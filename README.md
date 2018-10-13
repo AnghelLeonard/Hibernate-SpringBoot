@@ -1,6 +1,6 @@
 # Hibernate & Spring Boot (2.0.5)
 
-Hibernate & Spring Boot Samples
+**Hibernate & Spring Boot Samples**
 
 1. **[Hibernate SpringBoot UTC Timezone and MySQL](https://github.com/AnghelLeonard/Hibernate/tree/master/HibernateSpringBootUTCTimezone)**
 
@@ -21,4 +21,6 @@ Hibernate & Spring Boot Samples
      - in pom.xml, Add Log4j 2 Dependency
      - in log4j2.xml add, `<Logger name="org.hibernate.type.descriptor.sql" level="trace"/>`
    
+**Output example**
+
 -----------------------------------------------------------------------------------------------------------------------    
