@@ -31,8 +31,8 @@
 **Description:** View the query details (query type, binding parameters, batch size, etc) via **[datasource-proxy](https://github.com/ttddyy/datasource-proxy)**
 
 **Key points:**\
-     - add in pom.xml the datasource-proxy dependency
-     - create an bean post processor to intercept the `DataSource` bean
+     - add in pom.xml the datasource-proxy dependency\
+     - create an bean post processor to intercept the `DataSource` bean\
      - wrap the `DataSource` bean via `ProxyFactory` and an implementation of `MethodInterceptor`
    
 **Output example:**
