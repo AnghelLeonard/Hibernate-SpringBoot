@@ -7,5 +7,5 @@ Hibernate Samples
 
 **Key points:**\
      - spring.jpa.properties.hibernate.jdbc.time_zone=UTC\
-     - spring.datasource.url=jdbc:mysql://localhost:3306/db_screenshot **?useLegacyDatetimeCode=false**
+     - spring.datasource.url=jdbc:mysql://localhost:3306/db_screenshot**?useLegacyDatetimeCode=false**
    
