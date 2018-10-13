@@ -12,11 +12,10 @@ Hibernate & Spring Boot Samples
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-1. **[Hibernate SpringBoot View Binding Params Via Log4J2](https://github.com/AnghelLeonard/Hibernate/tree/master/HibernateSpringBootUTCTimezone)**
+1. **[Hibernate SpringBoot View Binding Params Via Log4J 2](https://github.com/AnghelLeonard/Hibernate/tree/master/HibernateSpringBootUTCTimezone)**
 
-**Description:** How to store date, time, and timestamps in UTC time zone in MySQL
+**Description:** View the PreparedStatement binding parameters via Log4J 2 logger setting
 
 **Key points:**\
-     - spring.jpa.properties.hibernate.jdbc.time_zone=UTC\
-     - spring.datasource.url=jdbc:mysql://localhost:3306/db_screenshot **?useLegacyDatetimeCode=false**
+     - in log4j2.xml, <Logger name="org.hibernate.type.descriptor.sql" level="trace"/>   
    
