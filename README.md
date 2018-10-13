@@ -17,5 +17,5 @@ Hibernate & Spring Boot Samples
 **Description:** View the PreparedStatement binding parameters via Log4J 2 logger setting
 
 **Key points:**\
-     - in log4j2.xml, '<Logger name="org.hibernate.type.descriptor.sql" level="trace"/>`
+     - in log4j2.xml, `<Logger name="org.hibernate.type.descriptor.sql" level="trace"/>`
    
