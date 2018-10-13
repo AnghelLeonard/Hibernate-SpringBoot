@@ -1,4 +1,4 @@
-# Hibernate & Spring Boot
+# Hibernate & Spring Boot (2.0.5)
 
 Hibernate & Spring Boot Samples
 
