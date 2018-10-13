@@ -22,5 +22,5 @@
      - in log4j2.xml add, `<Logger name="org.hibernate.type.descriptor.sql" level="trace"/>`
    
 **Output example**
-
+[](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLog4j2ViewBindingParameters/sample.png)
 -----------------------------------------------------------------------------------------------------------------------    
