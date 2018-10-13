@@ -25,3 +25,15 @@
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLog4j2ViewBindingParameters/sample.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
+
+3. **[Hibernate SpringBoot View Binding Params Via datasource-proxy](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLog4j2ViewBindingParameters)**
+
+**Description:** View the prepared statement details (binding parameters, batch size, etc) via **[datasource-proxy](https://github.com/ttddyy/datasource-proxy)**
+
+**Key points:**\
+     - in pom.xml, exclude Spring Boot's Default Logging\
+     - in pom.xml, Add Log4j 2 Dependency\
+     - in log4j2.xml add, `<Logger name="org.hibernate.type.descriptor.sql" level="trace"/>`
+   
+**Output example:**
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLog4j2ViewBindingParameters/sample.png)
