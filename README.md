@@ -12,7 +12,7 @@ Hibernate & Spring Boot Samples
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-1. **[Hibernate SpringBoot View Binding Params Via Log4J 2](https://github.com/AnghelLeonard/Hibernate/tree/master/HibernateSpringBootUTCTimezone)**
+2. **[Hibernate SpringBoot View Binding Params Via Log4J 2](https://github.com/AnghelLeonard/Hibernate/tree/master/HibernateSpringBootUTCTimezone)**
 
 **Description:** View the PreparedStatement binding parameters via Log4J 2 logger setting
 
