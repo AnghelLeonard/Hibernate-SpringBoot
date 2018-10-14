@@ -42,14 +42,14 @@
 
 4. **[Hibernate SpringBoot Batch Inserts via `saveAll(Iterable<S> entities)`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceProxy)**
 
-**Description:** Batch inserts via `saveAll(Iterable<S> entities)` method
+**Description:** Batch inserts via `SimpleJpaRepository#saveAll(Iterable<S> entities)` method
 
 **Key points:**\
      - in application.properties set `spring.jpa.properties.hibernate.jdbc.batch_size`\
      - in application.properties set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)\
      - in application.properties set, JDBC URL, set `rewriteBatchedStatements=true` (optimization for MySQL)\
      - in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL IDENTITY will cause batching to be disabled\
-     -
-   
+     - in entity, add `@Version` property of type `Long` to avoid extra-`SELECT`s fired before batching (also prevent lost updates in multi-request transactions). Extra-`SELECT`s are the effect of using `merge()` instead of `persist()`. Behind the scene, `saveAll()` uses `save()`, which in case of non-new entities (have IDs) will call `merge()`, which instruct Hibernate to fire a `SELECT` statement to make sure that there is no record in the database having the same identifier. 
+  
 **Output example:**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceProxy/sample.png)
