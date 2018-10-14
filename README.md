@@ -37,3 +37,16 @@
    
 **Output example:**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceProxy/sample.png)
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+4. **[Hibernate SpringBoot Batch Inserts via `saveAll(Iterable<S> entities)`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceProxy)**
+
+**Description:** Batch inserts via `saveAll(Iterable<S> entities)` method
+
+**Key points:**\
+     - in application.properties set `spring.jpa.properties.hibernate.jdbc.batch_size`
+     - in application.properties set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)
+   
+**Output example:**
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceProxy/sample.png)
