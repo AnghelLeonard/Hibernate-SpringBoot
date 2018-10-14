@@ -10,6 +10,7 @@ public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    // use the assigned generator 
     @Id
     private Long id;
 
@@ -17,6 +18,7 @@ public class User implements Serializable {
     private String city;
     private int age;
 
+    // avoid extra-SELECTs
     @Version
     private Long version;
 
