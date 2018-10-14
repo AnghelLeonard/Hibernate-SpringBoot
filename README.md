@@ -45,8 +45,11 @@
 **Description:** Batch inserts via `saveAll(Iterable<S> entities)` method
 
 **Key points:**\
-     - in application.properties set `spring.jpa.properties.hibernate.jdbc.batch_size`
-     - in application.properties set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)
+     - in application.properties set `spring.jpa.properties.hibernate.jdbc.batch_size`\
+     - in application.properties set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)\
+     - in application.properties set, JDBC URL, set `rewriteBatchedStatements=true` (optimization for MySQL)\
+     - in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL IDENTITY will cause batching to be disabled\
+     -
    
 **Output example:**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceProxy/sample.png)
