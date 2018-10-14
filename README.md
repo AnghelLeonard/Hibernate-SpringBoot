@@ -40,9 +40,9 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-4. **[Hibernate SpringBoot Batch Inserts via `saveAll(Iterable<S> entities)`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceProxy)**
+4. **[Hibernate SpringBoot Batch Inserts via `saveAll(Iterable<S> entities)` in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceProxy)**
 
-**Description:** Batch inserts via `SimpleJpaRepository#saveAll(Iterable<S> entities)` method
+**Description:** Batch inserts via `SimpleJpaRepository#saveAll(Iterable<S> entities)` method in MySQL
 
 **Key points:**\
      - in application.properties set `spring.jpa.properties.hibernate.jdbc.batch_size`\
