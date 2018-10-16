@@ -1,6 +1,6 @@
 # Hibernate & Spring Boot (2.0.5)
 
-![https://leanpub.com/java-persistence-performance-illustrated-guide](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg)
+[![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg)](https://leanpub.com/java-persistence-performance-illustrated-guide)
 
 **Hibernate & Spring Boot Samples**
 
