@@ -1,1 +1,11 @@
+**[Hibernate SpringBoot View Binding Params Via Log4J 2](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLog4j2ViewBindingParameters)**
 
+**Description:** View the prepared statement binding parameters via Log4J 2 logger setting
+
+**Key points:**\
+     - in pom.xml, exclude Spring Boot's Default Logging\
+     - in pom.xml, Add Log4j 2 Dependency\
+     - in log4j2.xml add, `<Logger name="org.hibernate.type.descriptor.sql" level="trace"/>`
+   
+**Output example:**
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLog4j2ViewBindingParameters/sample.png)
