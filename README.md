@@ -1,5 +1,7 @@
 # Hibernate & Spring Boot (2.0.5)
 
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg)
+
 **Hibernate & Spring Boot Samples**
 
 1. **[Hibernate SpringBoot UTC Timezone And MySQL](https://github.com/AnghelLeonard/Hibernate/tree/master/HibernateSpringBootUTCTimezone)**
