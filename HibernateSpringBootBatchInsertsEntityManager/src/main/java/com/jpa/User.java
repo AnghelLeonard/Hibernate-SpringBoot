@@ -3,7 +3,6 @@ package com.jpa;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Version;
 
 @Entity
 public class User implements Serializable {
@@ -15,10 +14,7 @@ public class User implements Serializable {
 
     private String name;
     private String city;
-    private int age;
-
-    @Version
-    private Long version;
+    private int age;    
 
     public Long getId() {
         return id;
