@@ -109,7 +109,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-8. **[Direct Fetching via Spring Data/EntityManager/Session](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsViaSession)**
+8. **[Direct Fetching via Spring Data/EntityManager/Session](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDirectFetching)**
 
 **Description:** Direct fetching via Spring Data, `EntityManager` and Hibernate `Session` examples.
 
