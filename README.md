@@ -4,7 +4,7 @@
 
 **Hibernate & Spring Boot Samples**
 
-1. **[Hibernate SpringBoot UTC Timezone And MySQL](https://github.com/AnghelLeonard/Hibernate/tree/master/HibernateSpringBootUTCTimezone)**
+1. **[UTC Timezone And MySQL](https://github.com/AnghelLeonard/Hibernate/tree/master/HibernateSpringBootUTCTimezone)**
 
 **Description:** How to store date, time, and timestamps in UTC time zone in MySQL
 
@@ -14,7 +14,7 @@
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-2. **[Hibernate SpringBoot View Binding Params Via Log4J 2](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLog4j2ViewBindingParameters)**
+2. **[View Binding Params Via Log4J 2](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLog4j2ViewBindingParameters)**
 
 **Description:** View the prepared statement binding parameters via Log4J 2 logger setting
 
@@ -28,7 +28,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-3. **[Hibernate SpringBoot View Query Details Via "datasource-proxy"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceProxy)**
+3. **[View Query Details Via "datasource-proxy"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceProxy)**
 
 **Description:** View the query details (query type, binding parameters, batch size, etc) via **[datasource-proxy](https://github.com/ttddyy/datasource-proxy)**
 
@@ -42,7 +42,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-4. **[Hibernate SpringBoot Batch Inserts via `saveAll(Iterable<S> entities)` in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsJpaRepository)**
+4. **[Batch Inserts via `saveAll(Iterable<S> entities)` in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsJpaRepository)**
 
 **Description:** Batch inserts via `SimpleJpaRepository#saveAll(Iterable<S> entities)` method in MySQL
 
@@ -59,7 +59,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-5. **[Hibernate SpringBoot Batch Inserts Via EntityManager in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsEntityManager)**
+5. **[Batch Inserts Via EntityManager in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsEntityManager)**
 
 **Description:** Batch inserts via `EntityManager` in MySQL. This way you can easily control the `flush()` and `clear()` of the persistence context (1st level cache). This is not possible via SpringBoot, `saveAll(Iterable<S> entities)`. Another advantage is that you can call `persist()` instead of `merge()` - this is used behind the scene by the SpringBoot `saveAll(Iterable<S> entities)` and `save(S entity)`.
 
@@ -75,7 +75,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-6. **[Hibernate SpringBoot Batch Inserts Via JpaContext/EntityManager in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsEntityManagerViaJpaContext)**
+6. **[Batch Inserts Via JpaContext/EntityManager in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsEntityManagerViaJpaContext)**
 
 **Description:** Batch inserts via `JpaContext/EntityManager` in MySQL.
 
@@ -92,7 +92,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-7. **[Hibernate SpringBoot Session-Level Batching (Hibernate 5.2 or Higher) in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsViaSession)**
+7. **[Session-Level Batching (Hibernate 5.2 or Higher) in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsViaSession)**
 
 **Description:** Batch inserts via Hibernate session-level batching (Hibernate 5.2 or higher) in MySQL.
 
