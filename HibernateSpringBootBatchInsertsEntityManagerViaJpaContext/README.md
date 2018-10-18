@@ -1,5 +1,5 @@
 
-**[Hibernate SpringBoot Batch Inserts Via JpaContext/EntityManager in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsEntityManagerViaJpaContext)**
+**[Batch Inserts Via JpaContext/EntityManager in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsEntityManagerViaJpaContext)**
 
 **Description:** Batch inserts via `JpaContext/EntityManager` in MySQL.
 
