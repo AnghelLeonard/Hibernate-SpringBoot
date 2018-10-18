@@ -96,7 +96,7 @@
 
 **Description:** Batch inserts via Hibernate session-level batching (Hibernate 5.2 or higher) in MySQL.
 
-**Key points:**\     
+**Key points:**\
      - in application.properties set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)\
      - in application.properties set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)\
      - in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause batching to be disabled\
