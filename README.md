@@ -130,4 +130,4 @@
      - if is applicable, limit the number of returned rows (e.g., via LIMIT) - here, we can use query builder mechanism built into Spring Data repository infrastructure
      
 **Output example (select first 2 rows; select only "name" and "city"):**
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsViaSession/sample.png)     
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaProjections/sample.png)     
