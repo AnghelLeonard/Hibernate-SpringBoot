@@ -3,7 +3,6 @@ package com.jpa;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Version;
 
 @Entity
 public class User implements Serializable {
