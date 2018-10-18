@@ -88,4 +88,4 @@
      - in DAO, flush and clear the persistence context from time to time. This way you avoid to "overwhelm" the persistence context. 
    
 **Output example (flush and clear at every 3 inserts, and have a total of 7 inserts):**
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsEntityManager/sample.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsEntityManagerViaJpaContext/sample.png)
