@@ -106,3 +106,17 @@
    
 **Output example (flush and clear at every 3 inserts, and have a total of 7 inserts):**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsViaSession/sample.png)
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+8. **[Direct Fetching via Spring Data/EntityManager/Session](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsViaSession)**
+
+**Description:** Direct fetching via Spring Data, `EntityManager` and Hibernate `Session` examples.
+
+**Key points:**\
+     - direct fetching via Spring Data uses `findById()`\
+     - direct fetching via `EntityManager` uses `find()`\
+     - direct fetching via Hibernate `Session` uses `get()`
+          
+**Output example (flush and clear at every 3 inserts, and have a total of 7 inserts):**
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsViaSession/sample.png)
