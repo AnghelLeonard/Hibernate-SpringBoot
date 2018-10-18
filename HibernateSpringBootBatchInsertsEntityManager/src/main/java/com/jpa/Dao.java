@@ -42,7 +42,7 @@ public class Dao<T, ID extends Serializable> implements GenericDao<T, ID> {
         List<S> result = new ArrayList<>();
 
         for (S entity : entities) {
-            result.add(this.persist(entity));
+            result.add(persist(entity));
 
             i++;
 
@@ -51,8 +51,8 @@ public class Dao<T, ID extends Serializable> implements GenericDao<T, ID> {
                 logger.log(Level.INFO, 
                         "Flushing the EntityManager containing {0} entities ...", i);
                 
-                this.entityManager.flush();
-                this.entityManager.clear();
+                entityManager.flush();
+                entityManager.clear();
                 i = 0;
             }
         }
