@@ -70,7 +70,7 @@
      - in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause batching to be disabled\
      - in DAO, flush and clear the persistence context from time to time. This way you avoid to "overwhelm" the persistence context. 
    
-**Output example (flush and clear at every 3 inserts, and have a total of 7 inserts):**
+**Output example (flush and clear at every 3 inserts):**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsEntityManager/sample.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
@@ -87,7 +87,7 @@
      - the `EntityManager` is obtain per entity type via, `JpaContext#getEntityManagerByManagedType(Class<?> entity)`\
      - in DAO, flush and clear the persistence context from time to time. This way you avoid to "overwhelm" the persistence context. 
    
-**Output example (flush and clear at every 3 inserts, and have a total of 7 inserts):**
+**Output example (flush and clear at every 3 inserts):**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsEntityManagerViaJpaContext/sample.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
@@ -104,7 +104,7 @@
      - the batching size is set via `Session#setJdbcBatchSize(Integer size)` and get via `Session#getJdbcBatchSize()`\
      - in DAO, flush and clear the persistence context from time to time. This way you avoid to "overwhelm" the persistence context. 
    
-**Output example (flush and clear at every 3 inserts, and have a total of 7 inserts):**
+**Output example (flush and clear at every 3 inserts):**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsViaSession/sample.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
