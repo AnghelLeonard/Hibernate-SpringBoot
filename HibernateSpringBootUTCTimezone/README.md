@@ -1,5 +1,5 @@
 
-**[Hibernate SpringBoot UTC Timezone And MySQL](https://github.com/AnghelLeonard/Hibernate/tree/master/HibernateSpringBootUTCTimezone)**
+**[UTC Timezone And MySQL](https://github.com/AnghelLeonard/Hibernate/tree/master/HibernateSpringBootUTCTimezone)**
 
 **Description:** How to store date, time, and timestamps in UTC time zone in MySQL
 
