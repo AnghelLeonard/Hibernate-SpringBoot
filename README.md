@@ -92,7 +92,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-7. **[Hibernate SpringBoot Session-Level Batching (Hibernate 5.2 or Higher) in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsEntityManagerViaJpaContext)**
+7. **[Hibernate SpringBoot Session-Level Batching (Hibernate 5.2 or Higher) in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsViaSession)**
 
 **Description:** Batch inserts via Hibernate session-level batching (Hibernate 5.2 or higher) in MySQL.
 
