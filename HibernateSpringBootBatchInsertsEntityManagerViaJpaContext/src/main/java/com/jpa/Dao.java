@@ -45,7 +45,7 @@ public class Dao<T, ID extends Serializable> implements GenericDao<T, ID> {
         List<S> result = new ArrayList<>();
 
         for (S entity : entities) {
-            result.add(this.persist(entity));
+            result.add(persist(entity));
 
             i++;
 
