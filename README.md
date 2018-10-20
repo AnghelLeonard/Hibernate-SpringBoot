@@ -170,8 +170,8 @@
 **Description:** N+1 is an issue of lazy fetching (but, eager is not exempt). This application reproduce the N+1 behavior.
 
 **Key points:**\
-     - define two entities, `Category` and `Product` having a `@OneToMany` relationship
-     - fetch all `Product` lazy, so without `Category` (results in 1 query)
+     - define two entities, `Category` and `Product` having a `@OneToMany` relationship\
+     - fetch all `Product` lazy, so without `Category` (results in 1 query)\
      - loop the fetched `Product` collection and for each entry fetch the corresponding `Category` (results N queries)
      
 **Output example:**\
