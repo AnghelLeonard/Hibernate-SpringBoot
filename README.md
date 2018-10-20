@@ -201,4 +201,4 @@
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootEnableDirtyTracking/sample.png)
 
-The bytecode enhancement effect can be seen on `User.class` ![here]()
+The bytecode enhancement effect can be seen on `User.class` ![here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootEnableDirtyTracking/Bytecode%20Enhancement%20User.class/User.java)
