@@ -199,4 +199,6 @@
      - add the corresponding `plugin` in pom.xml - use Maven bytecode enhancement plugin
      
 **Output example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHintPassDistinctThrough/sample.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootEnableDirtyTracking/sample.png)
+
+The bytecode enhancement effect can be seen on `User.class` ![here]()
