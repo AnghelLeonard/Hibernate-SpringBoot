@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,8 +22,8 @@ public class Tournament implements Serializable {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tournament",
-            orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, 
+               mappedBy = "tournament", orphanRemoval = true)
     private List<TennisPlayer> tennisPlayers = new ArrayList<>();
 
     public void addTennisPlayer(TennisPlayer tennisPlayer) {
