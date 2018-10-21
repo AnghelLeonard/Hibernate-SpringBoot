@@ -205,7 +205,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-15. **[Use Java 8 Optional in Entities and Queries](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnableDirtyTracking)**
+15. **[Use Java 8 Optional in Entities and Queries](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOptional)**
 
 **Description:** This application is a proof of concept of how is correct to use the Java 8 `Optional` in entities and queries. 
 
