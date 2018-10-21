@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,8 +21,8 @@ public class Category implements Serializable {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category",
-            orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, 
+               mappedBy = "category", orphanRemoval = true)
     private List<Product> products = new ArrayList<>();
 
     public void addProdcut(Product product) {
