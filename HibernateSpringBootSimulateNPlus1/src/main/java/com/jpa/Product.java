@@ -21,7 +21,7 @@ public class Product implements Serializable {
     private String name;
     
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "categoryId")
+    @JoinColumn(name = "category_id")
     private Category category;
 
     public Long getId() {
@@ -47,5 +47,20 @@ public class Product implements Serializable {
     public void setCategory(Category category) {
         this.category = category;
     }
-           
+     
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof Product)) {
+            return false;
+        }
+        return id != null && id.equals(((Product) obj).id);        
+    }
+
+    @Override
+    public int hashCode() {
+        return 2018;
+    }
 }
