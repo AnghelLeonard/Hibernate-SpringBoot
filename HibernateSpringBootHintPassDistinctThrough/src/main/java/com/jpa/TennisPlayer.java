@@ -21,7 +21,7 @@ public class TennisPlayer implements Serializable {
     private String name;
     
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name = "tournamentId")
+    @JoinColumn(name = "tournament_id")
     private Tournament tournament;
 
     public Long getId() {
@@ -47,4 +47,20 @@ public class TennisPlayer implements Serializable {
     public void setTournament(Tournament tournament) {
         this.tournament = tournament;
     }        
+ 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (!(obj instanceof TennisPlayer)) {
+            return false;
+        }
+        return id != null && id.equals(((TennisPlayer) obj).id);        
+    }
+
+    @Override
+    public int hashCode() {
+        return 2018;
+    } 
 }
