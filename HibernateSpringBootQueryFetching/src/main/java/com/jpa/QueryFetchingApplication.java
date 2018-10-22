@@ -28,9 +28,13 @@ public class QueryFetchingApplication {
     public ApplicationRunner init() {
         return args -> {
 
-            // Query via JpaRepository
-            List<User> users1 = userRepository.findByName("Larry Q");
-            users1.forEach((u) -> logger.info(() -> "JpaRepository: User name: " + u.getName()));
+            // Query via JpaRepository (Spring Data Query Creation)
+            List<User> users1a = userRepository.findByName("Larry Q");
+            users1a.forEach((u) -> logger.info(() -> "JpaRepository 1: User name: " + u.getName()));
+            
+            // Query via JpaRepository (@Query)
+            List<User> users1b = userRepository.findByName("Larry Q");
+            users1b.forEach((u) -> logger.info(() -> "JpaRepository 2: User name: " + u.getName()));
             
             // Query via EntityManager
             List<User> users2 = dao.findByName("Mark S");
