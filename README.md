@@ -238,6 +238,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 **Key points:**\
      - for `JpaRepository` use `@Query` or Spring Data Query Creation\
      - for `EntityManager` and `Session` use the `createQuery()` method 
+     
 -----------------------------------------------------------------------------------------------------------------------    
 
 18. **[MySQL & Hibernate 5 Avoid AUTO Generator Type](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAutoGeneratorType)**
