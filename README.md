@@ -231,7 +231,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-17. **[Query Fetching](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToManyBidirectional)**
+17. **[Query Fetching](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootQueryFetching)**
 
 **Description:** This application is a proof of concept of how to write a query via `JpaRepository`, `EntityManager` and `Session`.
 
