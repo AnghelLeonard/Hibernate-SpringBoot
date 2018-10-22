@@ -248,5 +248,5 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - use `GenerationType.IDENTITY` instead of `GenerationType.AUTO`\
      - use the native generator - exemplified in this application
    
-**Output example:**
+**Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAutoGeneratorType/sample.png)
