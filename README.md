@@ -238,3 +238,15 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 **Key points:**\
      - for `JpaRepository` use `@Query` or Spring Data Query Creation\
      - for `EntityManager` and `Session` use the `createQuery()` method 
+-----------------------------------------------------------------------------------------------------------------------    
+
+18. **[MySQL & Hibernate 5 Avoid AUTO Generator Type](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLog4j2ViewBindingParameters)**
+
+**Description:** In MySQL & Hibernate 5, the `GenerationType.AUTO` generator type will result in using the `TABLE` generator. This adds a significant performance penalty. Turning this behavior to `IDENTITY` generator can be obtained by using `GenerationType.IDENTITY` or the native generator.
+
+**Key points:**\
+     - use `GenerationType.IDENTITY` instead of `GenerationType.AUTO`\
+     - use the native generator - exemplified in this application
+   
+**Output example:**
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLog4j2ViewBindingParameters/sample.png)
