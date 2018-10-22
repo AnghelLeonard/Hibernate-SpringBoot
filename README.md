@@ -249,4 +249,4 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - use the native generator - exemplified in this application
    
 **Output example:**
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLog4j2ViewBindingParameters/sample.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAutoGeneratorType/sample.png)
