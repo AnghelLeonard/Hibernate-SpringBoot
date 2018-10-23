@@ -286,4 +286,4 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - all the classes in a hierarchy are mapped to a single table in a the database
    
 **Output example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchingAndSerial/sample.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSingleTableInheritance/sample.png)
