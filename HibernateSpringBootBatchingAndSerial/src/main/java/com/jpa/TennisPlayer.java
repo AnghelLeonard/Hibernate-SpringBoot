@@ -14,7 +14,7 @@ public class TennisPlayer implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    // This will disable insert batching - AVOID ID!
+    // This will disable insert batching - AVOID IT!
     // @GeneratedValue(strategy = GenerationType.IDENTITY)
     
     // This will work, but better use the below solution
