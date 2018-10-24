@@ -29,7 +29,7 @@ public class UserService {
         userRepository.save(user);   // 1 update
         userRepository.delete(user); // 1 delete
 
-        // at this point the transaction was committed
+        // at this point there is no transaction running
         // a total of 5 statements, not very good
         assertInsertCount(1);
         assertUpdateCount(1);
