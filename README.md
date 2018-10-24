@@ -311,7 +311,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 **Key points:**\
      - in entity, write callback methods and use the proper annotations\
-     - vallback methods annotated on the bean class must return void and take no arguments
+     - callback methods annotated on the bean class must return void and take no arguments
    
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootJpaCallbacks/sample.png)
