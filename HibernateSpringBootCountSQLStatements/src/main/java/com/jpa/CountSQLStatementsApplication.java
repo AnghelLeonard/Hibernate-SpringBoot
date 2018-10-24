@@ -15,7 +15,7 @@ import org.springframework.context.annotation.Bean;
 public class CountSQLStatementsApplication {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
     public static void main(String[] args) {
         SpringApplication.run(CountSQLStatementsApplication.class, args);
@@ -25,24 +25,17 @@ public class CountSQLStatementsApplication {
     public ApplicationRunner init() {
         return args -> {
 
-            User user = new User();
-
-            user.setName("Jacky Francisco");
-            user.setCity("Banesti");
-            user.setAge(24);            
-
-            SQLStatementCountValidator.reset();
+            userService.userOperationsWithoutTransactional();
             
-            userRepository.save(user);   // 1 insert
-            user.setCity("Craiova");     
-            userRepository.save(user);   // 1 update
-            userRepository.delete(user); // 1 delete
-            
+            SQLStatementCountValidator.reset();      
+            userService.userOperationsWithTransactional();
+
+            // allow the transaction to commit
+            // a total of 2 statements instead of 5 as in the case of no explicit transaction
             assertInsertCount(1);
-            assertUpdateCount(1);
-            assertDeleteCount(1);            
-            
-            assertSelectCount(2); 
+            assertUpdateCount(0);
+            assertDeleteCount(1);
+            assertSelectCount(0);
         };
     }
 }
