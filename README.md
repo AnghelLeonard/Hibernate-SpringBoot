@@ -314,4 +314,4 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - vallback methods annotated on the bean class must return void and take no arguments
    
 **Output example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootCountSQLStatements/sample.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootJpaCallbacks/sample.png)
