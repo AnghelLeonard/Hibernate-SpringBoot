@@ -302,3 +302,16 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
    
 **Output example (when the number of expected SQLs is not equal with the reality an exception is thrown):**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootCountSQLStatements/sample.png)
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+23. **[JPA Callbacks](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCountSQLStatements)**
+
+**Description:** This application is a sample of enabling the JPA callbacks (`Pre/PostPersist`, `Pre/PostUpdate`, `Pre/PostRemove` and `PostLoad`).
+
+**Key points:**\
+     - in entity, write callback methods and use the proper annotations\
+     - vallback methods annotated on the bean class must return void and take no arguments
+   
+**Output example:**\
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootCountSQLStatements/sample.png)
