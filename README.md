@@ -298,7 +298,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - in pom.xml add dependencies for `datasource-proxy` and Vlad Mihalcea's `db-util`\
      - create the `ProxyDataSourceBuilder` with `countQuery()`\
      - reset the counter via `SQLStatementCountValidator.reset()`\
-     - assert `INSERT`, `UPDATE`, `DELETE` and `SELECT` via `assertInsert/Update/Delete/Select/Count(long *expected_number*)`
+     - assert `INSERT`, `UPDATE`, `DELETE` and `SELECT` via `assertInsert/Update/Delete/Select/Count(long expectedNumberOfSql)`
    
 **Output example (when the number of expected SQLs is not equal with the reality an exception is thrown):**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootCountSQLStatements/sample.png)
