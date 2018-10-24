@@ -301,4 +301,4 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - assert `INSERT`, `UPDATE`, `DELETE` and `SELECT` via `assertInsert/Update/Delete/Select/Count(long *expected_number*)`
    
 **Output example (when the number of expected SQLs is not equal with the reality an exception is thrown):**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSingleTableInheritance/sample.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootCountSQLStatements/sample.png)
