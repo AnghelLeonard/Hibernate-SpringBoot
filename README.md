@@ -335,3 +335,13 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 **Key points:**\
      - use `SqlResultSetMapping` and `EntityManager`\
      - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
+     
+-----------------------------------------------------------------------------------------------------------------------    
+
+26. **[DTOs via SqlResultSetMapping & NamedNativeQuery](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSqlResultSetMapping)**
+
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on `SqlResultSetMapping`, `NamedNativeQuery` and `EntityManager`.
+
+**Key points:**\
+     - use `SqlResultSetMapping`, `NamedNativeQuery` and `EntityManager`\
+     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
