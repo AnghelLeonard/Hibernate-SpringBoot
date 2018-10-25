@@ -355,3 +355,13 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 **Key points:**\
      - use `java.persistence.Tuple` and `EntityManager.createNativeQuery()`\
      - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)     
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+28. **[DTOs via javax.persistence.Tuple and JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoTupleAndSql)**
+
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on `javax.persistence.Tuple` and JPQL.
+
+**Key points:**\
+     - use `java.persistence.Tuple` and `EntityManager.createQuery()`\
+     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
