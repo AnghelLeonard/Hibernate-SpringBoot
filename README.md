@@ -362,6 +362,12 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 **Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on `javax.persistence.Tuple` and JPQL.
 
+-----------------------------------------------------------------------------------------------------------------------    
+
+29. **[DTOs via Constrcutor Expression and JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoTupleAndJpql)**
+
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on Constructor Expression and JPQL.
+
 **Key points:**\
-     - use `java.persistence.Tuple` and `EntityManager.createQuery()`\
+     - use Constrcutor Experession and a query as `select new com.jpa.CarDto(c.name, c.color) from Car c`\
      - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
