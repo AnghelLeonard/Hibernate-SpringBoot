@@ -374,7 +374,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-30. **[DTOs via ResultTransformer](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructorExpression)**
+30. **[DTOs via ResultTransformer](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoResultTransformer)**
 
 **Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on Hibernate, `ResultTransformer`.
 
