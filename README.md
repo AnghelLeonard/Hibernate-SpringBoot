@@ -400,7 +400,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      
  -----------------------------------------------------------------------------------------------------------------------    
 
-32. **[DTOs via Blaze-Persistence Entity Views](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoResultTransformerJpql)**
+32. **[DTOs via Blaze-Persistence Entity Views](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoBlazeEntityView)**
 
 **Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on [Blaze-Persistence](https://persistence.blazebit.com/) entity views.
 
