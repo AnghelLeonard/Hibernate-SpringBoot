@@ -334,4 +334,4 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 **Key points:**\
      - use `SqlResultSetMapping` and `EntityManager`\
-     - for using Spring Data Projections check this recipe
+     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
