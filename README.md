@@ -325,3 +325,13 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 **Key points:**\
      - use `@MapsId` on child side\
      - basically, for `@OneToOne` associations, this will share the Primary Key with the parent table
+     
+-----------------------------------------------------------------------------------------------------------------------    
+
+25. **[DTOs via SqlResultSetMapping](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToOneMapsId)**
+
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on `SqlResultSetMapping` and `EntityManager`.
+
+**Key points:**\
+     - use `SqlResultSetMapping` and `EntityManager`\
+     - for using Spring Data Projections check this recipe
