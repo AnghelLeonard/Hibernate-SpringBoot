@@ -4,7 +4,7 @@
 
 **Hibernate & Spring Boot Samples**
 
-1. **[UTC Timezone And MySQL](https://github.com/AnghelLeonard/Hibernate/tree/master/HibernateSpringBootUTCTimezone)**
+1. **[How To Store UTC Timezone In MySQL](https://github.com/AnghelLeonard/Hibernate/tree/master/HibernateSpringBootUTCTimezone)**
 
 **Description:** How to store date, time, and timestamps in UTC time zone in MySQL
 
@@ -14,7 +14,7 @@
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-2. **[View Binding Params Via Log4J 2](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLog4j2ViewBindingParameters)**
+2. **[How To View Binding Params Via Log4J 2](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLog4j2ViewBindingParameters)**
 
 **Description:** View the prepared statement binding parameters via Log4J 2 logger setting
 
@@ -28,7 +28,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-3. **[View Query Details Via "datasource-proxy"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceProxy)**
+3. **[How To View Query Details Via "datasource-proxy"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceProxy)**
 
 **Description:** View the query details (query type, binding parameters, batch size, etc) via **[datasource-proxy](https://github.com/ttddyy/datasource-proxy)**
 
@@ -42,7 +42,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-4. **[Batch Inserts via `saveAll(Iterable<S> entities)` in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsJpaRepository)**
+4. **[How To Batch Inserts Via `saveAll(Iterable<S> entities)` In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsJpaRepository)**
 
 **Description:** Batch inserts via `SimpleJpaRepository#saveAll(Iterable<S> entities)` method in MySQL
 
@@ -59,7 +59,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-5. **[Batch Inserts Via EntityManager in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsEntityManager)**
+5. **[How To Batch Inserts Via EntityManager In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsEntityManager)**
 
 **Description:** Batch inserts via `EntityManager` in MySQL. This way you can easily control the `flush()` and `clear()` of the persistence context (1st level cache). This is not possible via SpringBoot, `saveAll(Iterable<S> entities)`. Another advantage is that you can call `persist()` instead of `merge()` - this is used behind the scene by the SpringBoot `saveAll(Iterable<S> entities)` and `save(S entity)`.
 
@@ -75,7 +75,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-6. **[Batch Inserts Via JpaContext/EntityManager in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsEntityManagerViaJpaContext)**
+6. **[How To Batch Inserts Via JpaContext/EntityManager In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsEntityManagerViaJpaContext)**
 
 **Description:** Batch inserts via `JpaContext/EntityManager` in MySQL.
 
@@ -92,7 +92,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-7. **[Session-Level Batching (Hibernate 5.2 or Higher) in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsViaSession)**
+7. **[How To Exploit Session-Level Batching (Hibernate 5.2 Or Higher) In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsViaSession)**
 
 **Description:** Batch inserts via Hibernate session-level batching (Hibernate 5.2 or higher) in MySQL.
 
@@ -109,7 +109,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-8. **[Direct Fetching via Spring Data/EntityManager/Session](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDirectFetching)**
+8. **[How To Use Direct Fetching Via Spring Data/EntityManager/Session](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDirectFetching)**
 
 **Description:** Direct fetching via Spring Data, `EntityManager` and Hibernate `Session` examples.
 
@@ -120,7 +120,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-9. **[DTOs Via Spring Data Projections](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)**
+9. **[How To Create DTOs Via Spring Data Projections](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)**
 
 **Description:** Fetch only the needed data from the database via Spring Data Projections (DTOs)
 
@@ -134,7 +134,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-10. **[Attribute Lazy Loading](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyFetching)**
+10. **[How To Load Attributes Lazily](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyFetching)**
 
 **Description:** By default, the attributes of an entity are loaded eager (all at once). We can load them **lazy** as well. This is useful for column types that store large amounts of data: `CLOB`, `BLOB`, `VARBINARY`, etc.
 
@@ -149,7 +149,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-11. **[Populating a Child-Side Parent Association via Proxy](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPopulatingChildViaProxy)**
+11. **[How To Populate A Child-Side Parent Association Via Proxy](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPopulatingChildViaProxy)**
 
 **Description:** A `Proxy` can be useful when a child entity can be persisted with a reference to its parent. In such cases, fetching the parent entity from the database (execute the `SELECT` statement) is a performance penalty and a pointless action. Hibernate can set the underlying foreign key value for an uninitialized `Proxy`.
 
@@ -165,7 +165,7 @@
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-12. **[Reproduce N+1 Performance Issue](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSimulateNPlus1)**
+12. **[How To Reproduce N+1 Performance Issue](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSimulateNPlus1)**
 
 **Description:** N+1 is an issue of lazy fetching (but, eager is not exempt). This application reproduce the N+1 behavior.
 
@@ -179,7 +179,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-13. **[Optimize Distinct SELECTs Via HINT_PASS_DISTINCT_THROUGH Hint](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHintPassDistinctThrough)**
+13. **[How To Optimize Distinct SELECTs Via HINT_PASS_DISTINCT_THROUGH Hint](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHintPassDistinctThrough)**
 
 **Description:** Starting with Hibernate 5.2.2, we can optimize `SELECT DISTINCT` via `HINT_PASS_DISTINCT_THROUGH` hint
 
@@ -191,7 +191,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-14. **[Enable Dirty Tracking](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnableDirtyTracking)**
+14. **[How To Enable Dirty Tracking](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnableDirtyTracking)**
 
 **Description:** Prior to Hibernate version 5, the dirty checking mechanism relies on Java Reflection API. Starting with Hibernate version 5, the dirty checking mechanism relies on bytecode enhancement. This approach sustain a better performance, especially when you have a relatively large number of entitites.
 
@@ -205,7 +205,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-15. **[Use Java 8 Optional in Entities and Queries](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOptional)**
+15. **[How To Use Java 8 Optional In Entities And Queries](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOptional)**
 
 **Description:** This application is a proof of concept of how is correct to use the Java 8 `Optional` in entities and queries. 
 
@@ -217,7 +217,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-16. **[OneToMany Bidirectional](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToManyBidirectional)**
+16. **[How To Use OneToMany Bidirectional Correctly](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToManyBidirectional)**
 
 **Description:** This application is a proof of concept of how is correct to implement the bidirectional `@OneToMany` association. 
 
@@ -231,7 +231,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-17. **[Query Fetching](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootQueryFetching)**
+17. **[How To Use Query Fetching](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootQueryFetching)**
 
 **Description:** This application is a proof of concept of how to write a query via `JpaRepository`, `EntityManager` and `Session`.
 
@@ -241,7 +241,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-18. **[MySQL & Hibernate 5 Avoid AUTO Generator Type](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAutoGeneratorType)**
+18. **[How To Avoid MySQL & Hibernate 5 AUTO Generator Type](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAutoGeneratorType)**
 
 **Description:** In MySQL & Hibernate 5, the `GenerationType.AUTO` generator type will result in using the `TABLE` generator. This adds a significant performance penalty. Turning this behavior to `IDENTITY` generator can be obtained by using `GenerationType.IDENTITY` or the native generator.
 
@@ -254,7 +254,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-19. **[Redundant save() Call](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRedundantSave)**
+19. **[How To Avoid The Redundant save() Call](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRedundantSave)**
 
 **Description:** This application is an example when calling `save()` for a managed entity is redundant.
 
@@ -264,7 +264,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-20. **[PostgreSQL (BIG)SERIAL and Batching Inserts](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchingAndSerial)**
+20. **[How To Handle PostgreSQL (BIG)SERIAL And Batching Inserts](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchingAndSerial)**
 
 **Description:** In PostgreSQL, using `GenerationType.IDENTITY` will disable insert batching. The `(BIG)SERIAL` is acting "almost" like MySQL, `AUTO_INCREMENT`. In this application, we use the `GenerationType.SEQUENCE` which enable insert batching, and we optimize it via the `hi/lo` optimization algorithm.
 
@@ -277,7 +277,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-21. **[JPA Inheritance - Single Table](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSingleTableInheritance)**
+21. **[How To Write JPA Inheritance - Single Table](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSingleTableInheritance)**
 
 **Description:** This application is a sample of JPA Single Table inheritance strategy (`SINGLE_TABLE`)
 
@@ -290,7 +290,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-22. **[Count and Assert SQL Statements](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCountSQLStatements)**
+22. **[How To Count And Assert SQL Statements](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCountSQLStatements)**
 
 **Description:** This application is a sample of counting and asserting SQL statements triggered "behind the scene". Is very useful to count the SQL statements in order to ensure that your code is not generating more SQLs that you may think (e.g., N+1 can be easily detected by asserting the number of expected statements).
 
@@ -305,7 +305,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-23. **[JPA Callbacks](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJpaCallbacks)**
+23. **[How To Use JPA Callbacks](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJpaCallbacks)**
 
 **Description:** This application is a sample of enabling the JPA callbacks (`Pre/PostPersist`, `Pre/PostUpdate`, `Pre/PostRemove` and `PostLoad`).
 
@@ -318,7 +318,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-24. **[@OneToOne and @MapsId](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToOneMapsId)**
+24. **[How To Write @OneToOne Via @MapsId](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToOneMapsId)**
 
 **Description:** Instead of a bidirectional `@OneToOne` better rely on an unidirectional `@OneToOne` and `@MapsId`. This application is a proof of concept. 
 
@@ -328,7 +328,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-25. **[DTOs via SqlResultSetMapping](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSqlResultSetMapping)**
+25. **[How To Extract DTOs Via SqlResultSetMapping](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSqlResultSetMapping)**
 
 **Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on `SqlResultSetMapping` and `EntityManager`.
 
@@ -338,7 +338,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-26. **[DTOs via SqlResultSetMapping & NamedNativeQuery](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSqlResultSetMappingAndNamedNativeQuery)**
+26. **[How To Extract DTOs Via SqlResultSetMapping & NamedNativeQuery](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSqlResultSetMappingAndNamedNativeQuery)**
 
 **Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on `SqlResultSetMapping`, `NamedNativeQuery` and `EntityManager`.
 
@@ -348,7 +348,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-27. **[DTOs via javax.persistence.Tuple and Native SQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoTupleAndSql)**
+27. **[How To Extract DTOs  Via javax.persistence.Tuple And Native SQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoTupleAndSql)**
 
 **Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on `javax.persistence.Tuple` and native SQL.
 
@@ -358,13 +358,13 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-28. **[DTOs via javax.persistence.Tuple and JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoTupleAndJpql)**
+28. **[How To Extract DTOs Via javax.persistence.Tuple And JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoTupleAndJpql)**
 
 **Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on `javax.persistence.Tuple` and JPQL.
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-29. **[DTOs via Constructor Expression and JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructorExpression)**
+29. **[How To Extract DTOs Via Constructor Expression And JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructorExpression)**
 
 **Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on Constructor Expression and JPQL.
 
@@ -374,7 +374,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-30. **[DTOs via ResultTransformer and Native SQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoResultTransformer)**
+30. **[How To Extract DTOs Via ResultTransformer And Native SQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoResultTransformer)**
 
 **Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on Hibernate, `ResultTransformer` and native SQL.
 
@@ -387,7 +387,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-31. **[DTOs via ResultTransformer and JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoResultTransformerJpql)**
+31. **[How To Extract DTOs Via ResultTransformer And JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoResultTransformerJpql)**
 
 **Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on Hibernate, `ResultTransformer` and JPQL.
 
@@ -400,7 +400,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      
  -----------------------------------------------------------------------------------------------------------------------    
 
-32. **[DTOs via Blaze-Persistence Entity Views](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoBlazeEntityView)**
+32. **[How To Extract DTOs Via Blaze-Persistence Entity Views](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoBlazeEntityView)**
 
 **Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on [Blaze-Persistence](https://persistence.blazebit.com/) entity views.
 
