@@ -1,6 +1,10 @@
 package com.jpa;
 
-public class CarDtoWithSetters {
+import java.io.Serializable;
+
+public class CarDtoWithSetters implements Serializable {
+
+    private static final long serialVersionUID = 1L;
     
     private String name;
     private String color;    
