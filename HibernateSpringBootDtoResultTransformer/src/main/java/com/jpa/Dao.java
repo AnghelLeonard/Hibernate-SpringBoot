@@ -31,7 +31,7 @@ public class Dao<T, ID extends Serializable> implements GenericDao<T, ID> {
     @Transactional(readOnly = true)
     public List<CarDtoNoSetters> fetchCarsNoSetters() {
         Query query = entityManager
-                .createNativeQuery("select c.name as name, c.color as color from Car c")
+                .createNativeQuery("select name, color from car")
                 .unwrap(org.hibernate.query.NativeQuery.class)
                 .setResultTransformer(
                         new AliasToBeanConstructorResultTransformer(
