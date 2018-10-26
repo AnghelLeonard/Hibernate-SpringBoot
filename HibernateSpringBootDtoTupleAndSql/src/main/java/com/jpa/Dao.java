@@ -31,7 +31,7 @@ public class Dao<T, ID extends Serializable> implements GenericDao<T, ID> {
     public List<Tuple> fetchCars() {
         List<Tuple> result = entityManager
                 .createNativeQuery(
-                        "select c.name as name, c.color as color from Car c", Tuple.class
+                        "select name, color from car", Tuple.class
                 ).getResultList();
 
         return result;
