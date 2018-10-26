@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 @NamedNativeQuery(
         name="CarDto",
-        query="select c.name as name, c.color as color from Car c",
+        query="select name, color from car",
         resultSetMapping="CarDto"
 )
 @SqlResultSetMapping(
