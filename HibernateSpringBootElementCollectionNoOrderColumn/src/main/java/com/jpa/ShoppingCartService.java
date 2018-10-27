@@ -10,7 +10,7 @@ public class ShoppingCartService {
     @Autowired
     private ShoppingCartRepository shoppingCartRepository;
 
-    public void createShoppingCart() {
+    public void createShoppingCartWithProducts() {
 
         ShoppingCart cart = new ShoppingCart();
         cart.setName("cart");
@@ -22,16 +22,44 @@ public class ShoppingCartService {
     }
     
     @Transactional
-    public void addInShoppingCart() {
+    public void addAtBeginInShoppingCart() {
+        ShoppingCart cart = shoppingCartRepository.findByName("cart");
+        
+        cart.getProducts().add(0, "desk");
+    }       
+    
+    @Transactional
+    public void addAtEndInShoppingCart() {
         ShoppingCart cart = shoppingCartRepository.findByName("cart");
         
         cart.getProducts().add("clock");
     }
     
     @Transactional
-    public void removeFromShoppingCart() {
+    public void addAtMiddleInShoppingCart() {
+        ShoppingCart cart = shoppingCartRepository.findByName("cart");
+        
+        cart.getProducts().add(cart.getProducts().size()/2, "scarf");
+    }
+            
+    @Transactional
+    public void removeFirstItemShoppingCart() {
         ShoppingCart cart = shoppingCartRepository.findByName("cart");
         
         cart.getProducts().remove(0);
+    }
+    
+    @Transactional
+    public void removeLastItemShoppingCart() {
+        ShoppingCart cart = shoppingCartRepository.findByName("cart");
+        
+        cart.getProducts().remove(cart.getProducts().size() - 1);
+    }
+    
+    @Transactional
+    public void removeMiddleItemShoppingCart() {
+        ShoppingCart cart = shoppingCartRepository.findByName("cart");
+        
+        cart.getProducts().remove(cart.getProducts().size()/2);
     }
 }
