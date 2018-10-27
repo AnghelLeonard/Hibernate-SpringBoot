@@ -398,7 +398,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - starting with Hibernate 5.2, `ResultTransformer` is deprecated, but until a replacement will be available (in Hibernate 6.0) it can be used ([read further](https://discourse.hibernate.org/t/hibernate-resulttransformer-is-deprecated-what-to-use-instead/232))\
      - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
      
- -----------------------------------------------------------------------------------------------------------------------    
+-----------------------------------------------------------------------------------------------------------------------    
 
 32. **[How To Extract DTOs Via Blaze-Persistence Entity Views](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoBlazeEntityView)**
 
@@ -412,3 +412,18 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - call method of this repository such as, `findAll()`, `findOne()`, etc\
      - starting with Hibernate 5.2, `ResultTransformer` is deprecated, but until a replacement will be available (in Hibernate 6.0) it can be used ([read further](https://discourse.hibernate.org/t/hibernate-resulttransformer-is-deprecated-what-to-use-instead/232))\
      - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+33. **[How @ElementCollection Without @OrderColumn Works](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoBlazeEntityView)**
+
+**Description:** This application reveals the performance penalties of using `@ElementCollection`. In this case, without `OrderColumn`.
+
+**Key points:**\
+     - an `@ElementCollection` doesn't have a Primary Key\
+     - an `@ElementCollection` is mapped in a separate table\
+     - avoid `@ElementCollection` when you have a lot of inserts and deletes in/from it since the database has to delete all existing rows in order to add a new one or delete one\
+     - the more items we have in this table the greater the performance penalty
+     
+**Output example:**\
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootJpaCallbacks/sample.png)     
