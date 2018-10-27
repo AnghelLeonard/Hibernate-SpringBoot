@@ -1,7 +1,5 @@
 package com.jpa;
 
-import java.util.Optional;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
@@ -27,13 +25,25 @@ public class ElementCollectionApplication {
         return args -> {
 
             logger.info(() -> "Creating the shopping cart with 3 items ...");
-            shoppingCartService.createShoppingCart();            
+            shoppingCartService.createShoppingCartWithProducts();
             
-            logger.info(() -> "Add one item to the existing cart ...");
-            shoppingCartService.addInShoppingCart();
+            logger.info(() -> "Add one item to the existing cart at the beginning ...");
+            shoppingCartService.addAtBeginInShoppingCart();
             
-            logger.info(() -> "Remove an item from the cart ...");
-            shoppingCartService.removeFromShoppingCart();
+            logger.info(() -> "Add one item to the existing cart at the end ...");
+            shoppingCartService.addAtEndInShoppingCart();
+            
+            logger.info(() -> "Add one item to the existing cart in the middle ...");
+            shoppingCartService.addAtMiddleInShoppingCart();
+            
+            logger.info(() -> "Remove first item from the cart ...");
+            shoppingCartService.removeFirstItemShoppingCart();
+            
+            logger.info(() -> "Remove last item from the cart ...");
+            shoppingCartService.removeLastItemShoppingCart();
+            
+            logger.info(() -> "Remove middle item from the cart ...");
+            shoppingCartService.removeMiddleItemShoppingCart();
             
         };
     }
