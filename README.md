@@ -426,4 +426,4 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - the more items we have in this table the greater the performance penalty
      
 **Output example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootJpaCallbacks/sample.png)     
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootElementCollectionNoOrderColumn/sample.png)     
