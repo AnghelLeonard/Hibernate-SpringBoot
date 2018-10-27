@@ -452,4 +452,4 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - you can do this is the service or controller layer, depending where it fits better to your case
      
 **Output example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootElementCollectionWithOrderColumn/sample.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSuppressLazyInitInOpenSessionInView/sample.png)
