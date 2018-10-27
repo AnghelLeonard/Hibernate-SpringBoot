@@ -415,7 +415,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-33. **[How @ElementCollection Without @OrderColumn Works](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoBlazeEntityView)**
+33. **[How @ElementCollection Without @OrderColumn Works](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionNoOrderColumn)**
 
 **Description:** This application reveals the performance penalties of using `@ElementCollection`. In this case, without `OrderColumn`.
 
