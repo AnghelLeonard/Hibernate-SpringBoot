@@ -25,7 +25,7 @@ public class TennisController {
     public Tournament tournamentWithoutPlayers() {
 
         Tournament tournament = tennisService.fetchTournament();
-        // explicitly set Players of the detached Tournament
+        // explicitly set Players of the Tournament
         // in order to avoid fetching them from the database
         tournament.setTennisPlayers(Collections.emptyList());
 
