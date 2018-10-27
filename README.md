@@ -441,4 +441,4 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - the more items are inserted/removed from the beginning of this table the greater the performance penalty
      
 **Output example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootElementCollectionNoOrderColumn/sample.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootElementCollectionWithOrderColumn/sample.png)
