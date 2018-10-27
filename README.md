@@ -426,4 +426,19 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - the more items we have in this table the greater the performance penalty
      
 **Output example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootElementCollectionNoOrderColumn/sample.png)     
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootElementCollectionNoOrderColumn/sample.png)  
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+34. **[How @ElementCollection With @OrderColumn Works](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionNoOrderColumn)**
+
+**Description:** This application reveals the performance penalties of using `@ElementCollection`. In this case, with `@OrderColumn`. But, as you can see in this application, by adding `@OrderColumn` can mitigate some performance penalties when operations take place near the collection tail (e.g., add/remove at/from the end of the collection). 
+
+**Key points:**\
+     - an `@ElementCollection` doesn't have a Primary Key\
+     - an `@ElementCollection` is mapped in a separate table\
+     - pefer `@ElementCollection` with `@OrderColumn` when you have a lot of inserts and deletes from the collection tail\
+     - the more items are inserted/removed from the beginning of this table the greater the performance penalty
+     
+**Output example:**\
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootElementCollectionNoOrderColumn/sample.png)
