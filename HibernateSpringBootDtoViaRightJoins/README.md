@@ -9,3 +9,5 @@
      - write right joins queries using JPQL/SQL, for example:\
      - Query all tournaments even if they don't have players (`localhost:8080/allTournamentsRightJoinJpql`)\
      - Query all players even if they are not in tournaments (`localhost:8080/allPlayersRightJoinJpql`)
+
+<a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
