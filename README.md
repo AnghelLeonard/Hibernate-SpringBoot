@@ -469,6 +469,6 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - define serveral entities (e.g., `Tournament` and `Player` in a bidirectional `@OneToMany`)
      - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., `TournamentPlayerNameDto`, `PlayerRankNameDto`, `TournamentIdNameDto`)\
      - write inner joins queries using JPQL/SQL, for example:\
-     - Query the tournaments of all players (`localhost:8080/playersFromTournamentsNamesInnerJoinJpql`)\
+     - Query the tournaments of all players (`localhost:8080/tournamentsOfPlayersNamesInnerJoinJpql`)\
      - Query all tournaments that have players with rank smaller or equal to "rank" (`localhost:8080/tournamentsIdNameByRankInnerJoinSql`)
      
