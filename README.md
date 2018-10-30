@@ -466,7 +466,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 **Description:** This application is a proof of concept for using Spring Projections(DTOs) and inner joins written via JPQL and native SQL (for MySQL).
 
 **Key points:**\
-     - define serveral entities (e.g., `Tournament` and `Player` in a bidirectional `@OneToMany`)\
+     - define serveral entities (e.g., `Tournament` and `Player` in a bidirectional `@OneToMany` relationship)\
      - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
      - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., `TournamentPlayerNameDto`, `PlayerRankNameDto`, `TournamentIdNameDto`)\
      - write inner joins queries using JPQL/SQL, for example:\
