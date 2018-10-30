@@ -503,7 +503,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-42. **[How To Use Spring Projections(DTOs) And Full Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaRightJoins)**
+42. **[How To Use Spring Projections(DTOs) And Full Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaFullJoins)**
 
 **Description:** This application is a proof of concept for using Spring Projections(DTOs) and right joins written via JPQL and native SQL (for PostgreSQL; MySQL does not support `FULL JOINS`).
 
