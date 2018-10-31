@@ -557,7 +557,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-43. **[How To Use Use Spring Post Commits](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaOuterExcludingJoins)**
+43. **[How To Use Use Spring Post Commits](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPostCommit)**
 
 **Description:** This application is a proof of concept for using Spring post-commit hooks.
 
