@@ -530,7 +530,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-41. **[How To Use Spring Projections(DTOs) And Right Excluding Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaLeftExcludingJoins)**
+41. **[How To Use Spring Projections(DTOs) And Right Excluding Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaRightExcludingJoins)**
 
 **Description:** This application is a proof of concept for using Spring Projections(DTOs) and right excluding joins written via JPQL and native SQL (we use MySQL).
 
