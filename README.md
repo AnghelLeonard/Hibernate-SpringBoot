@@ -554,3 +554,12 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., `TournamentPlayerNameDto`)\
      - write outer excluding joins queries using JPQL/SQL, for example:\
      - Query all tournaments that don't have players and all players that don't participate in tournaments (`localhost:8080/allTournamentsWithoutPlayersAndViceversaOuterExcludingJoinJpql`)
+     
+-----------------------------------------------------------------------------------------------------------------------    
+
+43. **[How To Use Use Spring Post Commits](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaOuterExcludingJoins)**
+
+**Description:** This application is a proof of concept for using Spring post-commit hooks.
+
+**Key points:**\
+     - avoid time-consuming task in post-commits since the database connection will remain open until this code finshes
