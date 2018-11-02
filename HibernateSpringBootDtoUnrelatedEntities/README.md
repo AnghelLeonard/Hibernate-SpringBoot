@@ -8,3 +8,5 @@
      - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., `PatientNameAndMedicalHistoryDto`)\
      - write joins queries using JPQL/SQL, for example:\
      - Query all patients names and medical history with no current treatment (`localhost:8080/allPatientsNameAndMedicalHistoryNoTreatmentInnerJoinJpql`)
+
+<a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
