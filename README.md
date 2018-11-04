@@ -595,4 +595,4 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - Rely on primary key (entity: `GoodProduct`, test: `GoodEqualsAndHashCodeTest`)
      
 **Good implementation of equals() and hashCode():**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootElementCollectionNoOrderColumn/sample.png)       
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLombokEqualsAndHashCode/sample.png)       
