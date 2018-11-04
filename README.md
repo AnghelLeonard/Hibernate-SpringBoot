@@ -585,10 +585,17 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 **Key points:**\
 **AVOID THESE APPROACHES**\
-     - Using Lombok default behavior of `@EqualsAndHashCode` (entity: `LombokDefaultProduct`, test: `LombokDefaultEqualsAndHashCodeTest`)\
-     - Using Lombok  `@EqualsAndHashCode` with primary key only (entity: `LombokIdProduct`, test: `LombokEqualsAndHashCodeWithIdOnlyTest`)\
-     - Rely on default `equals()` and `hashCode()` (entity: `DefaultProduct`, test: `DefaultEqualsAndHashCodeTest`)\
-     - Implement `equals()` and `hashCode()` based only on primary key (entity: `IdProduct`, test: `IdEqualsAndHashCodeTest`)\
+     - Using Lombok default behavior of `@EqualsAndHashCode`\
+     (entity: `LombokDefaultProduct`, test: `LombokDefaultEqualsAndHashCodeTest`)
+     
+     - Using Lombok  `@EqualsAndHashCode` with primary key only\
+     (entity: `LombokIdProduct`, test: `LombokEqualsAndHashCodeWithIdOnlyTest`)
+     
+     - Rely on default `equals()` and `hashCode()`\
+     (entity: `DefaultProduct`, test: `DefaultEqualsAndHashCodeTest`)
+     
+     - Implement `equals()` and `hashCode()` based only on primary key\
+     (entity: `IdProduct`, test: `IdEqualsAndHashCodeTest`)\
 
 **PREFER THESE APPROACHES**\
      - Rely on `@NaturalId` (entity: `NaturalIdProduct`, test: `NaturalIdEqualsAndHashCodeTest`)\
