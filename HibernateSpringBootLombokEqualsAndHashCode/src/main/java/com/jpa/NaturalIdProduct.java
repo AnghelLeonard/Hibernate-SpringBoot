@@ -21,7 +21,7 @@ public class NaturalIdProduct implements Serializable {
     private String name;
 
     @NaturalId
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(nullable = false, updatable = false, unique = true, length = 50)
     private String code;
 
     public Long getId() {
