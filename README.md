@@ -614,4 +614,5 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootJoinFetch/sample1.png) 
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootJoinFetch/sample2.png)
 
