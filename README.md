@@ -611,3 +611,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - define two related entities (e.g., `Category` and `Product` in a one-to-many lazy bidirectional relationship)\     
      - write a `JOIN FETCH` to fetch all categories including products\
      - write a `JOIN FETCH` to fetch all products including categories
+
+**Output example:**\
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootJoinFetch/sample1.png) 
+
