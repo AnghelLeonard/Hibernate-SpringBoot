@@ -4,7 +4,7 @@
 
 **Key points:**\
      - define two related entities (e.g., `Category` and `Product` in a one-to-many lazy bidirectional relationship)\
-     - write a JPQL `JOIN FETCH` to fetch all categories including products\
+     - write a JPQL `JOIN FETCH` to fetch a category including products\
      - write a JPQL `JOIN FETCH` to fetch all products including categories
 
 **Output example:**\
