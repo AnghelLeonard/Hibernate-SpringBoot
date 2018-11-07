@@ -640,3 +640,16 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDelayConnection/sample1.png)
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDelayConnection/sample2.png)
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+49. **[How To Fetch Primary Keys Via Hibernate hi/lo Algorithm](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDelayConnection)**
+
+**Description:** This is a Spring Boot example of using the hi/lo algorithm for fetching 1000 PKs in 10 database roundtrips for batching 1000 inserts in batches of 10 inserts. The hi/lo algorithm is an optimization algorithm for generating sequences of identifiers.
+
+**Key points:**\
+     - use the `SEQUENCE` generator type (e.g., in PostgreSQL)
+     - configure the hi/lo algorithm as in `Player.java` entity
+     
+**Output example:**\
+![]()
