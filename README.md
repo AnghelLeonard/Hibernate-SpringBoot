@@ -637,6 +637,6 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - set `spring.datasource.hikari.auto-commit=false` in application.properties\
      - set `spring.jpa.properties.hibernate.connection.provider_disables_autocommit=true` in application.properties
      
-**Output example:**\     
+**Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDelayConnection/sample1.png)
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDelayConnection/sample2.png)
