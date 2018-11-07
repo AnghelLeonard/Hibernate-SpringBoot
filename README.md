@@ -643,7 +643,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-49. **[How To Fetch Primary Keys Via Hibernate hi/lo Algorithm](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDelayConnection)**
+49. **[How To Fetch Primary Keys Via Hibernate hi/lo Algorithm](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHiLo/sample.png)**
 
 **Description:** This is a Spring Boot example of using the hi/lo algorithm for fetching 1000 PKs in 10 database roundtrips for batching 1000 inserts in batches of 10 inserts. The hi/lo algorithm is an optimization algorithm for generating sequences of identifiers.
 
