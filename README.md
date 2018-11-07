@@ -626,3 +626,17 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - Remove the existing database rows that are no longer found in the incoming collection\
      - Update the existing database rows which can be found in the incoming collection\
      - Add the rows found in the incoming collection, which cannot be found in the current database snapshot
+     
+-----------------------------------------------------------------------------------------------------------------------    
+
+48. **[How To Delay Connection Acquisition As Needed (Hibernate 5.2.10)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMergeCollections)**
+
+**Description:** This is a Spring Boot example that exploits Hibernate 5.2.10 capability of delaying the connection acquisition as needed. Normally, a database connection is aquried immediately after calling a method annotated with `@Transactional`. If this method contains some time-consuming tasks before the first SQL statement then the connection is holded for nothing. But, Hibernate 5.2.10 allows us to delay the connection acquisition as needed. This example rely on HikariCP as the default connection pool for Spring Boot.
+
+**Key points:**\
+     - set `spring.datasource.hikari.auto-commit=false` in application.properties\
+     - set `spring.jpa.properties.hibernate.connection.provider_disables_autocommit=true` in application.properties
+     
+**Output example:**\     
+![]()
+![]()
