@@ -676,4 +676,4 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - using `Set` is much more efficent than `List`      
      
 **Output example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootManyToManyBidirectional/sample.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootManyToManyBidirectionalListVsSet/sample.png)
