@@ -664,4 +664,4 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - we use two entities, `Tournament` and `Player`, and a tournament can have multiple players and a player can participate to multiple tournaments
      
 **Output example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHiLo/sample.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootManyToManyBidirectional/sample.png)
