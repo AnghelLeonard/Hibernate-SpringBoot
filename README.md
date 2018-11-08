@@ -665,3 +665,15 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootManyToManyBidirectional/sample.png)
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+51. **[Prefer Set Instead of List in @ManyToMany Relationships](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManyBidirectional)**
+
+**Description:** This is a Spring Boot example of removing rows in case of a bidirectional `@ManyToMany` using a `List` and a `Set`. The conclusion is that `Set` is much better!
+
+**Key points:**\
+     - using `Set` is much more efficent than `List`      
+     
+**Output example:**\
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootManyToManyBidirectional/sample.png)
