@@ -416,7 +416,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 33. **[How @ElementCollection Without @OrderColumn Works](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionNoOrderColumn)**
 
-**Description:** This application reveals the possible performance penalties of using `@ElementCollection`. As you can see in the next recipe (34) adding `@OrderColumn` can mitigate some performance penalties.
+**Description:** This application reveals the possible performance penalties of using `@ElementCollection`. In this case, without `@OrderColumn`. As you can see in the next recipe (34) adding `@OrderColumn` can mitigate some performance penalties.
 
 **Key points:**\
      - an `@ElementCollection` doesn't have a Primary Key\
