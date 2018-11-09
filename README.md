@@ -409,8 +409,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - configure Blaze-Persistence, `CriteriaBuilderFactory` and `EntityViewManager`\
      - write an entity view via an interface in Blaze-Persistence fashion\
      - write a Spring-centric repository by extending `EntityViewRepository`\
-     - call method of this repository such as, `findAll()`, `findOne()`, etc\
-     - starting with Hibernate 5.2, `ResultTransformer` is deprecated, but until a replacement will be available (in Hibernate 6.0) it can be used ([read further](https://discourse.hibernate.org/t/hibernate-resulttransformer-is-deprecated-what-to-use-instead/232))\
+     - call method of this repository such as, `findAll()`, `findOne()`, etc\     
      - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
 
 -----------------------------------------------------------------------------------------------------------------------    
