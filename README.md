@@ -409,7 +409,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - configure Blaze-Persistence, `CriteriaBuilderFactory` and `EntityViewManager`\
      - write an entity view via an interface in Blaze-Persistence fashion\
      - write a Spring-centric repository by extending `EntityViewRepository`\
-     - call method of this repository such as, `findAll()`, `findOne()`, etc\     
+     - call method of this repository such as, `findAll()`, `findOne()`, etc\
      - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
 
 -----------------------------------------------------------------------------------------------------------------------    
