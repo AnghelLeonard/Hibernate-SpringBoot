@@ -688,3 +688,12 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 **Key points:**\
      - in pom.xml, Add `log4jdbc` Dependency\
      - in application.properties add: `logging.level.resultsettable=info, logging.level.sqltiming=info, logging.level.sqlonly=fatal, logging.level.audit=fatal, logging.level.resultset=fatal, logging.level.connection=fatal`   
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+53. **[How To View Binding Params Via TRACE](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLog4JdbcViewBindingParameters)**
+
+**Description:** View the prepared statement binding parameters via TRACE
+
+**Key points:**\   
+     - in application.properties add: `logging.level.org.hibernate.type.descriptor.sql: TRACE`  
