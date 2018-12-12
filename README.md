@@ -691,9 +691,9 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-53. **[How To View Binding Params Via TRACE](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLog4JdbcViewBindingParameters)**
+53. **[How To View Binding Params Via TRACE](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLogTraceViewBindingParameters)**
 
 **Description:** View the prepared statement binding parameters via TRACE
 
-**Key points:**\   
+**Key points:**\
      - in application.properties add: `logging.level.org.hibernate.type.descriptor.sql: TRACE`  
