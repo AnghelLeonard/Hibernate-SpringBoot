@@ -16,7 +16,7 @@
 
 2. **[How To View Binding Params Via Log4J 2](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLog4j2ViewBindingParameters)**
 
-**See also recipe 52 for using log4jdbc**
+**See also recipe 52 for using log4jdbc and 53 for logging using TRACE**
 
 **Description:** View the prepared statement binding parameters via Log4J 2 logger setting
 
@@ -693,7 +693,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 53. **[How To View Binding Params Via TRACE](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLogTraceViewBindingParameters)**
 
-**Description:** View the prepared statement binding parameters via TRACE
+**Description:** View the prepared statement binding parameters via `TRACE`
 
 **Key points:**\
      - in application.properties add: `logging.level.org.hibernate.type.descriptor.sql: TRACE`  
