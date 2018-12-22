@@ -709,4 +709,4 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - in entity use `@TypeDef` to map `typeClass` to `defaultForType` 
      
 **Output example:**\
-![]()     
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootYearMonth/sample.png)     
