@@ -745,7 +745,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-57. **[How To Batch a Big JSON File To MySQL Via ExecutorService And HikariCP](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchJsonFileSingleThread)**
+57. **[How To Batch a Big JSON File To MySQL Via ExecutorService And HikariCP](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchJsonFileExecutorService)**
 
 **Other examples:**
 - same example based on a single thread is here
