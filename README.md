@@ -782,15 +782,15 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 **Description:** This is a Spring Boot application that reads a relatively big JSON file (200000+ lines) and inserts its content in MySQL via batching using `ForkJoinPool` and HikariCP.
 
 **Key points:**\
-     - read the file into a `List` of a certain capacity, for example equal or bigger than your batch; by default the batch is of 300 lines, and the temporary list is 300 * 64\
-     - the list is halved and subtasks are created until the list size is small than the batch size (e.g., by default smaller than 300)\
-     - when the list is full save it in batches into MySQL, clear the list, and fill it again\     
-     * for MySQL, in application.properties, you may want to attach to the JDBC URL the following:\
-          * `rewriteBatchedStatements=true` -> this setting will force sending the batched statements in a single request;\
-          * `useServerPrepStmts=true` and/or `cachePrepStmts=true` -> this way you avoid the `PreparedStatement` to be emulated at the JDBC Driver level; depending on Connector/J, both of these should be set to `true` in order to switch to server-side prepared statements\ 
-          * depending on the used Connector/J, using `rewriteBatchedStatements=true` requires disabling server-side prepared statements in order to work, `useServerPrepStmts=false` and/or `cachePrepStmts=false`\
-          * **for being sure that these statements are a must and are still valid please check the notes of the Connector/J that you are using)**\
-     - set the HikariCP to provide a number of database connections that ensure that the database achives a minimum context switching (e.g., 2 * number of CPU cores)\
-     - this application uses `StopWatch` to measure the time needed to transfer the file into the database\
-     - in order to run the application you have to unzip the citylots.zip in the current location; this is the big JSON file collected from Internet;\
-     - if you want to see details about the batch process simply activate the DatasourceProxyBeanPostProcessor.java component, uncomment `@Component`; This is needed because this application relies on DataSource-Proxy (for details, see [recipe 3](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceProxy))
+- read the file into a `List` of a certain capacity, for example equal or bigger than your batch; by default the batch is of 300 lines, and the temporary list is 300 * 64\
+- the list is halved and subtasks are created until the list size is small than the batch size (e.g., by default smaller than 300)\
+- when the list is full save it in batches into MySQL, clear the list, and fill it again\     
+     - for MySQL, in application.properties, you may want to attach to the JDBC URL the following:\
+     - `rewriteBatchedStatements=true` -> this setting will force sending the batched statements in a single request;\
+     - `useServerPrepStmts=true` and/or `cachePrepStmts=true` -> this way you avoid the `PreparedStatement` to be emulated at the JDBC Driver level; depending on Connector/J, both of these should be set to `true` in order to switch to server-side prepared statements\ 
+      - depending on the used Connector/J, using `rewriteBatchedStatements=true` requires disabling server-side prepared statements in order to work, `useServerPrepStmts=false` and/or `cachePrepStmts=false`\
+       - **for being sure that these statements are a must and are still valid please check the notes of the Connector/J that you are using)**\
+- set the HikariCP to provide a number of database connections that ensure that the database achives a minimum context switching (e.g., 2 * number of CPU cores)\
+- this application uses `StopWatch` to measure the time needed to transfer the file into the database\
+- in order to run the application you have to unzip the citylots.zip in the current location; this is the big JSON file collected from Internet;\
+- if you want to see details about the batch process simply activate the DatasourceProxyBeanPostProcessor.java component, uncomment `@Component`; This is needed because this application relies on DataSource-Proxy (for details, see [recipe 3](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceProxy))
