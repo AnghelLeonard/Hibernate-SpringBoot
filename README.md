@@ -773,6 +773,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 **Key points:**\
      - read the file into a `List` of a certain capacity, for example equal or bigger than your batch; by default the batch is of 300 lines, and the temporary list is 300 * 64\
+     - the list is halved and subtasks are created until the list size is small than the batch size (e.g., by default smaller than 300)\
      - when the list is full save it in batches into MySQL, clear the list, and fill it again\
      - set the HikariCP to provide a number of database connections that ensure that the database achives a minimum context switching (e.g., 2 * number of CPU cores)\
      - this application uses `StopWatch` to measure the time needed to transfer the file into the database\
