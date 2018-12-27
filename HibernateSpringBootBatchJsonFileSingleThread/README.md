@@ -9,7 +9,8 @@
 **Key points:**\
      - read the file into a `List` of a certain capacity, for example equal or bigger than your batch; by default the batch is of 300 lines, and the temporary list is 300 * 64\
      - when the list is full save it in batches into MySQL, clear the list, and fill it again\
-     - set the HikariCP to have a single connection
+     - set the HikariCP to have a single connection\
+     - in order to run the application you have to unzip the citylots.zip in the current location; this is the big JSON file collected from Internet;
      
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>     
 
