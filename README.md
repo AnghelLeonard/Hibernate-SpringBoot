@@ -71,6 +71,8 @@
      - in application.properties set `spring.jpa.properties.hibernate.jdbc.batch_size`\
      - in application.properties set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)\
      - in application.properties set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)\
+     - in application.properties set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)\
+     - in application.properties set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))\
      - in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause batching to be disabled\
      - in DAO, flush and clear the persistence context from time to time. This way you avoid to "overwhelm" the persistence context. 
    
@@ -87,6 +89,8 @@
      - in application.properties set `spring.jpa.properties.hibernate.jdbc.batch_size`\
      - in application.properties set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)\
      - in application.properties set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)\
+     - in application.properties set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)\
+     - in application.properties set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))\
      - in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause batching to be disabled\
      - the `EntityManager` is obtain per entity type via, `JpaContext#getEntityManagerByManagedType(Class<?> entity)`\
      - in DAO, flush and clear the persistence context from time to time. This way you avoid to "overwhelm" the persistence context. 
@@ -103,6 +107,8 @@
 **Key points:**\
      - in application.properties set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)\
      - in application.properties set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)\
+     - in application.properties set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)\
+     - in application.properties set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))\
      - in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause batching to be disabled\
      - the Hibernate `Session` is obtained by un-wrapping it via `EntityManager#unwrap(Session.class)`\
      - the batching size is set via `Session#setJdbcBatchSize(Integer size)` and get via `Session#getJdbcBatchSize()`\
