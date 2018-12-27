@@ -1,8 +1,8 @@
 **[How To Batch a Big JSON File To MySQL Via a Single Thread And a Single Database Connection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchJsonFileSingleThread)**
 
 **Other examples:**
-- same example based on `ExecutorService` is here
-- same example based on `ForkJoinPool` is here
+- same example based on `ExecutorService` is [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchJsonFileExecutorService)
+- same example based on `ForkJoinPool` is [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchJsonFileForkJoin)
 
 **Description:** This is a Spring Boot application that reads a relatively big JSON file (200000+ lines) and inserts its content in MySQL via batching using a single thread, the main thread.
 
