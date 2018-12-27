@@ -739,3 +739,4 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - read the file into a `List` of a certain capacity, for example equal or bigger than your batch; by default the batch is of 300 lines, and the temporary list is 300 * 64\
      - when the list is full save it in batches into MySQL, clear the list, and fill it again\
      - set the HikariCP to have a single connection
+     - in order to run the application you have to unzip the citylots.zip in the current location; this is the big JSON file collected from Internet;
