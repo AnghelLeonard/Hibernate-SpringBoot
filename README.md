@@ -738,6 +738,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 **Key points:**\
      - read the file into a `List` of a certain capacity, for example equal or bigger than your batch; by default the batch is of 300 lines, and the temporary list is 300 * 64\
      - when the list is full save it in batches into MySQL, clear the list, and fill it again\
+     - for MySQL, in application.properties, attach to the JDBC URL the following: `rewriteBatchedStatements=true` -> this setting will force sending the batched statements in a single request; since we are using `PreparedStatement` and enabling rewriting, the MySQL driver is not able to use server-side prepared statements, therefore if you prefer to use server-side prepared statements then set `useServerPrepStmts` and `cachePrepStmts` to `true` and remove `rewriteBatchedStatements=true`-> this way we avoid the `PreparedStatement` to be emulated at the JDBC Driver level (for being sure that this is a must and is still true please check the note of the Connector/J that you are using), but we lose the advantage of sending the batched statements in a single request\
      - set the HikariCP to have a single connection\
      - this application uses `StopWatch` to measure the time needed to transfer the file into the database\
      - in order to run the application you have to unzip the citylots.zip in the current location; this is the big JSON file collected from Internet;\
@@ -755,7 +756,8 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 **Key points:**\
      - read the file into a `List` of a certain capacity, for example equal or bigger than your batch; by default the batch is of 300 lines, and the temporary list is 300 * 64\
-     - when the list is full save it in batches into MySQL, clear the list, and fill it again\
+     - when the list is full save it in batches into MySQL, clear the list, and fill it again\     
+     - for MySQL, in application.properties, attach to the JDBC URL the following: `rewriteBatchedStatements=true` -> this setting will force sending the batched statements in a single request; since we are using `PreparedStatement` and enabling rewriting, the MySQL driver is not able to use server-side prepared statements, therefore if you prefer to use server-side prepared statements then set `useServerPrepStmts` and `cachePrepStmts` to `true` and remove `rewriteBatchedStatements=true`-> this way we avoid the `PreparedStatement` to be emulated at the JDBC Driver level (for being sure that this is a must and is still true please check the note of the Connector/J that you are using), but we lose the advantage of sending the batched statements in a single request\
      - set the HikariCP to provide a number of database connections that ensure that the database achives a minimum context switching (e.g., 2 * number of CPU cores)\
      - this application uses `StopWatch` to measure the time needed to transfer the file into the database\
      - in order to run the application you have to unzip the citylots.zip in the current location; this is the big JSON file collected from Internet;\
@@ -774,7 +776,8 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 **Key points:**\
      - read the file into a `List` of a certain capacity, for example equal or bigger than your batch; by default the batch is of 300 lines, and the temporary list is 300 * 64\
      - the list is halved and subtasks are created until the list size is small than the batch size (e.g., by default smaller than 300)\
-     - when the list is full save it in batches into MySQL, clear the list, and fill it again\
+     - when the list is full save it in batches into MySQL, clear the list, and fill it again\     
+     - for MySQL, in application.properties, attach to the JDBC URL the following: `rewriteBatchedStatements=true` -> this setting will force sending the batched statements in a single request; since we are using `PreparedStatement` and enabling rewriting, the MySQL driver is not able to use server-side prepared statements, therefore if you prefer to use server-side prepared statements then set `useServerPrepStmts` and `cachePrepStmts` to `true` and remove `rewriteBatchedStatements=true`-> this way we avoid the `PreparedStatement` to be emulated at the JDBC Driver level (for being sure that this is a must and is still true please check the note of the Connector/J that you are using), but we lose the advantage of sending the batched statements in a single request\
      - set the HikariCP to provide a number of database connections that ensure that the database achives a minimum context switching (e.g., 2 * number of CPU cores)\
      - this application uses `StopWatch` to measure the time needed to transfer the file into the database\
      - in order to run the application you have to unzip the citylots.zip in the current location; this is the big JSON file collected from Internet;\
