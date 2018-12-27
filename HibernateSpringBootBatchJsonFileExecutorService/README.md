@@ -1,8 +1,8 @@
 **[How To Batch a Big JSON File To MySQL Via ExecutorService And HikariCP](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchJsonFileExecutorService)**
 
 **Other examples:**
-- same example based on a single thread is here
-- same example based on `ForkJoinPool` is here
+- same example based on a single thread is [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchJsonFileSingleThread)
+- same example based on `ForkJoinPool` is [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchJsonFileForkJoin)
 
 **Description:** This is a Spring Boot application that reads a relatively big JSON file (200000+ lines) and inserts its content in MySQL via batching using `ExecutorService` and HikariCP.
 
