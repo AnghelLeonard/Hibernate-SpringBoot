@@ -740,8 +740,11 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 - when the list is full save it in batches into MySQL, clear the list, and fill it again
 - for MySQL, in application.properties, you may want to attach to the JDBC URL the following:
      - `rewriteBatchedStatements=true` -> this setting will force sending the batched statements in a single request;
-     - `useServerPrepStmts=true` and/or `cachePrepStmts=true` -> this way you avoid the `PreparedStatement` to be emulated at the JDBC Driver level; depending on Connector/J, both of these should be set to `true` in order to switch to server-side prepared statements; on the other hand, depending on the used Connector/J, using `rewriteBatchedStatements=true` requires disabling server-side prepared statements in order to work, `useServerPrepStmts=false` and/or `cachePrepStmts=false`
-     - **Note: for being sure that these statements are a must and are still valid please check the notes of the Connector/J that you are using)**
+     - `cachePrepStmts=true` -> enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled
+     - `useServerPrepStmts=true` -> this way you switch to server-side prepared statements (may lead to signnificant performance boost); moreover, you avoid the `PreparedStatement` to be emulated at the JDBC Driver level; 
+     - we use the following JDBC URL settings:\
+     `...?cachePrepStmts=true&useServerPrepStmts=true&rewriteBatchedStatements=true&createDatabaseIfNotExist=true`
+     - **Note: Older MySQL versions will not tolerate well to have toghether rewritting and server-side prepared statement activated. For being sure that these statements still valid please check the notes of the Connector/J that you are using**
 - set the HikariCP to have a single connection
 - this application uses `StopWatch` to measure the time needed to transfer the file into the database
 - in order to run the application you have to unzip the citylots.zip in the current location; this is the big JSON file collected from Internet;
@@ -762,8 +765,11 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 - when the list is full save it in batches into MySQL, clear the list, and fill it again
 - for MySQL, in application.properties, you may want to attach to the JDBC URL the following:
      - `rewriteBatchedStatements=true` -> this setting will force sending the batched statements in a single request;
-     - `useServerPrepStmts=true` and/or `cachePrepStmts=true` -> this way you avoid the `PreparedStatement` to be emulated at the JDBC Driver level; depending on Connector/J, both of these should be set to `true` in order to switch to server-side prepared statements; on the other hand, depending on the used Connector/J, using `rewriteBatchedStatements=true` requires disabling server-side prepared statements in order to work, `useServerPrepStmts=false` and/or `cachePrepStmts=false`
-     - **Note: for being sure that these statements are a must and are still valid please check the notes of the Connector/J that you are using)**
+     - `cachePrepStmts=true` -> enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled
+     - `useServerPrepStmts=true` -> this way you switch to server-side prepared statements (may lead to signnificant performance boost); moreover, you avoid the `PreparedStatement` to be emulated at the JDBC Driver level; 
+     - we use the following JDBC URL settings:\
+     `...?cachePrepStmts=true&useServerPrepStmts=true&rewriteBatchedStatements=true&createDatabaseIfNotExist=true`
+     - **Note: Older MySQL versions will not tolerate well to have toghether rewritting and server-side prepared statement activated. For being sure that these statements still valid please check the notes of the Connector/J that you are using**
 - set the HikariCP to provide a number of database connections that ensure that the database achives a minimum context switching (e.g., 2 * number of CPU cores)
 - this application uses `StopWatch` to measure the time needed to transfer the file into the database
 - in order to run the application you have to unzip the citylots.zip in the current location; this is the big JSON file collected from Internet;
@@ -789,7 +795,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - `useServerPrepStmts=true` -> this way you switch to server-side prepared statements (may lead to signnificant performance boost); moreover, you avoid the `PreparedStatement` to be emulated at the JDBC Driver level; 
      - we use the following JDBC URL settings:\
      `...?cachePrepStmts=true&useServerPrepStmts=true&rewriteBatchedStatements=true&createDatabaseIfNotExist=true`
-     - **Note: Older MySQL version will not tolerate well to have toghether rewritting and server-side prepared statement activated. For being sure that these statements are a must and are still valid please check the notes of the Connector/J that you are using)**
+     - **Note: Older MySQL versions will not tolerate well to have toghether rewritting and server-side prepared statement activated. For being sure that these statements still valid please check the notes of the Connector/J that you are using**
 - set the HikariCP to provide a number of database connections that ensure that the database achives a minimum context switching (e.g., 2 * number of CPU cores)
 - this application uses `StopWatch` to measure the time needed to transfer the file into the database
 - in order to run the application you have to unzip the citylots.zip in the current location; this is the big JSON file collected from Internet;
