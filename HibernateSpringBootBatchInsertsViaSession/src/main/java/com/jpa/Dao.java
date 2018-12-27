@@ -58,6 +58,11 @@ public class Dao<T, ID extends Serializable> implements GenericDao<T, ID> {
                 i = 0;
             }
         }
+        
+        if (i > 0) {
+            entityManager.flush();
+            entityManager.clear();
+        }    
 
         return result;
     }
