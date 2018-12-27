@@ -2,7 +2,7 @@
 
 **Other examples:**
 - same example based on a single thread is here
-- same example based on `ExecutorService` is here
+- same example based on `ExecutorService` is [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchJsonFileExecutorService)
 
 **Description:** This is a Spring Boot application that reads a relatively big JSON file (200000+ lines) and inserts its content in MySQL via batching using `ForkJoinPool` and HikariCP.
 
