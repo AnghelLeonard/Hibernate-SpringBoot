@@ -832,5 +832,6 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 **Description:** This is a kickoff application that set up HikariCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database.
 
 **Key points:**\
+     - in pom.xml, add the `spring-boot-configuration-processor` dependency\
      - in application.properties, configure HikariCP via a custom prefix, e.g., `app.datasource.*`\
      - write a `@Bean` that returns the `DataSource`
