@@ -811,3 +811,14 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 - this application uses `StopWatch` to measure the time needed to transfer the file into the database
 - in order to run the application you have to unzip the citylots.zip in the current location; this is the big JSON file collected from Internet;
 - if you want to see details about the batch process simply activate the DatasourceProxyBeanPostProcessor.java component, uncomment `@Component`; This is needed because this application relies on DataSource-Proxy (for details, see [recipe 3](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceProxy))
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+59. **[How To Configure HikariCP Via application.properties](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLog4j2ViewBindingParameters)**
+
+**If you use the `spring-boot-starter-jdbc` or `spring-boot-starter-data-jpa` "starters", you automatically get a dependency to HikariCP**
+
+**Description:** This is a kickoff application that set up HikariCP via application.properties. The `jdbcUrl` is set up for a MySQL database.
+
+**Key points:**\
+     - in application.properties, rely on `spring.datasource.hikari.*` to configure HikariCP     
