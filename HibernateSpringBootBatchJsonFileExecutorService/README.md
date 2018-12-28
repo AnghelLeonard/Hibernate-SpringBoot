@@ -1,4 +1,4 @@
-**[How To Batch a Big JSON File To MySQL Via ExecutorService And HikariCP](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchJsonFileExecutorService)**
+**[How To JDBC Batch a Big JSON File To MySQL Via ExecutorService And HikariCP](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchJsonFileExecutorService)**
 
 **Other examples:**
 - same example based on a single thread is [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchJsonFileSingleThread)
