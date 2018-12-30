@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <title>Player home</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script>
+            function newPlayer() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        alert(this.responseText);
+                    }
+                };
+                xhttp.open("POST", "/players/new", true);
+                xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                xhttp.send();
+            }
+            
+            function fetchPlayer() {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState === 4 && this.status === 200) {
+                        alert(this.responseText);
+                    }
+                };
+                xhttp.open("GET", "/players/fetch", true);
+                xhttp.setRequestHeader("Content-type", "application/json; charset=utf-8");
+                xhttp.send();
+            }
+        </script>    
+    </head>
+    <body>
+        <div>
+            <button type="submit" onclick="newPlayer()">Insert a single player with id 1</button>
+            <button type="submit" onclick="fetchPlayer()">Get player with id 1</button>
+        </div>
+    </body>
+</html>
