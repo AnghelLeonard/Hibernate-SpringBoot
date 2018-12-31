@@ -835,3 +835,9 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - in pom.xml, add the `spring-boot-configuration-processor` dependency\
      - in application.properties, configure HikariCP via a custom prefix, e.g., `app.datasource.*`\
      - write a `@Bean` that returns the `DataSource`
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+61. **[Running a SpringBoot Application Under Payara Server Using a Payara Data Source (JDBC Resource and Connection Pool)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceBuilderHikariCPKickoff)**
+
+** This application is detailed in this [DZone](#) article.
