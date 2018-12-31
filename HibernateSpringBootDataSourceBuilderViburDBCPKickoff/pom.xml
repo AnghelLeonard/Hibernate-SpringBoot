@@ -67,18 +67,7 @@
             <groupId>org.vibur</groupId>
             <artifactId>vibur-dbcp</artifactId>
             <version>22.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-vibur</artifactId>
-            <!-- Note that this dependency will transitively include dependency on
-            vibur-dbcp-22.2. If a different version of vibur-dbcp is needed, a concrete
-            dependency on this version needs to be included in the application. -->
-            <!-- Here X is the exact Hibernate 5.3 version used by the application
-            and Designator is usually the word Final (or something like Beta1 or CR1). -->
-            <!-- <version>5.3.X.Designator</version> -->
-            <version>5.3.7.Final</version>
-        </dependency>
+        </dependency>        
         <!-- https://mvnrepository.com/artifact/com.googlecode.concurrentlinkedhashmap/concurrentlinkedhashmap-lru -->
         <dependency>
             <groupId>com.googlecode.concurrentlinkedhashmap</groupId>
