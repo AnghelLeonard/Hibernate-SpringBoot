@@ -825,6 +825,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHikariCPPropertiesKickoff/sample.png)
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 60. **[How To Configure HikariCP Via DataSourceBuilder](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceBuilderHikariCPKickoff)**
