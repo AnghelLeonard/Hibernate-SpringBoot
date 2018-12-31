@@ -876,4 +876,4 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - write a `@Bean` that returns the `DataSource`
 
 **Output sample:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceBuilderBoneCPKickoff/sample.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceBuilderViburDBCPKickoff/sample.png)
