@@ -818,11 +818,13 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 **If you use the `spring-boot-starter-jdbc` or `spring-boot-starter-data-jpa` "starters", you automatically get a dependency to HikariCP**
 
-**Description:** This is a kickoff application that set up HikariCP via application.properties. The `jdbcUrl` is set up for a MySQL database.
+**Description:** This is a kickoff application that set up HikariCP via application.properties. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService`for simulating concurrent users. Check the HickariCP report revealing the connection pool status.
 
 **Key points:**\
      - in application.properties, rely on `spring.datasource.hikari.*` to configure HikariCP     
 
+**Output sample:**\
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHikariCPPropertiesKickoff/sample.png)
 -----------------------------------------------------------------------------------------------------------------------    
 
 60. **[How To Configure HikariCP Via DataSourceBuilder](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceBuilderHikariCPKickoff)**
