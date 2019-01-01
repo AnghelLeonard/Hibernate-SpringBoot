@@ -7,5 +7,8 @@
      - in pom.xml add the Tomcat Connection Pool dependency\
      - in application.properties, configure Tomcat Connection Pool via a custom prefix, e.g., `app.datasource.*`\
      - write a `@Bean` that returns the `DataSource`    
+     
+**Output sample:**\
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceBuilderTomcatKickoff/sample.png)
 
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
