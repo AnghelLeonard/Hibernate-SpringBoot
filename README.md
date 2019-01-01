@@ -916,3 +916,6 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - in pom.xml add the Tomcat Connection Pool dependency\
      - in application.properties, configure Tomcat Connection Pool via a custom prefix, e.g., `app.datasource.*`\
      - write a `@Bean` that returns the `DataSource`     
+
+**Output sample:**\
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceBuilderTomcatKickoff/sample.png)
