@@ -892,3 +892,18 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceBuilderC3P0Kickoff/sample.png)
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+65. **[How To Configure DBCP2 Via DataSourceBuilder](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceBuilderC3P0Kickoff)**
+
+**Description:** This is a kickoff application that set up DBCP2 via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. 
+
+**Key points:**\
+     - in pom.xml, add the `spring-boot-configuration-processor` dependency\
+     - in pom.xml add the DBCP2 dependency\
+     - in application.properties, configure DBCP2 via a custom prefix, e.g., `app.datasource.*`\
+     - write a `@Bean` that returns the `DataSource`
+
+**Output sample:**\
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceBuilderC3P0Kickoff/sample.png)
