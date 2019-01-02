@@ -919,3 +919,20 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceBuilderTomcatKickoff/sample.png)
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+67. **[How To Configure Two Data Sources With Two Connection Pools](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceBuilderTomcatKickoff)**
+
+**Description:** This is a kickoff application that two data sources (two MySQL databases, one named `players_db` and one named `coaches_db`) with two connection pools (each database uses its own HikariCP connection pool with different settings). Based on the above recipes is pretty easy to configure two connection pools from two different providers as well.
+
+**Key points:**\
+     - in pom.xml, add the `spring-boot-configuration-processor` dependency\     
+     - in application.properties, configure two HikariCP connection pools via a two custom prefixes, e.g., `app.datasource.ds1` and `app.datasource.ds2`\
+     - write a `@Bean` that returns the first `DataSource` and mark it as `@Primary`\
+     - write another `@Bean` that returns the second `DataSource`\
+     - configure two `EntityManagerFactory` and point out the packages to scan for each of them\
+     - put the domains and repositories for each `EntityManager` in the right packages
+     
+**Output sample:**\
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceBuilderTomcatKickoff/sample.png)
