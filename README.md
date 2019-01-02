@@ -935,4 +935,4 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - put the domains and repositories for each `EntityManager` in the right packages
      
 **Output sample:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceBuilderTomcatKickoff/sample.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootTwoDataSourceBuilderKickoff/sample.png)
