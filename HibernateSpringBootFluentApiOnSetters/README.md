@@ -1,7 +1,7 @@
 
 **[How To Provide a Fluent API Via Setters For Building Entities](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiOnSetters)**
 
-**Note**: If you want yo provide a Fluent API without altering setters then consider recipe 69.
+**Note**: If you want yo provide a Fluent API without altering setters then consider [this recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiAdditionalMethods).
 
 **Description:** This is a sample application that alter the entities setters methods in order to empower a Fluent API.
 
