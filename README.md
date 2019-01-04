@@ -971,7 +971,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 69. **[How To Provide a Fluent API Via Additional Methods For Building Entities](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiAdditionalMethods)**
 
-**Note**: If you want yo provide a Fluent API by altering setters then consider this recipe.
+**Note**: If you want yo provide a Fluent API by altering setters then consider [this recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiOnSetters).
 
 **Description:** This is a sample application that add in entities additional methods (e.g., for `setName`, we add `name`) methods in order to empower a Fluent API.
 
