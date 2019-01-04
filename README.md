@@ -957,12 +957,26 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 68. **[How To Provide a Fluent API Via Setters For Building Entities](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiOnSetters)**
 
-**Note**: If you want yo provide a Fluent API without altering setters then consider recipe 69.
+**Note**: If you want yo provide a Fluent API without altering setters then consider this recipe.
 
 **Description:** This is a sample application that alter the entities setters methods in order to empower a Fluent API.
 
 **Key points:**\
-     - in entitites, return `this` instead of `void` in setters
+     - in entities, return `this` instead of `void` in setters
 
 **Fluent API example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFluentApiOnSetters/sample.png)
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+69. **[How To Provide a Fluent API Via Additional Methods For Building Entities](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiAdditionalMethods)**
+
+**Note**: If you want yo provide a Fluent API by altering setters then consider this recipe.
+
+**Description:** This is a sample application that add in entities additional methods (e.g., for `setName`, we add `name`) methods in order to empower a Fluent API.
+
+**Key points:**\
+     - in entities, add for each setter an additional method that return `this` instead of `void`
+
+**Fluent API example:**\
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFluentApiAdditionalMethods/sample.png)
