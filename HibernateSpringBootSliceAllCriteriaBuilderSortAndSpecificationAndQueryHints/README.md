@@ -11,7 +11,7 @@
 `public Slice<Player> fetchNextSlice(int page, int size) {`\
 &nbsp;&nbsp;&nbsp;&nbsp;`// hint example`\
 &nbsp;&nbsp;&nbsp;&nbsp;`Map<String, Object> hints = new HashMap<>();`\
-&nbsp;&nbsp;&nbsp;&nbsp;`hints.put("...", value);`\
+&nbsp;&nbsp;&nbsp;&nbsp;`hints.put("...", value);`
         
 &nbsp;&nbsp;&nbsp;&nbsp;`return playerRepository.findAll(isAgeGt21(),`\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name")),`\
