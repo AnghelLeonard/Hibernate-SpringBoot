@@ -4,12 +4,12 @@
 - [This](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSliceAllCriteriaBuilderSortAndSpecification) is an implementation that allows us to provide a `Sort` and a Spring Data `Specification`.
 
 **Usage example:**\
-`public static Specification<Player> isAgeGt21() {`
-&nbsp;&nbsp;&nbsp;&nbsp;`...`
+`public static Specification<Player> isAgeGt21() {`\
+&nbsp;&nbsp;&nbsp;&nbsp;`...`\
 `}`
 
 `public Slice<Player> fetchNextSlice(int page, int size) {`\
-&nbsp;&nbsp;&nbsp;&nbsp;`return playerRepository.findAll(isAgeGt21(),`
+&nbsp;&nbsp;&nbsp;&nbsp;`return playerRepository.findAll(isAgeGt21(),`\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name")));`\
  `}`
 
