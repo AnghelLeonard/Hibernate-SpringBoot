@@ -4,8 +4,8 @@
 - [This](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSliceAllSimpleSql) is a thin implementation based on a hard-coded SQL: `"SELECT e FROM " + entityClass.getSimpleName() + " e;"`
 
 **Usage example:**\
-`public Slice<Player> fetchNextSlice(int page, int size) {`        
-     `return playerRepository.findAll(PageRequest.of(page, size));`
+`public Slice<Player> fetchNextSlice(int page, int size) {`\
+    `return playerRepository.findAll(PageRequest.of(page, size));`\
  `}`
 
 **Other implementations:**:
