@@ -980,3 +980,16 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 **Fluent API example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFluentApiAdditionalMethods/sample.png)
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+70. **[How To Remove The SELECT COUNT Query in Slice Paging with findAll()](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiAdditionalMethods)**
+
+**Note**: Spring Boot provides two built-in paging mechanisms, `Page` and `Slice`. For `Page`, Spring Boot provides a `findAll()` method capable to take as arguments a `Pageable` and/or a `Specification`.  In order to return a the total number of records, this method trigger a `select count` extra-query next to the query used to fetched the current page. This count query is trigger every time we request a page. In order to avoid this extra-query, Spring Boot provides the `Slice` API. Using `Slice` instead of `Page` removes this extra queries and returns only the page via a `select`. While `Slice` doesn't know the total number of records, it still can tell if there is another page available after the current one or this is the last page. The problem is that `Slice` work fine for queries containing the SQL, `where` clause, but it doesn't work for `findAll()`. This method will still return a `Page` instead of `Slice` therefore the count query is triggered.
+
+**Description:** This is a suite of samples applications that provides different versions of a `Slice<T> findAll(...)`  method. We have from a minimalist implementation that relies on a hardcoded query as: `"SELECT e FROM " + entityClass.getSimpleName() + " e";`, to a custom implementation that supports sorting, specification, lock mode and query hints to an implementation that relies on `SimpleJpaRepository` with the same features. 
+
+**Key points:**\
+     - pass the entity class (e.g., `Player.class`) to the implementation
+     - provide the `findAll()` methods
+     - implement a `readSlice()` method or override the `readPage()` page
