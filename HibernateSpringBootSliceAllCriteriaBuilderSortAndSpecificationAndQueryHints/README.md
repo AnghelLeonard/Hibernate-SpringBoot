@@ -15,7 +15,7 @@
         
 &nbsp;&nbsp;&nbsp;&nbsp;`return playerRepository.findAll(isAgeGt21(),`\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name")),`\
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`LockModeType.OPTIMISTIC_FORCE_INCREMENT);`\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`LockModeType..., hints);`\
 `}`
 
 **Other implementations:**:
