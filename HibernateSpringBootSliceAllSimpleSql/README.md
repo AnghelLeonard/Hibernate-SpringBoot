@@ -5,7 +5,7 @@
 
 **Usage example:**\
 `public Slice<Player> fetchNextSlice(int page, int size) {`\
-    `return playerRepository.findAll(PageRequest.of(page, size));`\
+&nbsp;&nbsp;&nbsp;&nbsp;`return playerRepository.findAll(PageRequest.of(page, size));`\
  `}`
 
 **Other implementations:**:
