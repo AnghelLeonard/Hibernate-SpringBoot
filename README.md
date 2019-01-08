@@ -997,7 +997,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - pass the entity class (e.g., `Player.class`) to this `abstract` class via a class that acts as a repository\
      - implement the `findAll()` methods to return `Slice<T>` or `Page<T>`, but without the total number of elements\
      - return a `SliceImpl` (`Slice<T>`) or a `PageImpl` (`Page<T>`) without the total number of elements\
-     - implement a `readSlice()` method or override the `SimpleJpaRepository#readPage()` page to avoid the extra `SELECT COUNT` query
+     - implement a `readSlice()` method or override the `SimpleJpaRepository#readPage()` page to avoid the extra `SELECT COUNT`
 
 **Example of usage for this recipe (returns `Slice<T>`):**\
 `return playerRepository.findAll(PageRequest.of(page, size));`
