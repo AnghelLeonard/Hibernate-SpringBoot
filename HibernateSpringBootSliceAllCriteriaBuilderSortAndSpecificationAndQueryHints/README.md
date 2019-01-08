@@ -8,7 +8,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;`...`\
 `}`
 
-`public Slice<Player> fetchNextSlice(int page, int size) {`\    
+`public Slice<Player> fetchNextSlice(int page, int size) {`\
 &nbsp;&nbsp;&nbsp;&nbsp;`// hint example`\
 &nbsp;&nbsp;&nbsp;&nbsp;`Map<String, Object> hints = new HashMap<>();`\
 &nbsp;&nbsp;&nbsp;&nbsp;`hints.put("...", value);`\
