@@ -993,7 +993,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 **Description:** This is a suite of samples applications that provides different versions of a `Slice<T> findAll(...)`  method. We have from a minimalist implementation that relies on a hardcoded query as: `"SELECT e FROM " + entityClass.getSimpleName() + " e";` (this recipe), to a custom implementation that supports sorting, specification, lock mode and query hints to an implementation that relies on `SimpleJpaRepository` with the same features. 
 
 **Key points:**\
-     - write an `abstract` class that expose the `Slice<T> findAll(...)` methods\     
+     - write an `abstract` class that expose the `Slice<T> findAll(...)` methods
      - pass the entity class (e.g., `Player.class`) to this `abstract` class via a class that acts as a repository\
      - implement the `findAll()` methods to return `Slice<T>` or `Page<T>`, but without the total number of elements\
      - return a `SliceImpl` (`Slice<T>`) or a `PageImpl` (`Page<T>`) without the total number of elements\
