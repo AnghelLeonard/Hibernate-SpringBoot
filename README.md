@@ -1008,10 +1008,11 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 71. **[How To Remove The Extra SELECT COUNT Query in Spring Boot Paging Via Window Functions](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiAdditionalMethods)**
 
-**Description:** When we rely on an *offset* paging we have the performance penalty induced by throwing away *n* records before reached the desired *offset*. Larger *n* leads to a significant performance penalty. But, this is not the only performance penalty. Most of the time we want to count the total number of rows to calculate the total number of possible pages, so this is an extra `SELECT`. So, if we don't want to go with keyset pagination and avoid counting that total which can be very costly, we have to tacke this performance penalty somehow. For databases vendors that support *Window Functions* there is a solution relying on `COUNT(*) OVER()` as in this application that uses this window function in a native query against MySQL 8.
+**Description:** When we rely on an *offset* paging we have the performance penalty induced by throwing away *n* records before reached the desired *offset*. Larger *n* leads to a significant performance penalty. But, this is not the only performance penalty. Most of the time we want to count the total number of rows to calculate the total number of possible pages, so this is an extra `SELECT COUNT`. So, if we don't want to go with *keyset* pagination and avoid counting that total number of records, which can be very costly, we have to tacke this performance penalty somehow. For databases vendors that support *Window Functions* there is a solution relying on `COUNT(*) OVER()` as in this application that uses this window function in a native query against MySQL 8.
 
 **Key points:**\
-     - in entities, add for each setter an additional method that return `this` instead of `void`
+     - create a DTO projection to cover the extra-column added by the `COUNT(*) OVER()` window function\
+     - write a native query relying on this window function
 
-**Fluent API example:**\
+**Example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFluentApiAdditionalMethods/sample.png)
