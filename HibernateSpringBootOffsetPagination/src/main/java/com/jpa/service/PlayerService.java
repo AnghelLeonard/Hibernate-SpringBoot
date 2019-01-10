@@ -2,8 +2,8 @@ package com.jpa.service;
 
 import com.jpa.domain.Player;
 import com.jpa.repository.PlayerRepository;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Slice;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,7 +15,7 @@ public class PlayerService {
         this.playerRepository = playerRepository;
     }
             
-    public Slice<Player> fetchNextSlice(int page, int size) {
+    public Page<Player> fetchNextSlice(int page, int size) {
         
         return playerRepository.findAll(PageRequest.of(page, size));
     }
