@@ -1031,3 +1031,17 @@ Screenshot from that article (*offset* pagination):
 **Key points:**\
      - choose a column to act as the latest visited record (e.g., `id`)\
      - use this column in the `WHERE` clause of your SQL
+     
+-----------------------------------------------------------------------------------------------------------------------    
+
+73. **[How To Implement Offset Pagination in Spring Boot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootKeysetPagination)**
+
+**Note:** For a list of pros and cons of *offset vs keyset* please check my book: [Java Persistence Performance Illustrated Guide](https://leanpub.com/java-persistence-performance-illustrated-guide).
+
+**Description:** When we rely on an *offset* paging we have the performance penalty induced by throwing away *n* records before reached the desired *offset*. Larger *n* leads to a significant performance penalty. Another penalty is the extra-`SELECT` needed to count the total number of records. But, for small datasets, *offset* and *keysey* provides almost the same performances. Spring Boot provides built-in support for *offset* pagination via the `Page` API, therefore it is very easy to use it in an application.
+
+**But:** If *offset* pagination is causing you performance issues then please check recipes: 70 (slice technique for find all records), 71 (*offset* with window functions) and 72 (*keyset* pagination).
+
+**Key points:**\
+     - write a repository that extends `PagingAndSortingRepository`\
+     - call or write methods that returns `Page` (e.g., `findAll(Pageable pageable)`
