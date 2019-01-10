@@ -1034,7 +1034,7 @@ Screenshot from that article (*offset* pagination):
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-73. **[How To Implement Offset Pagination in Spring Boot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootKeysetPagination)**
+73. **[How To Implement Offset Pagination in Spring Boot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOffsetPagination)**
 
 **Note:** For a list of pros and cons of *offset vs keyset* please check my book: [Java Persistence Performance Illustrated Guide](https://leanpub.com/java-persistence-performance-illustrated-guide).
 
