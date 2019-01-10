@@ -17,7 +17,7 @@ public class PlayerController {
     }
 
     @GetMapping("/players/{id}/{limit}")
-    public List<Player> fetchPlayersByPageAndSizePath(@PathVariable long id, @PathVariable int limit) {
+    public List<Player> fetchPlayersByIdAndSizeLimit(@PathVariable long id, @PathVariable int limit) {
 
         return playerService.fetchNextSlice(id, limit);
     }
