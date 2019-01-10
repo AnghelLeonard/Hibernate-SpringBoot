@@ -1044,4 +1044,13 @@ Screenshot from that article (*offset* pagination):
 
 **Key points:**\
      - write a repository that extends `PagingAndSortingRepository`\
-     - call or write methods that returns `Page` (e.g., `findAll(Pageable pageable)`
+     - call or write methods that returns `Page`
+
+**Examples:**\
+     - call the built-in `findAll(Pageable)` without sorting:\
+     `repository.findAll(PageRequest.of(page, size));`\
+     - call the built-in `findAll(Pageable)` with sorting:\
+     `repository.findAll(PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name")));`
+     - use Spring Data query creation to define new methods in your repository:\
+     `Page<Player> findByName(String name, Pageable pageable);`
+     `Page<Player> queryFirst10ByName(String name, Pageable pageable);`
