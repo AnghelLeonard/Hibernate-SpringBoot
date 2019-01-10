@@ -1040,7 +1040,7 @@ Screenshot from that article (*offset* pagination):
 
 **Description:** When we rely on an *offset* paging we have the performance penalty induced by throwing away *n* records before reached the desired *offset*. Larger *n* leads to a significant performance penalty. Another penalty is the extra-`SELECT` needed to count the total number of records. But, for small datasets, *offset* and *keysey* provides almost the same performances. Spring Boot provides built-in support for *offset* pagination via the `Page` API, therefore it is very easy to use it in an application.
 
-**Important note:** This application extract records as entities, but if all you want to do is to read this data as pages then consider DTOs to avoid consuming memory and CPU for nothing. As a rule, extract entites only if you plan to modify them.
+**Important note:** This application extract records as entities, but if all you want to do is to read this data as pages then consider DTOs to avoid consuming memory and CPU for nothing. As a rule, extract entites only if you plan to modify them. In this case, we need a native SQL or another approach instead of `Page<T>`.
 
 **But:** If *offset* pagination is causing you performance issues then please check recipes: [70](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSliceAllCriteriaBuilderSortAndSpecificationAndQueryHints) (slice technique for find all records), [71](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootWindowFunctionPaging) (*offset* with window functions) and [72](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootKeysetPagination) (*keyset* pagination).
 
