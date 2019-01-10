@@ -11,3 +11,7 @@ Screenshot from that article (*offset* pagination):
      - choose a column to act as the latest visited record (e.g., `id`)\
      - use this column in the `WHERE` clause of your SQL
 
+-------------------------------
+
+**You may like to try as well:**
+<a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
