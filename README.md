@@ -1028,10 +1028,13 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 Screenshot from that article (*offset* pagination):
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootKeysetPagination/offset.png)
 
+**Need to know if there are more records?**\
+By its nature, *keyset* doesn't use a `SELECT COUNT` to fetch the number of total records. But, we a little tweak we can easily say if there are more records, therefore to show a button of type `Next Page`. Mainly, if you need such a thing then consider [this application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootKeysetPaginationNextPage). A `Previous Page` button can be implemented easily based on the first record.
+
 **Key points:**\
      - choose a column to act as the latest visited record (e.g., `id`)\
      - use this column in the `WHERE` clause of your SQL
-     
+          
 -----------------------------------------------------------------------------------------------------------------------    
 
 73. **[How To Implement Offset Pagination in Spring Boot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOffsetPagination)**
