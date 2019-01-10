@@ -1025,7 +1025,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 **Description:** When we rely on an *offset* paging we have the performance penalty induced by throwing away *n* records before reached the desired *offset*. Larger *n* leads to a significant performance penalty. When we have a large *n* is better to rely on *keyset* pagination which maintain a "constant" time for large datasets. In order to understand how bad *offset* can perform please check this [article](http://allyouneedisbackend.com/blog/2017/09/24/the-sql-i-love-part-1-scanning-large-table/):
 
-Screenshot from that article:
+Screenshot from that article (*offset* pagination):
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootKeysetPagination/offset.png)
 
 **Key points:**\
