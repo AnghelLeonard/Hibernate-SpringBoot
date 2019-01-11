@@ -29,6 +29,7 @@ A `Previous Page` button can be implemented easily based on the first record.
 
 **Sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootKeysetPaginationNextPage/offset%20pagination.png)
+
 -------------------------------
 
 **You may like to try as well:**
