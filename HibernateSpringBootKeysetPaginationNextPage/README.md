@@ -27,6 +27,8 @@ A `Previous Page` button can be implemented easily based on the first record.
      - choose a column to act as the latest visited record (e.g., `id`)\
      - use this column in the `WHERE` clause of your SQL
 
+**Sample:**\
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootKeysetPaginationNextPage/offset%20pagination.png)
 -------------------------------
 
 **You may like to try as well:**
