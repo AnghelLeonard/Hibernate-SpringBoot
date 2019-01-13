@@ -1081,7 +1081,7 @@ A `Previous Page` button can be implemented easily based on the first record.
 
 74. **[How To Optimize Batch Inserts of Parent-Child Relationships and Cascade Persist](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertOrder)**
 
-**Description:** Let's suppose that we have a one-to-many relationship between `Tournament` and `TennisPlayer` entities. When we save a tournament, we save its players as well thanks to cascading. We want to create a bunch of tournaments with players and save them in the database (e.g., a MySQL database) using the batch technique. By default, this will result in batching the players per tournament. In order to batch tournaments and players, we need to order inserts as in this application.
+**Description:** Let's suppose that we have a one-to-many relationship between `Tournament` and `TennisPlayer` entities. When we save a tournament, we save its players as well thanks to cascading. We want to create a bunch of tournaments with players and save them in the database (e.g., a MySQL database) using the batch technique. By default, this will result in batching each tournament and the players per tournament. In order to batch tournaments and players, we need to order inserts as in this application.
 
 **Key points:**\
      - beside all setting specific to batching inserts in MySQL, we need to set up in application.properties the following property: `spring.jpa.properties.hibernate.order_inserts=true`
