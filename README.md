@@ -1096,9 +1096,9 @@ A `Previous Page` button can be implemented easily based on the first record.
 
 75. **[How To Batch Updates In MySQL](#)**
 
-**Implementations:**\
+**Implementations:**
 - [Update single entity](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchUpdateOrderSingleEntity)
-- [Parent-child relationship update]()
+- [Parent-child relationship update](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchUpdateOrder)
 
 **Description:** Batch updates in MySQL.
 
@@ -1113,6 +1113,7 @@ A `Previous Page` button can be implemented easily based on the first record.
 and delete operations (entities that contains `@Version` for implicit optimistic locking). This setting is: `spring.jpa.properties.hibernate.jdbc.batch_versioned_data=true`. Starting with Hibernate 5, this setting should be `true` by default.
    
 **Output example for single entity:**
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsEntityManagerViaJpaContext/sample.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchUpdateOrderSingleEntity/batch_update.png)
 
 **Output example for parent-child relationship:**
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchUpdateOrder/batch_update.png)
