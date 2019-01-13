@@ -1091,3 +1091,20 @@ A `Previous Page` button can be implemented easily based on the first record.
 
 **Example with ordered inserts:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertOrder/sample1.png)
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+75. **[How To Batch Updates In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsEntityManagerViaJpaContext)**
+
+**Description:** Batch updates in MySQL.
+
+**Key points:**\
+     - in application.properties set `spring.jpa.properties.hibernate.jdbc.batch_size`\
+     - in application.properties set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)\
+     - in application.properties set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)\
+     - in application.properties set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)\
+     - in application.properties set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))\
+     - in case of using a parent-child relationship (as in this application) with cascade all/merge (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_updates=true` to optimize the batching by ordering updates\    
+   
+**Output example:**
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsEntityManagerViaJpaContext/sample.png)
