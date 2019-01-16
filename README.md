@@ -1137,26 +1137,26 @@ and delete operations (entities that contains `@Version` for implicit optimistic
 **Output example:**
 
 **FIRST APPROACH: deleteAllInBatch()**\
-Output sample (no batch is hapenning):\
+Output sample - **no batching**:\
 Name:DATA_SOURCE_PROXY, Connection:25, Time:38, Success:True\
-Type:Prepared, Batch:False, QuerySize:1, BatchSize:0\
+Type:Prepared, **Batch:False**, QuerySize:1, BatchSize:0\
 Query:["delete from tennis_player"]
         
 `playerRepository.deleteAllInBatch();`
         
 **SECOND APPROACH: deleteInBatch()**\
-Output sample (no batch is happening):\
+Output sample - **no batching**:\
 Name:DATA_SOURCE_PROXY, Connection:25, Time:24, Success:True\
-Type:Prepared, Batch:False, QuerySize:1, BatchSize:0\
+Type:Prepared, **Batch:False**, QuerySize:1, BatchSize:0\
 Query:["delete from tennis_player where id=? or id=? or id=? or id=? or id=? ...]\
 Params:[(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20)]
         
 `playerRepository.deleteInBatch(players);`
         
 **THIRD APPROACH: use delete()**\
-Output sample: batch is happening\
+Output sample: - **batching**:\
 Name:DATA_SOURCE_PROXY, Connection:25, Time:467, Success:True\
-Type:Prepared, Batch:True, QuerySize:1, BatchSize:7\
+Type:Prepared, **Batch:True, QuerySize:1, BatchSize:7**\
 Query:["delete from tennis_player where id=? and version=?"]\
 Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 ...
