@@ -1119,7 +1119,7 @@ and delete operations (entities that contains `@Version` for implicit optimistic
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-76. **[How To Batch Deletes In MySQL (no relationships)](#)**
+76. **[How To Batch Deletes In MySQL (no relationships)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchDeleteSingleEntity)**
 
 **Description:** Batch deletes in MySQL having a single entity class (no relationships).
 
@@ -1134,7 +1134,7 @@ and delete operations (entities that contains `@Version` for implicit optimistic
      - before Hibernate 5, we need to set in application.properties a setting for enabling batching for versioned entities during update
 and delete operations (entities that contains `@Version` for implicit optimistic locking). This setting is: `spring.jpa.properties.hibernate.jdbc.batch_versioned_data=true`. Starting with Hibernate 5, this setting should be `true` by default.
    
-**Output example for single entity:**
+**Output example:**
 
 **FIRST APPROACH: deleteAllInBatch()**\
 Output sample (no batch is hapenning):\
