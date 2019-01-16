@@ -32,15 +32,15 @@ public class TennisArenaService {
         List<TennisPlayer> players = playerRepository.findAll();
         
         // FIRST APPROACH: deleteAllInBatch()        
-        // Output sample (no batch is hapenning):
+        // Output sample - no batching:
         // Name:DATA_SOURCE_PROXY, Connection:25, Time:38, Success:True
         // Type:Prepared, Batch:False, QuerySize:1, BatchSize:0
         // Query:["delete from tennis_player"]
         
         // playerRepository.deleteAllInBatch();
         
-        // SECOND APPROACH: deleteInBatch
-        // Output sample (no batch is happening):
+        // SECOND APPROACH: deleteInBatch()
+        // Output sample - no batching:
         // Name:DATA_SOURCE_PROXY, Connection:25, Time:24, Success:True
         // Type:Prepared, Batch:False, QuerySize:1, BatchSize:0
         // Query:["delete from tennis_player where id=? or id=? or id=? or id=? or id=? or id=? or id=? or id=? or id=? or id=? or id=? or id=? or id=? or id=? or id=? or id=? or id=? or id=? or id=? or id=?"]
@@ -49,7 +49,7 @@ public class TennisArenaService {
         // playerRepository.deleteInBatch(players);
         
         // THIRD APPROACH: use delete()
-        // Output sample: batch is happening
+        // Output sample: batching is happening
         // Name:DATA_SOURCE_PROXY, Connection:25, Time:467, Success:True
         // Type:Prepared, Batch:True, QuerySize:1, BatchSize:7
         // Query:["delete from tennis_player where id=? and version=?"]
