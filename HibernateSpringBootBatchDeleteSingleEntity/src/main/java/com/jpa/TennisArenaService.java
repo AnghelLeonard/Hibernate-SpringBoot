@@ -55,7 +55,7 @@ public class TennisArenaService {
         // Query:["delete from tennis_player where id=? and version=?"]
         // Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]        
         
-        players.forEach((t) -> playerRepository.delete(t));
+        players.forEach(playerRepository::delete);
                 
     }
 }
