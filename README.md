@@ -1173,9 +1173,30 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 **Key points:**\
      - in this example, we have a `Tournament` entity and each tournament can have several `TennisPlayer` (*one-to-many*)\
-     - first, we dissociate all `TennisPlayer` from the corresponding `Tournament`\
-     - second, we explicitly (manually) flush the persistent context (this will delete in batch all `TennisPlayer` thanks to `orphanRemoval=true`; if this is set to `false`, you will obtain a bunch of updates instead of deletes)\
-     - third, we delete all `Tournament` via the `delete()` method (since we have dissaciated all `TennisPlayer`, the `Tournament` deletion will take advantage of batching as well)
+     - first, we use `orphanRemoval=true` and only `CascadeType.PERSIST` and `CascadeType.MERGE`\
+     - second, we dissociate all `TennisPlayer` from the corresponding `Tournament`\
+     - third, we explicitly (manually) flush the persistent context (this will delete in batch all `TennisPlayer` thanks to `orphanRemoval=true`; if this is set to `false`, you will obtain a bunch of updates instead of deletes)\
+     - forth, we delete all `Tournament` via the `delete()` method (since we have dissaciated all `TennisPlayer`, the `Tournament` deletion will take advantage of batching as well)
+        
+**Output example:**
+
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchDeleteOrphanRemoval/batch_delete.png)
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+78. **[How To Batch Deletes In MySQL Via SQL "on delete cascade"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchDeleteOrphanRemoval)**
+
+**Description:** Batch deletes in MySQL via `on delete cascade`. Auto-generated database schema will contain `ON DELETE CASCADE` directive.
+
+**Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use batching. The first one simply triggers a `delete from entity_name` statement, while the second one triggers a `delete from entity_name where id=? or id=? or id=? ...` statement. Rely on `delete()` method.
+
+**Key points:**\
+     - in this example, we have a `Tournament` entity and each tournament can have several `TennisPlayer` (*one-to-many*)\
+     - first, we remove `orphanRemoval` or set it to `false`\
+     - second, we use only `CascadeType.PERSIST` and `CascadeType.MERGE`\
+     - third, we set `@OnDelete(action = OnDeleteAction.CASCADE)` next to `@OneToMany`\
+     - fourth, we set `spring.jpa.properties.hibernate.dialect` to `org.hibernate.dialect.MySQL5InnoDBDialect`
+     - fifth, we use the Spring `delete()` method to delete all `Tournament`
         
 **Output example:**
 
