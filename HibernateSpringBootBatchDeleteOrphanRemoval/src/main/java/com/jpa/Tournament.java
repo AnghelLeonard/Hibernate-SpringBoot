@@ -23,7 +23,7 @@ public class Tournament implements Serializable {
     @Version
     private long version;
 
-    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE}, 
+    @OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, 
             mappedBy = "tournament", orphanRemoval = true)
     private List<TennisPlayer> tennisPlayers = new ArrayList<>();
 
