@@ -1184,7 +1184,7 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-78. **[How To Batch Deletes In MySQL Via SQL "on delete cascade"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchDeleteOrphanRemoval)**
+78. **[How To Batch Deletes In MySQL Via SQL "on delete cascade"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchDeleteCascadeDelete)**
 
 **Description:** Batch deletes in MySQL via `on delete cascade`. Auto-generated database schema will contain `ON DELETE CASCADE` directive.
 
