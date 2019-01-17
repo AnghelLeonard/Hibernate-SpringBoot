@@ -1179,4 +1179,4 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
         
 **Output example:**
 
-![]()
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchDeleteOrphanRemoval/batch_delete.png)
