@@ -6,9 +6,10 @@
 
 **Key points:**\
      - in this example, we have a `Tournament` entity and each tournament can have several `TennisPlayer` (*one-to-many*)\
-     - first, we dissociate all `TennisPlayer` from the corresponding `Tournament`\
-     - second, we explicitly (manually) flush the persistent context (this will delete in batch all `TennisPlayer` thanks to `orphanRemoval=true`; if this is set to `false`, you will obtain a bunch of updates instead of deletes)\
-     - third, we delete all `Tournament` via the `delete()` method (since we have dissaciated all `TennisPlayer`, the `Tournament` deletion will take advantage of batching as well)
+     - first, we use `orphanRemoval=true` and only `CascadeType.PERSIST` and `CascadeType.MERGE`\
+     - second, we dissociate all `TennisPlayer` from the corresponding `Tournament`\
+     - third, we explicitly (manually) flush the persistent context (this will delete in batch all `TennisPlayer` thanks to `orphanRemoval=true`; if this is set to `false`, you will obtain a bunch of updates instead of deletes)\
+     - forth, we delete all `Tournament` via the `delete()` method (since we have dissaciated all `TennisPlayer`, the `Tournament` deletion will take advantage of batching as well)
         
 **Output example:**
 
