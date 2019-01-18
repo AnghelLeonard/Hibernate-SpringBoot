@@ -51,8 +51,8 @@ public class NaturalIdApplication {
             Optional<Product> foundTshirt = 
                     productNaturalRepository.findBySimpleNaturalId("014-tshirt-2019");
          
-            // find first product two natural ids (for running this code simply
-            // uncomment the "sku" field in the Product entity
+            // find first product by two natural ids (for running this code simply
+            // uncomment the "sku" field in the Product entity and the below lines; comment lines 51 and 52)
             // Map<String, Object> ids = new HashMap<>();
             // ids.put("sku", 1L);
             // ids.put("code", "014-tshirt-2019");            
