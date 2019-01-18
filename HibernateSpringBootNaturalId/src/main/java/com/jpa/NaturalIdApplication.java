@@ -37,12 +37,12 @@ public class NaturalIdApplication {
             Product tshirt = new Product();
             tshirt.setName("T-Shirt");
             tshirt.setCode("014-tshirt-2019");
-            // tshirt.setSku("1");
+            // tshirt.setSku(1L);
 
             Product socks = new Product();
             socks.setName("Socks");
             socks.setCode("012-socks-2018");
-            // socks.setSku("2");
+            // socks.setSku(2L);
 
             productRepository.save(tshirt);
             productRepository.save(socks);
@@ -53,8 +53,8 @@ public class NaturalIdApplication {
          
             // find first product two natural ids (for running this code simply
             // uncomment the "sku" field in the Product entity
-            // Map<String, String> ids = new HashMap<>();
-            // ids.put("sku", "1");
+            // Map<String, Object> ids = new HashMap<>();
+            // ids.put("sku", 1L);
             // ids.put("code", "014-tshirt-2019");            
             // Optional<Product> foundTshirt = productNaturalRepository.findByNaturalId(ids);
                                                 
