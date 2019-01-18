@@ -26,7 +26,7 @@ public class Product implements Serializable {
     
     // @NaturalId(mutable = false)
     // @Column(nullable = false, updatable = false, unique = true, length = 50)
-    // private String sku;
+    // private Long sku;
 
     public Long getId() {
         return id;
@@ -53,11 +53,11 @@ public class Product implements Serializable {
     }
 
     /*
-    public String getSku() {
+    public Long getSku() {
         return sku;
     }
 
-    public void setSku(String sku) {
+    public void setSku(Long sku) {
         this.sku = sku;
     } 
     */
