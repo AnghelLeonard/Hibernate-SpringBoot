@@ -12,3 +12,8 @@
      - provide an implementation for this interface (`NaturalRepositoryImpl`) relying on Hibernate, `Session`, `bySimpleNaturalId()` and `byNaturalId()` methods\
      - for the entity, write a repository class (e.g., for the `Product` entity write `ProductNaturalRepository`) that extends the `NaturalRepositoryImpl` and use it for setting the entity class type and the natural id type\
      - inject this class in your services and call `findBySimpleNaturalId()` or `findByNaturalId()`
+
+-------------------------------
+
+**You may like to try as well:**
+<a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
