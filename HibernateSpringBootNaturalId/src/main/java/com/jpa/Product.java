@@ -72,15 +72,22 @@ public class Product implements Serializable {
         }
         Product naturalIdProduct = (Product) o;
         return Objects.equals(getCode(), naturalIdProduct.getCode());
+        // including sku 
+        // return Objects.equals(getCode(), naturalIdProduct.getCode())
+            // && Objects.equals(getSku(), naturalIdProduct.getSku());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getCode());
+        // including sku
+        // return Objects.hash(getCode(), getSku());
     }
 
     @Override
     public String toString() {
         return "Product{" + "id=" + id + ", name=" + name + ", code=" + code + '}';
+        // including sku
+        // return "Product{" + "id=" + id + ", name=" + name + ", code=" + code + ", sku=" + sku + '}';
     }
 }
