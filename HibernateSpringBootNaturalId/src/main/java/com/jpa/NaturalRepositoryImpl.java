@@ -35,7 +35,7 @@ public abstract class NaturalRepositoryImpl<T, NID extends Serializable>
     }
 
     @Override
-    public Optional<T> findByNaturalId(Map<String, NID> naturalIds) {
+    public Optional<T> findByNaturalId(Map<String, Object> naturalIds) {
 
         NaturalIdLoadAccess<T> loadAccess
                 = entityManager.unwrap(Session.class).byNaturalId(entityClass);
