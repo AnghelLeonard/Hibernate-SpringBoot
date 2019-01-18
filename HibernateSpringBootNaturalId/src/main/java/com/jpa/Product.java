@@ -25,7 +25,7 @@ public class Product implements Serializable {
     private String code;
     
     // @NaturalId(mutable = false)
-    // @Column(nullable = false, updatable = false, unique = true, length = 50)
+    // @Column(nullable = false, updatable = false, unique = true)
     // private Long sku;
 
     public Long getId() {
