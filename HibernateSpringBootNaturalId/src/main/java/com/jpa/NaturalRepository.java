@@ -12,5 +12,5 @@ public interface NaturalRepository<T, NID extends Serializable> {
     Optional<T> findBySimpleNaturalId(NID naturalId);
      
     // use this method when your entity has more than one field annotated with @NaturalId
-    Optional<T> findByNaturalId(Map<String, NID> naturalIds);        
+    Optional<T> findByNaturalId(Map<String, Object> naturalIds);        
 }
