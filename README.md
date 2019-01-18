@@ -1215,5 +1215,5 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
      - override the `equals()` and `hashCode()` using the natural id(s)\
      - define a `@NoRepositoryBean` interface (`NaturalRepository`) to define two methods, named `findBySimpleNaturalId()` and `findByNaturalId()`\
      - provide an implementation for this interface (`NaturalRepositoryImpl`) relying on Hibernate, `Session`, `bySimpleNaturalId()` and `byNaturalId()` methods\
-     - for the entity, write a repository class (e.g., for the `Product` entity write `ProductNaturalRepository`) that extends the `NaturalRepositoryImpl` and use it for setting the entity class type and the natural id type\
+     - for the entity, write a repository class (e.g., for the `Product` entity write `ProductNaturalRepository`) that extends the `NaturalRepositoryImpl` and use it for setting the entity class type and the natural id type (when an entity uses more than one natural ID, the type is not relevant anymore, simply set it to `Serializable`)\
      - inject this class in your services and call `findBySimpleNaturalId()` or `findByNaturalId()`
