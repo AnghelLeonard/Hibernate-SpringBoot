@@ -1232,3 +1232,16 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootP6spy/Hibernate%20SpringBoot%20P6spy.png)
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+81. **[How To Retry Transactions After OptimisticLockException](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootP6spy)**
+
+**Description:** This is a Spring Boot application that simulates a scenario that leads to an `OptimisticLockException`. When such exception occur, the application retry the corresponding transactions via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
+
+**Key points:**\
+     - in pom.xml, add the db-util dependency\
+     -
+
+**Output sample:**\
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootP6spy/Hibernate%20SpringBoot%20P6spy.png)
