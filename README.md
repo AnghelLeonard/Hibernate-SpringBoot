@@ -1237,6 +1237,8 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 81. **[How To Retry Transactions After OptimisticLockException Shaped Via @Version](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryOptimisticLocking)**
 
+**Note:** Optimistic locking via `@Version` works for detached entities as well.
+
 **Description:** This is a Spring Boot application that simulates a scenario that leads to an `OptimisticLockException`. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
 
 **Key points:**\
@@ -1250,6 +1252,8 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 -----------------------------------------------------------------------------------------------------------------------    
 
 82. **[How To Retry Transactions After OptimisticLockException Shaped Via Hibernate Versionless Optimistic Locking](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootVersionlessOptimisticLocking)**
+
+**Note:** Optimistic locking via Hibernate versionless doesn't work for detached entities as well (don't close the persistent context).
 
 **Description:** This is a Spring Boot application that simulates a scenario that leads to an `OptimisticLockException` via Hibernate versionless optimistic locking. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
 
