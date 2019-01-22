@@ -37,13 +37,13 @@ public class InventoryService {
         }
 
         // Start the second transaction
-        // This transaction will decrease the inventory quantity by two units
+        // This transaction will decrease the inventory quantity by one unit (from 10 to 9)
         // This transaction will execute and commit without waiting
         // While this transaction is running, the first one sleeps, so when the
         // first transaction wakes up it will cause an OptimisticLockException since
-        // this transaction will increase the version from 0 to 1
-        // But, at retry, it will work as expected since it will try to increase the 
-        // version from 1 to 2
+        // this transaction will decrease the quantity from 10 to 9
+        // But, at retry, it will work as expected since the first transaction will try to decrease the 
+        // quantity from 9 to 7
         logger.info("Starting second transaction ...");
         InventoryRepository thread2
                 = applicationContext.getBean(InventoryRepository.class, 1, 1);
