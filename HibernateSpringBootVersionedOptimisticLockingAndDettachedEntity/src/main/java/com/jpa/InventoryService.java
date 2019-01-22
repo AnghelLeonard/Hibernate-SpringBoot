@@ -32,6 +32,7 @@ public class InventoryService {
         Inventory firstInventory = entityManager.find(Inventory.class, 1L);
 
         entityTransaction.commit();
+        logger.info("First transaction committed successfully...");
 
         return firstInventory;
     }
@@ -52,6 +53,7 @@ public class InventoryService {
             firstInventory.setQuantity(firstInventory.getQuantity() - 2);
 
             entityTransaction.commit();
+            logger.info("Second transaction committed successfully...");
         } catch (RuntimeException e) {
 
             if (entityTransaction != null && entityTransaction.isActive()) {
@@ -82,6 +84,7 @@ public class InventoryService {
             entityManager.merge(firstInventory);
 
             entityTransaction.commit();
+            logger.info("Third transaction committed successfully...");
         } catch (RuntimeException e) {
 
             if (entityTransaction != null && entityTransaction.isActive()) {
