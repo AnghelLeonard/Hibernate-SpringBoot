@@ -1,5 +1,7 @@
 **[How To Retry Transactions After OptimisticLockException Shaped Via Hibernate Versionless Optimistic Locking](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootVersionlessOptimisticLocking)**
 
+**Note:** Optimistic locking via Hibernate versionless doesn't work for detached entities (don't close the persistent context).
+
 **Description:** This is a Spring Boot application that simulates a scenario that leads to an `OptimisticLockException` via Hibernate versionless optimistic locking. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
 
 **Key points:**\
