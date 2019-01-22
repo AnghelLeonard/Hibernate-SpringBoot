@@ -15,6 +15,14 @@ public class InventoryService {
 
     @Autowired
     private ApplicationContext applicationContext;
+    
+    // We use applicationContext to get access to the EntityManagerFactory
+    // Another approach is like this:
+    // private final EntityManagerFactory entityManagerFactory;
+    
+    // public InventoryService(EntityManagerFactory entityManagerFactory) {
+    //     this.entityManagerFactory = entityManagerFactory;
+    // }
 
     private static final Logger logger = Logger.getLogger(InventoryService.class.getName());
 
