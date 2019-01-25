@@ -1264,3 +1264,18 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
      - Configure the `OptimisticConcurrencyControlAspect` bean\
      - Annotate the corresponding entity (e.g., `Inventory`) with `@DynamicUpdate` and `@OptimisticLocking(type = OptimisticLockType.DIRTY)` - more details in my book, ["Java Persistence Performance Illustrated Guide"](https://leanpub.com/java-persistence-performance-illustrated-guide)\
      - Mark the method that is prone to throw `OptimisticLockException` with `@Retry(times = 10, on = OptimisticLockException.class)`
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+83. **[How To Enrich DTOs With Virtual Properties Via Spring Projections](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootVersionlessOptimisticLocking)**
+
+**Note:** You may also like to read the recipe, ["How To Create DTOs Via Spring Data Projections"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
+
+**Description:** Fetch only the needed data from the database via Spring Data Projections (DTOs) and enrich the result via virtual properties.
+
+**Key points:**\
+     - in the projection interface, `UserDetail`, use the `@Value` and Spring SpEL to point to a backing property from the domain model (in this case, the domain model property `city` is exposed via the virtual property `livingin`)\
+     - in the projection interface, `UserDetail`, use the `@Value` and Spring SpEL to enrich the result with two virtual properties that don't have a match in the domain model (in this case, `sessionid` and `status`)
+
+**Output example:**\
+![]()
