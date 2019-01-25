@@ -1,4 +1,4 @@
-**DTOs Via Spring Data Projections And JPQL
+**DTOs Via Spring Data Projections And JPQL**
 
 **Note:** Using projections is not limited to use query builder mechanism built into Spring Data repository infrastructure. We can fetch projections via JPQL or native queries as well. For example, in this [application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjectionsAndJpql) we use a JPQL.
 
