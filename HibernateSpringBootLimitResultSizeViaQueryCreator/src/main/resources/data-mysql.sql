@@ -1,0 +1,10 @@
+INSERT INTO `db_users`.`user` (`id`, `age`, `city`, `name`) VALUES (1, 22, 'Craiova', 'George B');
+INSERT INTO `db_users`.`user` (`id`, `age`, `city`, `name`) VALUES (2, 22, 'Banesti', 'Ion D');
+INSERT INTO `db_users`.`user` (`id`, `age`, `city`, `name`) VALUES (3, 17, 'Salaj', 'Vasile P');
+INSERT INTO `db_users`.`user` (`id`, `age`, `city`, `name`) VALUES (4, 22, 'Timisoara', 'Mihai M');
+INSERT INTO `db_users`.`user` (`id`, `age`, `city`, `name`) VALUES (5, 17, 'Cluj', 'Gabi G');
+INSERT INTO `db_users`.`user` (`id`, `age`, `city`, `name`) VALUES (6, 31, 'Oradea', 'Toni A');
+INSERT INTO `db_users`.`user` (`id`, `age`, `city`, `name`) VALUES (7, 17, 'Ploiesti', 'Markus V');
+INSERT INTO `db_users`.`user` (`id`, `age`, `city`, `name`) VALUES (8, 33, 'Targoviste', 'Adrian C');
+INSERT INTO `db_users`.`user` (`id`, `age`, `city`, `name`) VALUES (9, 17, 'Urleta', 'Diana E');
+INSERT INTO `db_users`.`user` (`id`, `age`, `city`, `name`) VALUES (10, 17, 'Scorteni', 'Daniel U');
