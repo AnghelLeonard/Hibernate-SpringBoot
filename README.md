@@ -1301,7 +1301,7 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-85. **[How To Generate Schema Via schema-.sql And Match Table And Schema Via @Table In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLimitResultSizeViaQueryCreator)**
+85. **[How To Generate Schema Via schema-.sql And Match Table And Schema Via @Table In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMatchSchemaAndTable)**
 
 **Note:** As a rule, in real applications avoid generating schema via, `hibernate.ddl-auto`. Use `schema-.sql` file or better `Flyway` or `Liquibase`.
 
@@ -1317,4 +1317,3 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 **Output example:**\
 - Persisting a `Car` results in the following SQL: `insert into db_cars.lux_cars (name) values (?)`
 - Persisting a `Driver` results the following SQL: `insert into db_drivers.lux_drivers (name) values (?)`
-
