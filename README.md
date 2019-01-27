@@ -1312,8 +1312,8 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
      - in `application.properties`, disable DDL auto, e.g., `spring.jpa.hibernate.ddl-auto=none`\
      - in `aaplication.properties`, instruct Spring Boot to initialize the schema from `schema-mysql.sql` file\
      - in `Car` entity, specify that the schema is `db_cars` and the table is, `lux_cars`\
-     - in `Driver` entity, specify that the schema is `db_drivers` and the table is, `lux_drivers`\
+     - in `Driver` entity, specify that the schema is `db_drivers` and the table is, `lux_drivers`
 
-**Output example:**\
+**Output example:**
 - Persisting a `Car` results in the following SQL: `insert into db_cars.lux_cars (name) values (?)`
 - Persisting a `Driver` results the following SQL: `insert into db_drivers.lux_drivers (name) values (?)`
