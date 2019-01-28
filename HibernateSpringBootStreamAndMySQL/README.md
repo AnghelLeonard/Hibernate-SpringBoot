@@ -11,3 +11,8 @@
      - rely on forward-only result set (default in Spring Data)\
      - rely on read-only statement (add `@Transactional(readOnly=true)`)\
      - set the fetch-size set (e.g. 30, or row-by-row; `Integer.MIN_VALUE` (recommended in MySQL))
+
+-------------------------------
+
+**You may like to try as well:**
+<a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
