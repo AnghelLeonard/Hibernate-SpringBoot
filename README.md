@@ -1347,4 +1347,4 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
      - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
      
 **Output of migrationg history example:**\
-![]()
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFlywayKickoff/flyway_schema_history.png)
