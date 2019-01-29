@@ -6,8 +6,8 @@
 
 **Key points:**\
      - for Maven, in pom.xml, add the Flyway dependency\
-     - in application.properties, set the JDBC URL without specifying the schema, e.g., `jdbc:mysql://localhost:3306/`\
-     - in application.properties, set the schemas that should be migrated, e.g., `spring.flyway.schemas=db_cars`\
+     - in application.properties, set the JDBC URL with the schema, e.g., `jdbc:mysql://localhost:3306/db_cars`\
+     - in application.properties, set Flyway URL, e.g., `spring.flyway.url=jdbc:mysql://localhost:3306/db_cars?createDatabaseIfNotExist=true`\
      - each SQL file containing the schema update add it in `classpath:db/migration`\
      - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
      
