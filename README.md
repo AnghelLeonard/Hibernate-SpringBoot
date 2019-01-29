@@ -1300,7 +1300,7 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-85. **[How To Generate A Schema Via schema-.sql In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMatchSchemaAndTable)**
+85. **[How To Generate A Schema Via schema-.sql In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMatchSingleSchemaAndTable)**
 
 **Note:** As a rule, in real applications avoid generating schema via, `hibernate.ddl-auto`. Use `schema-.sql` file or better `Flyway` or `Liquibase`.
 
@@ -1309,7 +1309,7 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 **Key points:**\
      - in `application.properties`, set the JDBC URL. E.g., `spring.datasource.url=jdbc:mysql://localhost:3306/db_cars?createDatabaseIfNotExist=true`\
      - in `application.properties`, disable DDL auto, e.g., `spring.jpa.hibernate.ddl-auto=none`\
-     - in `aaplication.properties`, instruct Spring Boot to initialize the schema from `schema-mysql.sql` file\    
+     - in `aaplication.properties`, instruct Spring Boot to initialize the schema from `schema-mysql.sql` file  
 
 -----------------------------------------------------------------------------------------------------------------------    
 
