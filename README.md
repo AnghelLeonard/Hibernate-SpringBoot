@@ -1298,10 +1298,22 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLimitResultSizeViaQueryCreator/query%20creation%20for%20limiting%20result%20size.png)
 
+-----------------------------------------------------------------------------------------------------------------------    
+
+85. **[How To Generate A Schema Via schema-.sql In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMatchSchemaAndTable)**
+
+**Note:** As a rule, in real applications avoid generating schema via, `hibernate.ddl-auto`. Use `schema-.sql` file or better `Flyway` or `Liquibase`.
+
+**Description:** This application is an example of using `schema-.sql` to generate a schema(database) in MySQL.
+
+**Key points:**\
+     - in `application.properties`, set the JDBC URL. E.g., `spring.datasource.url=jdbc:mysql://localhost:3306/db_cars?createDatabaseIfNotExist=true`\
+     - in `application.properties`, disable DDL auto, e.g., `spring.jpa.hibernate.ddl-auto=none`\
+     - in `aaplication.properties`, instruct Spring Boot to initialize the schema from `schema-mysql.sql` file\    
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-85. **[How To Generate Two Schema Via schema-.sql And Match Tables And Schemas Via @Table In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMatchSchemaAndTable)**
+86. **[How To Generate Two Schema Via schema-.sql And Match Tables And Schemas Via @Table In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMatchSchemaAndTable)**
 
 **Note:** As a rule, in real applications avoid generating schema via, `hibernate.ddl-auto`. Use `schema-.sql` file or better `Flyway` or `Liquibase`.
 
@@ -1320,7 +1332,7 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-86. **[How To Stream Result Set Via Spring Data In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootStreamAndMySQL)**
+87. **[How To Stream Result Set Via Spring Data In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootStreamAndMySQL)**
 
 **Note:** For web-applications, pagination should be the way to go, not streaming. But, if you choose streaming then keep in mind the golden rule: keep th result set as small as posible. Also, keep in mind that the Execution Plan might not be as efficient as when using SQL-level pagination.
 
@@ -1333,7 +1345,7 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-87. **[How To Migrate Schema Using Flyway In SpringBoot And MySQL (kickoff)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayKickoff)**
+88. **[How To Migrate Schema Using Flyway In SpringBoot And MySQL (kickoff)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayKickoff)**
 
 **Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Set `hibernate.ddl-auto` to `none` or `validate` and rely on Flyway or Liquibase.
 
