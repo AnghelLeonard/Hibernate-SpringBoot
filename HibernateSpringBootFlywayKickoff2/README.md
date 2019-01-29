@@ -2,13 +2,12 @@
 
 **Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Set `hibernate.ddl-auto` to `none` or `validate` and rely on Flyway or Liquibase.
 
-**Description:** This application is a kickoff of using Flyway in SpringBoot for auto-creating and migrating database schema in MySQL. We set the database name in the JDBC URL as usual, and uses `flyway.url` with `createDatabaseIfNotExist=true` for creating the missing schema.
+**Description:** This application is a kickoff of using Flyway in SpringBoot for auto-creating and migrating database schema in MySQL. We set the database name in the JDBC URL as usual, and use the MySQL specific hint `createDatabaseIfNotExist=true` for creating the missing schema.
 
 **Key points:**\
      - for Maven, in pom.xml, add the Flyway dependency\
      - in application.properties, set `spring.jpa.hibernate.ddl-auto=none`\
-     - in application.properties, set the JDBC URL with the schema, e.g., `jdbc:mysql://localhost:3306/db_cars`\
-     - in application.properties, set Flyway URL, e.g., `spring.flyway.url=jdbc:mysql://localhost:3306/db_cars?createDatabaseIfNotExist=true`\
+     - in application.properties, set the JDBC URL with the schema, e.g., `jdbc:mysql://localhost:3306/db_cars?createDatabaseIfNotExist=true`\
      - each SQL file containing the schema update add it in `classpath:db/migration`\
      - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
      
