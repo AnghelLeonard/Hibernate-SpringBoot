@@ -1,4 +1,4 @@
-**[How To Generate Schema Via schema-.sql And Match Table And Schema Via @Table In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMatchSchemaAndTable)**
+**[How To Generate Two Schema Via schema-.sql And Match Tables And Schemas Via @Table In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMatchSchemaAndTable)**
 
 **Note:** As a rule, in real applications avoid generating schema via, `hibernate.ddl-auto`. Use `schema-.sql` file or better `Flyway` or `Liquibase`.
 
