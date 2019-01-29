@@ -6,6 +6,7 @@
 
 **Key points:**\
      - for Maven, in pom.xml, add the Flyway dependency\
+     - in application.properties, set `spring.jpa.hibernate.ddl-auto=none`\
      - in application.properties, set the JDBC URL with the schema, e.g., `jdbc:mysql://localhost:3306/db_cars`\
      - in application.properties, set Flyway URL, e.g., `spring.flyway.url=jdbc:mysql://localhost:3306/db_cars?createDatabaseIfNotExist=true`\
      - each SQL file containing the schema update add it in `classpath:db/migration`\
