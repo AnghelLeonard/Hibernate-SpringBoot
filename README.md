@@ -1345,7 +1345,22 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-88. **[How To Auto-Create And Migrate Schema Using Flyway In SpringBoot And MySQL (kickoff)](#)**
+88. **[How To Migrate Scehma Using Flyway in MySQL When Schema Exists](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayQuickKickoff)**
+
+**Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Set `hibernate.ddl-auto` to `none` or `validate` and rely on Flyway or Liquibase.
+
+**Description:** This application is an example of migrating a MySQL schema when the schema exists (is created before migration).
+
+**Key points:**\
+     - for Maven, in pom.xml, add the Flyway dependency\
+     - in application.properties, set `spring.jpa.hibernate.ddl-auto=none`\
+     - in application.properties, set the JDBC URL with the schema, e.g., `jdbc:mysql://localhost:3306/db_cars`\     
+     - each SQL file containing the schema update add it in `classpath:db/migration`\
+     - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+89. **[How To Auto-Create And Migrate Schema Using Flyway In SpringBoot And MySQL (kickoff)](#)**
 
 - [Kickoff using `spring.flyway.schemas`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayKickoff)
 - [Kickoff using `spring.flyway.url`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayKickoff2)
@@ -1356,6 +1371,7 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 **First application key points (using "spring.flyway.schemas"):**\
      - for Maven, in pom.xml, add the Flyway dependency\
+     - in application.properties, set `spring.jpa.hibernate.ddl-auto=none`\
      - in application.properties, set the JDBC URL without specifying the schema, e.g., `jdbc:mysql://localhost:3306/`\
      - in application.properties, set the schemas that should be migrated, e.g., `spring.flyway.schemas=db_cars`\
      - each SQL file containing the schema update add it in `classpath:db/migration`\
@@ -1363,6 +1379,7 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
      
 **Second application key points (using "spring.flyway.url"):**\
      - for Maven, in pom.xml, add the Flyway dependency\
+     - in application.properties, set `spring.jpa.hibernate.ddl-auto=none`\
      - in application.properties, set the JDBC URL with the schema, e.g., `jdbc:mysql://localhost:3306/db_cars`\
      - in application.properties, set Flyway URL, e.g., `spring.flyway.url=jdbc:mysql://localhost:3306/db_cars?createDatabaseIfNotExist=true`\
      - each SQL file containing the schema update add it in `classpath:db/migration`\
