@@ -1347,12 +1347,12 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 88. **[How To Migrate Schema Using Flyway In SpringBoot And MySQL (kickoff)](#)**
 
-- [Kickoff using `spring.flyway.scehmas`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayKickoff)
+- [Kickoff using `spring.flyway.schemas`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayKickoff)
 - [Kickoff using `spring.flyway.url`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayKickoff2)
 
 **Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Set `hibernate.ddl-auto` to `none` or `validate` and rely on Flyway or Liquibase.
 
-**Description:** These two applications are kickoffs of using Flyway in SpringBoot for migrating database schema in MySQL. The main difference between them is that in the first one we need to indicate the used via schema `@Table` since is not present in the JDBC URL. The second application is more friendly, since it doesn't have this restriction.
+**Description:** These two applications are kickoffs of using Flyway in SpringBoot for migrating database schema in MySQL. The main difference between them is that in the first one we need to indicate the used schema via `@Table` since is not present in the JDBC URL. The second application is more friendly, since it doesn't have this restriction.
 
 **First application key points (using "spring.flyway.schemas"):**\
      - for Maven, in pom.xml, add the Flyway dependency\
