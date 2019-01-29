@@ -1301,11 +1301,11 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-85. **[How To Generate Schema Via schema-.sql And Match Table And Schema Via @Table In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMatchSchemaAndTable)**
+85. **[How To Generate Two Schema Via schema-.sql And Match Tables And Schemas Via @Table In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMatchSchemaAndTable)**
 
 **Note:** As a rule, in real applications avoid generating schema via, `hibernate.ddl-auto`. Use `schema-.sql` file or better `Flyway` or `Liquibase`.
 
-**Description:** This application is an example of using `schema-.sql` to generate two schemas in MySQL. The tables and schemas are matched at entity mapping via `@Table`.
+**Description:** This application is an example of using `schema-.sql` to generate two schemas(databases) in MySQL. The tables and schemas are matched at entity mapping via `@Table`.
 
 **Key points:**\
      - in `application.properties`, set the JDBC URL without schema, e.g., `spring.datasource.url=jdbc:mysql://localhost:3306`\
