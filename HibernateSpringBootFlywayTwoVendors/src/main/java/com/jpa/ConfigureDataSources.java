@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 public class ConfigureDataSources {
 
-    // setting MySQL data source and flywway migration for "players_db"
+    // setting MySQL data source and Flyway migration for "players_db"
     @Bean(name = "configMySql")
     @Primary
     @ConfigurationProperties("app.datasource.ds1")
