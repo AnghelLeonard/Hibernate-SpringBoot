@@ -1389,11 +1389,11 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-90. **[How To Auto-Create And Migrate Schemas For Two Data Sources (MySQL and PostgreSQL) Using Flyway](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayQuickKickoff)**
+90. **[How To Auto-Create And Migrate Schemas For Two Data Sources (MySQL and PostgreSQL) Using Flyway](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayTwoVendors)**
 
 **Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Set `hibernate.ddl-auto` to `none` or `validate` and rely on Flyway or Liquibase.
 
-**Description:** This application is an example of auto-creating and migrating schemas for MySQL and PostgreSQL. In addition, each data source uses its own HikariCP connection pool. In case of MySQL, where schema=database, we auto-create the schema (`plyars_db`) based on `createDatabaseIfNotExist=true`. In case of PostgreSQL, where a database can have multiple schemas, we use the default `postgres` database and auto-create in it the schema, `coaches_db`. For this we rely on Flyway, which is capable to create a missing schema.
+**Description:** This application is an example of auto-creating and migrating schemas for MySQL and PostgreSQL. In addition, each data source uses its own HikariCP connection pool. In case of MySQL, where schema=database, we auto-create the schema (`players_db`) based on `createDatabaseIfNotExist=true`. In case of PostgreSQL, where a database can have multiple schemas, we use the default `postgres` database and auto-create in it the schema, `coaches_db`. For this we rely on Flyway, which is capable to create a missing schema.
 
 **Key points:**\
      - for Maven, in pom.xml, add the Flyway dependency\
