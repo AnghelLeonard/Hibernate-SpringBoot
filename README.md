@@ -1398,6 +1398,7 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 **Key points:**\
      - for Maven, in pom.xml, add the Flyway dependency\
      - in application.properties, configure the JDBC URL for MySQL as, `jdbc:mysql://localhost:3306/players_db?createDatabaseIfNotExist=true&useSSL=false` and for PostgreSQL as, `jdbc:postgresql://localhost:5432/postgres?currentSchema=coaches_db`\
+     - in application.properties, set `spring.flyway.enabled=false` to disable default behavior
      - programmatically create a `DataSource` for MySQL and one for PostgreSQL\
      - programmatically create a `FlywayDataSource` for MySQL and one for PostgreSQL\
      - programmatically create an `EntityManagerFactory` for MySQL and one for PostgreSQL\
