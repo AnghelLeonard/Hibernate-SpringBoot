@@ -45,8 +45,7 @@ public class PlayerResource {
                 tx.rollback();
             }
         } finally {
-            if (em.isOpen()) {
-                em.clear();
+            if (em.isOpen()) {              
                 em.close();
             }          
         }
