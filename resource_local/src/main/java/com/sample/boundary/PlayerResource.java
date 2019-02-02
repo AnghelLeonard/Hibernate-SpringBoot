@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.PersistenceUnit;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
@@ -16,9 +15,6 @@ import javax.ws.rs.Path;
 public class PlayerResource {
 
     private static final Logger logger = Logger.getLogger(PlayerResource.class.getName());
-
-    @PersistenceUnit(unitName = "MyPU")
-    private EntityManagerFactory emf;        
     
     @POST
     public String generatePlayer() {
@@ -28,7 +24,7 @@ public class PlayerResource {
         player.setCity("Some city");
         player.setAge(20);
 
-        // EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPU");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyPU");
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
