@@ -1,6 +1,7 @@
 package com.sample.boundary;
 
 import com.sample.model.Player;
+import javax.ejb.Stateless;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -11,6 +12,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 
 @Path("player")
+@Stateless
 public class PlayerResource {
 
     private static final Logger logger = Logger.getLogger(PlayerResource.class.getName());
