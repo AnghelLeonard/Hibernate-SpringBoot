@@ -51,7 +51,7 @@ public class PlayerResource {
             throw e;
             
         } finally {
-            if (em.isOpen()) {
+            if (em != null && em.isOpen()) {
                 em.close();
             }
         }
