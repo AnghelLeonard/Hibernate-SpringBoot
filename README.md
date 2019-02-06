@@ -1422,3 +1422,13 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
      - programmatically create two `EntityManagerFactory`, one for `players_db` and one for `coaches_db`\
      - for `players_db`, place the migration SQLs files in `db\migration\playersdb`\
      - for `coaches_db`, place the migration SQLs files in `db\migration\coachesdb`    
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+92. **[How To JOIN FETCH an @ElementCollection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPostgreSqlFlywayTwoSchemas)**
+
+**Description:** This application is an example applying `JOIN FETCH` to fetch an `@ElementCollection`.
+
+**Key points:**\
+     - by default, `@ElementCollection` is loaded lazy, keep it lazy\
+     - use `JOIN FETCH` in the repository
