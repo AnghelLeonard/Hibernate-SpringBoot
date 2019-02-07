@@ -1435,7 +1435,7 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-93. **[How To Map An Entity To a Query (@Subselect)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionJoinFetch)**
+93. **[How To Map An Entity To a Query (@Subselect) in a Spring Boot Application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSubselect)**
 
 **Note:** Consider using `@Subselect` only if using DTO + extra queries or map a database view to an entity is not a solution.
 
