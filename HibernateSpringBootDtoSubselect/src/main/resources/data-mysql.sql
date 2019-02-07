@@ -1,0 +1,16 @@
+INSERT INTO `db_tennis`.`tournaments` (`id`, `tournament_name`, `tournament_town`, `tournament_country`, `tournament_court`) VALUES ('1', 'US Open','New York', 'United States', 'hard');
+INSERT INTO `db_tennis`.`tournaments` (`id`, `tournament_name`, `tournament_town`, `tournament_country`, `tournament_court`) VALUES ('2', 'Wimbledon', 'London', 'England', 'grass');
+INSERT INTO `db_tennis`.`tournaments` (`id`, `tournament_name`, `tournament_town`, `tournament_country`, `tournament_court`) VALUES ('3', 'Roland Garros', 'Paris', 'France' ,'clay');
+INSERT INTO `db_tennis`.`tournaments` (`id`, `tournament_name`, `tournament_town`, `tournament_country`, `tournament_court`) VALUES ('4', 'AU Open', 'Melbourne', 'Australia' ,'hard');
+INSERT INTO `db_tennis`.`players` (`id`, `player_name`, `player_rank`, `tournament_id`) VALUES ('1', 'Rafael Nadal', '1', '3');
+INSERT INTO `db_tennis`.`players` (`id`, `player_name`, `player_rank`, `tournament_id`) VALUES ('2', 'Roger Federer', '2', null);
+INSERT INTO `db_tennis`.`players` (`id`, `player_name`, `player_rank`, `tournament_id`) VALUES ('3', 'Roger Federer ', '2', '2');
+INSERT INTO `db_tennis`.`players` (`id`, `player_name`, `player_rank`, `tournament_id`) VALUES ('4', 'Novak Djokovic', '3', '1');
+INSERT INTO `db_tennis`.`players` (`id`, `player_name`, `player_rank`, `tournament_id`) VALUES ('5', 'Novak Djokovic', '3', '2');
+INSERT INTO `db_tennis`.`players` (`id`, `player_name`, `player_rank`, `tournament_id`) VALUES ('6', 'Alexander Zverev', '4', null);
+INSERT INTO `db_tennis`.`players` (`id`, `player_name`, `player_rank`, `tournament_id`) VALUES ('7', 'Marin Cilic', '5', '3');
+INSERT INTO `db_tennis`.`players` (`id`, `player_name`, `player_rank`, `tournament_id`) VALUES ('8', 'John Isner', '6', '3');
+INSERT INTO `db_tennis`.`players` (`id`, `player_name`, `player_rank`, `tournament_id`) VALUES ('9', 'Grigor Dimitrov', '7', '3');
+INSERT INTO `db_tennis`.`players` (`id`, `player_name`, `player_rank`, `tournament_id`) VALUES ('10', 'David Goffin', '8', '3');
+INSERT INTO `db_tennis`.`players` (`id`, `player_name`, `player_rank`, `tournament_id`) VALUES ('11', 'Ferdando Verdasco', '9', null);
+INSERT INTO `db_tennis`.`players` (`id`, `player_name`, `player_rank`, `tournament_id`) VALUES ('12', 'Marius Copil', '10', null);
