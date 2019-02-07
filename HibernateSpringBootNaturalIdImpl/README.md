@@ -1,5 +1,5 @@
 
-**[How To Use Hibernate @NaturalId in SpringBoot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNaturalId)**
+**[How To Use Hibernate @NaturalId in SpringBoot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNaturalIdImpl)**
 
 **Description:** This is a SpringBoot application that maps a natural business key using Hibernate `@NaturalId`.
 
