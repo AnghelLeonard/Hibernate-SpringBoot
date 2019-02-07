@@ -1208,7 +1208,9 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-79. **[How To Use Hibernate @NaturalId in SpringBoot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNaturalId)**
+79. **[How To Use Hibernate @NaturalId in SpringBoot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNaturalIdImpl)**
+
+**Alternative implementation:** In case that you want to avoid extending `SimpleJpaRepository` check this [implementation](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNaturalId).
 
 **Description:** This is a SpringBoot application that maps a natural business key using Hibernate `@NaturalId`.
 
@@ -1219,7 +1221,8 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
      - override the `equals()` and `hashCode()` using the natural id(s)\
      - define a `@NoRepositoryBean` interface (`NaturalRepository`) to define two methods, named `findBySimpleNaturalId()` and `findByNaturalId()`\
      - provide an implementation for this interface (`NaturalRepositoryImpl`) relying on Hibernate, `Session`, `bySimpleNaturalId()` and `byNaturalId()` methods\
-     - for the entity, write a repository class (e.g., for the `Product` entity write `ProductNaturalRepository`) that extends the `NaturalRepositoryImpl` and use it for setting the entity class type and the natural id type (when an entity uses more than one natural ID, the type is not relevant anymore, simply set it to `Serializable`)\
+     - use `@EnableJpaRepositories(repositoryBaseClass = NaturalRepositoryImpl.class)` to register this implementation as the base class\
+     - for the entity, write a classic repository\
      - inject this class in your services and call `findBySimpleNaturalId()` or `findByNaturalId()`
 
 -----------------------------------------------------------------------------------------------------------------------    
