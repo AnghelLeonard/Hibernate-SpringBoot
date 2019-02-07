@@ -43,7 +43,7 @@ public class NaturalIdApplication {
             productRepository.save(socks);
 
             Optional<Product> p1 = productRepository.findById(tshirt.getId());                 // find by ID
-            Optional<Product> p2 = productRepository.findBySimpleNaturalId("014-tshirt-2019"); // find by natural ID
+            Optional<Product> p2 = productRepository.findBySimpleNaturalId(tshirt.getCode()); // find by natural ID
 
             if (p1.isPresent() && p2.isPresent()) {
                 System.out.println("p1: " + p1.get());
