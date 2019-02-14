@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 public interface PlayerRepository extends JpaRepository<Player, Long> {
 
     @Query(value = "SELECT * FROM player AS p WHERE p.id > ?1 ORDER BY p.id ASC LIMIT ?2",
-            nativeQuery = true)
+           nativeQuery = true)
     List<Player> fetchAllPlayers(long id, int limit);
 }
