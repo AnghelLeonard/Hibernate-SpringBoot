@@ -1463,5 +1463,5 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
      - these entities should be marked with Hibernate, `@SQLDelete` annotation to trigger `UPDATE` SQLs in place of `DELETE` SQLs, as follows: `@SQLDelete(sql = "UPDATE tournament SET deleted = true WHERE id = ?")`\
      - for fetching all entities including those marked as deleted or for fetching only the entities marked as deleted we need to rely on SQL native queries
 
-**Output of migrationg history example:**\
+**Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSoftDeletes/soft%20deletes.png)
