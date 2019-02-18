@@ -1453,7 +1453,7 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-94. **[How To Use Hibernate Soft Deletes in a Spring Boot Application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSubselect)**
+94. **[How To Use Hibernate Soft Deletes in a Spring Boot Application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSoftDeletes)**
 
 **Description:** This application is an example of using Hibernate soft deletes in a Spring Boot application. 
 
@@ -1464,4 +1464,4 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
      - for fetching all entities including those marked as deleted or for fetching only the entities marked as deleted we need to rely on SQL native queries
 
 **Output of migrationg history example:**\
-![]()
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSoftDeletes/soft%20deletes.png)
