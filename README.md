@@ -1,4 +1,4 @@
-# Best Performance Practices For Hibernate 5 & Spring Boot 2
+# Best Performance Practices For Hibernate5 & Spring Boot 2
 
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
 
@@ -165,7 +165,8 @@
      - fetch the user without avatar (this is a picture, therefore a large amount of data): `localhost:8080/user`\
      - fetch the user with avatar (loaded lazy): `localhost:8080/avatar`
 
-**NOTE: In case that you need to serialize the data via Jackson (e.g., classic rest controller) then check this [application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/AttributeLazyLoadingJacksonSerialization)**
+**NOTE: In case that you need to serialize the data via Jackson (e.g., classic rest controller) then check this [application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/AttributeLazyLoadingJacksonSerialization).**
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 11. **[How To Populate A Child-Side Parent Association Via Proxy](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPopulatingChildViaProxy)**
