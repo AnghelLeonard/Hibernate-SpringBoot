@@ -165,6 +165,7 @@
      - fetch the user without avatar (this is a picture, therefore a large amount of data): `localhost:8080/user`\
      - fetch the user with avatar (loaded lazy): `localhost:8080/avatar`
 
+**NOTE: In case that you need to serialize the data via Jackson (e.g., classic rest controller) then check this [application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/AttributeLazyLoadingJacksonSerialization)**
 -----------------------------------------------------------------------------------------------------------------------    
 
 11. **[How To Populate A Child-Side Parent Association Via Proxy](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPopulatingChildViaProxy)**
