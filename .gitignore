@@ -3,3 +3,4 @@
 /AttributeLazyLoadingBasic/target/
 /HibernateSpringBootAttributeLazyLoadingBasic/target/
 /HibernateSpringBootAttributeLazyLoadingJacksonSerialization/target/
+/HibernateSpringBootAttributeLazyLoadingWithConditionAndDefaults/target/
