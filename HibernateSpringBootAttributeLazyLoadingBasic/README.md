@@ -9,8 +9,8 @@
      
 **Run the following requests (via BookstoreController):**\
      - create several authors: `localhost:8080/create`\
-     - fetch the first author without details (author's `age` and `avatar` will be loaded lazy): `localhost:8080/author`\
-     - fetch the first author with details (`age` and `avatar`): `localhost:8080/author/details`
+     - fetch the first author without details (author's `age` and `avatar` will not be loaded): `localhost:8080/author`\
+     - fetch the first author with details (author's `age` and `avatar` will be loaded lazy in separate `SELECT`s): `localhost:8080/author/details`
 
 -------------------------------
 
