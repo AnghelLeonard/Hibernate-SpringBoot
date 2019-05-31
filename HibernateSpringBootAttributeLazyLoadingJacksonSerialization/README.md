@@ -1,1 +1,21 @@
+**[Attribute Lazy Loading And Jackson Serialization](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAttributeLazyLoadingBasic)**
+ 
+**Description:** By default, the attributes of an entity are loaded eager (all at once). We can load them **lazy** as well. This is useful for column types that store large amounts of data: `CLOB`, `BLOB`, `VARBINARY`, etc or details that should be loaded on demand. In this application, we have an entity named `Author`. Its properties are: `id`, `name`, `genre`, `avatar` and `age`. And, we want to load `avatar` and `age` lazy. But, returning entities that contains lazy loaded attributes from a rest controller will cause lazy initialization exceptions caused by Jackson which tries to fetch these attributes outside a session. 
 
+**Key points:**\
+     - in `pom.xml`, activate Hibernate *bytecode instrumentation* (e.g. use Maven *bytecode enhancement plugin*)\
+     - annotate the columns that should be loaded lazy with `@Basic(fetch = FetchType.LAZY)`\
+     - annotate the `Author` entity with `@JsonFilter("AuthorId")`\
+     - create and configure this filter via `SimpleBeanPropertyFilter.serializeAll()`\
+     - at controller level (in the needed endpoint) rely on a filter as `filterOutAllExcept("id", "name", "genre")` and return `MappingJacksonValue`
+     
+**Run the following requests (via BookstoreController):**\
+     - create several authors: `localhost:8080/create`\
+     - fetch an author by id: `localhost:8080/author/{id}`\
+     - fetch authors by age greater than or equal to the given age without age and avatar: `localhost:8080/authors/{age}`\
+     - fetch authors by age greater than or equal to the given age with age and avatar (don't do this, notice the N+1 issue caused by looping the list of authors and triggering SQLs for fetching age and avatar of each author): `localhost:8080/authors/details/{age}`
+
+-------------------------------
+
+**You may like to try as well:**
+<a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
