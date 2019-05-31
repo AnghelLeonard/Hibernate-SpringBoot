@@ -7,7 +7,7 @@
      - annotate the columns that should be loaded lazy with `@Basic(fetch = FetchType.LAZY)`\
      - annotate the `Author` entity with `@JsonFilter("AuthorId")`\
      - create and configure this filter to be used by default via `SimpleBeanPropertyFilter.serializeAll()`\
-     - at controller level (in the needed endpoint) rely on a filter as `filterOutAllExcept("id", "name", "genre")` and return `MappingJacksonValue`
+     - at controller level (in the needed endpoint) replace the default filter with one as `SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "genre")` and return `MappingJacksonValue`
      
 **Run the following requests (via BookstoreController):**\
      - create several authors: `localhost:8080/create`\
