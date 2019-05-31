@@ -1,7 +1,7 @@
 **[Spring Data JPA Auditing](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAudit)**
  
 **Description:** Auditing is useful for maintaining history records. This can later help us in tracking user activities. 
-
+ 
 **Key points:**\
      - create an abstract base entity (e.g., `BaseEntity`) and annotate it with `@MappedSuperclass` and `@EntityListeners({AuditingEntityListener.class})`\
      - in this base entity, add the following fields that will be automatically persisted: `@CreatedDate protected LocalDateTime createdAt;`, `@LastModifiedDate protected LocalDateTime updatedAt;`, `@CreatedBy protected U createdBy;` and `@LastModifiedBy protected U modifiedBy;`\
