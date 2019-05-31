@@ -4,7 +4,7 @@
  
 **Key points:**\
      - in `pom.xml` add the dependency `hibernate-envers`\
-     - each entity that should be audited should be annotated with `@Audited`\ 
+     - each entity that should be audited should be annotated with `@Audited`\
      - optionally, annotate entities with `@AuditTable` to rename the table used for auditing
           
 -------------------------------
