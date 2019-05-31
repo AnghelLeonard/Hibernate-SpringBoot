@@ -1,7 +1,7 @@
 
 **[Conditionally Loadind Lazy Attributes](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingWithConditionAndDefaults)**
  
-**Description:** By default, the attributes of an entity are loaded eager (all at once). We can load them **lazy** as well. This is useful for column types that store large amounts of data: `CLOB`, `BLOB`, `VARBINARY`, etc or details that should be loaded on demand. In this application, we have an entity named `Author`. Its properties are: `id`, `name`, `genre`, `avatar` and `age`. And, we want to load `avatar` lazy. Actually, we loop the list of all authors, and, for those younger than 40 years, we will load the `avatar` as well. For the rest of authors, we explicitly set the avatar as `null` (this is like the default value).
+**Description:** By default, the attributes of an entity are loaded eager (all at once). We can load them **lazy** as well. This is useful for column types that store large amounts of data: `CLOB`, `BLOB`, `VARBINARY`, etc or details that should be loaded on demand. In this application, we have an entity named `Author`. Its properties are: `id`, `name`, `genre`, `avatar` and `age`. And, we want to load `avatar` lazy. Actually, we loop the list of all authors, and, for those younger than 40 years, we will load the `avatar` as well. For the rest of authors, we explicitly set the avatar as `null` (this is like the default value). Pay attention that this technique is prone to N+1 issue.
 
 **Key points:**\
      - in `pom.xml`, activate Hibernate *bytecode instrumentation* (e.g. use Maven *bytecode enhancement plugin*)\
