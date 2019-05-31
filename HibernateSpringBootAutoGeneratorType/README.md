@@ -7,7 +7,7 @@
      - use the native generator - exemplified in this application
    
 **Output example:**\
-<a href="#"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAutoGeneratorType/sample.png" align="left" height="48" width="48" ></a>
+<a href="#"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAutoGeneratorType/sample.png" align="center" height="132" width="742" ></a>
 
 ----------------------------
 
