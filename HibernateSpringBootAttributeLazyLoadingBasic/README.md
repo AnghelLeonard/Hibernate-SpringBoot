@@ -12,6 +12,10 @@
      - fetch the first author without *details* (author's `age` and `avatar` will not be loaded): `localhost:8080/author`\
      - fetch the first author with *details* (author's `age` and `avatar` will be loaded lazy in separate `SELECT` statements): `localhost:8080/author/details`
 
+**Check as well:**\
+     - [Conditionally Loadind Lazy Attributes](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingWithConditionAndDefaults)\
+     - [Attribute Lazy Loading And Jackson Serialization](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingJacksonSerialization)
+     
 -------------------------------
 
 **You may like to try as well:**
