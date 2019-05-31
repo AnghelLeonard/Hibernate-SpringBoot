@@ -1,7 +1,7 @@
 
 **[Attribute Lazy Loading](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAttributeLazyLoadingBasic)**
  
-**Description:** By default, the attributes of an entity are loaded eager (all at once). We can load them **lazy** as well. This is useful for column types that store large amounts of data: `CLOB`, `BLOB`, `VARBINARY`, etc or details that should be loaded on demand. In this application, we have an entity named `Author`. Its properties are: `id`, `name`, `genre`, `avatar` and `age`. And, we want to load `avatar` and `age` lazy. We consider `age` and `avatar` as author's details.
+**Description:** By default, the attributes of an entity are loaded eager (all at once). We can load them **lazy** as well. This is useful for column types that store large amounts of data: `CLOB`, `BLOB`, `VARBINARY`, etc or *details* that should be loaded on demand. In this application, we have an entity named `Author`. Its properties are: `id`, `name`, `genre`, `avatar` and `age`. And, we want to load `avatar` and `age` lazy. We consider `age` and `avatar` as author's *details* that should be loaded on demand.
 
 **Key points:**\
      - in `pom.xml`, activate Hibernate *bytecode instrumentation* (e.g. use Maven *bytecode enhancement plugin*)\
@@ -9,8 +9,8 @@
      
 **Run the following requests (via BookstoreController):**\
      - create several authors: `localhost:8080/create`\
-     - fetch the first author without details (author's `age` and `avatar` will not be loaded): `localhost:8080/author`\
-     - fetch the first author with details (author's `age` and `avatar` will be loaded lazy in separate `SELECT`s): `localhost:8080/author/details`
+     - fetch the first author without *details* (author's `age` and `avatar` will not be loaded): `localhost:8080/author`\
+     - fetch the first author with *details* (author's `age` and `avatar` will be loaded lazy in separate `SELECT` statements): `localhost:8080/author/details`
 
 -------------------------------
 
