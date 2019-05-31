@@ -15,6 +15,10 @@
      - fetch authors by age greater than or equal to the given age without age and avatar: `localhost:8080/authors/{age}`\
      - fetch authors by age greater than or equal to the given age with age and avatar (but, don't do this, notice the N+1 issue caused by looping the list of authors and triggering SQLs for fetching age and avatar of each author): `localhost:8080/authors/details/{age}`
 
+**Check as well:**\
+     - [Attribute Lazy Loading (basic)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAttributeLazyLoadingBasic)\
+     - [Conditionally Loadind Lazy Attributes](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingWithConditionAndDefaults)
+
 -------------------------------
 
 **You may like to try as well:**
