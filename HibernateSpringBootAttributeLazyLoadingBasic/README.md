@@ -6,6 +6,7 @@
 **Key points:**\
      - in `pom.xml`, activate Hibernate *bytecode instrumentation* (e.g. use Maven *bytecode enhancement plugin*)\
      - annotate the columns that should be loaded lazy with `@Basic(fetch = FetchType.LAZY)`
+     - annotate the `Author` entity with `@JsonInclude(Include.NON_DEFAULT)` to avoid the serialization of fields with default values (e.g., useful when we set `avatar` to `null` and `age` to `0`)
      
 **Run the following requests (via BookstoreController):**\
      - create several authors: `localhost:8080/create`\
