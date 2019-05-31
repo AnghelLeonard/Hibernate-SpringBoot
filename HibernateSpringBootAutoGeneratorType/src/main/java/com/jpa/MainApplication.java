@@ -10,9 +10,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class AutoGeneratorTypeApplication {
+public class MainApplication {
 
-    private static final Logger logger = Logger.getLogger(AutoGeneratorTypeApplication.class.getName());
+    private static final Logger logger = Logger.getLogger(MainApplication.class.getName());
         
     @Autowired
     private UserGoodRepository userGoodRepository;
@@ -21,7 +21,7 @@ public class AutoGeneratorTypeApplication {
     private UserBadRepository userBadRepository;
         
     public static void main(String[] args) {
-        SpringApplication.run(AutoGeneratorTypeApplication.class, args);
+        SpringApplication.run(MainApplication.class, args);
     }
 
     @Bean
