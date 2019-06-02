@@ -6,6 +6,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+// Use this practice only if you simply cannot use JOIN FETCH 
+// or @NamedEntityGraph
+
 @SpringBootApplication
 public class MainApplication {
 
