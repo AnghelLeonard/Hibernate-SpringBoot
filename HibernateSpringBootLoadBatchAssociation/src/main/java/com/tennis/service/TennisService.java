@@ -12,7 +12,6 @@ public class TennisService {
     private final TournamentRepository tournamentRepository;
     
     public TennisService(TournamentRepository tournamentRepository) {
-
         this.tournamentRepository = tournamentRepository;
     }
     
