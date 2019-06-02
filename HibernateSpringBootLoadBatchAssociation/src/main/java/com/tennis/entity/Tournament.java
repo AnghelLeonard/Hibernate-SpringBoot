@@ -24,7 +24,7 @@ public class Tournament implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL, 
             mappedBy = "tournament", orphanRemoval = true)
-    //@BatchSize(size = 3)
+    @BatchSize(size = 3)
     private List<TennisPlayer> tennisPlayers = new ArrayList<>();
 
     public void addTennisPlayer(TennisPlayer tennisPlayer) {
