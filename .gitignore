@@ -1,6 +1,7 @@
 build/
 dist/
 nbproject/
+target/
 build.xml
 manifest.mf
 nbactions.xml
