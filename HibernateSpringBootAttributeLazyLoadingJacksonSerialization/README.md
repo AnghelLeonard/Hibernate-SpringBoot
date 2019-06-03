@@ -11,7 +11,8 @@
      
 **Run the following requests (via BookstoreController):**\
      - create several authors: `localhost:8080/create`\
-     - fetch an author by id: `localhost:8080/author/{id}`\
+     - lazy fetch the age of an author by id: `localhost:8080/author/age/{id}`\
+     - lazy fetch the avatar of an author by id: `localhost:8080/author/avatar/{id}`\
      - fetch authors by age greater than or equal to the given age without age and avatar: `localhost:8080/authors/{age}`\
      - fetch authors by age greater than or equal to the given age with age and avatar (but, don't do this, notice the N+1 issue caused by looping the list of authors and triggering SQLs for fetching age and avatar of each author): `localhost:8080/authors/details/{age}`
 
@@ -19,7 +20,7 @@
      - [Attribute Lazy Loading (basic)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAttributeLazyLoadingBasic)\
      - [Conditionally Loadind Lazy Attributes](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingWithConditionAndDefaults)
 
--------------------------------
+--------------------------------
 
 **You may like to try as well:**
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
