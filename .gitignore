@@ -16,3 +16,6 @@
 /HibernateSpringBootLoadBatchAssociation/target/
 /HibernateSpringBootLoadBatchAssociation - Copy/target/
 /HibernateSpringBootFilterAssociation/target/
+/HibernateSpringBootSkipLocked/target/
+/HibernateSpringBootOneToManyBidirectional - Copy/target/
+/HibernateSpringBootJacksonHibernate5Module/target/
