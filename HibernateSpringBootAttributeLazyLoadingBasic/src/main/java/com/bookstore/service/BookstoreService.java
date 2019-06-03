@@ -45,8 +45,7 @@ public class BookstoreService {
         authorRepository.save(cd);
         authorRepository.save(re);
     }
-
-    @Transactional(readOnly = true)
+   
     public Author fetchAuthor() {
 
         Author author = authorRepository.getOne(1L);
