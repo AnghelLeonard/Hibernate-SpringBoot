@@ -5,7 +5,6 @@ import com.app.entity.Article;
 import com.app.entity.ArticleStatus;
 import org.springframework.stereotype.Service;
 import com.app.repository.ArticleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
@@ -15,13 +14,12 @@ import org.springframework.transaction.support.TransactionTemplate;
 @Service
 public class ArticleService {
 
-    @Autowired
-    private TransactionTemplate template;
-
+    private final TransactionTemplate template;
     private final ArticleRepository articleRepository;
 
-    public ArticleService(ArticleRepository articleRepository) {
+    public ArticleService(ArticleRepository articleRepository, TransactionTemplate template) {
         this.articleRepository = articleRepository;
+        this.template = template;
     }
 
     public void fetchArticlesViaTwoTransactions() {
