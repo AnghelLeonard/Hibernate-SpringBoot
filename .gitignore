@@ -1,24 +1,6 @@
-/AttributeLazyLoadingJacksonSerialization/target/
-/AttributeLazyLoadingWithConditionAndDefaults/target/
-/AttributeLazyLoadingBasic/target/
-/HibernateSpringBootAttributeLazyLoadingBasic/target/
-/HibernateSpringBootAttributeLazyLoadingJacksonSerialization/target/
-/HibernateSpringBootAttributeLazyLoadingWithConditionAndDefaults/target/
-/HibernateSpringBootAudit/target/
-/HibernateSpringBootEnvers/target/
-/HibernateSpringBootCalculatePropertyPostLoad/target/
-/HibernateSpringBootCalculatePropertyFormula/target/
-/HibernateSpringBootCalculatePropertyFormula - Copy/target/
-/HibernateSpringBootCalculatePropertyGenerated/target/
-/P228_BatchInserts/target/
-/HibernateSpringBootBatchInsertsSpringStyle/target/
-/HibernateSpringBootAutoGeneratorType/target/
-/HibernateSpringBootLoadBatchAssociation/target/
-/HibernateSpringBootLoadBatchAssociation - Copy/target/
-/HibernateSpringBootFilterAssociation/target/
-/HibernateSpringBootSkipLocked/target/
-/HibernateSpringBootOneToManyBidirectional - Copy/target/
-/HibernateSpringBootJacksonHibernate5Module/target/
-/HibernateSpringBootMySqlSkipLocked/target/
-/HibernateSpringBootMySqlSkipLocked - Copy/target/
-/HibernateSpringBootPostgresSqlSkipLocked/target/
+build/
+dist/
+nbproject/
+build.xml
+manifest.mf
+nbactions.xml
