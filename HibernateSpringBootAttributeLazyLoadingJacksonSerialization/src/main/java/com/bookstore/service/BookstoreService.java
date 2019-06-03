@@ -54,6 +54,20 @@ public class BookstoreService {
     }
 
     @Transactional(readOnly = true)
+    public int fetchAuthorAgeViaId(long id) {
+
+        Author author = authorRepository.getOne(id);
+        return author.getAge();
+    }
+
+    @Transactional(readOnly = true)
+    public byte[] fetchAuthorAvatarViaId(long id) {
+
+        Author author = authorRepository.getOne(id);
+        return author.getAvatar();
+    }
+
+    @Transactional(readOnly = true)
     public List<Author> fetchAuthorsDetailsByAgeGreaterThanEqual(int age) {
 
         List<Author> authors = authorRepository.findByAgeGreaterThanEqual(age);
@@ -66,12 +80,5 @@ public class BookstoreService {
         });
 
         return authors;
-    }
-
-    @Transactional(readOnly = true)
-    public int fetchAuthorAgeViaId(long id) {
-
-        Author author = authorRepository.getOne(id);                
-        return author.getAge();
     }
 }

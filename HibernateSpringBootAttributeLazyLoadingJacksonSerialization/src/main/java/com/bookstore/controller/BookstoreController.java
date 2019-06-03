@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import java.io.IOException;
+import java.util.Base64;
 import java.util.List;
 import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,9 +35,14 @@ public class BookstoreController {
         return "created";
     }
 
-    @GetMapping("/author/{id}")
+    @GetMapping("/author/age/{id}")
     public int fetchAuthorAgeViaId(@PathVariable long id) {
         return bookstoreService.fetchAuthorAgeViaId(id);        
+    }
+    
+    @GetMapping("/author/avatar/{id}")
+    public String fetchAuthorAvatarViaId(@PathVariable long id) {
+        return  Base64.getEncoder().encodeToString(bookstoreService.fetchAuthorAvatarViaId(id));        
     }
     
     @GetMapping("/authors/{age}")
