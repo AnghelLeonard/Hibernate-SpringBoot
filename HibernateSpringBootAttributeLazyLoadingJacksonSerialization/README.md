@@ -11,7 +11,8 @@
      
 **Run the following requests (via BookstoreController):**\
      - create several authors: `localhost:8080/create`\
-     - fetch an author by id: `localhost:8080/author/{id}`\
+     - lazy fetch the age of an author by id: `localhost:8080/author/age/{id}`\
+     - lazy fetch the avatar of an author by id: `localhost:8080/author/avatar/{id}`\
      - fetch authors by age greater than or equal to the given age without age and avatar: `localhost:8080/authors/{age}`\
      - fetch authors by age greater than or equal to the given age with age and avatar (but, don't do this, notice the N+1 issue caused by looping the list of authors and triggering SQLs for fetching age and avatar of each author): `localhost:8080/authors/details/{age}`
 
