@@ -6,12 +6,7 @@
 **Key points:**\
      - in `pom.xml`, activate Hibernate *bytecode instrumentation* (e.g. use Maven *bytecode enhancement plugin*)\
      - annotate the columns that should be loaded lazy with `@Basic(fetch = FetchType.LAZY)`\
-     - annotate the `Author` entity with `@JsonInclude(Include.NON_DEFAULT)` to avoid the serialization of fields with default values (e.g., useful when we set `avatar` to `null` and `age` to `0`)
-     
-**Run the following requests (via BookstoreController):**\
-     - create several authors: `localhost:8080/create`\
-     - fetch the first author without *details* (author's `age` and `avatar` will not be loaded): `localhost:8080/author`\
-     - fetch the first author with *details* (author's `age` and `avatar` will be loaded lazy in separate `SELECT` statements): `localhost:8080/author/details`
+     - disable Open Session in View     
 
 **Check as well:**\
      - [Conditionally Loadind Lazy Attributes](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingWithConditionAndDefaults)\
