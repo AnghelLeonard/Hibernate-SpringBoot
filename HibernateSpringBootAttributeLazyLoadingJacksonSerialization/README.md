@@ -10,8 +10,7 @@
      - create and configure this filter to be used by default via `SimpleBeanPropertyFilter.serializeAll()`\
      - at controller level (in the needed endpoint) replace the default filter with one as `SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "genre")` and return `MappingJacksonValue`
      
-**Run the following requests (via BookstoreController):**\
-     - create several authors: `localhost:8080/create`\
+**Run the following requests (via BookstoreController):**\    
      - lazy fetch the age of an author by id: `localhost:8080/author/age/{id}`\
      - lazy fetch the avatar of an author by id: `localhost:8080/author/avatar/{id}`\
      - fetch authors by age greater than or equal to the given age without age and avatar: `localhost:8080/authors/{age}`\
