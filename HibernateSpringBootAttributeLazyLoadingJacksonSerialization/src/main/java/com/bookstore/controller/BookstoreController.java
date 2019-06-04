@@ -5,7 +5,6 @@ import com.bookstore.entity.Author;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
-import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
 import org.springframework.http.converter.json.MappingJacksonValue;
@@ -27,26 +26,18 @@ public class BookstoreController {
         filterProvider.setFailOnUnknownId(false);
     }
 
-    @GetMapping("/create")
-    public String create() throws IOException {
-
-        bookstoreService.createAuthors();
-
-        return "created";
-    }
-
     @GetMapping("/author/age/{id}")
     public int fetchAuthorAgeViaId(@PathVariable long id) {
-        return bookstoreService.fetchAuthorAgeViaId(id);        
+        return bookstoreService.fetchAuthorAgeViaId(id);
     }
-    
+
     @GetMapping("/author/avatar/{id}")
     public String fetchAuthorAvatarViaId(@PathVariable long id) {
-        return  Base64.getEncoder().encodeToString(bookstoreService.fetchAuthorAvatarViaId(id));        
+        return Base64.getEncoder().encodeToString(bookstoreService.fetchAuthorAvatarViaId(id));
     }
-    
+
     @GetMapping("/authors/{age}")
-    public MappingJacksonValue fetchAuthorsByAgeGreaterThanEqual(@PathVariable int age) 
+    public MappingJacksonValue fetchAuthorsByAgeGreaterThanEqual(@PathVariable int age)
             throws JsonProcessingException {
 
         List<Author> authors = bookstoreService.fetchAuthorsByAgeGreaterThanEqual(age);
@@ -57,7 +48,7 @@ public class BookstoreController {
     }
 
     @GetMapping("/authors/details/{age}")
-    public List<Author> fetchAuthorsDetailsByAgeGreaterThanEqual(@PathVariable int age) 
+    public List<Author> fetchAuthorsDetailsByAgeGreaterThanEqual(@PathVariable int age)
             throws JsonProcessingException {
 
         return bookstoreService.fetchAuthorsDetailsByAgeGreaterThanEqual(age);
