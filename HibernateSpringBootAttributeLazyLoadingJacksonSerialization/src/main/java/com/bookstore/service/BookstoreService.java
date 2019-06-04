@@ -51,14 +51,7 @@ public class BookstoreService {
         List<Author> authors = authorRepository.findByAgeGreaterThanEqual(age);
 
         return authors;
-    }
-
-    @Transactional(readOnly = true)
-    public int fetchAuthorAgeViaId(long id) {
-
-        Author author = authorRepository.getOne(id);
-        return author.getAge();
-    }
+    }  
 
     @Transactional(readOnly = true)
     public byte[] fetchAuthorAvatarViaId(long id) {
@@ -74,8 +67,7 @@ public class BookstoreService {
 
         // don't do this since this is a N+1 case (use a simple SQL)
         authors.forEach(a -> {
-            a.getAvatar();
-            a.getAge();
+            a.getAvatar();     
         });
 
         return authors;

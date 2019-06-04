@@ -22,14 +22,9 @@ public class BookstoreController {
         this.bookstoreService = bookstoreService;
 
         filterProvider = new SimpleFilterProvider().addFilter("AuthorId",
-                SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "genre"));
+                SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "age", "genre"));
         filterProvider.setFailOnUnknownId(false);
-    }
-
-    @GetMapping("/author/age/{id}")
-    public int fetchAuthorAgeViaId(@PathVariable long id) {
-        return bookstoreService.fetchAuthorAgeViaId(id);
-    }
+    }    
 
     @GetMapping("/author/avatar/{id}")
     public String fetchAuthorAvatarViaId(@PathVariable long id) {
