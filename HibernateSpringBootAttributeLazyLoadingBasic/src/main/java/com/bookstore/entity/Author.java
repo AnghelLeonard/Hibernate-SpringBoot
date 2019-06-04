@@ -18,10 +18,8 @@ public class Author implements Serializable {
     @Lob
     @Basic(fetch = FetchType.LAZY)
     private byte[] avatar;
-    
-    @Basic(fetch = FetchType.LAZY)
-    private int age;
-    
+     
+    private int age;    
     private String name;
     private String genre;
     
