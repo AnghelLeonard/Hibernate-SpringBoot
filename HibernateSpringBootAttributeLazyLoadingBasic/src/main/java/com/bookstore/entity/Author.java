@@ -1,7 +1,5 @@
 package com.bookstore.entity;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -10,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 
 @Entity
-@JsonInclude(Include.NON_DEFAULT)
 public class Author implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -5,6 +5,7 @@ import com.bookstore.entity.Author;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,25 +46,38 @@ public class BookstoreService {
         authorRepository.save(cd);
         authorRepository.save(re);
     }
-   
-    public Author fetchAuthor() {
 
-        Author author = authorRepository.getOne(1L);
-        author.setAvatar(null);
-        author.setAge(0);
+    public List<Author> fetchAuthorsByAgeGreaterThanEqual(int age) {
+        List<Author> authors = authorRepository.findByAgeGreaterThanEqual(age);
 
-        return author;
+        return authors;
     }
 
     @Transactional(readOnly = true)
-    public Author fetchAuthorDetails() {
+    public int fetchAuthorAgeViaId(long id) {
 
-        Author author = authorRepository.getOne(1L);
+        Author author = authorRepository.getOne(id);
+        return author.getAge();
+    }
 
-        // this is loaded LAZY
-        author.getAvatar();
-        author.getAge();
+    @Transactional(readOnly = true)
+    public byte[] fetchAuthorAvatarViaId(long id) {
 
-        return author;
+        Author author = authorRepository.getOne(id);
+        return author.getAvatar();
+    }
+
+    @Transactional(readOnly = true)
+    public List<Author> fetchAuthorsDetailsByAgeGreaterThanEqual(int age) {
+
+        List<Author> authors = authorRepository.findByAgeGreaterThanEqual(age);
+        
+        // don't do this since this is a N+1 case (use a simple SQL)
+        authors.forEach(a -> {
+            a.getAvatar();
+            a.getAge();
+        });
+
+        return authors;
     }
 }
