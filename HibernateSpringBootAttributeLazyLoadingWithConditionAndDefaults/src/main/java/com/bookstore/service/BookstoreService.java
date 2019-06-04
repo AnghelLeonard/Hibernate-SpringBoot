@@ -53,7 +53,7 @@ public class BookstoreService {
 
         // prone to N+1, used carefully (e.g., only if the condition is rarely met)
         for (Author author : authors) {
-            if (author.getAge() < 40) {
+            if (author.getAge() < 25) {
                 author.getAvatar();
             } else {
                 author.setAvatar(null);

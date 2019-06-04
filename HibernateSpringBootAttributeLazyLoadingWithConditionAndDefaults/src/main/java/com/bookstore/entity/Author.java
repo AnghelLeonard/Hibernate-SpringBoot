@@ -22,9 +22,9 @@ public class Author implements Serializable {
     @Basic(fetch = FetchType.LAZY)
     private byte[] avatar;
 
+    private int age;
     private String name;
     private String genre;
-    private int age;
 
     public Long getId() {
         return id;
