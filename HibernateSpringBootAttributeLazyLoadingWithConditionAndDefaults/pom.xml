@@ -61,8 +61,7 @@
                 <version>5.4.2.Final</version> 
                 <executions> 
                     <execution> 
-                        <configuration>                            
-                            <enableDirtyTracking>true</enableDirtyTracking>
+                        <configuration>                                                        
                             <failOnError>true</failOnError> 
                             <enableLazyInitialization>true</enableLazyInitialization> 
                         </configuration> 
