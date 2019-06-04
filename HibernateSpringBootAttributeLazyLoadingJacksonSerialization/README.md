@@ -12,8 +12,8 @@
      
 **Run the following requests (via BookstoreController):**\         
      - lazy fetch the avatar of an author by id: `localhost:8080/author/avatar/{id}`\
-     - fetch authors by age greater than or equal to the given age without age and avatar: `localhost:8080/authors/{age}`\
-     - fetch authors by age greater than or equal to the given age with age and avatar (but, don't do this, notice the N+1 issue caused by looping the list of authors and triggering SQLs for fetching age and avatar of each author): `localhost:8080/authors/details/{age}`
+     - fetch authors by age greater than or equal to the given age without avatar: `localhost:8080/authors/{age}`\
+     - fetch authors by age greater than or equal to the given age with and avatar (but, don't do this, notice the N+1 issue caused by looping the list of authors and triggering SQLs for fetching the avatar of each author): `localhost:8080/authors/details/{age}`
 
 **Check as well:**\
      - [Attribute Lazy Loading (basic)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAttributeLazyLoadingBasic)\
