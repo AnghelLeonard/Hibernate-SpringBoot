@@ -8,7 +8,7 @@
      - annotate the `Author` entity with `@JsonFilter("AuthorId")`\
      - disable Open Session in View\
      - create and configure this filter to be used by default via `SimpleBeanPropertyFilter.serializeAll()`\
-     - at controller level (in the needed endpoint) replace the default filter with one as `SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "genre")` and return `MappingJacksonValue`
+     - at controller level (in the needed endpoint) replace the default filter with one as `SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "age", "genre")` and return `MappingJacksonValue`
      
 **Run the following requests (via BookstoreController):**\         
      - lazy fetch the avatar of an author by id: `localhost:8080/author/avatar/{id}`\
