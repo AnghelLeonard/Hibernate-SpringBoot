@@ -6,6 +6,7 @@
      - in `pom.xml`, activate Hibernate *bytecode instrumentation* (e.g. use Maven *bytecode enhancement plugin*)\
      - annotate the columns that should be loaded lazy with `@Basic(fetch = FetchType.LAZY)`\
      - annotate the `Author` entity with `@JsonFilter("AuthorId")`\
+     - disable Open Session in View\
      - create and configure this filter to be used by default via `SimpleBeanPropertyFilter.serializeAll()`\
      - at controller level (in the needed endpoint) replace the default filter with one as `SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "genre")` and return `MappingJacksonValue`
      
