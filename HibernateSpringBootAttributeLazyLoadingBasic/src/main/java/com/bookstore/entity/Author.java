@@ -35,7 +35,7 @@ public class Author implements Serializable {
         return avatar;
     }
 
-    public void setAvatar(byte[] avatar) {
+    public void setAvatar(byte[] avatar) {       
         this.avatar = avatar;
     }
 
