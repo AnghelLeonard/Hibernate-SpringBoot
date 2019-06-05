@@ -1,4 +1,4 @@
-package com.bookstore;
+package com.bookstore.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;

@@ -65,7 +65,7 @@ public class BookstoreService {
 
         List<Author> authors = authorRepository.findByAgeGreaterThanEqual(age);
 
-        // don't do this since this is a N+1 case (use a simple SQL)
+        // don't do this since this is a N+1 case
         authors.forEach(a -> {
             a.getAvatar();     
         });
