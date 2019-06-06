@@ -1503,3 +1503,22 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
      - in `pom.xml` add the dependency `hibernate-envers`\
      - each entity that should be audited should be annotated with `@Audited`\
      - optionally, annotate entities with `@AuditTable` to rename the table used for auditing          
+
+-----------------------------------------------------------------------------------------------------------------------
+
+98. **[Attributes Lazy Loading Via Subentities](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSubentities)**
+ 
+**Description:** By default, the attributes of an entity are loaded eager (all at once). This application is an alternative to *Attribute Lazy Loading* from [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingBasic). This application uses a base class to isolate the attributes that should be loaded eagerly and subentities (entities that extends the base class) for isolating the attributes that should be loaded on demand.
+
+<a href="#"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSubentities/attributes%20lazy%20loading%20via%20subentites.png" align="center" height="150" width="500" ></a>
+
+**Key points:**\
+     - create the base class (this is not an entity), `BaseAuthor`,  and annotate it with `@MappedSuperclass`\
+     - create `AuthorShallow` subentity of `BaseAuthor` and don't add any attribute in it (this will inherit the attributes from the superclass)\
+     - create `AuthorDeep` subentity of `BaseAuthor` and add to it the attributes that should be loaded on demand (e.g., `avatar`)\
+     - map both subentities to the same table via `@Table(name = "author")`\
+     - provide the typical repositories, `AuthorShallowRepository` and `AuthorDeepRepository`
+     
+**Run the following requests (via BookstoreController):**\
+     - fetch all authors shallow (without avatars): `localhost:8080/authors/shallow`\
+     - fetch all authors deep (with avatars): `localhost:8080/authors/deep`
