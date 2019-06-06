@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     @Transactional(readOnly = true)
-    @Query(value = "select a.name as name, a.age as age from Author a")
+    @Query(value = "SELECT a.name AS name, a.age AS age FROM Author a")
     List<Tuple> fetchAuthors();
 }
