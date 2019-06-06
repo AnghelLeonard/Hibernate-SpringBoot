@@ -1522,3 +1522,17 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 **Run the following requests (via BookstoreController):**\
      - fetch all authors shallow (without avatars): `localhost:8080/authors/shallow`\
      - fetch all authors deep (with avatars): `localhost:8080/authors/deep`
+
+-----------------------------------------------------------------------------------------------------------------------
+
+99. **[DTOs Via Constructor And Spring Data Query Builder Mechanism](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructor)**
+
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on Constructor Expression and JPQL.
+
+**Key points:**\
+     - write a proper constructor in the DTO class\
+     - rely on Spring Data Query Builder Mechanism for expression the SQL\
+     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
+
+**See also:**\
+[Dto Via Constructor Expression and JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructorExpression)
