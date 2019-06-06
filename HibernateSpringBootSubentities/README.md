@@ -1,16 +1,17 @@
 
-**[Conditionally Loadind Lazy Attributes](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingWithConditionAndDefaults)**
+**[Attributes Lazy Loading Via Subentities](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingWithConditionAndDefaults)**
  
-**Description:** By default, the attributes of an entity are loaded eager (all at once). We can load them **lazy** as well. This is useful for column types that store large amounts of data: `CLOB`, `BLOB`, `VARBINARY`, etc or details that should be loaded on demand. In this application, we have an entity named `Author`. Its properties are: `id`, `name`, `genre`, `avatar` and `age`. And, we want to load `avatar` lazy. Actually, we loop the list of all authors, and, for those younger than 25 years (none in our case), we will load the `avatar` as well. For the rest of authors, we explicitly set the avatar as `null` (this is like the default value). Pay attention that this technique is prone to N+1 issue.
+**Description:** By default, the attributes of an entity are loaded eager (all at once). This application is an alternative to *Attribute Lazy Loading* from [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingBasic). This application uses a base class to isolate the attributes that should be loaded eagerly and subentities (entities that extends the base class) for isolating the attributes that should be loaded on demand.
 
 **Key points:**\
-     - in `pom.xml`, activate Hibernate *bytecode instrumentation* (e.g. use Maven *bytecode enhancement plugin*)\
-     - annotate the columns that should be loaded lazy with `@Basic(fetch = FetchType.LAZY)`\
-     - annotate the `Author` entity with `@JsonInclude(Include.NON_DEFAULT)` to avoid the serialization of fields with default values (e.g., useful when we set `avatar` to `null`)\
-     - disable Open Session in View
+     - create the base class (this is not an entity), `BaseAuthor`,  and annotate it with `@MappedSuperclass`\
+     - create a `AuthorShallow` subentity of `BaseAuthor` and don't add any attribute in it (this will inherit the attributes from the superclass)\     
+     - create a `AuthorDeep` subentity of `BaseAuthor` and add to it the attributes that should be loaded on demand (e.g., `avatar`)\
+     - map both subentities to the same table via `@Table(name = "author")`
      
 **Run the following requests (via BookstoreController):**\    
-     - fetch all authors (for those younger than 25 years the avatar is lazy loaded): `localhost:8080/authors`
+     - fetch all authors shallow (without avatars): `localhost:8080/authors/shallow`\
+     - fetch all authors deep (with avatars): `localhost:8080/authors/deep`
 
 **Check as well:**\
      - [Attribute Lazy Loading (basic)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAttributeLazyLoadingBasic)\
