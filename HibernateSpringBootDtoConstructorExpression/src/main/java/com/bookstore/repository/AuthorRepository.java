@@ -6,11 +6,12 @@ import com.bookstore.entity.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public interface AuthorRepository extends JpaRepository<Author, Long> {      
-    
-    @Query(value="select new com.bookstore.dto.AuthorDto(a.name, a.age) from Author a")
+public interface AuthorRepository extends JpaRepository<Author, Long> {
+
+    @Transactional(readOnly = true)
+    @Query(value = "select new com.bookstore.dto.AuthorDto(a.name, a.age) from Author a")
     List<AuthorDto> fetchAuthors();
 }
-
