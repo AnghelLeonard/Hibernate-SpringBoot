@@ -11,6 +11,6 @@ import com.bookstore.projection.AuthorNameAge;
 public interface AuthorRepository extends JpaRepository<Author, Long> {      
     
     @Transactional(readOnly = true)
-    List<AuthorNameAge> findFirst2ByBirthplace(String birthplace);
+    List<AuthorNameAge> findFirst2ByGenre(String genre);
 }
 

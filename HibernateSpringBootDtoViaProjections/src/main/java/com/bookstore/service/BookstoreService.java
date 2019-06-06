@@ -16,6 +16,6 @@ public class BookstoreService {
 
     public List<AuthorNameAge> fetchFirst2ByBirthplace() {
 
-        return authorRepository.findFirst2ByBirthplace("Birthplace_1");
+        return authorRepository.findFirst2ByGenre("Anthology");
     }
 }
