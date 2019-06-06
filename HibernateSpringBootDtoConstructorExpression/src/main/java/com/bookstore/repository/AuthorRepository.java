@@ -12,6 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     @Transactional(readOnly = true)
-    @Query(value = "select new com.bookstore.dto.AuthorDto(a.name, a.age) from Author a")
+    @Query(value = "SELECT new com.bookstore.dto.AuthorDto(a.name, a.age) FROM Author a")
     List<AuthorDto> fetchAuthors();
 }
