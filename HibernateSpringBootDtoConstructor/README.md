@@ -4,6 +4,7 @@
 
 **Key points:**\
      - write a proper constructor in the DTO class\
+     - rely on Spring Data Query Builder Mechanism for expression the SQL\
      - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
 
 **See also:**\
