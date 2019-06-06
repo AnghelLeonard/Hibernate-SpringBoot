@@ -12,6 +12,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     @Transactional(readOnly = true)
-    @Query(value = "SELECT a.name AS name, a.age AS age FROM Author a WHERE a.birthplace=?1")
-    List<AuthorNameAge> fetchByBirthplace(String birthplace);
+    @Query(value = "SELECT a.name AS name, a.age AS age FROM Author a WHERE a.genre=?1")
+    List<AuthorNameAge> fetchByGenre(String genre);
 }

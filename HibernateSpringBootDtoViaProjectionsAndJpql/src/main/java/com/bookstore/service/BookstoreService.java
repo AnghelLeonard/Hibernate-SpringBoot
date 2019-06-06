@@ -16,6 +16,6 @@ public class BookstoreService {
 
     public List<AuthorNameAge> fetchByBirthplace() {
 
-        return authorRepository.fetchByBirthplace("Birthplace_1");
+        return authorRepository.fetchByGenre("Anthology");
     }
 }

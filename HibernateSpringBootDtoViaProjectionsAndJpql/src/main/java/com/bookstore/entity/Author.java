@@ -15,10 +15,9 @@ public class Author implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String surname;
-    private String birthplace;
     private int age;
+    private String name;
+    private String genre;
 
     public Long getId() {
         return id;
@@ -36,12 +35,12 @@ public class Author implements Serializable {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     public int getAge() {
@@ -52,18 +51,9 @@ public class Author implements Serializable {
         this.age = age;
     }
 
-    public String getBirthplace() {
-        return birthplace;
-    }
-
-    public void setBirthplace(String birthplace) {
-        this.birthplace = birthplace;
-    }
-
     @Override
     public String toString() {
-        return "Author{" + "id=" + id + ", name=" + name 
-                + ", surname=" + surname + ", birthplace=" + birthplace + ", age=" + age + '}';
+        return "Author{" + "id=" + id + ", age="
+                + age + ", name=" + name + ", genre=" + genre + '}';
     }
-  
 }
