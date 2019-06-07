@@ -26,6 +26,6 @@ public class BookstoreService {
     public void updateAuthorRecommended() {
         Author author = authorRepository.findById(1L).orElseThrow();
 
-        author.setAge(44);
+        author.setAge(49);
     }
 }
