@@ -1,26 +1,29 @@
-package com.jpa;
+package com.bookstore;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.bookstore.service.BookstoreService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
-public class DelayConnectionApplication {
+public class MainApplication {
 
-    @Autowired
-    private UserService userService;
+    private final BookstoreService bookstoreService;
+
+    public MainApplication(BookstoreService bookstoreService) {
+        this.bookstoreService = bookstoreService;
+    }
 
     public static void main(String[] args) {
-        SpringApplication.run(DelayConnectionApplication.class, args);
+        SpringApplication.run(MainApplication.class, args);
     }
 
     @Bean
     public ApplicationRunner init() {
         return args -> {
-                        
-            userService.doTimeConsumingTask();                      
+
+            bookstoreService.doTimeConsumingTask();
         };
     }
 }
