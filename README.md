@@ -629,13 +629,12 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 **Description:** Typically, when we get a `LazyInitializationException` we tend to modify the relationship fetching type from `LAZY` to `EAGER`. That is bad! This is a [code smell](https://vladmihalcea.com/eager-fetching-is-a-code-smell/). Best way to avoid this exception is to rely on `JOIN FETCH` + DTOs (if needed). This application is a `JOIN FETCH` example with no DTOs. But, based on the DTOs examples from this repo, you can easily adapt it to use DTOs as well.
 
 **Key points:**\
-     - define two related entities (e.g., `Category` and `Product` in a one-to-many lazy bidirectional relationship)\
-     - write a JPQL `JOIN FETCH` to fetch a category including products\
-     - write a JPQL `JOIN FETCH` to fetch all products including categories
+     - define two related entities (e.g., `Author` and `Book` in a one-to-many lazy bidirectional relationship)\
+     - write a JPQL `JOIN FETCH` to fetch an author including his books\
+     - write a JPQL `JOIN FETCH` to fetch a book including its author
 
 **Output example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootJoinFetch/sample%201.png) 
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootJoinFetch/sample2.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootJoinFetch/hibernate%20spring%20boot%20join%20fetch.png) 
 
 -----------------------------------------------------------------------------------------------------------------------    
 
