@@ -77,12 +77,10 @@
             <artifactId>blaze-persistence-jpa-criteria-impl</artifactId>
             <version>${blaze-persistence.version}</version>
             <scope>runtime</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->
+        </dependency>        
         <dependency>
             <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.1</version>
+            <artifactId>jaxb-api</artifactId>          
         </dependency>
 
     </dependencies>
