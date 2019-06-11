@@ -23,7 +23,7 @@ public class BookstoreService {
     // INNER JOIN
     @Transactional(readOnly = true)
     public void fetchAuthorsBooksByPriceInnerJoin() {
-        List<Author> authors = authorRepository.fetchAuthorsBooksByPriceInnerJoin(30);
+        List<Author> authors = authorRepository.fetchAuthorsBooksByPriceInnerJoin(40);
 
         authors.forEach((e) -> System.out.println(e.getName() + " " + e.getGenre()
                 + " | " + e.getBooks())); // causes extra SELECTs and the result is not ok
@@ -40,7 +40,7 @@ public class BookstoreService {
 
     // JOIN FETCH
     public void fetchAuthorsBooksByPriceJoinFetch() {
-        List<Author> authors = authorRepository.fetchAuthorsBooksByPriceJoinFetch(30);
+        List<Author> authors = authorRepository.fetchAuthorsBooksByPriceJoinFetch(40);
 
         authors.forEach((e) -> System.out.println(e.getName() + " " + e.getGenre()
                 + " | " + e.getBooks())); // does not cause extra SELECTs and the result is ok
