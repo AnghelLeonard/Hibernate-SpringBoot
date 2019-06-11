@@ -1539,3 +1539,20 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 **See also:**\
 [Dto Via Constructor Expression and JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructorExpression)
+
+-----------------------------------------------------------------------------------------------------------------------
+
+100. **[JOIN FETCH And DTOs](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch)**
+
+**Description:** Combining `JOIN FETCH` and DTOs can be done under several constrains. Mainly, the JPQL containing the `JOIN FETCH` cannot be used to fetch only some columns from the involved entities (in such cases, `JOIN` is the proper choice). It must fetch all attributes of the involved entities. 
+
+**Key points:**\
+     - define two related entities (e.g., `Author` and `Book` in a one-to-many lazy bidirectional relationship)\
+     - define the proper DTOs classes (e.g., `BookDto` and `AuthorDto`)\
+     - the `BookDto` and `AuthorDto` may map only the needed columns, but the triggered SQL will fetch all of them anyway\
+     - write a JPQL `JOIN FETCH` to fetch an author including his books
+
+**Constrains:**\
+     - this is ok: `SELECT a FROM Author a JOIN FETCH a.books`\
+     - this is not ok: `SELECT a.age as age FROM Author a JOIN FETCH a.books` -> *org.hibernate.QueryException: query specified join fetching, but the owner of the fetched association was not present in the select list*\
+     - this is not ok: `SELECT a FROM Author a JOIN FETCH a.books.title` ->  *org.hibernate.QueryException: illegal attempt to dereference collection [author0_.id.books] with element property reference [title]*
