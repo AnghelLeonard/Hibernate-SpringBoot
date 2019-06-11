@@ -5,6 +5,7 @@
 **Key points:**\
      - define two related entities (e.g., `Author` and `Book` in a one-to-many lazy bidirectional relationship)\
      - define the proper DTOs classes (e.g., `BookDto` and `AuthorDto`)\
+     - the `BookDto` and `AuthorDto` may map only the needed columns, but the triggered SQL will fetch all of them anyway\
      - write a JPQL `JOIN FETCH` to fetch an author including his books
 
 **Constrains:**\
