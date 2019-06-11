@@ -7,7 +7,7 @@
      - write a JPQL `JOIN` and `JOIN FETCH` to fetch an author including his books\
      - write a JPQL `JOIN` and `JOIN FETCH` to fetch a book including its author
      
-**Notice that:**\     
+**Notice that:**\
      - via `JOIN`, fetching each `Author` of a `Book` (or each `Book` of an `Author`) required a separate `SELECT`\
      - via `JOIN FETCH`, fetching each `Author` of a `Book` (or each `Book` of an `Author`) required a single `SELECT`
 
