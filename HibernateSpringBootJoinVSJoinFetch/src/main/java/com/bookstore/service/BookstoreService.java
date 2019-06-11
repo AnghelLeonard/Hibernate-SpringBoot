@@ -46,8 +46,7 @@ public class BookstoreService {
                 + ", books: " + e.getBooks())); // does not cause extra SELECTs and the result is ok
     }
 
-    // JOIN FETCH
-    @Transactional(readOnly = true)
+    // JOIN FETCH    
     public void fetchBooksAuthorsJoinFetch() {
         List<Book> books = bookRepository.fetchBooksAuthorsJoinFetch();
 
