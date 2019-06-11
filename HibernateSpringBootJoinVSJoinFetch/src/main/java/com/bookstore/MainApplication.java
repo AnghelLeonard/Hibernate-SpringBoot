@@ -1,6 +1,6 @@
-package modern.challenge;
+package com.bookstore;
 
-import modern.challenge.service.BookstoreService;
+import com.bookstore.service.BookstoreService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,10 +1,10 @@
-package modern.challenge.service;
+package com.bookstore.service;
 
-import modern.challenge.repository.AuthorRepository;
-import modern.challenge.repository.BookRepository;
+import com.bookstore.repository.AuthorRepository;
+import com.bookstore.repository.BookRepository;
 import java.util.List;
-import modern.challenge.entity.Author;
-import modern.challenge.entity.Book;
+import com.bookstore.entity.Author;
+import com.bookstore.entity.Book;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

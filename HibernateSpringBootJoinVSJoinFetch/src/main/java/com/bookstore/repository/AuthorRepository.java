@@ -1,8 +1,8 @@
-package modern.challenge.repository;
+package com.bookstore.repository;
 
 import java.util.List;
 import javax.persistence.QueryHint;
-import modern.challenge.entity.Author;
+import com.bookstore.entity.Author;
 import static org.hibernate.jpa.QueryHints.HINT_PASS_DISTINCT_THROUGH;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
