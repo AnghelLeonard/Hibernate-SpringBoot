@@ -11,15 +11,16 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional(readOnly = true)
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     // INNER JOIN
+    @Transactional(readOnly = true)
     @Query(value = "SELECT DISTINCT a FROM Author a INNER JOIN a.books b WHERE b.price > ?1")
     @QueryHints(value = @QueryHint(name = HINT_PASS_DISTINCT_THROUGH, value = "false"))
     List<Author> fetchAuthorsBooksByPriceInnerJoin(int price);
-
+   
     // JOIN FETCH
+    @Transactional(readOnly = true)
     @Query(value = "SELECT DISTINCT a FROM Author a JOIN FETCH a.books b WHERE b.price > ?1")
     @QueryHints(value = @QueryHint(name = HINT_PASS_DISTINCT_THROUGH, value = "false"))
     List<Author> fetchAuthorsBooksByPriceJoinFetch(int price);
