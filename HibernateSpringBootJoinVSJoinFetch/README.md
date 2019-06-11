@@ -13,7 +13,7 @@
      - write a JPQL `JOIN` and `JOIN FETCH` to fetch a book including its author
      
 **Notice that:**\
-     - via `JOIN`, fetching each `Author` of a `Book` (or each `Book` of an `Author`) required additional `SELECT(s)`\
+     - via `JOIN`, fetching each `Author` of a `Book` (or each `Book` of an `Author`) may require additional `SELECT(s)` being prone to N+1\
      - via `JOIN FETCH`, fetching each `Author` of a `Book` (or each `Book` of an `Author`) required a single `SELECT`
 
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
