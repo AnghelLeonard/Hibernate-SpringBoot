@@ -6,12 +6,12 @@
      - in `pom.xml`, activate Hibernate *bytecode instrumentation* (e.g. use Maven *bytecode enhancement plugin*)\
      - in entity, annotate the columns that should be loaded lazy with `@Basic(fetch = FetchType.LAZY)`\
      - in `application.properties`, disable Open Session in View\
-     - annotate the `Author` entity with `@JsonFilter("AuthorId")`\     
+     - annotate the `Author` entity with `@JsonFilter("AuthorId")`\
      - create and configure the `AuthorId` filter to be used by default via `SimpleBeanPropertyFilter.serializeAll()`\
      - at controller level (in the needed endpoint) override the `AuthorId` filter with one as `SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "age", "genre")` and return `MappingJacksonValue`\
      - a controller endpoint that need to use the overriden version of `AuthorId` filter should rely on `MappingJacksonValue`
      
-**Run the following requests (via BookstoreController):**\         
+**Run the following requests (via BookstoreController):**\
      - lazy fetch the avatar of an author by id: `localhost:8080/author/avatar/{id}`\
      - fetch authors by age greater than or equal to the given age without avatar: `localhost:8080/authors/{age}`\
      - fetch authors by age greater than or equal to the given age with and avatar (but, don't do this, notice the N+1 issue caused by looping the list of authors and triggering SQLs for fetching the avatar of each author): `localhost:8080/authors/details/{age}`
