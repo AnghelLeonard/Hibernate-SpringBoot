@@ -1,14 +1,15 @@
 **[Attribute Lazy Loading And Jackson Serialization](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingJacksonSerialization)**
  
-**Description:** By default, the attributes of an entity are loaded eager (all at once). We can load them **lazy** as well. This is useful for column types that store large amounts of data: `CLOB`, `BLOB`, `VARBINARY`, etc or *details* that should be loaded on demand. In this application, we have an entity named `Author`. Its properties are: `id`, `name`, `genre`, `avatar` and `age`. And, we want to load `avatar` lazy. But, returning entities (as JSON) that contains un-fetched lazy loaded attributes from a rest controller (`@RestController`) will cause lazy initialization exceptions because Jackson tries to "force" the fetching of these attributes outside a session. 
+**Description:** By default, the attributes of an entity are loaded eagerly (all at once). But, we can load them **lazy** as well. This is useful for column types that store large amounts of data: `CLOB`, `BLOB`, `VARBINARY`, etc or *details* that should be loaded on demand. In this application, we have an entity named `Author`. Its properties are: `id`, `name`, `genre`, `avatar` and `age`. And, we want to load the `avatar` lazy. But, returning entities (as JSON) that contains un-fetched lazy loaded attributes from a REST controller (`@RestController`) will cause lazy initialization exceptions because Jackson tries to "force" the fetching of these attributes outside a session. 
 
 **Key points:**\
      - in `pom.xml`, activate Hibernate *bytecode instrumentation* (e.g. use Maven *bytecode enhancement plugin*)\
-     - annotate the columns that should be loaded lazy with `@Basic(fetch = FetchType.LAZY)`\
-     - annotate the `Author` entity with `@JsonFilter("AuthorId")`\
-     - disable Open Session in View\
-     - create and configure this filter to be used by default via `SimpleBeanPropertyFilter.serializeAll()`\
-     - at controller level (in the needed endpoint) replace the default filter with one as `SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "age", "genre")` and return `MappingJacksonValue`
+     - in entity, annotate the columns that should be loaded lazy with `@Basic(fetch = FetchType.LAZY)`\
+     - in `application.properties`, disable Open Session in View\
+     - annotate the `Author` entity with `@JsonFilter("AuthorId")`\     
+     - create and configure the `AuthorId` filter to be used by default via `SimpleBeanPropertyFilter.serializeAll()`\
+     - at controller level (in the needed endpoint) override the `AuthorId` filter with one as `SimpleBeanPropertyFilter.filterOutAllExcept("id", "name", "age", "genre")` and return `MappingJacksonValue`\
+     - a controller endpoint that need to use the overriden version of `AuthorId` filter should rely on `MappingJacksonValue`
      
 **Run the following requests (via BookstoreController):**\         
      - lazy fetch the avatar of an author by id: `localhost:8080/author/avatar/{id}`\
