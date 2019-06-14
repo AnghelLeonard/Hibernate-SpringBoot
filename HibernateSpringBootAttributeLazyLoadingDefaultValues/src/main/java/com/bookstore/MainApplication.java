@@ -24,7 +24,7 @@ public class MainApplication {
         return args -> {
 
             System.out.println("Persisting several authors ...");
-            bookstoreService.createAuthors();
+            bookstoreService.createAuthors();                        
         };
     }
 }

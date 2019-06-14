@@ -5,7 +5,6 @@ import com.bookstore.entity.Author;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,18 +47,15 @@ public class BookstoreService {
     }
 
     @Transactional(readOnly = true)
-    public List<Author> fetchAuthors() {
-        List<Author> authors = authorRepository.findAll();
+    public Author fetchAuthor(long id) {
+        Author author = authorRepository.findById(id).orElseThrow();
 
-        // prone to N+1, used carefully (e.g., only if the condition is rarely met)
-        for (Author author : authors) {
-            if (author.getAge() < 25) {
-                author.getAvatar();
-            } else {
-                author.setAvatar(null);
-            }
+        if (author.getAge() < 40) {
+            author.getAvatar();
+        } else {
+            author.setAvatar(null);
         }
 
-        return authors;
+        return author;
     }
 }

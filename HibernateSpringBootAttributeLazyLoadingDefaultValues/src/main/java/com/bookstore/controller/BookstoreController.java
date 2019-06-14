@@ -2,8 +2,8 @@ package com.bookstore.controller;
 
 import com.bookstore.service.BookstoreService;
 import com.bookstore.entity.Author;
-import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -15,9 +15,9 @@ public class BookstoreController {
         this.bookstoreService = bookstoreService;
     }
 
-    @GetMapping("/authors")
-    public List<Author> fetchAuthors() {
-        return bookstoreService.fetchAuthors();
+    @GetMapping("/author/{id}")
+    public Author fetchAuthors(@PathVariable long id) {
+        return bookstoreService.fetchAuthor(id);
     }
 
 }

@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jpa</groupId>
-    <artifactId>HibernateSpringBootAttributeLazyLoadingWithConditionAndDefaults</artifactId>
+    <artifactId>HibernateSpringBootAttributeLazyLoadingDefaultValues</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>HibernateSpringBootAttributeLazyLoadingWithConditionAndDefaults</name>
+    <name>HibernateSpringBootAttributeLazyLoadingDefaultValues</name>
     <description>JPA project for Spring Boot</description>
 
     <parent>
