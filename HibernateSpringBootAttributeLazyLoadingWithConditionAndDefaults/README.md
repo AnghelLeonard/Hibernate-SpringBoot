@@ -9,7 +9,7 @@
      - annotate the `Author` entity with `@JsonInclude(Include.NON_DEFAULT)` to avoid the serialization of fields with default values (e.g., useful when we set `avatar` to `null`)\
      - in `application.properties`, disable Open Session in View
      
-**Run the following requests (via BookstoreController):**\    
+**Run the following requests (via BookstoreController):**\
      - fetch all authors (for those younger than 25 years the avatar is lazy loaded): `localhost:8080/authors`
 
 **Check as well:**\
