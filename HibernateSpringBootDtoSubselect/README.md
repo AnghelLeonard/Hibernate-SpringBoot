@@ -2,7 +2,7 @@
 
 **Note:** Consider using `@Subselect` only if using DTO + extra queries or map a database view to an entity is not a solution.
 
-**Description:** This application is an example of mapping an entity to a query via Hibernate, `@Subselect`. Mainly, we have two entities in a bidirectional *one-to-many* association. An `Author` has wrote several `Book`. The idea is to write a *read-only* query to fetch from `Author` only some fields (e.g., DTO), but to have the posibility to call `getBooks()` and fetch the `Book` in a lazy manner as well. As you know, a classic DTO cannot be used, since such DTO is not managed and we cannot fetch managed associations. Via Hibernate, `@Subselect` we can map an entity to a query to obtain a *read-only*, *immutable* entity that can follow managed associations. 
+**Description:** This application is an example of mapping an entity to a query via Hibernate, `@Subselect`. Mainly, we have two entities in a bidirectional *one-to-many* association. An `Author` has wrote several `Book`. The idea is to write a *read-only* query to fetch from `Author` only some fields (e.g., DTO), but to have the posibility to call `getBooks()` and fetch the `Book` in a lazy manner as well. As you know, a classic DTO cannot be used, since such DTO is not managed and we cannot fetch managed associations. Via Hibernate, `@Subselect` we can map a *read-only*, *immutable* entity to a query. Being an entity, it can lazy load the managed associations. 
 
 **Key points:**\
      - define a new entity that contains only the needed fields from the `Author` (including association to `Book`)\
