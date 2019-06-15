@@ -18,18 +18,17 @@ public class BookstoreService {
     }
 
     @Transactional(readOnly = true)
-    public void fetchAuthorWithBooksByGenre(String genre) {
+    public void fetchAuthorWithBooksById(long id, String genre) {
 
-        List<AuthorDto> authors = authorDtoRepository.findAll();
-        for (AuthorDto author : authors) {
-            System.out.println("Author: " + author.getName());
+        AuthorDto author = authorDtoRepository.findById(id).orElseThrow();
 
-            if (author.getGenre().equals(genre)) {
-                // lazy loading the books of this author
-                Set<Book> books = author.getBooks();
-                books.forEach((b) -> System.out.println("Book: " 
-                        + b.getTitle() + "(" + b.getIsbn() + ")"));
-            }
+        System.out.println("Author: " + author.getName());
+
+        if (author.getGenre().equals(genre)) {
+            // lazy loading the books of this author
+            Set<Book> books = author.getBooks();
+            books.forEach((b) -> System.out.println("Book: "
+                    + b.getTitle() + "(" + b.getIsbn() + ")"));
         }
     }
 }
