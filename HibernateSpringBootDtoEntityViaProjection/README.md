@@ -4,7 +4,7 @@
 
 **Key points:**\
      - define two related entities (e.g., `Author` and `Book` in a one-to-many lazy bidirectional relationship)\
-     - define the proper Spring projection having `public Author getAuthor()` and `public String getTitle()`\     
+     - define the proper Spring projection having `public Author getAuthor()` and `public String getTitle()`\
      - write a JPQL to fetch data
 
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
