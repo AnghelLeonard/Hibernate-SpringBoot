@@ -1,21 +1,5 @@
-**[JOIN FETCH And DTOs](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch)**
-
-**See also:**\
-     - [How To Avoid LazyInitializationException Via JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinFetch)\
-     - [LEFT JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLeftJoinFetch)\
-     - [JOIN VS. JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinVSJoinFetch)
+**[Avoid Entity In DTO Via Constructor Expression (no association)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAvoidEntityInDtoViaConstructor)**
      
-**Description:** Combining `JOIN FETCH` and DTOs can be done under several constrains. Mainly, the JPQL containing the `JOIN FETCH` cannot be used to fetch only some columns from the involved entities (in such cases, `JOIN` is the proper choice). It must fetch all attributes of the involved entities. 
-
-**Key points:**\
-     - define two related entities (e.g., `Author` and `Book` in a one-to-many lazy bidirectional relationship)\
-     - define the proper DTOs classes (e.g., `BookDto` and `AuthorDto`)\
-     - the `BookDto` and `AuthorDto` may map only the needed columns, but the triggered SQL will fetch all of them anyway\
-     - write a JPQL `JOIN FETCH` to fetch an author including his books
-
-**Constrains:**\
-     - this is ok: `SELECT a FROM Author a JOIN FETCH a.books`\
-     - this is not ok: `SELECT a.age as age FROM Author a JOIN FETCH a.books` -> *org.hibernate.QueryException: query specified join fetching, but the owner of the fetched association was not present in the select list*\
-     - this is not ok: `SELECT a FROM Author a JOIN FETCH a.books.title` ->  *org.hibernate.QueryException: illegal attempt to dereference collection [author0_.id.books] with element property reference [title]*
+**Description:** Let's assume that we have two entities, `Author` and `Book`. There is no materialized association between them, but, both entities shares an attribute named, `genre`. We want to use this attribute to join the tables corresponding to `Author` and `Book`, and fetch the result in a DTO. The result should contain the `Author` entity and only the `title` attribute from `Book`. Well, when you are in a scenario as here, it is strongly advisable to avoid fetching the DTO via *constructor expression*. This approach cannot fetch the data in a single `SELECT`, and is prone to N+1. Way better than this consists of using Spring projections, JPA `Tuple` or even Hibernate `ResultTransformer`. These approaches will fetch the data in a single `SELECT`. This application is a **DON'T DO THIS** example. Check the number of queries needed for fetching the data. In place, do it as here: [Entity Inside Spring Projection (no association)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoEntityViaProjectionNoAssociation).
 
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
