@@ -1,6 +1,6 @@
-package com.app;
+package com.bookstore;
 
-import com.app.service.UserService;
+import com.bookstore.service.BookstoreService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class MainApplication {
 
-    private final UserService userService;
+    private final BookstoreService bookstoreService;
 
-    public MainApplication(UserService userService) {
-        this.userService = userService;
+    public MainApplication(BookstoreService bookstoreService) {
+        this.bookstoreService = bookstoreService;
     }
 
     public static void main(String[] args) {
@@ -23,11 +23,11 @@ public class MainApplication {
     public ApplicationRunner init() {
         return args -> {
 
-            System.out.println("Persist the bad user ...");
-            userService.persistBadUser();
+            System.out.println("Persist good author ...");
+            bookstoreService.persistGoodAuthor();
 
-            System.out.println("\nPersist the good user ...");
-            userService.persistGoodUser();
+            System.out.println("\nPersist bad author ...");
+            bookstoreService.persistBadAuthor();
         };
     }
 }
