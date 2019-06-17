@@ -25,20 +25,11 @@ public class BookstoreService {
         author.setName("Mark Janel");
         author.setGenre("Anthology");
         author.setAge(23);
-
-        SQLStatementCountValidator.reset();
-
+        
         authorRepository.save(author);   // 1 insert
         author.setGenre("History");
         authorRepository.save(author);   // 1 update
-        authorRepository.delete(author); // 1 delete
-
-        // at this point there is no transaction running
-        // a total of 5 statements, not very good
-        assertInsertCount(1);
-        assertUpdateCount(1);
-        assertDeleteCount(1);
-        assertSelectCount(2);
+        authorRepository.delete(author); // 1 delete        
     }
 
     @Transactional

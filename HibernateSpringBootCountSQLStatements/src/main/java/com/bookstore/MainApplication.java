@@ -27,12 +27,18 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            
-            bookstoreService.authorOperationsWithoutTransactional();
-            
-            SQLStatementCountValidator.reset();      
-            bookstoreService.authorOperationsWithTransactional();
 
+            SQLStatementCountValidator.reset();
+            bookstoreService.authorOperationsWithoutTransactional();
+            // at this point there is no transaction running
+            // a total of 5 statements, not very good
+            assertInsertCount(1);
+            assertUpdateCount(1);
+            assertDeleteCount(1);
+            assertSelectCount(2);
+
+            SQLStatementCountValidator.reset();
+            bookstoreService.authorOperationsWithTransactional();
             // allow the transaction to commit
             // a total of 2 statements instead of 5 as in the case of no explicit transaction
             assertInsertCount(1);
