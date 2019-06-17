@@ -1,10 +1,10 @@
-**[How To JOIN FETCH an @ElementCollection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionJoinFetch)**
+**[How To DTO an @ElementCollection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionJoinFetch)**
 
-**Description:** This application is an example applying `JOIN FETCH` to fetch an `@ElementCollection`.
+**Description:** This application is an example fetching a DTO that includes attributes from an `@ElementCollection`.
  
 **Key points:**\
      - by default, `@ElementCollection` is loaded lazy, keep it lazy\
-     - use `JOIN FETCH` in the repository 
+     - use a Spring projection and `JOIN` in the repository 
 
 -------------------------------
 
