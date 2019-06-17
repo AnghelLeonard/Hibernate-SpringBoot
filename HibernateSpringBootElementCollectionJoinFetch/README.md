@@ -4,7 +4,7 @@
 
 **Key points:**\
      - by default, `@ElementCollection` is loaded lazy, keep it lazy\
-     - use `JOIN FETCH` in the repository
+     - use `JOIN FETCH` in the repository 
 
 -------------------------------
 
