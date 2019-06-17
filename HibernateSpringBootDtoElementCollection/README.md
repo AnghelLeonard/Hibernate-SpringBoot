@@ -1,4 +1,4 @@
-**[How To DTO an @ElementCollection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionJoinFetch)**
+**[How To DTO an @ElementCollection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoElementCollection)**
 
 **Description:** This application is an example of fetching a DTO that includes attributes from an `@ElementCollection`.
  
