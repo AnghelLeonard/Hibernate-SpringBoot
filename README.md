@@ -1613,7 +1613,7 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 -----------------------------------------------------------------------------------------------------------------------
 
-106. **[How To DTO an @ElementCollection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionJoinFetch)**
+106. **[How To DTO an @ElementCollection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoElementCollection)**
 
 **Description:** This application is an example of fetching a DTO that includes attributes from an `@ElementCollection`.
  
