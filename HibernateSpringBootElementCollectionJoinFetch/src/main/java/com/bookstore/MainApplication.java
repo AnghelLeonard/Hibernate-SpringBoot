@@ -1,5 +1,7 @@
 package com.bookstore;
 
+import com.bookstore.service.ShoppingCartService;
+import com.bookstore.entity.ShoppingCart;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

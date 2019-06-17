@@ -1,4 +1,4 @@
-package com.bookstore;
+package com.bookstore.entity;
 
 import java.io.Serializable;
 import java.util.ArrayList;

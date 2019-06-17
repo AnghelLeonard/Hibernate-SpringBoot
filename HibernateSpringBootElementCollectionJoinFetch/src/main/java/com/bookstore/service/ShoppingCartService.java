@@ -1,5 +1,7 @@
-package com.bookstore;
+package com.bookstore.service;
 
+import com.bookstore.repository.ShoppingCartRepository;
+import com.bookstore.entity.ShoppingCart;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
