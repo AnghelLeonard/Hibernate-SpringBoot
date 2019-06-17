@@ -2,11 +2,6 @@ package com.bookstore.service;
 
 import com.bookstore.entity.Author;
 import com.bookstore.repository.AuthorRepository;
-import com.vladmihalcea.sql.SQLStatementCountValidator;
-import static com.vladmihalcea.sql.SQLStatementCountValidator.assertDeleteCount;
-import static com.vladmihalcea.sql.SQLStatementCountValidator.assertInsertCount;
-import static com.vladmihalcea.sql.SQLStatementCountValidator.assertSelectCount;
-import static com.vladmihalcea.sql.SQLStatementCountValidator.assertUpdateCount;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,11 +20,11 @@ public class BookstoreService {
         author.setName("Mark Janel");
         author.setGenre("Anthology");
         author.setAge(23);
-        
+
         authorRepository.save(author);   // 1 insert
         author.setGenre("History");
-        authorRepository.save(author);   // 1 update
-        authorRepository.delete(author); // 1 delete        
+        authorRepository.save(author);   // 1 select, 1 update
+        authorRepository.delete(author); // 1 select, 1delete        
     }
 
     @Transactional
