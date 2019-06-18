@@ -447,7 +447,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - the more items we have in this table the greater the performance penalty
      
 **Output example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootElementCollectionNoOrderColumn/sample.png)  
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootElementCollectionNoOrderColumn/%40ElementCollection%20without%20%40OrderColumn.png)  
 
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -462,7 +462,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - the more items are inserted/removed from the beginning of this table the greater the performance penalty
      
 **Output example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootElementCollectionWithOrderColumn/sample.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootElementCollectionWithOrderColumn/%40ElementCollection%20with%20%40OrderColumn.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
