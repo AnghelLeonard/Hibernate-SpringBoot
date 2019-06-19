@@ -976,7 +976,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - in entities, return `this` instead of `void` in setters
 
 **Fluent API example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFluentApiOnSetters/sample.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFluentApiOnSetters/fluent%20entity%20setters.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
