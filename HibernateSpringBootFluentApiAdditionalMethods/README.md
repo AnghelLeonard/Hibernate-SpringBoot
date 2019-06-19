@@ -8,7 +8,7 @@
      - in entities, add for each setter an additional method that return `this` instead of `void`
 
 **Fluent API example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFluentApiAdditionalMethods/sample.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFluentApiAdditionalMethods/fluent%20api%20with%20additional%20methods.png)
 
 -------------------------------
 
