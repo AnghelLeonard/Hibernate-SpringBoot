@@ -1,6 +1,6 @@
-package modern.challenge;
+package com.bookstore;
 
-import modern.challenge.service.BookstoreService;
+import com.bookstore.service.BookstoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
