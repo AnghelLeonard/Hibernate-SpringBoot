@@ -1,4 +1,4 @@
-package modern.challenge.entity;
+package com.bookstore.entity;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -23,7 +23,7 @@ public class Author implements Serializable {
     private Long id;
 
     private String name;
-    private String surname;
+    private String genre;
     private int age;
 
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
@@ -70,12 +70,12 @@ public class Author implements Serializable {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 
     public int getAge() {
@@ -115,6 +115,7 @@ public class Author implements Serializable {
 
     @Override
     public String toString() {
-        return "Author{" + "id=" + id + ", name=" + name + ", surname=" + surname + ", age=" + age + '}';
-    }        
+        return "Author{" + "id=" + id + ", name=" + name
+                + ", genre=" + genre + ", age=" + age + '}';
+    }
 }

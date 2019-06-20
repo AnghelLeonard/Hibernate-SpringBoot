@@ -1,6 +1,6 @@
-package modern.challenge;
+package com.bookstore;
 
-import modern.challenge.service.BookstoreService;
+import com.bookstore.service.BookstoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,14 +20,7 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            System.out.println("Register new author ...");
-            bookstoreService.registerAuthor();
-            
-            System.out.println("Display authors ...");
-            bookstoreService.displayAuthors();
-            
-            System.out.println("Display books ...");
-            bookstoreService.displayBooks();                      
+            bookstoreService.addAuthorsWithBooks();
         };
     }
 }
