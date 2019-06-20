@@ -245,7 +245,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - use `orphanRemoval` on parent in order to remove children without references\
      - use helper methods on parent to keep both sides of the association in sync\
      - use lazy fetch\
-     - use a natural/business key or use entity identifier and override `equlas()` and `hashCode()` as [here](https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/)         
+     - use a natural/business key or use entity generated identifier and override `equals()` and `hashCode()` as [here](https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/)         
 
 -----------------------------------------------------------------------------------------------------------------------    
 
