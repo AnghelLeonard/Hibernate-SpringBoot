@@ -11,4 +11,15 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     @Transactional(readOnly = true)
     Optional<Author> findByName(String name);
+
+    /*
+    @Query("SELECT a FROM Author a WHERE a.name=?1")
+    Optional<Author> fetchByName(String name);
+    
+    @Query("SELECT a.genre FROM Author a WHERE a.name=?1")
+    Optional<String> fetchGenreByName(String name);
+    
+    @Query(value="SELECT a.genre FROM author a WHERE a.name=?1", nativeQuery=true)
+    Optional<String> fetchGenreByNameNative(String name);
+     */
 }
