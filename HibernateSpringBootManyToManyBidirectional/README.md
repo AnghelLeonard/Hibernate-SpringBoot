@@ -7,9 +7,9 @@
      - choose and set the owner of the relationship via `mappedBy`\    
      - use `Set` not `List`\
      - use helper methods on the owner of the relationship to keep both sides of the association in sync\
-     - on the owner of the relationship use `CascadeType.PERSIST` and `CascadeType.MERGE, but avoid `CascadeType.REMOVE`\
+     - on the owner of the relationship use `CascadeType.PERSIST` and `CascadeType.MERGE`, but avoid `CascadeType.REMOVE`\
      - on the owner of the relationship set up join table columns\
-     - `@ManyToMany`is lazy by default; keep it this way!\
+     - `@ManyToMany` is lazy by default; keep it this way!\
      - use a natural/business key or use generated entity identifier and override `equals()` and `hashCode()` as [here](https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/)\
      - if `toString()` need to be overridden, then pay attention to involve only for the basic attributes fetched when the entity is loaded from the database
           
