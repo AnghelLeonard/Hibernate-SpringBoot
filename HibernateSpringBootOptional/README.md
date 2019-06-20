@@ -1,5 +1,5 @@
 **[Use Java 8 Optional in Entities and Queries](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOptional)**
-
+ 
 **Description:** This application is an example of how is correct to use the Java 8 `Optional` in entities and queries. 
 
 **Key points:**\
