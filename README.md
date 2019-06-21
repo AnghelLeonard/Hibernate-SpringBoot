@@ -688,7 +688,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - on the owner of the relationship use `CascadeType.PERSIST` and `CascadeType.MERGE`, but avoid `CascadeType.REMOVE/ALL`\
      - on the owner of the relationship set up join table\
      - `@ManyToMany` is lazy by default; keep it this way!\
-     - use a natural/business key or use generated entity identifier and override `equals()` and `hashCode()` as [here](https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/)\
+     - as entities identifiers, use assigned identifiers (business key, natural key (`@NaturalId`)) and/or database-generated identifiers and override properly the `equals()` and `hashCode()` methods as [here](https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/)\
      - if `toString()` need to be overridden, then pay attention to involve only for the basic attributes fetched when the entity is loaded from the database
      
 -----------------------------------------------------------------------------------------------------------------------    
