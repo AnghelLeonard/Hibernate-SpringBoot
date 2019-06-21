@@ -44,8 +44,8 @@ public class BookstoreService {
         oneDay.setTitle("One Day");
 
         BookList headDown = new BookList();
-        oneDay.setIsbn("001-AT");
-        oneDay.setTitle("Head Down");
+        headDown.setIsbn("001-AT");
+        headDown.setTitle("Head Down");
 
         alicia.addBook(bookOfSwords);
         mark.addBook(bookOfSwords);
@@ -85,8 +85,8 @@ public class BookstoreService {
         oneDay.setTitle("One Day");
 
         BookSet headDown = new BookSet();
-        oneDay.setIsbn("001-AT");
-        oneDay.setTitle("Head Down");
+        headDown.setIsbn("001-AT");
+        headDown.setTitle("Head Down");
 
         alicia.addBook(bookOfSwords);
         mark.addBook(bookOfSwords);
