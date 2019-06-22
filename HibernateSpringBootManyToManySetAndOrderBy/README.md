@@ -1,6 +1,6 @@
 **[Fetch @ManyToMany Association Via Ordered Set](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManySetAndOrderBy)**
 
-**Description:** In case of `@ManyToMany` association, we always should rely on `Set` (not on `List`) for mapping the child entities as a collection. Why? Well, please see [Prefer Set Instead of List in @ManyToMany Relationships](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManyBidirectionalListVsSet). But, is well-known that `Set` doesn't preserve the order of elements. This application relies in `@OrderBy` for sorting the result set in memory (`HashSet`), after feching it from the database.
+**Description:** In case of `@ManyToMany` association, we always should rely on `Set` (not on `List`) for mapping the child entities as a collection. Why? Well, please see [Prefer Set Instead of List in @ManyToMany Relationships](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManyBidirectionalListVsSet). But, is well-known that `HashSet` doesn't preserve the order of elements. This application relies in `@OrderBy` for sorting the result set in memory, after feching it from the database.
 
 **Key points:**\
      - sorting the result set in memory can be done via `@OrderBy`\
