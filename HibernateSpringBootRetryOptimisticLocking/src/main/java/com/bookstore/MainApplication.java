@@ -1,5 +1,6 @@
-package com.jpa;
+package com.bookstore;
 
+import com.bookstore.service.InventoryService;
 import com.vladmihalcea.concurrent.aop.OptimisticConcurrencyControlAspect;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,16 +12,16 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 @Configuration
 @EnableAspectJAutoProxy
 @SpringBootApplication
-public class RetryOptimisticLockApplication {
+public class MainApplication {
 
     private final InventoryService inventoryService;
 
-    public RetryOptimisticLockApplication(InventoryService inventoryService) {
+    public MainApplication(InventoryService inventoryService) {
         this.inventoryService = inventoryService;
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(RetryOptimisticLockApplication.class, args);
+        SpringApplication.run(MainApplication.class, args);
     }
 
     @Bean
@@ -32,12 +33,7 @@ public class RetryOptimisticLockApplication {
     public ApplicationRunner init() {
         return args -> {
 
-            Inventory firstInventory = inventoryService.firstTransactionFetchAndReturn();
-            
-            inventoryService.secondTransactionFetchAndUpdate();
-            
-            firstInventory.setQuantity(firstInventory.getQuantity() - 1);
-            inventoryService.thirdTransactionIsReattachingAndResultsInOLE(firstInventory);
+            inventoryService.forceOptimisticLockException();
         };
     }
 }
