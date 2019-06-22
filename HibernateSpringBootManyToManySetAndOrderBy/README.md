@@ -7,6 +7,6 @@
      - this works with `HashSet`, but doesn't provide consistency over all transition states (e.g., over transient state)\
      - for consistency over transient state as well, consider `LinkedHashSet` instead of `HashSet`
 
-**Note:**\ Alternatively, we can use `@OrderColumn`. This gets materialized in an additional column in the junction table. This is needed for maintaining a permanent ordering of the related data.
+**Note:**\Alternatively, we can use `@OrderColumn`. This gets materialized in an additional column in the junction table. This is needed for maintaining a permanent ordering of the related data.
 
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
