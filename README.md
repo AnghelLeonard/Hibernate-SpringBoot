@@ -1635,7 +1635,7 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 This application uses two entities, `Author` and `Book`, involved in a lazy bidirectional many-to-many relationship. First, we fetch a `Book` by title. Further, we call `getAuthors()` to fetch the authors of this book. The fetched authors are ordered descending by name. The ordering is done by the database as a result of adding `@OrderBy("name DESC")`, and is preserved by Hibernate.
 
 **Key points:**\
-     - ask the database to handle ordering via `@OrderBy`\
+     - ask the database to handle ordering and Hibernate to preserve this order via `@OrderBy`\
      - this works with `HashSet`, but doesn't provide consistency over all transition states (e.g., over transient state)\
      - for consistency over transient state as well, consider using explicitly `LinkedHashSet` instead of `HashSet`
 
