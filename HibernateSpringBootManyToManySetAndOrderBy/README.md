@@ -7,7 +7,7 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
 **Key points:**\
      - ask the database to handle ordering via `@OrderBy`\
      - this works with `HashSet`, but doesn't provide consistency over all transition states (e.g., over transient state)\
-     - for consistency over transient state as well, consider using `LinkedHashSet` instead of `HashSet`
+     - for consistency over transient state as well, consider using explicitly `LinkedHashSet` instead of `HashSet`
 
 **Note:** Alternatively, we can use `@OrderColumn`. This gets materialized in an additional column in the junction table. This is needed for maintaining a permanent ordering of the related data.
 
