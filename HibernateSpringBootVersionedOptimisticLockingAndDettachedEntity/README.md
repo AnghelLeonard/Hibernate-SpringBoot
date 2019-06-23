@@ -4,7 +4,7 @@
 
 **Key points:**\
      - in a transaction, fetch an entity via `findById(1L)`; commit transaction and close the persistence context\
-     - in a second transaction, fetch an another entity via `findById(1L)` and update it; commit the transaction and close the persistence context\
+     - in a second transaction, fetch another entity via `findById(1L)` and update it; commit the transaction and close the persistence context\
      - outside transactional context, update the detached entity (fetched in the first transaction)\
      - in a third transaction, call `save()` and pass to it the detached entity; trying to re-attach (`EntityManager.merge()`) the entity will end up in an optimistic locking exception since the version of the detached and just loaded entity don't match
 
