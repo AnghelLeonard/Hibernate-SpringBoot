@@ -24,7 +24,7 @@ public class MainApplication {
 
     @Bean
     public OptimisticConcurrencyControlAspect optimisticConcurrencyControlAspect() {
-        return new com.vladmihalcea.concurrent.aop.OptimisticConcurrencyControlAspect();
+        return new OptimisticConcurrencyControlAspect();
     }
     
     @Bean
