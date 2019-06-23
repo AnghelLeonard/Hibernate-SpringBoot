@@ -54,7 +54,7 @@ public class InventoryService {
             entityManager.merge(firstInventory);
 
             entityTransaction.commit();
-            logger.info("Third transaction committed successfully...");
+            logger.info("Second transaction committed successfully...");
         } catch (RuntimeException e) {
 
             if (entityTransaction != null && entityTransaction.isActive()) {
