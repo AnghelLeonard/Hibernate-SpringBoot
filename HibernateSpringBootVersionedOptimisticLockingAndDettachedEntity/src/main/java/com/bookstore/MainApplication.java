@@ -24,11 +24,16 @@ public class MainApplication {
     public ApplicationRunner init() {
         return args -> {
 
-            Inventory firstInventory = inventoryService.firstTransactionFetchAndReturn();
-
+            System.out.println("Triggering the first transaction ...");
+            Inventory firstInventory = inventoryService.firstTransactionFetchesAndReturn();
+            System.out.println("First transaction committed successfully ..."); 
+            
             // AT THIS POINT, THE firstInventory IS DETACHED
             firstInventory.setQuantity(firstInventory.getQuantity() - 1);
-            inventoryService.secondTransactionMergesInventory(firstInventory);
+            
+            System.out.println("Triggering the second transaction ...");
+            inventoryService.secondTransactionMergesAndUpdates(firstInventory);
+            System.out.println("Second transaction committed successfully ..."); 
         };
     }
 }

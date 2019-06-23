@@ -1,67 +1,26 @@
 package com.bookstore.service;
 
 import com.bookstore.entity.Inventory;
-import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import org.springframework.context.ApplicationContext;
+import com.bookstore.repository.InventoryRepository;
+import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
 public class InventoryService {
 
-    private final ApplicationContext applicationContext;
+    private final InventoryRepository inventoryRepository;
 
-    public InventoryService(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
+    public InventoryService(InventoryRepository inventoryRepository) {
+        this.inventoryRepository = inventoryRepository;
     }
 
-    private static final Logger logger = Logger.getLogger(InventoryService.class.getName());
-
-    public Inventory firstTransactionFetchAndReturn() {
-
-        EntityManagerFactory entityManagerFactory
-                = applicationContext.getBean(EntityManagerFactory.class);
-
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        EntityTransaction entityTransaction = entityManager.getTransaction();
-
-        logger.info("First transaction fetches entity and return ...");
-        entityTransaction.begin();
-
-        Inventory firstInventory = entityManager.find(Inventory.class, 1L);
-
-        entityTransaction.commit();
-        logger.info("First transaction committed successfully...");
+    public Inventory firstTransactionFetchesAndReturn() {
+        Inventory firstInventory = inventoryRepository.findById(1L).orElseThrow();
 
         return firstInventory;
-    }
+    }       
 
-    public void secondTransactionMergesInventory(Inventory firstInventory) {
-
-        EntityManagerFactory entityManagerFactory
-                = applicationContext.getBean(EntityManagerFactory.class);
-
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-
-        EntityTransaction entityTransaction = entityManager.getTransaction();
-
-        try {
-            logger.info("Second transaction merges the detached entity ...");
-            entityTransaction.begin();
-
-            entityManager.merge(firstInventory);
-
-            entityTransaction.commit();
-            logger.info("Second transaction committed successfully...");
-        } catch (RuntimeException e) {
-
-            if (entityTransaction != null && entityTransaction.isActive()) {
-                entityTransaction.rollback();
-            }
-
-            throw (e);
-        }
+    public void secondTransactionMergesAndUpdates(Inventory firstInventory) {        
+        inventoryRepository.save(firstInventory); // calls EntityManager#merge() behind the scene                
     }
 }
