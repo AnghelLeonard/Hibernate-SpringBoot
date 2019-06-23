@@ -8,8 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
-@EnableAspectJAutoProxy
 @SpringBootApplication
+@EnableAspectJAutoProxy
 public class MainApplication {
 
     private final InventoryService inventoryService;
