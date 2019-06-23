@@ -1266,17 +1266,17 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-82. **[How To Retry Transactions After OptimisticLockException Shaped Via Hibernate Versionless Optimistic Locking](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootVersionlessOptimisticLocking)**
+82. **[How To Retry Transaction After OptimisticLockException Shaped Via Hibernate Version-less Optimistic Locking](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionlessOptimisticLocking)**
 
-**Note:** Optimistic locking via Hibernate versionless doesn't work for detached entities (don't close the persistent context).
+**Note:** Optimistic locking via Hibernate version-less doesn't work for detached entities (don't close the persistent context).
 
-**Description:** This is a Spring Boot application that simulates a scenario that leads to an `OptimisticLockException` via Hibernate versionless optimistic locking. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
+**Description:** This is a Spring Boot application that simulates a scenario that leads to an `OptimisticLockException` via Hibernate version-less optimistic locking. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
 
 **Key points:**\
-     - in pom.xml, add the db-util dependency\
-     - Configure the `OptimisticConcurrencyControlAspect` bean\
-     - Annotate the corresponding entity (e.g., `Inventory`) with `@DynamicUpdate` and `@OptimisticLocking(type = OptimisticLockType.DIRTY)` - more details in my book, ["Java Persistence Performance Illustrated Guide"](https://leanpub.com/java-persistence-performance-illustrated-guide)\
-     - Mark the method that is prone to throw `OptimisticLockException` with `@Retry(times = 10, on = OptimisticLockException.class)`
+     - in `pom.xml`, add the `db-util` library dependency\
+     - configure the `OptimisticConcurrencyControlAspect` bean\
+     - annotate the corresponding entity (e.g., `Inventory`) with `@DynamicUpdate` and `@OptimisticLocking(type = OptimisticLockType.DIRTY)`\
+     - mark the method that is prone to throw `OptimisticLockException` with `@Retry(times = 10, on = OptimisticLockException.class)`
 
 -----------------------------------------------------------------------------------------------------------------------    
 
