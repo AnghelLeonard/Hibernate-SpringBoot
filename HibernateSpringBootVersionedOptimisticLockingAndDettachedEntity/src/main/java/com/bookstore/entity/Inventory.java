@@ -1,4 +1,4 @@
-package com.bookstore;
+package com.bookstore.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -13,11 +13,11 @@ public class Inventory implements Serializable {
     @Id
     private Long id;
 
-    private String name;
+    private String title;
     private int quantity;
-    
+
     @Version
-    private long version;    
+    private Short version;
 
     public Long getId() {
         return id;
@@ -27,12 +27,12 @@ public class Inventory implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getQuantity() {
@@ -43,13 +43,8 @@ public class Inventory implements Serializable {
         this.quantity = quantity;
     }
 
-    public long getVersion() {
+    public Short getVersion() {
         return version;
-    }        
-/////////////////
-    public void setVersion(long version) {
-        this.version = version;
     }
-    
-    
+
 }

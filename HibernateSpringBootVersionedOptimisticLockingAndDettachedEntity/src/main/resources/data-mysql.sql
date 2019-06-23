@@ -1,1 +1,1 @@
-INSERT INTO `db_inventory`.`inventory` (`id`, `name`, `quantity`, `version`) VALUES ('1', 't-shirt', 10, 0);
+INSERT INTO inventory (id, title, quantity, version) VALUES ("1", "A People's History", 10, 0);
