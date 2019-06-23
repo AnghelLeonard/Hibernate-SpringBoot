@@ -19,8 +19,17 @@ public class InventoryService {
 
         return firstInventory;
     }       
+    
+    @Transactional
+    public void secondTransactionFetchesAndReturn() {
+        Inventory secondInventory = inventoryRepository.findById(1L).orElseThrow();
 
-    public void secondTransactionMergesAndUpdates(Inventory firstInventory) {        
-        inventoryRepository.save(firstInventory); // calls EntityManager#merge() behind the scene                
+        secondInventory.setQuantity(secondInventory.getQuantity() - 1);
+    }
+
+    public void thirdTransactionMergesAndUpdates(Inventory firstInventory) {        
+        inventoryRepository.save(firstInventory); // calls EntityManager#merge() behind the scene    
+        
+        // this ends up in optimistic locking exception
     }
 }
