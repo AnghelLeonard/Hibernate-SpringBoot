@@ -8,7 +8,7 @@
 **Key points:**\
      - in `pom.xml`, add the `db-util` dependency\
      - configure the `OptimisticConcurrencyControlAspect` bean\
-     - mark the method (not annotated with `@Transactional`) that is prone to throw (or call a method that may throw) an optimistic locking exception with `@Retry(times = 10, on = OptimisticLockingFailureException.class)`
+     - mark the method (not annotated with `@Transactional`) that is prone to throw (or call a method that is prone to throw) an optimistic locking exception with `@Retry(times = 10, on = OptimisticLockingFailureException.class)`
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootRetryVersionedOptimisticLocking/Retry%20Optimistic%20Lock.png)
