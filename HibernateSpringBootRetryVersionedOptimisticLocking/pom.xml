@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jpa</groupId>
-    <artifactId>HibernateSpringBootRetryOptimisticLocking</artifactId>
+    <artifactId>HibernateSpringBootRetryVersionedOptimisticLocking</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
  
-    <name>HibernateSpringBootRetryOptimisticLocking</name>
+    <name>HibernateSpringBootRetryVersionedOptimisticLocking</name>
     <description>JPA project for Spring Boot</description>
 
     <parent>

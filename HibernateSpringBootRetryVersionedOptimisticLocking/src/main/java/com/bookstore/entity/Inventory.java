@@ -15,9 +15,9 @@ public class Inventory implements Serializable {
 
     private String title;
     private int quantity;
-    
+
     @Version
-    private Short version;    
+    private Short version;
 
     public Long getId() {
         return id;
@@ -33,7 +33,7 @@ public class Inventory implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }    
+    }
 
     public int getQuantity() {
         return quantity;
@@ -45,5 +45,5 @@ public class Inventory implements Serializable {
 
     public Short getVersion() {
         return version;
-    }        
+    }
 }
