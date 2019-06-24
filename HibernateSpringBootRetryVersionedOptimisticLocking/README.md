@@ -11,7 +11,7 @@
      - Mark the method that is prone to throw an optimistic locking exception with `@Retry(times = 10, on = OptimisticLockingFailureException.class)`
 
 **Output sample:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootRetryOptimisticLocking/Retry%20Optimistic%20Lock.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootRetryVersionedOptimisticLocking/Retry%20Optimistic%20Lock.png)
 
 -------------------------------
 
