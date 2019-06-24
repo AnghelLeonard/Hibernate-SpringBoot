@@ -3,7 +3,7 @@
 
 **Note:** Optimistic locking via `@Version` works for detached entities as well.
 
-**Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic Locking exception. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
+**Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic locking exception. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
 
 **Key points:**\
      - in `pom.xml`, add the `db-util` dependency\
