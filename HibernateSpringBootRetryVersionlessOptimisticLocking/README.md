@@ -2,7 +2,7 @@
 
 **Note:** Optimistic locking via Hibernate version-less doesn't work for detached entities (don't close the persistent context).
 
-**Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic Locking exception (e.g., in Spring Boot, `OptimisticLockingFailureException`) via Hibernate version-less optimistic locking. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
+**Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic locking exception (e.g., in Spring Boot, `OptimisticLockingFailureException`) via Hibernate version-less optimistic locking. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
 
 **Key points:**\
      - in `pom.xml`, add the `db-util` library dependency\
