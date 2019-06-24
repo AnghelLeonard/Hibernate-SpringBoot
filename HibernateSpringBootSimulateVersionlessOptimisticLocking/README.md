@@ -5,7 +5,7 @@
 **Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic lock exception. So, running the application should end up with a Spring specific `ObjectOptimisticLockingFailureException` exception.
 
 **Key points:**\
-     - set up version-less optimistic lcocking mechanism\
+     - set up version-less optimistic locking mechanism\
      - rely on two concurrent threads that call the same a `@Transactional` method used for updating data
 
 -------------------------------
