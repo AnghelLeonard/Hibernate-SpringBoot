@@ -3,12 +3,12 @@
 
 **Note:** Optimistic locking via `@Version` works for detached entities as well.
 
-**Description:** This is a Spring Boot application that simulates a scenario that leads to an `OptimisticLockException`. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
+**Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic locking exception. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
 
 **Key points:**\
      - in `pom.xml`, add the `db-util` dependency\
      - Configure the `OptimisticConcurrencyControlAspect` bean\
-     - Mark the method that is prone to throw `OptimisticLockException` with `@Retry(times = 10, on = OptimisticLockException.class)`
+     - Mark the method that is prone to throw an optimistic locking exception with `@Retry(times = 10, on = OptimisticLockingFailureException.class)`
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootRetryOptimisticLocking/Retry%20Optimistic%20Lock.png)
