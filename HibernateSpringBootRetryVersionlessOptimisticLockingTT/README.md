@@ -1,6 +1,6 @@
-**[How To Retry Transaction Via TransactionTemplate After OptimisticLockException Shaped Via @Version](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionedOptimisticLockingTT)**
+**[How To Retry Transaction Via TransactionTemplate After OptimisticLockException Shaped Via @Version](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionlessOptimisticLockingTT)**
 
-**Note:** Optimistic locking via `@Version` works for detached entities as well.
+**Note:** Version-less optimistic locking doesn't work for detached entities (do not close the persistence context).
 
 **Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic locking exception. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
 
