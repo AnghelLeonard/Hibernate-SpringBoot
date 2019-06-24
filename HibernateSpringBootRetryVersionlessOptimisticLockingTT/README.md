@@ -1,4 +1,4 @@
-**[How To Retry Transaction Via TransactionTemplate After OptimisticLockException Shaped Via @Version](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionlessOptimisticLockingTT)**
+**[How To Retry Transaction Via TransactionTemplate After OptimisticLockException Shaped Via Version-less Optimistic Locking](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionlessOptimisticLockingTT)**
 
 **Note:** Version-less optimistic locking doesn't work for detached entities (do not close the persistence context).
 
