@@ -2,11 +2,11 @@
 
 **Note:** Version-less optimistic locking doesn't work for detached entities (do not close the persistence context).
 
-**Description:** This is a Spring Boot application that simulates a scenario that leads to an `OptimisticLockException`. So, running the application should end up with an Spring specific `ObjectOptimisticLockingFailureException` exception.
+**Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic lock exception. So, running the application should end up with a Spring specific `ObjectOptimisticLockingFailureException` exception.
 
 **Key points:**\
      - set up version-less optimistic lcocking mechanism\
-     - run a `@Transactional` method from two threads trying to update the same data
+     - rely on two concurrent threads that call the same a `@Transactional` method used for updating data
 
 -------------------------------
 
