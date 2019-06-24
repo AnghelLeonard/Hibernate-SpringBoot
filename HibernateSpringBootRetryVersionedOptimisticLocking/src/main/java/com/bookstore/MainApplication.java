@@ -39,7 +39,7 @@ public class MainApplication {
             ExecutorService executor = Executors.newFixedThreadPool(2);
             executor.execute(bookstoreService);
             // Thread.sleep(2000); -> adding a sleep here will break the transactions concurrency
-            executor.execute(bookstoreService);
+            executor.execute(bookstoreService); 
 
             executor.shutdown();
             try {
