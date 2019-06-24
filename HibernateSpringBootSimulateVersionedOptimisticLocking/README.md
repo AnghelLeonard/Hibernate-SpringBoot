@@ -2,10 +2,11 @@
 
 **Note:** Optimistic locking via `@Version` works for detached entities as well.
 
-**Description:** This is a Spring Boot application that simulates a scenario that leads to an `OptimisticLockException`. So, running the application should end up with an Spring specific `ObjectOptimisticLockingFailureException` exception.
+**Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic lock exception. So, running the application should end up with a Spring specific `ObjectOptimisticLockingFailureException` exception.
 
 **Key points:**\
-     - run a `@Transactional` method from two threads trying to update the same data
+     - set up versioned optimistic locking mechanism\
+     - rely on two concurrent threads that call the same a `@Transactional` method used for updating data
 
 -------------------------------
 
