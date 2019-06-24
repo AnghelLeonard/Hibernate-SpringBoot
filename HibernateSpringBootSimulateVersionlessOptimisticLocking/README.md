@@ -1,6 +1,6 @@
 **[How To Simulate Version-less OptimisticLockException](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSimulateVersionlessOptimisticLocking)**
 
-**Note:** Version-less optimistic locking doen't work for detached entities (do not close the persistence context).
+**Note:** Version-less optimistic locking doesn't work for detached entities (do not close the persistence context).
 
 **Description:** This is a Spring Boot application that simulates a scenario that leads to an `OptimisticLockException`. So, running the application should end up with an Spring specific `ObjectOptimisticLockingFailureException` exception.
 
