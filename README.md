@@ -1659,10 +1659,11 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
 
 **Note:** Optimistic locking via `@Version` works for detached entities as well.
 
-**Description:** This is a Spring Boot application that simulates a scenario that leads to an `OptimisticLockException`. So, running the application should end up with an Spring specific `ObjectOptimisticLockingFailureException` exception.
+**Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic lock exception. So, running the application should end up with a Spring specific `ObjectOptimisticLockingFailureException` exception.
 
 **Key points:**\
-     - run a `@Transactional` method from two threads trying to update the same data
+     - set up versioned optimistic locking mechanism\
+     - rely on two concurrent threads that call the same a `@Transactional` method used for updating data
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -1676,3 +1677,15 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
      - in `pom.xml`, add the `db-util` dependency\
      - configure the `OptimisticConcurrencyControlAspect` bean\
      - rely on `TransactionTemplate`
+
+-----------------------------------------------------------------------------------------------------------------------
+
+111. **[How To Simulate Version-less OptimisticLockException](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSimulateVersionlessOptimisticLocking)**
+
+**Note:** Version-less optimistic locking doesn't work for detached entities (do not close the persistence context).
+
+**Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic lock exception. So, running the application should end up with a Spring specific `ObjectOptimisticLockingFailureException` exception.
+
+**Key points:**\
+     - set up version-less optimistic locking mechanism\
+     - rely on two concurrent threads that call the same a `@Transactional` method used for updating data
