@@ -12,6 +12,9 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class MainApplication {
 
+    // Running the application should result in 
+    // org.springframework.orm.ObjectOptimisticLockingFailureException
+    
     private final InventoryService inventoryService;
 
     public MainApplication(InventoryService inventoryService) {
