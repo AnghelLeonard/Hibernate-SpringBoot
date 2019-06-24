@@ -1,4 +1,4 @@
-**[How To Simulate OptimisticLockException Shaped Via @Version](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSimulateVersionedOptimisticLocking)**
+**[How To Simulate Version-less OptimisticLockException](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSimulateVersionlessOptimisticLocking)**
 
 **Note:** Version-less optimistic locking doen't work for detached entities (do not close the persistence context).
 
