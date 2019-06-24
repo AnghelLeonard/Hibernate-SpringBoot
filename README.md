@@ -1652,3 +1652,14 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
      - in a second transaction, fetch another entity via `findById(1L)` and update it; commit the transaction and close the persistence context\
      - outside transactional context, update the detached entity (fetched in the first transaction)\
      - in a third transaction, call `save()` and pass to it the detached entity; trying to re-attach (`EntityManager.merge()`) the entity will end up in an optimistic locking exception since the version of the detached and just loaded entity don't match
+
+-----------------------------------------------------------------------------------------------------------------------
+
+109. **[How To Simulate OptimisticLockException Shaped Via @Version](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSimulateVersionedOptimisticLocking)**
+
+**Note:** Optimistic locking via `@Version` works for detached entities as well.
+
+**Description:** This is a Spring Boot application that simulates a scenario that leads to an `OptimisticLockException`. So, running the application should end up with an Spring specific `ObjectOptimisticLockingFailureException` exception.
+
+**Key points:**\
+     - run a `@Transactional` method from two threads trying to update the same data
