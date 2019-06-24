@@ -1270,13 +1270,13 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 **Note:** Optimistic locking via Hibernate version-less doesn't work for detached entities (don't close the persistent context).
 
-**Description:** This is a Spring Boot application that simulates a scenario that leads to an `OptimisticLockException` via Hibernate version-less optimistic locking. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
+**Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic locking exception (e.g., in Spring Boot, `OptimisticLockingFailureException`) via Hibernate version-less optimistic locking. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
 
 **Key points:**\
      - in `pom.xml`, add the `db-util` library dependency\
      - configure the `OptimisticConcurrencyControlAspect` bean\
      - annotate the corresponding entity (e.g., `Inventory`) with `@DynamicUpdate` and `@OptimisticLocking(type = OptimisticLockType.DIRTY)`\
-     - mark the method that is prone to throw `OptimisticLockException` with `@Retry(times = 10, on = OptimisticLockException.class)`
+     - mark the method (not annotated with `@Transactional`) that is prone to throw (or that calls a method that is prone to throw (this method can be annotated with `@Transactional`)) an optimistic locking exception with `@Retry(times = 10, on = OptimisticLockingFailureException.class)`
 
 -----------------------------------------------------------------------------------------------------------------------    
 
