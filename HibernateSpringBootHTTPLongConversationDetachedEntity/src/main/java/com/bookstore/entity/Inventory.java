@@ -1,6 +1,5 @@
 package com.bookstore.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +25,7 @@ public class Inventory implements Serializable {
     private int quantity;
     
     @Version
-    private Short version;
+    private short version;
 
     public Long getId() {
         return id;
@@ -52,7 +51,7 @@ public class Inventory implements Serializable {
         this.quantity = quantity;
     }
 
-    public Short getVersion() {
+    public short getVersion() {
         return version;
     }
 
