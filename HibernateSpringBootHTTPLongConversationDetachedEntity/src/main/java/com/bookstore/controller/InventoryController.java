@@ -22,7 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class InventoryController {
 
     protected static final String INVENTORY_ATTR = "inventory";
-    static final String BINDING_RESULT = "org.springframework.validation.BindingResult." + INVENTORY_ATTR;
+    private static final String BINDING_RESULT = "org.springframework.validation.BindingResult." + INVENTORY_ATTR;
 
     private final InventoryService inventoryService;
 
