@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Inventory</title>        
+    </head>
+    <body>        
+        <p><a href="/load/1">Load inventory of title: 'A People's History'</a></p>
+        <div>            
+            <div th:if="${inventory != null}">             
+                <p th:text = "'Id: ' + ${inventory.id}"/>
+                <p th:text = "'Title: ' + ${inventory.title}"/>
+                <p th:text = "'Version: ' + ${inventory.version}"/>
+                <hr/>
+                <form action="#" th:action="@{/update}" th:object="${inventory}" method="post">
+                    <div th:object="${inventory}" th:remove="tag">
+                        <p th:if="${#fields.hasErrors('global')}" th:errors="*{global}"/>                            
+                    </div>
+                    <label for="quantity">In stock: </label>
+                    <input id="quantity" type="text" th:field="*{quantity}" placeholder="Stock"/>
+                    <span th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}"></span>                     
+                    <input type="submit" value="Update inventory"/> 
+
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                </form>                
+            </div>
+        </div>
+    </body>
+</html>

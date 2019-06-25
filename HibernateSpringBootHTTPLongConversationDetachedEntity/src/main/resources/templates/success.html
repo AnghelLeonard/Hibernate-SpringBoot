@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Inventory</title>        
+    </head>
+    <body>        
+        <div> Inventory was successfully updated ... </div>        
+        <p th:text = "'Id: ' + ${updatedInventory.id}"/>
+        <p th:text = "'Title: ' + ${updatedInventory.title}"/>
+        <p th:text = "'Quantity: ' + ${updatedInventory.quantity}"/>        
+        <p th:text = "'Version: ' + ${updatedInventory.version}"/>        
+    </body>
+</html>
