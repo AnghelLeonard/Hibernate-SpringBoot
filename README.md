@@ -1302,12 +1302,20 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
 
 **Key points:**\
      - define a Spring Data classic repository (e.g., `AuthorRepository`)\
-     - write query methods respecting the query creation mechanism for JPA naming conventions\
-     - populate the database with some records, in this case via, `data-mysql.sql` file\
-     - run the queries and check the output sample below
+     - write query methods respecting the query creation mechanism for JPA naming conventions     
 
-**Output example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLimitResultSizeViaQueryCreator/query%20creation%20for%20limiting%20result%20size.png)
+**Examples:**\
+    - `List<Author> findFirst5ByAge(int age);`\
+    - `List<Author> findFirst5ByAgeGreaterThanEqual(int age);`\
+    - `List<Author> findFirst5ByAgeLessThan(int age);`\
+    - `List<Author> findFirst5ByAgeOrderByNameDesc(int age);`\
+    - `List<Author> findFirst5ByGenreOrderByAgeAsc(String genre);`\
+    - `List<Author> findFirst5ByAgeGreaterThanEqualOrderByNameAsc(int age);`\
+    - `List<Author> findFirst5ByGenreAndAgeLessThanOrderByNameDesc(String genre, int age);`\
+    - `List<AuthorDto> findFirst5ByOrderByAgeAsc();`
+    
+**The list of supported keywords is listed below:**
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLimitResultSizeViaQueryCreator/supported%20keywords%20inside%20method%20names.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
