@@ -12,17 +12,20 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
-    List<Author> findTop5ByAge(int age);
-
-    List<Author> findFirst5ByAge(int age, Sort sort);
-
-    List<Author> findTop3ByAgeGreaterThanEqual(int age);
-
-    List<Author> findFirst3ByAgeGreaterThan(int age, Sort sort);
-
-    List<Author> findFirst5ByOrderByAgeDesc();
-
-    List<Author> findTop3ByOrderByAgeDesc();
+    List<Author> findFirst5ByAge(int age);
     
-    List<AuthorDto> findTop3ByOrderByAgeAsc();
+    List<Author> findFirst5ByAgeGreaterThanEqual(int age);
+    
+    List<Author> findFirst5ByAgeLessThan(int age);
+
+    List<Author> findFirst5ByAgeOrderByNameDesc(int age);    
+    
+    List<Author> findFirst5ByGenreOrderByAgeAsc(String genre);
+    
+    List<Author> findFirst5ByAgeGreaterThanEqualOrderByNameAsc(int age);
+    
+    List<Author> findFirst5ByGenreAndAgeLessThanOrderByNameDesc(String genre, int age);
+    
+    List<AuthorDto> findFirst5ByOrderByAgeAsc();
+
 }
