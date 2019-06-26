@@ -1,14 +1,10 @@
-**[OneToMany Bidirectional](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToManyBidirectional)**
+**[Filter Association Via Hibernate @Where](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFilterAssociation)**
 
-**Description:** This application is a proof of concept of how is correct to implement the bidirectional `@OneToMany` association. 
+**Note:** Rely on this approach only if you simply cannot use `JOIN FETCH WHERE` or `@NamedEntityGraph`.
+
+**Description:** This application is a sample of using Hibernate `@Where` for filtering associations. 
 
 **Key points:**\
-     - always cascade from parent to child\
-     - use `mappedBy` on the parent\
-     - use `orphanRemoval` on parent in order to remove children without references\
-     - use helper methods on parent to keep both sides of the association in sync\
-     - use lazy fetching on both side of the association\
-     - as entities identifiers, use assigned identifiers (business key, natural key (`@NaturalId`)) and/or database-generated identifiers and override (on child-side) properly the `equals()` and `hashCode()` methods as [here](https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/)\
-     - if `toString()` need to be overridden, then pay attention to involve only for the basic attributes fetched when the entity is loaded from the database
+     - use `@Where(clause = "condition to be met")` in entity (check the `Author` entity)
      
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
