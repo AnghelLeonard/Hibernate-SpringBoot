@@ -1711,14 +1711,14 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
 
 **Key points:**\
      - prepare the entity via `@Version`\
-     - rely on `@SessionAttributes` for storing the detached entities
-     
------------------------------------------------------------------------------------------------------------------------
+     - rely on `@SessionAttributes` for storing the detached entities    
 
-114. **Sample output (check the message caused by optimistic locking exception):**
+**Sample output (check the message caused by optimistic locking exception):**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHTTPLongConversationDetachedEntity/http%20long%20conversations%20detached%20entity%20ole.png)
 
-**[Filter Association Via Hibernate @Where](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFilterAssociation)**
+-----------------------------------------------------------------------------------------------------------------------
+
+114. **[Filter Association Via Hibernate @Where](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFilterAssociation)**
 
 **Note:** Rely on this approach only if you simply cannot use `JOIN FETCH WHERE` or `@NamedEntityGraph`.
 
