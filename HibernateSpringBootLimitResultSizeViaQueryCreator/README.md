@@ -16,6 +16,9 @@
     - `List<Author> findFirst5ByGenreAndAgeLessThanOrderByNameDesc(String genre, int age);`\
     - `List<AuthorDto> findFirst5ByOrderByAgeAsc();`
     
+**The list of supported keywords is listed below:**
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLimitResultSizeViaQueryCreator/supported%20keywords%20inside%20method%20names.png)
+
 -------------------------------
 
 **You may like to try as well:**
