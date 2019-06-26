@@ -1312,7 +1312,7 @@ Params:[(1,0),(2,0),(3,0),(4,0),(5,0),(6,0),(7,0)]\
     - `List<Author> findFirst5ByGenreOrderByAgeAsc(String genre);`\
     - `List<Author> findFirst5ByAgeGreaterThanEqualOrderByNameAsc(int age);`\
     - `List<Author> findFirst5ByGenreAndAgeLessThanOrderByNameDesc(String genre, int age);`\
-    - `List<AuthorDto> findFirst5ByOrderByAgeAsc();`
+    - `List<AuthorDto> findFirst5ByOrderByAgeAsc();`\
     - `Page<Author> queryFirst10ByName(String name, Pageable p);`\
     - `Slice<Author> findFirst10ByName(String name, Pageable p);`
     
