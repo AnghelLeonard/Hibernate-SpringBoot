@@ -7,13 +7,13 @@
      - write query methods respecting the query creation mechanism for JPA naming conventions     
 
 **Examples:**\
-    - `List<Author> findFirst5ByAge(int age);`
-    - `List<Author> findFirst5ByAgeGreaterThanEqual(int age);`
-    - `List<Author> findFirst5ByAgeLessThan(int age);`
-    - `List<Author> findFirst5ByAgeOrderByNameDesc(int age);`
-    - `List<Author> findFirst5ByGenreOrderByAgeAsc(String genre);`
-    - `List<Author> findFirst5ByAgeGreaterThanEqualOrderByNameAsc(int age);`
-    - `List<Author> findFirst5ByGenreAndAgeLessThanOrderByNameDesc(String genre, int age);`
+    - `List<Author> findFirst5ByAge(int age);`\
+    - `List<Author> findFirst5ByAgeGreaterThanEqual(int age);`\
+    - `List<Author> findFirst5ByAgeLessThan(int age);`\
+    - `List<Author> findFirst5ByAgeOrderByNameDesc(int age);`\
+    - `List<Author> findFirst5ByGenreOrderByAgeAsc(String genre);`\
+    - `List<Author> findFirst5ByAgeGreaterThanEqualOrderByNameAsc(int age);`\
+    - `List<Author> findFirst5ByGenreAndAgeLessThanOrderByNameDesc(String genre, int age);`\
     - `List<AuthorDto> findFirst5ByOrderByAgeAsc();`
     
 -------------------------------
