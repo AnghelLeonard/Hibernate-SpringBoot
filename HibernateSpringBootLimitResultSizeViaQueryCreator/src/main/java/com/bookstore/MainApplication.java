@@ -11,38 +11,44 @@ import org.springframework.data.domain.Sort;
 
 @SpringBootApplication
 public class MainApplication {
-    
+
     private final BookstoreService bookstoreService;
-    
+
     public MainApplication(BookstoreService bookstoreService) {
         this.bookstoreService = bookstoreService;
     }
-    
+
     public static void main(String[] args) {
         SpringApplication.run(MainApplication.class, args);
     }
-    
+
     @Bean
     public ApplicationRunner init() {
         return args -> {
             System.out.println("\nTop 5 by age equal to 56: \n"
-                    + bookstoreService.fetchTop5ByAge(56));
-            
+                    + bookstoreService.fetchTop5ByAge(56)
+                    + "\n\n");
+
             System.out.println("\nFirst 5 by age equal with 56 sorted by name: \n"
-                    + bookstoreService.fetchFirst5ByAge(56, new Sort(Sort.Direction.ASC, "name")));
-            
+                    + bookstoreService.fetchFirst5ByAge(56, new Sort(Sort.Direction.ASC, "name"))
+                    + "\n\n");
+
             System.out.println("\nTop 3 by age greater than or equal to 30: \n"
-                    + bookstoreService.fetchTop3ByAgeGreaterThanEqual(30));
-            
+                    + bookstoreService.fetchTop3ByAgeGreaterThanEqual(30)
+                    + "\n\n");
+
             System.out.println("\nFirst 3 by age greater than 40 sorted by name: \n"
-                    + bookstoreService.fetchFirst3ByAgeGreaterThan(40, new Sort(Sort.Direction.ASC, "name")));
-            
+                    + bookstoreService.fetchFirst3ByAgeGreaterThan(40, new Sort(Sort.Direction.ASC, "name"))
+                    + "\n\n");
+
             System.out.println("\nFind first 5 by age desc: \n"
-                    + bookstoreService.fetchFirst5ByOrderByAgeDesc());
-            
+                    + bookstoreService.fetchFirst5ByOrderByAgeDesc()
+                    + "\n\n");
+
             System.out.println("\nFind top 3 by age desc: \n"
-                    + bookstoreService.fetchTop3ByOrderByAgeDesc());
-            
+                    + bookstoreService.fetchTop3ByOrderByAgeDesc()
+                    + "\n\n");
+
             System.out.println("\nFind top 3 by age asc as DTO: \n");
             List<AuthorDto> authors = bookstoreService.fetchTop3ByOrderByAgeAsc();
             authors.forEach(a -> System.out.println("Author:" + a.getName() + ", " + a.getAge()));
