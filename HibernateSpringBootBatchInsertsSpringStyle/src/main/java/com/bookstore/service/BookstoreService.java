@@ -21,7 +21,7 @@ public class BookstoreService {
 
         for (int i = 0; i < 1000; i++) {
             Author author = new Author();
-            author.setId((long) i);
+            author.setId((long) i + 1);
             author.setName("Name_" + i);
             author.setGenre("Genre_" + i);
             author.setAge(18 + i);
