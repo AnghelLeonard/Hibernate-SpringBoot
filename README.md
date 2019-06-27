@@ -6,11 +6,11 @@
 
 1. **[How To Store UTC Timezone In MySQL](https://github.com/AnghelLeonard/Hibernate/tree/master/HibernateSpringBootUTCTimezone)**
 
-**Description:** How to store date, time, and timestamps in UTC time zone in MySQL
+**Description:** This application is a sample of how to store date, time, and timestamps in UTC time zone in MySQL.
 
 **Key points:**\
      - `spring.jpa.properties.hibernate.jdbc.time_zone=UTC`\
-     - `spring.datasource.url=jdbc:mysql://localhost:3306/db_screenshot?useLegacyDatetimeCode=false`
+     - `spring.datasource.url=jdbc:mysql://localhost:3306/screenshotdb?useLegacyDatetimeCode=false`
      
 -----------------------------------------------------------------------------------------------------------------------    
 
