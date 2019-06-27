@@ -22,7 +22,7 @@ public class ScreenshotService {
 
         Screenshot screenshot = new Screenshot();
 
-        screenshot.setName("Screenshot-001");
+        screenshot.setName("Screenshot-1");
         screenshot.setCreateOn(new Timestamp(
                 ZonedDateTime.of(2018, 3, 30, 10, 15, 55, 0,
                         ZoneId.of("UTC")
@@ -36,7 +36,7 @@ public class ScreenshotService {
     }
 
     public void displayScreenshotInUTC() {
-        Screenshot fetchScreenshot = screenshotRepository.findByName("Screenshot-001");
+        Screenshot fetchScreenshot = screenshotRepository.findByName("Screenshot-1");
         System.out.println("Timestamp epoch milliseconds after fetching: "
                 + fetchScreenshot.getCreateOn().getTime());
     }
