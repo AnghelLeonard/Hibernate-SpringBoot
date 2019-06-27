@@ -9,11 +9,11 @@ public class Author implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
+    @Id    
     private Long id;
 
     private String name;
-    private String surname;
+    private String genre;
     private int age;
 
     public Long getId() {
@@ -32,13 +32,13 @@ public class Author implements Serializable {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
+    public String getGenre() {
+        return genre;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }    
 
     public int getAge() {
         return age;

@@ -1,8 +1,11 @@
 package com.bookstore.impl;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -71,7 +74,26 @@ public class BatchRepositoryImpl<T, ID extends Serializable>
         return result;
     }
 
-    protected int batchSize() {
-        return Integer.valueOf(Dialect.DEFAULT_BATCH_SIZE);
+    private static int batchSize() {
+
+        int batchsize = Integer.valueOf(Dialect.DEFAULT_BATCH_SIZE); // default batch size
+
+        Properties configuration = new Properties();
+        try ( InputStream inputStream = BatchRepositoryImpl.class.getClassLoader()
+                .getResourceAsStream("application.properties")) {
+            configuration.load(inputStream);
+        } catch (IOException ex) {
+            logger.log(Level.SEVERE,
+                    "Cannot fetch batch size. Using further Dialect.DEFAULT_BATCH_SIZE{0}", ex);
+            return batchsize;
+        }
+
+        String batchsizestr = configuration.getProperty(
+                "spring.jpa.properties.hibernate.jdbc.batch_size");
+        if (batchsizestr != null) {
+            batchsize = Integer.valueOf(batchsizestr);
+        }
+
+        return batchsize;
     }
 }

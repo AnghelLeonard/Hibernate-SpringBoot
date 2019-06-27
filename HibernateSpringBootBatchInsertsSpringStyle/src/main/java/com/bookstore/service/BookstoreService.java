@@ -19,11 +19,11 @@ public class BookstoreService {
 
         List<Author> authors = new ArrayList<>();
 
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 1000; i++) {
             Author author = new Author();
             author.setId((long) i);
             author.setName("Name_" + i);
-            author.setSurname("Surname_" + i);
+            author.setGenre("Genre_" + i);
             author.setAge(18 + i);
 
             authors.add(author);
