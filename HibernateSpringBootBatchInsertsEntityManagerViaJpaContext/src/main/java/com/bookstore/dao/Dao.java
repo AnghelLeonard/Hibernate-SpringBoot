@@ -2,7 +2,6 @@ package com.bookstore.dao;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -58,16 +57,16 @@ public class Dao<T, ID extends Serializable> implements GenericDao<T, ID> {
                 getEntityManager(entity).flush();
                 getEntityManager(entity).clear();
                 i = 0;
-            }            
-        }
-        
-        if (i > 0) {
-                logger.log(Level.INFO,
-                        "Flushing the remaining {0} entities ...", i);
-
-                getEntityManager(entities.iterator().next()).flush();
-                getEntityManager(entities.iterator().next()).clear();
             }
+        }
+
+        if (i > 0) {
+            logger.log(Level.INFO,
+                    "Flushing the remaining {0} entities ...", i);
+
+            getEntityManager(entities.iterator().next()).flush();
+            getEntityManager(entities.iterator().next()).clear();
+        }
 
         return result;
     }
