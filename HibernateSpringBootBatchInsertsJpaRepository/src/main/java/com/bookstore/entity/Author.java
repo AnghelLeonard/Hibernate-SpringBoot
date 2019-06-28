@@ -3,6 +3,7 @@ package com.bookstore.entity;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Version;
 
 @Entity
 public class Author implements Serializable {
@@ -15,6 +16,9 @@ public class Author implements Serializable {
     private String name;
     private String genre;
     private int age;
+    
+    @Version
+    private Short version;
 
     public Long getId() {
         return id;
@@ -48,4 +52,7 @@ public class Author implements Serializable {
         this.age = age;
     }
 
+    public Short getVersion() {
+        return version;
+    }   
 }
