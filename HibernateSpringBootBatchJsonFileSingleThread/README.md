@@ -7,7 +7,7 @@
 **Description:** This is a Spring Boot application that reads a relatively big JSON file (200000+ lines) and inserts its content in MySQL via batching using a single thread, the main thread, and a single database connection.
 
 **Key points:**
-- use MySql, `json` type
+- use MySQL, `json` type
 - read the file into a `List` (in this example using `Files.readAllLines()`)
 - save the list in batches into MySQL
 - for MySQL, in `application.properties`, you may want to attach to the JDBC URL the following:
