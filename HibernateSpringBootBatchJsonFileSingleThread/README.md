@@ -4,12 +4,12 @@
 - same example based on `ExecutorService` is [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchJsonFileExecutorService)
 - same example based on `ForkJoinPool` is [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchJsonFileForkJoin)
 
-**Description:** This is a Spring Boot application that reads a relatively big JSON file (200000+ lines) and inserts its content in MySQL via batching using a single thread, the main thread.
+**Description:** This is a Spring Boot application that reads a relatively big JSON file (200000+ lines) and inserts its content in MySQL via batching using a single thread, the main thread, and a single database connection.
 
 **Key points:**
 - use MySql, `json` type
-- read the file into a `List` (in this example using `Files.readAllLines()`)\
-- save the list in batches into MySQL\
+- read the file into a `List` (in this example using `Files.readAllLines()`)
+- save the list in batches into MySQL
 - for MySQL, in `application.properties`, you may want to attach to the JDBC URL the following:
      - `rewriteBatchedStatements=true` -> this setting will force sending the batched statements in a single request;
      - `cachePrepStmts=true` -> enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled
