@@ -32,8 +32,7 @@ public class BatchService {
 
         watch.stop();
 
-        logger.info(() -> "Stop inserting. \n Total time: {0} ms ({1} s)"
-                + watch.getTotalTimeMillis() + ", " + watch.getTotalTimeSeconds());
+        logger.info(() -> "Stop inserting. \n Total time: " + watch.getTotalTimeMillis()
+                + " ms (" + watch.getTotalTimeSeconds() + "s)");
     }
-
 }
