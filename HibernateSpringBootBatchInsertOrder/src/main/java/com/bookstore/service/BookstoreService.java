@@ -20,7 +20,7 @@ public class BookstoreService {
 
         List<Author> authors = new ArrayList<>();
 
-        long pk = -1;
+        long pk = 0;
         for (int i = 0; i < 40; i++) {
 
             Author author = new Author();
