@@ -65,7 +65,7 @@ public class BookstoreService {
     // (uses orphanRemoval = true, but generates 20 batches because DELETE statements are not sorted at all)
     @Transactional
     public void deleteAuthorsAndBooksViaDeleteAll() {        
-        authorRepository.deleteAll();        
+        authorRepository.deleteAll(); // for a collection of certain Authors use deleteAll(Iterable<? extends T> entities)       
     }
 
     // good if you need to delete in a classical batch approach
