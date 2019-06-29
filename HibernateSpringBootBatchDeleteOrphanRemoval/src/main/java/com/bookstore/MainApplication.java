@@ -25,8 +25,8 @@ public class MainApplication {
             bookstoreService.batchAuthorsAndBooks();
             // bookstoreService.deleteAuthorsAndBooksViaDeleteAllInBatch();
             // bookstoreService.deleteAuthorsAndBooksViaDeleteInBatch();
-             bookstoreService.deleteAuthorsAndBooksViaDeleteAll();
-            //bookstoreService.deleteAuthorsAndBooksViaDelete();
+            // bookstoreService.deleteAuthorsAndBooksViaDeleteAll();
+            bookstoreService.deleteAuthorsAndBooksViaDelete();
         };
     }
 }

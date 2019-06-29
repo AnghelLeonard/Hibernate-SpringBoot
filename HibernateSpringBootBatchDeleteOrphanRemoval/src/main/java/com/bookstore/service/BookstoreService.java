@@ -78,6 +78,6 @@ public class BookstoreService {
         authors.forEach(Author::removeBooks);
         authorRepository.flush();
 
-        authors.forEach(authorRepository::delete);
+        authors.forEach(authorRepository::delete); // or, authorRepository.deleteAll();
     }
 }
