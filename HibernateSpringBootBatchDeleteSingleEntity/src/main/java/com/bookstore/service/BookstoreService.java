@@ -40,7 +40,7 @@ public class BookstoreService {
 
     // good if the number of deletes can be converted into 
     // a DELETE of type, delete from author where id=? or id=? or id=? ...
-    // without exceeding the maximum accepted length (as a workaround, 
+    // without exceeding the maximum accepted size (as a workaround, 
     // split the number of deletes in multiple chunks to avoid this issue)
     @Transactional
     public void deleteAuthorsViaDeleteInBatch() {
