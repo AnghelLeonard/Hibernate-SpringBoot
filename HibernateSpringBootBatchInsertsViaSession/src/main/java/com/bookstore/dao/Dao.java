@@ -33,7 +33,7 @@ public class Dao<T, ID extends Serializable> implements GenericDao<T, ID> {
     public <S extends T> Iterable<S> saveInBatch(Iterable<S> entities) {
 
         if(entities == null) {
-            throw new IllegalArgumentException("The given Iterable of entities not be null!");
+            throw new IllegalArgumentException("The given Iterable of entities cannot be null!");
         }
         
         int i = 0;
