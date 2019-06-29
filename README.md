@@ -1075,18 +1075,14 @@ A `Previous Page` button can be implemented easily based on the first record.
 
 **Description:** Batch deletes in MySQL via `orphanRemoval=true`.
 
-**Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use batching. The first one simply triggers a `delete from entity_name` statement, while the second one triggers a `delete from entity_name where id=? or id=? or id=? ...` statement. Rely on `delete()` method.
+**Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use batching and don't take advantage of `orphanRemoval=true`. The first one simply triggers a `delete from entity_name` statement, while the second one triggers a `delete from entity_name where id=? or id=? or id=? ...` statement. Using these methods for deleting parent-entities and the associated entites (child-entities) requires explicit calls for both sides. For batching rely on `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or even better, on `delete()` method. Behind the scene, `deleteAll()` methods uses `delete()`.
 
-**Key points:**\
-     - in this example, we have a `Tournament` entity and each tournament can have several `TennisPlayer` (*one-to-many*)\
-     - first, we use `orphanRemoval=true` and only `CascadeType.PERSIST` and `CascadeType.MERGE`\
-     - second, we dissociate all `TennisPlayer` from the corresponding `Tournament`\
-     - third, we explicitly (manually) flush the persistent context (this will delete in batch all `TennisPlayer` thanks to `orphanRemoval=true`; if this is set to `false`, you will obtain a bunch of updates instead of deletes)\
-     - forth, we delete all `Tournament` via the `delete()` method (since we have dissaciated all `TennisPlayer`, the `Tournament` deletion will take advantage of batching as well)
-        
-**Output example:**
-
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchDeleteOrphanRemoval/batch_delete.png)
+**Key points for using `deleteAll()/delete()`:**\
+     - in this example, we have a `Author` entity and each author can have several `Book` (*one-to-many*)\
+     - first, we use `orphanRemoval=true` and `CascadeType.ALL`\
+     - second, we dissociate all `Book` from the corresponding `Author`\
+     - third, we explicitly (manually) flush the persistent context (this will delete in batch all `Book` thanks to `orphanRemoval=true`; if this is set to `false`, you will obtain a bunch of updates instead of deletes)\
+     - forth, we delete all `Author` via the `deleteAll()` or `delete()` method (since we have dissaciated all `Book`, the `Author` deletion will take advantage of batching as well)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
