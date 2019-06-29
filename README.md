@@ -1049,7 +1049,7 @@ and delete operations (entities that contains `@Version` for implicit optimistic
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchUpdateOrderSingleEntity/batch%20updates.png)     
    
 **Output example for parent-child relationship:**
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchUpdateOrder/batch_update.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchUpdateOrder/batch%20updates.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
