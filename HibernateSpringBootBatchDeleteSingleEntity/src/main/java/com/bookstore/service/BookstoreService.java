@@ -21,7 +21,7 @@ public class BookstoreService {
         List<Author> authors = new ArrayList<>();
 
         for (int i = 0; i < 100; i++) {
-            Author author = new Author();            
+            Author author = new Author();
             author.setName("Name_" + i);
             author.setGenre("Genre_" + i);
             author.setAge(18 + i);
@@ -34,7 +34,7 @@ public class BookstoreService {
 
     // good if you want to delete all records
     @Transactional
-    public void deleteAuthorsViaDeleteAllInBatch() {        
+    public void deleteAuthorsViaDeleteAllInBatch() {
         authorRepository.deleteAllInBatch();
     }
 
@@ -48,6 +48,12 @@ public class BookstoreService {
         List<Author> authors = authorRepository.findAll();
 
         authorRepository.deleteInBatch(authors);
+    }
+
+    // good if you need to delete in a classical batch approach
+    @Transactional
+    public void deleteAuthorsViaDeleteAll() {        
+        authorRepository.deleteAll(); // for a collection of certain Authors use deleteAll(Iterable<? extends T> entities)
     }
 
     // good if you need to delete in a classical batch approach

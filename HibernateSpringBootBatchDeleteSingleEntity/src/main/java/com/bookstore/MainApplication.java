@@ -8,12 +8,12 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class MainApplication {
-    
+
     private final BookstoreService bookstoreService;
 
     public MainApplication(BookstoreService bookstoreService) {
         this.bookstoreService = bookstoreService;
-    }        
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(MainApplication.class, args);
@@ -25,8 +25,9 @@ public class MainApplication {
 
             bookstoreService.persistAuthors();
             // bookstoreService.deleteAuthorsViaDeleteAllInBatch();
-            // bookstoreService.deleteAuthorsViaDeleteInBatch();
-             bookstoreService.deleteAuthorsViaDelete();
+            // bookstoreService.deleteAuthorsViaDeleteInBatch();            
+            // bookstoreService.deleteAuthorsViaDelete();
+            bookstoreService.deleteAuthorsViaDeleteAll();
         };
     }
 }
