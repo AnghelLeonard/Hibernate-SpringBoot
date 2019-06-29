@@ -3,20 +3,27 @@ package com.bookstore.entity;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Version;
 
 @Entity
 public class Book implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id   
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
     private String isbn;
+
+    @Version
+    private short version;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
@@ -54,17 +61,21 @@ public class Book implements Serializable {
         this.author = author;
     }
 
+    public short getVersion() {
+        return version;
+    }
+
     @Override
     public boolean equals(Object obj) {
-        
+
         if (this == obj) {
             return true;
         }
-        
+
         if (getClass() != obj.getClass()) {
             return false;
         }
-        
+
         return id != null && id.equals(((Book) obj).id);
     }
 
@@ -77,5 +88,5 @@ public class Book implements Serializable {
     public String toString() {
         return "Book{" + "id=" + id + ", title=" + title + ", isbn=" + isbn + '}';
     }
-    
+
 }

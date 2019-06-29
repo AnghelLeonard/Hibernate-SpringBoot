@@ -6,20 +6,27 @@ import java.util.Iterator;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Version;
 
 @Entity
 public class Author implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id   
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
     private String genre;
     private int age;
+
+    @Version
+    private short version;
 
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "author", orphanRemoval = true)
@@ -68,7 +75,7 @@ public class Author implements Serializable {
 
     public void setGenre(String genre) {
         this.genre = genre;
-    }  
+    }
 
     public int getAge() {
         return age;
@@ -86,10 +93,14 @@ public class Author implements Serializable {
         this.books = books;
     }
 
+    public short getVersion() {
+        return version;
+    }
+
     @Override
     public String toString() {
-        return "Author{" + "id=" + id + ", name=" + name 
+        return "Author{" + "id=" + id + ", name=" + name
                 + ", genre=" + genre + ", age=" + age + '}';
     }
-    
+
 }
