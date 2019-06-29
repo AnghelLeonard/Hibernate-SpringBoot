@@ -23,9 +23,10 @@ public class MainApplication {
     public ApplicationRunner init() {
         return args -> {
             bookstoreService.batchAuthorsAndBooks();
-             //bookstoreService.deleteAuthorsViaDeleteAllInBatch();
-            //bookstoreService.deleteAuthorsViaDeleteInBatch();
-            bookstoreService.deleteAuthorsAndBooksViaDelete();
+            // bookstoreService.deleteAuthorsAndBooksViaDeleteAllInBatch();
+            // bookstoreService.deleteAuthorsAndBooksViaDeleteInBatch();
+             bookstoreService.deleteAuthorsAndBooksViaDeleteAll();
+            //bookstoreService.deleteAuthorsAndBooksViaDelete();
         };
     }
 }

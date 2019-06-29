@@ -24,7 +24,7 @@ public class BookstoreService {
 
         List<Author> authors = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 10; i++) {
 
             Author author = new Author();
             author.setName("Name_" + i);
@@ -45,30 +45,39 @@ public class BookstoreService {
         authorRepository.saveAll(authors);
     }
 
-    // explicitly delete all records from each table
+    // explicitly delete all records from each table (ignores orphanRemoval = true)
     @Transactional
-    public void deleteAuthorsViaDeleteAllInBatch() {
+    public void deleteAuthorsAndBooksViaDeleteAllInBatch() {
         authorRepository.deleteAllInBatch();
         bookRepository.deleteAllInBatch();
     }
 
-    // explicitly delete all records from each table
+    // explicitly delete all records from each table (ignores orphanRemoval = true)
     @Transactional
-    public void deleteAuthorsViaDeleteInBatch() {
-        List<Author> authors = authorRepository.findAll();
+    public void deleteAuthorsAndBooksViaDeleteInBatch() {
+        List<Author> authors = authorRepository.fetchAllAuthorsAndBooks();
 
         authorRepository.deleteInBatch(authors);
         authors.forEach(a -> bookRepository.deleteInBatch(a.getBooks()));
     }
 
+    // good if you need to delete in a classical batch approach
+    // (uses orphanRemoval = true, but generates 20 batches)
+    @Transactional
+    public void deleteAuthorsAndBooksViaDeleteAll() {        
+        authorRepository.deleteAll();        
+    }
+
+    // good if you need to delete in a classical batch approach
+    // (uses orphanRemoval = true, and generates only 3 batches)
     @Transactional
     public void deleteAuthorsAndBooksViaDelete() {
 
         List<Author> authors = authorRepository.fetchAllAuthorsAndBooks();
-authorRepository.deleteAll();
-        //authors.forEach(Author::removeBooks);
-        //authorRepository.flush();
+        
+        authors.forEach(Author::removeBooks);
+        authorRepository.flush();
 
-        //authors.forEach(authorRepository::delete);
+        authors.forEach(authorRepository::delete);
     }
 }
