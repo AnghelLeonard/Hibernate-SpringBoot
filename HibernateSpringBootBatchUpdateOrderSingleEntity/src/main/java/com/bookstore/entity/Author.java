@@ -12,14 +12,14 @@ public class Author implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id    
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
     private String genre;
     private int age;
-    
+
     @Version
     private short version;
 
@@ -45,7 +45,7 @@ public class Author implements Serializable {
 
     public void setGenre(String genre) {
         this.genre = genre;
-    }    
+    }
 
     public int getAge() {
         return age;
@@ -57,5 +57,5 @@ public class Author implements Serializable {
 
     public short getVersion() {
         return version;
-    }   
+    }
 }
