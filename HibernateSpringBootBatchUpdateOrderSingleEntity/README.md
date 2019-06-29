@@ -1,6 +1,6 @@
 **[How To Batch Updates In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchUpdateOrderSingleEntity)**
 
-**Description:** Batch updates in MySQL.
+**Description:** Batch updates in MySQL. 
 
 **See also:** [How To Optimize Batch Updates Of Parent-Child Relationships In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchUpdateOrder)
 
