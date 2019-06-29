@@ -12,10 +12,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(repositoryBaseClass = BatchRepositoryImpl.class)
 public class MainApplication {
 
-    private final BookstoreService authorService;
+    private final BookstoreService bookstoreService;
 
-    public MainApplication(BookstoreService authorService) {
-        this.authorService = authorService;
+    public MainApplication(BookstoreService bookstoreService) {
+        this.bookstoreService = bookstoreService;
     }
 
     public static void main(String[] args) {
@@ -25,7 +25,7 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            authorService.batchAuthorsAndBooks();
+            bookstoreService.batchAuthorsAndBooks();
         };
     }
 }
