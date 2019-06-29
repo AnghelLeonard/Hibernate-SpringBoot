@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class MainApplication {
 
-    private final BookstoreService authorService;
+    private final BookstoreService bookstoreService;
 
-    public MainApplication(BookstoreService authorService) {
-        this.authorService = authorService;
+    public MainApplication(BookstoreService bookstoreService) {
+        this.bookstoreService = bookstoreService;
     }
 
     public static void main(String[] args) {
@@ -22,7 +22,7 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            authorService.batchAuthors();
+            bookstoreService.batchAuthors();
         };
     }
 }

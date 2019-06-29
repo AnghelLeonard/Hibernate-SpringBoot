@@ -4,7 +4,7 @@
 
 **Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use *classical* delete batching. The first one simply triggers a `delete from entity_name` statement and is useful for deleting all records. The second one triggers a `delete from entity_name where id=? or id=? or id=? ...` statement, therefore, is prone to cause issues if the generated `DELETE` statement exceedes the maximum accepted size. This drawback can be controlled by deleting the data in chunks that results in `DELETE` statements that don't exceed the maximum accepted size. The maximum accepted size depends on RDBMS (e.g., for MySQL, execute `SHOW VARIABLES LIKE 'max_allowed_packet';`). Nevertheless, this approach is very fast. Is faster than *classical* delete batching which can be achieved via the `delete()` method.
 
-**Key points:**\
+**Key points for *classical* delete batching:**\
      - for *classical* delete batching rely on the `delete()` method\
      - in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`\
      - in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL, statements get rewritten into a single `String` buffer and sent in a single request)\
