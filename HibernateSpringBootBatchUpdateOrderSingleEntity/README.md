@@ -2,6 +2,8 @@
 
 **Description:** Batch updates in MySQL.
 
+**See also:** [How To Optimize Batch Updates Of Parent-Child Relationships In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchUpdateOrder)
+
 **Key points:**\
      - in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`\
      - in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL, statements get rewritten into a single `String` buffer and sent in a single request)\
