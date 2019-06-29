@@ -62,7 +62,7 @@ public class BookstoreService {
     }
 
     // good if you need to delete in a classical batch approach
-    // (uses orphanRemoval = true, but generates 20 batches)
+    // (uses orphanRemoval = true, but generates 20 batches because DELETE statements are not sorted at all)
     @Transactional
     public void deleteAuthorsAndBooksViaDeleteAll() {        
         authorRepository.deleteAll();        
