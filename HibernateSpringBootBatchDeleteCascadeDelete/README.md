@@ -9,7 +9,8 @@
      - first, we remove `orphanRemoval` or set it to `false`\
      - second, we use only `CascadeType.PERSIST` and `CascadeType.MERGE`\
      - third, we set `@OnDelete(action = OnDeleteAction.CASCADE)` next to `@OneToMany`\
-     - fourth, we set `spring.jpa.properties.hibernate.dialect` to `org.hibernate.dialect.MySQL5InnoDBDialect`\   
+     - fourth, we set `spring.jpa.properties.hibernate.dialect` to `org.hibernate.dialect.MySQL5InnoDBDialect`\
+     - fifth, we run through each `deleteFoo()` method
         
 **Output example:**
 
