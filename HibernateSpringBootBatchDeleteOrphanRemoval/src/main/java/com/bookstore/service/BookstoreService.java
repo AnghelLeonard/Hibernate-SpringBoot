@@ -29,7 +29,7 @@ public class BookstoreService {
             Author author = new Author();
             author.setName("Name_" + i);
             author.setGenre("Genre_" + i);
-            author.setAge(18 + i);
+            author.setAge((int) ((Math.random() + 0.1) * 100));
 
             for (int j = 0; j < 5; j++) {
                 Book book = new Book();
@@ -45,39 +45,42 @@ public class BookstoreService {
         authorRepository.saveAll(authors);
     }
 
-    // explicitly delete all records from each table (ignores orphanRemoval = true)
+    // explicitly delete all records from each table
     @Transactional
     public void deleteAuthorsAndBooksViaDeleteAllInBatch() {
         authorRepository.deleteAllInBatch();
         bookRepository.deleteAllInBatch();
     }
 
-    // explicitly delete all records from each table (ignores orphanRemoval = true)
+    // explicitly delete all records from each table
     @Transactional
     public void deleteAuthorsAndBooksViaDeleteInBatch() {
-        List<Author> authors = authorRepository.fetchAllAuthorsAndBooks();
+        List<Author> authors = authorRepository.fetchAuthorsAndBooks(60);
 
         authorRepository.deleteInBatch(authors);
         authors.forEach(a -> bookRepository.deleteInBatch(a.getBooks()));
     }
 
     // good if you need to delete in a classical batch approach
-    // (uses orphanRemoval = true, but generates 20 batches because DELETE statements are not sorted at all)
+    // deletes are cascaded by CascadeType.REMOVE and batched as well
+    // the DELETE statements are not sorted at all and this causes more batches than needed for this job
     @Transactional
-    public void deleteAuthorsAndBooksViaDeleteAll() {        
-        authorRepository.deleteAll(); // for a collection of certain Authors use deleteAll(Iterable<? extends T> entities)       
+    public void deleteAuthorsAndBooksViaDeleteAll() {
+        List<Author> authors = authorRepository.fetchAuthorsAndBooks(60);
+        
+        authorRepository.deleteAll(authors); // for deleting all Authors use deleteAll()       
     }
 
     // good if you need to delete in a classical batch approach
-    // (uses orphanRemoval = true, and generates only 3 batches)
+    // (uses orphanRemoval = true, and optimize the number of batches)
     @Transactional
     public void deleteAuthorsAndBooksViaDelete() {
 
-        List<Author> authors = authorRepository.fetchAllAuthorsAndBooks();
-        
+        List<Author> authors = authorRepository.fetchAuthorsAndBooks(60);
+
         authors.forEach(Author::removeBooks);
         authorRepository.flush();
 
-        authors.forEach(authorRepository::delete); // or, authorRepository.deleteAll();
+        authors.forEach(authorRepository::delete); // or, authorRepository.deleteAll(authors);
     }
 }

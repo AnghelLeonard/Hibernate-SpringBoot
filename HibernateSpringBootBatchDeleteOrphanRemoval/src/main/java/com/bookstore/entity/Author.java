@@ -28,7 +28,7 @@ public class Author implements Serializable {
     @Version
     private short version;
 
-    @OneToMany(cascade = {CascadeType.ALL},
+    @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "author", orphanRemoval = true)
     private List<Book> books = new ArrayList<>();
 
