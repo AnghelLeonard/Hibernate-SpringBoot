@@ -25,9 +25,9 @@ public class MainApplication {
 
             bookstoreService.persistAuthors();
             // bookstoreService.deleteAuthorsViaDeleteAllInBatch();
-            // bookstoreService.deleteAuthorsViaDeleteInBatch();            
-            // bookstoreService.deleteAuthorsViaDelete();
-            bookstoreService.deleteAuthorsViaDeleteAll();
+            // bookstoreService.deleteAuthorsViaDeleteInBatch();                        
+            // bookstoreService.deleteAuthorsViaDeleteAll();
+            bookstoreService.deleteAuthorsViaDelete();
         };
     }
 }

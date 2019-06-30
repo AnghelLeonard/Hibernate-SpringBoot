@@ -24,7 +24,7 @@ public class BookstoreService {
             Author author = new Author();
             author.setName("Name_" + i);
             author.setGenre("Genre_" + i);
-            author.setAge(18 + i);
+            author.setAge((int) ((Math.random() + 0.1) * 100));
 
             authors.add(author);
         }
@@ -32,8 +32,7 @@ public class BookstoreService {
         authorRepository.saveAll(authors);
     }
 
-    // good if you want to delete all records
-    @Transactional
+    // good if you want to delete all records    
     public void deleteAuthorsViaDeleteAllInBatch() {
         authorRepository.deleteAllInBatch();
     }
@@ -45,22 +44,25 @@ public class BookstoreService {
     @Transactional
     public void deleteAuthorsViaDeleteInBatch() {
 
-        List<Author> authors = authorRepository.findAll();
+        List<Author> authors = authorRepository.findByAgeLessThan(60);
 
         authorRepository.deleteInBatch(authors);
     }
 
     // good if you need to delete in a classical batch approach
     @Transactional
-    public void deleteAuthorsViaDeleteAll() {        
-        authorRepository.deleteAll(); // for a collection of certain Authors use deleteAll(Iterable<? extends T> entities)
+    public void deleteAuthorsViaDeleteAll() {
+
+        List<Author> authors = authorRepository.findByAgeLessThan(60);
+
+        authorRepository.deleteAll(authors); // for deleting all Authors use deleteAll() with no arguments
     }
 
     // good if you need to delete in a classical batch approach
     @Transactional
     public void deleteAuthorsViaDelete() {
 
-        List<Author> authors = authorRepository.findAll();
+        List<Author> authors = authorRepository.findByAgeLessThan(60);
 
         authors.forEach(authorRepository::delete);
     }
