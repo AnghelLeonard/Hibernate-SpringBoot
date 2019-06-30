@@ -2,7 +2,7 @@
 
 **Description:** Batch deletes in MySQL via `orphanRemoval=true`.
 
-**Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use batching and don't take advantage of `orphanRemoval=true`. The first one simply triggers a `delete from entity_name` statement, while the second one triggers a `delete from entity_name where id=? or id=? or id=? ...` statement. Using these methods for deleting parent-entities and the associated entites (child-entities) requires explicit calls for both sides. For batching rely on `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or even better, on `delete()` method. Behind the scene, `deleteAll()` methods uses `delete()`.
+**Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use batching and don't take advantage of `orphanRemoval=true`. They trigger *bulk* operations and the persistent context is not synchronized accordingly. The first one simply triggers a `delete from entity_name` statement, while the second one triggers a `delete from entity_name where id=? or id=? or id=? ...` statement. Using these methods for deleting parent-entities and the associated entites (child-entities) requires explicit calls for both sides. For batching rely on `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or even better, on `delete()` method. Behind the scene, `deleteAll()` methods uses `delete()`. The `delete()` and `deleteAll()` methods rely on `EntityManager.remove()`, therefore, the persistent context is synchronized.
 
 **Key points for using `deleteAll()/delete()`:**\
      - in this example, we have a `Author` entity and each author can have several `Book` (*one-to-many*)\
