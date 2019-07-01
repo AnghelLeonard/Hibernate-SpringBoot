@@ -51,7 +51,7 @@ public class BookstoreService {
     // deleting the authors will delete the books as well
     @Transactional
     public void deleteAuthorsAndBooksViaDeleteInBatch() {
-        List<Author> authors = authorRepository.findAll();
+        List<Author> authors = authorRepository.fetchAuthorsAndBooks(60);
 
         authorRepository.deleteInBatch(authors);
     }
@@ -60,15 +60,17 @@ public class BookstoreService {
     // the authors will be deleted in batches; the books will be deleted as well
     @Transactional
     public void deleteAuthorsAndBooksViaDeleteAll() {
-        authorRepository.deleteAll(); // for a collection of certain Authors use deleteAll(Iterable<? extends T> entities)       
+        List<Author> authors = authorRepository.fetchAuthorsAndBooks(60);
+        
+        authorRepository.deleteAll(authors); // for deleting all Author use deleteAll()       
     }
 
     // good if you need to delete in a classical batch approach
     // the authors will be deleted in batches; the books will be deleted as well
     @Transactional
     public void deleteAuthorsAndBooksViaDelete() {
-
-        List<Author> authors = authorRepository.findAll();
+        List<Author> authors = authorRepository.fetchAuthorsAndBooks(60);
+        
         authors.forEach(authorRepository::delete);
     }
 }
