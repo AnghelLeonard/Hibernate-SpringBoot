@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
-
+ 
     // Query all author names and their titles with the given price
     
     @Transactional(readOnly = true)    
