@@ -8,7 +8,7 @@
      - in this example, we have a `Author` entity and each author can have several `Book` (*one-to-many*)\
      - first, we use `orphanRemoval=true` and `CascadeType.ALL`\
      - second, we dissociate all `Book` from the corresponding `Author`\
-     - third, we explicitly (manually) flush the persistent context; is time for `orphanRemoval=true` to enter into the scene; thanks to this setting, all disassociated books will be deleted; the generated `DELETE` statements are batched (if `orphanRemoval` is set to `false`, a bunch of updates will be executed instead of deletes\
+     - third, we explicitly (manually) flush the persistent context; is time for `orphanRemoval=true` to enter into the scene; thanks to this setting, all disassociated books will be deleted; the generated `DELETE` statements are batched (if `orphanRemoval` is set to `false`, a bunch of updates will be executed instead of deletes)\
      - forth, we delete all `Author` via the `deleteAll()` or `delete()` method (since we have dissaciated all `Book`, the `Author` deletion will take advantage of batching as well)
 
 -------------------------------
