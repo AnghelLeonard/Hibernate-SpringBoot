@@ -1,6 +1,6 @@
 **[How To Use Spring Boot Offset Pagination And `Page<dto>`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOffsetPagination)**
 
-**Description:** This application extracts records as `Page<dto>` instead of `Page<entity>` via offset pagination. Most of the time data that should be paginated is read-only data. But, fetching data into entities should be done only if we plan to modify that data, therefore, fetching read only data as `Page<entity>` is not preferable.
+**Description:** This application fetches data as `Page<dto>` via Spring Boot offset pagination. Most of the time data that should be paginated is read-only data. But, fetching data into entities should be done only if we plan to modify that data, therefore, fetching read only data as `Page<entity>` is not preferable.
 
 **Key points:**\
      - create a Spring projection (DTO) to contains getters only for the data that should be fetched\
