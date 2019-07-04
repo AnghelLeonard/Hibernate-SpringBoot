@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class PlayerController {
+public class BookstoreController {
 
     private final BookstoreService bookstoreService;
 
-    public PlayerController(BookstoreService bookstoreService) {
+    public BookstoreController(BookstoreService bookstoreService) {
         this.bookstoreService = bookstoreService;
     }
 
