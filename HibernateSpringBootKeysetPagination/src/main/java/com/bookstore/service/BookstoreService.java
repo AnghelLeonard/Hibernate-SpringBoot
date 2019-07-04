@@ -15,6 +15,6 @@ public class BookstoreService {
     }
 
     public List<Author> fetchNextPage(long id, int limit) {
-        return authorRepository.fetchAllAuthors(id, limit);
+        return authorRepository.fetchAll(id, limit);
     }
 }

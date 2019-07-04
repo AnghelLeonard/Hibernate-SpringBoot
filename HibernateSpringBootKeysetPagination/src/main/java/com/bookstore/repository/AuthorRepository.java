@@ -11,5 +11,5 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     @Query(value = "SELECT * FROM author AS a WHERE a.id > ?1 ORDER BY a.id ASC LIMIT ?2",
             nativeQuery = true)
-    List<Author> fetchAllAuthors(long id, int limit);
+    List<Author> fetchAll(long id, int limit);
 }
