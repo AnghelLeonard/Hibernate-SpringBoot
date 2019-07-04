@@ -2,6 +2,8 @@
 
 **Description:** When we rely on an *offset* paging we have the performance penalty induced by throwing away *n* records before reached the desired *offset*. Larger *n* leads to a significant performance penalty. But, this is not the only performance penalty. Most of the time we want to count the total number of rows to calculate the total number of possible pages, so this is an extra `SELECT COUNT`. So, if we don't want to go with *keyset* pagination and avoid counting that total number of records, which can be very costly, we have to tackle this performance penalty somehow. For databases vendors that support *Window Functions* there is a solution relying on `COUNT(*) OVER()` as in this application that uses this window function in a native query against MySQL 8.
 
+Moreover, this application fetches data as `Page<dto>` via Spring Boot offset pagination. Most of the time, the data that should be paginated is *read-only* data. Fetching the data into entities should be done only if we plan to modify that data, therefore, fetching *read only* data as `Page<entity>` is not preferable since it may end up in a significant performance penalty.
+
 **Key points:**\
      - create a DTO projection to cover the extra-column added by the `COUNT(*) OVER()` window function\
      - write a repository that extends `PagingAndSortingRepository`\
