@@ -4,7 +4,7 @@
 
 **Important note:** This application extracts records as entities, but if all you want to do is to read this data in pages then consider DTOs to avoid consuming memory and CPU for nothing. As a rule, extract entites only if you plan to modify them. In this case, we need a native SQL or another approach instead of `Page<T>`.
 
-**But:** If *offset* pagination is causing you performance issues then please check recipes: [70](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSliceAllCriteriaBuilderSortAndSpecificationAndQueryHints) (slice technique for find all records), [71](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootWindowFunctionPaging) (*offset* with window functions) and [72](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootKeysetPagination) (*keyset* pagination).
+**But:** If *offset* pagination is causing you performance issues then please check recipes: [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSliceAllCriteriaBuilderSortAndSpecificationAndQueryHints) (slice technique for find all records), [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootWindowFunctionPaging) (*offset* with window functions) and [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootKeysetPagination) (*keyset* pagination).
 
 **Key points:**\
      - write a repository that extends `PagingAndSortingRepository`\
