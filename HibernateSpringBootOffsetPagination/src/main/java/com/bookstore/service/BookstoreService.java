@@ -4,6 +4,7 @@ import com.bookstore.entity.Author;
 import com.bookstore.repository.AuthorRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +18,6 @@ public class BookstoreService {
 
     public Page<Author> fetchNextPage(int page, int size) {
 
-        return authorRepository.findAll(PageRequest.of(page, size));
+        return authorRepository.findAll(PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "age")));
     }
 }
