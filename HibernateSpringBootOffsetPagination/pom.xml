@@ -25,7 +25,7 @@
         
         <datasource-proxy.version>1.4.9</datasource-proxy.version>            
     </properties>
-
+ 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
