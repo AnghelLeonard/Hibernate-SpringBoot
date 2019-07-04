@@ -10,6 +10,9 @@ Moreover, this application fetches data as `Page<dto>` via Spring Boot offset pa
      - write a native query relying on this window function that fetch the data into a `List<dto>` using a `Pageable`\
      - use the fetched `List<dto>` and `Pageable` to create a `Page<dto>`
 
+**Sample:**\
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootWindowFunctionPagingPage/offset%20pagination%20via%20window%20function.png)
+
 -------------------------------
 
 **You may like to try as well:**
