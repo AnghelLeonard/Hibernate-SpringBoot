@@ -1,6 +1,6 @@
 
 **[UTC Timezone And MySQL](https://github.com/AnghelLeonard/Hibernate/tree/master/HibernateSpringBootUTCTimezone)**
-
+ 
 **Description:** This application is a sample of how to store date, time, and timestamps in UTC time zone in MySQL.
 
 **Key points:**\
