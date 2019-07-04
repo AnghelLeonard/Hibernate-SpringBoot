@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 public interface AuthorRepository extends PagingAndSortingRepository<Author, Long> {
 
     @Query(value = "SELECT t.total, name, age FROM author, "
-            + "(SELECT count(*) as total FROM author) AS t "
+            + "(SELECT count(*) AS total FROM author) AS t "
             + "ORDER BY age LIMIT ?1, ?2",
             nativeQuery = true)
     List<AuthorDto> fetchAll(int page, int size);
