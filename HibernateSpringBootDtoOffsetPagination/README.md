@@ -1,11 +1,11 @@
-**[How To Implement Offset Pagination in Spring Boot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOffsetPagination)**
+**[How To Use Spring Boot Offset Pagination And Page< DTO >](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOffsetPagination)**
 
 **Description:** This application extracts records as `Page<dto>` instead of `Page<entity>` via offset pagination. Most of the time data that should be paginated is read-only data. But, fetching data into entities should be done only if we plan to modify that data, therefore, fetching read only data as `Page<T>` is not preferable.
 
 **Key points:**\
      - create a Spring projection (DTO) to contains getters only for the data that should be fetched\
      - write a repository that extends `PagingAndSortingRepository`\
-     - fetch data via a native query that includes counting into a `List<dto>` and a `Pageable`\     
+     - fetch data via a native query that includes counting into a `List<dto>` and a `Pageable`\
      - use `List<dto>` and `Pageable` to create a `Page<dto>`
 
 -------------------------------
