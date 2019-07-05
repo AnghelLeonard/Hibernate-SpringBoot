@@ -18,4 +18,14 @@ public class BookstoreService {
 
         return authorRepository.fetchAll(page, size);
     }
+
+    /* // this relies in Author.toString() 
+       // using this method requires the controller to return Map<List<Author>, Long> as well
+    public Map<List<Author>, Long> fetchNextPage(int page, int size) {
+
+        List<Author> authors = authorRepository.fetchAll(page, size);
+        
+        return Collections.singletonMap(authors, authors.isEmpty() ? 0 : authors.get(0).getTotal());
+    }
+     */
 }
