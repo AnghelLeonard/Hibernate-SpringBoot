@@ -1,11 +1,11 @@
-**[How To Use Spring Boot Offset Pagination And `List<dto>`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootListDtoOffsetPagination)**
+**[How To Use `SELECT COUNT` Subquery In Spring Boot Offset Pagination And `List<entity>`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootListEntityOffsetPaginationExtraColumn)**
 
-**Description:** This application fetches data as `List<dto>` via Spring Boot offset pagination. Most of the time, the data that should be paginated is *read-only* data. Fetching the data into entities should be done only if we plan to modify that data, therefore, fetching *read only* data as `List<entity>` is not preferable since it may end up in a significant performance penalty.
+**Description:** This application fetches data as `List<entity>` via Spring Boot offset pagination. The `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`.
 
-**Key points:**\
-     - create a Spring projection (DTO) to contains getters only for the data that should be fetched\
+**Key points:**\     
      - write a repository that extends `PagingAndSortingRepository`\
-     - fetch data via a native query (that includes counting) into a `List<dto>`
+     - in the `entity` add a extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`\
+     - fetch data via a native query (that includes `SELECT COUNT` subquery) into a `List<entity>`
 
 -------------------------------
 
