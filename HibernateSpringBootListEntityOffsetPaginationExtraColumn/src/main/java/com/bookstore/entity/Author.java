@@ -61,6 +61,6 @@ public class Author implements Serializable {
 
     @Override
     public String toString() {
-        return "Author{" + "id=" + id + ", age=" + age + ", name=" + name + ", genre=" + genre + '}';
+        return "{" + "id=" + id + ", age=" + age + ", name=" + name + ", genre=" + genre + '}';
     }   
 }
