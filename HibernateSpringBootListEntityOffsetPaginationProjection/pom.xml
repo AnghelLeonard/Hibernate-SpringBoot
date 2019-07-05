@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jpa</groupId>
-    <artifactId>HibernateSpringBootListEntityInProjectionOffsetPagination</artifactId>
+    <artifactId>HibernateSpringBootListEntityOffsetPaginationProjection</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>HibernateSpringBootListEntityInProjectionOffsetPagination</name>
+    <name>HibernateSpringBootListEntityOffsetPaginationProjection</name>
     <description>JPA project for Spring Boot</description>
 
     <parent>
