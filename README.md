@@ -1755,3 +1755,15 @@ Moreover, this application fetches data as `Page<dto>` via Spring Boot offset pa
      - write a repository that extends `PagingAndSortingRepository`\
      - fetch data via a JPQL query (that includes counting) into a `List<projection>`, and a `Pageable`\
      - use the fetched `List<projection>` and `Pageable` to create a `Page<projection>`
+
+-----------------------------------------------------------------------------------------------------------------------
+
+122. **[Offset Pagination - Trigger `COUNT(*) OVER` And Return `Page<dto>`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPageDtoOffsetPaginationWF)**
+
+**Description:** This application fetches data as `Page<dto>` via Spring Boot offset pagination. Most of the time, the data that should be paginated is *read-only* data. Fetching the data into entities should be done only if we plan to modify that data, therefore, fetching *read only* data as `Page<entity>` is not preferable since it may end up in a significant performance penalty. So, if we don't want to go with *keyset* pagination and avoid counting that total number of records, which can be very costly, we have to tackle this performance penalty somehow. For databases vendors that support *Window Functions* there is a solution relying on `COUNT(*) OVER()` as in this application that uses this window function in a native query against MySQL 8.
+
+**Key points:**\
+     - create a Spring projection (DTO) to contains getters only for the data that should be fetched\
+     - write a repository that extends `PagingAndSortingRepository`\
+     - fetch data via a native query (that includes counting) into a `List<dto>`, and a `Pageable`\
+     - use the fetched `List<dto>` and `Pageable` to create a `Page<dto>`
