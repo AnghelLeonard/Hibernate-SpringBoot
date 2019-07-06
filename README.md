@@ -987,10 +987,10 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 71. **[Offset Pagination - Trigger `COUNT(*) OVER` And Return `List<dto>`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootListDtoOffsetPaginationWF)**
  
-**Description:** When we rely on an *offset* paging we have the performance penalty induced by throwing away *n* records before reached the desired *offset*. Larger *n* leads to a significant performance penalty. But, this is not the only performance penalty. Most of the time we want to count the total number of rows to calculate the total number of possible pages, so this is an extra `SELECT COUNT`. So, if we don't want to go with *keyset* pagination and avoid counting that total number of records, which can be very costly, we have to tackle this performance penalty somehow. For databases vendors that support *Window Functions* there is a solution relying on `COUNT(*) OVER()` as in this application that uses this window function in a native query against MySQL 8.
+**Description:** Typically, in offset pagination, there is one query needed for fetching the data and one for counting the total number of records. But, we can fetch this information in a single database rountrip via a `SELECT COUNT` subquery nested in the main `SELECT`. Even better, for databases vendors that support *Window Functions* there is a solution relying on `COUNT(*) OVER()` as in this application that uses this window function in a native query against MySQL 8. So, prefer this one instead of `SELECT COUNT` subquery.
 
 **Key points:**\
-     - create a DTO projection to cover the extra-column added by the `COUNT(*) OVER()` window function\
+     - create a DTO projection that contains getters for the data that should be fetched and an extra-column for mapping the return of the `COUNT(*) OVER()` window function\
      - write a native query relying on this window function
 
 **Example:**\
@@ -1713,20 +1713,20 @@ Moreover, this application fetches data as `Page<dto>` via Spring Boot offset pa
 
 -----------------------------------------------------------------------------------------------------------------------
 
-118. **[Offset Pagination - Trigger `SELECT COUNT` Subquery And Return `List<entity>` Via Projection (DTO)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootListEntityOffsetPaginationProjection)**
-
-**Description:** This application fetches data as `List<entity>` via Spring Boot offset pagination. The `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, there is one query needed for fetching the data and one for counting the total number of records).
+118. **[Offset Pagination - Trigger `SELECT COUNT` Subquery And Return `List<projection>` That Maps Entities And The Total Number Of Records Via Projection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootListEntityOffsetPaginationProjection)**
+   
+**Description:** This application fetches data as `List<projection>` via Spring Boot offset pagination. The projection maps the entity and the total number of records. This information is fetched in a single database rountrip because the `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, there is one query needed for fetching the data and one for counting the total number of records). Use this approch only if the fetched data is not *read-only*. Otherwise, prefer `List<dto>` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootListDtoOffsetPagination).
 
 **Key points:**\
+     - write a Spring projection that maps the entity and the total number of records\
      - write a repository that extends `PagingAndSortingRepository`\
-     - write a Spring projection for representing the entity and total number of records\
-     - fetch data via a JPQL query (that includes `SELECT COUNT` subquery) into a `List<entity>`
+     - fetch data via a JPQL query (that includes `SELECT COUNT` subquery) into a `List<projection>`
 
 -----------------------------------------------------------------------------------------------------------------------
 
 119. **[Offset Pagination - Trigger `COUNT(*) OVER` And Return `List<entity>` Via Extra Column](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootListEntityOffsetPaginationExtraColumnWF)**
  
-**Description:** This application fetches data as `List<entity>` via Spring Boot offset pagination. The `COUNT(*) OVER` triggered for counting the total number of records is a windowed aggregate supported in MySQL starting with version 8. Therefore, there will be a single database roundtrip instead of two (typically, one query is needed for fetching the data and one for counting the total number of records).
+**Description:** Typically, in offset pagination, there is one query needed for fetching the data and one for counting the total number of records. But, we can fetch this information in a single database rountrip via a `SELECT COUNT` subquery nested in the main `SELECT`. Even better, for databases vendors that support *Window Functions* there is a solution relying on `COUNT(*) OVER()` as in this application that uses this window function in a native query against MySQL 8. So, prefer this one instead of `SELECT COUNT` subquery.This application fetches data as `List<entity>` via Spring Boot offset pagination, but, if the fetched data is *read-only*, then rely on `List<dto>` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootListDtoOffsetPaginationWF). 
 
 **Key points:**\
      - write a repository that extends `PagingAndSortingRepository`\
@@ -1741,14 +1741,15 @@ Moreover, this application fetches data as `Page<dto>` via Spring Boot offset pa
 
 **Key points:**\
      - write a repository that extends `PagingAndSortingRepository`\
+     - in the entity, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`\
      - fetch data via a native query (that includes counting) into a `List<entity>`, and a `Pageable`\
      - use the fetched `List<entity>` and `Pageable` to create a `Page<entity>`
 
 -----------------------------------------------------------------------------------------------------------------------
 
-121. **[Offset Pagination - Trigger `SELECT COUNT` Subquery And Return `Page<entity>` Via Projection (DTO)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPageEntityOffsetPaginationProjection)**
+121. **[Offset Pagination - Trigger `SELECT COUNT` Subquery And Return `Page<projection>` That Maps Entities And The Total Number Of Records Via Projection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPageEntityOffsetPaginationProjection)**
 
-**Description:** This application fetches data as `Page<entity>` via Spring Boot offset pagination. Use this only if the fetched data will be modified. Otherwise, fetch `Page<dto>` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPageDtoOffsetPagination). The `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, there is one query needed for fetching the data and one for counting the total number of records).
+**Description:** This application fetches data as `Page<projection>` via Spring Boot offset pagination. The projection maps the entity and the total number of records. This information is fetched in a single database rountrip because the `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, there is one query needed for fetching the data and one for counting the total number of records). Use this approch only if the fetched data is not *read-only*. Otherwise, prefer `Page<dto>` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPageDtoOffsetPagination).
 
 **Key points:**\
      - define a Spring projection that maps the entity and the total number of records\
@@ -1767,3 +1768,14 @@ Moreover, this application fetches data as `Page<dto>` via Spring Boot offset pa
      - write a repository that extends `PagingAndSortingRepository`\
      - fetch data via a native query (that includes counting) into a `List<dto>`, and a `Pageable`\
      - use the fetched `List<dto>` and `Pageable` to create a `Page<dto>`
+
+-----------------------------------------------------------------------------------------------------------------------
+
+123. **[Offset Pagination - Trigger `COUNT(*) OVER` And Return `Page<entity>` Via Extra Column](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPageEntityOffsetPaginationExtraColumnWF)**
+
+**Description:** This application fetches data as `Page<entity>` via Spring Boot offset pagination. Use this only if the fetched data will be modified. Otherwise, fetch `Page<dto>` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPageDtoOffsetPagination). The `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, there is one query needed for fetching the data and one for counting the total number of records).
+
+**Key points:**\
+     - write a repository that extends `PagingAndSortingRepository`\
+     - fetch data via a native query (that includes counting) into a `List<entity>`, and a `Pageable`\
+     - use the fetched `List<entity>` and `Pageable` to create a `Page<entity>`
