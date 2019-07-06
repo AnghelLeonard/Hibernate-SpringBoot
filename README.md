@@ -1741,6 +1741,7 @@ Moreover, this application fetches data as `Page<dto>` via Spring Boot offset pa
 
 **Key points:**\
      - write a repository that extends `PagingAndSortingRepository`\
+     - in the entity, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`\
      - fetch data via a native query (that includes counting) into a `List<entity>`, and a `Pageable`\
      - use the fetched `List<entity>` and `Pageable` to create a `Page<entity>`
 
