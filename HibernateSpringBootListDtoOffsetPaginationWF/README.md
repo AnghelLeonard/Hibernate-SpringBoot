@@ -1,9 +1,9 @@
 **[Offset Pagination - Trigger `COUNT(*) OVER` And Return `List<dto>`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootListDtoOffsetPaginationWF)**
  
-**Description:** When we rely on an *offset* paging we have the performance penalty induced by throwing away *n* records before reached the desired *offset*. Larger *n* leads to a significant performance penalty. But, this is not the only performance penalty. Most of the time we want to count the total number of rows to calculate the total number of possible pages, so this is an extra `SELECT COUNT`. So, if we don't want to go with *keyset* pagination and avoid counting that total number of records, which can be very costly, we have to tackle this performance penalty somehow. For databases vendors that support *Window Functions* there is a solution relying on `COUNT(*) OVER()` as in this application that uses this window function in a native query against MySQL 8.
+**Description:** Typically, in offset pagination, there is one query needed for fetching the data and one for counting the total number of records. But, we can fetch this information in a single database rountrip via a `SELECT COUNT` subquery nested in the main `SELECT`. Even better, for databases vendors that support *Window Functions* there is a solution relying on `COUNT(*) OVER()` as in this application that uses this window function in a native query against MySQL 8. So, prefer this one instead of `SELECT COUNT` subquery.
 
 **Key points:**\
-     - create a DTO projection to cover the extra-column added by the `COUNT(*) OVER()` window function\
+     - create a DTO projection that contains getters for the data that should be fetched and an extra-column for mapping the return of the `COUNT(*) OVER()` window function\
      - write a native query relying on this window function
 
 **Example:**\
