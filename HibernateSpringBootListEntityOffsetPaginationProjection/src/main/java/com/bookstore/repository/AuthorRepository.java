@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AuthorRepository extends PagingAndSortingRepository<Author, Long> {
 
-    @Query(value = "SELECT a AS author, (SELECT count(a) FROM Author a) AS total "
-            + "FROM Author a")
+    @Query(value = "SELECT a AS author, (SELECT count(a) FROM Author a) AS total FROM Author a")
     List<AuthorInfo> fetchAll(Pageable pageable);
 }
