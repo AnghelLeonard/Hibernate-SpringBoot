@@ -7,7 +7,7 @@
      - write a native query relying on this window function
 
 **Example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootWindowFunctionPaging/offset%20pagination%20via%20window%20function.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootListDtoOffsetPaginationWF/offset%20pagination%20via%20window%20function.png)
 
 -------------------------------
 
