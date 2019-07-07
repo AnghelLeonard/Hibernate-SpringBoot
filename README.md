@@ -777,7 +777,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 **Key points:**\
      - create a Spring projection (DTO) to contains getters only for the data that should be fetched\
      - write a repository that extends `PagingAndSortingRepository`\
-     - fetch data via a native query (that includes counting) into a `List<dto>`, and a `Pageable`\
+     - fetch data via a JPQL or native query (that includes counting) into a `List<dto>`, and a `Pageable`\
      - use the fetched `List<dto>` and `Pageable` to create a `Page<dto>`
      
 -----------------------------------------------------------------------------------------------------------------------    
