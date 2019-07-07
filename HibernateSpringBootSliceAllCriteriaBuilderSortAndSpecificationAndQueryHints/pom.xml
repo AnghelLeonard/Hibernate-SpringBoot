@@ -4,17 +4,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jpa</groupId>
-    <artifactId>jpa</artifactId>
+    <artifactId>HibernateSpringBootSliceAllCriteriaBuilderSortAndSpecificationAndQueryHints</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>jpa</name>
+    <name>HibernateSpringBootSliceAllCriteriaBuilderSortAndSpecificationAndQueryHints</name>
     <description>JPA project for Spring Boot</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.6.RELEASE</version>
+        <version>2.1.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -35,11 +35,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.integralblue</groupId>
-            <artifactId>log4jdbc-spring-boot-starter</artifactId>
-            <version>1.0.2</version>
-        </dependency>
+        
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -64,6 +60,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>
