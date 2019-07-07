@@ -962,7 +962,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-70. **[How To Remove The Extra SELECT COUNT Query in Spring Boot Slice Paging with findAll()](https://github.com/AnghelLeonard/Hibernate-SpringBoot)**
+70. **[How To Implement `Slice<T> findAll()`](https://github.com/AnghelLeonard/Hibernate-SpringBoot)**
 
 **Available implementations:**:
 - [This](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSliceAllSimpleSql) is a thin implementation based on a hard-coded SQL: `"SELECT e FROM " + entityClass.getSimpleName() + " e;"`
@@ -981,7 +981,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - implement the `findAll()` methods to return `Slice<T>` (or `Page<T>`, but without the total number of elements)\
      - return a `SliceImpl` (`Slice<T>`) or a `PageImpl` (`Page<T>`) without the total number of elements\
      - implement a new `readSlice()` method or override the `SimpleJpaRepository#readPage()` page to avoid `SELECT COUNT`\
-     - pass the entity class (e.g., `Player.class`) to this `abstract` class via a class repository (`PlayerRepository`)
+     - pass the entity class (e.g., `Author.class`) to this `abstract` class via a class repository (`AuthorRepository`)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
