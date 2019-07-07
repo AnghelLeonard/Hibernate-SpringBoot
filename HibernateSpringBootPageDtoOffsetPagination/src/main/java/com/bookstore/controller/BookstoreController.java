@@ -16,10 +16,15 @@ public class BookstoreController {
         this.bookstoreService = bookstoreService;
     }
 
-    @GetMapping("/authors/{page}/{size}")
-    public Page<AuthorDto> fetchAuthors(@PathVariable int page, @PathVariable int size) {
+    @GetMapping("/native/authors/{page}/{size}")
+    public Page<AuthorDto> fetchAuthorsNative(@PathVariable int page, @PathVariable int size) {
 
-        return bookstoreService.fetchNextPage(page, size);
+        return bookstoreService.fetchNextPageNative(page, size);
     }
 
+    @GetMapping("/jpql/authors/{page}/{size}")
+    public Page<AuthorDto> fetchAuthorsJpql(@PathVariable int page, @PathVariable int size) {
+
+        return bookstoreService.fetchNextPageJpql(page, size);
+    }
 }
