@@ -19,6 +19,19 @@ By its nature, *keyset* doesn't use a `SELECT COUNT` to fetch the number of tota
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`return new AuthorView(authors, false);`\
 `}`
 
+Or, like this (rely on `Author.toString()` method):
+
+`public Map<List<Author>, Boolean> fetchNextPage(long id, int limit) {`\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`List<Author> authors = authorRepository.fetchAll(id, limit + 1);`
+        
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`if(authors.size() == (limit + 1)) {`\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`authors.remove(authors.size() -1);`\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`return Collections.singletonMap(authors, true);`\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`}`
+        
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`return Collections.singletonMap(authors, false);`\
+`}`
+
 A `Previous Page` button can be implemented easily based on the first record.
 
 **Key points:**\
