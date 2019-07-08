@@ -1,5 +1,6 @@
 package com.bookstore.controller;
 
+import com.bookstore.dto.AuthorDto;
 import com.bookstore.entity.Author;
 import com.bookstore.service.BookstoreService;
 import java.util.List;
@@ -20,5 +21,11 @@ public class BookstoreController {
     public List<Author> fetchAuthors(@PathVariable long id, @PathVariable int limit) {
 
         return bookstoreService.fetchNextPage(id, limit);
+    }
+
+    @GetMapping("/dto/authors/{id}/{limit}")
+    public List<AuthorDto> fetchAuthorsDto(@PathVariable long id, @PathVariable int limit) {
+
+        return bookstoreService.fetchNextPageDto(id, limit);
     }
 }
