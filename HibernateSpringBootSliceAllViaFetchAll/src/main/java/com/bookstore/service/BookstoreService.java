@@ -5,6 +5,7 @@ import com.bookstore.entity.Author;
 import com.bookstore.repository.AuthorRepository;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,11 +19,13 @@ public class BookstoreService {
 
     public Slice<Author> fetchNextSlice(int page, int size) {
 
-        return authorRepository.fetchAll(PageRequest.of(page, size));
+        return authorRepository.fetchAll(PageRequest.of(page, size,
+                new Sort(Sort.Direction.ASC, "age")));
     }
-    
+
     public Slice<AuthorDto> fetchNextSliceDto(int page, int size) {
 
-        return authorRepository.fetchAllDto(PageRequest.of(page, size));
+        return authorRepository.fetchAllDto(PageRequest.of(page, size,
+                new Sort(Sort.Direction.ASC, "age")));
     }
 }
