@@ -25,4 +25,18 @@ public class BookstoreService {
 
         return new AuthorView(authors, false);
     }
+
+    // Or, like this (rely on Author.toString() method):
+    /*
+    public Map<List<Author>, Boolean> fetchNextPage(long id, int limit) {
+        List<Author> authors = authorRepository.fetchAll(id, limit + 1);
+
+        if (authors.size() == (limit + 1)) {
+            authors.remove(authors.size() - 1);
+            return Collections.singletonMap(authors, true);
+        }
+
+        return Collections.singletonMap(authors, false);
+    }
+    */
 }
