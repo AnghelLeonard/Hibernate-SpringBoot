@@ -17,7 +17,7 @@ public class Author implements Serializable {
 
     private int age;
     private String name;
-    private String genre;
+    private String genre;  
 
     public Long getId() {
         return id;
