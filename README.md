@@ -1010,6 +1010,19 @@ Screenshot from that article (*offset* pagination):
 **Need to know if there are more records?**\
 By its nature, *keyset* doesn't use a `SELECT COUNT` to fetch the number of total records. But, we a little tweak we can easily say if there are more records, therefore to show a button of type `Next Page`. Mainly, if you need such a thing then consider [this application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootKeysetPaginationNextPage). 
 
+`public AuthorView fetchNextPage(long id, int limit) {`\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`List<Author> authors = authorRepository.fetchAll(id, limit + 1);`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`if (authors.size() == (limit + 1)) {`\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`authors.remove(authors.size() - 1);`\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`return new AuthorView(authors, true);`\
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`}`
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`return new AuthorView(authors, false);`\
+`}`
+
+Or, like this (rely on `Author.toString()` method):
+
 `public Map<List<Author>, Boolean> fetchNextPage(long id, int limit) {`\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`List<Author> authors = authorRepository.fetchAll(id, limit + 1);`
         
