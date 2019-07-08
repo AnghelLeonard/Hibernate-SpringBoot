@@ -20,10 +20,10 @@ public class BookstoreService {
 
         if (authors.size() == (limit + 1)) {
             authors.remove(authors.size() - 1);
-            return new AuthorView(authors, true);
+            return new AuthorView(authors, false);
         }
 
-        return new AuthorView(authors, false);
+        return new AuthorView(authors, true);
     }
 
     // Or, like this (rely on Author.toString() method):
