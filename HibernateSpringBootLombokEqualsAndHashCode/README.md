@@ -14,7 +14,7 @@
      (entity: `IdBook`, test: `IdEqualsAndHashCodeTest`)
 
 **PREFER THESE APPROACHES**\
-     - Rely on business key (entity: `BusinessKeyBook`, test: `BusinessKeyEqualsAndHashCodeTest`)
+     - Rely on business key (entity: `BusinessKeyBook`, test: `BusinessKeyEqualsAndHashCodeTest`)\
      - Rely on `@NaturalId` (entity: `NaturalIdBook`, test: `NaturalIdEqualsAndHashCodeTest`)\
      - Rely on assigned identifiers (entity: `IdProgBook`, test: `IdProgEqualsAndHashCodeTest`)\
      - Rely on database-generated identifiers (entity: `IdGenBook`, test: `IdGenEqualsAndHashCodeTest`)
