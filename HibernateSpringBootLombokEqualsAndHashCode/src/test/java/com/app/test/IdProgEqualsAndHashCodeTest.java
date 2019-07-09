@@ -35,8 +35,8 @@ public class IdProgEqualsAndHashCodeTest {
     @BeforeClass
     public static void setUp() {
         book.setId(1L);
-        book.setTitle("Java Modern Challenge");
-        book.setIsbn("45522-2322GH-23344");
+        book.setTitle("Modern History");
+        book.setIsbn("001-100-000-111");
 
         books.add(book);
     }

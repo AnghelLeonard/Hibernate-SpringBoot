@@ -17,7 +17,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -36,8 +35,8 @@ public class IdEqualsAndHashCodeTest {
 
     @BeforeClass
     public static void setUp() {
-        book.setTitle("Java Modern Challenge");
-        book.setIsbn("45522-2322GH-23344");
+        book.setTitle("Modern History");
+        book.setIsbn("001-100-000-111");
 
         books.add(book);
     }
