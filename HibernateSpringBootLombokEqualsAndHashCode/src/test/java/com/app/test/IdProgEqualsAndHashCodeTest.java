@@ -69,7 +69,7 @@ public class IdProgEqualsAndHashCodeTest {
     // Transition state at second assert point: MANAGED
     public void C_givenBookWhenMergeThenSuccess() {
 
-        book.setTitle("Mastering JSF 2.2");
+        book.setTitle("New Modern History");
         assertTrue(books.contains(book));
 
         IdProgBook mergedBook = entityManager.merge(book);
