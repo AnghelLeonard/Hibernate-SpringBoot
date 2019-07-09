@@ -610,7 +610,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      - Using Lombok  `@EqualsAndHashCode` with primary key only\
      (entity: `LombokIdBook`, test: `LombokEqualsAndHashCodeWithIdOnlyTest`)\
      - Rely on default `equals()` and `hashCode()`\
-     (entity: `DefaultBook`, test: `DefaultEqualsAndHashCodeTest`)\   
+     (entity: `DefaultBook`, test: `DefaultEqualsAndHashCodeTest`)\
      - Rely on default `equals()` and `hashCode()` containing only the database-generated identifier\
      (entity: `IdBook`, test: `IdEqualsAndHashCodeTest`)
 
