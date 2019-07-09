@@ -1037,8 +1037,8 @@ Or, like this (rely on `Author.toString()` method):
 A `Previous Page` button can be implemented easily based on the first record.
 
 **Key points:**\
-     - choose a column to act as the latest visited record (e.g., `id`)\
-     - use this column in the `WHERE` clause of your SQL
+     - choose the column(s) to act as the latest visited record (e.g., `id`)\
+     - use the column(s) in the `WHERE` and `ORDER BY` clauses of your SQL
           
 -----------------------------------------------------------------------------------------------------------------------    
 
