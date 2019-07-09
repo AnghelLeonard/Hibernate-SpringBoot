@@ -44,7 +44,7 @@ public class NaturalIdEqualsAndHashCodeTest {
     @Test
     // Find the Book that has never been persisted
     // Transition state at assert point: NEW
-    public void A_givenBookInSetWhenContainsThenTrue() {
+    public void A_givenBookInSetWhenContainsThenTrue() throws Exception {
 
         assertTrue(books.contains(book));
     }
@@ -53,7 +53,7 @@ public class NaturalIdEqualsAndHashCodeTest {
     // Find the Book after persist
     // Transition state at first assert point: NEW
     // Transition state at second and third assert point: MANAGED
-    public void B_givenBookWhenPersistThenSuccess() {
+    public void B_givenBookWhenPersistThenSuccess() throws Exception {
 
         assertNull(book.getId());
 
@@ -67,7 +67,7 @@ public class NaturalIdEqualsAndHashCodeTest {
     // Find the Book after a merge() - UPDATE statement
     // Transition state at first assert point: DETACHED
     // Transition state at second assert point: MANAGED
-    public void C_givenBookWhenMergeThenSuccess() {
+    public void C_givenBookWhenMergeThenSuccess() throws Exception {
 
         book.setTitle("New Modern History");
         assertTrue(books.contains(book));
@@ -82,7 +82,7 @@ public class NaturalIdEqualsAndHashCodeTest {
     // Find the Book after a find() - SELECT statement
     // Transition state at first assert point: DETACHED
     // Transition state at second assert point: MANAGED
-    public void D_givenBookWhenFindThenSuccess() {
+    public void D_givenBookWhenFindThenSuccess() throws Exception {
 
         assertTrue(books.contains(book));
 
@@ -95,7 +95,7 @@ public class NaturalIdEqualsAndHashCodeTest {
     @Test
     // Find the Book after an explicit detach
     // Transition state at assert point: DETACHED    
-    public void E_givenBookWhenFindAndDetachThenSuccess() {
+    public void E_givenBookWhenFindAndDetachThenSuccess() throws Exception {
 
         NaturalIdBook foundBook = entityManager.find(NaturalIdBook.class, book.getId());
         entityManager.detach(foundBook);
@@ -106,7 +106,7 @@ public class NaturalIdEqualsAndHashCodeTest {
     @Test
     // Find the Book after a remove() - DELETE statement
     // Transition state at assert points: REMOVED    
-    public void F_givenBookWhenFindAndRemoveThenSuccess() {
+    public void F_givenBookWhenFindAndRemoveThenSuccess() throws Exception {
 
         NaturalIdBook foundBook = entityManager.find(NaturalIdBook.class, book.getId());
         entityManager.remove(foundBook);
