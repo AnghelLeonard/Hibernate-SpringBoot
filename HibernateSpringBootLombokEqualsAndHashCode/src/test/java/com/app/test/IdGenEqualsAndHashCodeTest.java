@@ -64,14 +64,11 @@ public class IdGenEqualsAndHashCodeTest {
     }
 
     @Test
-    // Find the Book after a merge() - UPDATE statement
-    // Transition state at first assert point: DETACHED
-    // Transition state at second assert point: MANAGED
+    // Find the Book after a merge() - UPDATE statement    
+    // Transition state at assert point: MANAGED
     public void C_givenBookWhenMergeThenSuccess() throws Exception {
 
         book.setTitle("New Modern History");
-        assertTrue(books.contains(book));
-
         IdGenBook mergedBook = entityManager.merge(book);
         entityManager.flush();
 
@@ -79,12 +76,9 @@ public class IdGenEqualsAndHashCodeTest {
     }
 
     @Test
-    // Find the Book after a find() - SELECT statement
-    // Transition state at first assert point: DETACHED
+    // Find the Book after a find() - SELECT statement    
     // Transition state at second assert point: MANAGED
     public void D_givenBookWhenFindThenSuccess() throws Exception {
-
-        assertTrue(books.contains(book));
 
         IdGenBook foundBook = entityManager.find(IdGenBook.class, book.getId());
         entityManager.flush();

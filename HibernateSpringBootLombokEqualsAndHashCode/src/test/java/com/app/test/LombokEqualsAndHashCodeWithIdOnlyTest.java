@@ -64,14 +64,11 @@ public class LombokEqualsAndHashCodeWithIdOnlyTest {
     }
 
     @Test(expected = java.lang.AssertionError.class)
-    // Find the Book after a merge() - UPDATE statement
-    // Transition state at first assert point: DETACHED
-    // Transition state at second assert point: MANAGED
+    // Find the Book after a merge() - UPDATE statement    
+    // Transition state at assert point: MANAGED
     public void C_givenBookWhenMergeThenSuccess() throws Exception {
 
         book.setTitle("New Modern History");
-        assertTrue(books.contains(book));
-
         LombokIdBook mergedBook = entityManager.merge(book);
         entityManager.flush();
 
@@ -79,12 +76,9 @@ public class LombokEqualsAndHashCodeWithIdOnlyTest {
     }
 
     @Test(expected = java.lang.AssertionError.class)
-    // Find the Book after a find() - SELECT statement
-    // Transition state at first assert point: DETACHED
-    // Transition state at second assert point: MANAGED
+    // Find the Book after a find() - SELECT statement 
+    // Transition state at assert point: MANAGED
     public void D_givenBookWhenFindThenSuccess() throws Exception {
-
-        assertTrue(books.contains(book));
 
         LombokIdBook foundBook = entityManager
                 .find(LombokIdBook.class, book.getId());

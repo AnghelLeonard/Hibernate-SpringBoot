@@ -2,7 +2,7 @@ package com.app.test;
 
 import java.util.HashSet;
 import java.util.Set;
-import com.app.IdProgBook;
+import com.app.IdManBook;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -24,13 +24,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 @Rollback(false)
 @AutoConfigureTestDatabase(replace = Replace.NONE)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class IdProgEqualsAndHashCodeTest {
+public class IdManEqualsAndHashCodeTest {
 
     @Autowired
     private TestEntityManager entityManager;
 
-    private static final IdProgBook book = new IdProgBook();
-    private static final Set<IdProgBook> books = new HashSet<>();
+    private static final IdManBook book = new IdManBook();
+    private static final Set<IdManBook> books = new HashSet<>();
 
     @BeforeClass
     public static void setUp() {
@@ -64,29 +64,23 @@ public class IdProgEqualsAndHashCodeTest {
     }
 
     @Test
-    // Find the Book after a merge() - UPDATE statement
-    // Transition state at first assert point: DETACHED
-    // Transition state at second assert point: MANAGED
+    // Find the Book after a merge() - UPDATE statement   
+    // Transition state at assert point: MANAGED
     public void C_givenBookWhenMergeThenSuccess() throws Exception {
 
         book.setTitle("New Modern History");
-        assertTrue(books.contains(book));
-
-        IdProgBook mergedBook = entityManager.merge(book);
+        IdManBook mergedBook = entityManager.merge(book);
         entityManager.flush();
 
         assertTrue(books.contains(mergedBook));
     }
 
     @Test
-    // Find the Book after a find() - SELECT statement
-    // Transition state at first assert point: DETACHED
+    // Find the Book after a find() - SELECT statement    
     // Transition state at second assert point: MANAGED
     public void D_givenBookWhenFindThenSuccess() throws Exception {
 
-        assertTrue(books.contains(book));
-
-        IdProgBook foundBook = entityManager.find(IdProgBook.class, book.getId());
+        IdManBook foundBook = entityManager.find(IdManBook.class, book.getId());
         entityManager.flush();
 
         assertTrue(books.contains(foundBook));
@@ -97,7 +91,7 @@ public class IdProgEqualsAndHashCodeTest {
     // Transition state at assert point: DETACHED    
     public void E_givenBookWhenFindAndDetachThenSuccess() throws Exception {
 
-        IdProgBook foundBook = entityManager.find(IdProgBook.class, book.getId());
+        IdManBook foundBook = entityManager.find(IdManBook.class, book.getId());
         entityManager.detach(foundBook);
 
         assertTrue(books.contains(foundBook));
@@ -108,7 +102,7 @@ public class IdProgEqualsAndHashCodeTest {
     // Transition state at assert points: REMOVED    
     public void F_givenBookWhenFindAndRemoveThenSuccess() throws Exception {
 
-        IdProgBook foundBook = entityManager.find(IdProgBook.class, book.getId());
+        IdManBook foundBook = entityManager.find(IdManBook.class, book.getId());
         entityManager.remove(foundBook);
         entityManager.flush();
 

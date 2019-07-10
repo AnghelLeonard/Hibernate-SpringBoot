@@ -44,28 +44,33 @@ public class IdBook implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 89 * hash + Objects.hashCode(this.id);
-        return hash;
-    }
-
-    @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
+
         if (obj == null) {
             return false;
         }
+
+        if (this == obj) {
+            return true;
+        }
+
         if (getClass() != obj.getClass()) {
             return false;
         }
+
         final IdBook other = (IdBook) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
+
         return true;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + Objects.hashCode(this.id);
+
+        return hash;
+    }
 }
