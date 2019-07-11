@@ -2,6 +2,7 @@ package com.bookstore.service;
 
 import com.bookstore.repository.AuthorRepository;
 import com.bookstore.entity.Author;
+import com.bookstore.repository.AuthorDto;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class BookstoreService {
         List<Author> authors = authorRepository.fetchWithDuplicates();
 
         authors.forEach(a -> {
-            System.out.println("Id: " + a.getId() + ": Name: " + a.getName());
+            System.out.println("Id: " + a.getId() + ": Name: " + a.getName() + " Books: " + a.getBooks());
         });
     }
 
@@ -30,7 +31,7 @@ public class BookstoreService {
         List<Author> authors = authorRepository.fetchWithoutHint();
 
         authors.forEach(a -> {
-            System.out.println("Id: " + a.getId() + ": Name: " + a.getName());
+            System.out.println("Id: " + a.getId() + ": Name: " + a.getName() + " Books: " + a.getBooks());
         });
     }
 
@@ -40,7 +41,7 @@ public class BookstoreService {
         List<Author> authors = authorRepository.fetchWithHint();
 
         authors.forEach(a -> {
-            System.out.println("Id: " + a.getId() + ": Name: " + a.getName());
+            System.out.println("Id: " + a.getId() + ": Name: " + a.getName() + " Books: " + a.getBooks());
         });
-    }
+    }       
 }
