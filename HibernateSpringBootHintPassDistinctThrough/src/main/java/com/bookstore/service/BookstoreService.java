@@ -2,7 +2,6 @@ package com.bookstore.service;
 
 import com.bookstore.repository.AuthorRepository;
 import com.bookstore.entity.Author;
-import com.bookstore.repository.AuthorDto;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
