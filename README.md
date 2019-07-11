@@ -196,7 +196,7 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-13. **[How To Optimize Distinct SELECTs Via HINT_PASS_DISTINCT_THROUGH Hint](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHintPassDistinctThrough)**
+13. **[Optimize `SELECT DISTINCT` Via Hibernate `HINT_PASS_DISTINCT_THROUGH` Hint](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHintPassDistinctThrough)**
 
 **Description:** Starting with Hibernate 5.2.2, we can optimize `SELECT DISTINCT` via `HINT_PASS_DISTINCT_THROUGH` hint
 
@@ -204,7 +204,7 @@
      - use `@QueryHints(value = @QueryHint(name = HINT_PASS_DISTINCT_THROUGH, value = "false"))`
      
 **Output example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHintPassDistinctThrough/sample.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHintPassDistinctThrough/HINT_PASS_DISTINCT_THROUGH.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
