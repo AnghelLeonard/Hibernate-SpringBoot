@@ -336,13 +336,14 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-24. **[How To Write @OneToOne Via @MapsId](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToOneMapsId)**
+24. **[How To Use `@MapsId` For Sharing Identifier In `@OneToOne` Relationship](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToOneMapsId)**
 
-**Description:** Instead of a bidirectional `@OneToOne` better rely on an unidirectional `@OneToOne` and `@MapsId`. This application is a proof of concept. 
+**Description:** Instead of *classical* unidirectional/bidirectional `@OneToOne` better rely on an unidirectional `@OneToOne` and `@MapsId`. This application is a proof of concept. 
 
 **Key points:**\
      - use `@MapsId` on child side\
-     - basically, for `@OneToOne` associations, this will share the Primary Key with the parent table
+     - use `@JoinColumn` to customize the name of the Primary Key column\
+     - basically, for `@OneToOne` associations, this will share the Primary Key with the parent table (`id` acts as both Primary Key and Foreign Key)         
      
 -----------------------------------------------------------------------------------------------------------------------    
 
