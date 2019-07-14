@@ -1,4 +1,4 @@
-package modern.challenge.projection;
+package com.bookstore.projection;
 
 public interface AuthorNameBookTitle {
             

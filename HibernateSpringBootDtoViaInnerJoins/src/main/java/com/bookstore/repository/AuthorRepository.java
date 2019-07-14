@@ -1,12 +1,12 @@
-package modern.challenge.repository;
+package com.bookstore.repository;
 
 import java.util.List;
-import modern.challenge.entity.Author;
+import com.bookstore.entity.Author;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import modern.challenge.projection.AuthorNameBookTitle;
+import com.bookstore.projection.AuthorNameBookTitle;
 
 @Repository
 @Transactional(readOnly = true)

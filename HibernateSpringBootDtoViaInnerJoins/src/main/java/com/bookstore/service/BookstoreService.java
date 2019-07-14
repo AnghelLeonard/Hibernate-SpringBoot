@@ -1,8 +1,8 @@
-package modern.challenge.service;
+package com.bookstore.service;
 
-import modern.challenge.projection.AuthorNameBookTitle;
-import modern.challenge.repository.AuthorRepository;
-import modern.challenge.repository.BookRepository;
+import com.bookstore.projection.AuthorNameBookTitle;
+import com.bookstore.repository.AuthorRepository;
+import com.bookstore.repository.BookRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
