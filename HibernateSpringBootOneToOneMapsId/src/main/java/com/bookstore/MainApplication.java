@@ -21,7 +21,6 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            bookstoreService.newAuthor();
             bookstoreService.newBookOfAuthor();
 
             Book book = bookstoreService.fetchBookByAuthorId();

@@ -20,7 +20,7 @@ public class Book implements Serializable {
     private String isbn;
 
     @MapsId
-    @OneToOne(fetch = FetchType.LAZY)    
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
     private Author author;
 

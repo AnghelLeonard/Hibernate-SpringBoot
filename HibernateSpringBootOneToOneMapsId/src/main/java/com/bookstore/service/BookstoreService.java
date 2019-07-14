@@ -20,25 +20,17 @@ public class BookstoreService {
         this.bookRepository = bookRepository;
     }
 
-    public void newAuthor() {
-
-        Author author = new Author();
-        author.setName("Joana Nimar");
-        author.setGenre("History");
-        author.setAge(34);
-
-        authorRepository.save(author);
-    }
-
     @Transactional
     public void newBookOfAuthor() {
 
-        Author author = authorRepository.findByName("Joana Nimar");
+        Author author = authorRepository.findById(1L).orElseThrow();
 
         Book book = new Book();
         book.setTitle("A History of Ancient Prague");
         book.setIsbn("001-JN");
-        book.setAuthor(author);// this will set the ID of book as the ID of the author
+
+        // this will set the id of the book as the id of the author
+        book.setAuthor(author);
 
         bookRepository.save(book);
     }
@@ -46,7 +38,7 @@ public class BookstoreService {
     @Transactional(readOnly = true)
     public Book fetchBookByAuthorId() {
 
-        Author author = authorRepository.findByName("Joana Nimar");
+        Author author = authorRepository.findById(1L).orElseThrow();
 
         return bookRepository.findById(author.getId()).orElseThrow();
     }
