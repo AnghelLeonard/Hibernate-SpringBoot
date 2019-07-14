@@ -1,12 +1,12 @@
-**[How To Quickly Reproduce N+1 Performance Issue](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSimulateNPlus1)**
+**[How To Quickly Reproduce The N+1 Performance Issue](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSimulateNPlus1)**
 
-**Description:** N+1 is an issue of lazy fetching (but, eager is not exempt). This application reproduce the N+1 behavior.
+**Description:** The N+1 is an issue of lazy fetching (but, eager is not exempt). This application reproduce the N+1 behavior.
 
 **Key points:**\
      - define two entities, `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship\
      - fetch all `Book` lazy, so without `Author` (results in 1 query)\
      - loop the fetched `Book` collection and for each entry fetch the corresponding `Author` (results N queries)\
-     -or, fetch all `Author` lazy, so without `Book` (results in 1 query)\
+     - or, fetch all `Author` lazy, so without `Book` (results in 1 query)\
      - loop the fetched `Author` collection and for each entry fetch the corresponding `Book` (results N queries)
      
 **Output example:**\
