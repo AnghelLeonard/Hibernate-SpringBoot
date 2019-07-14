@@ -343,7 +343,7 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
 **Key points:**\
      - use `@MapsId` on child side\
      - use `@JoinColumn` to customize the name of the Primary Key column\
-     - basically, for `@OneToOne` associations, this will share the Primary Key with the parent table (`id` acts as both Primary Key and Foreign Key)         
+     - basically, for `@OneToOne` associations, `@MapsId` will share the Primary Key with the parent table (`id` property acts as both Primary Key and Foreign Key)      
      
 -----------------------------------------------------------------------------------------------------------------------    
 
