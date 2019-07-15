@@ -2,7 +2,7 @@
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaFullJoinsMySQL/DTO%20via%20inclusive%20full%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and inclusive full joins written native SQL (for MySQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTOs) and inclusive full joins written in native SQL (for MySQL).
 
 **Key points:**\
      - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
