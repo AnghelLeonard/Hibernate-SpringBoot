@@ -2,7 +2,7 @@
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaOuterExcludingJoins/DTO%20via%20exclusive%20full%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and exclusive full joins written via JPQL and native SQL (for MySQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTOs) and exclusive full joins written via JPQL and native SQL (for PostgreSQL).
 
 **Key points:**\
      - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
