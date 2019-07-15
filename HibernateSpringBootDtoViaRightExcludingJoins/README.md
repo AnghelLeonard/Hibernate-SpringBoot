@@ -1,13 +1,13 @@
-**[How To Use Spring Projections(DTOs) And Exclusive Left Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaLeftExcludingJoins)**
+**[How To Use Spring Projections(DTOs) And Exclusive Right Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaRightExcludingJoins)**
 
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaLeftExcludingJoins/DTO%20via%20exclusive%20left%20joins.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaRightExcludingJoins/DTO%20via%20exclusive%20right%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and exclusive left joins written via JPQL and native SQL (for MySQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTOs) and exclusive right joins written via JPQL and native SQL (for MySQL).
 
 **Key points:**\
      - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
      - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
      - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
-     - write exclusive left joins queries using JPQL/SQL
+     - write exclusive right joins queries using JPQL/SQL
 
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
