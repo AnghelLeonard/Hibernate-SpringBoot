@@ -583,13 +583,13 @@ The bytecode enhancement effect can be seen on `User.class` [here](https://githu
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-43. **[How To Use Use Spring Post Commits](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPostCommit)**
+43. **[Why You Should Avoid Time-Consuming Tasks In Spring Boot Post-Commits](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPostCommit)**
 
 **Description:** This application is a proof of concept for using Spring post-commit hooks.
 
 **Key points:**\
      - avoid time-consuming task in post-commits since the database connection will remain open until this code finshes
-
+     
 -----------------------------------------------------------------------------------------------------------------------    
 
 44. **[How To Exploit Spring Projections(DTOs) And Join Unrelated Entities in Hibernate 5.1+](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoUnrelatedEntities)**
