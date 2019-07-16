@@ -1,3 +1,1 @@
-INSERT INTO `db_royalty`.`royalty` (`id`, `amount`, `name`) VALUES ('1', '23.4', 'Geo Bioi');
-
-
+insert into book (isbn, title, price, id) values ("001-JN", "A People's History", 32, 1);
