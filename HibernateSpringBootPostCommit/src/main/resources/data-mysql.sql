@@ -1,1 +1,1 @@
-INSERT INTO `db_users`.`user` (`id`, `age`, `city`, `name`) VALUES ('1', '22', 'Banesti', 'Leonard A');
+INSERT INTO `author` (`id`, `age`, `name`, `genre`) VALUES (1,34,'Joana Nimar', 'History');
