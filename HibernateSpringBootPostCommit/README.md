@@ -1,4 +1,4 @@
-**[How To Use Use Spring Post Commits](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPostCommit)**
+**[Why You Should Avoid Time-Consuming Tasks In Spring Boot Post-Commits](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPostCommit)**
 
 **Description:** This application is a proof of concept for using Spring post-commit hooks.
 
