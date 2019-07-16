@@ -17,7 +17,7 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
             + "FROM Author a RIGHT JOIN a.books b WHERE a.id IS NULL")
     List<AuthorNameBookTitle> findAuthorsAndBooksJpql();
 
-    // Fetch authors and books excluding authors that have registered books (JPQL)    
+    // Fetch authors and books excluding authors that have registered books (SQL)    
     @Query(value = "SELECT b.title AS title, a.name AS name "
             + "FROM author a RIGHT JOIN book b ON a.id = b.author_id WHERE a.id IS NULL",
             nativeQuery = true)

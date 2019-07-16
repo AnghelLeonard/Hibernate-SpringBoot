@@ -18,12 +18,12 @@ public class BookstoreService {
         this.bookRepository = bookRepository;
     }
 
-    // Fetch books and authors excluding authors that have registered books (JPQL)    
+    // Fetch books and authors excluding books that have registered authors (JPQL)    
     public List<AuthorNameBookTitle> fetchBooksAndAuthorsJpql() {
         return bookRepository.findBooksAndAuthorsJpql();
     }
 
-    // Fetch books and authors excluding authors that have registered books (SQL)    
+    // Fetch books and authors excluding books that have registered authors (SQL)    
     public List<AuthorNameBookTitle> fetchBooksAndAuthorsSql() {
         return bookRepository.findBooksAndAuthorsSql();
     }
