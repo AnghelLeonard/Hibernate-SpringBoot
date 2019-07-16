@@ -12,12 +12,12 @@ import com.bookstore.projection.AuthorNameBookTitle;
 @Transactional(readOnly = true)
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
-    // Fetch authors and books excluding authors that have registered books (JPQL)    
+    // Fetch authors and books excluding authors that have registered books and books with registered authors (JPQL)    
     @Query(value = "SELECT b.title AS title, a.name AS name "
             + "FROM Author a FULL JOIN a.books b WHERE a.id IS NULL OR b.id IS NULL")
     List<AuthorNameBookTitle> findAuthorsAndBooksJpql();
 
-    // Fetch authors and books excluding authors that have registered books (JPQL)    
+    // Fetch authors and books excluding authors that have registered books and books with registered authors (SQL)    
     @Query(value = "SELECT b.title AS title, a.name AS name "
             + "FROM author a FULL JOIN book b ON a.id = b.author_id WHERE a.id IS NULL OR b.id IS NULL",
             nativeQuery = true)
