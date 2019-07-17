@@ -1835,3 +1835,14 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
      - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
      - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
      - write inclusive full joins queries using native SQL
+
+-----------------------------------------------------------------------------------------------------------------------
+
+125. **[How To Declare Immutable Entities And Store Them In Second Level Cache (e.g., `EhCache`)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootImmutableEntity)**
+
+**Description:** This application is a sample of declaring an immutable entity. Moreover, the immutable entity will be stored in Second Level Cache via `EhCache` implementation.
+
+**Key points of declaring an immutable entity:**\
+     - annotate the entity with `@Immutable (org.hibernate.annotations.Immutable)`\
+     - avoid any kind of associations\
+     - set `hibernate.cache.use_reference_entries configuration` to `true`
