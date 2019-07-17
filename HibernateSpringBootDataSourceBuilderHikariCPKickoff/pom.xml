@@ -21,9 +21,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>    
-        
-        <datasource-proxy.version>1.4.9</datasource-proxy.version>            
+        <java.version>1.8</java.version>            
     </properties>
 
     <dependencies>
@@ -50,15 +48,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>net.ttddyy</groupId>
-            <artifactId>datasource-proxy</artifactId>
-            <version>${datasource-proxy.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
             <optional>true</optional>
-        </dependency>
+        </dependency>        
     </dependencies>
 
     <build>
