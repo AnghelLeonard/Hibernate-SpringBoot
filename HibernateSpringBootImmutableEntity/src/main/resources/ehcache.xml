@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd"
+         updateCheck="true" monitoring="autodetect" dynamicConfig="true">        
+
+    <defaultCache maxElementsInMemory="100" 
+                  eternal="false" 
+                  timeToIdleSeconds="1" 
+                  timeToLiveSeconds="1"                  
+                  diskPersistent="false" 
+                  diskExpiryThreadIntervalSeconds="1"
+                  overflowToDisk="false"
+                  memoryStoreEvictionPolicy="LRU"/>         
+    
+    <cache name="Author"
+           maxElementsInMemory="15000"           
+           eternal="true"           
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="0"
+           memoryStoreEvictionPolicy="LRU"
+           overflowToDisk="false"
+           transactionalMode="off">        
+    </cache>
+    
+    <cache name="default-query-results-region"
+           maxElementsInMemory="1500"
+           eternal="true" 
+           timeToIdleSeconds="0" timeToLiveSeconds="0" 
+           overflowToDisk="false"
+           memoryStoreEvictionPolicy="LRU" />
+    
+    <cache name="default-update-timestamps-region"
+           maxElementsInMemory="100"
+           overflowToDisk="false"
+           eternal="true">
+    </cache>       
+</ehcache>
