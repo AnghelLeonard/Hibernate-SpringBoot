@@ -1,7 +1,7 @@
-package modern.challenge.service;
+package com.bookstore.service;
 
-import modern.challenge.repository.AuthorRepository;
-import modern.challenge.entity.Author;
+import com.bookstore.repository.AuthorRepository;
+import com.bookstore.entity.Author;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

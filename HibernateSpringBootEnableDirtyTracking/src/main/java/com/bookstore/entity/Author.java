@@ -1,4 +1,4 @@
-package modern.challenge.entity;
+package com.bookstore.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;

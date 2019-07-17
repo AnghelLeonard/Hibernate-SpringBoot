@@ -1,14 +1,14 @@
-package com.jpa;
+package com.bookstore.entity;
 
+import java.util.Objects;
 import javax.persistence.Transient;
 import org.hibernate.bytecode.enhance.internal.tracker.DirtyTracker;
 import org.hibernate.engine.spi.EntityEntry;
 import org.hibernate.engine.spi.ManagedEntity;
-import org.hibernate.internal.util.compare.EqualsHelper;
 
 
 @javax.persistence.Entity
-public class User
+public class Author
   implements java.io.Serializable, ManagedEntity, org.hibernate.engine.spi.SelfDirtinessTracker
 {
   private static final long serialVersionUID = 1L;
@@ -16,9 +16,9 @@ public class User
   @javax.persistence.GeneratedValue(strategy=javax.persistence.GenerationType.IDENTITY)
   private Long id;
   private String name;
-  private String city;
+  private String genre;
   
-  public User() {}
+  public Author() {}
   
   public Long getId() { return $$_hibernate_read_id(); }
   
@@ -36,25 +36,23 @@ public class User
   
   @Transient
   private transient ManagedEntity $$_hibernate_previousManagedEntity;
-  public String getCity() { return $$_hibernate_read_city(); }
+  public String getGenre() { return $$_hibernate_read_genre(); }
   
-  public void setCity(String city)
+  public void setGenre(String genre)
   {
-    $$_hibernate_write_city(city);
+    $$_hibernate_write_genre(genre);
   }
   
   public int getAge() {
     return $$_hibernate_read_age();
   }
   
-
-  public void setAge(int age) { $$_hibernate_write_age(age); }
+  public void setAge(int age) {
+    $$_hibernate_write_age(age);
+  }
   
   @Transient
   private transient ManagedEntity $$_hibernate_nextManagedEntity;
-  
-  public String toString() { return "User{id=" + $$_hibernate_read_id() + ", name=" + $$_hibernate_read_name() + ", city=" + $$_hibernate_read_city() + ", age=" + $$_hibernate_read_age() + '}'; }
-  
   @Transient
   private transient DirtyTracker $$_hibernate_tracker;
   public Object $$_hibernate_getEntityInstance()
@@ -94,7 +92,9 @@ public class User
   
   public void $$_hibernate_trackChange(String paramString)
   {
-    if ($$_hibernate_tracker == null) {
+    if ($$_hibernate_tracker == null)
+    {
+      this;
       $$_hibernate_tracker = new org.hibernate.bytecode.enhance.internal.tracker.SimpleFieldTracker();
     }
     $$_hibernate_tracker.add(paramString);
@@ -102,12 +102,18 @@ public class User
   
   public String[] $$_hibernate_getDirtyAttributes()
   {
-    return $$_hibernate_tracker == null ? new String[0] : $$_hibernate_tracker.get();
+    Object localObject = this;
+    localObject = null;
+    localObject = $$_hibernate_tracker == null ? new String[0] : $$_hibernate_tracker.get();
+    return localObject;
   }
   
   public boolean $$_hibernate_hasDirtyAttributes()
   {
-    return ($$_hibernate_tracker != null) && (!$$_hibernate_tracker.isEmpty());
+    Author localAuthor = this;
+    boolean bool = false;
+    bool = ($$_hibernate_tracker != null) && (!$$_hibernate_tracker.isEmpty());
+    return bool;
   }
   
   public void $$_hibernate_clearDirtyAttributes()
@@ -119,7 +125,9 @@ public class User
   
   public void $$_hibernate_suspendDirtyTracking(boolean paramBoolean)
   {
-    if ($$_hibernate_tracker == null) {
+    if ($$_hibernate_tracker == null)
+    {
+      this;
       $$_hibernate_tracker = new org.hibernate.bytecode.enhance.internal.tracker.SimpleFieldTracker();
     }
     $$_hibernate_tracker.suspend(paramBoolean);
@@ -127,7 +135,10 @@ public class User
   
   public org.hibernate.bytecode.enhance.spi.CollectionTracker $$_hibernate_getCollectionTracker()
   {
-    return org.hibernate.bytecode.enhance.internal.tracker.NoopCollectionTracker.INSTANCE;
+    Object localObject = this;
+    localObject = null;
+    localObject = org.hibernate.bytecode.enhance.internal.tracker.NoopCollectionTracker.INSTANCE;
+    return localObject;
   }
   
   public Long $$_hibernate_read_id()
@@ -147,23 +158,23 @@ public class User
   
   public void $$_hibernate_write_name(String paramString)
   {
-    if (!EqualsHelper.areEqual(name, paramString)) {
+    if (!Objects.deepEquals(paramString, name)) {
       $$_hibernate_trackChange("name");
     }
     name = paramString;
   }
   
-  public String $$_hibernate_read_city()
+  public String $$_hibernate_read_genre()
   {
-    return city;
+    return genre;
   }
   
-  public void $$_hibernate_write_city(String paramString)
+  public void $$_hibernate_write_genre(String paramString)
   {
-    if (!EqualsHelper.areEqual(city, paramString)) {
-      $$_hibernate_trackChange("city");
+    if (!Objects.deepEquals(paramString, genre)) {
+      $$_hibernate_trackChange("genre");
     }
-    city = paramString;
+    genre = paramString;
   }
   
   public int $$_hibernate_read_age()
@@ -173,7 +184,7 @@ public class User
   
   public void $$_hibernate_write_age(int paramInt)
   {
-    if (age != paramInt) {
+    if (paramInt - age != 0) {
       $$_hibernate_trackChange("age");
     }
     age = paramInt;
