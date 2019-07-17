@@ -6,7 +6,7 @@
 
 **Description:** This is a kickoff application that set up HikariCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. Check the HickariCP report revealing the connection pool status.
 
-**Key points:**\     
+**Key points:**\
      - write a `@Bean` that returns the `DataSource` programmatically
 
 **Output sample:**\
