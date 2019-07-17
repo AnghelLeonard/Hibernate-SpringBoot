@@ -4,26 +4,24 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jpa</groupId>
-    <artifactId>jpa</artifactId>
+    <artifactId>HibernateSpringBootHikariCPPropertiesKickoff</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>jpa</name>
+    <name>HibernateSpringBootHikariCPPropertiesKickoff</name>
     <description>JPA project for Spring Boot</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.5.RELEASE</version>
+        <version>2.1.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>    
-        
-        <datasource-proxy.version>1.4.9</datasource-proxy.version>            
+        <java.version>1.8</java.version>            
     </properties>
 
     <dependencies>
@@ -48,12 +46,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.ttddyy</groupId>
-            <artifactId>datasource-proxy</artifactId>
-            <version>${datasource-proxy.version}</version>
-        </dependency>
+        </dependency>        
     </dependencies>
 
     <build>
@@ -64,6 +57,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>
