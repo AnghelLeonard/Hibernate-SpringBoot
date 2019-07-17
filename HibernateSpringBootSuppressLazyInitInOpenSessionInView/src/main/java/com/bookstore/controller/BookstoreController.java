@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class AuthorController {
+public class BookstoreController {
 
     private final BookstoreService bookstoreService;
 
-    public AuthorController(BookstoreService bookstoreService) {
+    public BookstoreController(BookstoreService bookstoreService) {
         this.bookstoreService = bookstoreService;
     }
 
