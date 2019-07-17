@@ -1,4 +1,4 @@
-**[How To Customize HikariCP Settings Via Properties And `DataSourceBuilder`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceBuilderHikariCPKickoff)**
+**[How To Programmatically Customize HikariCP Settings Via `DataSourceBuilder`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceBuilderProgHikariCPKickoff)**
 
 **If you use the `spring-boot-starter-jdbc` or `spring-boot-starter-data-jpa` "starters", you automatically get a dependency to HikariCP**
 
@@ -6,9 +6,8 @@
 
 **Description:** This is a kickoff application that set up HikariCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. Check the HickariCP report revealing the connection pool status.
 
-**Key points:**\
-     - in `application.properties`, configure HikariCP via a custom prefix, e.g., `app.datasource.*`\
-     - write a `@Bean` that returns the `DataSource`
+**Key points:**\     
+     - write a `@Bean` that returns the `DataSource` programmatically
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHikariCPPropertiesKickoff/HikariCP%20trace%20log.png)
