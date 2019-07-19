@@ -4,17 +4,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jpa</groupId>
-    <artifactId>jpa</artifactId>
+    <artifactId>HibernateSpringBootDataSourceBuilderViburDBCPKickoff</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>jpa</name>
+    <name>HibernateSpringBootDataSourceBuilderViburDBCPKickoff</name>
     <description>JPA project for Spring Boot</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.0.RELEASE</version>
+        <version>2.1.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -23,7 +23,8 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>    
         
-        <datasource-proxy.version>1.4.9</datasource-proxy.version>            
+        <vibur-dbcp.version>22.2</vibur-dbcp.version>          
+        <concurrentlinkedhashmap.version>1.4.2</concurrentlinkedhashmap.version>  
     </properties>
 
     <dependencies>
@@ -56,13 +57,13 @@
         <dependency>
             <groupId>org.vibur</groupId>
             <artifactId>vibur-dbcp</artifactId>
-            <version>22.2</version>
+            <version>${vibur-dbcp.version}</version>
         </dependency>        
         <!-- https://mvnrepository.com/artifact/com.googlecode.concurrentlinkedhashmap/concurrentlinkedhashmap-lru -->
         <dependency>
             <groupId>com.googlecode.concurrentlinkedhashmap</groupId>
             <artifactId>concurrentlinkedhashmap-lru</artifactId>
-            <version>1.4.2</version>
+            <version>${concurrentlinkedhashmap.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
