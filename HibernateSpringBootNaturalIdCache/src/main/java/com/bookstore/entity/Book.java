@@ -12,7 +12,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.NaturalIdCache;
 
-@Entity
+@Entity 
 @NaturalIdCache
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "Book")
 public class Book implements Serializable {
