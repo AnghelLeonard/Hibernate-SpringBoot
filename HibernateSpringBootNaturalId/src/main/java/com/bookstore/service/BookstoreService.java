@@ -48,7 +48,7 @@ public class BookstoreService {
         // uncomment the "sku" field in the Book entity and the below lines; comment lines 44 and 45)
         // Map<String, Object> ids = new HashMap<>();
         // ids.put("sku", 1L);
-        // ids.put("code", "001-AR");            
+        // ids.put("isbn", "001-AR");            
         // Optional<Book> foundArBook = bookNaturalRepository.findByNaturalId(ids);
         
         return foundArBook.orElseThrow();
