@@ -1,10 +1,10 @@
 
-**[How To Use Hibernate @NaturalId in SpringBoot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNaturalId)**
+**[How To Use Hibernate `@NaturalId` in SpringBoot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNaturalId)**
 
 **Description:** This is a SpringBoot application that maps a natural business key using Hibernate `@NaturalId`.
 
 **Key points:**\
-     - in the entity (e.g., `Product`), mark the properties (business keys) that should act as natural IDs with `@NaturalId`; commonly, there is a single such property, but multiple are suppored as well as [here](https://docs.jboss.org/hibernate/orm/5.0/mappingGuide/en-US/html/ch07.html).\
+- in the entity (e.g., `Book`), mark the fields (business keys) that should act as natural IDs with `@NaturalId`; commonly, there is a single such property, but multiple are suppored as well as [here](https://docs.jboss.org/hibernate/orm/5.0/mappingGuide/en-US/html/ch07.html).\
      - for non-mutable ids, mark the columns as `@NaturalId(mutable = false)` and `@Column(nullable = false, updatable = false, unique = true, ...)`\
      - for mutable ids, mark the columns as `@NaturalId(mutable = true)` and `@Column(nullable = false, updatable = true, unique = true, ...)`\
      - override the `equals()` and `hashCode()` using the natural id(s)\
