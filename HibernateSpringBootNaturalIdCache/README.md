@@ -7,6 +7,9 @@
 - annotate entity with `@NaturalIdCache`
 - annotate entity with `@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "Book")`
 
+**Output sample:**\
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootNaturalIdCache/Hibernate%20NaturalIdCache%20first%20query.png)
+
 -------------------------------
 
 **You may like to try as well:**
