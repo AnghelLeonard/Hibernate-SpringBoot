@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PostLoad;
 import javax.persistence.Transient;
-
+ 
 @Entity
 public class Book implements Serializable {
 
