@@ -3,7 +3,7 @@
 **Description:** This application is an example of calculating an entity property at `INSERT` or `UPDATE ` time via Hibernate `@Generated` annotation.
 
 **Key points:**\
-     - annotate the entity property that should be calculated with `GenerationTime.ALWAYS` or `GenerationTime.INSERT`\
+     - annotate the entity property that should be calculated with `@Generated(value = GenerationTime.ALWAYS)` or `@Generated(value = GenerationTime.INSERT)`\
      - if  the database schema is generated via JPA annotations then use `columnDefinition` element of `@Column` (in production, you should not rely on this practice)\
      - in production, add the SQL query expression in `CREATE TABLE` (check, `schema-sql.sql`)
      
