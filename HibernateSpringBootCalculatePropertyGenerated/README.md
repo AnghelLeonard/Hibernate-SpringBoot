@@ -1,9 +1,10 @@
-**[How To Calculate Property via JPA `@PostLoad`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyPostLoad)**
+**[How To Calculate An Entity Property At `INSERT` Or `UPDATE` Time Via Hibernate `@Generated`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyGenerated)**
  
-**Description:** This application is an example of calculating transient properties of an entity based on the persistent entity attributes. In this case, we will use JPA, `@PostLoad`.
+**Description:** This application is an example of calculating an entity property at `INSERT` or `UPDATE ` time via Hibernate `@Generated` annotation.
 
 **Key points:**\
-     - annotate the non-persitent fields and properties with `@Transient`\
-     - define a method annotated with `@PostLoad` that calculates these transient properties based on the persistent entity attributes
+     - annotate the entity property that should be calculated with `@Generated(value = GenerationTime.ALWAYS)` or `@Generated(value = GenerationTime.INSERT)`\
+     - if  the database schema is generated via JPA annotations then use `columnDefinition` element of `@Column` (in production, you should not rely on this practice)\
+     - in production, add the SQL query expression in `CREATE TABLE` (check, `schema-sql.sql`)
      
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
