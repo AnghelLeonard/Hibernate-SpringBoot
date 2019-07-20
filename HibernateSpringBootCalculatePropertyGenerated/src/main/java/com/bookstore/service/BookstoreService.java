@@ -3,8 +3,8 @@ package com.bookstore.service;
 import com.bookstore.repository.BookRepository;
 import java.util.logging.Logger;
 import com.bookstore.entity.Book;
-import java.util.List;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookstoreService {
@@ -26,6 +26,12 @@ public class BookstoreService {
         book.setPrice(13.99);
 
         bookRepository.save(book);
+    }
+
+    @Transactional
+    public void updateBook() {
+        Book book = bookRepository.findByTitle("Ancient History");
+        book.setPrice(9.99);
     }
 
     public Book fetchBook() {

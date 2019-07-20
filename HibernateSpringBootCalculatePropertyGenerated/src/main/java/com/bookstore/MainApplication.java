@@ -23,10 +23,13 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            bookstoreService.insertBook();
+            bookstoreService.insertBook();                       
+            Book book1 = bookstoreService.fetchBook();
+            System.out.println("After insert" + book1);
             
-            Book book = bookstoreService.fetchBook();
-            System.out.println(book);
+            bookstoreService.updateBook();                       
+            Book book2 = bookstoreService.fetchBook();
+            System.out.println("After update: " + book2);
         };
     }
 }
