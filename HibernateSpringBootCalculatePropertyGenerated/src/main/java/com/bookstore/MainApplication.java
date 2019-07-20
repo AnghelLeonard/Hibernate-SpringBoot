@@ -1,5 +1,6 @@
 package com.bookstore;
 
+import com.bookstore.entity.Book;
 import com.bookstore.service.BookstoreService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -23,6 +24,9 @@ public class MainApplication {
     public ApplicationRunner init() {
         return args -> {
             bookstoreService.insertBook();
+            
+            Book book = bookstoreService.fetchBook();
+            System.out.println(book);
         };
     }
 }
