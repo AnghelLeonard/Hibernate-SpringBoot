@@ -1882,3 +1882,14 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 **Key points:**\
      - annotate the non-persitent fields and properties with `@Transient`\
      - define a method annotated with `@PostLoad` that calculates these transient properties based on the persistent entity attributes
+
+----------------------------------------------------------------------------------------------------------------------
+
+129. **[How To Calculate An Entity Property At `INSERT` Or `UPDATE` Time Via Hibernate `@Generated`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyGenerated)**
+ 
+**Description:** This application is an example of calculating an entity property at `INSERT` or `UPDATE ` time via Hibernate `@Generated` annotation.
+
+**Key points:**\
+     - annotate the entity property that should be calculated with `@Generated(value = GenerationTime.ALWAYS)` or `@Generated(value = GenerationTime.INSERT)`\
+     - if  the database schema is generated via JPA annotations then use `columnDefinition` element of `@Column` (in production, you should not rely on this practice; set `hibernate.ddl-auto` to `none` or `validate`)\
+     - in production, add the SQL query expression in `CREATE TABLE` (in this example, check `schema-sql.sql`; nevertheless, the best way is to rely on Flyway or Liquibase)
