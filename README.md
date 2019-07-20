@@ -1872,3 +1872,13 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootNaturalIdCache/Hibernate%20NaturalIdCache%20first%20query.png)
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootNaturalIdCache/Hibernate%20NaturalIdCache%20second%20query.png)
+
+----------------------------------------------------------------------------------------------------------------------
+
+128. **[How To Calculate Property via JPA `@PostLoad`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyPostLoad)**
+ 
+**Description:** This application is an example of calculating transient properties of an entity based on the persistent entity attributes. In this case, we will use JPA, `@PostLoad`.
+
+**Key points:**\
+     - annotate the non-persitent fields and properties with `@Transient`\
+     - define a method annotated with `@PostLoad` that calculates these transient properties based on the persistent entity attributes
