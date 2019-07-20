@@ -1,6 +1,6 @@
 **[How To Calculate An Entity Property At `INSERT` Or `UPDATE` Time Via Hibernate `@Generated`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyGenerated)**
  
-**Description:** This application is an example of calculating an entity property at `INSERT` or `UPDATE ` time via Hibernate `@Generated`.
+**Description:** This application is an example of calculating an entity property at `INSERT` or `UPDATE ` time via Hibernate `@Generated` annotation.
 
 **Key points:**\
      - annotate the entity property that should be calculated with `GenerationTime.ALWAYS` or `GenerationTime.INSERT`\
