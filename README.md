@@ -1894,3 +1894,14 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
      - if  the database schema is generated via JPA annotations then use `columnDefinition` element of `@Column` 
      
 **Note:** In production, you should not rely on this practice. You should set `hibernate.ddl-auto` to `none` or `validate`, and add the SQL query expression in `CREATE TABLE` (in this example, check the `discount` column in `CREATE TABLE`, file `schema-sql.sql`). Nevertheless, not even `schema-sql.sql` is ok in production. The best way is to rely on Flyway or Liquibase.
+
+----------------------------------------------------------------------------------------------------------------------
+
+130. **[How To Calculate Property via Hibernate `@Formula`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyFormula)**
+ 
+**Description:** This application is an example of calculating transient properties of an entity based on the persistent entity attributes. In this case, we will use Hibernate, `@Formula`.
+
+**Key points:**\
+     - annotate the non-persitent properties with `@Transient`\
+     - annotate the non-persistent fields with `@Formula`\
+     - as the value of `@Formula` add the SQL query expression that calculates these transient properties based on the persistent entity attributes
