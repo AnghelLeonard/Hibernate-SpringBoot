@@ -1891,5 +1891,6 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 **Key points:**\
      - annotate the entity property that should be calculated with `@Generated(value = GenerationTime.ALWAYS)` or `@Generated(value = GenerationTime.INSERT)`\
-     - if  the database schema is generated via JPA annotations then use `columnDefinition` element of `@Column` (in production, you should not rely on this practice; set `hibernate.ddl-auto` to `none` or `validate`)\
-     - in production, add the SQL query expression in `CREATE TABLE` (in this example, check `schema-sql.sql`; nevertheless, the best way is to rely on Flyway or Liquibase)
+     - if  the database schema is generated via JPA annotations then use `columnDefinition` element of `@Column` 
+     
+**Note:** In production, you should not rely on this practice. You should set `hibernate.ddl-auto` to `none` or `validate`, and add the SQL query expression in `CREATE TABLE` (in this example, check `schema-sql.sql`). Nevertheless, not even `schema-sql.sql` is ok in production. The best way is to rely on Flyway or Liquibase.
