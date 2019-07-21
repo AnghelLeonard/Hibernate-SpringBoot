@@ -26,8 +26,7 @@ public class Book implements Serializable {
     // @Column(name="...", insertable=false)
     
     @Generated(value = GenerationTime.ALWAYS)
-    @Column(insertable = false, updatable = false, 
-            columnDefinition = "double AS (price - price * 0.25)")
+    @Column(insertable = false, updatable = false /*, columnDefinition = "double AS (price - price * 0.25)"*/ )
     private double discount;
 
     public Long getId() {
@@ -64,11 +63,7 @@ public class Book implements Serializable {
 
     public double getDiscount() {
         return discount;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
-    }
+    }   
 
     @Override
     public String toString() {

@@ -1,12 +1,12 @@
 -- Drop
-DROP TABLE IF EXISTS `bookstoredb`.`book`;
+DROP TABLE IF EXISTS bookstoredb.book;
 
 -- Create
-CREATE TABLE `book` (
-  `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `discount` double GENERATED ALWAYS AS ((`price` - (`price` * 0.25))) VIRTUAL,
-  `isbn` varchar(255) DEFAULT NULL,
-  `price` double NOT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE book (
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  discount DOUBLE GENERATED ALWAYS AS ((`price` - (`price` * 0.25))) STORED,
+  isbn VARCHAR(255),
+  price DOUBLE PRECISION NOT NULL,
+  title VARCHAR(255),
+  PRIMARY KEY (id)
+)
