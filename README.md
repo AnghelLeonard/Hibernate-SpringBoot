@@ -1880,7 +1880,7 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 **Description:** This application is an example of calculating a non-persistent property of an entity based on the persistent entity attributes. In this case, we will use JPA, `@PostLoad`.
 
 **Key points:**\
-     - annotate the non-persitent field and property with `@Transient`\
+     - annotate the non-persistent field and property with `@Transient`\
      - define a method annotated with `@PostLoad` that calculates this non-persistent property based on the persistent entity attributes
 
 ----------------------------------------------------------------------------------------------------------------------
@@ -1904,6 +1904,6 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 **Description:** This application is an example of calculating a non-persistent property of an entity based on the persistent entity attributes. In this case, we will use Hibernate, `@Formula`.
 
 **Key points:**\
-     - annotate the non-persitent property with `@Transient`\
+     - annotate the non-persistent property with `@Transient`\
      - annotate the corresponding non-persistent field with `@Formula`\
      - as the value of `@Formula` add the SQL query expression that calculates the non-persistent property based on the persistent entity attributes
