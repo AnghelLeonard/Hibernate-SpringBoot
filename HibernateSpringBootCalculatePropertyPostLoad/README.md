@@ -1,9 +1,9 @@
 **[How To Calculate Non-Persistent Property via JPA `@PostLoad`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyPostLoad)**
  
-**Description:** This application is an example of calculating non-persistent properties of an entity based on the persistent entity attributes. In this case, we will use JPA, `@PostLoad`.
+**Description:** This application is an example of calculating a non-persistent property of an entity based on the persistent entity attributes. In this case, we will use JPA, `@PostLoad`.
 
 **Key points:**\
-     - annotate the non-persitent fields and properties with `@Transient`\
-     - define a method annotated with `@PostLoad` that calculates these non-persistent properties based on the persistent entity attributes
+     - annotate the non-persitent field and property with `@Transient`\
+     - define a method annotated with `@PostLoad` that calculates this non-persistent property based on the persistent entity attributes
      
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
