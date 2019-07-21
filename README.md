@@ -1885,14 +1885,15 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 ----------------------------------------------------------------------------------------------------------------------
 
-129. **[How To Calculate Entity Persistent Property At `INSERT` Or `UPDATE` Time Via Hibernate `@Generated`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyGenerated)**
+129. **[How To Calculate Entity Persistent Property](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculateProperty)**
  
-**Description:** This application is an example of calculating an entity persistent property at `INSERT` or `UPDATE ` time via Hibernate `@Generated` annotation. 
+**Description:** This application is an example of calculating an entity persistent property at `INSERT` or `UPDATE ` time. 
 
 **Key points:**\
-     - annotate the entity persistent field that corresponds to the property that should be calculated with `@Generated(value = GenerationTime.ALWAYS)` or `@Generated(value = GenerationTime.INSERT)`\
-     - annotate the same field with `@Column(insertable = false, updatable = false)`\
-     - if the database schema is generated via JPA annotations (not recommended) then use `columnDefinition` element of `@Column` to specify the formula\
+     - annotate the corresponding persistent field with `@Column(insertable = false, updatable = false)`\
+**Method 1:**\
+     - if the database schema is generated via JPA annotations (not recommended) then use `columnDefinition` element of `@Column` to specify as an SQL query expression the formula for calculating the persistent property\
+**Method 2:**\
      - if the database schema is not generated via JPA annotations (recommended way) then add the formula as part of schema in `CREATE TABLE`
      
 **Note:** In production, you should not rely on `columnDefinition`. You should disable `hibernate.ddl-auto` (by omitting it) or set it to `validate`, and add the SQL query expression in `CREATE TABLE` (in this application, check the `discount` column in `CREATE TABLE`, file `schema-sql.sql`). Nevertheless, not even `schema-sql.sql` is ok in production. The best way is to rely on Flyway or Liquibase.
