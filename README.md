@@ -1875,17 +1875,17 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 ----------------------------------------------------------------------------------------------------------------------
 
-128. **[How To Calculate Transient Property via JPA `@PostLoad`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyPostLoad)**
+128. **[How To Calculate Non-Persistent Property via JPA `@PostLoad`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyPostLoad)**
  
-**Description:** This application is an example of calculating transient properties of an entity based on the persistent entity attributes. In this case, we will use JPA, `@PostLoad`.
+**Description:** This application is an example of calculating a non-persistent property of an entity based on the persistent entity attributes. In this case, we will use JPA, `@PostLoad`.
 
 **Key points:**\
-     - annotate the non-persitent fields and properties with `@Transient`\
-     - define a method annotated with `@PostLoad` that calculates these transient properties based on the persistent entity attributes
+     - annotate the non-persitent field and property with `@Transient`\
+     - define a method annotated with `@PostLoad` that calculates this non-persistent property based on the persistent entity attributes
 
 ----------------------------------------------------------------------------------------------------------------------
 
-129. **[How To Calculate An Entity Persistent Property At `INSERT` Or `UPDATE` Time Via Hibernate `@Generated`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyGenerated)**
+129. **[How To Calculate Entity Persistent Property At `INSERT` Or `UPDATE` Time Via Hibernate `@Generated`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyGenerated)**
  
 **Description:** This application is an example of calculating an entity persistent property at `INSERT` or `UPDATE ` time via Hibernate `@Generated` annotation. 
 
@@ -1899,11 +1899,11 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 ----------------------------------------------------------------------------------------------------------------------
 
-130. **[How To Calculate Transient Property via Hibernate `@Formula`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyFormula)**
+130. **[How To Calculate Non-Persistent Property via Hibernate `@Formula`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyFormula)**
  
-**Description:** This application is an example of calculating transient properties of an entity based on the persistent entity attributes. In this case, we will use Hibernate, `@Formula`.
+**Description:** This application is an example of calculating a non-persistent property of an entity based on the persistent entity attributes. In this case, we will use Hibernate, `@Formula`.
 
 **Key points:**\
-     - annotate the non-persitent properties with `@Transient`\
-     - annotate the non-persistent fields with `@Formula`\
-     - as the value of `@Formula` add the SQL query expression that calculates these transient properties based on the persistent entity attributes
+     - annotate the non-persitent property with `@Transient`\
+     - annotate the corresponding non-persistent field with `@Formula`\
+     - as the value of `@Formula` add the SQL query expression that calculates the non-persistent property based on the persistent entity attributes
