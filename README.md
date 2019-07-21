@@ -1887,7 +1887,7 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 129. **[How To Calculate Entity Persistent Property](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculateProperty)**
  
-**Description:** This application is an example of calculating an entity persistent property at `INSERT` or `UPDATE ` time. 
+**Description:** This application is an example of calculating an entity persistent property at `INSERT` and `UPDATE ` time. 
 
 **Key points:**\
      - annotate the corresponding persistent field with `@Column(insertable = false, updatable = false)`\
