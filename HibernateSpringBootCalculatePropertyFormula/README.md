@@ -3,7 +3,7 @@
 **Description:** This application is an example of calculating transient properties of an entity based on the persistent entity attributes. In this case, we will use Hibernate, `@Formula`.
 
 **Key points:**\
-     - annotate the non-persitent properties with `@Transient`\
+     - annotate the non-persistent properties with `@Transient`\
      - annotate the non-persistent fields with `@Formula`\
      - as the value of `@Formula` add the SQL query expression that calculates these transient properties based on the persistent entity attributes
      
