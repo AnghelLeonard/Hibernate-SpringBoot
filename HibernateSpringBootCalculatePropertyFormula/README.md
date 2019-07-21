@@ -1,4 +1,4 @@
-**[How To Calculate Property via Hibernate `@Formula`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyFormula)**
+**[How To Calculate Transient Property via Hibernate `@Formula`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyFormula)**
  
 **Description:** This application is an example of calculating transient properties of an entity based on the persistent entity attributes. In this case, we will use Hibernate, `@Formula`.
 
