@@ -5,7 +5,7 @@
 **Key points:**\
      - annotate the corresponding persistent field with `@Column(insertable = false, updatable = false)`\
 **Method 1:**\
-     - if the database schema is generated via JPA annotations (not recommended) then use `columnDefinition` element of `@Column` to specify the formula for calculating the persistent property as an SQL query expression\
+     - if the database schema is generated via JPA annotations (not recommended) then use `columnDefinition` element of `@Column` to specify as an SQL query expression the formula for calculating the persistent property\
 **Method 2:**\
      - if the database schema is not generated via JPA annotations (recommended way) then add the formula as part of schema in `CREATE TABLE`
      
