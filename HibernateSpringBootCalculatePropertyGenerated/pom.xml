@@ -7,7 +7,7 @@
     <artifactId>HibernateSpringBootCalculatePropertyGenerated</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
- 
+  
     <name>HibernateSpringBootCalculatePropertyGenerated</name>
     <description>JPA project for Spring Boot</description>
 
