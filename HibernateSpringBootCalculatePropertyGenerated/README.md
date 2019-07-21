@@ -5,7 +5,7 @@
 **Key points:**\
      - annotate the entity persistent field that corresponds to the property that should be calculated with `@Generated(value = GenerationTime.ALWAYS)` or `@Generated(value = GenerationTime.INSERT)`\
      - annotate the same field with `@Column(insertable = false, updatable = false)`\
-     - if the database schema is generated via JPA annotations (not recommended) then use `columnDefinition` element of `@Column` to specify the formula/
+     - if the database schema is generated via JPA annotations (not recommended) then use `columnDefinition` element of `@Column` to specify the formula\
      - if the database schema is not generated via JPA annotations (recommended way) then add the formula as part of schema in `CREATE TABLE`
      
 **Note:** In production, you should not rely on `columnDefinition`. You should disable `hibernate.ddl-auto` (by omitting it) or set it to `validate`, and add the SQL query expression in `CREATE TABLE` (in this application, check the `discount` column in `CREATE TABLE`, file `schema-sql.sql`). Nevertheless, not even `schema-sql.sql` is ok in production. The best way is to rely on Flyway or Liquibase.
