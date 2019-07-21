@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 @Entity
 public class Book implements Serializable {
@@ -20,6 +22,7 @@ public class Book implements Serializable {
     private String isbn;
     private double price;
 
+    @Generated(value = GenerationTime.ALWAYS)
     @Column(insertable = false, updatable = false /*, columnDefinition = "double AS (price - price * 0.25)"*/)
     private double discount;
 

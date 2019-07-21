@@ -26,15 +26,17 @@ public class BookstoreService {
         book.setPrice(13.99);
 
         bookRepository.save(book);
+
+        System.out.println("Discount after insert: " + book.getDiscount());
     }
 
     @Transactional
     public void updateBook() {
         Book book = bookRepository.findByTitle("Ancient History");
         book.setPrice(9.99);
-    }
+        
+        bookRepository.flush();
 
-    public Book fetchBook() {
-        return bookRepository.findByTitle("Ancient History");
+        System.out.println("Discount after update: " + book.getDiscount());
     }
 }
