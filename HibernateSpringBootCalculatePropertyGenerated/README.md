@@ -1,4 +1,4 @@
-**[How To Calculate An Entity Persistent Property At `INSERT` Or `UPDATE` Time Via Hibernate `@Generated`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyGenerated)**
+**[How To Calculate Entity Persistent Property At `INSERT` Or `UPDATE` Time Via Hibernate `@Generated`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyGenerated)**
  
 **Description:** This application is an example of calculating an entity persistent property at `INSERT` or `UPDATE ` time via Hibernate `@Generated` annotation. 
 
