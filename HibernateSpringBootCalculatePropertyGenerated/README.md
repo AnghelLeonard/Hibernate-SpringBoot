@@ -3,8 +3,8 @@
 **Description:** This application is an example of calculating an entity persistent property at `INSERT` or `UPDATE ` time via Hibernate `@Generated` annotation.
 
 **Key points:**\
-     - annotate the entity persistent property that should be calculated with `@Generated(value = GenerationTime.ALWAYS)` or `@Generated(value = GenerationTime.INSERT)`\
-     - annotate the same property with `@Column(insertable = false, updatable = false)`\
+     - annotate the entity persistent field that corresponds to the property that should be calculated with `@Generated(value = GenerationTime.ALWAYS)` or `@Generated(value = GenerationTime.INSERT)`\
+     - annotate the same field with `@Column(insertable = false, updatable = false)`\
      - if the database schema is generated via JPA annotations (not recommended) then use `columnDefinition` element of `@Column` to specify the formula/
      - if the database schema is not generated via JPA annotations (recommended way) then add the formula as part of schema in `CREATE TABLE`
      
