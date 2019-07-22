@@ -1,10 +1,12 @@
-**[How To Calculate Non-Persistent Property via Hibernate `@Formula`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyFormula)**
+**[How To Add `created`, `lastModified` And `lastModifiedBy` In An Entity](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTimestampGeneration)**
  
-**Description:** This application is an example of calculating a non-persistent property of an entity based on the persistent entity attributes. In this case, we will use Hibernate, `@Formula`.
+**Description:** This application is an example of adding in an entity the fields, `created`, `lastModified` and `lastModifiedBy`. These fields have only getters and will be automatically generated.
 
 **Key points:**\
-     - annotate the non-persistent property with `@Transient`\
-     - annotate the non-persistent field with `@Formula`\
-     - as the value of `@Formula` add the SQL query expression that calculates this non-persistent property based on the persistent entity attributes
+     - define a field named `created` and annotate it with `@CreationTimestamp`\
+     - define a field named `lastModified` and annotate it with `@UpdateTimestamp`\
+     - define a field named `lastModifiedBy` and annotate it with `@ModifiedBy`\
+     - implement the `@ModifiedBy` annotation via `AnnotationValueGeneration`\
+     - store the date-time in UTC
      
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
