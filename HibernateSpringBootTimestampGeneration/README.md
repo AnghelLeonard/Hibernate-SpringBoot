@@ -1,4 +1,4 @@
-**[How To Add `created`, `lastModified` And `lastModifiedBy` In An Entity](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTimestampGeneration)**
+**[How To Add `created`, `lastModified` And `lastModifiedBy` In An Entity Via Hibernate](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTimestampGeneration)**
  
 **Description:** This application is an example of adding in an entity the fields, `created`, `lastModified` and `lastModifiedBy`. These fields have only getters and will be automatically generated/populated.
 
