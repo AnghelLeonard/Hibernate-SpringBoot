@@ -3,9 +3,9 @@
 **Description:** This application is an example of adding in an entity the fields, `created`, `lastModified` and `lastModifiedBy`. These fields have only getters and will be automatically generated/populated.
 
 **Key points:**\
-     - define a field named `created` and annotate it with `@CreationTimestamp`\
-     - define a field named `lastModified` and annotate it with `@UpdateTimestamp`\
-     - define a field named `lastModifiedBy` and annotate it with `@ModifiedBy`\
+     - define a field named `created` and annotate it with the built-in `@CreationTimestamp` annotation\
+     - define a field named `lastModified` and annotate it with the built-in `@UpdateTimestamp` annotation\
+     - define a field named `lastModifiedBy` and annotate it with the `@ModifiedBy` annotation\
      - implement the `@ModifiedBy` annotation via `AnnotationValueGeneration`\
      - store the date-time in UTC
      
