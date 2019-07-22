@@ -25,11 +25,11 @@ public class Book implements Serializable {
     private double price;
 
     @CreationTimestamp
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date created;
 
     @UpdateTimestamp
-    @Temporal(javax.persistence.TemporalType.DATE)
+    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
     private Date lastModified;
 
     @ModifiedBy
