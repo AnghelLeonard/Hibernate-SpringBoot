@@ -7,7 +7,7 @@
      - rely on `EntityManager#getReference()`\
      - in Spring, use `JpaRepository#getOne()` -> used in this example\
      - in Hibernate, use `load()`\
-     - here, we have two entities, `Author` and `Book`, involved in a unidirectional `@ManyToOne` relationship (`Author` is the parent-side)\
+     - assume two entities, `Author` and `Book`, involved in a unidirectional `@ManyToOne` relationship (`Author` is the parent-side)\
      - we fetch the author via a `Proxy` (this will not trigger a `SELECT`), we create a new book, we set the `Proxy` as the author for this book and we save the book (this will trigger an `INSERT` in the `book` table)
      
 **Output example:**\
