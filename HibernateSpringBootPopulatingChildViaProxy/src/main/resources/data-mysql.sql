@@ -1,1 +1,1 @@
-INSERT INTO tournament (id, name) VALUES (1, 'RolandGaros');
+insert into author (age, name, genre, id) values (23, "Mark Janel", "Anthology", 1);
