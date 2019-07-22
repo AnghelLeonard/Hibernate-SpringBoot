@@ -11,7 +11,7 @@ public class ModifiedByValueGeneration
     private final ValueGenerator<String> generator
             = (Session session, Object owner) -> "leonarda" 
 
-            // loopup for UserService (typical in Spring)
+            // lookup for UserService (typical in Spring Security)
             // UserService userService = ((SessionImplementor) session).getFactory()
             //        .getServiceRegistry()
             //        .getService(UserService.class);
