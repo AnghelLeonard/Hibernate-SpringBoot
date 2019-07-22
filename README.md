@@ -1915,3 +1915,16 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
      - annotate the non-persistent property with `@Transient`\
      - annotate the corresponding non-persistent field with `@Formula`\
      - as the value of `@Formula` add the SQL query expression that calculates the non-persistent property based on the persistent entity attributes
+
+----------------------------------------------------------------------------------------------------------------------
+
+131. **[How To Add `created`, `lastModified` And `lastModifiedBy` In An Entity](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTimestampGeneration)**
+ 
+**Description:** This application is an example of adding in an entity the fields, `created`, `lastModified` and `lastModifiedBy`. These fields have only getters and will be automatically generated/populated.
+
+**Key points:**\
+     - define a field named `created` and annotate it with the built-in `@CreationTimestamp` annotation\
+     - define a field named `lastModified` and annotate it with the built-in `@UpdateTimestamp` annotation\
+     - define a field named `lastModifiedBy` and annotate it with the `@ModifiedBy` annotation\
+     - implement the `@ModifiedBy` annotation via `AnnotationValueGeneration`\
+     - store the date-time in UTC
