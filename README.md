@@ -166,7 +166,7 @@
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-11. **[How To Populate A Child-Side Parent Association Via Proxy](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPopulatingChildViaProxy)**
+11. **[How To Populate a Child-Side Parent Association via Proxy](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPopulatingChildViaProxy)**
 
 **Description:** A `Proxy` can be useful when a child entity can be persisted with a reference to its parent. In such cases, fetching the parent entity from the database (execute the `SELECT` statement) is a performance penalty and a pointless action. Hibernate can set the underlying foreign key value for an uninitialized `Proxy`.
 
@@ -174,8 +174,8 @@
      - rely on `EntityManager#getReference()`\
      - in Spring, use `JpaRepository#getOne()` -> used in this example\
      - in Hibernate, use `load()`\
-     - here, we have two entities, `Tournament` and `TennisPlayer`, and a tournament can have multiple players (`@OneToMany`)\
-     - we fetch the tournament via a `Proxy` (this will not trigger a `SELECT`), we create a new tennis player, we set the `Proxy` as the tournament for this player and we save the player (this will trigger an `INSERT` in the tennis players table, `tennis_player`)
+     - here, we have two entities, `Author` and `Book`, and an author have written multiple books (`@OneToMany`)\
+     - we fetch the author via a `Proxy` (this will not trigger a `SELECT`), we create a new book, we set the `Proxy` as the author for this book and we save the book (this will trigger an `INSERT` in the `book` table)
      
 **Output example:**\
      - the console output will reveal that only an `INSERT` is triggered, not the `SELECT`
