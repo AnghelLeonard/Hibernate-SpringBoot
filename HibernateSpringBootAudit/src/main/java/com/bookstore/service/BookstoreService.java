@@ -1,8 +1,6 @@
 package com.bookstore.service;
 
-import com.bookstore.repository.BookRepository;
 import com.bookstore.repository.AuthorRepository;
-import java.util.logging.Logger;
 import com.bookstore.entity.Author;
 import com.bookstore.entity.Book;
 import java.util.List;
@@ -12,17 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class BookstoreService {
 
-    private static final Logger logger
-            = Logger.getLogger(BookstoreService.class.getName());
-
     private final AuthorRepository authorRepository;
-    private final BookRepository bookRepository;
 
-    public BookstoreService(AuthorRepository authorRepository,
-            BookRepository bookRepository) {
+    public BookstoreService(AuthorRepository authorRepository) {
 
         this.authorRepository = authorRepository;
-        this.bookRepository = bookRepository;
     }
 
     @Transactional
@@ -40,7 +32,7 @@ public class BookstoreService {
 
         Book b1 = new Book();
         b1.setIsbn("001");
-        b1.setTitle("The Beatles Anthology");        
+        b1.setTitle("The Beatles Anthology");
 
         Book b2 = new Book();
         b2.setIsbn("002");
@@ -61,7 +53,7 @@ public class BookstoreService {
     @Transactional
     public void updateAuthor() {
         Author author = authorRepository.findByName("Mark Janel");
-        
+
         author.setAge(45);
     }
 
@@ -69,8 +61,8 @@ public class BookstoreService {
     public void updateBooks() {
         Author author = authorRepository.findByName("Quartis Young");
         List<Book> books = author.getBooks();
-        
-        for(Book book: books) {
+
+        for (Book book : books) {
             book.setIsbn("not available");
         }
     }
