@@ -21,14 +21,14 @@ public abstract class BaseEntity<U> {
     protected Long id;
     
     @CreatedDate
-    protected LocalDateTime createdAt;
+    protected LocalDateTime created;
  
-    @LastModifiedDate
-    protected LocalDateTime updatedAt;   
-    
     @CreatedBy
     protected U createdBy;
+    
+    @LastModifiedDate
+    protected LocalDateTime lastModified;          
  
     @LastModifiedBy
-    protected U modifiedBy;
+    protected U lastModifiedBy;
 }
