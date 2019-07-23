@@ -34,14 +34,14 @@ public class BookstoreService {
         System.out.println("-------------------------------------------------");
 
         // Remove the existing database rows that are no 
-        // longer found in the incoming collection (books)
-        List<Book> toRemove = author.getBooks().stream()
+        // longer found in the incoming collection (detachedBooks)
+        List<Book> booksToRemove  = author.getBooks().stream()
                 .filter(b -> !detachedBooks.contains(b))
                 .collect(Collectors.toList());
-        toRemove.forEach(b -> author.removeBook(b));
+        booksToRemove .forEach(b -> author.removeBook(b));
 
         // Update the existing database rows which can be found 
-        // in the incoming collection (books)
+        // in the incoming collection (detachedBooks)
         List<Book> newBooks = detachedBooks.stream()
                 .filter(b -> !author.getBooks().contains(b))
                 .collect(Collectors.toList());
@@ -52,8 +52,7 @@ public class BookstoreService {
                     b.setAuthor(author);
                     Book mergedBook = bookRepository.save(b);
                     author.getBooks().set(
-                            author.getBooks().indexOf(mergedBook),
-                            mergedBook);
+                            author.getBooks().indexOf(mergedBook), mergedBook);
                 });
 
         // Add the rows found in the incoming collection, 

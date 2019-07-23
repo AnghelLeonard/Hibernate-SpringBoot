@@ -25,30 +25,33 @@ public class MainApplication {
     public ApplicationRunner init() {
         return args -> {
 
-            System.out.println("------------------- Joana Nimar's Books --------------------");
-            List<Book> books = bookstoreService.fetchBooksOfAuthor("Joana Nimar");
+            System.out.println("\n------------------- Joana Nimar's Books --------------------");
+            List<Book> detachedBooks = bookstoreService.fetchBooksOfAuthor("Joana Nimar");
 
-            books.forEach(b -> System.out.println(b));
+            detachedBooks.forEach(b -> System.out.println(b));
 
-            System.out.println("---------- Books of Joana Nimar Updated Detached ------------");
+            System.out.println("\n---------- Books of Joana Nimar updated in detached state------------");
 
             // ,update first book title
-            books.get(0).setTitle("A History of Ancient Rome");
+            detachedBooks.get(0).setTitle("A History of Ancient Rome");
 
             // remove second title
-            books.remove(1);
+            detachedBooks.remove(1);
 
             // add a new book
             Book book = new Book();
             book.setTitle("History In 100 Minutes");
             book.setIsbn("005-JN");
-            books.add(book);
+            detachedBooks.add(book);
 
-            books.forEach(b -> System.out.println(b));
+            detachedBooks.forEach(b -> System.out.println(b));
             
-            System.out.println("----------------- Books of Joana Nimar Merged ----------------");
-            bookstoreService.updateBooksOfAuthor("Joana Nimar", books);
+            System.out.println("\n----------------- Merging books of Joana Nimar ----------------");
+            bookstoreService.updateBooksOfAuthor("Joana Nimar", detachedBooks);
 
+            System.out.println("\n----------------- Books of Joana Nimar After Merge ----------------");
+            List<Book> books = bookstoreService.fetchBooksOfAuthor("Joana Nimar");
+            
             books.forEach(b -> System.out.println(b));
         };
     }
