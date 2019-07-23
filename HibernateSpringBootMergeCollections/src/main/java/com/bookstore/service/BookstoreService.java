@@ -28,7 +28,7 @@ public class BookstoreService {
     }
 
     @Transactional
-    public void updateBooksOfAuthor(String name, List<Book> books) {
+    public void updateBooksOfAuthor(String name, List<Book> detachedBooks) {
 
         Author author = authorRepository.authorAndBooks(name);
         System.out.println("-------------------------------------------------");
@@ -36,17 +36,17 @@ public class BookstoreService {
         // Remove the existing database rows that are no 
         // longer found in the incoming collection (books)
         List<Book> toRemove = author.getBooks().stream()
-                .filter(b -> !books.contains(b))
+                .filter(b -> !detachedBooks.contains(b))
                 .collect(Collectors.toList());
         toRemove.forEach(b -> author.removeBook(b));
 
         // Update the existing database rows which can be found 
         // in the incoming collection (books)
-        List<Book> newBooks = books.stream()
+        List<Book> newBooks = detachedBooks.stream()
                 .filter(b -> !author.getBooks().contains(b))
                 .collect(Collectors.toList());
 
-        books.stream()
+        detachedBooks.stream()
                 .filter(b -> !newBooks.contains(b))
                 .forEach((b) -> {
                     b.setAuthor(author);
