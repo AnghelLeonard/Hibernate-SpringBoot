@@ -1920,11 +1920,13 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 131. **[How To Add `created`, `lastModified` And `lastModifiedBy` In An Entity Via Hibernate](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTimestampGeneration)**
  
-**Description:** This application is an example of adding in an entity the fields, `created`, `lastModified` and `lastModifiedBy` via Hibernate support. These fields have only getters and will be automatically generated/populated.
+**Description:** This application is an example of adding in an entity the fields, `created`, `lastModified` and `lastModifiedBy` via Hibernate support. These fields will be automatically generated/populated.
 
 **Key points:**\
-     - define a field named `created` and annotate it with the built-in `@CreationTimestamp` annotation\
-     - define a field named `lastModified` and annotate it with the built-in `@UpdateTimestamp` annotation\
-     - define a field named `lastModifiedBy` and annotate it with the `@ModifiedBy` annotation\
+     - write an abstract class (e.g., `BaseEntity`) annotated with `@MappedSuperclass`\
+     - in this abstract class, define a field named `created` and annotate it with the built-in `@CreationTimestamp` annotation\
+     - in this abstract class, define a field named `lastModified` and annotate it with the built-in `@UpdateTimestamp` annotation\
+     - in this abstract class, define a field named `lastModifiedBy` and annotate it with the `@ModifiedBy` annotation\
      - implement the `@ModifiedBy` annotation via `AnnotationValueGeneration`\
+     - every entity that want to take advantage of `created`, `lastModified` and `lastModifiedBy` will extend the `BaseEntity`\
      - store the date-time in UTC
