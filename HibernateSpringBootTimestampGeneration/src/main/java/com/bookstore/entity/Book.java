@@ -2,6 +2,9 @@ package com.bookstore.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Book extends BaseEntity<String> implements Serializable {
@@ -10,7 +13,10 @@ public class Book extends BaseEntity<String> implements Serializable {
 
     private String title;
     private String isbn;
-    private double price;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "author_id")
+    private Author author;
 
     public Long getId() {
         return id;
@@ -36,21 +42,36 @@ public class Book extends BaseEntity<String> implements Serializable {
         this.isbn = isbn;
     }
 
-    public double getPrice() {
-        return price;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
+    public void setAuthor(Author author) {
+        this.author = author;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) {
+            return true;
+        }
+
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+
+        return id != null && id.equals(((Book) obj).id);
+    }
+
+    @Override
+    public int hashCode() {
+        return 2021;
     }
 
     @Override
     public String toString() {
-        return "Book{" + "id=" + id + ", title=" + title
-                + ", isbn=" + isbn + ", price=" + price
-                + ", created=" + created
-                + ", createdBy=" + createdBy
-                + ", lastModified=" + lastModified
-                + ", lastModifiedBy=" + lastModifiedBy + '}';
+        return "Book{" + "id=" + id + ", title=" + title + ", isbn=" + isbn + '}';
     }
+
 }
