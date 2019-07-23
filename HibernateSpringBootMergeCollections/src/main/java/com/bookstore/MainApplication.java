@@ -28,8 +28,7 @@ public class MainApplication {
             System.out.println("------------------- Joana Nimar's Books --------------------");
             List<Book> books = bookstoreService.fetchBooksOfAuthor("Joana Nimar");
 
-            books.forEach(b -> System.out.println("Title: "
-                    + b.getTitle() + " | id:(" + b.getId() + ")"));
+            books.forEach(b -> System.out.println(b));
 
             System.out.println("---------- Books of Joana Nimar Updated Detached ------------");
 
@@ -45,14 +44,12 @@ public class MainApplication {
             book.setIsbn("005-JN");
             books.add(book);
 
-            books.forEach(b -> System.out.println("Title: "
-                    + b.getTitle() + " | id:(" + b.getId() + ")"));
-
+            books.forEach(b -> System.out.println(b));
+            
             System.out.println("----------------- Books of Joana Nimar Merged ----------------");
             bookstoreService.updateBooksOfAuthor("Joana Nimar", books);
 
-            books.forEach(b -> System.out.println("Title: "
-                    + b.getTitle() + " | id:(" + b.getId() + ")"));
+            books.forEach(b -> System.out.println(b));
         };
     }
 }

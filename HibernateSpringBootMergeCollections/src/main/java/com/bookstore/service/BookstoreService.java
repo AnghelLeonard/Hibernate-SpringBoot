@@ -35,18 +35,21 @@ public class BookstoreService {
 
         // Remove the existing database rows that are no 
         // longer found in the incoming collection (books)
-        author.getBooks().removeIf(b -> !books.contains(b));
+        List<Book> toRemove = author.getBooks().stream()
+                .filter(b -> !books.contains(b))
+                .collect(Collectors.toList());
+        toRemove.forEach(b -> author.removeBook(b));
 
         // Update the existing database rows which can be found 
         // in the incoming collection (books)
         List<Book> newBooks = books.stream()
                 .filter(b -> !author.getBooks().contains(b))
-                .collect(Collectors.toList());             
+                .collect(Collectors.toList());
 
         books.stream()
                 .filter(b -> !newBooks.contains(b))
                 .forEach((b) -> {
-                    b.setAuthor(author);                       
+                    b.setAuthor(author);
                     Book mergedBook = bookRepository.save(b);
                     author.getBooks().set(
                             author.getBooks().indexOf(mergedBook),
