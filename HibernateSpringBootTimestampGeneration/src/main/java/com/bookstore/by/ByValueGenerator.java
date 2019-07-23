@@ -1,14 +1,14 @@
-package com.bookstore.modifiedby;
+package com.bookstore.by;
 
 import com.bookstore.service.UserService;
 import org.hibernate.Session;
 import org.hibernate.tuple.ValueGenerator;
 
-public class ModifiedByValueGenerator implements ValueGenerator<String> {
+public class ByValueGenerator implements ValueGenerator<String> {
 
     public final UserService userService;
 
-    public ModifiedByValueGenerator(UserService userService) {
+    public ByValueGenerator(UserService userService) {
         this.userService = userService;
     }
 

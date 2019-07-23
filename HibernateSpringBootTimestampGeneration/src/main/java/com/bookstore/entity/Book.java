@@ -49,6 +49,7 @@ public class Book extends BaseEntity<String> implements Serializable {
         return "Book{" + "id=" + id + ", title=" + title
                 + ", isbn=" + isbn + ", price=" + price
                 + ", created=" + created
+                + ", createdBy=" + createdBy
                 + ", lastModified=" + lastModified
                 + ", lastModifiedBy=" + lastModifiedBy + '}';
     }

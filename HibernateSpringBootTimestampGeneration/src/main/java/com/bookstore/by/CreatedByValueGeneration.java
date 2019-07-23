@@ -1,18 +1,18 @@
-package com.bookstore.modifiedby;
+package com.bookstore.by;
 
 import com.bookstore.service.UserService;
 import org.hibernate.tuple.AnnotationValueGeneration;
 import org.hibernate.tuple.GenerationTiming;
 import org.hibernate.tuple.ValueGenerator;
 
-public class ModifiedByValueGeneration
-        implements AnnotationValueGeneration<ModifiedBy> {
+public class CreatedByValueGeneration
+        implements AnnotationValueGeneration<CreatedBy> {
 
-    private final ModifiedByValueGenerator generator
-            = new ModifiedByValueGenerator(new UserService());
+    private final ByValueGenerator generator
+            = new ByValueGenerator(new UserService());
 
     @Override
-    public void initialize(ModifiedBy mby, Class<?> clazz) {
+    public void initialize(CreatedBy mby, Class<?> clazz) {
     }
 
     @Override

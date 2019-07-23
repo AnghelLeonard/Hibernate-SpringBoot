@@ -1,6 +1,7 @@
 package com.bookstore.entity;
 
-import com.bookstore.modifiedby.ModifiedBy;
+import com.bookstore.by.CreatedBy;
+import com.bookstore.by.ModifiedBy;
 import java.time.LocalDateTime;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +23,9 @@ public abstract class BaseEntity<U> {
     @UpdateTimestamp
     protected LocalDateTime lastModified;
 
+    @CreatedBy
+    protected U createdBy;
+    
     @ModifiedBy
     protected U lastModifiedBy;
 }
