@@ -41,12 +41,12 @@ public class BookstoreService {
         // in the incoming collection (books)
         List<Book> newBooks = books.stream()
                 .filter(b -> !author.getBooks().contains(b))
-                .collect(Collectors.toList());
+                .collect(Collectors.toList());             
 
         books.stream()
                 .filter(b -> !newBooks.contains(b))
                 .forEach((b) -> {
-                    b.setAuthor(author);
+                    b.setAuthor(author);                       
                     Book mergedBook = bookRepository.save(b);
                     author.getBooks().set(
                             author.getBooks().indexOf(mergedBook),
