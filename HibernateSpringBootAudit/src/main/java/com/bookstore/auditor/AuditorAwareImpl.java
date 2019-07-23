@@ -1,13 +1,17 @@
 package com.bookstore.auditor;
 
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.Random;
 import org.springframework.data.domain.AuditorAware;
 
 public class AuditorAwareImpl implements AuditorAware<String> {
 
     @Override
     public Optional<String> getCurrentAuditor() {
-        return Optional.of("Leonard"); // use Spring Security to return the currently logged-in user
+        // use Spring Security to retrive the current user
+        return Optional.of(Arrays.asList("mark1990", "adrianm", "dan555")
+                .get(new Random().nextInt(3)));
     }
 
 }
