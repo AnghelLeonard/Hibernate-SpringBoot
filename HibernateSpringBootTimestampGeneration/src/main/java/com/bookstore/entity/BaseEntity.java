@@ -1,12 +1,11 @@
 package com.bookstore.entity;
 
 import com.bookstore.modifiedby.ModifiedBy;
-import java.util.Date;
+import java.time.LocalDateTime;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -18,13 +17,11 @@ public abstract class BaseEntity<U> {
     protected Long id;
 
     @CreationTimestamp
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    protected Date created;
+    protected LocalDateTime created;
 
     @UpdateTimestamp
-    @Temporal(javax.persistence.TemporalType.TIMESTAMP)
-    protected Date lastModified;
+    protected LocalDateTime lastModified;
 
     @ModifiedBy
-    protected U lastModifiedBy;        
+    protected U lastModifiedBy;
 }
