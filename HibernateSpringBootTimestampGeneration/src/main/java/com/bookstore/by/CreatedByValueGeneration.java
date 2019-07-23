@@ -17,7 +17,7 @@ public class CreatedByValueGeneration
 
     @Override
     public GenerationTiming getGenerationTiming() {
-        return GenerationTiming.ALWAYS;
+        return GenerationTiming.INSERT;
     }
 
     @Override
