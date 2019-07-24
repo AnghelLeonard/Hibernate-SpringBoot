@@ -7,7 +7,7 @@
      - each entity that should be audited should be annotated with `@Audited`\
      - optionally, annotate entities with `@AuditTable` to rename the table used for auditing\
      - rely on `ValidityAuditStrategy`
-     
+      
 -------------------------------
 
 **You may like to try as well:**
