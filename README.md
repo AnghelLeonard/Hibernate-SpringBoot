@@ -1483,7 +1483,8 @@ Fetch a page as a `List`:
 **Key points:**\
      - in `pom.xml` add the dependency `hibernate-envers`\
      - each entity that should be audited should be annotated with `@Audited`\
-     - optionally, annotate entities with `@AuditTable` to rename the table used for auditing          
+     - optionally, annotate entities with `@AuditTable` to rename the table used for auditing\
+     - rely on `ValidityAuditStrategy`
 
 -----------------------------------------------------------------------------------------------------------------------
 
