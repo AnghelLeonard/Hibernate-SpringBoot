@@ -84,7 +84,7 @@ public class BookstoreService {
 
     @Transactional(readOnly = true)
     public void queryEntityHistory() {
-        AuditReader reader = AuditReaderFactory.get(em.unwrap(Session.class));
+        AuditReader reader = AuditReaderFactory.get(em);
 
         AuditQuery queryAtRev = reader.createQuery().forEntitiesAtRevision(Book.class, 3);
         System.out.println("Get all Book instances modified at revision #3:");
