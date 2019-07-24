@@ -9,7 +9,7 @@ public class AuditorAwareImpl implements AuditorAware<String> {
 
     @Override
     public Optional<String> getCurrentAuditor() {
-        // use Spring Security to retrive the current user
+        // use Spring Security to retrive the current logged-in user(s)
         return Optional.of(Arrays.asList("mark1990", "adrianm", "dan555")
                 .get(new Random().nextInt(3)));
     }
