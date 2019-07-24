@@ -1,12 +1,12 @@
 package com.bookstore.service;
 
-import java.util.Set;
 import com.bookstore.repository.BookRepository;
 import com.bookstore.repository.AuthorRepository;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import com.bookstore.entity.Author;
 import com.bookstore.entity.Book;
+import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
@@ -35,49 +35,47 @@ public class BookstoreService {
     @Transactional
     public void registerAuthor() {
 
-        Author author1 = new Author();
-        author1.setName("Name_1");
-        author1.setSurname("Surname_1");
-        author1.setAge(43);
+        Author a1 = new Author();
+        a1.setName("Quartis Young");
+        a1.setGenre("Anthology");
+        a1.setAge(34);
 
-        Author author2 = new Author();
-        author2.setName("Name_2");
-        author2.setSurname("Surname_2");
-        author2.setAge(41);
+        Author a2 = new Author();
+        a2.setName("Mark Janel");
+        a2.setGenre("Anthology");
+        a2.setAge(23);
 
-        Book book1 = new Book();
-        book1.setIsbn("Isbn_1");
-        book1.setTitle("Title_1");
+        Book b1 = new Book();
+        b1.setIsbn("001");
+        b1.setTitle("The Beatles Anthology");
 
-        Book book2 = new Book();
-        book2.setIsbn("Isbn_2");
-        book2.setTitle("Title_2");
+        Book b2 = new Book();
+        b2.setIsbn("002");
+        b2.setTitle("A People's Anthology");
 
-        Book book3 = new Book();
-        book3.setIsbn("Isbn_3");
-        book3.setTitle("Title_3");
+        Book b3 = new Book();
+        b3.setIsbn("003");
+        b3.setTitle("Anthology Myths");
 
-        author1.addBook(book1);
-        author1.addBook(book2);
-        author2.addBook(book1);
-        author2.addBook(book2);
-        author2.addBook(book3);
+        a1.addBook(b1);
+        a1.addBook(b2);
+        a2.addBook(b3);
 
-        authorRepository.save(author1);
-        authorRepository.save(author2);
+        authorRepository.save(a1);
+        authorRepository.save(a2);
     }
 
     @Transactional
     public void updateAuthor() {
-        Author author = authorRepository.findByName("Name_1");
+        Author author = authorRepository.findByName("Mark Janel");
 
         author.setAge(45);
     }
 
     @Transactional
     public void updateBooks() {
-        Author author = authorRepository.findByName("Name_1");
-        Set<Book> books = author.getBooks();
+        Author author = authorRepository.findByName("Quartis Young");
+        List<Book> books = author.getBooks();
 
         for (Book book : books) {
             book.setIsbn("not available");
@@ -87,14 +85,14 @@ public class BookstoreService {
     @Transactional(readOnly = true)
     public void queryEntityHistory() {
         AuditReader reader = AuditReaderFactory.get(em.unwrap(Session.class));
-        
+
         AuditQuery queryAtRev = reader.createQuery().forEntitiesAtRevision(Book.class, 3);
         System.out.println("Get all Book instances modified at revision #3:");
         System.out.println(queryAtRev.getResultList());
-        
+
         AuditQuery queryOfRevs = reader.createQuery().forRevisionsOfEntity(Book.class, true, true);
         System.out.println("\nGet all Book instances in all their states that were audited:");
         System.out.println(queryOfRevs.getResultList());
-        
+
     }
 }
