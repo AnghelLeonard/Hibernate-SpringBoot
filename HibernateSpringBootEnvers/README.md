@@ -1,4 +1,4 @@
-**[Hibernate Envers Auditing](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnvers)**
+**[Hibernate Envers Auditing (`spring.jpa.hibernate.ddl-auto=create`)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnvers)**
  
 **Description:** Auditing is useful for maintaining history records. This can later help us in tracking user activities. 
  
