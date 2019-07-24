@@ -6,7 +6,7 @@
      - in `pom.xml` add the dependency `hibernate-envers`\
      - each entity that should be audited should be annotated with `@Audited`\
      - optionally, annotate entities with `@AuditTable` to rename the table used for auditing\
-     - rely on `ValidityAuditStrategy`
+     - rely on `ValidityAuditStrategy` for fast database reads, but slower writes (slower than the default `DefaultAuditStrategy`)
       
 -------------------------------
 
