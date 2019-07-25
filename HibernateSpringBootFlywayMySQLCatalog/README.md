@@ -13,7 +13,7 @@
      - each SQL file containing the schema update add it in `classpath:db/migration`\
      - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
      
-**Output of migrationg history example:**\
+**Output of migration history example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFlywayMySQLCatalog/flyway_schema_history%20table.png)
 
 -------------------------------
