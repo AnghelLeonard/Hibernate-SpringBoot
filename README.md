@@ -1324,7 +1324,7 @@ Fetch a page as a `List`:
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-88. **[How To Migrate Schema Using Flyway In MySQL When The Database Exists](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLQuick)**
+88. **[How To Migrate Schema Using Flyway In MySQL With Database Created Via `createDatabaseIfNotExist`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLQuick)**
 
 **Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
 
