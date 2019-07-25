@@ -1,9 +1,9 @@
 
-**[How To Migrate Schema Using Flyway In MySQL When Schema Exists](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLQuick)**
+**[How To Migrate Schema Using Flyway In MySQL When The Database Exists](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLQuick)**
 
 **Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
 
-**Description:** This application is an example of migrating a MySQL schema when the schema exists (is created before migration via MySQL specific, `createDatabaseIfNotExist=true`). In this example, the names of the table specified in `CREATE TABLE` queries are the same as the names of the entities, therefore, there is no need to use `@Table(name="...")`.
+**Description:** This application is an example of migrating a MySQL schema when the database exists (is created before migration via MySQL specific, `createDatabaseIfNotExist=true`). In this example, the names of the table specified in `CREATE TABLE` queries are the same as the names of the entities, therefore, there is no need to use `@Table(name="...")`.
 
 **Key points:**\
      - for Maven, in `pom.xml`, add the Flyway dependency\
