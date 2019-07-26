@@ -1964,11 +1964,11 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 ----------------------------------------------------------------------------------------------------------------------
 
-134. **[How To Migrate Database Using Flyway In PostgreSQL With The Default Database `postgres` And Schema `public`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayPostgreSQLQuick)**
+134. **[How To Migrate PostgreSQL Database Using Flyway - Use The Default Database `postgres` And Schema `public`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayPostgreSQLQuick)**
 
-**Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
 
-**Description:** This application is an example of using Flyway with PostgreSQL for the default database `postgres` and schema `public`. In this example, the names of the table specified in `CREATE TABLE` queries are the same as the names of the entities, therefore, there is no need to use `@Table(name="...")`.
+**Description:** This application is an example of migrating a PostgreSQL database via Flyway for the default database `postgres` and schema `public`. 
 
 **Key points:**\
      - for Maven, in `pom.xml`, add the Flyway dependency\
