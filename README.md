@@ -1354,6 +1354,9 @@ Fetch a page as a `List`:
      - each SQL file containing the schema update add it in `classpath:db/migration`\
      - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
 
+**Output of migration history example:**\
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFlywayMySQLDatabase/flyway_schema_history%20table.png)
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 90. **[How To Auto-Create And Migrate Schemas For Two Data Sources (MySQL and PostgreSQL) Using Flyway](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayTwoVendors)**
