@@ -1947,3 +1947,16 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
      - remove (disable) `spring.jpa.hibernate.ddl-auto` for avoiding schema generated from JPA annotations\
      - create `schema-mysql.sql` and provide the SQL statements needed by Hibernate Envers\
      - if the schema is not autommatically found, then point it via `spring.jpa.properties.org.hibernate.envers.default_catalog` for MySQL or `spring.jpa.properties.org.hibernate.envers.default_schema` for the rest
+
+----------------------------------------------------------------------------------------------------------------------
+
+133. **[How To Programmatically Setup Flyway And MySQL `DataSource`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootProgFlyway)**
+
+**Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+
+**Description:** This application is a kickoff for setting Flyway and MySQL `DataSource` programmatically.
+
+**Key points:**\
+     - for Maven, in `pom.xml`, add the Flyway dependency\
+     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
+     - configure `DataSource` and Flyway programmatically
