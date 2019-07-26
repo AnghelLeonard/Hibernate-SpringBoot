@@ -1324,11 +1324,11 @@ Fetch a page as a `List`:
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-88. **[How To Migrate Schema Using Flyway In MySQL With Database Created Via `createDatabaseIfNotExist`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLQuick)**
+88. **[How To Migrate MySQL Database Using Flyway - Database Created Via `createDatabaseIfNotExist`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLQuick)**
 
-**Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase
 
-**Description:** This application is an example of migrating a MySQL schema when the database exists (is created before migration via MySQL specific, `createDatabaseIfNotExist=true`). In this example, the names of the table specified in `CREATE TABLE` queries are the same as the names of the entities, therefore, there is no need to use `@Table(name="...")`.
+**Description:** This application is an example of migrating a MySQL database via Flyway when the database exists (it is created before migration via MySQL specific parameter, `createDatabaseIfNotExist=true`). 
 
 **Key points:**\
      - for Maven, in `pom.xml`, add the Flyway dependency\
