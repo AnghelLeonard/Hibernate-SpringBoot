@@ -4,17 +4,17 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jpa</groupId>
-    <artifactId>jpa</artifactId>
+    <artifactId>HibernateSpringBootFlywayTwoVendors</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>jpa</name>
+    <name>HibernateSpringBootFlywayTwoVendors</name>
     <description>JPA project for Spring Boot</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.5.RELEASE</version>
+        <version>2.1.4.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
@@ -60,8 +60,7 @@
         </dependency>
         <dependency>
             <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-            <version>5.2.1</version>
+            <artifactId>flyway-core</artifactId>           
         </dependency>      
     </dependencies>
 
@@ -73,6 +72,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>
