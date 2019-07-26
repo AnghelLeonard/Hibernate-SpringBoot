@@ -2,7 +2,7 @@
 
 **Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
 
-**Description:** This application is a kickoff for setting Flyway and `DataSource` programmatically.
+**Description:** This application is a kickoff for setting Flyway and MySQL `DataSource` programmatically.
 
 **Key points:**\
      - for Maven, in `pom.xml`, add the Flyway dependency\
