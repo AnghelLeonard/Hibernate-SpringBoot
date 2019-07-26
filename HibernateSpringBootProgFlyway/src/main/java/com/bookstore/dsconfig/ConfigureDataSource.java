@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ConfigureDataSource {
 
-    @Bean(name = "dataSourceMySql")
+    @Bean(name = "dataSource")
     public HikariDataSource dataSource() {
 
         HikariDataSource hds = new HikariDataSource();
@@ -33,7 +33,7 @@ public class ConfigureDataSource {
 
     @FlywayDataSource
     @Bean(initMethod = "migrate")
-    public Flyway primaryFlyway(@Qualifier("dataSourceMySql") DataSource primaryDataSource) {
+    public Flyway flyway(@Qualifier("dataSource") DataSource primaryDataSource) {
 
         return Flyway.configure()
                 .dataSource(primaryDataSource)
