@@ -1,4 +1,4 @@
-CREATE TABLE bookstoredb.author
+CREATE TABLE bookstore.author
 (
     id bigserial NOT NULL,
     age integer NOT NULL,
@@ -11,5 +11,5 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE bookstoredb.author
+ALTER TABLE bookstore.author
     OWNER to postgres;
