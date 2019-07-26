@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(catalog = "bookstoredb")
+@Table(schema = "bookstoredb") // or @Table(catalog = "bookstoredb")
 public class Author implements Serializable {
 
     private static final long serialVersionUID = 1L;
