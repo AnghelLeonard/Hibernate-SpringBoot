@@ -14,7 +14,7 @@
      - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
      
 **Output of migration history example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFlywayMySQLCatalog/flyway_schema_history%20table.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFlywayMySQLDatabase/flyway_schema_history%20table.png)
 
 -------------------------------
 
