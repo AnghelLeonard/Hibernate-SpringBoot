@@ -2,7 +2,7 @@
 
 **Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
 
-**Description:** This application is an example of migrating the PostgreSQL default database `postgres` when the schema(s) is/are created by Flyway via `spring.flyway.schemas`. In this case, the entities should be annotated with `@Table(schema = "bookstore")` or `@Table(catalog = "bookstore")`. Here, the schema name is `bookstore`.
+**Description:** This application is an example of migrating a schema created by Flyway via `spring.flyway.schemas` in the default `postgres` database. In this case, the entities should be annotated with `@Table(schema = "bookstore")` or `@Table(catalog = "bookstore")`. Here, the schema name is `bookstore`.
 
 **Key points:**\
      - for Maven, in `pom.xml`, add the Flyway dependency\
