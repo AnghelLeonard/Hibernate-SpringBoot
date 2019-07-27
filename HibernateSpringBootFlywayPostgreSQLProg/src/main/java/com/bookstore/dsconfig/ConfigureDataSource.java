@@ -33,10 +33,10 @@ public class ConfigureDataSource {
 
     @FlywayDataSource
     @Bean(initMethod = "migrate")
-    public Flyway flyway(@Qualifier("dataSource") DataSource primaryDataSource) {
+    public Flyway flyway(@Qualifier("dataSource") DataSource dataSource) {
 
         return Flyway.configure()
-                .dataSource(primaryDataSource)                
+                .dataSource(dataSource)                
                 .locations("classpath:db/migration") // this path is default
                 .load();
     }
