@@ -1,4 +1,4 @@
-CREATE TABLE public.book
+CREATE TABLE book
 (
     id bigserial NOT NULL,
     isbn character varying(255) COLLATE pg_catalog."default",
@@ -15,5 +15,5 @@ WITH (
 )
 TABLESPACE pg_default;
 
-ALTER TABLE public.book
+ALTER TABLE book
     OWNER to postgres;
