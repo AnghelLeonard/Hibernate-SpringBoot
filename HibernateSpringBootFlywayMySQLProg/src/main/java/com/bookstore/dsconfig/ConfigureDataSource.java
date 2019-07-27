@@ -1,7 +1,6 @@
 package com.bookstore.dsconfig;
 
 import com.zaxxer.hikari.HikariDataSource;
-import javax.sql.DataSource;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.flyway.FlywayDataSource;
@@ -33,7 +32,7 @@ public class ConfigureDataSource {
 
     @FlywayDataSource
     @Bean(initMethod = "migrate")
-    public Flyway flyway(@Qualifier("dataSource") DataSource dataSource) {
+    public Flyway flyway(@Qualifier("dataSource") HikariDataSource dataSource) {
 
         return Flyway.configure()
                 .dataSource(dataSource)                
