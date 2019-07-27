@@ -10,7 +10,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Primary;
 
 @Configuration
@@ -40,11 +39,11 @@ public class ConfigureDataSources {
 
     @Primary
     @FlywayDataSource
-    @Bean(name = "flywayBooksDb", initMethod = "migrate")
-    @DependsOn("dataSourceBooksDb")
-    public Flyway firstFlyway(@Qualifier("configFlywayBooksDb") FlywayBookProperties properties) {
+    @Bean(initMethod = "migrate")
+    public Flyway firstFlyway(@Qualifier("configFlywayBooksDb") FlywayBookProperties properties,
+            @Qualifier("dataSourceBooksDb") HikariDataSource dataSource) {
         return Flyway.configure()
-                .dataSource(properties.getUrl(), properties.getUser(), properties.getPassword())
+                .dataSource(dataSource)
                 .schemas(properties.getSchema())
                 .locations(properties.getLocation())
                 .load();
@@ -70,11 +69,11 @@ public class ConfigureDataSources {
     }
 
     @FlywayDataSource
-    @Bean(name = "flywayAuthorsDb", initMethod = "migrate")
-    @DependsOn("dataSourceAuthorsDb")
-    public Flyway secondFlyway(@Qualifier("configFlywayAuthorsDb") FlywayAuthorProperties properties) {
+    @Bean(initMethod = "migrate")
+    public Flyway secondFlyway(@Qualifier("configFlywayAuthorsDb") FlywayAuthorProperties properties,
+            @Qualifier("dataSourceBooksDb") HikariDataSource dataSource) {
         return Flyway.configure()
-                .dataSource(properties.getUrl(), properties.getUser(), properties.getPassword())
+                .dataSource(dataSource)
                 .schemas(properties.getSchema())
                 .locations(properties.getLocation())
                 .load();

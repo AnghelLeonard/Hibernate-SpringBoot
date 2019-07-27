@@ -5,9 +5,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
-@Component
-@Validated
-@ConfigurationProperties(prefix = "app.flyway.ds2")
+//@Component
+//@Validated
+//@ConfigurationProperties(prefix = "app.flyway.ds2")
 public class FlywayDs2Properties {
 
     @NotEmpty
