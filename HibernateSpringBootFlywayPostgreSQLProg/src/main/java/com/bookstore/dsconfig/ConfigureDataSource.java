@@ -33,7 +33,7 @@ public class ConfigureDataSource {
 
     @FlywayDataSource
     @Bean(initMethod = "migrate")
-    public Flyway flyway(@Qualifier("dataSource") DataSource dataSource) {
+    public Flyway flyway(@Qualifier("dataSource") HikariDataSource dataSource) {
 
         return Flyway.configure()
                 .dataSource(dataSource)                
