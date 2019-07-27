@@ -12,8 +12,6 @@ public class FlywayBookProperties {
 
     @NotEmpty
     private String location;
-    @NotEmpty
-    private String schema;
 
     public String getLocation() {
         return location;
@@ -21,13 +19,5 @@ public class FlywayBookProperties {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public String getSchema() {
-        return schema;
-    }
-
-    public void setSchema(String schema) {
-        this.schema = schema;
     }
 }

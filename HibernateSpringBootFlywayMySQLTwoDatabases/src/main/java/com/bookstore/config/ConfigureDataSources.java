@@ -43,8 +43,7 @@ public class ConfigureDataSources {
     public Flyway firstFlyway(@Qualifier("configFlywayBooksDb") FlywayBookProperties properties,
             @Qualifier("dataSourceBooksDb") HikariDataSource dataSource) {
         return Flyway.configure()
-                .dataSource(dataSource)
-                .schemas(properties.getSchema())
+                .dataSource(dataSource)                
                 .locations(properties.getLocation())
                 .load();
     }
@@ -71,10 +70,9 @@ public class ConfigureDataSources {
     @FlywayDataSource
     @Bean(initMethod = "migrate")
     public Flyway secondFlyway(@Qualifier("configFlywayAuthorsDb") FlywayAuthorProperties properties,
-            @Qualifier("dataSourceBooksDb") HikariDataSource dataSource) {
+            @Qualifier("dataSourceAuthorsDb") HikariDataSource dataSource) {
         return Flyway.configure()
-                .dataSource(dataSource)
-                .schemas(properties.getSchema())
+                .dataSource(dataSource)                
                 .locations(properties.getLocation())
                 .load();
     }
