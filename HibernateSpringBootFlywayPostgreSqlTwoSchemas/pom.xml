@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jpa</groupId>
-    <artifactId>HibernateSpringBootFlywayPostgreSqTwoSchemas</artifactId>
+    <artifactId>HibernateSpringBootFlywayPostgreSqlTwoSchemas</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>HibernateSpringBootFlywayPostgreSqTwoSchemas</name>
+    <name>HibernateSpringBootFlywayPostgreSqlTwoSchemas</name>
     <description>JPA project for Spring Boot</description>
 
     <parent>
