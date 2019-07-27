@@ -16,16 +16,16 @@ import org.springframework.context.annotation.Primary;
 @Configuration
 public class ConfigureDataSources {
 
-    // first schema, booksdb
+    // first schema, books
     @Primary
-    @Bean(name = "configBooksDb")
+    @Bean(name = "configBooksSchema")
     @ConfigurationProperties("app.datasource.ds1")
     public DataSourceProperties firstDataSourceProperties() {
         return new DataSourceProperties();
     }
 
     @Primary
-    @Bean(name = "configFlywayBooksDb")
+    @Bean(name = "configFlywayBooksSchema")
     @ConfigurationProperties("app.flyway.ds1")
     public FlywayBookProperties firstFlywayProperties() {
         return new FlywayBookProperties();
@@ -33,8 +33,8 @@ public class ConfigureDataSources {
 
     @Primary
     @FlywayDataSource
-    @Bean(name = "flywayBooksDb", initMethod = "migrate")
-    public Flyway firstFlyway(@Qualifier("configFlywayBooksDb") FlywayBookProperties properties) {
+    @Bean(name = "flywayBooksSchema", initMethod = "migrate")
+    public Flyway firstFlyway(@Qualifier("configFlywayBooksSchema") FlywayBookProperties properties) {
         return Flyway.configure()
                 .dataSource(properties.getUrl(), properties.getUser(), properties.getPassword())
                 .schemas(properties.getSchema())
@@ -43,29 +43,29 @@ public class ConfigureDataSources {
     }
 
     @Primary
-    @Bean(name = "dataSourceBooksDb")
-    @DependsOn("flywayBooksDb")
+    @Bean(name = "dataSourceBooksSchema")
+    @DependsOn("flywayBooksSchema")
     @ConfigurationProperties("app.datasource.ds1")
-    public HikariDataSource firstDataSource(@Qualifier("configBooksDb") DataSourceProperties properties) {
+    public HikariDataSource firstDataSource(@Qualifier("configBooksSchema") DataSourceProperties properties) {
         return properties.initializeDataSourceBuilder().type(HikariDataSource.class)
                 .build();
     }
 
-    // second schema, authorsdb
-    @Bean(name = "configAuthorsDb")
+    // second schema, authors
+    @Bean(name = "configAuthorsSchema")
     @ConfigurationProperties("app.datasource.ds2")
     public DataSourceProperties secondDataSourceProperties() {
         return new DataSourceProperties();
     }
 
-    @Bean(name = "configFlywayAuthorsDb")
+    @Bean(name = "configFlywayAuthorsSchema")
     public FlywayAuthorProperties secondFlywayProperties() {
         return new FlywayAuthorProperties();
     }
 
     @FlywayDataSource
-    @Bean(name = "flywayAuthorsDb", initMethod = "migrate")
-    public Flyway secondFlyway(@Qualifier("configFlywayAuthorsDb") FlywayAuthorProperties properties) {
+    @Bean(name = "flywayAuthorsSchema", initMethod = "migrate")
+    public Flyway secondFlyway(@Qualifier("configFlywayAuthorsSchema") FlywayAuthorProperties properties) {
         return Flyway.configure()
                 .dataSource(properties.getUrl(), properties.getUser(), properties.getPassword())
                 .schemas(properties.getSchema())
@@ -73,10 +73,10 @@ public class ConfigureDataSources {
                 .load();
     }
 
-    @Bean(name = "dataSourceAuthorsDb")
-    @DependsOn("flywayAuthorsDb")
+    @Bean(name = "dataSourceAuthorsSchema")
+    @DependsOn("flywayAuthorsSchema")
     @ConfigurationProperties("app.datasource.ds2")
-    public HikariDataSource secondDataSource(@Qualifier("configAuthorsDb") DataSourceProperties properties) {
+    public HikariDataSource secondDataSource(@Qualifier("configAuthorsSchema") DataSourceProperties properties) {
         return properties.initializeDataSourceBuilder().type(HikariDataSource.class)
                 .build();
     }

@@ -1,4 +1,4 @@
-CREATE TABLE booksdb.book (
+CREATE TABLE books.book (
   id bigserial NOT NULL,
   isbn character varying(50),
   title character varying(50),
@@ -9,5 +9,5 @@ WITH (
     OIDS = FALSE
 );
 
-ALTER TABLE booksdb.book
+ALTER TABLE books.book
     OWNER to postgres;

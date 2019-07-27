@@ -25,7 +25,7 @@ public class SecondEntityManagerFactory {
 
     @Bean
     public LocalContainerEntityManagerFactoryBean ds2EntityManagerFactory(
-            EntityManagerFactoryBuilder builder, @Qualifier("dataSourceAuthorsDb") DataSource dataSource) {
+            EntityManagerFactoryBuilder builder, @Qualifier("dataSourceAuthorsSchema") DataSource dataSource) {
 
         return builder
                 .dataSource(dataSource)

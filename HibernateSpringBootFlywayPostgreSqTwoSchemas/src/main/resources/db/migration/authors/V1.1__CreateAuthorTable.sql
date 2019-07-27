@@ -1,4 +1,4 @@
-CREATE TABLE authorsdb.author (
+CREATE TABLE authors.author (
   id bigserial NOT NULL,
   name character varying(50),
   genre character varying(50),
@@ -10,5 +10,5 @@ WITH (
     OIDS = FALSE
 );
 
-ALTER TABLE authorsdb.author
+ALTER TABLE authors.author
     OWNER to postgres;

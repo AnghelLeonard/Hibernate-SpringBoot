@@ -27,7 +27,7 @@ public class FirstEntityManagerFactory {
     @Bean
     @Primary
     public LocalContainerEntityManagerFactoryBean ds1EntityManagerFactory(
-            EntityManagerFactoryBuilder builder, @Qualifier("dataSourceBooksDb") DataSource dataSource) {
+            EntityManagerFactoryBuilder builder, @Qualifier("dataSourceBooksSchema") DataSource dataSource) {
 
         return builder
                 .dataSource(dataSource)
