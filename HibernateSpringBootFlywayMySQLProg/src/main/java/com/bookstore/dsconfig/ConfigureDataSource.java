@@ -36,8 +36,8 @@ public class ConfigureDataSource {
     public Flyway flyway(@Qualifier("dataSource") DataSource primaryDataSource) {
 
         return Flyway.configure()
-                .dataSource(primaryDataSource)
-                .locations("classpath:db/migration")
+                .dataSource(primaryDataSource)                
+                .locations("classpath:db/migration") // this path is default
                 .load();
     }
 }
