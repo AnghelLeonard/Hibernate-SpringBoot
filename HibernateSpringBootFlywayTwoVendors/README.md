@@ -7,7 +7,7 @@
 **Key points:**\
      - for Maven, in `pom.xml`, add the Flyway dependency\
      - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - in `application.properties`, configure the JDBC URL for MySQL as, `jdbc:mysql://localhost:3306/authorsdb?createDatabaseIfNotExist=true&useSSL=false` and for PostgreSQL as, `jdbc:postgresql://localhost:5432/postgres?currentSchema=booksdb`\
+     - in `application.properties`, configure the JDBC URL for MySQL as, `jdbc:mysql://localhost:3306/authorsdb?createDatabaseIfNotExist=true` and for PostgreSQL as, `jdbc:postgresql://localhost:5432/postgres?currentSchema=booksdb`\
      - in `application.properties`, set `spring.flyway.enabled=false` to disable default behavior\
      - programmatically create a `DataSource` for MySQL and one for PostgreSQL\
      - programmatically create a `FlywayDataSource` for MySQL and one for PostgreSQL\
