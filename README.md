@@ -1951,9 +1951,9 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 ----------------------------------------------------------------------------------------------------------------------
 
-133. **[How To Programmatically Setup Flyway And MySQL `DataSource`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootProgFlyway)**
-
-**Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+133. **[How To Programmatically Setup Flyway And MySQL `DataSource`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLProg)**
+ 
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
 
 **Description:** This application is a kickoff for setting Flyway and MySQL `DataSource` programmatically.
 
