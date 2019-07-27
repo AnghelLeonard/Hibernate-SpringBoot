@@ -2009,7 +2009,7 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 ----------------------------------------------------------------------------------------------------------------------
 
-137. **[How To Auto-Create And Migrate Two Schemas In MySQL Using Flyway](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLTwoDatabases)**
+137. **[How To Auto-Create And Migrate Two Databases In MySQL Using Flyway](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLTwoDatabases)**
 
 **Note:** or production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
 
