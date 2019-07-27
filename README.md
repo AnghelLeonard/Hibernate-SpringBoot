@@ -1993,3 +1993,16 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
      - each entity that should be stored in this database should be annotated with, `@Table(schema = "bookstore")`\
      - each SQL file containing the schema update add it in `classpath:db/migration`\
      - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
+
+----------------------------------------------------------------------------------------------------------------------
+
+136. **[How To Programmatically Setup Flyway And PostgreSQL `DataSource`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayPostgreSQLProg)**
+ 
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+
+**Description:** This application is a kickoff for setting Flyway and PostgreSQL `DataSource` programmatically.
+
+**Key points:**\
+     - for Maven, in `pom.xml`, add the Flyway dependency\
+     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
+     - configure `DataSource` and Flyway programmatically
