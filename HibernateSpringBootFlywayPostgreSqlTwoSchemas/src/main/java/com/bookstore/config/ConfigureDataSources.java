@@ -25,8 +25,7 @@ public class ConfigureDataSources {
     }
 
     @Primary
-    @Bean(name = "configFlywayBooksSchema")
-    @ConfigurationProperties("app.flyway.ds1")
+    @Bean(name = "configFlywayBooksSchema")    
     public FlywayBookProperties firstFlywayProperties() {
         return new FlywayBookProperties();
     }
