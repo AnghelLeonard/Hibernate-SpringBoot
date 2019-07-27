@@ -3,7 +3,6 @@ package com.bookstore.config;
 import com.bookstore.fllyway.propeties.FlywayDs1Properties;
 import com.bookstore.fllyway.propeties.FlywayDs2Properties;
 import com.zaxxer.hikari.HikariDataSource;
-import javax.sql.DataSource;
 import org.flywaydb.core.Flyway;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.flyway.FlywayDataSource;
@@ -11,7 +10,6 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Primary;
 
 @Configuration
@@ -19,14 +17,14 @@ public class ConfigureDataSources {
 
     // setting MySQL data source and Flyway migration for "authorsdb"
     @Primary
-    @Bean(name = "configMySql")    
+    @Bean(name = "configMySql")
     @ConfigurationProperties("app.datasource.ds1")
     public DataSourceProperties firstDataSourceProperties() {
         return new DataSourceProperties();
     }
 
     @Primary
-    @Bean(name = "configFlywayMySql")    
+    @Bean(name = "configFlywayMySql")
     public FlywayDs1Properties firstFlywayProperties() {
         return new FlywayDs1Properties();
     }
@@ -42,7 +40,7 @@ public class ConfigureDataSources {
     @Primary
     @FlywayDataSource
     @Bean(initMethod = "migrate")
-    public Flyway primaryFlyway(@Qualifier("dataSourceMySql") DataSource primaryDataSource,
+    public Flyway primaryFlyway(@Qualifier("dataSourceMySql") HikariDataSource primaryDataSource,
             @Qualifier("configFlywayMySql") FlywayDs1Properties properties) {
 
         return Flyway.configure()
@@ -57,29 +55,27 @@ public class ConfigureDataSources {
     public DataSourceProperties secondDataSourceProperties() {
         return new DataSourceProperties();
     }
-/*
+
     @Bean(name = "configFlywayPostgreSql")
     public FlywayDs2Properties secondFlywayProperties() {
         return new FlywayDs2Properties();
-    }   
-*/
+    }
+
     @Bean(name = "dataSourcePostgreSql")
-    //@DependsOn("flywayPostgreSql")
     @ConfigurationProperties("app.datasource.ds2")
-    public HikariDataSource secondDataSource(
-            @Qualifier("configPostgreSql") DataSourceProperties properties) {
+    public HikariDataSource secondDataSource(@Qualifier("configPostgreSql") DataSourceProperties properties) {
         return properties.initializeDataSourceBuilder().type(HikariDataSource.class)
                 .build();
     }
-    
+ 
     @FlywayDataSource
     @Bean(initMethod = "migrate")
-    //@DependsOn("dataSourcePostgreSql")
-    public Flyway secondFlyway(@Qualifier("dataSourcePostgreSql") DataSource primaryDataSource) {
-       return Flyway.configure()
-                .dataSource(primaryDataSource)
-               .schemas("booksdb")
-                .locations("classpath:db/migration/postgresql")
+    public Flyway secondFlyway(@Qualifier("dataSourcePostgreSql") HikariDataSource secondDataSource,
+            @Qualifier("configFlywayPostgreSql") FlywayDs2Properties properties) {
+        return Flyway.configure()
+                .dataSource(secondDataSource)
+                .schemas(properties.getSchema())
+                .locations(properties.getLocation())
                 .load();
     }
 }
