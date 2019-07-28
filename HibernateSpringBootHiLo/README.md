@@ -1,5 +1,5 @@
 **[How To Generate Sequences Of Identifiers Via Hibernate `hi/lo` Algorithm](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHiLo)**
-
+ 
 **Description:** This is a Spring Boot example of using the `hi/lo` algorithm for generating 1000 identifiers in 10 database roundtrips for batching 1000 inserts in batches of 30 inserts. The `hi/lo` is a Hibernate algorithm is an optimization algorithm for generating sequences of identifiers.
 
 **Key points:**\
