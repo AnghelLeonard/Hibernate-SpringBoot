@@ -1,11 +1,11 @@
-**[Hibernate hi/lo Algorithm And External Systems Issue](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHiLoIssue)**
+**[Hibernate `hi/lo` Algorithm And External Systems Issue](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHiLoIssue)**
 
-**Description:** This is a Spring Boot sample that exemplifies how the hi/lo algorithm may cause issues when the database is used by external systems as well. Such systems can safetly generate non-duplicate identifiers (e.g., for inserting new records) only if they know about the hi/lo presence and its internal work.
+**Description:** This is a Spring Boot sample that exemplifies how the `hi/lo` algorithm may cause issues when the database is used by external systems as well. Such systems can safely generate non-duplicate identifiers (e.g., for inserting new records) only if they know about the `hi/lo` presence and its internal work.
 
 **Key points:**\
      - use the `SEQUENCE` generator type (e.g., in PostgreSQL)\
-     - configure the hi/lo algorithm as in `Author.java` entity\
-     - insert a few records via hi/lo\
-     - insert a few records naively (this acts as an external system that relies in `NEXTVAL('sequence')` and is not aware of hi/lo presence
+     - configure the `hi/lo` algorithm as in `Author.java` entity\
+     - insert a few records via `hi/lo`\
+     - insert a few records naively (this acts as an external system that relies in `NEXTVAL('sequence')` and is not aware of `hi/lo` presence
 
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
