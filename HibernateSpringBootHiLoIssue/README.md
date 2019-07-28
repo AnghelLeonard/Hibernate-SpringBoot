@@ -7,5 +7,9 @@
      - configure the `hi/lo` algorithm as in `Author.java` entity\
      - insert a few records via `hi/lo`\
      - insert a few records natively (this acts as an external system that relies in `NEXTVAL('sequence')` and is not aware of `hi/lo` presence
+     
+**Output sample:** Running this application should result in the following error:\
+`ERROR: duplicate key value violates unique constraint "author_pkey"
+     Detail: Key (id)=(2) already exists.`
 
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
