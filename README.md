@@ -668,13 +668,13 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-49. **[How To Fetch Primary Keys Via Hibernate hi/lo Algorithm](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHiLo)**
+49. **[How To Generate Sequences Of Identifiers Via Hibernate `hi/lo` Algorithm](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHiLo)**
 
-**Description:** This is a Spring Boot example of using the hi/lo algorithm for fetching 1000 PKs in 10 database roundtrips for batching 1000 inserts in batches of 30 inserts. The hi/lo algorithm is an optimization algorithm for generating sequences of identifiers.
+**Description:** This is a Spring Boot example of using the `hi/lo` algorithm for generating 1000 identifiers in 10 database roundtrips for batching 1000 inserts in batches of 30 inserts. The `hi/lo` is a Hibernate algorithm is an optimization algorithm for generating sequences of identifiers.
 
 **Key points:**\
      - use the `SEQUENCE` generator type (e.g., in PostgreSQL)\
-     - configure the hi/lo algorithm as in `Author.java` entity
+     - configure the `hi/lo` algorithm as in `Author.java` entity
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHiLo/Hibernate%20hilo%20algorithm.png)
