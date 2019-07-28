@@ -19,7 +19,7 @@ public class BookstoreService {
 
         List<Author> authors = new ArrayList<>();
 
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 1; i <= 1000; i++) {
             Author author = new Author();
             author.setName("Author_" + i);
 

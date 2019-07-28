@@ -25,9 +25,7 @@ public class Author implements Serializable {
     )
     private Long id;
 
-    private int age;
     private String name;
-    private String genre;
 
     public Long getId() {
         return id;
@@ -43,27 +41,5 @@ public class Author implements Serializable {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getGenre() {
-        return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    @Override
-    public String toString() {
-        return "Author{" + "id=" + id + ", age=" + age
-                + ", name=" + name + ", genre=" + genre + '}';
     }
 }
