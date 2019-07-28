@@ -8,6 +8,6 @@
      - insert a few records via `pooled`\
      - insert a few records natively (this acts as an external system that relies on `NEXTVAL('sequence')` and is not aware of `pooled` presence
      
-**Conclusion:** The Hibernate `pooled` algorithm allows external systems to generate unique identifiers as well. In other words, external systems can concurrently insert rows in the tables relying on `pooled` algorithm. Nevertheless, old versions of Hibernate can raise exceptions caused by `INSERT` statements triggered by external systems that uses the lowest boundary as identifier. This is a good reason to update to Hibernate latest versions (e.g., Hibernate 5.x), which have fixed this issue.
+**Conclusion:** In contrast to the classical `hi/lo` algorithm, the Hibernate `pooled` algorithm allows external systems to generate unique identifiers as well. In other words, external systems can concurrently insert rows in the tables relying on `pooled` algorithm. Nevertheless, old versions of Hibernate can raise exceptions caused by `INSERT` statements triggered by external systems that uses the lowest boundary as identifier. This is a good reason to update to Hibernate latest versions (e.g., Hibernate 5.x), which have fixed this issue.
 
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
