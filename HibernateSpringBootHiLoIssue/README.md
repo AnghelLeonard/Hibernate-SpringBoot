@@ -1,12 +1,15 @@
-**[How To Fetch Primary Keys Via Hibernate hi/lo Algorithm](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHiLo)**
+**[Hibernate `hi/lo` Algorithm And External Systems Issue](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHiLoIssue)**
 
-**Description:** This is a Spring Boot example of using the hi/lo algorithm for fetching 1000 PKs in 10 database roundtrips for batching 1000 inserts in batches of 30 inserts. The hi/lo algorithm is an optimization algorithm for generating sequences of identifiers.
+**Description:** This is a Spring Boot sample that exemplifies how the `hi/lo` algorithm may cause issues when the database is used by external systems as well. Such systems can safely generate non-duplicate identifiers (e.g., for inserting new records) only if they know about the `hi/lo` presence and its internal work.
 
 **Key points:**\
      - use the `SEQUENCE` generator type (e.g., in PostgreSQL)\
-     - configure the hi/lo algorithm as in `Author.java` entity
+     - configure the `hi/lo` algorithm as in `Author.java` entity\
+     - insert a few records via `hi/lo`\
+     - insert a few records natively (this acts as an external system that relies on `NEXTVAL('sequence')` and is not aware of `hi/lo` presence
      
-**Output example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHiLo/Hibernate%20hilo%20algorithm.png)
+**Output sample:** Running this application should result in the following error:\
+`ERROR: duplicate key value violates unique constraint "author_pkey"`\
+`Detail: Key (id)=(2) already exists.`
 
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
