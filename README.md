@@ -2036,7 +2036,7 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
      - use the `SEQUENCE` generator type (e.g., in PostgreSQL)\
      - configure the `hi/lo` algorithm as in `Author.java` entity\
      - insert a few records via `hi/lo`\
-     - insert a few records natively (this acts as an external system that relies in `NEXTVAL('sequence')` and is not aware of `hi/lo` presence
+     - insert a few records natively (this acts as an external system that relies on `NEXTVAL('sequence')` and is not aware of `hi/lo` presence
      
 **Output sample:** Running this application should result in the following error:\
 `ERROR: duplicate key value violates unique constraint "author_pkey"`\
