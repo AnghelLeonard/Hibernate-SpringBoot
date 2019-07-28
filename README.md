@@ -2025,3 +2025,19 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
      - programmatically create two `EntityManagerFactory`, one for `booksdb` and one for `authorsdb`\
      - for `booksdb`, place the migration SQLs files in `db\migration\booksdb`\
      - for `authorsdb`, place the migration SQLs files in `db\migration\authorsdb`
+
+----------------------------------------------------------------------------------------------------------------------
+
+138. **[Hibernate `hi/lo` Algorithm And External Systems Issue](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHiLoIssue)**
+
+**Description:** This is a Spring Boot sample that exemplifies how the `hi/lo` algorithm may cause issues when the database is used by external systems as well. Such systems can safely generate non-duplicate identifiers (e.g., for inserting new records) only if they know about the `hi/lo` presence and its internal work.
+
+**Key points:**\
+     - use the `SEQUENCE` generator type (e.g., in PostgreSQL)\
+     - configure the `hi/lo` algorithm as in `Author.java` entity\
+     - insert a few records via `hi/lo`\
+     - insert a few records natively (this acts as an external system that relies in `NEXTVAL('sequence')` and is not aware of `hi/lo` presence
+     
+**Output sample:** Running this application should result in the following error:\
+`ERROR: duplicate key value violates unique constraint "author_pkey"`\
+`Detail: Key (id)=(2) already exists.`
