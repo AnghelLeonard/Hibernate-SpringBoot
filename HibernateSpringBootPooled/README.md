@@ -1,12 +1,12 @@
 **[How To Generate Sequences Of Identifiers Via Hibernate `pooled` Algorithm](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPooled)**
 
-**Description:** This is a Spring Boot example of using the `pooled` algorithm. The `pooled` is an optimization of `hi/lo`. This algorithm fetched from the database the current sequence value as the top boundary identifier (the current sequence value is computed as the previous sequence value + *increment value*). This way, the application will use in-memory identifiers generated between the previous top boundary (aka, lowest boundary) and the current top boundary.
+**Description:** This is a Spring Boot example of using the `pooled` algorithm. The `pooled` is an optimization of `hi/lo`. This algorithm fetched from the database the current sequence value as the top boundary identifier (the current sequence value is computed as the previous sequence value + `increment_size`). This way, the application will use in-memory identifiers generated between the previous top boundary inclusive (aka, lowest boundary) and the current top boundary exclusive.
 
 **Key points:**\
      - use the `SEQUENCE` generator type (e.g., in PostgreSQL)\
      - configure the `pooled` algorithm as in `Author.java` entity\
      - insert a few records via `pooled`\
-     - insert a few records natively (this acts as an external system that relies on `NEXTVAL('sequence')` and is not aware of `pooled` presence)
+     - insert a few records natively (this acts as an external system that relies on `NEXTVAL('hilo_sequence')` and is not aware of `pooled` presence and/or behavior)
      
 **Conclusion:** In contrast to the classical `hi/lo` algorithm, the Hibernate `pooled` algorithm doesn't cause issues to external systems that wants to interact with our tables. In other words, external systems can concurrently insert rows in the tables relying on `pooled` algorithm. Nevertheless, old versions of Hibernate can raise exceptions caused by `INSERT` statements triggered by external systems that uses the lowest boundary as identifier. This is a good reason to update to Hibernate latest versions (e.g., Hibernate 5.x), which have fixed this issue.
 
