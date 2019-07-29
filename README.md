@@ -2036,7 +2036,7 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
      - use the `SEQUENCE` generator type (e.g., in PostgreSQL)\
      - configure the `hi/lo` algorithm as in `Author.java` entity\
      - insert a few records via `hi/lo`\
-     - insert a few records natively (this acts as an external system that relies on `NEXTVAL('sequence')` and is not aware of `hi/lo` presence)
+     - insert a few records natively (this acts as an external system that relies on `NEXTVAL('hilo_sequence')` and is not aware of `hi/lo` presence and/or behavior)
      
 **Output sample:** Running this application should result in the following error:\
 `ERROR: duplicate key value violates unique constraint "author_pkey"`\
@@ -2052,6 +2052,6 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
      - use the `SEQUENCE` generator type (e.g., in PostgreSQL)\
      - configure the `pooled` algorithm as in `Author.java` entity\
      - insert a few records via `pooled`\
-     - insert a few records natively (this acts as an external system that relies on `NEXTVAL('sequence')` and is not aware of `pooled` presence)
+     - insert a few records natively (this acts as an external system that relies on `NEXTVAL('hilo_sequence')` and is not aware of `pooled` presence and/or behavior)
      
 **Conclusion:** In contrast to the classical `hi/lo` algorithm, the Hibernate `pooled` algorithm doesn't cause issues to external systems that wants to interact with our tables. In other words, external systems can concurrently insert rows in the tables relying on `pooled` algorithm. Nevertheless, old versions of Hibernate can raise exceptions caused by `INSERT` statements triggered by external systems that uses the lowest boundary as identifier. This is a good reason to update to Hibernate latest versions (e.g., Hibernate 5.x), which have fixed this issue.
