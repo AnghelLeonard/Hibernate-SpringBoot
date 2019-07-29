@@ -6,12 +6,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-/*
-   Running this application should result in the following error:
-     ERROR: duplicate key value violates unique constraint "author_pkey"
-     Detail: Key (id)=(2) already exists.
-*/
-
 @SpringBootApplication
 public class MainApplication {
 
