@@ -2032,7 +2032,7 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 138. **[Hibernate `hi/lo` Algorithm And External Systems Issue](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHiLoIssue)**
 
-**Description:** This is a Spring Boot sample that exemplifies how the `hi/lo` algorithm may cause issues when the database is used by external systems as well. Such systems can safely generate non-duplicate identifiers (e.g., for inserting new records) only if they know about the `hi/lo` presence and its internal work.
+**Description:** This is a Spring Boot sample that exemplifies how the `hi/lo` algorithm may cause issues when the database is used by external systems as well. Such systems can safely generate non-duplicate identifiers (e.g., for inserting new records) only if they know about the `hi/lo` presence and its internal work. So, better rely on `pooled` or `pooled-lo` which doesn't have such issues.
 
 **Key points:**\
      - use the `SEQUENCE` generator type (e.g., in PostgreSQL)\
