@@ -26,9 +26,7 @@ public class BookstoreService {
     }
 
     @Transactional
-    public void saveAuthorNative() {
-        // ERROR: duplicate key value violates unique constraint "author_pkey"
-        // Detail: Key (id)=(2) already exists.
-        authorRepository.saveNative("Author_" + 4); // try to insert at id 2 and fails
+    public void saveAuthorNative() {        
+        authorRepository.saveNative("Author_" + 4); // successfully inserts at id 201
     }
 }
