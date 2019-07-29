@@ -670,6 +670,8 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 49. **[How To Generate Sequences Of Identifiers Via Hibernate `hi/lo` Algorithm](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHiLo)**
 
+ **Note:** If systems external to your application need to insert rows in your tables then don't rely on `hi/lo` since, in such cases, it may cause errors resulted from generating duplicated identifiers. Rely on `pooled` or `pooled-lo`.
+ 
 **Description:** This is a Spring Boot example of using the `hi/lo` algorithm for generating 1000 identifiers in 10 database roundtrips for batching 1000 inserts in batches of 30 inserts. The `hi/lo` is a Hibernate algorithm is an optimization algorithm for generating sequences of identifiers.
 
 **Key points:**\
