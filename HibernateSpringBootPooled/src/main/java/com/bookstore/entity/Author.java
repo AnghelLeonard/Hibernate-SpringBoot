@@ -19,7 +19,7 @@ public class Author implements Serializable {
             parameters = {
                 @Parameter(name = "sequence_name", value = "hilo_sequence"),
                 @Parameter(name = "initial_value", value = "1"),
-                @Parameter(name = "increment_size", value = "5"),
+                @Parameter(name = "increment_size", value = "100"),
                 @Parameter(name = "optimizer", value = "pooled")
             }
     )
