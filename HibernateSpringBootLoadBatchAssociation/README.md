@@ -1,11 +1,11 @@
-**[Offset Pagination - Trigger `SELECT COUNT` Subquery And Return `List<entity>` Via Extra Column](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootListEntityOffsetPaginationExtraColumn)**
+**[Fetching Associations In Batches Via `@BatchSize`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLoadBatchAssociation)**
+
+**Note:** Fetching associations in the same query with their parent can be done via `JOIN FETCH` or `@NamedEntityGraph`. But, Hibernate allows us to fetch associations in batches as well via `@BatchSize` annotation. This may be useful when `JOIN FETCH` and `@NamedEntityGraph` doesn't seem to help.
  
-**Description:** This application fetches data as `List<entity>` via Spring Boot offset pagination. The `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, one query is needed for fetching the data and one for counting the total number of records).
+**Description:** This application fetches all `Author` entities via a `SELECT` query. Further, calling the `getBooks()` method of the first `Author` entity will trigger another `SELECT` query that initializes the association of the first three `Author` entities returned by the previous `SELECT` query. This is the effect of `@BatchSize`.
 
 **Key points:**\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - in the `entity`, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`\
-     - fetch data via a native query (that includes `SELECT COUNT` subquery) into a `List<entity>` 
+     -
 
 -------------------------------
 
