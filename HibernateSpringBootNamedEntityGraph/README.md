@@ -13,7 +13,7 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Key points:**\
      - define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` relationship\
-     - in `Author` entity use the `@NamedEntityGraph` to define the graph (e.g., load eagerly the authors and the associatated books)\
+     - in `Author` entity use the `@NamedEntityGraph` to define the *entity graph* (e.g., load eagerly the authors and the associatated books)\
      - in `AuthorRepositry` rely on Spring `@EntityGraph` annotation to indicate the entity graph defined at the previous step
 
 -------------------------------
