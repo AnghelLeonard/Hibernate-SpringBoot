@@ -1,22 +1,17 @@
-package com.tennis;
+package com.bookstore;
 
-import com.tennis.service.TennisService;
+import com.bookstore.service.BookstoreService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-// Use this practice only if you simply cannot use JOIN FETCH 
-// or @NamedEntityGraph
-
 @SpringBootApplication
 public class MainApplication {
 
-    private final TennisService tennisService;
-
-    public MainApplication(TennisService tennisService) {
-        this.tennisService = tennisService;
-    }
+    @Autowired
+    private BookstoreService bookstoreService;
 
     public static void main(String[] args) {
         SpringApplication.run(MainApplication.class, args);
@@ -25,8 +20,7 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-
-            tennisService.displayTournamentsAndPlayers();
+            bookstoreService.displayAuthorsAndBooks();
         };
     }
 }
