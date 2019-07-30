@@ -1,16 +1,20 @@
 
-**[How To Set Up p6spy in Spring Boot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootP6spy)**
+**[How To Use Entity Graph (`@NamedEntityGraph`) In Spring Boot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNamedEntityGraph)**
 
-**Description:** This is a Spring Boot application that uses [P6Spy](https://github.com/p6spy/p6spy). *P6Spy is a framework that enables database data to be seamlessly intercepted and logged with no code changes to the application.*
+**Note:** In a nutshell, entity graph (aka, *fetch plans*) is a feature introduced in JPA 2.1 that help us to improve the performance of loading entities. Mainly, we specify the entity’s related associations and basic fields that should be loaded in a single `SELECT` statement. We can *chain* any number of entities and even use sub-graphs to create complex *fetch plans*. To override the current `FetchType` semantics there are properties that can be set:
+
+*Fetch Graph* (default), `javax.persistence.fetchgraph`
+The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The remaining attributes are treated as `FetchType.LAZY` regardless of the default/explicit `FetchType`.
+
+*Load Graph*, `javax.persistence.loadgraph`
+The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The remaining attributes are treated according to their specified or default `FetchType`.
+
+**Description:** This is a sample application of using entity graphs in Spring Boot.
 
 **Key points:**\
-     - in `pom.xml`, add the P6Spy Maven dependency\
-     - in `application.properties`, set up JDBC URL as, `jdbc:p6spy:mysql://localhost:3306/db_users`\
-     - in `application.properties`, set up driver class name as, `com.p6spy.engine.spy.P6SpyDriver`\
-     - in the application root folder add the file `spy.properties` (this file contains P6Spy configurations); in this application, the logs will be outputed to console, but you can easy switch to a file; more details about P6Spy configurations can be found in documentation
-
-**Output sample:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootP6spy/p6spy.png)
+     - define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` relationship\
+     - in `Author` entity use the `@NamedEntityGraph` to define the graph (e.g., load eagerly the authors and the associatated books)\
+     - in `AuthorRepositry` rely on Spring `@EntityGraph` annotation to indicate the entity graph defined at the previous step
 
 -------------------------------
 
