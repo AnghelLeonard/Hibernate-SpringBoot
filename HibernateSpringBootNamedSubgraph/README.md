@@ -14,7 +14,7 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 **Description:** This is a sample application of using *entity sub-graphs* in Spring Boot. There is one example based on `@NamedSubgraph` and one based on the dot notation (.) in an ad-hoc *entity graph*.
 
 **Key points:**\
-     - define three entities, `Author`, `Book` and `Publisher` (`Author` and `Book` are involved in a lazy bidirectional `@OneToMany` relationship, `Book` and `Publisher` are also involved in a lazy bidirectional `@OneToMany` relationship)
+     - define three entities, `Author`, `Book` and `Publisher` (`Author` and `Book` are involved in a lazy bidirectional `@OneToMany` relationship, `Book` and `Publisher` are also involved in a lazy bidirectional `@OneToMany` relationship; between `Author` and `Publisher` there is no relationship)
      
 **Using `@NamedSubgraph`**\
      - in `Author` entity define an *entity graph* via  `@NamedEntityGraph`; load eagerly the authors and the associatated books and use `@NamedSubgraph` to define a *sub-graph* for loading the publishers associated with these books\
