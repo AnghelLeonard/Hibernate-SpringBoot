@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface PublisherRepository extends JpaRepository<Publisher, Long> {
 
     @Transactional(readOnly = true)
-    @EntityGraph(attributePaths = {"books", "books.author"},
+    @EntityGraph(attributePaths = {"books.author"},
             type = EntityGraph.EntityGraphType.FETCH)
     @Override
     public List<Publisher> findAll();
