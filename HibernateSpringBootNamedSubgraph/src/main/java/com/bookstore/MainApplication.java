@@ -20,7 +20,8 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            bookstoreService.displayAuthorsAndBooks();
+            bookstoreService.displayAuthorsWithBooksAndPublishers();
+            bookstoreService.displayPublishersWithBooksAndAuthors();
         };
     }
 }
