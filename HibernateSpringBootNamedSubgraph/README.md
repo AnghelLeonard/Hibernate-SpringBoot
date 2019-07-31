@@ -21,7 +21,7 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
      - in `AuthorRepository` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
      
 **Using the dot notation (.)**\
-     - in `PublisherRepository` define an ad-hoc *entity graph* that fetches all publishers with associated books, and further, the authors associated with these books (e.g., `@EntityGraph(attributePaths = {"books", "books.author"})`.
+     - in `PublisherRepository` define an ad-hoc *entity graph* that fetches all publishers with associated books, and further, the authors associated with these books (e.g., `@EntityGraph(attributePaths = {"books.author"})`.
 
 -------------------------------
 
