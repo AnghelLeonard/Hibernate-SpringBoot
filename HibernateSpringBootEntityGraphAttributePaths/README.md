@@ -15,7 +15,7 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Key points:**\
      - define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` relationship\
-     - the *entity graph* should load eagerly the authors and the associatated books\
+     - the *entity graph* should load in a single `SELECT` the authors and the associatated books\
      - in `AuthorRepository` rely on Spring `@EntityGraph(attributePaths = {"books"})` annotation to indicate the ad-hoc *entity graph*
 
 -------------------------------
