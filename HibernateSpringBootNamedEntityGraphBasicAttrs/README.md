@@ -15,7 +15,7 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Key points:**\
      - define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` relationship\
-     - in `Author` entity use the `@NamedEntityGraph` to define the *entity graph* (e.g., load eagerly the authors names (only the `name` basic attribute, ignore the rest) and the associatated books)\
+     - in `Author` entity use the `@NamedEntityGraph` to define the *entity graph* (e.g., load the authors names (only the `name` basic attribute; ignore the rest) and the associatated books)\
      - add *bytecode enhancement*\
      - annotate the basic attributes that should be ignored by the *entity graph* with `@Basic(fetch = FetchType.LAZY)`\
      - in `AuthorRepository` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
