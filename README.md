@@ -2104,7 +2104,7 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Key points:**\
      - define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` relationship\
-     - in `Author` entity use the `@NamedEntityGraph` to define the *entity graph* (e.g., load eagerly the authors and the associatated books)\
+     - in `Author` entity use the `@NamedEntityGraph` to define the *entity graph* (e.g., load in a single `SELECT` the authors and the associatated books)\
      - in `AuthorRepository` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
 
 ----------------------------------------------------------------------------------------------------------------------
@@ -2127,7 +2127,7 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
      - define three entities, `Author`, `Book` and `Publisher` (`Author` and `Book` are involved in a lazy bidirectional `@OneToMany` relationship, `Book` and `Publisher` are also involved in a lazy bidirectional `@OneToMany` relationship; between `Author` and `Publisher` there is no relationship)
      
 **Using `@NamedSubgraph`**\
-     - in `Author` entity define an *entity graph* via  `@NamedEntityGraph`; load eagerly the authors and the associatated books and use `@NamedSubgraph` to define a *sub-graph* for loading the publishers associated with these books\
+     - in `Author` entity define an *entity graph* via  `@NamedEntityGraph`; load the authors and the associatated books and use `@NamedSubgraph` to define a *sub-graph* for loading the publishers associated with these books\
      - in `AuthorRepository` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
      
 **Using the dot notation (.)**\
@@ -2151,7 +2151,7 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Key points:**\
      - define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` relationship\
-     - the *entity graph* should load eagerly the authors and the associatated books\
+     - the *entity graph* should load in a single `SELECT` the authors and the associatated books\
      - in `AuthorRepository` rely on Spring `@EntityGraph(attributePaths = {"books"})` annotation to indicate the ad-hoc *entity graph*
 
 ----------------------------------------------------------------------------------------------------------------------
@@ -2172,7 +2172,7 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Key points:**\
      - define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` relationship\
-     - in `Author` entity use the `@NamedEntityGraph` to define the *entity graph* (e.g., load eagerly the authors names (only the `name` basic attribute, ignore the rest) and the associatated books)\
+     - in `Author` entity use the `@NamedEntityGraph` to define the *entity graph* (e.g., load the authors names (only the `name` basic attribute; ignore the rest) and the associatated books)\
      - add *bytecode enhancement*\
      - annotate the basic attributes that should be ignored by the *entity graph* with `@Basic(fetch = FetchType.LAZY)`\
      - in `AuthorRepository` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
