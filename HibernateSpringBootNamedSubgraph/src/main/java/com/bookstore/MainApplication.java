@@ -26,7 +26,7 @@ public class MainApplication {
             System.out.println("\nCall AuthorRepository#fetchAll():");
             bookstoreService.displayAuthorsWithBooksAndPublishersFetchAll();
             
-            System.out.println("\nCall BookRepository#findAll():");
+            System.out.println("\nCall PublisherRepository#findAll():");
             bookstoreService.displayPublishersWithBooksAndAuthors();
         };
     }
