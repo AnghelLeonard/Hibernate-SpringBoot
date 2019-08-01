@@ -20,7 +20,19 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
+            System.out.println("\nCall AuthorRepository#findAll():");
             bookstoreService.displayAuthorsAndBooks();
+
+            System.out.println("\nCall AuthorRepository#findByAgeLessThanOrderByNameDesc(int age):");
+            bookstoreService.displayAuthorsAndBooksByAge(40);
+
+            System.out.println("\nCall AuthorRepository#findAll(Specification spec):");
+            bookstoreService.displayAuthorsAndBooksByAgeWithSpec();
+
+            System.out.println("\nCall AuthorRepository#fetchAll():");
+            bookstoreService.displayAuthorsAndBooksFetchAll();
+
+            System.out.println("\nCall BookRepository#findAll():");
             bookstoreService.displayBooksAndAuthors();
         };
     }
