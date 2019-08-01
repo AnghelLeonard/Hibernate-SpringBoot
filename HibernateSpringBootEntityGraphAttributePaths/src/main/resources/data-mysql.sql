@@ -12,4 +12,4 @@ insert into book (isbn, title, author_id, id) values ("003-JN", "History Day", 4
 insert into book (isbn, title, author_id, id) values ("001-MJ", "The Beatles Anthology", 1, 4);
 insert into book (isbn, title, author_id, id) values ("001-OG", "Carrie", 2, 5);
 insert into book (isbn, title, author_id, id) values ("002-OG", "House Of Pain", 2, 6);
-insert into book (isbn, title, author_id, id) values ("001-WT", "Anthology 2000", 5, 7);
+insert into book (isbn, title, author_id, id) values ("001-AT", "Anthology 2000", 5, 7);
