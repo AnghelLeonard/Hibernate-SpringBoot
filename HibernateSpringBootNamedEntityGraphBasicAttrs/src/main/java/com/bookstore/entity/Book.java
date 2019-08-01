@@ -1,7 +1,6 @@
 package com.bookstore.entity;
 
 import java.io.Serializable;
-import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -9,17 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedAttributeNode;
-import javax.persistence.NamedEntityGraph;
 
 @Entity
-@NamedEntityGraph(
-        name = "books-author-graph",
-        attributeNodes = {
-            @NamedAttributeNode("title"),
-            @NamedAttributeNode("author")
-        }
-)
 public class Book implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,8 +18,7 @@ public class Book implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
-    @Basic(fetch = FetchType.LAZY)
+    private String title;    
     private String isbn;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -85,11 +74,5 @@ public class Book implements Serializable {
     @Override
     public int hashCode() {
         return 2021;
-    }
-
-    @Override
-    public String toString() {
-        return "Book{" + "id=" + id + ", title=" + title + ", isbn=" + isbn + '}';
-    }
-
+    }    
 }

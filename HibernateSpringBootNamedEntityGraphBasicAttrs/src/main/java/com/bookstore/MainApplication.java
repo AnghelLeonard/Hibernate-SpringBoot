@@ -20,8 +20,13 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            bookstoreService.displayAuthorsAndBooks();
-            bookstoreService.displayBooksAndAuthors();
+            System.out.println("\nCall AuthorRepository#findByAgeGreaterThanAndGenre(), fetch graph:");
+            bookstoreService.displayAuthorsAndBooksByAgeAndGenre(40, "Anthology");
+            
+            System.out.println("\nCall AuthorRepository#findByGenreAndAgeGreaterThan(), load graph:");
+            bookstoreService.displayAuthorsAndBooksByGenreAndAge("Anthology", 40);
+            
+            //bookstoreService.displayBooksAndAuthors();
         };
     }
 }

@@ -3,7 +3,6 @@ package com.bookstore.service;
 import com.bookstore.repository.AuthorRepository;
 import com.bookstore.entity.Author;
 import com.bookstore.entity.Book;
-import com.bookstore.repository.BookRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -11,18 +10,15 @@ import org.springframework.stereotype.Service;
 public class BookstoreService {
 
     private final AuthorRepository authorRepository;
-    private final BookRepository bookRepository;
 
-    public BookstoreService(AuthorRepository authorRepository,
-            BookRepository bookRepository) {
+    public BookstoreService(AuthorRepository authorRepository) {
 
         this.authorRepository = authorRepository;
-        this.bookRepository = bookRepository;
     }
 
-    public void displayAuthorsAndBooks() {
+    public void displayAuthorsAndBooksByGenreAndAge(String genre, int age) {
 
-        List<Author> authors = authorRepository.findAll();
+        List<Author> authors = authorRepository.findByGenreAndAgeGreaterThan(genre, age);
 
         for (Author author : authors) {
             System.out.println("\nAuthor: " + author.getName());
@@ -34,13 +30,17 @@ public class BookstoreService {
         }
     }
 
-    public void displayBooksAndAuthors() {
+    public void displayAuthorsAndBooksByAgeAndGenre(int age, String genre) {
 
-        List<Book> books = bookRepository.findAll();
+        List<Author> authors = authorRepository.findByAgeGreaterThanAndGenre(age, genre);
 
-        for (Book book : books) {
-            System.out.println("\nBook: " + book.getTitle());
-            System.out.println("Author: " + book.getAuthor().getName());
+        for (Author author : authors) {
+            System.out.println("\nAuthor: " + author.getName());
+
+            List<Book> books = author.getBooks();
+            for (Book book : books) {
+                System.out.println("Book: " + book.getTitle());
+            }
         }
     }
 }

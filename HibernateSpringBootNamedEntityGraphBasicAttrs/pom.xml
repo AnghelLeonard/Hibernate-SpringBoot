@@ -55,6 +55,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <!--
             <plugin> 
                 <groupId>org.hibernate.orm.tooling</groupId> 
                 <artifactId>hibernate-enhance-maven-plugin</artifactId> 
@@ -71,6 +72,7 @@
                     </execution> 
                 </executions> 
             </plugin>
+                        -->
         </plugins>
     </build>
 </project>

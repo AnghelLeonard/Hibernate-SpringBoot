@@ -32,9 +32,9 @@ public class Author implements Serializable {
     private Long id;
 
     private String name;
-    @Basic(fetch = FetchType.LAZY)
+   // @Basic(fetch = FetchType.LAZY)
     private String genre;
-    @Basic(fetch = FetchType.LAZY)
+   // @Basic(fetch = FetchType.LAZY)
     private int age;
 
     @OneToMany(cascade = CascadeType.ALL,
@@ -101,11 +101,4 @@ public class Author implements Serializable {
     public void setBooks(List<Book> books) {
         this.books = books;
     }
-
-    @Override
-    public String toString() {
-        return "Author{" + "id=" + id + ", name=" + name
-                + ", genre=" + genre + ", age=" + age + '}';
-    }
-
 }

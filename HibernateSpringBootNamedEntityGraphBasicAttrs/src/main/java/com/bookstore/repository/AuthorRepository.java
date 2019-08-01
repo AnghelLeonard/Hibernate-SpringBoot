@@ -8,10 +8,14 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@Transactional(readOnly = true)
 public interface AuthorRepository extends JpaRepository<Author, Long> {
-
-    @Transactional(readOnly = true)
-    @EntityGraph(value = "author-books-graph", type = EntityGraph.EntityGraphType.FETCH)
-    @Override
-    public List<Author> findAll();
+    
+    @EntityGraph(value = "author-books-graph", 
+            type = EntityGraph.EntityGraphType.FETCH)    
+    public List<Author> findByAgeGreaterThanAndGenre(int age, String genre);
+    
+    @EntityGraph(value = "author-books-graph", 
+            type = EntityGraph.EntityGraphType.LOAD)   
+    public List<Author> findByGenreAndAgeGreaterThan(String genre, int age);
 }
