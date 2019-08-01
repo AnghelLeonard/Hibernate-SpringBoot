@@ -2168,6 +2168,8 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Nevertheless, the JPA specs doesn't apply in Hibernate for the basic (`@Basic`) attributes.** In other words, by default, attributes are annotated with `@Basic` which rely on the default fetch policy. The default fetch policy is `FetchType.EAGER`. These attributes are also loaded in case of *fetch graph* even if they are not explicitly specified via `@NamedAttributeNode`. Annotating the basic attributes that should not be fetched with `@Basic(fetch = FetchType.LAZY)` it is not enough. Both, *fetch graph* and *load graph* will ignore these settings as long as we don't add *bytecode enhancement* as well.
 
+**The main drawback consists of the fact the these basic attributes are fetched `LAZY` by all other queries not only by the queries using the entity graph, and most probably, you will not want this behavior.**
+
 **Description:** This is a sample application of using *entity graphs* with `@Basic` attributes in Spring Boot.
 
 **Key points:**\
