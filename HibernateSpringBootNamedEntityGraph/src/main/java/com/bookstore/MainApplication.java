@@ -29,8 +29,8 @@ public class MainApplication {
             System.out.println("\nCall AuthorRepository#findAll(Specification spec):");
             bookstoreService.displayAuthorsAndBooksByAgeWithSpec();
 
-            System.out.println("\nCall AuthorRepository#fetchAll():");
-            bookstoreService.displayAuthorsAndBooksFetchAll();
+            System.out.println("\nCall AuthorRepository#fetchAllAgeGt40Isbn001():");
+            bookstoreService.displayAuthorsAndBooksFetchAllAgeGt40Isbn001();
 
             System.out.println("\nCall BookRepository#findAll():");
             bookstoreService.displayBooksAndAuthors();

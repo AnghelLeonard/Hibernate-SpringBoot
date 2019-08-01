@@ -54,9 +54,9 @@ public class BookstoreService {
         }
     }
     
-    public void displayAuthorsAndBooksFetchAll() {
+    public void displayAuthorsAndBooksFetchAllAgeGt40Isbn001() {
         
-        List<Author> authors = authorRepository.fetchAll();
+        List<Author> authors = authorRepository.fetchAllAgeGt40Isbn001();
         
         for (Author author : authors) {
             System.out.println("Author: " + author);
