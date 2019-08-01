@@ -64,4 +64,19 @@ public class BookstoreService {
             }
         }
     }
+    
+    public void displayPublishersWithBooksAndAuthorsFetchAll001() {
+
+        List<Publisher> publishers = publisherRepository.fetchAll001();
+
+        for (Publisher publisher : publishers) {
+            System.out.println("\nPublisher: " + publisher);
+
+            List<Book> books = publisher.getBooks();
+            System.out.println("No of books: " + books.size() + ", " + books);
+            for (Book book : books) {
+                System.out.println("Book: " + book.getTitle() + " written by: " + book.getAuthor());
+            }
+        }
+    }
 }
