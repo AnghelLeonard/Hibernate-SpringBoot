@@ -21,7 +21,8 @@ public class MainApplication {
     public ApplicationRunner init() {
         return args -> {
             bookstoreService.displayAuthorsWithBooksAndPublishers();
-            bookstoreService.displayPublishersWithBooksAndAuthors();
+            bookstoreService.displayAuthorsWithBooksAndPublishersFetchAll();
+            //bookstoreService.displayPublishersWithBooksAndAuthors();
         };
     }
 }

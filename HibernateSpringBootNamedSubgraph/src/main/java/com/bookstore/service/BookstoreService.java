@@ -35,6 +35,21 @@ public class BookstoreService {
         }
     }
     
+    public void displayAuthorsWithBooksAndPublishersFetchAll() {
+
+        List<Author> authors = authorRepository.fetchAll();
+
+        for (Author author : authors) {
+            System.out.println("\nAuthor: " + author);
+
+            List<Book> books = author.getBooks();
+            System.out.println("No of books: " + books.size() + ", " + books);
+            for (Book book : books) {
+                System.out.println("Book: " + book.getTitle() + " published by: " + book.getPublisher());
+            }
+        }
+    }
+    
     public void displayPublishersWithBooksAndAuthors() {
 
         List<Publisher> publishers = publisherRepository.findAll();
