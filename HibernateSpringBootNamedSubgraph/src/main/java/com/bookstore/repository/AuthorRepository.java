@@ -21,5 +21,5 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
             type = EntityGraph.EntityGraphType.FETCH)
     @Query("SELECT a FROM Author a LEFT JOIN FETCH a.books b "
             + "WHERE b.isbn LIKE '001-%'")
-    public List<Author> fetchAll();
+    public List<Author> fetchAll001();
 }
