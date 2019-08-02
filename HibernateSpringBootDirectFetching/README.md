@@ -1,5 +1,5 @@
 
-**[Direct Fetching via Spring Data/EntityManager/Session](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDirectFetching)**
+**[Direct Fetching Via Spring Data `findById()`, `EntityManager` And `Session`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDirectFetching)**
 
 **Description:** Direct fetching via Spring Data, `EntityManager` and Hibernate `Session` examples.
 
