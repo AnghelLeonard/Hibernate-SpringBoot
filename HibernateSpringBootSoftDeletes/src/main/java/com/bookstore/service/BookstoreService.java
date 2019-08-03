@@ -38,14 +38,14 @@ public class BookstoreService {
 
     @Transactional
     public void restoreFirstBook() {
-        bookRepository.restoreBooksOfAuthor(4L);
+        bookRepository.restoreBooksOfAuthorById(4L);
         authorRepository.restoreAuthorById(4L);
     }
 
     @Transactional
     public void restoreFirstAuthor() {
         authorRepository.restoreAuthorById(1L);
-        bookRepository.restoreBooksOfAuthor(1L);
+        bookRepository.restoreBooksOfAuthorById(1L);
     }
 
     public void displayAllExceptDeletedAuthors() {
