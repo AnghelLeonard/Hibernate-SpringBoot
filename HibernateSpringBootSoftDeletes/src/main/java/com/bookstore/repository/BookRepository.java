@@ -21,5 +21,5 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Transactional
     @Query(value = "UPDATE book SET deleted = false WHERE author_id = ?1", nativeQuery = true)
     @Modifying    
-    public void restoreBooksOfAuthorById(Long id);
+    public void restoreByAuthorId(Long id);
 }
