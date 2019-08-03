@@ -1,13 +1,15 @@
-**[How To Use Hibernate Soft Deletes in a Spring Boot Application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSoftDeletes)**
+**[How To Implement Soft Deletes Via `SoftDeleteRepository` In Spring Boot Application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSoftDeletesSpringStyle)**
 
-**Description:** This application is an example of using Hibernate soft deletes in a Spring Boot application. 
+**Description:** This application is an example of implementing soft deletes in Spring Data style via a repository named, `SoftDeleteRepository`. 
 
 **Key points:**\
-     - in entities (e.g., `Tournament` entity) that should take advantage of soft deletes define a dedicated column to store the deletion status (e.g., `deleted`)\
-     - these entities should be marked with Hibernate, `@Where` annotation like this: `@Where(clause = "deleted = false")`\
-     - these entities should be marked with Hibernate, `@SQLDelete` annotation to trigger `UPDATE` SQLs in place of `DELETE` SQLs, as follows: `@SQLDelete(sql = "UPDATE tournament SET deleted = true WHERE id = ?")`\
-     - for fetching all entities including those marked as deleted or for fetching only the entities marked as deleted we need to rely on SQL native queries
-
+     - define an abstract class, `BaseEntity`, annotated with `@MappedSuperclass`\
+     - in `BaseEntity` define a flag-field named `deleted` (default this field to `false` or in other words, not deleted)\
+     - every entity that wants to take advantage of soft deletes should extend the `BaseEntity` classs\
+     - write a `@NoRepositoryBean` named `SoftDeleteRepository` and extend `JpaRepository`\
+     - override and implement the needed methods that provide the logic for soft deletes (check out the source code)\     
+     - repositories of entities should extend `SoftDeleteRepository`
+     
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSoftDeletes/soft%20deletes.png)
 
