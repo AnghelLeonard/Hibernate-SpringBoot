@@ -1,7 +1,6 @@
 package com.bookstore.entity;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,16 +17,13 @@ import org.hibernate.annotations.Where;
         + "SET deleted = true "
         + "WHERE id = ?")
 @Where(clause = "deleted = false")
-public class Book implements Serializable {
+public class Book extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "deleted")
-    private boolean deleted;
 
     private String title;
     private String isbn;

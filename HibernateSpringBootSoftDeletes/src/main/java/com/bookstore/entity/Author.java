@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,16 +19,13 @@ import org.hibernate.annotations.Where;
         + "SET deleted = true "
         + "WHERE id = ?")
 @Where(clause = "deleted = false")
-public class Author implements Serializable {
+public class Author extends BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(name = "deleted")
-    private boolean deleted;
 
     private String name;
     private String genre;
@@ -99,7 +95,7 @@ public class Author implements Serializable {
     public void setBooks(List<Book> books) {
         this.books = books;
     }
-    
+
     @Override
     public String toString() {
         return "Author{" + "id=" + id + ", name=" + name
