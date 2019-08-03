@@ -22,9 +22,27 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            bookstoreService.removeOneAuthor();
-            bookstoreService.removeOneBook();
+            
+            System.out.println("\n-----------------------");
+            System.out.println("---------REMOVE--------");
+            System.out.println("-----------------------\n");
+            bookstoreService.removeFirstAuthor();
+            bookstoreService.removeFirstBook();
+           
+            bookstoreService.displayAllIncludeDeletedAuthors();
+            bookstoreService.displayAllExceptDeletedAuthors();
+            bookstoreService.displayAllOnlyDeletedAuthors();
 
+            bookstoreService.displayAllIncludeDeletedBooks();
+            bookstoreService.displayAllExceptDeletedBooks();
+            bookstoreService.displayAllOnlyDeletedBooks();
+            
+            System.out.println("\n-----------------------");
+            System.out.println("---------RESTORE-------");
+            System.out.println("-----------------------\n");            
+            bookstoreService.restoreFirstAuthor();
+            bookstoreService.restoreFirstBook();
+           
             bookstoreService.displayAllIncludeDeletedAuthors();
             bookstoreService.displayAllExceptDeletedAuthors();
             bookstoreService.displayAllOnlyDeletedAuthors();

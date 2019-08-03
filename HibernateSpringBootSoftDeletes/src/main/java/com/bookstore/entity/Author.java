@@ -99,15 +99,7 @@ public class Author implements Serializable {
     public void setBooks(List<Book> books) {
         this.books = books;
     }
-
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
-
+    
     @Override
     public String toString() {
         return "Author{" + "id=" + id + ", name=" + name

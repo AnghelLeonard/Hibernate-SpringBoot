@@ -68,14 +68,6 @@ public class Book implements Serializable {
         this.author = author;
     }
 
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(boolean deleted) {
-        this.deleted = deleted;
-    }
-
     @Override
     public boolean equals(Object obj) {
 

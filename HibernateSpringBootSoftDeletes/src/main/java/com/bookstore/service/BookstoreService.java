@@ -22,18 +22,30 @@ public class BookstoreService {
     }
 
     @Transactional
-    public void removeOneBook() {
-        Author author = authorRepository.findByName("Joana Nimar");
-        Book book = author.getBooks().get(0); // don't do this in production!
+    public void removeFirstBook() {
+        Author author = authorRepository.findById(4L).get();
+        Book book = author.getBooks().get(0);
 
         author.removeBook(book);
     }
 
     @Transactional
-    public void removeOneAuthor() {
-        Author author = authorRepository.findByName("Mark Janel");
+    public void removeFirstAuthor() {
+        Author author = authorRepository.findById(1L).get();
 
         authorRepository.delete(author);
+    }
+
+    @Transactional
+    public void restoreFirstBook() {
+        bookRepository.restoreBooksOfAuthor(4L);
+        authorRepository.restoreAuthorById(4L);
+    }
+
+    @Transactional
+    public void restoreFirstAuthor() {
+        authorRepository.restoreAuthorById(1L);
+        bookRepository.restoreBooksOfAuthor(1L);
     }
 
     public void displayAllExceptDeletedAuthors() {
@@ -41,6 +53,7 @@ public class BookstoreService {
 
         System.out.println("\nAll authors except deleted:");
         authors.forEach(a -> System.out.println("Author name: " + a.getName()));
+        System.out.println();
     }
 
     public void displayAllIncludeDeletedAuthors() {
@@ -48,6 +61,7 @@ public class BookstoreService {
 
         System.out.println("\nAll authors including deleted:");
         authors.forEach(a -> System.out.println("Author name: " + a.getName()));
+        System.out.println();
     }
 
     public void displayAllOnlyDeletedAuthors() {
@@ -55,6 +69,7 @@ public class BookstoreService {
 
         System.out.println("\nAll deleted authors:");
         authors.forEach(a -> System.out.println("Author name: " + a.getName()));
+        System.out.println();
     }
 
     public void displayAllExceptDeletedBooks() {
@@ -62,6 +77,7 @@ public class BookstoreService {
 
         System.out.println("\nAll books except deleted:");
         books.forEach(b -> System.out.println("Book title: " + b.getTitle()));
+        System.out.println();
     }
 
     public void displayAllIncludeDeletedBooks() {
@@ -69,6 +85,7 @@ public class BookstoreService {
 
         System.out.println("\nAll books including deleted:");
         books.forEach(b -> System.out.println("Book title: " + b.getTitle()));
+        System.out.println();
     }
 
     public void displayAllOnlyDeletedBooks() {
@@ -76,5 +93,6 @@ public class BookstoreService {
 
         System.out.println("\nAll deleted books:");
         books.forEach(b -> System.out.println("Book title: " + b.getTitle()));
+        System.out.println();
     }
 }
