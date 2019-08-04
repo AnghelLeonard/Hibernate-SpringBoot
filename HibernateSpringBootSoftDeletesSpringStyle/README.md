@@ -14,7 +14,7 @@
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSoftDeletes/soft%20deletes.png)
-
+ 
 -------------------------------
 
 **You may like to try as well:**
