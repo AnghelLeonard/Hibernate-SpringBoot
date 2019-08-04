@@ -28,10 +28,10 @@ public class BookstoreService {
         System.out.println("Deleted Authors: " + authorRepository.countDeleted());
         System.out.println("Deleted Books: " + bookRepository.countDeleted());
         
-        Author author = authorRepository.findByName("Mark Janel"); // id 1
+        Author author = authorRepository.fetchByName("Mark Janel"); // id 1
         authorRepository.delete(author);
         
-        Book book = bookRepository.findByTitle("Carrie"); // id 4
+        Book book = bookRepository.fetchByTitle("Carrie"); // id 4
         bookRepository.delete(book);
         
         System.out.println("Authors: " + authorRepository.count());

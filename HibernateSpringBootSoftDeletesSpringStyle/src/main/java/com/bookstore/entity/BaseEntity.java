@@ -7,7 +7,7 @@ import javax.persistence.MappedSuperclass;
 public abstract class BaseEntity {
 
     @Column(name = "deleted")
-    private boolean deleted;   
+    protected boolean deleted;   
 
     public abstract Long getId();
 }
