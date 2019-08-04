@@ -108,7 +108,7 @@ public class Author extends BaseEntity implements Serializable {
 
     @PreRemove
     private void authorRemoved() {
-        setDeleted(true);
+        deleted = true;
     }
 
     @Override
