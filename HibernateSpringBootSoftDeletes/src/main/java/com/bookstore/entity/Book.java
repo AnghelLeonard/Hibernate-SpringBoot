@@ -75,7 +75,7 @@ public class Book extends BaseEntity implements Serializable {
     }
 
     @PreRemove
-    private void bookRemoved() {
+    private void bookRemove() {
         deleted = true;
     }
 
