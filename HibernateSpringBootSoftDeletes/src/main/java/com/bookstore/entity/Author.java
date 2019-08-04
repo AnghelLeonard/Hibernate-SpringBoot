@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PreRemove;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -103,6 +104,11 @@ public class Author extends BaseEntity implements Serializable {
 
     public void setBooks(List<Book> books) {
         this.books = books;
+    }
+
+    @PreRemove
+    private void authorRemoved() {
+        setDeleted(true);
     }
 
     @Override

@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PreRemove;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
@@ -73,6 +74,11 @@ public class Book extends BaseEntity implements Serializable {
         this.author = author;
     }
 
+    @PreRemove
+    private void bookRemoved() {
+        setDeleted(true);
+    }
+    
     @Override
     public boolean equals(Object obj) {
 
