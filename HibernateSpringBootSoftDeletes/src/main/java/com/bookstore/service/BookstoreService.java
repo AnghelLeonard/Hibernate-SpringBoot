@@ -38,8 +38,7 @@ public class BookstoreService {
 
     @Transactional
     public void restoreBook() {
-        bookRepository.restoreByAuthorId(4L);
-        authorRepository.restoreById(4L);
+        bookRepository.restoreById(1L);        
     }
 
     @Transactional

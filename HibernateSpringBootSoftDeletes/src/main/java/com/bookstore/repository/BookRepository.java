@@ -22,4 +22,9 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query(value = "UPDATE book SET deleted = false WHERE author_id = ?1", nativeQuery = true)
     @Modifying    
     public void restoreByAuthorId(Long id);
+    
+    @Transactional
+    @Query(value = "UPDATE book SET deleted = false WHERE id = ?1", nativeQuery = true)
+    @Modifying    
+    public void restoreById(Long id);
 }

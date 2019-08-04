@@ -16,6 +16,15 @@ import org.hibernate.annotations.Where;
         = "UPDATE book "
         + "SET deleted = true "
         + "WHERE id = ?")
+/*
+@Loader(namedQuery = "findBookById")
+@NamedQuery(name = "findBookById", query = 
+    "SELECT b " +
+    "FROM Book b " +
+    "WHERE" +
+    " b.id = ?1 AND " +
+    " b.deleted = false")
+ */
 @Where(clause = "deleted = false")
 public class Book extends BaseEntity implements Serializable {
 

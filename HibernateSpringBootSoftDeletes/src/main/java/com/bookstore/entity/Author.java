@@ -18,6 +18,15 @@ import org.hibernate.annotations.Where;
         = "UPDATE author "
         + "SET deleted = true "
         + "WHERE id = ?")
+/*
+@Loader(namedQuery = "findAuthorById")
+@NamedQuery(name = "findAuthorById", query = 
+    "SELECT a " +
+    "FROM Author a " +
+    "WHERE" +
+    " a.id = ?1 AND " +
+    " a.deleted = false")
+ */
 @Where(clause = "deleted = false")
 public class Author extends BaseEntity implements Serializable {
 
