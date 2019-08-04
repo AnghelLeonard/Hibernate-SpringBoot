@@ -26,8 +26,8 @@ public class MainApplication {
             System.out.println("\n-----------------------");
             System.out.println("---------REMOVE--------");
             System.out.println("-----------------------\n");
-            bookstoreService.removeFirstAuthor();
-            bookstoreService.removeFirstBook();
+            bookstoreService.softDeleteAuthor();
+            bookstoreService.softDeleteBook();
            
             bookstoreService.displayAllIncludeDeletedAuthors();
             bookstoreService.displayAllExceptDeletedAuthors();
@@ -40,8 +40,8 @@ public class MainApplication {
             System.out.println("\n-----------------------");
             System.out.println("---------RESTORE-------");
             System.out.println("-----------------------\n");            
-            bookstoreService.restoreFirstAuthor();
-            bookstoreService.restoreFirstBook();
+            bookstoreService.restoreAuthor();
+            bookstoreService.restoreBook();
            
             bookstoreService.displayAllIncludeDeletedAuthors();
             bookstoreService.displayAllExceptDeletedAuthors();

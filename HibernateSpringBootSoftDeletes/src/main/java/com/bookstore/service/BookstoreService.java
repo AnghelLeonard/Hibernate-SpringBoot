@@ -22,7 +22,7 @@ public class BookstoreService {
     }
 
     @Transactional
-    public void removeFirstBook() {
+    public void softDeleteBook() {
         Author author = authorRepository.findById(4L).get();
         Book book = author.getBooks().get(0);
 
@@ -30,20 +30,20 @@ public class BookstoreService {
     }
 
     @Transactional
-    public void removeFirstAuthor() {
+    public void softDeleteAuthor() {
         Author author = authorRepository.findById(1L).get();
 
         authorRepository.delete(author);
     }
 
     @Transactional
-    public void restoreFirstBook() {
+    public void restoreBook() {
         bookRepository.restoreByAuthorId(4L);
         authorRepository.restoreById(4L);
     }
 
     @Transactional
-    public void restoreFirstAuthor() {
+    public void restoreAuthor() {
         authorRepository.restoreById(1L);
         bookRepository.restoreByAuthorId(1L);
     }
