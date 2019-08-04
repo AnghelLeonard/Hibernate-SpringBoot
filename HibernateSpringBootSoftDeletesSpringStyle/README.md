@@ -9,7 +9,7 @@
      - in `BaseEntity` define a flag-field named `deleted` (default this field to `false` or in other words, not deleted)\
      - every entity that wants to take advantage of soft deletes should extend the `BaseEntity` classs\
      - write a `@NoRepositoryBean` named `SoftDeleteRepository` and extend `JpaRepository`\
-     - override and implement the needed methods that provide the logic for soft deletes (check out the source code)\     
+     - override and implement the needed methods that provide the logic for soft deletes (check out the source code)\
      - repositories of entities should extend `SoftDeleteRepository`
      
 **Output example:**\
