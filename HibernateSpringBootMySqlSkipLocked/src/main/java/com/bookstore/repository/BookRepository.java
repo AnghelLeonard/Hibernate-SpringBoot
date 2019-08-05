@@ -1,10 +1,10 @@
-package com.app.repository;
+package com.bookstore.repository;
 
 import java.util.List;
 import javax.persistence.LockModeType;
 import javax.persistence.QueryHint;
-import com.app.entity.Article;
-import com.app.entity.ArticleStatus;
+import com.bookstore.entity.Book;
+import com.bookstore.entity.BookStatus;
 import org.hibernate.LockOptions;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,10 +13,10 @@ import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ArticleRepository extends JpaRepository<Article, Long> {
+public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @QueryHints({
         @QueryHint(name = "javax.persistence.lock.timeout", value = "" + LockOptions.SKIP_LOCKED)})
-    public List<Article> findTop2ByStatus(ArticleStatus status, Sort sort);
+    public List<Book> findTop3ByStatus(BookStatus status, Sort sort);
 }

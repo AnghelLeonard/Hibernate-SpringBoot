@@ -1,45 +1,47 @@
-package com.app.service;
+package com.bookstore.service;
 
 import java.util.List;
-import com.app.entity.Article;
-import com.app.entity.ArticleStatus;
+import com.bookstore.entity.Book;
+import com.bookstore.entity.BookStatus;
 import org.springframework.stereotype.Service;
-import com.app.repository.ArticleRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
+import com.bookstore.repository.BookRepository;
 
 @Service
-public class ArticleService {
+public class BookstoreService {
 
     private final TransactionTemplate template;
-    private final ArticleRepository articleRepository;
+    private final BookRepository bookRepository;
 
-    public ArticleService(ArticleRepository articleRepository, TransactionTemplate template) {
-        this.articleRepository = articleRepository;
+    public BookstoreService(BookRepository bookRepository, TransactionTemplate template) {
+        this.bookRepository = bookRepository;
         this.template = template;
     }
 
-    public void fetchArticlesViaTwoTransactions() {
+    public void fetchBooksViaTwoTransactions() {
         template.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
         template.execute(new TransactionCallbackWithoutResult() {
             @Override
             protected void doInTransactionWithoutResult(TransactionStatus status) {
-                List<Article> articles = articleRepository
-                        .findTop2ByStatus(ArticleStatus.PENDING, new Sort(Sort.Direction.ASC, "id"));
+                List<Book> books = bookRepository
+                        .findTop3ByStatus(BookStatus.PENDING, new Sort(Sort.Direction.ASC, "id"));
 
                 template.execute(new TransactionCallbackWithoutResult() {
                     @Override
                     protected void doInTransactionWithoutResult(TransactionStatus status) {
-                        List<Article> articles = articleRepository
-                                .findTop2ByStatus(ArticleStatus.PENDING, new Sort(Sort.Direction.ASC, "id"));
-                        System.out.println("Inner transaction: " + articles);
+                        List<Book> books = bookRepository
+                                .findTop3ByStatus(BookStatus.PENDING, new Sort(Sort.Direction.ASC, "id"));
+                        System.out.println("Second transaction: " + books);
                     }
                 });
-                System.out.println("Outer transaction: " + articles);
+                System.out.println("First transaction: " + books);
             }
         });
+        
+        System.out.println("Done!");
     }
 }

@@ -1,6 +1,6 @@
-package com.app;
+package com.bookstore;
 
-import com.app.service.ArticleService;
+import com.bookstore.service.BookstoreService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,9 +9,9 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class MainApplication {
 
-    private final ArticleService bookstoreService;
+    private final BookstoreService bookstoreService;
 
-    public MainApplication(ArticleService bookstoreService) {
+    public MainApplication(BookstoreService bookstoreService) {
         this.bookstoreService = bookstoreService;
     }
 
@@ -21,7 +21,7 @@ public class MainApplication {
 
     @Bean
     public ApplicationRunner init() {
-        return args -> {bookstoreService.fetchArticlesViaTwoTransactions();
+        return args -> {bookstoreService.fetchBooksViaTwoTransactions();
         };
     }
 }
