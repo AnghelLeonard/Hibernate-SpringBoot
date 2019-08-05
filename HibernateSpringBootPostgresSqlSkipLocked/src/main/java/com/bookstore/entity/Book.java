@@ -1,4 +1,4 @@
-package com.app.entity;
+package com.bookstore.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Article implements Serializable {
+public class Book implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -18,11 +18,11 @@ public class Article implements Serializable {
     private Long id;
 
     private String title;
-    private String content;
+    private String isbn;
     
     @Enumerated(EnumType.STRING)
-    private ArticleStatus status;
-
+    private BookStatus status;
+   
     public Long getId() {
         return id;
     }
@@ -39,25 +39,17 @@ public class Article implements Serializable {
         this.title = title;
     }
 
-    public String getContent() {
-        return content;
+    public String getIsbn() {
+        return isbn;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
     }
-
-    public ArticleStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(ArticleStatus status) {
-        this.status = status;
-    }  
 
     @Override
     public String toString() {
-        return "Article{" + "id=" + id + ", title=" 
-                + title + ", content=" + content + ", status=" + status + '}';
-    }        
+        return "Book{" + "id=" + id + ", title=" + title 
+                + ", isbn=" + isbn + ", status=" + status + '}';
+    }           
 }
