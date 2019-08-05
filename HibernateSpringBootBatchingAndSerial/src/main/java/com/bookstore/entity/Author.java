@@ -26,7 +26,7 @@ public class Author implements Serializable {
     @GenericGenerator(name = "hilo",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                @Parameter(name = "sequence_name", value = "sequence"),
+                @Parameter(name = "sequence_name", value = "hilo_sequence"),
                 @Parameter(name = "initial_value", value = "1"),
                 @Parameter(name = "increment_size", value = "10"),
                 @Parameter(name = "optimizer", value = "hilo")
