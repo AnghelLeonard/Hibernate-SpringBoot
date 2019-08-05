@@ -25,10 +25,10 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            System.out.println("\n Saving an author (check the MySQL database) ...");
+            System.out.println("\n Saving an author (check the 'authorsdb' database) ...");
             authorService.persistAuthor();
 
-            System.out.println("\n Saving a book (check the PostgreSQL database) ...");
+            System.out.println("\n Saving a book (check the 'booksdb' database) ...");
             bookService.persistBook();
         };
     }
