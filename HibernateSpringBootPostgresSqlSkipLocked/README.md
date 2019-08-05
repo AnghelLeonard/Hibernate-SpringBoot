@@ -4,6 +4,7 @@
 
 **Key points:**\
      - define an entity that acts as a job queue (e.g., see the `Book` entity)\
+     - in `BookRepository` setup `@Lock(LockModeType.PESSIMISTIC_WRITE)`\
      - in `BookRepository` use `@QueryHint` to setup `javax.persistence.lock.timeout` to `SKIP_LOCKED`\
      - rely on `org.hibernate.dialect.PostgreSQL95Dialect` dialect\
      - run two concurrent transactions to see the effect of `SKIP_LOCKED`
