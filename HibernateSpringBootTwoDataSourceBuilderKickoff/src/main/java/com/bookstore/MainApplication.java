@@ -1,7 +1,7 @@
 package com.bookstore;
 
-import com.bookstore.ds1.BookService;
-import com.bookstore.ds2.AuthorService;
+import com.bookstore.ds2.BookService;
+import com.bookstore.ds1.AuthorService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

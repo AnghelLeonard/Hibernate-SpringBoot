@@ -1,4 +1,4 @@
-package com.bookstore.ds2;
+package com.bookstore.ds1;
 
 import org.springframework.stereotype.Service;
 

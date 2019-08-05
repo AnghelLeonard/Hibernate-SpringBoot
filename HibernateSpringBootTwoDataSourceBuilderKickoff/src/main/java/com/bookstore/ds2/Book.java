@@ -1,4 +1,4 @@
-package com.bookstore.ds1;
+package com.bookstore.ds2;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
