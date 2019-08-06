@@ -253,9 +253,9 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-17. **[How To Use Query Fetching](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootQueryFetching)**
+17. **[Query Fetching](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootQueryFetching)**
 
-**Description:** This application is a proof of concept of how to write a query via `JpaRepository`, `EntityManager` and `Session`.
+**Description:** This application is an example of how to write a query via `JpaRepository`, `EntityManager` and `Session`.
 
 **Key points:**\
      - for `JpaRepository` use `@Query` or Spring Data Query Creation\
