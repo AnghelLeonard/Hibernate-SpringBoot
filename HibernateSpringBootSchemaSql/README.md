@@ -5,9 +5,9 @@
 **Description:** This application is an example of using `schema-*.sql` to generate a schema(database) in MySQL.
 
 **Key points:**\
-     - in `application.properties`, set the JDBC URL. E.g., `spring.datasource.url=jdbc:mysql://localhost:3306/bookstoredb?createDatabaseIfNotExist=true`\
-     - in `application.properties`, disable DDL auto (just do no explicitly use `hibernate.ddl-auto`)\
-     - in `aaplication.properties`, instruct Spring Boot to initialize the schema from `schema-mysql.sql` file  
+     - in `application.properties`, set the JDBC URL (e.g., `spring.datasource.url=jdbc:mysql://localhost:3306/bookstoredb?createDatabaseIfNotExist=true`)\
+     - in `application.properties`, disable DDL auto (just don't use explicitly the `hibernate.ddl-auto` setting)\
+     - in `application.properties`, instruct Spring Boot to initialize the schema from `schema-mysql.sql` file  
      
 -------------------------------
 
