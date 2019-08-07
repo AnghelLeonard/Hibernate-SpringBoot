@@ -305,7 +305,7 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 **Key points:**\
      - this is the default inheritance strategy (`@Inheritance(strategy=InheritanceType.SINGLE_TABLE)`)\
-     - all the classes in a hierarchy are mapped to a single table in a the database\
+     - all the classes in an inheritance hierarchy are represented via a single table in a the database\
      - subclasses attributes non-nullability is ensured via `@NotNull` and MySQL triggers\
      - the default discriminator column memory footprint was optimized by declaring it of type `TINYINT`
    
