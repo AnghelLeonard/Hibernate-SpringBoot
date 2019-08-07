@@ -299,16 +299,18 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-21. **[How To Write JPA Inheritance - Single Table](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSingleTableInheritance)**
+21. **[JPA Inheritance - Single Table](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSingleTableInheritance)**
 
 **Description:** This application is a sample of JPA Single Table inheritance strategy (`SINGLE_TABLE`)
 
 **Key points:**\
      - this is the default inheritance strategy (`@Inheritance(strategy=InheritanceType.SINGLE_TABLE)`)\
-     - all the classes in a hierarchy are mapped to a single table in a the database
+     - all the classes in a hierarchy are mapped to a single table in a the database\
+     - subclasses attributes non-nullability is ensured via `@NotNull` and MySQL triggers\
+     - the default discriminator column memory footprint was optimized by declaring it of type `TINYINT`
    
-**Output example (below is a single table obtained from 4 entities):**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSingleTableInheritance/sample.png)
+**Output example (below is a single table obtained from 3 entities):**\
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSingleTableInheritance/Single%20table%20inheritance.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
