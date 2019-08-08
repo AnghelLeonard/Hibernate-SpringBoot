@@ -20,20 +20,20 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            System.out.println("\n\naddAuthorWithBooks():");
-            bookstoreService.addAuthorWithBooks();
+            System.out.println("\n\npersistAuthorWithBooks():");
+            bookstoreService.persistAuthorWithBooks();
 
-            System.out.println("\n\nfetchBookByName():");
-            bookstoreService.fetchBookByName();
+            System.out.println("\n\nfetchBookByTitle():");
+            bookstoreService.fetchBookByTitle();
 
             System.out.println("\n\nfetchPaperback():");
             bookstoreService.fetchPaperback();
             System.out.println("\n\nfetchEbook():");
             bookstoreService.fetchEbook();
 
-            System.out.println("\n\nfetchBooks():");
-            bookstoreService.fetchBooks();
-            System.out.println("\n\fetchAuthorAndBooksLazy():");
+            System.out.println("\n\nfetchBooksByAuthorId():");
+            bookstoreService.fetchBooksByAuthorId();
+            System.out.println("\n\nfetchAuthorAndBooksLazy():");
             bookstoreService.fetchAuthorAndBooksLazy();
             System.out.println("\n\nfetchAuthorAndBooksEager():");
             bookstoreService.fetchAuthorAndBooksEager();

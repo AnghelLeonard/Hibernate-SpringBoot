@@ -31,7 +31,7 @@ public class BookstoreService {
         this.ebookRepository = ebookRepository;
     }
 
-    public void addAuthorWithBooks() {
+    public void persistAuthorWithBooks() {
 
         Author author = new Author();
         author.setName("Alicia Tom");
@@ -60,7 +60,7 @@ public class BookstoreService {
         authorRepository.save(author);
     }
 
-    public void fetchBookByName() {
+    public void fetchBookByTitle() {
         Book book1 = bookRepository.findByTitle("The book of swords");
         System.out.println(book1); // this is a Book
 
@@ -87,7 +87,7 @@ public class BookstoreService {
         System.out.println(e2);
     }
 
-    public void fetchBooks() {
+    public void fetchBooksByAuthorId() {
         List<Book> books = bookRepository.fetchBooksByAuthorId(1L);
         System.out.println(books);
     }
