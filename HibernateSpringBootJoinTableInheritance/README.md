@@ -1,14 +1,11 @@
-**[JPA Inheritance - Single Table](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSingleTableInheritance)**
+**[JPA Inheritance - Join Table](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinTableInheritance)**
 
-**Description:** This application is a sample of JPA Single Table inheritance strategy (`SINGLE_TABLE`)
+**Description:** This application is a sample of JPA Join Table inheritance strategy (`JOINED`)
 
 **Key points:**\
-     - this is the default inheritance strategy (`@Inheritance(strategy=InheritanceType.SINGLE_TABLE)`)\
-     - all the classes in an inheritance hierarchy are represented via a single table in a the database\
-     - subclasses attributes non-nullability is ensured via `@NotNull` and MySQL triggers\
-     - the default discriminator column memory footprint was optimized by declaring it of type `TINYINT`
-   
-**Output example (below is a single table obtained from 3 entities):**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSingleTableInheritance/Single%20table%20inheritance.png)
+     - this inheritance strategy can be employed via `@Inheritance(strategy=InheritanceType.JOINED)`\
+     - all the classes in an inheritance hierarchy (a.k.a., subclasses) are represented via individual tables\
+     - by default, subclass-tables contains a primary key column that acts as a foreign key  as well - this foreign key references the *base class* table primary key\
+     - customizing this foreign key can be done by annotating the subclasses with `@PrimaryKeyJoinColumn.`  
 
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
