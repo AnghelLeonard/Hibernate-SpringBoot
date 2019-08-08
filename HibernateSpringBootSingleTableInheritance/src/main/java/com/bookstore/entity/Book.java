@@ -17,8 +17,8 @@ import javax.persistence.ManyToOne;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(
-    discriminatorType = DiscriminatorType.INTEGER,    
-    columnDefinition = "TINYINT(1)"
+        discriminatorType = DiscriminatorType.INTEGER,
+        columnDefinition = "TINYINT(1)"
 )
 @DiscriminatorValue("1")
 public class Book implements Serializable {

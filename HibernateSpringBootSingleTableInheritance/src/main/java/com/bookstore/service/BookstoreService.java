@@ -65,7 +65,7 @@ public class BookstoreService {
         System.out.println(book1); // this is a Book
 
         Book book2 = bookRepository.findByTitle("The beatles anthology");
-        System.out.println(book2); // this is a Paperback
+        System.out.println(book2); // this is a Paperback               
 
         Book book3 = bookRepository.findByTitle("Anthology myths");
         System.out.println(book3); // this is an Ebook
@@ -75,7 +75,7 @@ public class BookstoreService {
         Paperback p1 = paperbackRepository.findByTitle("The book of swords"); // this is a Book
         System.out.println(p1); // prints null
 
-        Paperback p2 = paperbackRepository.findByTitle("The beatles anthology");
+        Paperback p2 = paperbackRepository.findByTitle("The beatles anthology"); // this is a Paperback
         System.out.println(p2);
     }
 
@@ -83,7 +83,7 @@ public class BookstoreService {
         Ebook e1 = ebookRepository.findByTitle("The book of swords"); // this is a Book
         System.out.println(e1); // prints null
 
-        Ebook e2 = ebookRepository.findByTitle("Anthology myths");
+        Ebook e2 = ebookRepository.findByTitle("Anthology myths"); // this is a Ebook
         System.out.println(e2);
     }
 
@@ -93,13 +93,13 @@ public class BookstoreService {
     }
 
     @Transactional(readOnly = true)
-    public void fetchAuthorLazy() {
+    public void fetchAuthorAndBooksLazy() {
         Author author = authorRepository.findByName("Alicia Tom");
         System.out.println(author + " | " + author.getBooks());
     }
 
     @Transactional(readOnly = true)
-    public void fetchAuthorEager() {
+    public void fetchAuthorAndBooksEager() {
         Author author = authorRepository.findAuthor();
         System.out.println(author + " | " + author.getBooks());
     }

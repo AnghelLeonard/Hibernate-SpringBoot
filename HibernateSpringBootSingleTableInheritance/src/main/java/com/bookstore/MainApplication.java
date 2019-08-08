@@ -19,24 +19,24 @@ public class MainApplication {
 
     @Bean
     public ApplicationRunner init() {
-        return args -> {            
+        return args -> {
             System.out.println("\n\naddAuthorWithBooks():");
             bookstoreService.addAuthorWithBooks();
 
             System.out.println("\n\nfetchBookByName():");
             bookstoreService.fetchBookByName();
-            
+
             System.out.println("\n\nfetchPaperback():");
             bookstoreService.fetchPaperback();
             System.out.println("\n\nfetchEbook():");
             bookstoreService.fetchEbook();
-            
+
             System.out.println("\n\nfetchBooks():");
             bookstoreService.fetchBooks();
-            System.out.println("\n\nfetchAuthorLazy():");
-            bookstoreService.fetchAuthorLazy();
-            System.out.println("\n\nfetchAuthorEager():");
-            bookstoreService.fetchAuthorEager();
+            System.out.println("\n\fetchAuthorAndBooksLazy():");
+            bookstoreService.fetchAuthorAndBooksLazy();
+            System.out.println("\n\nfetchAuthorAndBooksEager():");
+            bookstoreService.fetchAuthorAndBooksEager();
         };
     }
 }
