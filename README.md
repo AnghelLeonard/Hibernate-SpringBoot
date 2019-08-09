@@ -2251,5 +2251,3 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
      - this inheritance strategy can be employed via `@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)`\
      - all the classes in an inheritance hierarchy (a.k.a., subclasses) are represented via individual tables\
      - each subclass-table stores the columns inherited from the superclass-table (*base class*)
-
-**Note:** This is the least effective JPA inheritance strategy.
