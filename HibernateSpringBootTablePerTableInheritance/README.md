@@ -8,6 +8,4 @@
      - all the classes in an inheritance hierarchy (a.k.a., subclasses) are represented via individual tables\
      - each subclass-table stores the columns inherited from the superclass-table (*base class*)
 
-**Note:** This is the least effective JPA inheritance strategy.
-
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
