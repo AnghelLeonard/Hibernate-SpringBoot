@@ -1,12 +1,13 @@
-**[Fetching Associations In Batches Via `@BatchSize`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLoadBatchAssociation)**
+**[How To Use Hibernate5Module For Avoiding Lazy Initialization Exceptions](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJacksonHibernate5Module)**
 
-**Note:** Fetching associations in the same query with their parent can be done via `JOIN FETCH` or `@NamedEntityGraph`. But, Hibernate allows us to fetch associations in batches as well via `@BatchSize` annotation. This may be useful when `JOIN FETCH` and `@NamedEntityGraph` doesn't seem to help.
+**Note:** [Hibernate5Module](https://github.com/FasterXML/jackson-datatype-hibernate) is an *add-on module for Jackson JSON processor which handles Hibernate datatypes; and specifically aspects of lazy-loading*
  
-**Description:** This application fetches all `Author` entities via a `SELECT` query. Further, calling the `getBooks()` method of the first `Author` entity will trigger another `SELECT` query that initializes the association of the first three `Author` entities returned by the previous `SELECT` query. This is the effect of `@BatchSize`.
+**Description:** By default, the Open Session In View anti-pattern is enabled. Now, imagine a lazy relationship (e.g., `@OneToMany`) between two entities, `Author` and `Book` (an author has associated more books). Next, a rest controller endpoint fetches an `Author` whithout the associated `Book`. But, since OSIV is eanbled, it forces the lazy loading of `Book` as well. Of course, the correct decision is to disable OSIV by setting it to `false`. Running the code again will result in an exception of type: *Could not write JSON: failed to lazily initialize a collection of role: com.bookstore.entity.Author.books, could not initialize proxy - no Session; nested exception is com.fasterxml.jackson.databind.JsonMappingException: failed to lazily initialize a collection of role: com.bookstore.entity.Author.books, could not initialize proxy - no Session*. Well, among the Hibernate5Module features we have support for dealing with this aspect of lazy loading. 
 
 **Key points:**\
-     - `Author` and `Book` are in a lazy relationship (e.g., `@OneToMany` bidirectional relationship)\
-     - `Author` association is annotated with `@BatchSize(size = 3)`
+     - add the Hibernate5Module dependency in `pom.xml`\
+     - add a `@Bean` that returns an instance of `Hibernate5Module`\
+     - annotate the `Author` bean with `@JsonInclude(Include.NON_EMPTY)` to exclude nulls from the returned JSON
 
 -------------------------------
 
