@@ -1,9 +1,8 @@
-INSERT INTO tournament (id, name, location) VALUES (1, 'Roland Garros', 'France');
-INSERT INTO tournament (id, name, location) VALUES (2, 'US Open', 'United States');
-INSERT INTO tennis_player (id, name, tournament_id) VALUES (1, 'Rafael Nadal', 1);
-INSERT INTO tennis_player (id, name, tournament_id) VALUES (2, 'Roger Federer', 1);
-INSERT INTO tennis_player (id, name, tournament_id) VALUES (3, 'David Ferer', 2);
-INSERT INTO tennis_player (id, name, tournament_id) VALUES (4, 'Andy Murray', 2);
-INSERT INTO tennis_player (id, name, tournament_id) VALUES (5, 'Del Potro', 2);
-INSERT INTO tennis_player (id, name, tournament_id) VALUES (6, 'Novak D', 2);
-
+insert into author (age, name, genre, id) values (23, "Mark Janel", "Anthology", 1);
+insert into author (age, name, genre, id) values (43, "Olivia Goy", "Horror", 2);
+insert into author (age, name, genre, id) values (51, "Quartis Young", "Anthology", 3);
+insert into author (age, name, genre, id) values (34, "Joana Nimar", "History", 4);
+insert into book (isbn, title, author_id, id) values ("001-JN", "A History of Ancient Prague", 4, 1);
+insert into book (isbn, title, author_id, id) values ("002-JN", "A People's History", 4, 2);
+insert into book (isbn, title, author_id, id) values ("001-MJ", "The Beatles Anthology", 1, 3);
+insert into book (isbn, title, author_id, id) values ("001-OG", "Carrie", 2, 4);

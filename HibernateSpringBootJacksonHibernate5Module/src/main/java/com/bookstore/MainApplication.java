@@ -1,4 +1,4 @@
-package com.tennis;
+package com.bookstore;
 
 import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import org.springframework.boot.SpringApplication;
