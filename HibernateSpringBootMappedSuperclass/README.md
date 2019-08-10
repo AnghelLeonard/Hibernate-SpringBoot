@@ -1,4 +1,4 @@
-**[JPA Inheritance - Join Table](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMappedSuperclass)**
+**[JPA Inheritance - `@MappedSuperclass`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMappedSuperclass)**
 
 **Description:** This application is a sample of using the JPA `@MappedSuperclass`.
 
