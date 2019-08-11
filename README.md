@@ -473,19 +473,22 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-35. **[How To Avoid Lazy Initialization Caused By Open Session In View Anti-Pattern (1 Session / 1 HTTP Request-Response)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSuppressLazyInitInOpenSessionInView)**
+35. **[How To Avoid Lazy Initialization Issues Caused By Disabling Open Session In View Via Explicit (Default) Values](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSuppressLazyInitInOpenSessionInView)**
 
-**Description:** The Open-Session in View anti-pattern is activated by default in SpringBoot. If you prefer to use it then it is recommended to mitigate its performance penalties as much as possible. One optimization consist in marking the `Connection` as read-only which would allow the database server to avoid writing to the transaction log. Another optimization consist in explicitly setting the lazy properties of the fetched entities when you don't want them to be lazy initialized.
+**Note: Before reading this item try to see if [Hibernate5Module](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJacksonHibernate5Module) is not what you are looking for.**
+
+**Description:** The Open-Session in View anti-pattern is activated by default in SpringBoot. If you prefer to use it then it is recommended to mitigate its performance penalties as much as possible. One optimization consist of marking the `Connection` as read-only which would allow the database server to avoid writing to the transaction log. Another optimization consist of explicitly initializing the lazy properties of the fetched entities when you don't want them to be lazy initialized by the View layer.
 
 **Key points:**\
-     - fetch a entity and set the lazy properties explicitly\
-     - you can do this is the service or controller layer, depending where it fits better to your case, but outside of an explicit transaction\
-     - why is this working? why we can set the property of a managed entity and not trigger the flush? well, the answer can be found in the documentation of `OpenSessionInViewFilter` which specifies that:
+     - fetch an entity and initialize its lazy properties explicitly with (default) values\
+     - you can do this in the service or controller layer, depending where it fits better to your case, but outside of an explicit transaction to avoid flush\
+     - why is this working? why we can initialize the lazy properties of a managed entity and not trigger the flush? well, the answer can be found in the documentation of `OpenSessionInViewFilter` which specifies that:
      
- **NOTE:** This filter will by default not flush the Hibernate `Session`, with the flush mode set to `FlushMode.NEVER`. It assumes to be used in combination with service layer transactions that care for the flushing: The active transaction manager will temporarily change the flush mode to `FlushMode.AUTO` during a read-write transaction, with the flush mode reset to `FlushMode.NEVER` at the end of each transaction. If you intend to use this filter without transactions, consider changing the default flush mode (through the "flushMode" property).
+ **NOTE:** *This filter will by default not flush the Hibernate `Session`, with the flush mode set to `FlushMode.NEVER`. It assumes to be used in combination with service layer transactions that care for the flushing: The active transaction manager will temporarily change the flush mode to `FlushMode.AUTO` during a read-write transaction, with the flush mode reset to `FlushMode.NEVER` at the end of each transaction. If you intend to use this filter without transactions, consider changing the default flush mode (through the "flushMode" property).*
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSuppressLazyInitInOpenSessionInView/avoid%20lazy%20initialization%20in%20open%20session%20in%20view.png)
+
 
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -2265,7 +2268,7 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 ----------------------------------------------------------------------------------------------------------------------
 
-152. **[How To Use Hibernate5Module For Avoiding Lazy Initialization Exceptions](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJacksonHibernate5Module)**
+152. **[How To Avoid Lazy Initialization Issues Caused By Disabling Open Session In View Via Hibernate5Module](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJacksonHibernate5Module)**
 
 **Note:** [Hibernate5Module](https://github.com/FasterXML/jackson-datatype-hibernate) is an *add-on module for Jackson JSON processor which handles Hibernate datatypes; and specifically aspects of lazy-loading*
  
