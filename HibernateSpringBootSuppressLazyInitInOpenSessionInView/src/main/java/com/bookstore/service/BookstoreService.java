@@ -13,13 +13,13 @@ public class BookstoreService {
         this.authorRepository = authorRepository;
     }
 
-    public Author fetchAuthorLazy() {
+    public Author fetchAuthorWithBooks() {
         Author author = authorRepository.findByName("Joana Nimar");
 
         return author;
     }
 
-    public Author fetchAuthorEager() {
+    public Author fetchAuthorWithoutBooks() {
         Author author = authorRepository.findByName("Joana Nimar");
 
         // explicitly set Books of the Author to null
