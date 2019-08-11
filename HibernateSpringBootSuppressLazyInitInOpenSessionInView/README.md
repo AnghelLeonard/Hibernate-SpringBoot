@@ -6,7 +6,7 @@
 
 **Key points:**\
      - fetch an entity and initialize its lazy properties explicitly with (default) values\
-     - you can do this is the service or controller layer, depending where it fits better to your case, but outside of an explicit transaction to avoid flush\
+     - you can do this in the service or controller layer, depending where it fits better to your case, but outside of an explicit transaction to avoid flush\
      - why is this working? why we can initialize the lazy properties of a managed entity and not trigger the flush? well, the answer can be found in the documentation of `OpenSessionInViewFilter` which specifies that:
      
  **NOTE:** This filter will by default not flush the Hibernate `Session`, with the flush mode set to `FlushMode.NEVER`. It assumes to be used in combination with service layer transactions that care for the flushing: The active transaction manager will temporarily change the flush mode to `FlushMode.AUTO` during a read-write transaction, with the flush mode reset to `FlushMode.NEVER` at the end of each transaction. If you intend to use this filter without transactions, consider changing the default flush mode (through the "flushMode" property).
