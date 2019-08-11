@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
-    
-    @Transactional(readOnly=true)
+
+    @Transactional(readOnly = true)
     Author findByName(String name);
 }

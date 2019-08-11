@@ -2,19 +2,34 @@ package com.bookstore.service;
 
 import com.bookstore.repository.AuthorRepository;
 import com.bookstore.entity.Author;
+import com.bookstore.entity.Book;
+import java.util.List;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookstoreService {
-   
-    private final AuthorRepository authorRepository;    
+
+    private final AuthorRepository authorRepository;
 
     public BookstoreService(AuthorRepository authorRepository) {
 
-        this.authorRepository = authorRepository;        
+        this.authorRepository = authorRepository;
     }
 
-    public Author fetchAuthorByName(String name) {
-        return authorRepository.findByName(name);
+    @Transactional(readOnly = true)
+    public Author fetchAuthorLazy() {
+        Author author = authorRepository.findByName("Joana Nimar");
+        List<Book> books = author.getBooks();
+        
+        System.out.println(books);
+
+        return author;
+    }
+    
+    public Author fetchAuthorEager() {
+        Author author = authorRepository.findByName("Joana Nimar");
+
+        return author;
     }
 }
