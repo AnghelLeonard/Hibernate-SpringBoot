@@ -477,18 +477,18 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 **Note: Before reading this item try to see if [Hibernate5Module](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJacksonHibernate5Module) is not what you are looking for.**
 
-**Description:** The Open-Session in View anti-pattern is activated by default in SpringBoot. If you prefer to use it then it is recommended to mitigate its performance penalties as much as possible. One optimization consist of marking the `Connection` as read-only which would allow the database server to avoid writing to the transaction log. Another optimization consist of explicitly initializing the lazy properties of the fetched entities when you don't want them to be lazy initialized by the View layer.
+**Description:** The Open-Session in View anti-pattern is activated by default in SpringBoot. It is advisable to disable it, but if you prefer to use it then it is recommended to mitigate its performance penalties as much as possible. One optimization consist of marking the `Connection` as read-only which would allow the database server to avoid writing to the transaction log. Another optimization consist of explicitly initializing the lazy properties of the fetched entities when you don't want them to be lazy initialized by the View layer.
 
 **Key points:**\
-     - fetch an entity and initialize its lazy properties explicitly with (default) values\
-     - you can do this in the service or controller layer, depending where it fits better to your case, but outside of an explicit transaction to avoid flush\
+     - fetch an entity and initialize its lazy properties explicitly with (default) values (e.g., `null`)\
+     - set `@JsonInclude(Include.NON_EMPTY)` on this entity-level to avoid rendering `null` or what is considered empty\
+     - initialize the lazy properties in the service or controller layer, depending where it fits better to your case, but outside of an explicit transaction to avoid flushing\
      - why is this working? why we can initialize the lazy properties of a managed entity and not trigger the flush? well, the answer can be found in the documentation of `OpenSessionInViewFilter` which specifies that:
      
  **NOTE:** *This filter will by default not flush the Hibernate `Session`, with the flush mode set to `FlushMode.NEVER`. It assumes to be used in combination with service layer transactions that care for the flushing: The active transaction manager will temporarily change the flush mode to `FlushMode.AUTO` during a read-write transaction, with the flush mode reset to `FlushMode.NEVER` at the end of each transaction. If you intend to use this filter without transactions, consider changing the default flush mode (through the "flushMode" property).*
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSuppressLazyInitInOpenSessionInView/avoid%20lazy%20initialization%20in%20open%20session%20in%20view.png)
-
 
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -2272,9 +2272,11 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Note:** [Hibernate5Module](https://github.com/FasterXML/jackson-datatype-hibernate) is an *add-on module for Jackson JSON processor which handles Hibernate datatypes; and specifically aspects of lazy-loading*
  
-**Description:** By default, in Spring Boot, the Open Session In View anti-pattern is enabled. Now, imagine a lazy relationship (e.g., `@OneToMany`) between two entities, `Author` and `Book` (an author has associated more books). Next, a rest controller endpoint fetches an `Author` whithout the associated `Book`. But, since OSIV is eanbled, it forces the lazy loading of `Book` as well. Of course, the correct decision is to disable OSIV by setting it to `false`. Running the code again will result in an exception of type: *Could not write JSON: failed to lazily initialize a collection of role: com.bookstore.entity.Author.books, could not initialize proxy - no Session; nested exception is com.fasterxml.jackson.databind.JsonMappingException: failed to lazily initialize a collection of role: com.bookstore.entity.Author.books, could not initialize proxy - no Session*. Well, among the Hibernate5Module features we have support for dealing with this aspect of lazy loading and eliminate this exception. And, if you really need OSIV, then you can enable it since Hibernate5Module will prevent OSIV to trigger lazy loading the associations.
+**Description:** By default, in Spring Boot, the Open Session In View anti-pattern is enabled. Now, imagine a lazy relationship (e.g., `@OneToMany`) between two entities, `Author` and `Book` (an author has associated more books). Next, a REST controller endpoint fetches an `Author` whithout the associated `Book`. But, the View (Jackson), forces the lazy loading of the associated `Book` as well. This is working since OSIV will supply the current open `Session`. Of course, the correct decision is to disable OSIV by setting it to `false`, but this will not stop Jackson to try to force the lazy initialization of the associated `Book` entities. Running the code again will result in an exception of type: *Could not write JSON: failed to lazily initialize a collection of role: com.bookstore.entity.Author.books, could not initialize proxy - no Session; nested exception is com.fasterxml.jackson.databind.JsonMappingException: failed to lazily initialize a collection of role: com.bookstore.entity.Author.books, could not initialize proxy - no Session*. Well, among the Hibernate5Module features we have support for dealing with this aspect of lazy loading and eliminate this exception. And, if you really need OSIV, then you can enable it since Hibernate5Module will prevent OSIV to trigger lazy loading the associations.
 
 **Key points:**\
      - add the Hibernate5Module dependency in `pom.xml`\
      - add a `@Bean` that returns an instance of `Hibernate5Module`\
-     - annotate the `Author` bean with `@JsonInclude(Include.NON_EMPTY)` to exclude nulls from the returned JSON
+     - annotate the `Author` bean with `@JsonInclude(Include.NON_EMPTY)` to exclude `null` or what is considered empty from the returned JSON
+     
+**Note:** Hibernate5Module instructs Jackson to initialize the lazy properties with default values (e.g., `null`).

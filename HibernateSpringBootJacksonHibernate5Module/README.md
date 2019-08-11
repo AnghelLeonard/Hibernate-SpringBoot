@@ -7,7 +7,9 @@
 **Key points:**\
      - add the Hibernate5Module dependency in `pom.xml`\
      - add a `@Bean` that returns an instance of `Hibernate5Module`\
-     - annotate the `Author` bean with `@JsonInclude(Include.NON_EMPTY)` to exclude nulls from the returned JSON
+     - annotate the `Author` bean with `@JsonInclude(Include.NON_EMPTY)` to exclude `null` or what is considered empty from the returned JSON
+     
+**Note:** Hibernate5Module instructs Jackson to initialize the lazy properties with default values (e.g., `null`).
 
 -------------------------------
 
