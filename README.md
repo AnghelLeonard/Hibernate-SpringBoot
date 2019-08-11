@@ -2279,4 +2279,4 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
      - add a `@Bean` that returns an instance of `Hibernate5Module`\
      - annotate the `Author` bean with `@JsonInclude(Include.NON_EMPTY)` to exclude `null` or what is considered empty from the returned JSON
      
-**Note:** Hibernate5Module instructs Jackson to initialize the lazy properties with default values (e.g., `null`).
+**Note:** The presence of Hibernate5Module instructs Jackson to initialize the lazy properties with default values (e.g., a lazy associated collection will be initialized with `null`).
