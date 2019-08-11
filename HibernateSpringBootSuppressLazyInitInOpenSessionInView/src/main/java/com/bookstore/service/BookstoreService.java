@@ -3,7 +3,6 @@ package com.bookstore.service;
 import com.bookstore.entity.Author;
 import com.bookstore.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookstoreService {
@@ -14,11 +13,21 @@ public class BookstoreService {
         this.authorRepository = authorRepository;
     }
 
-    @Transactional(readOnly = true)
-    public Author fetchAuthor() {
+    public Author fetchAuthorLazy() {
         Author author = authorRepository.findByName("Joana Nimar");
 
         return author;
     }
 
+    public Author fetchAuthorEager() {
+        Author author = authorRepository.findByName("Joana Nimar");
+
+        // explicitly set Books of the Author to null
+        // in order to avoid fetching them from the database
+        author.setBooks(null);
+
+        // or, to an empty collection
+        // author.setBooks(Collections.emptyList());
+        return author;
+    }
 }
