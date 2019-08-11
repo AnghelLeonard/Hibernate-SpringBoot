@@ -1,4 +1,4 @@
-**[How To Avoid Lazy Initialization Issues Caused By Disabling Open Session In View Via Explicit Values](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSuppressLazyInitInOpenSessionInView)**
+**[How To Avoid Lazy Initialization Issues Caused By Disabling Open Session In View Via Explicit Default Values](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSuppressLazyInitInOpenSessionInView)**
 
 **Note: Before reading this item try to see if [Hibernate5Module](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJacksonHibernate5Module) is not what you are looking for.**
 
