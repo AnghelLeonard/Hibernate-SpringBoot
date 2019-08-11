@@ -14,7 +14,7 @@ public class BookstoreService {
         this.authorRepository = authorRepository;        
     }
 
-    public Author fetchAuthorByName() {
-        return authorRepository.findByName("Joana Nimar");
+    public Author fetchAuthorByName(String name) {
+        return authorRepository.findByName(name);
     }
 }

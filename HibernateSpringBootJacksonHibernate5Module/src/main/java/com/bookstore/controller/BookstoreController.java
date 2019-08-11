@@ -16,6 +16,6 @@ public class BookstoreController {
 
     @GetMapping("/author")
     public Author fetchAuthor() {
-        return bookstoreService.fetchAuthorByName();
+        return bookstoreService.fetchAuthorByName("Joana Nimar");
     }
 }

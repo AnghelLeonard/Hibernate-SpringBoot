@@ -2,6 +2,7 @@ package com.bookstore.entity;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -29,6 +30,7 @@ public class Author implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "author", orphanRemoval = true)
+    @JsonManagedReference
     private List<Book> books = new ArrayList<>();
 
     public void addBook(Book book) {
@@ -74,7 +76,7 @@ public class Author implements Serializable {
 
     public void setGenre(String genre) {
         this.genre = genre;
-    }  
+    }
 
     public int getAge() {
         return age;
@@ -94,8 +96,8 @@ public class Author implements Serializable {
 
     @Override
     public String toString() {
-        return "Author{" + "id=" + id + ", name=" + name 
+        return "Author{" + "id=" + id + ", name=" + name
                 + ", genre=" + genre + ", age=" + age + '}';
     }
-    
+
 }

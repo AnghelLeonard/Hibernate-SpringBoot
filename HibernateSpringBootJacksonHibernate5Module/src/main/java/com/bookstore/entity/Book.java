@@ -1,5 +1,6 @@
 package com.bookstore.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,6 +24,7 @@ public class Book implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
+    @JsonBackReference
     private Author author;
 
     public Long getId() {
