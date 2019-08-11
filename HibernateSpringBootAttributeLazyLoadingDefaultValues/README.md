@@ -6,7 +6,7 @@
 **Key points:**\
      - in `pom.xml`, activate Hibernate *bytecode instrumentation* (e.g. use Maven *bytecode enhancement plugin*)\
      - in entity, annotate the columns that should be loaded lazy with `@Basic(fetch = FetchType.LAZY)`\
-     - annotate the `Author` entity with `@JsonInclude(Include.NON_DEFAULT)` to avoid the serialization of fields with default values (e.g., useful when we set `avatar` to `null`)\
+     - annotate the `Author` entity with `@JsonInclude(Include.NON_EMPTY)` to avoid the serialization of fields with empty values (e.g., useful when we set `avatar` to `null`)\
      - in `application.properties`, disable Open Session in View
      
 **Run the following requests (via BookstoreController):**\
