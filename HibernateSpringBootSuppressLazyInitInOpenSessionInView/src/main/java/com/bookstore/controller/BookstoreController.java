@@ -30,9 +30,12 @@ public class BookstoreController {
 
         Author author = bookstoreService.fetchAuthor();
 
-        // explicitly set Books of the Author
+        // explicitly set Books of the Author to null
         // in order to avoid fetching them from the database
-        author.setBooks(Collections.emptyList());
+        author.setBooks(null); 
+        
+        // or, if you want to render an empty collection
+        // author.setBooks(Collections.emptyList());
 
         return author;
     }
