@@ -15,7 +15,7 @@ public class BookstoreController {
         this.bookstoreService = bookstoreService;
     }
 
-    // Open Session In View will "force" lazy initialization of books
+    // The View will force lazy initialization of books
     @RequestMapping("/fetchlazy")
     public Author authorWithBooksLazyInitialized() {
 
@@ -24,7 +24,7 @@ public class BookstoreController {
         return author;
     }
 
-    // Open Session In View will NOT "force" lazy initialization of books
+    // The View will NOT force lazy initialization of books
     @RequestMapping("/fetchnolazy")
     public Author authorWithoutBooks() {
 
