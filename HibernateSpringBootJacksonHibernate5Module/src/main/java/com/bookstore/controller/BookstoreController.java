@@ -15,18 +15,18 @@ public class BookstoreController {
     }
 
     // The View will NOT force lazy initialization of books
-    @RequestMapping("/fetchlazy")
-    public Author authorWithBooksLazyInitialized() {
+    @RequestMapping("/fetchwithbooks")
+    public Author fetchAuthorWithBooks() {
 
-        Author author = bookstoreService.fetchAuthorLazy();
+        Author author = bookstoreService.fetchAuthorWithBooks();
 
         return author;
     }
 
     // The View will NOT force lazy initialization of books
-    @RequestMapping("/fetchnolazy")
-    public Author authorWithoutBooks() {
-        Author author = bookstoreService.fetchAuthorEager();
+    @RequestMapping("/fetchwithoutbooks")
+    public Author fetchAuthorWithoutBooks() {
+        Author author = bookstoreService.fetchAuthorWithoutBooks();
         
         return author;
     }

@@ -18,7 +18,7 @@ public class BookstoreService {
     }
 
     @Transactional(readOnly = true)
-    public Author fetchAuthorLazy() {
+    public Author fetchAuthorWithBooks() {
         Author author = authorRepository.findByName("Joana Nimar");
         List<Book> books = author.getBooks();
         
@@ -27,7 +27,7 @@ public class BookstoreService {
         return author;
     }
     
-    public Author fetchAuthorEager() {
+    public Author fetchAuthorWithoutBooks() {
         Author author = authorRepository.findByName("Joana Nimar");
 
         return author;
