@@ -5,7 +5,7 @@
 
 **Key points:**\
      - in `pom.xml`, activate Hibernate *bytecode instrumentation* (e.g. use Maven *bytecode enhancement plugin*)\
-     - in entity, annotate the columns that should be loaded lazy with `@Basic(fetch = FetchType.LAZY)`\
+     - in entity, annotate the attributes that should be loaded lazy with `@Basic(fetch = FetchType.LAZY)`\
      - in `application.properties`, disable Open Session in View     
 
 **Check as well:**\
