@@ -5,7 +5,7 @@
 **Description:** The Open-Session in View anti-pattern is activated by default in SpringBoot. If you prefer to use it then it is recommended to mitigate its performance penalties as much as possible. One optimization consist of marking the `Connection` as read-only which would allow the database server to avoid writing to the transaction log. Another optimization consist of explicitly setting the lazy properties of the fetched entities when you don't want them to be lazy initialized.
 
 **Key points:**\
-     - fetch a entity and set the lazy properties explicitly\
+     - fetch a entity and set default values for its lazy properties explicitly\
      - you can do this is the service or controller layer, depending where it fits better to your case, but outside of an explicit transaction to avoid flush\
      - why is this working? why we can set the property of a managed entity and not trigger the flush? well, the answer can be found in the documentation of `OpenSessionInViewFilter` which specifies that:
      
