@@ -19,11 +19,8 @@ public class BookstoreService {
 
     @Transactional(readOnly = true)
     public Author fetchAuthorWithBooks() {
-        Author author = authorRepository.findByName("Joana Nimar");
-        List<Book> books = author.getBooks();
+        Author author = authorRepository.findByNameWithBooks("Joana Nimar");
         
-        System.out.println(books);
-
         return author;
     }
     
