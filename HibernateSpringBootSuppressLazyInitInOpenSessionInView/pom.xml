@@ -8,7 +8,7 @@
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>jpaHibernateSpringBootSuppressLazyInitInOpenSessionInView</name>
+    <name>HibernateSpringBootSuppressLazyInitInOpenSessionInView</name>
     <description>JPA project for Spring Boot</description>
 
     <parent>
