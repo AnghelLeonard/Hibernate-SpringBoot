@@ -14,7 +14,7 @@ public class BookstoreController {
         this.bookstoreService = bookstoreService;
     }
 
-    // The View will force lazy initialization of books
+    // The View will NOT force lazy initialization of books
     @RequestMapping("/fetchwithbooks")
     public Author fetchAuthorWithBooks() {
         Author author = bookstoreService.fetchAuthorWithBooks();
