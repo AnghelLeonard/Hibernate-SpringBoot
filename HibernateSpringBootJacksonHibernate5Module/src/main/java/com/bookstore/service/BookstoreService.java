@@ -2,10 +2,7 @@ package com.bookstore.service;
 
 import com.bookstore.repository.AuthorRepository;
 import com.bookstore.entity.Author;
-import com.bookstore.entity.Book;
-import java.util.List;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookstoreService {
@@ -17,7 +14,6 @@ public class BookstoreService {
         this.authorRepository = authorRepository;
     }
 
-    @Transactional(readOnly = true)
     public Author fetchAuthorWithBooks() {
         Author author = authorRepository.findByNameWithBooks("Joana Nimar");
         
