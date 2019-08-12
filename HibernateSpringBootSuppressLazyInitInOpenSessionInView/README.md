@@ -2,7 +2,7 @@
 
 **Note: Before reading this item try to see if [Hibernate5Module](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJacksonHibernate5Module) is not what you are looking for.**
 
-**Description:** The Open-Session in View anti-pattern is activated by default in SpringBoot. It is advisable to disable it, but if you prefer to use it then it is recommended to mitigate its performance penalties as much as possible. One optimization consist of marking the `Connection` as read-only which would allow the database server to avoid writing to the transaction log. Another optimization consist of explicitly initializing the lazy properties of the fetched entities when you don't want them to be lazy initialized by the View layer.
+**Description:** The Open-Session in View anti-pattern is activated by default in SpringBoot. It is advisable to disable it, but if you prefer to use it then it is recommended to mitigate its performance penalties as much as possible. One optimization consist of marking the `Connection` as read-only which would allow the database server to avoid writing to the transaction log. Another optimization consist of explicitly initializing the un-fetched lazy properties when you don't want them to be lazy initialized by the View layer.
 
 **Key points:**\
      - fetch an entity and initialize its lazy properties explicitly with (default) values (e.g., `null`)\
