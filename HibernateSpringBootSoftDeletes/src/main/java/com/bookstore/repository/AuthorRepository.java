@@ -19,7 +19,7 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     List<Author> findAllOnlyDeleted();
 
     @Transactional
-    @Query(value = "UPDATE author SET deleted = false WHERE id = ?1", nativeQuery = true)
+    @Query(value = "UPDATE Author a SET a.deleted = false WHERE a.id = ?1")
     @Modifying
     public void restoreById(Long id);
 }
