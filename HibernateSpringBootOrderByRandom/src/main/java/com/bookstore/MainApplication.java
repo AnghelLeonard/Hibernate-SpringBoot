@@ -22,8 +22,11 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            
-            bookstoreService.fetchBooksOrderByRnd();
+
+            // trigger three queries to see if shuffling is working
+            for (int i = 1; i <= 3; i++) {
+                bookstoreService.fetchBooksOrderByRnd();
+            }
         };
     }
 }
