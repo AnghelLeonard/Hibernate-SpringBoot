@@ -31,8 +31,11 @@ public class MainApplication {
             // System.out.println("\n\n deleteViaIdentifier()");
             // bookstoreService.deleteViaIdentifier();                        
             
-            System.out.println("\n\n deleteViaIn()");
-            bookstoreService.deleteViaIn();
+            // System.out.println("\n\n deleteViaIn()");
+            // bookstoreService.deleteViaIn();
+            
+            System.out.println("\n\n deleteViaDeleteInBatch()");
+            bookstoreService.deleteViaDeleteInBatch();
         };
     }
 }
