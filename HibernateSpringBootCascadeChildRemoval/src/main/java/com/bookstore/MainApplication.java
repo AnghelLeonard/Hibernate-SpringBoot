@@ -28,14 +28,17 @@ public class MainApplication {
             // System.out.println("\n\n deleteViaOrphanRemoval()");
             // bookstoreService.deleteViaOrphanRemoval();
             
-            // System.out.println("\n\n deleteViaIdentifier()");
-            // bookstoreService.deleteViaIdentifier();                        
+            // System.out.println("\n\n deleteViaIdentifiers()");
+            // bookstoreService.deleteViaIdentifiers();
             
-            // System.out.println("\n\n deleteViaIn()");
-            // bookstoreService.deleteViaIn();
-            
+            // System.out.println("\n\n deleteViaBulkIn()");
+            // bookstoreService.deleteViaBulkIn();                                    
+                        
             System.out.println("\n\n deleteViaDeleteInBatch()");
             bookstoreService.deleteViaDeleteInBatch();
+            
+            // System.out.println("\n\n deleteViaIdentifier()");
+            // bookstoreService.deleteViaIdentifier();                        
         };
     }
 }

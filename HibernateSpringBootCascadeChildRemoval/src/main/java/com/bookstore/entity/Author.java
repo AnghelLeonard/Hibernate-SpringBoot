@@ -71,7 +71,7 @@ public class Author implements Serializable {
 
     public void setGenre(String genre) {
         this.genre = genre;
-    }  
+    }
 
     public int getAge() {
         return age;
@@ -91,8 +91,8 @@ public class Author implements Serializable {
 
     @Override
     public String toString() {
-        return "Author{" + "id=" + id + ", name=" + name 
+        return "Author{" + "id=" + id + ", name=" + name
                 + ", genre=" + genre + ", age=" + age + '}';
     }
-    
+
 }
