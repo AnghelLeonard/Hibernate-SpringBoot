@@ -24,5 +24,10 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Transactional    
     @Modifying(flushAutomatically = true, clearAutomatically = true)
     @Query("DELETE FROM Author a WHERE a.id=?1")
-    public int deleteByIdentifier(Long id);        
+    public int deleteByIdentifier(Long id);      
+    
+    @Transactional
+    @Modifying(flushAutomatically = true, clearAutomatically = true)
+    @Query("DELETE FROM Author a WHERE a.id IN ?1")
+    public int deleteBulkByIdentifier(List<Long> id);
 }

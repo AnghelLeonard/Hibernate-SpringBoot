@@ -19,6 +19,11 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Modifying(flushAutomatically = true, clearAutomatically = true)
     @Query("DELETE FROM Book b WHERE b.author.id=?1")
     public int deleteByAuthorIdentifier(Long id);
+    
+    @Transactional
+    @Modifying(flushAutomatically = true, clearAutomatically = true)
+    @Query("DELETE FROM Book b WHERE b.author.id IN ?1")
+    public int deleteBulkByAuthorIdentifier(List<Long> id);
 
     @Transactional
     @Modifying(flushAutomatically = true, clearAutomatically = true)

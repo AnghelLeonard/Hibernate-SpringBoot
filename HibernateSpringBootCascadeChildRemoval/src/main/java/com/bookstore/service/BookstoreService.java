@@ -3,7 +3,7 @@ package com.bookstore.service;
 import com.bookstore.entity.Author;
 import com.bookstore.repository.BookRepository;
 import com.bookstore.repository.AuthorRepository;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,5 +64,13 @@ public class BookstoreService {
     public void deleteViaHardCodedIdentifiers() {
         bookRepository.deleteByAuthorIdentifier(4L);
         authorRepository.deleteByIdentifier(4L);
+    }
+
+    @Transactional
+    public void deleteViaBulkHardCodedIdentifiers() {
+        List<Long> authorsIds = Arrays.asList(1L, 4L);
+        
+        bookRepository.deleteBulkByAuthorIdentifier(authorsIds);
+        authorRepository.deleteBulkByIdentifier(authorsIds);
     }
 }

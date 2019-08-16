@@ -6,4 +6,4 @@ insert into book (isbn, title, author_id, id) values ("001-JN", "A History of An
 insert into book (isbn, title, author_id, id) values ("002-JN", "A People's History", 4, 2);
 insert into book (isbn, title, author_id, id) values ("001-MJ", "The Beatles Anthology", 1, 3);
 insert into book (isbn, title, author_id, id) values ("003-JN", "Modern History", 4, 4);
-insert into book (isbn, title, author_id, id) values ("001-OG", "House Of Pain", 3, 5);
+insert into book (isbn, title, author_id, id) values ("001-OG", "House Of Pain", 2, 5);
