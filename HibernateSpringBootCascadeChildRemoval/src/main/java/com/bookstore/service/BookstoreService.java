@@ -21,6 +21,7 @@ public class BookstoreService {
         this.bookRepository = bookRepository;
     }
 
+    // not efficient
     @Transactional
     public void deleteViaCascadeRemove() {
         Author author = authorRepository.findByName("Joana Nimar");
@@ -28,6 +29,7 @@ public class BookstoreService {
         authorRepository.delete(author);
     }
 
+    // not efficient
     @Transactional
     public void deleteViaOrphanRemoval() {
         Author author = authorRepository.findByNameWithBooks("Joana Nimar");
@@ -36,6 +38,7 @@ public class BookstoreService {
         authorRepository.delete(author);
     }
 
+    // One Author is in Persistent Context
     @Transactional
     public void deleteViaIdentifiers() {
         Author author = authorRepository.findByName("Joana Nimar");
@@ -44,6 +47,7 @@ public class BookstoreService {
         authorRepository.deleteByIdentifier(author.getId());
     }
 
+    // More Author are in the Persistent Context
     @Transactional
     public void deleteViaBulkIn() {
         List<Author> authors = authorRepository.findByAge(34);
@@ -52,6 +56,7 @@ public class BookstoreService {
         authorRepository.deleteInBatch(authors);
     }
 
+    // One Author and the associated Book are in Persistent Context
     @Transactional
     public void deleteViaDeleteInBatch() {
         Author author = authorRepository.findByNameWithBooks("Joana Nimar");
@@ -60,12 +65,14 @@ public class BookstoreService {
         authorRepository.deleteByIdentifier(author.getId());
     }
 
+    // No Author or Book is in Persistent Context
     @Transactional
     public void deleteViaHardCodedIdentifiers() {
         bookRepository.deleteByAuthorIdentifier(4L);
         authorRepository.deleteByIdentifier(4L);
     }
-
+    
+    // No Author or Book is in Persistent Context
     @Transactional
     public void deleteViaBulkHardCodedIdentifiers() {
         List<Long> authorsIds = Arrays.asList(1L, 4L);
