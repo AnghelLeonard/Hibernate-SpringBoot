@@ -41,6 +41,7 @@ public class BookstoreService {
     // a DELETE of type, delete from author where id=? or id=? or id=? ...
     // without exceeding the maximum accepted size (as a workaround, 
     // split the number of deletes in multiple chunks to avoid this issue)
+    // doesn't prevent lost updates
     @Transactional
     public void deleteAuthorsViaDeleteInBatch() {
 
