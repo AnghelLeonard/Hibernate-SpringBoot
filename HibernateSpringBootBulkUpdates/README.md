@@ -2,7 +2,7 @@
 
 **Description:** *Bulk* operations (updates and deletes) are fastest than batching, can benefit from indexing, but they have two main drawbacks:
 
-- *bulk* updates/deletes may leave the Persistent Context in an outdated state (it is a update/delete) and close/clear (after update/delete) the Persistent Context accordingly to avoid issues created by potentially unflushed or outdated entities
+- *bulk* updates/deletes may leave the Persistent Context in an outdated state (prevent this by flushing the Persistent Context before update/delete and close/clear it after the update/delete to avoid issues created by potentially unflushed or outdated entities)
 - *bulk* updates/deletes don't benefit of application-level optimistic locking mechanisms, therefore the *lost updates* not prevented (it is advisable to signal these updates by explicitly incrementing `version` (if any is present)).
 
 This application provides examples of *bulk* updates for `Author` and `Book` entities (between `Author` and `Book` there is a bidirectional lazy `@OneToMany` relationship). Both, `Author` and `Book`, has a `version` field.
