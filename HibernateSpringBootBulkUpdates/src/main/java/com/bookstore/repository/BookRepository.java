@@ -14,8 +14,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Transactional
     @Modifying(flushAutomatically = true, clearAutomatically = true)
-    @Query(value = "UPDATE book SET isbn='None', version=version + 1",
-            nativeQuery = true)
+    @Query(value = "UPDATE Book b SET b.isbn='None', b.version=b.version + 1")
     public int updateInBulk();
 
     @Transactional
