@@ -49,6 +49,15 @@ public class BookstoreService {
         authorRepository.deleteInBatch(authors);
     }
 
+    // good if you want an alternative to deleteInBatch()
+    @Transactional
+    public void deleteAuthorsViaDeleteInBulk() {
+
+        List<Author> authors = authorRepository.findByAgeLessThan(60);
+
+        authorRepository.deleteInBulk(authors);
+    }
+
     // good if you need to delete in a classical batch approach
     @Transactional
     public void deleteAuthorsViaDeleteAll() {
