@@ -24,7 +24,7 @@ public class BookstoreService {
             Author author = new Author();
             author.setName("Name_" + i);
             author.setGenre("Genre_" + i);
-            author.setAge((int) ((Math.random() + 0.1) * 100));
+            author.setAge((int) ((Math.random() + 0.1) * 100));            
 
             authors.add(author);
         }
@@ -48,7 +48,7 @@ public class BookstoreService {
 
         authorRepository.deleteInBatch(authors);
     }
-
+    
     // good if you want an alternative to deleteInBatch()
     @Transactional
     public void deleteAuthorsViaDeleteInBulk() {
