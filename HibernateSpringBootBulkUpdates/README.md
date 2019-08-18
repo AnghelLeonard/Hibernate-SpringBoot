@@ -9,7 +9,7 @@ This application provides examples of *bulk* updates for `Author` and `Book` ent
 
 **Key points:**\
      - this application provide an example of *bulk* updates that don't involve entities (data is not loaded in the Persistent Context)\
-     - this application provide an example of *bulk* updates that involve entities (data is loaded in the Persistent Context before update it via *bulk* operations)\
+     - this application provide an example of *bulk* updates that involve entities (data is loaded in the Persistent Context before update it via *bulk* operations)
 
 -------------------------------
 
