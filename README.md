@@ -2329,3 +2329,15 @@ Well, among the Hibernate5Module features we have support for dealing with this 
 - *bulk* updates/deletes don't benefit of application-level optimistic locking mechanisms, therefore the *lost updates* not prevented (it is advisable to signal these updates by explicitly incrementing `version` (if any is present)).
 
 This application provides examples of *bulk* updates for `Author` and `Book` entities (between `Author` and `Book` there is a bidirectional lazy `@OneToMany` relationship). Both, `Author` and `Book`, has a `version` field.
+
+----------------------------------------------------------------------------------------------------------------------
+
+157. **[Why You Should Avoid Unidirectional `@OneToMany` And Prefer Bidirectional `@OneToMany` Relationship](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToManyUnidirectinal)**
+
+**Description:** As a rule of thumb, unidirectional `@OneToMany` association is less efficient than the bidirectional `@OneToMany` or the unidirectional `@ManyToOne` associations. This application is a sample that exposes the DML statements generated for reads, writes and removal operations when the unidirectional `@OneToMany` mapping is used.
+
+**Key points:**\
+     - regular unidirectional `@OneToMany` is less efficient than bidirectional `@OneToMany` relationship\
+     - using `@OrderColumn` come with some optimizations for removal operations but is still less efficient than bidirectional `@OneToMany` relationship\
+     - using `@JoinColumn` eliminates the junction table but is still less efficient than bidirectional `@OneToMany` relationship\
+     - using `Set` instead of `List` or bidirectional `@OneToMany` with `@JoinColumn` relationship (e.g., `@ManyToOne @JoinColumn(name = "author_id", updatable = false, insertable = false)`) still performs worse than bidirectional `@OneToMany` relationship
