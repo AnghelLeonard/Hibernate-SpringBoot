@@ -5,7 +5,7 @@
 **Key points:**\
      - regular unidirectional `@OneToMany` is less efficient than bidirectional `@OneToMany` relationship\
      - using `@OrderColumn` come with some optimizations for removal operations but is still less efficient than bidirectional `@OneToMany` relationship\
-     - using `@JoinColumn` eliminates the junction table but is still less efficient than bidirectional `@OneToMany` relationship
+     - using `@JoinColumn` eliminates the junction table but is still less efficient than bidirectional `@OneToMany` relationship\
      - using `Set` instead of `List` or bidirectional `@OneToMany` with `@JoinColumn` relationship (e.g., `@ManyToOne @JoinColumn(name = "author_id", updatable = false, insertable = false)`) still performs worse than bidirectional `@OneToMany` relationship
      
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
