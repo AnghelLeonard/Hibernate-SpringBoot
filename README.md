@@ -2341,3 +2341,14 @@ This application provides examples of *bulk* updates for `Author` and `Book` ent
      - using `@OrderColumn` come with some optimizations for removal operations but is still less efficient than bidirectional `@OneToMany` relationship\
      - using `@JoinColumn` eliminates the junction table but is still less efficient than bidirectional `@OneToMany` relationship\
      - using `Set` instead of `List` or bidirectional `@OneToMany` with `@JoinColumn` relationship (e.g., `@ManyToOne @JoinColumn(name = "author_id", updatable = false, insertable = false)`) still performs worse than bidirectional `@OneToMany` relationship
+
+----------------------------------------------------------------------------------------------------------------------
+
+158. **[How To Use Subqeries in JPQL `WHERE`/`HAVING` Clause](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSubqueryInWhere)**
+ 
+**Description:** This application is an example of using subqueries in JPQL `WHERE` clause (you can easily use it in `HAVING` clause as well).
+
+**Key points:**\
+Even if the Execution Plan is specific to the database, historically speaking joins are faster than subqueries among different databases. Of course, do not conclude that subqueries are just a replacement for joins that doesn't deserve attention. Tuning subqueries can increases their performance as well, but this is an SQL wide topic. So, benchmark! Benchmark! Benchmark!
+
+**As a rule of thumb, prefer subqueries only if you cannot use joins, or if you can prove that they are faster than the alternative joins.**
