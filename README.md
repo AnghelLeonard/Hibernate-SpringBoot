@@ -2356,3 +2356,14 @@ Keep in mind that subqueries and joins queries may not be semantically equivalen
 Even if the Execution Plan is specific to the database, historically speaking joins are faster than subqueries among different databases, but this is not a rule (e.g., the amount of data may significantly influence the results). Of course, do not conclude that subqueries are just a replacement for joins that doesn't deserve attention. Tuning subqueries can increases their performance as well, but this is an SQL wide topic. So, benchmark! Benchmark! Benchmark!
 
 **As a rule of thumb, prefer subqueries only if you cannot use joins, or if you can prove that they are faster than the alternative joins.**
+
+----------------------------------------------------------------------------------------------------------------------
+
+159. **[How To Execute SQL Functions In `WHERE` Part Of JPQL Query And JPA 2.1](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJpqlFunctionsParams)**
+
+Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJpqlFunctionsParams).
+
+**Description:** Starting with JPA 2.1, a JPQL query can call SQL functions in the `WHERE` part via `function()`. This application is an example of calling the MySQL, `concat_ws` function, but user defined (custom) functions can be used as well.
+
+**Key points:**\
+     - use JPA 2.1, `function()` 
