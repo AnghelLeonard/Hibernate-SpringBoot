@@ -34,6 +34,11 @@ public class MainApplication {
 
             System.out.println("\nStored procedure and DTO ...");
             bookstoreService.fetchAnthologyDtoAuthorsViaStoredProcedure();
+
+            System.out.println("\n---------------------------------------------------------");
+
+            System.out.println("\nStored procedure and manually mapping DTO ...");
+            bookstoreService.fetchAnthologyManualMappingDtoAuthorsViaStoredProcedure();
         };
     }
 }

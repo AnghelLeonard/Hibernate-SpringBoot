@@ -29,4 +29,9 @@ public class BookstoreService {
         List<AuthorDto> authors = dao.fetchByGenre3("Anthology");
         authors.forEach(a -> System.out.println(a));
     }
+    
+    public void fetchAnthologyManualMappingDtoAuthorsViaStoredProcedure() {
+        List<AuthorDto> authors = dao.fetchByGenre4("Anthology");
+        authors.forEach(a -> System.out.println(a));
+    }
 }
