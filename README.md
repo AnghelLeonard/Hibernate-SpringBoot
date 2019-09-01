@@ -2377,3 +2377,12 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as 
 **Key points:**\
      - rely on `@NamedStoredProcedureQuery` to shape the stored procedure in the entity\
      - rely on `@Procedure` in repository
+
+----------------------------------------------------------------------------------------------------------------------
+
+161. **[Calling Stored Procedure That Returns A Result Set (Entity And DTO)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCallStoredProcedureReturnResultSet)**
+ 
+**Description:** This application is an example of calling a MySQL stored procedure that returns a result set. The application fetches entities (e.g., `List<Author>`) and DTO (e.g., `List<AuthorDto>`).
+
+**Key points:**\
+     - rely on `EntiyManager` since Spring Data `@Procedure` will not work
