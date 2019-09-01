@@ -2386,3 +2386,12 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as 
 
 **Key points:**\
      - rely on `EntiyManager` since Spring Data `@Procedure` will not work
+
+----------------------------------------------------------------------------------------------------------------------
+
+162. **[Calling Stored Procedure That Returns A Result Set Via Native Query](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCallStoredProcedureNativeCall)**
+ 
+**Description:** This application is an example of calling a MySQL stored procedure that returns a result set (entity or DTO) via a native query.
+ 
+**Key points:**\
+     - rely on a native call as `@Query(value = "{CALL FETCH_AUTHOR_BY_GENRE (:p_genre)}", nativeQuery = true)`
