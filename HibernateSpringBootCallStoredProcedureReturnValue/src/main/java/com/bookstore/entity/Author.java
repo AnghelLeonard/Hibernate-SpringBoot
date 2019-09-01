@@ -21,7 +21,7 @@ import javax.persistence.StoredProcedureParameter;
                         name = "p_genre",
                         type = String.class,
                         mode = ParameterMode.IN),
-            @StoredProcedureParameter(
+                @StoredProcedureParameter(
                         name = "p_count",
                         type = Integer.class,
                         mode = ParameterMode.OUT)})

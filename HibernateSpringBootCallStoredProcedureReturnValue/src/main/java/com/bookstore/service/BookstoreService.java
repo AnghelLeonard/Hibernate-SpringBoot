@@ -13,7 +13,7 @@ public class BookstoreService {
     }
 
     public void countAnthologyAuthors() {
-         Integer result = authorRepository.countByGenre("Anthology");
-         System.out.println("Result: " + result);
+        Integer result = authorRepository.countByGenre("Anthology");
+        System.out.println("Result: " + result);
     }
 }
