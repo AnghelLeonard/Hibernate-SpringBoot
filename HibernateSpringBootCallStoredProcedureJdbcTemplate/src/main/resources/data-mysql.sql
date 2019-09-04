@@ -6,7 +6,6 @@ INSERT INTO author (age, name, genre, id) VALUES (38, "Alicia Tom", "Anthology",
 INSERT INTO author (age, name, genre, id) VALUES (56, "Katy Loin", "Anthology", 6) ^;
 
 DROP PROCEDURE IF EXISTS FETCH_AUTHOR_BY_GENRE ^; 
-DROP PROCEDURE IF EXISTS FETCH_NAME_AND_AGE_BY_GENRE ^; 
 
 CREATE DEFINER=root@localhost PROCEDURE FETCH_AUTHOR_BY_GENRE(IN p_genre CHAR(20))
 BEGIN  
