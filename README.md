@@ -2395,3 +2395,12 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as 
  
 **Key points:**\
      - rely on a native call as `@Query(value = "{CALL FETCH_AUTHOR_BY_GENRE (:p_genre)}", nativeQuery = true)`
+
+----------------------------------------------------------------------------------------------------------------------
+
+163. **[Calling Stored Procedure That Returns A Result Set Via `JdbcTemplate`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCallStoredProcedureJdbcTemplate)**
+ 
+**Description:** This application is an example of calling a MySQL stored procedure that returns a result set via `JdbcTemplate`.
+ 
+**Key points:**\
+     - rely on `JdbcTemplate` and `SimpleJdbcCall`
