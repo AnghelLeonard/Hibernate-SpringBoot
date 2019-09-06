@@ -61,7 +61,7 @@ public class Dao {
 
         StoredProcedureQuery storedProcedure
                 = entityManager.createStoredProcedureQuery(
-                        "FETCH_NAME_AND_AGE_BY_GENRE", "AuthorDtoMapping");
+                        "FETCH_NICKNAME_AND_AGE_BY_GENRE", "AuthorDtoMapping");
 
         storedProcedure.registerStoredProcedureParameter(GENRE_PARAM, String.class, ParameterMode.IN);
         storedProcedure.setParameter(GENRE_PARAM, genre);
@@ -80,7 +80,7 @@ public class Dao {
     public List<AuthorDto> fetchByGenre4(String genre) {
 
         StoredProcedureQuery storedProcedure
-                = entityManager.createStoredProcedureQuery("FETCH_NAME_AND_AGE_BY_GENRE");
+                = entityManager.createStoredProcedureQuery("FETCH_NICKNAME_AND_AGE_BY_GENRE");
 
         storedProcedure.registerStoredProcedureParameter(GENRE_PARAM, String.class, ParameterMode.IN);
         storedProcedure.setParameter(GENRE_PARAM, genre);

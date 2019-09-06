@@ -29,7 +29,7 @@ import javax.persistence.StoredProcedureParameter;
 @SqlResultSetMapping(name = "AuthorDtoMapping",
         classes = @ConstructorResult(targetClass = AuthorDto.class,
                 columns = {
-                    @ColumnResult(name = "name"),
+                    @ColumnResult(name = "nickname"),
                     @ColumnResult(name = "age")}))
 public class Author implements Serializable {
 
@@ -42,6 +42,7 @@ public class Author implements Serializable {
     private int age;
     private String name;
     private String genre;
+    private String nickname;
 
     public Long getId() {
         return id;
@@ -75,9 +76,17 @@ public class Author implements Serializable {
         this.age = age;
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
     @Override
     public String toString() {
-        return "Author{" + "id=" + id + ", age=" + age
-                + ", name=" + name + ", genre=" + genre + '}';
+        return "Author{" + "id=" + id + ", age=" + age + ", name=" + name
+                + ", genre=" + genre + ", nickname=" + nickname + '}';
     }
 }

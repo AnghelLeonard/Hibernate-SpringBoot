@@ -5,16 +5,16 @@ import java.io.Serializable;
 public class AuthorDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private final String name;
+    private final String nickname;
     private final int age;
 
-    public AuthorDto(String name, int age) {
-        this.name = name;
+    public AuthorDto(String nickname, int age) {
+        this.nickname = nickname;
         this.age = age;
     }
 
-    public String getName() {
-        return name;
+    public String getNickname() {
+        return nickname;
     }
 
     public int getAge() {
@@ -23,7 +23,7 @@ public class AuthorDto implements Serializable {
 
     @Override
     public String toString() {
-        return "AuthorDto{" + "name=" + name + ", age=" + age + '}';
+        return "AuthorDto{" + "nickname=" + nickname + ", age=" + age + '}';
     }
 
 }
