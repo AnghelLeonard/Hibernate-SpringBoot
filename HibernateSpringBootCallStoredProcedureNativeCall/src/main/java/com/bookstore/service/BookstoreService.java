@@ -22,7 +22,7 @@ public class BookstoreService {
     }
 
     public void fetchAnthologyAuthorsNameAndAge() {
-        List<Object[]> authorsArray = authorRepository.fetchNameAndAgeByGenre("Anthology");
+        List<Object[]> authorsArray = authorRepository.fetchNicknameAndAgeByGenre("Anthology");
         List<AuthorDto> authors = authorsArray.stream()
                 .map(result -> new AuthorDto(
                 (String) result[0],
