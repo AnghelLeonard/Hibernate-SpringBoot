@@ -5,7 +5,6 @@ import com.bookstore.dao.SimpleJdbcInsertDao;
 import com.bookstore.entity.Author;
 import com.bookstore.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookstoreService {
