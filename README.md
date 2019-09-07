@@ -2405,6 +2405,8 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as 
 **Key points:**\
      - rely on `JdbcTemplate` and `SimpleJdbcCall`
 
+----------------------------------------------------------------------------------------------------------------------
+
 164. **[How To Obtain Auto-Generated Keys](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootReturnGeneratedKeys)**
  
 **Description:** This application is an example of retrieving the database auto-generated primary keys.
