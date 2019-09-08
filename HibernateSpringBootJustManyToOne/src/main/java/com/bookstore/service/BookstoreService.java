@@ -60,11 +60,9 @@ public class BookstoreService {
         book.setTitle("History Facts");
         book.setAuthor(books.get(0).getAuthor());      
 
-        bookRepository.save(book);
-
-        List<Book> booksWithNewOne = bookRepository.fetchBooksOfAuthorById(4L);
+        books.add(bookRepository.save(book));
         
-        System.out.println(booksWithNewOne);
+        System.out.println(books);
     }
     
     @Transactional
