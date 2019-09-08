@@ -5,6 +5,7 @@ import com.bookstore.repository.BookRepository;
 import com.bookstore.repository.AuthorRepository;
 import com.bookstore.entity.Book;
 import java.util.List;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -44,10 +45,10 @@ public class BookstoreService {
     }
 
     public void fetchPageBooksOfAuthorById() {
-        List<Book> books = bookRepository.fetchPageBooksOfAuthorById(4L,
+        Page<Book> books = bookRepository.fetchPageBooksOfAuthorById(4L,
                 PageRequest.of(0, 2, new Sort(Sort.Direction.ASC, "title")));
 
-        System.out.println(books);
+        books.get().forEach(System.out::println);
     }
 
     @Transactional
