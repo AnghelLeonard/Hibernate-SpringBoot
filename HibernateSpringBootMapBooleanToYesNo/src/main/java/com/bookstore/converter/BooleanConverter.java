@@ -8,25 +8,15 @@ public class BooleanConverter implements AttributeConverter<Boolean, String> {
 
     @Override
     public String convertToDatabaseColumn(Boolean attr) {
-        if (attr != null) {
-            System.out.println("Convert boolean to yes/no ...");
-            if (attr) {
-                return "Yes";
-            } else {
-                return "No";
-            }
+        System.out.println("Convert boolean to yes/no ...");
 
-        }
-        return null;
+        return attr == null ? "No" : "Yes";
     }
 
     @Override
     public Boolean convertToEntityAttribute(String dbData) {
-        if (dbData != null) {
-            System.out.println("Convert yes/no to boolean ...");
-            return dbData.equals("Yes");
-        }
-        return null;
-    }
+        System.out.println("Convert yes/no to boolean ...");
 
+        return !"No".equals(dbData);
+    }
 }
