@@ -17,7 +17,7 @@ public class BookstoreService {
         this.authorRepository = authorRepository;
     }
 
-    public void authorEqualsProxy() {
+    public void authorNotEqualsProxy() {
 
         // behind findById() we have EntityManager#find()        
         author = authorRepository.findById(1L).orElseThrow();

@@ -20,7 +20,7 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {            
-            bookstoreService.authorEqualsProxy();
+            bookstoreService.authorNotEqualsProxy();
             System.out.println("------------------------------------------------------");
             bookstoreService.authorEqualsUnproxy();
         };
