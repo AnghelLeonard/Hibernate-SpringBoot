@@ -2427,3 +2427,12 @@ A proxy can be unproxied via `Hibernate.unproxy()`. This method is available sta
 **Key points:**\
      - fetch a proxy via `JpaRepository#getOne()`\
      - unproxy the fetched proxy via `Hibernate.unproxy()`    
+
+----------------------------------------------------------------------------------------------------------------------
+
+166. **[How To Convert `Boolean` To Yes/No Via `AttributeConverter`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMapBooleanToYesNo)**
+ 
+**Description:** This application is an example of converting a `Boolean` to Yes/No strings via `AttributeConverter`. This kind of conversions are needed when we deal with legacy databases that connot be changed. In this case, the legacy database stores the booleans as Yes/No.
+
+**Key points:**\
+     - implement a custom converter via `AttributeConverter`
