@@ -58,7 +58,7 @@ public class BookstoreService {
         Book book = new Book();
         book.setIsbn("004-JN");
         book.setTitle("History Facts");
-        book.setAuthor(books.get(0).getAuthor());      
+        book.setAuthor(books.get(0).getAuthor());          
 
         books.add(bookRepository.save(book));
         
@@ -68,11 +68,9 @@ public class BookstoreService {
     @Transactional
     public void fetchBooksOfAuthorByIdDeleteFirstBook() {
         List<Book> books = bookRepository.fetchBooksOfAuthorById(4L);
+                
+        bookRepository.delete(books.remove(0));                
         
-        bookRepository.delete(books.get(0));
-        
-        List<Book> booksAfterDeleteFirst = bookRepository.fetchBooksOfAuthorById(4L);
-        
-        System.out.println(booksAfterDeleteFirst);
+        System.out.println(books);
     }
 }
