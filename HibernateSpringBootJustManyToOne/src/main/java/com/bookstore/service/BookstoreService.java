@@ -36,15 +36,13 @@ public class BookstoreService {
 
         bookRepository.save(book);
     }
-
-    @Transactional(readOnly = true)
+    
     public void fetchBooksOfAuthorById() {
         List<Book> books = bookRepository.fetchBooksOfAuthorById(4L);
 
         System.out.println(books);
     }
 
-    @Transactional(readOnly = true)
     public void fetchPageBooksOfAuthorById() {
         List<Book> books = bookRepository.fetchPageBooksOfAuthorById(4L,
                 PageRequest.of(0, 2, new Sort(Sort.Direction.ASC, "title")));
