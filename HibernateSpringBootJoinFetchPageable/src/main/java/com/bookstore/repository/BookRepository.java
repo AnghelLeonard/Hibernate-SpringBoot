@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Transactional(readOnly = true)
-    @Query(value = "SELECT b FROM Book b JOIN FETCH b.author WHERE b.isbn LIKE ?1%",
+    @Query(value = "SELECT b FROM Book b LEFT JOIN FETCH b.author WHERE b.isbn LIKE ?1%",
             countQuery = "SELECT COUNT(b) FROM Book b WHERE b.isbn LIKE ?1%")
     Page<Book> fetchWithAuthorsByIsbnCQ(String isbn, Pageable pageable);
 

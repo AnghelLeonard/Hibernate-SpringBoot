@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     @Transactional(readOnly = true)
-    @Query(value = "SELECT a FROM Author a JOIN FETCH a.books WHERE a.genre = ?1",
+    @Query(value = "SELECT a FROM Author a LEFT JOIN FETCH a.books WHERE a.genre = ?1",
             countQuery = "SELECT COUNT(a) FROM Author a WHERE a.genre = ?1")
     Page<Author> fetchWithBooksByGenreCQ(String genre, Pageable pageable);
     
