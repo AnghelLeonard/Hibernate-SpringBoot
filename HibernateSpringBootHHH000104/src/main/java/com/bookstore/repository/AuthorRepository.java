@@ -26,8 +26,7 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
             countQuery = "SELECT COUNT(a) FROM Author a WHERE a.genre = ?1")
     Page<Author> fetchWithBooksByGenre(String genre, Pageable pageable);        
      */
-    
-    // triggering two queries eliminates HHH000104    
+        
     @Transactional(readOnly = true)
     @Query(value = "SELECT a.id FROM Author a WHERE a.genre = ?1")
     Page<Long> fetchIdsByGenre(String genre, Pageable pageable);
