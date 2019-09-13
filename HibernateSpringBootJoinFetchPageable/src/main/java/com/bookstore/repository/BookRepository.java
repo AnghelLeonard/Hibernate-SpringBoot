@@ -12,12 +12,12 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    @Transactional(readOnly = true)
+    @Transactional
     @Query(value = "SELECT b FROM Book b LEFT JOIN FETCH b.author WHERE b.isbn LIKE ?1%",
             countQuery = "SELECT COUNT(b) FROM Book b WHERE b.isbn LIKE ?1%")
     Page<Book> fetchWithAuthorsByIsbnCQ(String isbn, Pageable pageable);
 
-    @Transactional(readOnly = true)
+    @Transactional
     @EntityGraph(attributePaths = {"author"}, type = EntityGraph.EntityGraphType.FETCH)
     @Query(value = "SELECT b FROM Book b WHERE b.isbn LIKE ?1%")
     Page<Book> fetchWithAuthorsByIsbnEG(String isbn, Pageable pageable);

@@ -11,13 +11,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
-
-    @Transactional(readOnly = true)
+  
+    @Transactional
     @Query(value = "SELECT a FROM Author a LEFT JOIN FETCH a.books WHERE a.genre = ?1",
             countQuery = "SELECT COUNT(a) FROM Author a WHERE a.genre = ?1")
     Page<Author> fetchWithBooksByGenreCQ(String genre, Pageable pageable);
     
-    @Transactional(readOnly = true)
+    @Transactional
     @EntityGraph(attributePaths = {"books"},type = EntityGraph.EntityGraphType.FETCH)
     @Query(value = "SELECT a FROM Author a WHERE a.genre = ?1")
     Page<Author> fetchWithBooksByGenreEG(String genre, Pageable pageable);

@@ -27,22 +27,22 @@ public class MainApplication {
         return args -> {
 
             Page<Author> authorscq = bookstoreService.fetchWithBooksByGenreCQ();
-            authorscq.forEach(System.out::println);
+            authorscq.forEach(a -> System.out.println(a.getName() + ": " + a.getBooks()));
             System.out.println("Number of elements: " + authorscq.getNumberOfElements());
             System.out.println("Total elements: " + authorscq.getTotalElements());
 
             Page<Author> authorseg = bookstoreService.fetchWithBooksByGenreEG();
-            authorseg.forEach(System.out::println);
+            authorseg.forEach(a -> System.out.println(a.getName() + ": " + a.getBooks()));
             System.out.println("Number of elements: " + authorseg.getNumberOfElements());
             System.out.println("Total elements: " + authorseg.getTotalElements());
-            
+
             Page<Book> bookscq = bookstoreService.fetchWithAuthorsByIsbnCQ();
-            bookscq.forEach(System.out::println);
+            bookscq.forEach(a -> System.out.println(a.getTitle() + ": " + a.getAuthor()));
             System.out.println("Number of elements: " + bookscq.getNumberOfElements());
             System.out.println("Total elements: " + bookscq.getTotalElements());
-            
+
             Page<Book> bookseg = bookstoreService.fetchWithAuthorsByIsbnEG();
-            bookseg.forEach(System.out::println);
+            bookseg.forEach(a -> System.out.println(a.getTitle() + ": " + a.getAuthor()));
             System.out.println("Number of elements: " + bookseg.getNumberOfElements());
             System.out.println("Total elements: " + bookseg.getTotalElements());
         };
