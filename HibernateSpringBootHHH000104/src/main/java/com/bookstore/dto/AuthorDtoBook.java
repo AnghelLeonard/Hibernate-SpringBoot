@@ -2,7 +2,7 @@ package com.bookstore.dto;
 
 import com.bookstore.entity.Book;
 import java.util.List;
-
+ 
 public interface AuthorDtoBook {
 
     public String getName();
