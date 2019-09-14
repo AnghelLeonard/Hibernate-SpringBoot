@@ -2,10 +2,10 @@
 
 **Description:** HHH000104 is a Hibernate warning that tell us that pagination of a result set is tacking place in memory. For example, consider the `Author` and `Book` entities in a bidirectional lazy `@OneToMany` relationship and the following query: 
 
-`@Transactional`
-`@Query(value = "SELECT a FROM Author a LEFT JOIN FETCH a.books WHERE a.genre = ?1",`
-`       countQuery = "SELECT COUNT(a) FROM Author a WHERE a.genre = ?1")`
-`Page<Author> fetchWithBooksByGenre(String genre, Pageable pageable);`
+  `@Transactional`\
+  `@Query(value = "SELECT a FROM Author a LEFT JOIN FETCH a.books WHERE a.genre = ?1",`\
+  `       countQuery = "SELECT COUNT(a) FROM Author a WHERE a.genre = ?1")`\
+  `Page<Author> fetchWithBooksByGenre(String genre, Pageable pageable);`\
 
 **Key points:**\
      - ...
