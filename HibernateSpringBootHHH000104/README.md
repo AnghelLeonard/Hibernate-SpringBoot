@@ -4,8 +4,8 @@
 
   `@Transactional`\
   `@Query(value = "SELECT a FROM Author a LEFT JOIN FETCH a.books WHERE a.genre = ?1",`\
-  `       countQuery = "SELECT COUNT(a) FROM Author a WHERE a.genre = ?1")`\
-  `Page<Author> fetchWithBooksByGenre(String genre, Pageable pageable);`\
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`countQuery = "SELECT COUNT(a) FROM Author a WHERE a.genre = ?1")`\
+  `Page<Author> fetchWithBooksByGenre(String genre, Pageable pageable);`
 
 **Key points:**\
      - ...
