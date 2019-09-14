@@ -4,10 +4,10 @@
 
   `@Transactional`\
   `@Query(value = "SELECT a FROM Author a LEFT JOIN FETCH a.books WHERE a.genre = ?1",`\
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`countQuery = "SELECT COUNT(a) FROM Author a WHERE a.genre = ?1")`\
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`countQuery = "SELECT COUNT(a) FROM Author a WHERE a.genre = ?1")`\
   `Page<Author> fetchWithBooksByGenre(String genre, Pageable pageable);`
 
-Calling `fetchWithBooksByGenre()` works fine only that the following warning is signaled: `HHH000104: firstResult/maxResults specified with collection fetch; applying in memory!` Obviously, having pagination in memory cannot be good from performance perspective. This application reveals several approaches for moving pagination at database-level.
+Calling `fetchWithBooksByGenre()` works fine only that the following warning is signaled: `HHH000104: firstResult / maxResults specified with collection fetch; applying in memory!` Obviously, having pagination in memory cannot be good from performance perspective. This application reveals several approaches for moving pagination at database-level.
 
 **Key points:**\
      - use two JPQL queries (use `Page` or `Slice`) to fetch read-write result set\
