@@ -10,7 +10,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-
+ 
 @Entity
 @JsonInclude(Include.NON_EMPTY)
 public class Author implements Serializable {
