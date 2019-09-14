@@ -13,3 +13,5 @@ insert into book (isbn, title, author_id, id) values ("001-KL", "Personal Anthol
 insert into book (isbn, title, author_id, id) values ("001-MU", "Ultimate Anthology", 6, 7);
 insert into book (isbn, title, author_id, id) values ("002-MJ", "Anthology From Zero To Expert", 1, 8);
 insert into book (isbn, title, author_id, id) values ("003-MJ", "Quick Anthology", 1, 9);
+insert into book (isbn, title, author_id, id) values ("002-MU", "1959 Anthology", 6, 10);
+
