@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
-    AuthorDto findFirstByGenre(String genre);
+    Author findFirstByGenre(String genre);
+    AuthorDto findTopByGenre(String genre);
 }

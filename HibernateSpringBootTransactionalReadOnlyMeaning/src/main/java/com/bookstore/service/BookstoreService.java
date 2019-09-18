@@ -26,7 +26,7 @@ public class BookstoreService {
 
     @Transactional
     public void fetchAuthorReadWriteMode() {
-        Author author = authorRepository.findById(1L).orElseThrow();
+        Author author = authorRepository.findFirstByGenre("Anthology");
 
         org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
         System.out.println("Has only non read entities : " + persistenceContext.hasNonReadOnlyEntities());
@@ -60,7 +60,7 @@ public class BookstoreService {
 
     @Transactional(readOnly = true)
     public void fetchAuthorReadOnlyMode() {
-        Author author = authorRepository.findById(1L).orElseThrow();
+        Author author = authorRepository.findFirstByGenre("Anthology");
 
         org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
         System.out.println("Has only non read entities : " + persistenceContext.hasNonReadOnlyEntities());
@@ -94,7 +94,7 @@ public class BookstoreService {
     
     @Transactional
     public void fetchAuthorDtoReadWriteMode() {
-        AuthorDto authorDto = authorRepository.findFirstByGenre("Anthology");
+        AuthorDto authorDto = authorRepository.findTopByGenre("Anthology");
 
         System.out.println("Author DTO: " + authorDto.getName() + ", " + authorDto.getAge());
         
@@ -104,7 +104,7 @@ public class BookstoreService {
     
     @Transactional(readOnly = true)
     public void fetchAuthorDtoReadOnlyMode() {
-        AuthorDto authorDto = authorRepository.findFirstByGenre("Anthology");
+        AuthorDto authorDto = authorRepository.findTopByGenre("Anthology");
 
         System.out.println("Author DTO: " + authorDto.getName() + ", " + authorDto.getAge());
         
