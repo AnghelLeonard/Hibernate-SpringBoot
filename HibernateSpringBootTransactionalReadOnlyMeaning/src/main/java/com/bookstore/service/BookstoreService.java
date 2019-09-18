@@ -31,8 +31,7 @@ public class BookstoreService {
         displayInformation("After Fetch", author);
 
         author.setAge(40);
-        author.setGenre("Horror");
-
+     
         displayInformation("After Update Entity", author);
 
         authorRepository.flush();
@@ -47,8 +46,7 @@ public class BookstoreService {
         displayInformation("After Fetch", author);
 
         author.setAge(40);
-        author.setGenre("Horror");
-
+     
         displayInformation("After Update Entity", author);
 
         authorRepository.flush();
