@@ -2461,6 +2461,8 @@ A proxy can be unproxied via `Hibernate.unproxy()`. This method is available sta
 **Key points:**\
      - use `countQuery`\
      - use entity graph
+     
+**Note:** Fixing the above exception will lead to an warning of type HHH000104, `firstResult / maxResults specified with collection fetch; applying in memory!`. If this warning is a performance issue, and most probably it is, then follow by reading [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHHH000104).
 
 ----------------------------------------------------------------------------------------------------------------------
 
