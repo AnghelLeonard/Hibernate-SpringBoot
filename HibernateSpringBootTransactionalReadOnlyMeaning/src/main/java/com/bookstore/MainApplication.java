@@ -24,16 +24,16 @@ public class MainApplication {
         return args -> {
 
             System.out.println("\n\nREAD-WRITE MODE:");
-            bookstoreService.readWriteMode();
+            bookstoreService.fetchAuthorReadWriteMode();
             
             System.out.println("\n\nREAD-ONLY MODE:");
-            bookstoreService.readOnlyMode();
-            
-            System.out.println("\n\nREAD-ONLY MODE (DTO):");
-            bookstoreService.readOnlyDtoMode();
+            bookstoreService.fetchAuthorReadOnlyMode();
             
             System.out.println("\n\nREAD-WRITE MODE (DTO):");
-            bookstoreService.readWriteDtoMode();
+            bookstoreService.fetchAuthorDtoReadWriteMode();
+                        
+            System.out.println("\n\nREAD-ONLY MODE (DTO):");
+            bookstoreService.fetchAuthorDtoReadOnlyMode();
         };
     }
 }

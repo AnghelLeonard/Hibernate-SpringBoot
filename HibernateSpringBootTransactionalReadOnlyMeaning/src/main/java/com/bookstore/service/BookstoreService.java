@@ -25,7 +25,7 @@ public class BookstoreService {
     }
 
     @Transactional
-    public void readWriteMode() {
+    public void fetchAuthorReadWriteMode() {
         Author author = authorRepository.findById(1L).orElseThrow();
 
         org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
@@ -59,7 +59,7 @@ public class BookstoreService {
     }
 
     @Transactional(readOnly = true)
-    public void readOnlyMode() {
+    public void fetchAuthorReadOnlyMode() {
         Author author = authorRepository.findById(1L).orElseThrow();
 
         org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
@@ -93,7 +93,7 @@ public class BookstoreService {
     }
     
     @Transactional
-    public void readWriteDtoMode() {
+    public void fetchAuthorDtoReadWriteMode() {
         AuthorDto authorDto = authorRepository.findFirstByGenre("Anthology");
 
         System.out.println("Author DTO: " + authorDto.getName() + ", " + authorDto.getAge());
@@ -103,7 +103,7 @@ public class BookstoreService {
     }
     
     @Transactional(readOnly = true)
-    public void readOnlyDtoMode() {
+    public void fetchAuthorDtoReadOnlyMode() {
         AuthorDto authorDto = authorRepository.findFirstByGenre("Anthology");
 
         System.out.println("Author DTO: " + authorDto.getName() + ", " + authorDto.getAge());
