@@ -1,8 +1,9 @@
-**[Redundant save() Call](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRedundantSave)**
+**[What `@Transactional(readOnly=true)` Actually Do](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTransactionalReadOnlyMeaning)**
  
-**Description:** This application is an example when calling `save()` for a managed entity is redundant.
+ **Description:** This application is meant to reveal what is the difference between `@Transactional(readOnly = false)` and `@Transactional(readOnly = true)`. In a nuthsell, `readOnly = false` (default) fetches entites in *read-write* mode (managed). Before Spring 5.1, `readOnly = true` just set `FlushType.MANUAL`, therefore the automatic *dirty checking mechanism* will not take action since there is no flush. In other words, Hibernate keep in the Persistent Context the fetched entities and the hydrated (loaded) state. By comparing the entity state with the hydrated state, the *dirty checking mechanism* can decide to trigger `UPDATE`s in our behalf. But, the *dirty checking mechanism* take place at flush time, therefore, without a flush, the hydrated state is kept in Persistent Context for nothing, representing a performance penalty. Starting with Spring 5.1, the *read-only* mode is propagated to Hibernate, therefore the hydrated state is discarded immediately after loading the entities. Even if the *read-only* mode discards the hydrated state the entities are still loaded in the Persistent Context, therefore, for *read-only* data, relying on DTO (Spring projection) is better.
 
 **Key points:**\
-     - Hibernate triggers `UPDATE` statements for managed entities without the need to explicitly call the `save()` method\
-     - behind the scene, this redundancy implies a performance penalty as well
+     - `readOnly = false` load data in *read-write* mode (managed)\
+     - `readOnly = true` discard the hydrated state (starting with Spring 5.1)
+     
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
