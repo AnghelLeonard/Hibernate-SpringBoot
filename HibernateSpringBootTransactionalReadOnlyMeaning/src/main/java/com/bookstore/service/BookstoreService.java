@@ -1,6 +1,6 @@
 package com.bookstore.service;
 
-import com.bookstore.AuthorDto;
+import com.bookstore.dto.AuthorDto;
 import com.bookstore.entity.Author;
 import com.bookstore.repository.AuthorRepository;
 import java.util.Arrays;
