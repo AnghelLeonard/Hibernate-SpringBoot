@@ -1,5 +1,6 @@
 package com.bookstore.service;
 
+import com.bookstore.AuthorDto;
 import com.bookstore.entity.Author;
 import com.bookstore.repository.AuthorRepository;
 import java.util.Arrays;
@@ -28,6 +29,7 @@ public class BookstoreService {
         Author author = authorRepository.findById(1L).orElseThrow();
 
         org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
+        System.out.println("Has only non read entities : " + persistenceContext.hasNonReadOnlyEntities());
 
         EntityEntry entityEntryAfterFetch = persistenceContext.getEntry(author);
         Object[] loadedStateAfterFetch = entityEntryAfterFetch.getLoadedState();
@@ -61,13 +63,14 @@ public class BookstoreService {
         Author author = authorRepository.findById(1L).orElseThrow();
 
         org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
+        System.out.println("Has only non read entities : " + persistenceContext.hasNonReadOnlyEntities());
 
         EntityEntry entityEntryAfterFetch = persistenceContext.getEntry(author);
         Object[] loadedStateAfterFetch = entityEntryAfterFetch.getLoadedState();
         Status statusAfterFetch = entityEntryAfterFetch.getStatus();
         
         displayInformation("After fetch", author, statusAfterFetch, loadedStateAfterFetch);
-        System.out.println("Entity entry : " + entityEntryAfterFetch);
+        System.out.println("Entity entry : " + entityEntryAfterFetch);        
 
         author.setAge(40);
         author.setGenre("Horror");
@@ -88,6 +91,26 @@ public class BookstoreService {
         displayInformation("After flush", author, statusAfterFlush, loadedStateAfterFlush);
         System.out.println("Entity entry : " + entityEntryAfterFlush);
     }
+    
+    @Transactional
+    public void readWriteDtoMode() {
+        AuthorDto authorDto = authorRepository.findFirstByGenre("Anthology");
+
+        System.out.println("Author DTO: " + authorDto.getName() + ", " + authorDto.getAge());
+        
+        org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();       
+        System.out.println("No of managed entities : " + persistenceContext.getNumberOfManagedEntities());
+    }
+    
+    @Transactional(readOnly = true)
+    public void readOnlyDtoMode() {
+        AuthorDto authorDto = authorRepository.findFirstByGenre("Anthology");
+
+        System.out.println("Author DTO: " + authorDto.getName() + ", " + authorDto.getAge());
+        
+        org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();       
+        System.out.println("No of managed entities : " + persistenceContext.getNumberOfManagedEntities());
+    }        
 
     private org.hibernate.engine.spi.PersistenceContext getPersistenceContext() {
         SharedSessionContractImplementor sharedSession = entityManager.unwrap(
@@ -103,5 +126,5 @@ public class BookstoreService {
         System.out.println("Entity: " + author);        
         System.out.println("Status:" + status);
         System.out.println("Loaded state: " + Arrays.toString(loadedState));
-    }
+    }        
 }

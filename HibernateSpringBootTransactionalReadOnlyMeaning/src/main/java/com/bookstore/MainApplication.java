@@ -28,6 +28,12 @@ public class MainApplication {
             
             System.out.println("\n\nREAD-ONLY MODE:");
             bookstoreService.readOnlyMode();
+            
+            System.out.println("\n\nREAD-ONLY MODE (DTO):");
+            bookstoreService.readOnlyDtoMode();
+            
+            System.out.println("\n\nREAD-WRITE MODE (DTO):");
+            bookstoreService.readWriteDtoMode();
         };
     }
 }
