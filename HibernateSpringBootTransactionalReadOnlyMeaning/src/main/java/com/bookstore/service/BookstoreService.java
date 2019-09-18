@@ -37,7 +37,7 @@ public class BookstoreService {
 
         authorRepository.flush();
 
-        displayInformation("After Update Flush", author);
+        displayInformation("After Flush", author);
     }
 
     @Transactional(readOnly = true)
@@ -53,7 +53,7 @@ public class BookstoreService {
 
         authorRepository.flush();
 
-        displayInformation("After Update Flush", author);
+        displayInformation("After Flush", author);
     }
 
     @Transactional
