@@ -28,89 +28,53 @@ public class BookstoreService {
     public void fetchAuthorReadWriteMode() {
         Author author = authorRepository.findFirstByGenre("Anthology");
 
-        org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
-        System.out.println("Has only non read entities : " + persistenceContext.hasNonReadOnlyEntities());
-
-        EntityEntry entityEntryAfterFetch = persistenceContext.getEntry(author);
-        Object[] loadedStateAfterFetch = entityEntryAfterFetch.getLoadedState();
-        Status statusAfterFetch = entityEntryAfterFetch.getStatus();
-
-        displayInformation("After fetch", author, statusAfterFetch, loadedStateAfterFetch);
-        System.out.println("Entity entry : " + entityEntryAfterFetch);
+        displayInformation("After Fetch", author);
 
         author.setAge(40);
         author.setGenre("Horror");
 
-        EntityEntry entityEntryAfterUpdate = persistenceContext.getEntry(author);
-        Object[] loadedStateAfterUpdate = entityEntryAfterUpdate.getLoadedState();
-        Status statusAfterUpdate = entityEntryAfterUpdate.getStatus();
-
-        displayInformation("After update", author, statusAfterUpdate, loadedStateAfterUpdate);
-        System.out.println("Entity entry : " + entityEntryAfterUpdate);
+        displayInformation("After Update Entity", author);
 
         authorRepository.flush();
 
-        EntityEntry entityEntryAfterFlush = persistenceContext.getEntry(author);
-        Object[] loadedStateAfterFlush = entityEntryAfterFlush.getLoadedState();
-        Status statusAfterFlush = entityEntryAfterFlush.getStatus();
-
-        displayInformation("After flush", author, statusAfterFlush, loadedStateAfterFlush);
-        System.out.println("Entity entry : " + entityEntryAfterFlush);
+        displayInformation("After Update Flush", author);
     }
 
     @Transactional(readOnly = true)
     public void fetchAuthorReadOnlyMode() {
         Author author = authorRepository.findFirstByGenre("Anthology");
 
-        org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
-        System.out.println("Has only non read entities : " + persistenceContext.hasNonReadOnlyEntities());
-
-        EntityEntry entityEntryAfterFetch = persistenceContext.getEntry(author);
-        Object[] loadedStateAfterFetch = entityEntryAfterFetch.getLoadedState();
-        Status statusAfterFetch = entityEntryAfterFetch.getStatus();
-        
-        displayInformation("After fetch", author, statusAfterFetch, loadedStateAfterFetch);
-        System.out.println("Entity entry : " + entityEntryAfterFetch);        
+        displayInformation("After Fetch", author);
 
         author.setAge(40);
         author.setGenre("Horror");
 
-        EntityEntry entityEntryAfterUpdate = persistenceContext.getEntry(author);        
-        Object[] loadedStateAfterUpdate = entityEntryAfterUpdate.getLoadedState();
-        Status statusAfterUpdate = entityEntryAfterUpdate.getStatus();
-
-        displayInformation("After update", author, statusAfterUpdate, loadedStateAfterUpdate);
-        System.out.println("Entity entry : " + entityEntryAfterUpdate);
+        displayInformation("After Update Entity", author);
 
         authorRepository.flush();
 
-        EntityEntry entityEntryAfterFlush = persistenceContext.getEntry(author);
-        Object[] loadedStateAfterFlush = entityEntryAfterFlush.getLoadedState();
-        Status statusAfterFlush = entityEntryAfterFlush.getStatus();
-
-        displayInformation("After flush", author, statusAfterFlush, loadedStateAfterFlush);
-        System.out.println("Entity entry : " + entityEntryAfterFlush);
+        displayInformation("After Update Flush", author);
     }
-    
+
     @Transactional
     public void fetchAuthorDtoReadWriteMode() {
         AuthorDto authorDto = authorRepository.findTopByGenre("Anthology");
 
         System.out.println("Author DTO: " + authorDto.getName() + ", " + authorDto.getAge());
-        
-        org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();       
+
+        org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
         System.out.println("No of managed entities : " + persistenceContext.getNumberOfManagedEntities());
     }
-    
+
     @Transactional(readOnly = true)
     public void fetchAuthorDtoReadOnlyMode() {
         AuthorDto authorDto = authorRepository.findTopByGenre("Anthology");
 
         System.out.println("Author DTO: " + authorDto.getName() + ", " + authorDto.getAge());
-        
-        org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();       
+
+        org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
         System.out.println("No of managed entities : " + persistenceContext.getNumberOfManagedEntities());
-    }        
+    }
 
     private org.hibernate.engine.spi.PersistenceContext getPersistenceContext() {
         SharedSessionContractImplementor sharedSession = entityManager.unwrap(
@@ -120,11 +84,22 @@ public class BookstoreService {
         return sharedSession.getPersistenceContext();
     }
 
-    private void displayInformation(String phase, Author author, Status status, Object[] loadedState) {
+    private void displayInformation(String phase, Author author) {
+
         System.out.println("\n-------------------------------------");
         System.out.println("Phase:" + phase);
-        System.out.println("Entity: " + author);        
+        System.out.println("Entity: " + author);
+        System.out.println("-------------------------------------");
+
+        org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
+        System.out.println("Has only non read entities : " + persistenceContext.hasNonReadOnlyEntities());
+
+        EntityEntry entityEntry = persistenceContext.getEntry(author);
+        Object[] loadedState = entityEntry.getLoadedState();
+        Status status = entityEntry.getStatus();
+
+        System.out.println("Entity entry : " + entityEntry);        
         System.out.println("Status:" + status);
         System.out.println("Loaded state: " + Arrays.toString(loadedState));
-    }        
+    }
 }
