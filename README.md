@@ -2500,3 +2500,13 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Key points:**\
      - rely on the following query, `SELECT tx.trx_id FROM information_schema.innodb_trx tx WHERE tx.trx_mysql_thread_id = connection_id()`
+
+----------------------------------------------------------------------------------------------------------------------
+
+172. **[Inspect Persistent Context](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootInspectPersistentContext)**
+
+**Description:** This application is a sample of inspecting the Persistent Context content via `org.hibernate.engine.spi.PersistenceContext`.
+
+**Key points:**\
+     - get the current Persistent Context via Hibernate `SharedSessionContractImplementor`\
+     - rely on `PersistenceContext` [API](https://docs.jboss.org/hibernate/orm/5.4/javadocs/org/hibernate/engine/spi/PersistenceContext.html)
