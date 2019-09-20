@@ -1,5 +1,3 @@
-[![HitCount](http://hits.dwyl.io/AnghelLeonard/Hibernate-SpringBoot.svg)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/edit/master/HibernateSpringBootAttributeLazyLoadingBasic)
-
 **[Attribute Lazy Loading](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAttributeLazyLoadingBasic)**
   
 **Description:** By default, the attributes of an entity are loaded eagerly (all at once). But, we can load them **lazy** as well. This is useful for column types that store large amounts of data: `CLOB`, `BLOB`, `VARBINARY`, etc or *details* that should be loaded on demand. In this application, we have an entity named `Author`. Its properties are: `id`, `name`, `genre`, `avatar` and `age`. And, we want to load the `avatar` lazy. So, the `avatar` should be loaded on demand.
