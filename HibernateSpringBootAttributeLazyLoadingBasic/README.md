@@ -1,3 +1,4 @@
+[![HitCount](http://hits.dwyl.io/AnghelLeonard/Hibernate-SpringBoot.svg)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/edit/master/HibernateSpringBootAttributeLazyLoadingBasic)
 
 **[Attribute Lazy Loading](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAttributeLazyLoadingBasic)**
   
