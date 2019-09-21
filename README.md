@@ -2538,7 +2538,7 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Key points:**\
      - use `@Table` to point out the database view (here, the database view is available in `data-mysql.sql` file)\
-     - the entity used to fetch the database view is `AuthorBookView`
+     - the entity used to fetch the database view is `GenreAndTitleView`
 
 ----------------------------------------------------------------------------------------------------------------------
 
