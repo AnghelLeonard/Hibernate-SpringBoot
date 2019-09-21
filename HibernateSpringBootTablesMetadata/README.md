@@ -1,8 +1,9 @@
-**[Redundant save() Call](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRedundantSave)**
+**[How To Extract Tables Metadata](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTablesMetadata)**
  
-**Description:** This application is an example when calling `save()` for a managed entity is redundant.
+**Description:** This application is an example of using the Hibernare SPI, `org.hibernate.integrator.spi.Integrator` for extracting tables metadata.
 
 **Key points:**\
-     - Hibernate triggers `UPDATE` statements for managed entities without the need to explicitly call the `save()` method\
-     - behind the scene, this redundancy implies a performance penalty as well
-<a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
+     - Implement `org.hibernate.integrator.spi.Integrator` and override `integrate()` method to return `metadata.getDatabase()`\
+     - Register this `Integrator` via `LocalContainerEntityManagerFactoryBean`
+     
+     <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
