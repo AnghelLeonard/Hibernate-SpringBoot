@@ -2510,3 +2510,13 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 **Key points:**\
      - get the current Persistent Context via Hibernate `SharedSessionContractImplementor`\
      - rely on `PersistenceContext` [API](https://docs.jboss.org/hibernate/orm/5.4/javadocs/org/hibernate/engine/spi/PersistenceContext.html)
+
+----------------------------------------------------------------------------------------------------------------------
+
+173. **[How To Extract Tables Metadata](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTablesMetadata)**
+ 
+**Description:** This application is an example of using the Hibernare SPI, `org.hibernate.integrator.spi.Integrator` for extracting tables metadata.
+
+**Key points:**\
+     - Implement `org.hibernate.integrator.spi.Integrator` and override `integrate()` method to return `metadata.getDatabase()`\
+     - Register this `Integrator` via `LocalContainerEntityManagerFactoryBean`
