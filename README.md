@@ -2537,5 +2537,15 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 **Description:** This application is an example of fetching a read-only MySQL database view in a JPA immutable entity.
 
 **Key points:**\
-     - use `@Table` to point out the database view (here, the database view is available in `data-mysql.sql` file\
+     - use `@Table` to point out the database view (here, the database view is available in `data-mysql.sql` file)\
      - the entity used to fetch the database view is `AuthorBookView`
+
+----------------------------------------------------------------------------------------------------------------------
+
+176. **[How To Update/Insert Data From/In A MySQL Database View](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDatabaseViewUpdateInsert)**
+
+**Description:** This application is an example of updating and inserting data in a MySQL database view. Every update/insert will automatically update the contents of the underlying table(s).
+
+**Key points:**\
+     - use `@Table` to point out the database view (here, the database views are available in `data-mysql.sql` file)\
+     - respect [MySQL](https://dev.mysql.com/doc/refman/8.0/en/view-updatability.html) requirements for updatable and insertable database views
