@@ -7,7 +7,7 @@ insert into book (isbn, title, author_id, id) values ("002-JN", "A People's Hist
 insert into book (isbn, title, author_id, id) values ("001-MJ", "The Beatles Anthology", 1, 3) ^;
 insert into book (isbn, title, author_id, id) values ("001-OG", "Carrie", 2, 4) ^;
 
-CREATE OR REPLACE VIEW GENRE_AND_TITLE
+CREATE OR REPLACE VIEW GENRE_AND_TITLE_VIEW
 AS 
 SELECT 
     a.genre, 

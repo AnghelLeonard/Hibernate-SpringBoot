@@ -1,9 +1,9 @@
 package com.bookstore.repository;
 
-import com.bookstore.view.AuthorBookView;
+import com.bookstore.view.GenreAndTitleView;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AuthorBookViewRepository extends JpaRepository<AuthorBookView, Long> {
+public interface AuthorBookViewRepository extends JpaRepository<GenreAndTitleView, Long> {
 }

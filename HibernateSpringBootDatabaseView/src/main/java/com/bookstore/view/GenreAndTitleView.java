@@ -8,8 +8,8 @@ import org.springframework.data.annotation.Immutable;
 
 @Entity
 @Immutable
-@Table(name="genre_and_title")
-public class AuthorBookView implements Serializable {
+@Table(name="genre_and_title_view")
+public class GenreAndTitleView implements Serializable {
     
     private static final long serialVersionUID = 1L;
     

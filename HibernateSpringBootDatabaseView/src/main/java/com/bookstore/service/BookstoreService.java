@@ -1,6 +1,6 @@
 package com.bookstore.service;
 
-import com.bookstore.view.AuthorBookView;
+import com.bookstore.view.GenreAndTitleView;
 import org.springframework.stereotype.Service;
 import com.bookstore.repository.AuthorBookViewRepository;
 import java.util.List;
@@ -15,7 +15,7 @@ public class BookstoreService {
     }
    
     public void displayView() {
-        List<AuthorBookView> view = authorBookViewRepository.findAll();
+        List<GenreAndTitleView> view = authorBookViewRepository.findAll();
         System.out.println("View: " + view);
     }
 }
