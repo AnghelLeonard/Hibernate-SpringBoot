@@ -2529,3 +2529,13 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Key points:**\
      - fetching the book `B` is done via `@JoinFormula`
+
+----------------------------------------------------------------------------------------------------------------------
+
+175. **[How To Fetch Data From A MySQL Database View](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDatabaseView)**
+
+**Description:** This application is an example of fetching a read-only MySQL database view in a JPA immutable entity.
+
+**Key points:**\
+     - use `@Table` to point out the database view (here, the database view is available in `data-mysql.sql` file\
+     - the entity used to fetch the database view is `AuthorBookView`
