@@ -32,7 +32,7 @@ public class Book implements Serializable {
             + "WHERE b.price < price AND b.author_id = author_id "
             + "ORDER BY b.price DESC "
             + "LIMIT 1)")
-    private Book prevBook;
+    private Book nextBook;
 
     public Long getId() {
         return id;
@@ -74,13 +74,13 @@ public class Book implements Serializable {
         this.price = price;
     }
 
-    public Book getPrevBook() {
-        return prevBook;
+    public Book getNextBook() {
+        return nextBook;
     }
 
-    public void setPrevBook(Book prevBook) {
-        this.prevBook = prevBook;
-    }   
+    public void setNextBook(Book nextBook) {
+        this.nextBook = nextBook;
+    }    
 
     @Override
     public String toString() {
