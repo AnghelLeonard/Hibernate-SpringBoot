@@ -1,4 +1,4 @@
-package com.bookstore.entity;
+package com.bookstore.view;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
