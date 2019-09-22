@@ -16,7 +16,7 @@ public class AuthorAnthologyView implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String name;
     private int age;
     private String genre;
@@ -55,7 +55,7 @@ public class AuthorAnthologyView implements Serializable {
 
     @Override
     public String toString() {
-        return "AuthorNameAgeGenreView{" + "id=" + id + ", name=" + name 
+        return "AuthorAnthologyView{" + "id=" + id + ", name=" + name 
                 + ", age=" + age + ", genre=" + genre + '}';
-    }        
+    }    
 }

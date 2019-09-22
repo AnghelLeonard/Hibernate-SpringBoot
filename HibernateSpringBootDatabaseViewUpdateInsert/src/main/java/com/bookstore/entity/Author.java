@@ -18,6 +18,9 @@ public class Author implements Serializable {
     private String name;
     private String genre;
     private int age;
+    private int sellrank;
+    private int royalties;
+    private int rating;
 
     public Long getId() {
         return id;
@@ -51,9 +54,34 @@ public class Author implements Serializable {
         this.age = age;
     }
 
+    public int getSellrank() {
+        return sellrank;
+    }
+
+    public void setSellrank(int sellrank) {
+        this.sellrank = sellrank;
+    }
+
+    public int getRoyalties() {
+        return royalties;
+    }
+
+    public void setRoyalties(int royalties) {
+        this.royalties = royalties;
+    }
+
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
     @Override
     public String toString() {
-        return "Author{" + "id=" + id + ", name=" + name
-                + ", genre=" + genre + ", age=" + age + '}';
-    }
+        return "Author{" + "id=" + id + ", name=" + name + ", genre=" + genre 
+                + ", age=" + age + ", sellrank=" + sellrank + ", royalties=" + royalties 
+                + ", rating=" + rating + '}';
+    }    
 }
