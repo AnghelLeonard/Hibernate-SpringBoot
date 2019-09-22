@@ -30,4 +30,12 @@ public class BookstoreService {
 
         authorAnthologyViewRepository.save(newAuthor);
     }
+    
+    @Transactional
+    public void deleteAuthorViaView() {
+        AuthorAnthologyView author
+                = authorAnthologyViewRepository.findByName("Mark Janel");
+        
+        authorAnthologyViewRepository.delete(author);
+    }    
 }

@@ -24,6 +24,7 @@ public class MainApplication {
         return args -> {
             bookstoreService.updateAuthorAgeViaView();
             bookstoreService.insertAuthorViaView();
+            bookstoreService.deleteAuthorViaView();
         };
     }
 }
