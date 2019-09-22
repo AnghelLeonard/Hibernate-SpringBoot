@@ -8,12 +8,12 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class MainApplication {
-    
+
     private final BookstoreService bookstoreService;
 
     public MainApplication(BookstoreService bookstoreService) {
         this.bookstoreService = bookstoreService;
-    }        
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(MainApplication.class, args);
@@ -21,9 +21,9 @@ public class MainApplication {
 
     @Bean
     public ApplicationRunner init() {
-        return args -> {            
-            bookstoreService.updateView();
-            bookstoreService.insertView();
+        return args -> {
+          //  bookstoreService.updateAuthorAgeViaView();
+          //  bookstoreService.insertAuthorViaView();
         };
     }
 }

@@ -18,7 +18,6 @@ public class Author implements Serializable {
     private String name;
     private String genre;
     private int age;
-    private String promotionFlag;
 
     public Long getId() {
         return id;
@@ -52,17 +51,9 @@ public class Author implements Serializable {
         this.age = age;
     }
 
-    public String getPromotionFlag() {
-        return promotionFlag;
-    }
-
-    public void setPromotionFlag(String promotionFlag) {
-        this.promotionFlag = promotionFlag;
-    }
-
     @Override
     public String toString() {
-        return "Author{" + "id=" + id + ", name=" + name 
-                + ", genre=" + genre + ", age=" + age + ", promotionFlag=" + promotionFlag + '}';
-    }            
+        return "Author{" + "id=" + id + ", name=" + name
+                + ", genre=" + genre + ", age=" + age + '}';
+    }
 }

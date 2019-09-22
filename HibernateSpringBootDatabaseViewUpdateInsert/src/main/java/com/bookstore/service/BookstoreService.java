@@ -1,41 +1,33 @@
 package com.bookstore.service;
 
-import com.bookstore.view.AuthorGenrePromoView;
 import org.springframework.stereotype.Service;
-import java.util.List;
 import javax.transaction.Transactional;
-import com.bookstore.repository.AuthorGenrePromoViewRepository;
-import com.bookstore.repository.AuthorNameAgeGenreViewRepository;
-import com.bookstore.view.AuthorNameAgeGenreView;
+import com.bookstore.view.AuthorAnthologyView;
+import com.bookstore.repository.AuthorAnthologyViewRepository;
 
 @Service
 public class BookstoreService {
 
-    private final AuthorGenrePromoViewRepository authorGenrePromoViewRepository;
-    private final AuthorNameAgeGenreViewRepository authorNameAgeGenreViewRepository;
+    private final AuthorAnthologyViewRepository authorAnthologyViewRepository;
 
-    public BookstoreService(AuthorGenrePromoViewRepository authorGenrePromoViewRepository,
-            AuthorNameAgeGenreViewRepository authorNameAgeGenreViewRepository) {
-        this.authorGenrePromoViewRepository = authorGenrePromoViewRepository;
-        this.authorNameAgeGenreViewRepository = authorNameAgeGenreViewRepository;
+    public BookstoreService(AuthorAnthologyViewRepository authorAnthologyViewRepository) {
+        this.authorAnthologyViewRepository = authorAnthologyViewRepository;
     }
 
     @Transactional
-    public void updateView() {
-        List<AuthorGenrePromoView> authorView
-                = authorGenrePromoViewRepository.findAll();
+    public void updateAuthorAgeViaView() {
+        AuthorAnthologyView author
+                = authorAnthologyViewRepository.findByName("Quartis Young");
 
-        authorView.stream()
-                .filter(a -> ("Anthology".equals(a.getGenre())))
-                .forEachOrdered(a -> a.setPromotionFlag("High"));
+        author.setAge(author.getAge() + 1);
     }
 
-    public void insertView() {
-        AuthorNameAgeGenreView newAuthor = new AuthorNameAgeGenreView();
+    public void insertAuthorViaView() {
+        AuthorAnthologyView newAuthor = new AuthorAnthologyView();
         newAuthor.setName("Toij Kalu");
         newAuthor.setGenre("Anthology");
         newAuthor.setAge(42);
 
-        authorNameAgeGenreViewRepository.save(newAuthor);
+        authorAnthologyViewRepository.save(newAuthor);
     }
 }

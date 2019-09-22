@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "author_name_age_genre_view")
-public class AuthorNameAgeGenreView implements Serializable {
+@Table(name = "author_anthology_view")
+public class AuthorAnthologyView implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
