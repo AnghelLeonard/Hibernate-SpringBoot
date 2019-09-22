@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AuthorBookViewRepository extends JpaRepository<GenreAndTitleView, Long> {
+public interface GenreAndTitleViewRepository extends JpaRepository<GenreAndTitleView, Long> {
 }
