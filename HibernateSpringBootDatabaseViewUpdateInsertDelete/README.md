@@ -1,6 +1,6 @@
-**[How To Update/Insert Data From/In A MySQL Database View](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDatabaseViewUpdateInsert)**
+**[How To Update/Insert/Delete Data From/In A MySQL Database View](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDatabaseViewUpdateInsertDelete)**
 
-**Description:** This application is an example of updating and inserting data in a MySQL database view. Every update/insert will automatically update the contents of the underlying table(s).
+**Description:** This application is an example of updating, inserting and deleting data in a MySQL database view. Every update/insert/delete will automatically update the contents of the underlying table(s).
 
 **Key points:**\
      - the database views are available in `data-mysql.sql` file\
