@@ -2537,8 +2537,8 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 **Description:** This application is an example of fetching a read-only MySQL database view in a JPA immutable entity.
 
 **Key points:**\
-     - use `@Table` to point out the database view (here, the database view is available in `data-mysql.sql` file)\
-     - the entity used to fetch the database view is `GenreAndTitleView`
+     - the database view is available in `data-mysql.sql` file\
+     - the entity used to map the database view is `GenreAndTitleView.java`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2547,7 +2547,7 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 **Description:** This application is an example of updating and inserting data in a MySQL database view. Every update/insert will automatically update the contents of the underlying table(s).
 
 **Key points:**\
-     - use `@Table` to point out the database view (here, the database views are available in `data-mysql.sql` file)\
+     - the database views are available in `data-mysql.sql` file\
      - respect [MySQL](https://dev.mysql.com/doc/refman/8.0/en/view-updatability.html) requirements for updatable and insertable database views
 
 ----------------------------------------------------------------------------------------------------------------------
