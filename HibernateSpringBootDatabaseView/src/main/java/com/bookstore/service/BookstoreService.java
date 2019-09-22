@@ -18,4 +18,9 @@ public class BookstoreService {
         List<GenreAndTitleView> view = genreAndTitleViewRepository.findAll();
         System.out.println("View: " + view);
     }
+    
+    public void displayViewByGenre() {
+        List<GenreAndTitleView> view = genreAndTitleViewRepository.findByGenre("History");
+        System.out.println("View: " + view);
+    }
 }

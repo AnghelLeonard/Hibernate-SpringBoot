@@ -23,6 +23,7 @@ public class MainApplication {
     public ApplicationRunner init() {
         return args -> {            
             bookstoreService.displayView();
+            bookstoreService.displayViewByGenre();
         };
     }
 }
