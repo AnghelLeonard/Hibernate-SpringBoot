@@ -1,42 +1,36 @@
 package com.bookstore.service;
 
-import com.bookstore.view.NameAndGenreView;
+import com.bookstore.view.AuthorAnthologyView;
 import org.springframework.stereotype.Service;
-import java.util.List;
-import com.bookstore.repository.NameAndGenreViewRepository;
+import com.bookstore.repository.AuthorAnthologyViewRepository;
 
 @Service
 public class BookstoreService {
    
-    private final NameAndGenreViewRepository nameAndGenreViewRepository;    
+    private final AuthorAnthologyViewRepository authorAnthologyViewRepository;    
 
-    public BookstoreService(NameAndGenreViewRepository nameAndGenreViewRepository) {
-        this.nameAndGenreViewRepository = nameAndGenreViewRepository;        
-    }
-   
-    public void displayView() {
-        List<NameAndGenreView> view = nameAndGenreViewRepository.findAll();
-        System.out.println("View: " + view);
-    }
+    public BookstoreService(AuthorAnthologyViewRepository authorAnthologyViewRepository) {
+        this.authorAnthologyViewRepository = authorAnthologyViewRepository;        
+    }  
     
     // Works
     public void insertAnthologyInView() {
-        NameAndGenreView author = new NameAndGenreView();
+        AuthorAnthologyView author = new AuthorAnthologyView();
         author.setName("Mark Powell");
         author.setGenre("Anthology");
-        author.setId(100L);
+        author.setAge(45);
         
-        nameAndGenreViewRepository.save(author);
+        authorAnthologyViewRepository.save(author);
     }
     
     // WITH CHECK OPTION doesn't allow this insert
-    // expect to see: java.sql.SQLException: CHECK OPTION failed 'bookstoredb.name_and_genre_view'
+    // expect to see: java.sql.SQLException: CHECK OPTION failed 'bookstoredb.author_anthology_view'
     public void insertHistoryInView() {
-        NameAndGenreView author = new NameAndGenreView();
+        AuthorAnthologyView author = new AuthorAnthologyView();
         author.setName("Mark Powell");
         author.setGenre("History"); // this field doesn't pass the check
-        author.setId(101L);
+        author.setAge(45);
         
-        nameAndGenreViewRepository.save(author);
+        authorAnthologyViewRepository.save(author);
     }
 }
