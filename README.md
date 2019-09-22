@@ -2549,3 +2549,13 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 **Key points:**\
      - use `@Table` to point out the database view (here, the database views are available in `data-mysql.sql` file)\
      - respect [MySQL](https://dev.mysql.com/doc/refman/8.0/en/view-updatability.html) requirements for updatable and insertable database views
+
+----------------------------------------------------------------------------------------------------------------------
+
+177. **[How To Prevent A MySQL Database View From Updating/Inserting Rows That Are Not Visible Through It Via `WITH CHECK OPTION`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDatabaseViewWithCheckOption)**
+
+**Description:** This application is an example of preventing inserts/updates of a MySQL view that are not visible through this view via `WITH CHECK OPTION`. In other words, whenever you insert or update a row of the base tables through a view, MySQL ensures that the this operation is conformed with the definition of the view.
+
+**Key points:**\
+     - add `WITH CHECK OPTION` to the view\
+     - this application will throw an exception of type `java.sql.SQLException: CHECK OPTION failed 'bookstoredb.name_and_genre_view`
