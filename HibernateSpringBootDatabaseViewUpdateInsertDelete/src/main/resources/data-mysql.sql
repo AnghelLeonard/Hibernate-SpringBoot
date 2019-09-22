@@ -14,4 +14,6 @@ SELECT
     a.genre    
 FROM
     author a 
-WHERE a.genre = "Anthology" ^;
+WHERE a.genre = "Anthology" ^; 
+
+-- use: ...  = "Anthology" WITH CHECK OPTION ^; for ensuring that the this operation is conformed with the definition of the view
