@@ -2558,4 +2558,4 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Key points:**\
      - add `WITH CHECK OPTION` to the view\
-     - this application will throw an exception of type `java.sql.SQLException: CHECK OPTION failed 'bookstoredb.name_and_genre_view`
+     - this application will throw an exception of type `java.sql.SQLException: CHECK OPTION failed 'bookstoredb.author_anthology_view`
