@@ -22,8 +22,8 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-          //  bookstoreService.updateAuthorAgeViaView();
-          //  bookstoreService.insertAuthorViaView();
+            bookstoreService.updateAuthorAgeViaView();
+            bookstoreService.insertAuthorViaView();
         };
     }
 }
