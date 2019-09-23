@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     @Transactional(readOnly = true)
-    @Query(value = "SELECT ROW_NUMBER() OVER(ORDER BY name) rowNum, name, genre "
+    @Query(value = "SELECT ROW_NUMBER() OVER (ORDER BY name) rowNum, name, genre "
             + "FROM author ORDER BY name",
             nativeQuery = true)
     List<AuthorDto> fetchWithSeqNumber();
