@@ -22,7 +22,7 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            bookstoreService.fetchWithSeqNumber();
+            bookstoreService.fetchAuthorsWithSeqNumber();
         };
     }
 }

@@ -14,7 +14,7 @@ public class BookstoreService {
         this.authorRepository = authorRepository;
     }
 
-    public void fetchWithSeqNumber() {
+    public void fetchAuthorsWithSeqNumber() {
         List<AuthorDto> authors = authorRepository.fetchWithSeqNumber();
         
         authors.forEach(a -> System.out.println(a.getRowNum() 
