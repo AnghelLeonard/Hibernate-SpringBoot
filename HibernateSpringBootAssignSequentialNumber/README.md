@@ -3,7 +3,7 @@
 **Description:** This application is an example of assigning a sequential number to rows via the window function, `ROW_NUMBER()`. This is available in almost all databases, and starting with version 8.x is available in MySQL as well.
 
 **Key points:**\
-     - write a native query relying on ROW_NUMBER window function
+     - write a native query relying on `ROW_NUMBER()` window function
      
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAssignSequentialNumber/assign%20sequential%20number%20to%20rows.png)
