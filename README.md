@@ -2562,9 +2562,9 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 ----------------------------------------------------------------------------------------------------------------------
 
-178. **[How To Efficiently Assign A Sequential Number To Rows](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAssignSequentialNumber)**
+178. **[How To Efficiently Assign A Database Sequential Number To DTO Rows](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAssignSequentialNumber)**
  
-**Description:** This application is an example of assigning a sequential number to rows via the window function, `ROW_NUMBER()`. This is available in almost all databases, and starting with version 8.x is available in MySQL as well.
+**Description:** This application is an example of assigning a database sequential number to DTO rows via the window function, `ROW_NUMBER()`. This is available in almost all databases, and starting with version 8.x is available in MySQL as well.
 
 **Key points:**\
      - write a native query relying on `ROW_NUMBER()` window function
