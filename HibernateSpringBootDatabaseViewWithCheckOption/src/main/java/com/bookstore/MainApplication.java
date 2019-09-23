@@ -22,8 +22,8 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {            
-            bookstoreService.insertAnthologyInView();
-            bookstoreService.insertHistoryInView();
+            bookstoreService.insertAnthologyAuthorInView();
+            bookstoreService.insertHistoryAuthorInView();
         };
     }
 }

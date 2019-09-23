@@ -14,7 +14,7 @@ public class BookstoreService {
     }  
     
     // Works
-    public void insertAnthologyInView() {
+    public void insertAnthologyAuthorInView() {
         AuthorAnthologyView author = new AuthorAnthologyView();
         author.setName("Mark Powell");
         author.setGenre("Anthology");
@@ -23,9 +23,10 @@ public class BookstoreService {
         authorAnthologyViewRepository.save(author);
     }
     
+    // Doesn't work
     // WITH CHECK OPTION doesn't allow this insert
     // expect to see: java.sql.SQLException: CHECK OPTION failed 'bookstoredb.author_anthology_view'
-    public void insertHistoryInView() {
+    public void insertHistoryAuthorInView() {
         AuthorAnthologyView author = new AuthorAnthologyView();
         author.setName("Mark Powell");
         author.setGenre("History"); // this field doesn't pass the check
