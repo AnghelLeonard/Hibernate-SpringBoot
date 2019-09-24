@@ -1,5 +1,5 @@
 **[How To Implement Pagination Via `ROW_NUMBER()` Window Function](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPaginationRowNumber)**
-
+ 
 **Description:** This application is an example of using `ROW_NUMBER()` (and `COUNT(*) OVER()` for counting all elements) window function to implement pagination.
 
 **Key points:**\
