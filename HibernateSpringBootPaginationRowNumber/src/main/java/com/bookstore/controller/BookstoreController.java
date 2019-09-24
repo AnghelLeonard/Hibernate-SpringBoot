@@ -1,6 +1,6 @@
 package com.bookstore.controller;
 
-import com.bookstore.entity.Author;
+import com.bookstore.dto.AuthorDto;
 import com.bookstore.service.BookstoreService;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ public class BookstoreController {
     }
 
     @GetMapping("/authors/{start}/{end}")
-    public List<Author> fetchAuthors(@PathVariable int start, @PathVariable int end) {
+    public List<AuthorDto> fetchAuthors(@PathVariable int start, @PathVariable int end) {
 
         return bookstoreService.fetchNextPage(start, end);
     }

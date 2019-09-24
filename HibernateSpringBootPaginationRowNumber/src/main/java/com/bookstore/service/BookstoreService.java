@@ -1,6 +1,6 @@
 package com.bookstore.service;
 
-import com.bookstore.entity.Author;
+import com.bookstore.dto.AuthorDto;
 import com.bookstore.repository.AuthorRepository;
 import java.util.List;
 import org.springframework.stereotype.Service;
@@ -14,9 +14,9 @@ public class BookstoreService {
         this.authorRepository = authorRepository;
     }
 
-    public List<Author> fetchNextPage(int start, int end) {
+    public List<AuthorDto> fetchNextPage(int start, int end) {
 
-        List<Author> authors = authorRepository.fetchPage(start, end);
+        List<AuthorDto> authors = authorRepository.fetchPage(start, end);
 
         return authors;
     }

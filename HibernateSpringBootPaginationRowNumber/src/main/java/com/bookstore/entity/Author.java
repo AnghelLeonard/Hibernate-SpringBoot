@@ -1,7 +1,6 @@
 package com.bookstore.entity;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,9 +18,6 @@ public class Author implements Serializable {
     private int age;
     private String name;
     private String genre;
-
-    @Column(insertable = false, updatable = false)
-    long total;
 
     public Long getId() {
         return id;
@@ -53,10 +49,6 @@ public class Author implements Serializable {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public long getTotal() {
-        return total;
     }
 
     @Override
