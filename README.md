@@ -2583,3 +2583,13 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
      
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootTopNRowsPerGroup/Finding%20top%20N%20rows%20of%20every%20group.png)
+
+----------------------------------------------------------------------------------------------------------------------
+
+180. **[How To Implement Pagination Via `ROW_NUMBER()` Window Function](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPaginationRowNumber)**
+
+**Description:** This application is an example of using `ROW_NUMBER()` (and `COUNT(*) OVER()` for counting all elements) window function to implement pagination.
+
+**Key points:**\
+     - use a native query relying on `ROW_NUMBER()`\
+     - we don't return a page as `Page` or `Slice`, we return it as `List`, therefore `Pageable` is not used
