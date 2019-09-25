@@ -2593,3 +2593,17 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 **Key points:**\
      - use a native query relying on `ROW_NUMBER()`\
      - we don't return a page as `Page` or `Slice`, we return it as `List`, therefore `Pageable` is not used
+
+----------------------------------------------------------------------------------------------------------------------
+
+181. **[Why the `@Transactional` annotation is being ignored](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootWhyTransactionalIsIgnored)**
+ 
+**Description:** This application is an example of fixing the case when `@Transactional` annotation is ignored. Most of the time, this annotation is ignored in the following scenarios:
+
+1. `@Transactional` was added to a `private`, `protected` or `package-protected` method
+2. `@Transactional` was added to a method defined in the same class where it is invoked
+
+**Key points:**\
+     - write a helper service and move the `@Transactional` methods there\
+     - ensure that these methods are declared as `public`\
+     - call `@Transactional` methods from other services
