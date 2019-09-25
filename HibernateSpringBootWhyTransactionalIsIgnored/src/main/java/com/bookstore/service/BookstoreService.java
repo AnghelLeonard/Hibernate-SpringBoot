@@ -33,7 +33,7 @@ public class BookstoreService {
         return authorRepository.count();
     }
 
-    public void notifyAuthor(Author author) {
+    private void notifyAuthor(Author author) {
         log.info(() -> "Saving author: " + author);
     }
 }
