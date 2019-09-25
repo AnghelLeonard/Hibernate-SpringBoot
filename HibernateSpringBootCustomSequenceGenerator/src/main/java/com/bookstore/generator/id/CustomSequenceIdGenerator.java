@@ -11,7 +11,7 @@ import org.hibernate.service.ServiceRegistry;
 import org.hibernate.type.LongType;
 import org.springframework.data.mapping.MappingException;
 
-public class StringPrefixedSequenceIdGenerator extends SequenceStyleGenerator {
+public class CustomSequenceIdGenerator extends SequenceStyleGenerator {
 
     public static final String PREFIX_PARAM = "prefix";
     public static final String PREFIX_DEFAULT_PARAM = "";

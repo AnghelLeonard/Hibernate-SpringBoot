@@ -1,6 +1,6 @@
 package com.bookstore.entity;
 
-import com.bookstore.generator.id.StringPrefixedSequenceIdGenerator;
+import com.bookstore.generator.id.CustomSequenceIdGenerator;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,12 +19,12 @@ public class Author implements Serializable {
     @GenericGenerator(name = "hilopooledlo", 
             strategy = "com.bookstore.generator.id.StringPrefixedSequenceIdGenerator",
             parameters = {
-                @Parameter(name = StringPrefixedSequenceIdGenerator.SEQUENCE_PARAM, value = "hilo_sequence"),
-                @Parameter(name = StringPrefixedSequenceIdGenerator.INITIAL_PARAM, value = "1"),                
-                @Parameter(name = StringPrefixedSequenceIdGenerator.OPT_PARAM, value = "pooled-lo"),
-                @Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "100"),
-                @Parameter(name = StringPrefixedSequenceIdGenerator.PREFIX_PARAM, value = "A-"),
-                @Parameter(name = StringPrefixedSequenceIdGenerator.NUMBER_FORMAT_PARAM, value = "%010d")
+                @Parameter(name = CustomSequenceIdGenerator.SEQUENCE_PARAM, value = "hilo_sequence"),
+                @Parameter(name = CustomSequenceIdGenerator.INITIAL_PARAM, value = "1"),                
+                @Parameter(name = CustomSequenceIdGenerator.OPT_PARAM, value = "pooled-lo"),
+                @Parameter(name = CustomSequenceIdGenerator.INCREMENT_PARAM, value = "100"),
+                @Parameter(name = CustomSequenceIdGenerator.PREFIX_PARAM, value = "A-"),
+                @Parameter(name = CustomSequenceIdGenerator.NUMBER_FORMAT_PARAM, value = "%010d")
             }
     )
     private String id;
