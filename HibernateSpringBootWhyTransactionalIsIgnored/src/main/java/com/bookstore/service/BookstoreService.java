@@ -20,7 +20,7 @@ public class BookstoreService {
         this.helperService = helperService;
     }
 
-    public void createAuthor() {
+    public void mainAuthor() {
         Author author = new Author();
         // persistAuthor(author);
         helperService.persistAuthor(author);
