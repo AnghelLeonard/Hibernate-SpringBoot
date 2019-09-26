@@ -2617,3 +2617,13 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 **Key points:**\
      - extend `SequenceStyleGenerator` and override the `configure()` and `generate()` methods\
      - set this generator in entities
+
+----------------------------------------------------------------------------------------------------------------------
+
+183. **[How To Map `Clob` And `Blob` To `byte[]` And `String`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMappingLobToByteString)**
+ 
+**Description:** This application is an example of mapping `Clob` and `Blob` as `byte[]` and `String`. 
+
+**Key points:**\
+     - this is vey easy to use but the application doesn't take advantage of JDBC driver LOB-specific optimizations
+     
