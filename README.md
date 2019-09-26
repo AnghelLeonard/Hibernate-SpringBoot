@@ -2627,3 +2627,11 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 **Key points:**\
      - this is vey easy to use but the application doesn't take advantage of JDBC driver LOB-specific optimizations
      
+----------------------------------------------------------------------------------------------------------------------
+     
+184. **[How To Map To JDBC’s `LOB` Locators `Clob` And `Blob`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMappingLobToClobAndBlob)**
+ 
+**Description:** This application is an example of mapping to JDBC's `LOB` locators `Clob` and `Blob`.
+
+**Key points:**\
+     - this takes advantage of JDBC driver LOB-specific optimizations
