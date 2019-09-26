@@ -1,6 +1,6 @@
 **[How To Map `Clob` And `Blob` To `byte[]` And `String`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMappingLobToByteString)**
  
-**Description:** This application is an example of mapping `Clob`s and `Blob`s as `byte[]` and `String`. 
+**Description:** This application is an example of mapping `Clob` and `Blob` as `byte[]` and `String`. 
 
 **Key points:**\
      - this is vey easy to use but the application doesn't take advantage of JDBC driver LOB-specific optimizations
