@@ -10,6 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 public interface EbookRepository extends JpaRepository<Ebook, Long> {
 
     @Transactional(readOnly = true)
-    @Query("SELECT b FROM Author a JOIN a.books b WHERE a.name = 'Alicia Tom' AND TYPE(b) = 'Ebook'")
-    public Ebook findByAuthorName();
+    @Query("SELECT b FROM Author a JOIN a.books b WHERE a.name = ?1 AND TYPE(b) = 'Ebook'")
+    public Ebook findByAuthorName(String name);
 }

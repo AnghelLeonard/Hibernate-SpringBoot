@@ -55,12 +55,12 @@ public class BookstoreService {
     }
 
     public void findEbookByAuthorNameViaEbookRepository() {
-        Book ebook = ebookRepository.findByAuthorName();
+        Book ebook = ebookRepository.findByAuthorName("Alicia Tom");
         System.out.println(ebook + " | " + (ebook instanceof Ebook));
     }
 
     public void findEbookByAuthorNameViaBookRepository() {
-        Book book = bookRepository.findByAuthorName();
+        Book book = bookRepository.findByAuthorName("Alicia Tom");
         System.out.println(book + " | " + (book instanceof Ebook));
     }
 }
