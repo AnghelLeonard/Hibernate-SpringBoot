@@ -2649,7 +2649,7 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 186. **[How To Define An Association That Reference `@NaturalId`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootReferenceNaturalId)**
 
-**Description:** This is a SpringBoot application that defines a `@ManyToOne` relationship that doesn't reference primary key column. It references a Hibernate `@NaturalId`.
+**Description:** This is a SpringBoot application that defines a `@ManyToOne` relationship that doesn't reference a primary key column. It references a Hibernate `@NaturalId` column.
 
 **Key points:**
 - rely on `@JoinColumn(referencedColumnName = "natural_id_column")`
