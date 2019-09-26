@@ -8,24 +8,20 @@ import com.bookstore.entity.Paperback;
 import com.bookstore.entity.Ebook;
 import com.bookstore.repository.EbookRepository;
 import org.springframework.stereotype.Service;
-import com.bookstore.repository.PaperbackRepository;
 
 @Service
 public class BookstoreService {
 
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
-    private final PaperbackRepository paperbackRepository;
     private final EbookRepository ebookRepository;
 
     public BookstoreService(AuthorRepository authorRepository,
             BookRepository bookRepository,
-            PaperbackRepository paperbackRepository,
             EbookRepository ebookRepository) {
 
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
-        this.paperbackRepository = paperbackRepository;
         this.ebookRepository = ebookRepository;
     }
 
