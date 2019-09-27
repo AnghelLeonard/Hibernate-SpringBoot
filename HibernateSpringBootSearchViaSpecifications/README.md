@@ -1,8 +1,8 @@
-**[Redundant save() Call](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRedundantSave)**
+**[How To Implement Advanced Search Via `Specification`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSearchViaSpecifications)**
  
-**Description:** This application is an example when calling `save()` for a managed entity is redundant.
+**Description:** This application is an example of implementing an advanced search via `Specification` API. Mainly, you can give the search filters to a generic `Specification` and fetch the result set. Pagination is supported as well. You can chain expressions via `AND` and `OR` to create compound filters. Nevertheless, there is room for extensions to add brackets support (e.g., `(x AND y) OR z`), more operations, conditions parser and so on and forth.
 
 **Key points:**\
-     - Hibernate triggers `UPDATE` statements for managed entities without the need to explicitly call the `save()` method\
-     - behind the scene, this redundancy implies a performance penalty as well
+     - write a generic `Specification`     
+     
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
