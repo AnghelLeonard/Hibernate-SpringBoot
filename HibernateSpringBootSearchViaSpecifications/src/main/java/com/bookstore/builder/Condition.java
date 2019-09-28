@@ -2,7 +2,7 @@ package com.bookstore.builder;
 
 public final class Condition {
     
-    public enum LogicalPointerType {
+    public enum LogicalOperatorType {
         
         AND, OR, END
     }
@@ -15,14 +15,14 @@ public final class Condition {
     private final String leftHand;
     private final String rightHand;
     private final OperationType operation;
-    private final LogicalPointerType pointer;
+    private final LogicalOperatorType operator;
 
     public Condition(String leftHand, String rightHand, 
-            OperationType operation, LogicalPointerType pointer) {
+            OperationType operation, LogicalOperatorType operator) {
         this.leftHand = leftHand;
         this.rightHand = rightHand;
         this.operation = operation;
-        this.pointer = pointer;
+        this.operator = operator;
     }
 
     public String getLeftHand() {
@@ -37,7 +37,7 @@ public final class Condition {
         return operation;
     }        
 
-    public LogicalPointerType getPointer() {
-        return pointer;
+    public LogicalOperatorType getOperator() {
+        return operator;
     }            
 }

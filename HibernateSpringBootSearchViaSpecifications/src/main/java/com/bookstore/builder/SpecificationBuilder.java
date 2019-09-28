@@ -1,6 +1,6 @@
 package com.bookstore.builder;
 
-import com.bookstore.builder.Condition.LogicalPointerType;
+import com.bookstore.builder.Condition.LogicalOperatorType;
 import com.bookstore.builder.Condition.OperationType;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +15,8 @@ public class SpecificationBuilder<T> {
     }
 
     public SpecificationBuilder<T> with(String leftHand, String rightHand,
-            OperationType operation, LogicalPointerType pointer) {
-        conditions.add(new Condition(leftHand, rightHand, operation, pointer));
+            OperationType operation, LogicalOperatorType operator) {
+        conditions.add(new Condition(leftHand, rightHand, operation, operator));
         return this;
     }
 
@@ -32,8 +32,8 @@ public class SpecificationBuilder<T> {
 
         Specification<T> finalSpecification = specifications.get(0);
         for (int i = 1; i < conditions.size(); i++) {
-            if (!conditions.get(i - 1).getPointer().equals(LogicalPointerType.END)) {
-                finalSpecification = conditions.get(i - 1).getPointer().equals(LogicalPointerType.OR)
+            if (!conditions.get(i - 1).getOperator().equals(LogicalOperatorType.END)) {
+                finalSpecification = conditions.get(i - 1).getOperator().equals(LogicalOperatorType.OR)
                         ? Specification.where(finalSpecification).or(specifications.get(i))
                         : Specification.where(finalSpecification).and(specifications.get(i));
             }

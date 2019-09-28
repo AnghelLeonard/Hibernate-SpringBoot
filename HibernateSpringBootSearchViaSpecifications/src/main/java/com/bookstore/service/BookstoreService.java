@@ -1,7 +1,7 @@
 package com.bookstore.service;
 
-import static com.bookstore.builder.Condition.LogicalPointerType.AND;
-import static com.bookstore.builder.Condition.LogicalPointerType.END;
+import static com.bookstore.builder.Condition.LogicalOperatorType.AND;
+import static com.bookstore.builder.Condition.LogicalOperatorType.END;
 import static com.bookstore.builder.Condition.OperationType.EQUAL;
 import static com.bookstore.builder.Condition.OperationType.GREATER_THAN;
 import static com.bookstore.builder.Condition.OperationType.LESS_THAN;
