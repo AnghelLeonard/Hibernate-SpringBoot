@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookstoreService {
@@ -32,6 +33,7 @@ public class BookstoreService {
         return pageOfAuthors;
     }
 
+    @Transactional(readOnly = true)
     public Page<Author> fetchViaJoinFetchInIdsSpecification(int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size,
