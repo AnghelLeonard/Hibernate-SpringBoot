@@ -40,8 +40,10 @@ public class BookstoreService {
                 new Sort(Sort.Direction.ASC, "name"));
 
         Page<Long> pageOfIds = authorRepository.fetchPageOfIdsByGenre("Anthology", pageable);
-        List<Author> listOfAuthors = authorRepository.findAll(new JoinFetchInIdsSpecification(pageOfIds.getContent()));
-        Page<Author> pageOfAuthors = new PageImpl(listOfAuthors, pageable, pageOfIds.getTotalElements());
+        List<Author> listOfAuthors = authorRepository.findAll(
+                new JoinFetchInIdsSpecification(pageOfIds.getContent()));
+        Page<Author> pageOfAuthors = new PageImpl(
+                listOfAuthors, pageable, pageOfIds.getTotalElements());
         
         return pageOfAuthors;
     }

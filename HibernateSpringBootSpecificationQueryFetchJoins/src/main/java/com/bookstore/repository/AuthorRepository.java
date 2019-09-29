@@ -1,6 +1,7 @@
 package com.bookstore.repository;
 
 import com.bookstore.entity.Author;
+import java.util.List;
 import javax.persistence.QueryHint;
 import static org.hibernate.jpa.QueryHints.HINT_PASS_DISTINCT_THROUGH;
 import org.springframework.data.domain.Page;
@@ -23,5 +24,10 @@ public interface AuthorRepository extends JpaRepository<Author, Long>,
 
     @Override
     @QueryHints(value = @QueryHint(name = HINT_PASS_DISTINCT_THROUGH, value = "false"))
+    public List<Author> findAll(Specification<Author> spec);
+    
+    @Override
+    @QueryHints(value = @QueryHint(name = HINT_PASS_DISTINCT_THROUGH, value = "false"))
     public Page<Author> findAll(Specification<Author> spec, Pageable pageable);
+    
 }
