@@ -1,8 +1,8 @@
-**[DTOs Via Spring Data Projections](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)** 
+**[DTOs Via Spring Data Projections (Projection Interface In Repository Interface)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjectionsIntefaceInRepo)** 
 
 **Note:** You may also like to read the recipe, ["How To Enrich DTOs With Virtual Properties Via Spring Projections"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaProjectionsAndVirtualProperties)
 
-**Description:** Fetch only the needed data from the database via Spring Data Projections (DTOs)
+**Description:** Fetch only the needed data from the database via Spring Data Projections (DTOs). The projection interface is defined as a `static` interface (can be non-`static` as well) in the repository interface.
 
 **Key points:**\
      - write an interface (projection) containing getters only for the columns that should be fetched from the database\
