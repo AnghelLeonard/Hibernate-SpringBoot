@@ -1,8 +1,9 @@
-**[Redundant save() Call](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRedundantSave)**
+**[How To Ensure/Validate That Only One Association Is Non-null](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootChooseOnlyOneAssociation)**
  
-**Description:** This application is an example when calling `save()` for a managed entity is redundant.
+ **Description:** Consider an entity named `Review`. This entity defines three `@ManyToOne` relationships to `Book`, `Article` and `Magazine`. A review can be associated with either a book, a magazine or an article. To validate this constraint, we can rely on  [Bean Validation](https://beanvalidation.org/) as in this application.
 
 **Key points:**\
-     - Hibernate triggers `UPDATE` statements for managed entities without the need to explicitly call the `save()` method\
-     - behind the scene, this redundancy implies a performance penalty as well
+     - rely on Bean Validation to validate that only one association is non-`null`\
+     - expose the constraint via a custom annotation (`@JustOneOfMany`) added at class-level to the `Review` entity
+     
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
