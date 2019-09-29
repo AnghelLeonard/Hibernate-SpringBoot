@@ -29,7 +29,7 @@ public class BookstoreService {
 
         Review review = new Review();
         review.setContent("This is a book review ...");
-        review.setBook(bookRepository.findById(3L).get());
+        review.setBook(bookRepository.findById(1L).get());
         
         reviewRepository.save(review);
     }
@@ -42,7 +42,7 @@ public class BookstoreService {
         Review review = new Review();
         review.setContent("This is an article and magazine review ...");
         review.setArticle(articleRepository.findById(1L).get());
-        review.setMagazine(magazineRepository.findById(2L).get());
+        review.setMagazine(magazineRepository.findById(1L).get());
         
         reviewRepository.save(review);
     }
