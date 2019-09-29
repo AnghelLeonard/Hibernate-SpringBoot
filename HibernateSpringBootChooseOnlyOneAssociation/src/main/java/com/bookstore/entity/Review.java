@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-@JustOneOfMany
+@JustOneOfMany // for testing the TRIGGER from data-mysql.sql you have to comment this line
 public class Review implements Serializable {
 
     private static final long serialVersionUID = 1L;
