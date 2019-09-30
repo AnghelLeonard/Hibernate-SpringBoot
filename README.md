@@ -2701,7 +2701,8 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 **Key points:**\
      - rely on Bean Validation to validate that only one association is non-`null`\
      - expose the constraint via a custom annotation (`@JustOneOfMany`) added at class-level to the `Review` entity\
-     - for preventing native query to break our constraint add the validation at database level as well (e.g., in MySQL add a `TRIGGER`)     
+     - for preventing native query to break our constraint add the validation at database level as well (e.g., in MySQL add a `TRIGGER`) 
+     
 ----------------------------------------------------------------------------------------------------------------------
      
 191. **[Quickest Mapping Of Enums](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnumStringInt)**
