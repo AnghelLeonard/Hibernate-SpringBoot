@@ -1,7 +1,6 @@
 package com.bookstore.entity;
 
 import com.bookstore.enums.GenreType;
-import com.bookstore.enums.RatingType;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,13 +21,11 @@ public class Author implements Serializable {
 
     private int age;
     private String name;
-
+    
+    // @Enumerated(EnumType.STRING)
+    // @Column(columnDefinition = "VARCHAR(9)")
     @Enumerated(EnumType.ORDINAL)
     @Column(columnDefinition = "SMALLINT")
-    private RatingType rating;
-
-    @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "VARCHAR(9)")
     private GenreType genre;
 
     public Long getId() {
@@ -61,19 +58,11 @@ public class Author implements Serializable {
 
     public void setAge(int age) {
         this.age = age;
-    }
-
-    public RatingType getRating() {
-        return rating;
-    }
-
-    public void setRating(RatingType rating) {
-        this.rating = rating;
-    }
+    }  
 
     @Override
     public String toString() {
         return "Author{" + "id=" + id + ", age=" + age
-                + ", name=" + name + ", rating=" + rating + ", genre=" + genre + '}';
+                + ", name=" + name + ", genre=" + genre + '}';
     }
 }

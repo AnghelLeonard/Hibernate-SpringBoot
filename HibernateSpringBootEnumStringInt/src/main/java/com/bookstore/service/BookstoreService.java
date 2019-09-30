@@ -2,7 +2,6 @@ package com.bookstore.service;
 
 import com.bookstore.entity.Author;
 import com.bookstore.enums.GenreType;
-import com.bookstore.enums.RatingType;
 import com.bookstore.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +19,7 @@ public class BookstoreService {
 
         author.setName("Maryus Yarn");
         author.setAge(34);
-        author.setGenre(GenreType.HORROR);
-        author.setRating(RatingType.LOVE_IT);
+        author.setGenre(GenreType.HISTORY);  
 
         authorRepository.save(author);
     }
