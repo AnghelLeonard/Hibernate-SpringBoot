@@ -17,11 +17,11 @@ public class GenreTypeConverter implements AttributeConverter<GenreType, Integer
 
         switch (attr) {
             case HORROR:
-                return 1;
+                return 10;
             case ANTHOLOGY:
-                return 2;
+                return 20;
             case HISTORY:
-                return 3;
+                return 30;
             default:
                 throw new IllegalArgumentException("The " + attr + " not supported.");
         }
@@ -35,11 +35,11 @@ public class GenreTypeConverter implements AttributeConverter<GenreType, Integer
         }
 
         switch (dbData) {
-            case 1:
+            case 10:
                 return HORROR;
-            case 2:
+            case 20:
                 return ANTHOLOGY;
-            case 3:
+            case 30:
                 return HISTORY;
             default:
                 throw new IllegalArgumentException("The " + dbData + " not supported.");

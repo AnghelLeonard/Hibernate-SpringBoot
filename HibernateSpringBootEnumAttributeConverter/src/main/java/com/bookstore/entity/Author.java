@@ -23,7 +23,7 @@ public class Author implements Serializable {
     private String name;
 
     @Convert(converter = GenreTypeConverter.class)
-    @Column(columnDefinition = "SMALLINT")
+    @Column(columnDefinition = "TINYINT")
     private GenreType genre;
 
     public Long getId() {

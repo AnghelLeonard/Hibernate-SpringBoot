@@ -19,7 +19,7 @@ public class BookstoreService {
 
         author.setName("Maryus Yarn");
         author.setAge(34);
-        author.setGenre(GenreType.HORROR);
+        author.setGenre(GenreType.HISTORY);
 
         authorRepository.save(author);
     }
