@@ -1,6 +1,6 @@
 **[How To Map Java `enum` To Database Via `AttributeConverter`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnumAttributeConverter)**
  
-**Description:** This application maps a Java `enum` via `AttributeConverter`. In other words, it maps the `enum` values `HORROR`, `ANTHOLOGY` and `HISTORY` to the integers `1`, `2` and `3` and viceversa. This allows us to set the column type as `SMALLINT` which is less space-consuming then `VARCHAR`.
+**Description:** This application maps a Java `enum` via `AttributeConverter`. In other words, it maps the `enum` values `HORROR`, `ANTHOLOGY` and `HISTORY` to the integers `1`, `2` and `3` and viceversa. This allows us to set the column type as `SMALLINT` which is less space-consuming than `VARCHAR(9)` needed in this case.
 
 **Key points:**\
      - define a custom `AttributeConverter`\
