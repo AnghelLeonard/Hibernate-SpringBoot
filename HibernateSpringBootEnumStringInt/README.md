@@ -1,5 +1,5 @@
 **[Quickest Mapping Of Enums](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnumStringInt)**
- 
+  
 **Description:** This application uses `EnumType.ORDINAL` and `EnumType.STRING` for mapping Java `enum` type to database. As a rule of thumb, strive to keep the data types as small as possible (e.g., for `EnumType.ORDINAL` use `SMALLINT`, while for `EnumType.STRING` use `VARCHAR(n)`). Relying on `EnumType.ORDINAL` should be more efficient but is less expressive than `EnumType.STRING`.
 
 **Key points:**\
