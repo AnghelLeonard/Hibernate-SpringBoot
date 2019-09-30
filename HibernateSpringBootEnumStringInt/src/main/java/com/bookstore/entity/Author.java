@@ -23,9 +23,9 @@ public class Author implements Serializable {
     private String name;
     
     // @Enumerated(EnumType.STRING)
-    // @Column(columnDefinition = "VARCHAR(9)")
+    // @Column(length = 9)
     @Enumerated(EnumType.ORDINAL)
-    @Column(columnDefinition = "SMALLINT")
+    @Column(columnDefinition = "TINYINT")
     private GenreType genre;
 
     public Long getId() {
