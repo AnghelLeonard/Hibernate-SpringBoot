@@ -2701,4 +2701,14 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 **Key points:**\
      - rely on Bean Validation to validate that only one association is non-`null`\
      - expose the constraint via a custom annotation (`@JustOneOfMany`) added at class-level to the `Review` entity\
-     - for preventing native query to break our constraint add the validation at database level as well (e.g., in MySQL add a `TRIGGER`)     
+     - for preventing native query to break our constraint add the validation at database level as well (e.g., in MySQL add a `TRIGGER`) 
+     
+----------------------------------------------------------------------------------------------------------------------
+     
+191. **[Quickest Mapping Of Enums](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnumStringInt)**
+ 
+**Description:** This application uses `EnumType.ORDINAL` and `EnumType.STRING` for mapping Java `enum` type to database. As a rule of thumb, strive to keep the data types as small as possible (e.g., for `EnumType.ORDINAL` use `SMALLINT`, while for `EnumType.STRING` use `VARCHAR(n)`). Relying on `EnumType.ORDINAL` should be more efficient but is less expressive than `EnumType.STRING`.
+
+**Key points:**\
+     - strive for smallest data types (e.g., for `EnumType.ORDINAL` set `@Column(columnDefinition = "SMALLINT")`)
+     
