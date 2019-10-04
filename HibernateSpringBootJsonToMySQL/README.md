@@ -1,4 +1,4 @@
-**[How To Store JSON in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJsonToMySQL)**
+**[How To Handle JSON in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJsonToMySQL)**
 
 **Description:** [Hibernate Types](https://github.com/vladmihalcea/hibernate-types) is a library of extra types not supported by Hibernate Core by default. This is a Spring Boot application that uses this library to store JSON data (JSON Java `Object`) in a MySQL `json` column and for querying JSON data from the MySQL `json` column to JSON Java `Object`.
 
