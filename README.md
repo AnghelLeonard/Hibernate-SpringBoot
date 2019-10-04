@@ -2707,16 +2707,16 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
      
 191. **[Quickest Mapping Of Enums](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnumStringInt)**
  
-**Description:** This application uses `EnumType.ORDINAL` and `EnumType.STRING` for mapping Java `enum` type to database. As a rule of thumb, strive to keep the data types as small as possible (e.g., for `EnumType.ORDINAL` use `SMALLINT`, while for `EnumType.STRING` use `VARCHAR(n)`). Relying on `EnumType.ORDINAL` should be more efficient but is less expressive than `EnumType.STRING`.
+**Description:** This application uses `EnumType.ORDINAL` and `EnumType.STRING` for mapping Java `enum` type to database. As a rule of thumb, strive to keep the data types as small as possible (e.g., for `EnumType.ORDINAL` use `TINYINT/SMALLINT`, while for `EnumType.STRING` use `VARCHAR(max_needed_bytes)`). Relying on `EnumType.ORDINAL` should be more efficient but is less expressive than `EnumType.STRING`.
 
 **Key points:**\
-     - strive for smallest data types (e.g., for `EnumType.ORDINAL` set `@Column(columnDefinition = "SMALLINT")`)
+     - strive for smallest data types (e.g., for `EnumType.ORDINAL` set `@Column(columnDefinition = "TINYINT")`)
 
 ----------------------------------------------------------------------------------------------------------------------
 
 192. **[How To Map Java `enum` To Database Via `AttributeConverter`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnumAttributeConverter)**
  
-**Description:** This application maps a Java `enum` via `AttributeConverter`. In other words, it maps the `enum` values `HORROR`, `ANTHOLOGY` and `HISTORY` to the integers `1`, `2` and `3` and viceversa. This allows us to set the column type as `SMALLINT` which is less space-consuming than `VARCHAR(9)` needed in this case.
+**Description:** This application maps a Java `enum` via `AttributeConverter`. In other words, it maps the `enum` values `HORROR`, `ANTHOLOGY` and `HISTORY` to the integers `1`, `2` and `3` and viceversa. This allows us to set the column type as `TINYINT/SMALLINT` which is less space-consuming than `VARCHAR(9)` needed in this case.
 
 **Key points:**\
      - define a custom `AttributeConverter`\
