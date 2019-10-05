@@ -4,7 +4,7 @@
 
 **Key points:**\
      - use two entities, `Author` (which uses `@Version`) and `Book` involved in a lazy bidirectional `@OneToMany` relationship\
-     - when we add a new `Book` Hibernate will trigger an `INSERT` statement against the `book` table, therefore the `author` table will not be modified\
+     - when we add a new `Book` to an author Hibernate will trigger an `INSERT` statement against the `book` table, therefore the `author` table will not be modified\
      - but, even if the `author` table is not modified the `version` is forcibly increased (this is materialized in an `UPDATE` triggered at the end of the currently running transaction)\
      - set `OPTIMISTIC_FORCE_INCREMENT` in the corresponding repository\
      - rely on two concurrent transactions to shape the scenario that will lead to an exception of type `ObjectOptimisticLockingFailureException`
