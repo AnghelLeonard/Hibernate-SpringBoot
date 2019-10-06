@@ -1,8 +1,8 @@
 package com.bookstore.service;
 
 import com.bookstore.entity.Chapter;
-import com.bookstore.entity.Introduction;
-import com.bookstore.entity.Summary;
+import com.bookstore.entity.EditorModification;
+import com.bookstore.entity.AuthorModification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
@@ -10,8 +10,8 @@ import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 import java.util.logging.Logger;
 import com.bookstore.repository.ChapterRepository;
-import com.bookstore.repository.IntroductionRepository;
-import com.bookstore.repository.SummaryRepository;
+import com.bookstore.repository.AuthorModificationRepository;
+import com.bookstore.repository.EditorModificationRepository;
 
 @Service
 public class BookstoreService {
@@ -20,22 +20,22 @@ public class BookstoreService {
 
     private final TransactionTemplate template;
     private final ChapterRepository chapterRepository;
-    private final IntroductionRepository introductionRepository;
-    private final SummaryRepository summaryRepository;
+    private final AuthorModificationRepository authorModificationRepository;
+    private final EditorModificationRepository editorModificationRepository;
 
     public BookstoreService(ChapterRepository chapterRepository,
-            IntroductionRepository introductionRepository,
-            SummaryRepository summaryRepository,
+            AuthorModificationRepository authorModificationRepository,
+            EditorModificationRepository editorModificationRepository,
             TransactionTemplate template) {
         this.chapterRepository = chapterRepository;
-        this.introductionRepository = introductionRepository;
-        this.summaryRepository = summaryRepository;
+        this.authorModificationRepository = authorModificationRepository;
+        this.editorModificationRepository = editorModificationRepository;
         this.template = template;
     }
 
     // running this application will
     // throw org.springframework.orm.ObjectOptimisticLockingFailureException
-    public void buildChapter() {
+    public void editChapter() {
         template.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
         template.execute(new TransactionCallbackWithoutResult() {
             @Override
@@ -45,9 +45,10 @@ public class BookstoreService {
 
                 Chapter chapter = chapterRepository.findById(1L).orElseThrow();
 
-                Introduction intro = new Introduction();
-                intro.setContent("In this chapter, ...");
-                intro.setChapter(chapter);
+                EditorModification editorModification = new EditorModification();
+                editorModification.setDescription("Rewording first paragraph");
+                editorModification.setModification("Deleted: ... Added: ...");
+                editorModification.setChapter(chapter);
 
                 template.execute(new TransactionCallbackWithoutResult() {
                     @Override
@@ -57,22 +58,23 @@ public class BookstoreService {
 
                         Chapter chapter = chapterRepository.findById(1L).orElseThrow();
 
-                        Summary summary = new Summary();
-                        summary.setContent("Let's summarize ...");
-                        summary.setChapter(chapter);
+                        AuthorModification authorModification = new AuthorModification();
+                        authorModification.setDescription("Deleting first paragraph");
+                        authorModification.setModification("Deleted ...");
+                        authorModification.setChapter(chapter);
 
-                        summaryRepository.save(summary);
+                        authorModificationRepository.save(authorModification);
 
                         log.info("Commit second transaction ...");
                     }
                 });
 
-                introductionRepository.save(intro);
+                editorModificationRepository.save(editorModification);
 
                 log.info("Commit first transaction ...");
             }
         });
 
-        System.out.println("Done!");
+        log.info("Done!");
     }
 }

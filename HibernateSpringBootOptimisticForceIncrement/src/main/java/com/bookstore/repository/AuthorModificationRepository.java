@@ -1,9 +1,9 @@
 package com.bookstore.repository;
 
-import com.bookstore.entity.Introduction;
+import com.bookstore.entity.AuthorModification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface IntroductionRepository extends JpaRepository<Introduction, Long> {
+public interface AuthorModificationRepository extends JpaRepository<AuthorModification, Long> {
 }

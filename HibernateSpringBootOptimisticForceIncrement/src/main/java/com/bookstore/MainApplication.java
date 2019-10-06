@@ -26,7 +26,7 @@ public class MainApplication {
             // running this application will
             // throw org.springframework.orm.ObjectOptimisticLockingFailureException
             
-            bookstoreService.buildChapter();
+            bookstoreService.editChapter();
         };
     }
 }

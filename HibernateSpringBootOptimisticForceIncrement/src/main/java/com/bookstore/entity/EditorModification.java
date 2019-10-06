@@ -10,18 +10,19 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Summary implements Serializable {
+public class EditorModification implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    private String content;
+
+    private String modification;
+    private String description;
 
     @MapsId
-    @OneToOne(fetch = FetchType.LAZY)  
+    @OneToOne(fetch = FetchType.LAZY)
     private Chapter chapter;
 
     public Long getId() {
@@ -32,12 +33,20 @@ public class Summary implements Serializable {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
+    public String getDescription() {
+        return description;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getModification() {
+        return modification;
+    }
+
+    public void setModification(String modification) {
+        this.modification = modification;
     }
 
     public Chapter getChapter() {
@@ -47,9 +56,4 @@ public class Summary implements Serializable {
     public void setChapter(Chapter chapter) {
         this.chapter = chapter;
     }
-
-    @Override
-    public String toString() {
-        return "Summary{" + "id=" + id + ", content=" + content + '}';
-    }    
 }
