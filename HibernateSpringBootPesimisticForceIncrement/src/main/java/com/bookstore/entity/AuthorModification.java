@@ -6,8 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class AuthorModification implements Serializable {
@@ -20,9 +19,8 @@ public class AuthorModification implements Serializable {
     
     private String description;
     private String modification;
-
-    @MapsId
-    @OneToOne(fetch = FetchType.LAZY)  
+  
+    @ManyToOne(fetch = FetchType.LAZY)  
     private Chapter chapter;
 
     public Long getId() {
