@@ -1,9 +1,7 @@
 package com.bookstore.service;
 
-import com.bookstore.entity.AuthorModification;
 import com.bookstore.entity.Chapter;
-import com.bookstore.entity.EditorModification;
-import com.bookstore.repository.AuthorModificationRepository;
+import com.bookstore.entity.Modification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
@@ -13,7 +11,7 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import com.bookstore.repository.ChapterRepository;
-import com.bookstore.repository.EditorModificationRepository;
+import com.bookstore.repository.ModificationRepository;
 
 @Service
 public class BookstoreService {
@@ -22,17 +20,14 @@ public class BookstoreService {
 
     private final TransactionTemplate template;
     private final ChapterRepository chapterRepository;
-    private final AuthorModificationRepository authorModificationRepository;
-    private final EditorModificationRepository editorModificationRepository;
+    private final ModificationRepository modificationRepository;
     private final EntityManager entityManager;
 
     public BookstoreService(ChapterRepository chapterRepository,
-            AuthorModificationRepository authorModificationRepository,
-            EditorModificationRepository editorModificationRepository,
+            ModificationRepository modificationRepository,
             TransactionTemplate template, EntityManager entityManager) {
         this.chapterRepository = chapterRepository;
-        this.authorModificationRepository = authorModificationRepository;
-        this.editorModificationRepository = editorModificationRepository;
+        this.modificationRepository = modificationRepository;
         this.template = template;
         this.entityManager = entityManager;
     }
@@ -60,12 +55,12 @@ public class BookstoreService {
 
                         Chapter chapter = chapterRepository.findById(1L).orElseThrow();
 
-                        AuthorModification authorModification = new AuthorModification();
-                        authorModification.setDescription("Deleting first paragraph");
-                        authorModification.setModification("Deleted ...");
-                        authorModification.setChapter(chapter);
+                        Modification modification = new Modification();
+                        modification.setDescription("Formatting first paragraph");
+                        modification.setModification("Format ...");
+                        modification.setChapter(chapter);
 
-                        authorModificationRepository.save(authorModification);
+                        modificationRepository.save(modification);
 
                         log.info("Commit second transaction ...");
                     }
@@ -75,12 +70,12 @@ public class BookstoreService {
                         + "PESSIMISTIC_FORCE_INCREMENT on the existing `chapter` entity");
                 entityManager.lock(chapter, LockModeType.PESSIMISTIC_FORCE_INCREMENT);
 
-                EditorModification editorModification = new EditorModification();
-                editorModification.setDescription("Rewording first paragraph");
-                editorModification.setModification("Deleted: ... Added: ...");
-                editorModification.setChapter(chapter);
+                Modification modification = new Modification();
+                modification.setDescription("Rewording first paragraph");
+                modification.setModification("Reword: ... Add: ...");
+                modification.setChapter(chapter);
 
-                editorModificationRepository.save(editorModification);
+                modificationRepository.save(modification);
 
                 log.info("Commit first transaction ...");
             }
@@ -107,10 +102,10 @@ public class BookstoreService {
 
                 Chapter chapter = chapterRepository.findById(1L).orElseThrow();
 
-                EditorModification editorModification = new EditorModification();
-                editorModification.setDescription("Rewording first paragraph");
-                editorModification.setModification("Deleted: ... Added: ...");
-                editorModification.setChapter(chapter);
+                Modification modification = new Modification();
+                modification.setDescription("Rewording first paragraph");
+                modification.setModification("Reword: ... Add: ...");
+                modification.setChapter(chapter);
 
                 template.execute(new TransactionCallbackWithoutResult() {
                     @Override
@@ -120,18 +115,18 @@ public class BookstoreService {
 
                         Chapter chapter = chapterRepository.findById(1L).orElseThrow();
 
-                        AuthorModification authorModification = new AuthorModification();
-                        authorModification.setDescription("Deleting first paragraph");
-                        authorModification.setModification("Deleted ...");
-                        authorModification.setChapter(chapter);
+                        Modification modification = new Modification();
+                        modification.setDescription("Formatting first paragraph");
+                        modification.setModification("Format ...");
+                        modification.setChapter(chapter);
 
-                        authorModificationRepository.save(authorModification);
+                        modificationRepository.save(modification);
 
                         log.info("Commit second transaction ...");
                     }
                 });
 
-                editorModificationRepository.save(editorModification);
+                modificationRepository.save(modification);
 
                 log.info("Commit first transaction ...");
             }
