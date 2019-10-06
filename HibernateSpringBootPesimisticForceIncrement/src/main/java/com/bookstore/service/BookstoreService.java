@@ -56,7 +56,7 @@ public class BookstoreService {
                         Chapter chapter = chapterRepository.findById(1L).orElseThrow();
 
                         Modification modification = new Modification();
-                        modification.setDescription("Formatting first paragraph");
+                        modification.setDescription("Formatting second paragraph");
                         modification.setModification("Format ...");
                         modification.setChapter(chapter);
 
@@ -66,13 +66,15 @@ public class BookstoreService {
                     }
                 });
 
+                log.info("Resuming first transaction ...");
+                
                 log.info("First transaction attempts to acquire a "
                         + "PESSIMISTIC_FORCE_INCREMENT on the existing `chapter` entity");
                 entityManager.lock(chapter, LockModeType.PESSIMISTIC_FORCE_INCREMENT);
 
                 Modification modification = new Modification();
                 modification.setDescription("Rewording first paragraph");
-                modification.setModification("Reword: ... Add: ...");
+                modification.setModification("Reword: ... Added: ...");
                 modification.setChapter(chapter);
 
                 modificationRepository.save(modification);
@@ -104,7 +106,7 @@ public class BookstoreService {
 
                 Modification modification = new Modification();
                 modification.setDescription("Rewording first paragraph");
-                modification.setModification("Reword: ... Add: ...");
+                modification.setModification("Reword: ... Added: ...");
                 modification.setChapter(chapter);
 
                 template.execute(new TransactionCallbackWithoutResult() {
@@ -116,7 +118,7 @@ public class BookstoreService {
                         Chapter chapter = chapterRepository.findById(1L).orElseThrow();
 
                         Modification modification = new Modification();
-                        modification.setDescription("Formatting first paragraph");
+                        modification.setDescription("Formatting second paragraph");
                         modification.setModification("Format ...");
                         modification.setChapter(chapter);
 
@@ -126,6 +128,8 @@ public class BookstoreService {
                     }
                 });
 
+                log.info("Resuming first transaction ...");
+                
                 modificationRepository.save(modification);
 
                 log.info("Commit first transaction ...");

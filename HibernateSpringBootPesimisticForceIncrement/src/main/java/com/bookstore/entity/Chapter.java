@@ -17,6 +17,7 @@ public class Chapter implements Serializable {
     private Long id;
 
     private String title;
+    private String content;
 
     @Version
     private short version;
@@ -41,8 +42,11 @@ public class Chapter implements Serializable {
         return version;
     }
 
-    @Override
-    public String toString() {
-        return "Book{" + "id=" + id + ", title=" + title + ", version=" + version + '}';
+    public String getContent() {
+        return content;
     }
+
+    public void setContent(String content) {
+        this.content = content;
+    }   
 }
