@@ -4,10 +4,10 @@
 
 **Key points:**\
      - use a root entity, `Chapter` (which uses `@Version`)\
-     - two entities, `AuthorModification` and `EditorModification` are use to apply modifications to a chapter\
-     - between each of these two entities and the root entity there is a lazy unidirectional `@ManyToOne` relationship\
-     - for each modification, Hibernate will trigger an `INSERT` statement against the corresponding table (`author_modification` or `editor_modification`), therefore the `chapter` table will not be modified\
-     - but, `Chapter` entity version is needed to ensure that modifications are applied sequentially (the author and editor are notified if a modificaton was added since the chapter copy was loaded)\
+     - several editors load a chapter and perfom modifications mapped via the `Modification` entity\
+     - between `Modification` (child-side) and `Chapter` (parent-side) there is a lazy unidirectional `@ManyToOne` relationship\
+     - for each modification, Hibernate will trigger an `INSERT` statement against `modification` table, therefore the `chapter` table will not be modified\
+     - but, `Chapter` entity version is needed to ensure that modifications are applied sequentially (each editor is notified if a modificaton was added since his chapter copy was loaded)\
      - the `version` is forcibly increased at each modification (this is materialized in an `UPDATE` triggered immediately after aquiring the row-level lock)\
      - set `PESSIMISTIC_FORCE_INCREMENT` in the corresponding repository\
      - rely on two concurrent transactions to shape two scenarios: one that will lead to an exception of type `OptimisticLockException` and one that will lead to `QueryTimeoutException`          
