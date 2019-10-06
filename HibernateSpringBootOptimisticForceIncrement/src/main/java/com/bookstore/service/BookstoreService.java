@@ -54,7 +54,7 @@ public class BookstoreService {
                         Chapter chapter = chapterRepository.findById(1L).orElseThrow();
 
                         Modification modification = new Modification();
-                        modification.setDescription("Formatting first paragraph");
+                        modification.setDescription("Formatting second paragraph");
                         modification.setModification("Format ...");
                         modification.setChapter(chapter);
 
