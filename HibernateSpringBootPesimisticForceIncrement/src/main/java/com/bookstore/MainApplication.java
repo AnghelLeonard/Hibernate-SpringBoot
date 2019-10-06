@@ -28,12 +28,12 @@ public class MainApplication {
             // For MySQL8Dialect (InnoDB storage engine): row-level locking is aquired via FOR UPDATE NOWAIT
             // running the below method will throw: org.hibernate.QueryTimeoutException
             // Caused by: com.mysql.cj.jdbc.exceptions.MySQLTimeoutException
-            bookstoreService.addBooksViaTwoTransactionsTestLocking();
+            // bookstoreService.editChapterTestLocking();
             
             // For all dialects (MySQL5Dialect, MySQL5InnoDBDialect, MySQL8Dialect)            
             // running the below method will throw: javax.persistence.OptimisticLockException
             // Caused by: org.hibernate.StaleObjectStateException:
-            // bookstoreService.addBooksViaTwoTransactionsTestVersion();
+            bookstoreService.editChapterTestVersion();
         };
     }
 }

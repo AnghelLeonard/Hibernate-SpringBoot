@@ -1,6 +1,6 @@
 package com.bookstore.repository;
 
-import com.bookstore.entity.Author;
+import com.bookstore.entity.Chapter;
 import java.util.Optional;
 import javax.persistence.LockModeType;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,11 +8,11 @@ import org.springframework.data.jpa.repository.Lock;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AuhorRepository extends JpaRepository<Author, Long> {
+public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 
-    @Lock(LockModeType.PESSIMISTIC_FORCE_INCREMENT)    
     @Override    
-    public Optional<Author> findById(Long id);
+    @Lock(LockModeType.PESSIMISTIC_FORCE_INCREMENT)        
+    public Optional<Chapter> findById(Long id);
     
-    public Author findByName(String name);      
+    public Chapter findByTitle(String title);      
 }
