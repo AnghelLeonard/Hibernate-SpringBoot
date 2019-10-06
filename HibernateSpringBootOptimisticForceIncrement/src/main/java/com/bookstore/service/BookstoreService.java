@@ -64,6 +64,8 @@ public class BookstoreService {
                     }
                 });
 
+                log.info("Resuming first transaction ...");
+
                 modificationRepository.save(modification);
 
                 log.info("Commit first transaction ...");
