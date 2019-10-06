@@ -2787,10 +2787,13 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 **Description:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in MySQL. This is useful when you want to increment the version of the locked entity even if this entity was not modified. Via `PESSIMISTIC_FORCE_INCREMENT` the version is updated (incremented) immediately (the entity version update is guaranteed to succeed immediately after acquiring the row-level lock). The incrementation takes place before the entity is returned to the data access layer.
 
 **Key points:**\
-     - use two entities, `Author` (which uses `@Version`) and `Book` involved in a lazy bidirectional `@OneToMany` relationship\
-     - when we add a new `Book` to an author Hibernate will trigger an `INSERT` statement against the `book` table, therefore the `author` table will not be modified\
-     - but, even if the `author` table is not modified the `version` is forcibly increased (this is materialized in an `UPDATE` triggered immediately after aquiring the row-level lock)\
+     - use a root entity, `Chapter` (which uses `@Version`)\
+     - two entities, `AuthorModification` and `EditorModification` are use to apply modifications to a chapter\
+     - between each of these two entities and the root entity there is a lazy unidirectional `@OneToOne` relationship\
+     - for each modification, Hibernate will trigger an `INSERT` statement against the corresponding table (`author_modification` or `editor_modification`), therefore the `chapter` table will not be modified\
+     - but, `Chapter` entity version is needed to ensure that modifications are applied sequentially (the author and editor are notified if a modificaton was added since the chapter copy was loaded)\
+     - the `version` is forcibly increased at each modification (this is materialized in an `UPDATE` triggered immediately after aquiring the row-level lock)\
      - set `PESSIMISTIC_FORCE_INCREMENT` in the corresponding repository\
-     - rely on two concurrent transactions to shape two scenarios: one that will lead to an exception of type `OptimisticLockException` and one that will lead to `QueryTimeoutException`
+     - rely on two concurrent transactions to shape two scenarios: one that will lead to an exception of type `OptimisticLockException` and one that will lead to `QueryTimeoutException`          
      
 **Note:** Pay attention to the MySQL dialect: `MySQL5Dialect` (MyISAM) doesn't support row-level locking, `MySQL5InnoDBDialect` (InnoDB) acquires row-level lock via `FOR UPDATE` (timeout can be set), `MySQL8Dialect` (InnoDB) acquires row-level lock via `FOR UPDATE NOWAIT`.
