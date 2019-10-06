@@ -4,8 +4,8 @@
 
 **Key points:**\
      - use a root entity, `Chapter` (which uses `@Version`)\
-     - two entities, `AuthorModification` and `EditorModification` are use to apply modifications to a chapter\    
-     - between these two entities and the root entity there is a lazy unidirectional `@OneToOne` relationship\
+     - two entities, `AuthorModification` and `EditorModification` are use to apply modifications to a chapter\
+     - between each of these two entities and the root entity there is a lazy unidirectional `@OneToOne` relationship\
      - for each modification, Hibernate will trigger an `INSERT` statement against the corresponding table, therefore the `chapter` table will not be modified\
      - but, `Chapter` entity version is needed to ensure that modifications are applied sequentially (the author and editor are notified if a modificaton was added since the chapter copy was loaded).
      - the `version` is forcibly increased at each modification (this is materialized in an `UPDATE` triggered at the end of the currently running transaction)\
