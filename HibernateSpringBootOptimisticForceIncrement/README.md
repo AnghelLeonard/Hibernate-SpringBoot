@@ -1,6 +1,6 @@
 **[How to increment the version of the locked entity even if this entity was not modified `OPTIMISTIC_FORCE_INCREMENT`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOptimisticForceIncrement)**
 
-**Description:** This application is a sample of how `OPTIMISTIC_FORCE_INCREMENT` works. This is useful when you want to increment the version of the locked entity even if this entity was not modified. Via `OPTIMISTIC_FORCE_INCREMENT` the version is updated (incremented) at the end of the currently running transaction.
+**Description:** This application is a sample of how `OPTIMISTIC_FORCE_INCREMENT` works in MySQL. This is useful when you want to increment the version of the locked entity even if this entity was not modified. Via `OPTIMISTIC_FORCE_INCREMENT` the version is updated (incremented) at the end of the currently running transaction.
 
 **Key points:**\
      - use two entities, `Author` (which uses `@Version`) and `Book` involved in a lazy bidirectional `@OneToMany` relationship\
