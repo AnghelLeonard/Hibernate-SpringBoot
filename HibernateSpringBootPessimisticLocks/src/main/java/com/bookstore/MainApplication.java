@@ -25,18 +25,9 @@ public class MainApplication {
             // calling the below method will throw:
             // org.springframework.dao.QueryTimeoutException
             // Caused by: org.hibernate.QueryTimeoutException
-            System.out.println("\n\nPESSIMISTIC_READ ...");
+            System.out.println("\n\nPESSIMISTIC_READ/WRITE ...");
             System.out.println("------------------------");
-            bookstoreService.pessimisticRead();
-            
-            // before calling this method go in AuthorRepository and switch from READ to WRITE
-            // -------------------------------------------------------------------------------
-            // calling the below method will throw:
-            // org.springframework.dao.QueryTimeoutException
-            // Caused by: org.hibernate.QueryTimeoutException
-            // System.out.println("\n\nPESSIMISTIC_WRITE ...");
-            // System.out.println("------------------------");                        
-            // bookstoreService.pessimisticWrite();
+            bookstoreService.pessimisticReadWrite();                        
         };
     }
 }

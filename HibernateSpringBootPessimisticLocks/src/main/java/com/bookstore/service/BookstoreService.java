@@ -22,7 +22,7 @@ public class BookstoreService {
         this.template = template;
     }
 
-    public void pessimisticRead() {
+    public void pessimisticReadWrite() {
 
         template.setPropagationBehavior(
                 TransactionDefinition.PROPAGATION_REQUIRES_NEW);
@@ -37,47 +37,6 @@ public class BookstoreService {
                 log.info("Starting first transaction ...");
 
                 Author author = authorRepository.findById(1L).orElseThrow();
-
-                template.execute(new TransactionCallbackWithoutResult() {
-
-                    @Override
-                    protected void doInTransactionWithoutResult(
-                            TransactionStatus status) {
-
-                        log.info("Starting second transaction ...");
-
-                        Author author = authorRepository.findById(1L).orElseThrow();
-                        author.setGenre("Horror");                        
-
-                        log.info("Commit second transaction ...");
-                    }
-                });
-
-                log.info("Resuming first transaction ...");                
-                log.info("Commit first transaction ...");
-            }
-        });
-
-        log.info("Done!");
-    }
-
-    // before calling this method go in AuthorRepository and switch from READ to WRITE
-    public void pessimisticWrite() {
-
-        template.setPropagationBehavior(
-                TransactionDefinition.PROPAGATION_REQUIRES_NEW);
-        template.setTimeout(3); // 3 seconds
-
-        template.execute(new TransactionCallbackWithoutResult() {
-
-            @Override
-            protected void doInTransactionWithoutResult(
-                    TransactionStatus status) {
-
-                log.info("Starting first transaction ...");
-
-                Author author = authorRepository.findById(1L).orElseThrow();
-                author.setGenre("History");                
 
                 template.execute(new TransactionCallbackWithoutResult() {
 
