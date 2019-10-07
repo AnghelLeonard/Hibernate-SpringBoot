@@ -29,6 +29,8 @@ public class MainApplication {
             System.out.println("------------------------");
             //bookstoreService.pessimisticRead();
             
+            // before calling this method go in AuthorRepository and switch from READ to WRITE
+            // -------------------------------------------------------------------------------
             // calling the below method will throw:
             // org.springframework.dao.QueryTimeoutException
             // Caused by: org.hibernate.QueryTimeoutException

@@ -37,8 +37,6 @@ public class BookstoreService {
                 log.info("Starting first transaction ...");
 
                 Author author = authorRepository.findById(1L).orElseThrow();
-                author.setGenre("History");
-                log.info(() -> "Author (first transaction): " + author);
 
                 template.execute(new TransactionCallbackWithoutResult() {
 
@@ -58,14 +56,18 @@ public class BookstoreService {
 
                 log.info("Resuming first transaction ...");
 
+                author.setGenre("History");
+                log.info(() -> "Author (first transaction): " + author);
+
                 log.info("Commit first transaction ...");
             }
         });
 
         log.info("Done!");
     }
-    
-        public void pessimisticWrite() {
+
+    // before calling this method go in AuthorRepository and switch from READ to WRITE
+    public void pessimisticWrite() {
 
         template.setPropagationBehavior(
                 TransactionDefinition.PROPAGATION_REQUIRES_NEW);
@@ -79,9 +81,7 @@ public class BookstoreService {
 
                 log.info("Starting first transaction ...");
 
-                Author author = authorRepository.findByName("Mark Janel");
-                author.setGenre("History");
-                log.info(() -> "Author (first transaction): " + author);
+                Author author = authorRepository.findById(1L).orElseThrow();
 
                 template.execute(new TransactionCallbackWithoutResult() {
 
@@ -91,7 +91,7 @@ public class BookstoreService {
 
                         log.info("Starting second transaction ...");
 
-                        Author author = authorRepository.findByName("Mark Janel");
+                        Author author = authorRepository.findById(1L).orElseThrow();
                         author.setGenre("Horror");
                         log.info(() -> "Author (second transaction): " + author);
 
@@ -100,6 +100,9 @@ public class BookstoreService {
                 });
 
                 log.info("Resuming first transaction ...");
+
+                author.setGenre("History");
+                log.info(() -> "Author (first transaction): " + author);
 
                 log.info("Commit first transaction ...");
             }
