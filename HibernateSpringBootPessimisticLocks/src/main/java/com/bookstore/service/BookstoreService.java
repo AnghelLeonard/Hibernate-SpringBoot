@@ -47,8 +47,7 @@ public class BookstoreService {
                         log.info("Starting second transaction ...");
 
                         Author author = authorRepository.findById(1L).orElseThrow();
-                        author.setGenre("Horror");
-                        log.info(() -> "Author (second transaction): " + author);
+                        author.setGenre("Horror");                        
 
                         log.info("Commit second transaction ...");
                     }
@@ -88,8 +87,7 @@ public class BookstoreService {
                         log.info("Starting second transaction ...");
 
                         Author author = authorRepository.findById(1L).orElseThrow();
-                        author.setGenre("Horror");
-                        log.info(() -> "Author (second transaction): " + author);
+                        author.setGenre("Horror");                        
 
                         log.info("Commit second transaction ...");
                     }
