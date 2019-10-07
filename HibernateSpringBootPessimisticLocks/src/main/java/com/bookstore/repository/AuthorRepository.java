@@ -12,5 +12,5 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     @Override
     @Lock(LockModeType.PESSIMISTIC_READ) // for exclusive lock switch to PESSIMISTIC_WRITE
-    public Optional<Author> findById(Long id);        
+    public Optional<Author> findById(Long id);
 }

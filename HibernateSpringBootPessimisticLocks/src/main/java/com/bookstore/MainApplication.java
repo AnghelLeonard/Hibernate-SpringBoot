@@ -27,7 +27,7 @@ public class MainApplication {
             // Caused by: org.hibernate.QueryTimeoutException
             System.out.println("\n\nPESSIMISTIC_READ ...");
             System.out.println("------------------------");
-            //bookstoreService.pessimisticRead();
+            bookstoreService.pessimisticRead();
             
             // before calling this method go in AuthorRepository and switch from READ to WRITE
             // -------------------------------------------------------------------------------

@@ -54,11 +54,7 @@ public class BookstoreService {
                     }
                 });
 
-                log.info("Resuming first transaction ...");
-
-                author.setGenre("History");
-                log.info(() -> "Author (first transaction): " + author);
-
+                log.info("Resuming first transaction ...");                
                 log.info("Commit first transaction ...");
             }
         });
