@@ -24,7 +24,7 @@ public class BookstoreService {
     }
 
     public void pessimisticWriteUpdate() throws InterruptedException {
-        Thread tf = new Thread(() -> {
+        Thread tA = new Thread(() -> {
             template.setPropagationBehavior(
                     TransactionDefinition.PROPAGATION_REQUIRES_NEW);
             
@@ -51,7 +51,7 @@ public class BookstoreService {
             log.info("First transaction committed!");
         });
 
-        Thread ts = new Thread(() -> {
+        Thread tB = new Thread(() -> {
             template.setPropagationBehavior(
                     TransactionDefinition.PROPAGATION_REQUIRES_NEW);
             template.setTimeout(15); // 15 seconds
@@ -71,16 +71,16 @@ public class BookstoreService {
             log.info("Second transaction committed!");
         });
         
-        tf.start();
+        tA.start();
         Thread.sleep(2000);
-        ts.start();
+        tB.start();
         
-        tf.join();
-        ts.join();
+        tA.join();
+        tB.join();
     }
     
     public void pessimisticWriteInsert(int isolationLevel) throws InterruptedException {
-        Thread tf = new Thread(() -> {
+        Thread tA = new Thread(() -> {
             template.setPropagationBehavior(
                     TransactionDefinition.PROPAGATION_REQUIRES_NEW);
             template.setIsolationLevel(isolationLevel);
@@ -108,7 +108,7 @@ public class BookstoreService {
             log.info("First transaction committed!");
         });
 
-        Thread ts = new Thread(() -> {
+        Thread tB = new Thread(() -> {
             template.setPropagationBehavior(
                     TransactionDefinition.PROPAGATION_REQUIRES_NEW);
             template.setTimeout(15); // 15 seconds
@@ -133,16 +133,16 @@ public class BookstoreService {
             log.info("Second transaction committed!");
         });
         
-        tf.start();
+        tA.start();
         Thread.sleep(2000);
-        ts.start();
+        tB.start();
         
-        tf.join();
-        ts.join();
+        tA.join();
+        tB.join();
     }
     
     public void pessimisticWriteDelete() throws InterruptedException {
-        Thread tf = new Thread(() -> {
+        Thread tA = new Thread(() -> {
             template.setPropagationBehavior(
                     TransactionDefinition.PROPAGATION_REQUIRES_NEW);
             
@@ -169,7 +169,7 @@ public class BookstoreService {
             log.info("First transaction comitted!");
         });
 
-        Thread ts = new Thread(() -> {
+        Thread tB = new Thread(() -> {
             template.setPropagationBehavior(
                     TransactionDefinition.PROPAGATION_REQUIRES_NEW);
             template.setTimeout(15); // 15 seconds
@@ -189,11 +189,11 @@ public class BookstoreService {
             log.info("Second transaction comitted!");
         });
         
-        tf.start();
+        tA.start();
         Thread.sleep(2000);
-        ts.start();
+        tB.start();
         
-        tf.join();
-        ts.join();
+        tA.join();
+        tB.join();
     }
 }
