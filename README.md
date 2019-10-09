@@ -2820,3 +2820,19 @@ on:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in
      - start a concurrent *Transaction B* that triggers an `UPDATE`, `INSERT` or `DELETE` on the rows locked by *Transaction A*\
      - in case of `UPDATE`, `DELETE` and `INSERT` + `REPEATABLE_READ`, *Transaction B* is blocked until it timeouts or *Transaction A* releases the exclusive lock\
      - in case of `INSERT` + `READ_COMMITTED`, *Transaction B* can insert in the range of rows locked by *Transaction A* even if *Transaction A* is holding an exclusive lock on this range  
+
+----------------------------------------------------------------------------------------------------------------------
+
+201. **[How To Check That Transaction Timeout And Rollback At Expiration Works As Expected](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTransactionTimeout)**
+ 
+**Note:** Do not test transaction timeout via `Thread.sleep()`! This is not working! Rely on two transactions and exclusive locks or even better rely on SQL sleep functions (e.g., MySQL, `SELECT SLEEP(n)` seconds, PostgreSQL, `SELECT PG_SLEEP(n)` seconds). Most RDBMS supports a sleep function flavor.
+
+**Description:** This application contains several approaches for setting a timeout period for a transaction or query. The timeout is signaled by a specific timeout exception (e.g., `.QueryTimeoutException`). After timeout, the transaction is rolled back. You can see this in the database (visually or query) and on log via a message of type: `Initiating transaction rollback; Rolling back JPA transaction on EntityManager [SessionImpl(... <open>)]`.
+
+**Key points:**\
+     - set global transaction timeout via `spring.transaction.default-timeout` in seconds (see, `application.properties`)\
+     - set transaction timeout at method-level via `@Transactional(timeout = n)` in seconds\
+     - set query timeout via JPA `javax.persistence.query.timeout` hint in milliseconds\
+     - set query timeout via Hibrenate `org.hibernate.timeout` hint in seconds
+     
+**Note:** If you are using `TransactionTemplate` then the timeout can be set via `TransactionTemplate.setTimeout(n)` in seconds.
