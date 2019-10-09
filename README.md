@@ -2831,7 +2831,7 @@ on:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in
 
 **Key points:**\
      - set global transaction timeout via `spring.transaction.default-timeout` in seconds (see, `application.properties`)\
-     - set transaction timeout at method-level via `@Transactional(timeout = n)` in seconds\
+     - set transaction timeout at method-level or class-level via `@Transactional(timeout = n)` in seconds\
      - set query timeout via JPA `javax.persistence.query.timeout` hint in milliseconds\
      - set query timeout via Hibrenate `org.hibernate.timeout` hint in seconds
      
