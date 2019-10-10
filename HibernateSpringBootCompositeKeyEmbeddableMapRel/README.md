@@ -1,6 +1,6 @@
-**[How To Define A Composite Primary Key Via `@Embeddable`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCompositeKeyEmbeddable)**
+**[How To Define A Relationship in an `@Embeddable` Composite Primary Key](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCompositeKeyEmbeddableMapRel)**
 
-**Description:** This application is a proof of concept of how to define a composite key via `@Embeddable` and `@EmbeddedId`. This application uses two entities, `Author` and `Book` involved in a lazy bidirectional `@OneToMany` relationship. The identifier of `Author` is composed by `name` and `age` via `AuthorId` class. The identifier of `Book` is just a typical auto-generated numeric value.
+**Description:** This application is a proof of concept of how to define a relationship in an `@Embeddable` composite key. The composite key is `AuthorId` and it belongs to the `Author` class.
 
 **Key points:**\
      - The composite key class (e.g., `AuthorId`) is `public`\
