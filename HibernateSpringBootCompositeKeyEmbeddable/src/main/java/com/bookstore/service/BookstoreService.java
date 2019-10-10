@@ -42,6 +42,7 @@ public class BookstoreService {
 
         author.addBook(book1); // use addBook() helper
         author.addBook(book2);
+        author.addBook(book3);
 
         authorRepository.save(author);
     }
