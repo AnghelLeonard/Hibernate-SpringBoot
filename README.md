@@ -2862,3 +2862,15 @@ on:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in
      - The composite key must define a no-arguments constructor
      
 **Note**: The `@IdClass` can be useful when we cannot modify the compsite key class. Otherwise, rely on [`@Embeddable`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCompositeKeyEmbeddable).
+
+----------------------------------------------------------------------------------------------------------------------
+
+204. **[How To Define A Relationship in an `@Embeddable` Composite Primary Key](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCompositeKeyEmbeddableMapRel)**
+
+**Description:** This application is a proof of concept of how to define a relationship in an `@Embeddable` composite key. The composite key is `AuthorId` and it belongs to the `Author` class.
+
+**Key points:**\
+     - The composite key class (e.g., `AuthorId`) is `public`\
+     - The composite key class must implement `Serializable`\
+     - The composite key must define `equals()` and `hashCode()`\
+     - The composite key must define a no-arguments constructor
