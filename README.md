@@ -2836,3 +2836,15 @@ on:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in
      - set query timeout via Hibrenate `org.hibernate.timeout` hint in seconds
      
 **Note:** If you are using `TransactionTemplate` then the timeout can be set via `TransactionTemplate.setTimeout(n)` in seconds.
+
+----------------------------------------------------------------------------------------------------------------------
+
+202. **[How To Define A Composite Primary Key Via `@Embeddable`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCompositeKeyEmbeddable)**
+
+**Description:** This application is a proof of concept of how to define a composite key via `@Embeddable` and `@EmbeddedId`. This application uses two entities, `Author` and `Book` involved in a lazy bidirectional `@OneToMany` relationship. The identifier of `Author` is composed by `name` and `age` via `AuthorId` class. The identifier of `Book` is just a typical auto-generated numeric value.
+
+**Key points:**\
+     - The composite key class (e.g., `AuthorId`) is `public`\
+     - The composite key class must implement `Serializable`\
+     - The composite key must define `equals()` and `hashCode()`\
+     - The composite key must define a no-arguments constructor
