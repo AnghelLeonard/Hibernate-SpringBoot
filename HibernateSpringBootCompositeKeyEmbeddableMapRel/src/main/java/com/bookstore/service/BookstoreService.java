@@ -28,11 +28,11 @@ public class BookstoreService {
         publisher.setName("GreatBooks Ltd");
         publisher.setUrc(92284434);
 
-        publisherRepository.saveAndFlush(publisher);
+        publisherRepository.save(publisher);
     }
 
     @Transactional
-    public void addAuthorWithBooks() {
+    public void addAuthorsWithBooks() {
         
         Publisher publisher = publisherRepository.findByUrc(92284434);
 

@@ -27,7 +27,7 @@ public class MainApplication {
             bookstoreService.addPublisher();
             
             System.out.println("\nAdd author with books ...");
-            bookstoreService.addAuthorWithBooks();
+            bookstoreService.addAuthorsWithBooks();
             
             System.out.println("\nFetch author by name ...");
             bookstoreService.fetchAuthorByName();
