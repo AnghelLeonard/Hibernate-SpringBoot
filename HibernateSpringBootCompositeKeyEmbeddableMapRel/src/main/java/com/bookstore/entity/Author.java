@@ -70,6 +70,6 @@ public class Author implements Serializable {
     
     @Override
     public String toString() {
-        return "Author{ " + "id=" + id + ", genre=" + genre + '}';
+        return "Author{ genre=" + genre + '}';
     }
 }
