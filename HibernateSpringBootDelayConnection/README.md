@@ -4,7 +4,7 @@
 
 **Key points:**
 - set `spring.datasource.hikari.auto-commit=false` in application.properties
-- set `spring.jpa.properties.hibernate.connection.provider_disables_autocommit=true` in application.properties
+- set `spring.jpa.properties.hibernate.connection.provider_disables_autocommit=true` in `application.properties`
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDelayConnection/delay%20connection%20acquisition%201.png)
