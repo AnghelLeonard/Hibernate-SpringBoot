@@ -163,14 +163,14 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-10. **[Attribute Lazy Loading](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAttributeLazyLoadingBasic)**
+10. **[How To Use Hibernate Attribute Lazy Loading](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAttributeLazyLoadingBasic)**
   
 **Description:** By default, the attributes of an entity are loaded eagerly (all at once). But, we can load them **lazy** as well. This is useful for column types that store large amounts of data: `CLOB`, `BLOB`, `VARBINARY`, etc or *details* that should be loaded on demand. In this application, we have an entity named `Author`. Its properties are: `id`, `name`, `genre`, `avatar` and `age`. And, we want to load the `avatar` lazy. So, the `avatar` should be loaded on demand.
 
-**Key points:**\
-     - in `pom.xml`, activate Hibernate *bytecode instrumentation* (e.g. use Maven *bytecode enhancement plugin*)\
-     - in entity, annotate the columns that should be loaded lazy with `@Basic(fetch = FetchType.LAZY)`\
-     - in `application.properties`, disable Open Session in View
+**Key points:**
+- in `pom.xml`, activate Hibernate *bytecode enhancement* (e.g. use Maven *bytecode enhancement plugin*)
+- in entity, annotate the attributes that should be loaded lazy with `@Basic(fetch = FetchType.LAZY)`
+- in `application.properties`, disable Open Session in View    
 
 **Check as well:**\
      - [Default Values For Lazy Loaded Attributes](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingDefaultValues)\
@@ -180,17 +180,17 @@
 
 11. **[How To Populate a Child-Side Parent Association via Proxy](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPopulatingChildViaProxy)**
 
-**Description:** A proxy can be useful when a child entity can be persisted with a reference to its parent (`@ManyToOne` or `@OneToOne` association). In such cases, fetching the parent entity from the database (execute the `SELECT` statement) is a performance penalty and a pointless action. Hibernate can set the underlying foreign key value for an uninitialized proxy.
+**Description:** A proxy can be useful when a child entity can be persisted with a reference to its parent (`@ManyToOne` or `@OneToOne` association). In such cases, fetching the parent entity from the database (execute the `SELECT` statement) is a performance penalty and a pointless action, becase Hibernate can set the underlying foreign key value for an uninitialized proxy.
 
-**Key points:**\
-     - rely on `EntityManager#getReference()`\
-     - in Spring, use `JpaRepository#getOne()` -> used in this example\
-     - in Hibernate, use `load()`\
-     - assume two entities, `Author` and `Book`, involved in a unidirectional `@ManyToOne` relationship (`Author` is the parent-side)\
-     - we fetch the author via a proxy (this will not trigger a `SELECT`), we create a new book, we set the proxy as the author for this book and we save the book (this will trigger an `INSERT` in the `book` table)
+**Key points:**
+- rely on `EntityManager#getReference()`
+- in Spring, use `JpaRepository#getOne()` -> used in this example
+- in Hibernate, use `load()`
+- assume two entities, `Author` and `Book`, involved in a unidirectional `@ManyToOne` association (`Author` is the parent-side)
+- we fetch the author via a proxy (this will not trigger a `SELECT`), we create a new book, we set the proxy as the author for this book and we save the book (this will trigger an `INSERT` in the `book` table)
      
-**Output example:**\
-     - the console output will reveal that only an `INSERT` is triggered, not the `SELECT`
+**Output example:**
+- the console output will reveal that only an `INSERT` is triggered, and no `SELECT`
      
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -198,12 +198,12 @@
 
 **Description:** The N+1 is an issue of lazy fetching (but, eager is not exempt). This application reproduce the N+1 behavior.
 
-**Key points:**\
-     - define two entities, `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship\
-     - fetch all `Book` lazy, so without `Author` (results in 1 query)\
-     - loop the fetched `Book` collection and for each entry fetch the corresponding `Author` (results N queries)\
-     - or, fetch all `Author` lazy, so without `Book` (results in 1 query)\
-     - loop the fetched `Author` collection and for each entry fetch the corresponding `Book` (results N queries)
+**Key points:**
+- define two entities, `Author` and `Book` in a lazy bidirectional `@OneToMany` association
+- fetch all `Book` lazy, so without `Author` (results in 1 query)
+- loop the fetched `Book` collection and for each entry fetch the corresponding `Author` (results N queries)
+- or, fetch all `Author` lazy, so without `Book` (results in 1 query)
+- loop the fetched `Author` collection and for each entry fetch the corresponding `Book` (results N queries)
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSimulateNPlus1/simulate%20N%2B1.png)
@@ -212,10 +212,10 @@
 
 13. **[Optimize `SELECT DISTINCT` Via Hibernate `HINT_PASS_DISTINCT_THROUGH` Hint](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHintPassDistinctThrough)**
 
-**Description:** Starting with Hibernate 5.2.2, we can optimize JPQL (HQL) query entites of type `SELECT DISTINCT` via `HINT_PASS_DISTINCT_THROUGH` hint. Keep in mind that this hint is useful only for JPQL (HQL) query entites. Is not useful for scalar queries (e.g., `List<Integer>`) or DTO. In such cases, the `DISTINCT` JPQL keyword is needed to be passed to the underlying SQL query. This will instruct the database to remove duplicates from the result set. Also check [HHH-13280](https://hibernate.atlassian.net/browse/HHH-13280).
+**Description:** Starting with Hibernate 5.2.2, we can optimize JPQL (HQL) query entites of type `SELECT DISTINCT` via `HINT_PASS_DISTINCT_THROUGH` hint. Keep in mind that this hint is useful only for JPQL (HQL) JOIN FETCH-ing queries. Is not useful for scalar queries (e.g., `List<Integer>`), DTO or [HHH-13280](https://hibernate.atlassian.net/browse/HHH-13280). In such cases, the `DISTINCT` JPQL keyword is needed to be passed to the underlying SQL query. This will instruct the database to remove duplicates from the result set. 
 
-**Key points:**\
-     - use `@QueryHints(value = @QueryHint(name = HINT_PASS_DISTINCT_THROUGH, value = "false"))`
+**Key points:**
+- use `@QueryHints(value = @QueryHint(name = HINT_PASS_DISTINCT_THROUGH, value = "false"))`
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHintPassDistinctThrough/HINT_PASS_DISTINCT_THROUGH.png)
@@ -224,10 +224,11 @@
 
 14. **[How To Enable Dirty Tracking In A Spring Boot Application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnableDirtyTracking)**
 
-**Description:** Prior to Hibernate version 5, the *dirty checking* mechanism relies on Java Reflection API. Starting with Hibernate version 5, the *dirty checking* mechanism relies on *bytecode enhancement*. This approach sustain a better performance, especially when you have a relatively large number of entitites.
+**Description:** Prior to Hibernate version 5, the *dirty checking* mechanism relies on Java Reflection API. Starting with Hibernate version 5, the *dirty checking* mechanism can rely on *bytecode enhancement*. This approach sustain a better performance, especially when you have a relatively large number of entitites. Enabling *bytecode enhancement* is about adding a plugin into the application.
 
-**Key points:**\
-     - add the corresponding `plugin` in `pom.xml` (use Maven bytecode enhancement plugin)
+**Key points:**
+- Hibernate come with plugins for Maven and Gradle
+- for Maven, add the plugin in the `pom.xml` file
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootEnableDirtyTracking/Enable%20dirty%20tracking.png)
