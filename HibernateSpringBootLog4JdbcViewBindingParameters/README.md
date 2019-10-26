@@ -1,6 +1,6 @@
 **[How To View Query Details Via `log4jdbc`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLog4JdbcViewBindingParameters)**
 
-**Description:** View the query details via [log4jdbc](https://stackoverflow.com/questions/45346905/how-to-log-sql-queries-their-parameters-and-results-with-log4jdbc-in-spring-boo/45346996#45346996).
+**Description:** View the query details via [log4jdbc](https://github.com/candrews/log4jdbc-spring-boot-starter).
 
 **Key points:**
 - for Maven, in `pom.xml`, add `log4jdbc` dependency
