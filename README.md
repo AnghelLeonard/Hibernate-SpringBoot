@@ -1971,16 +1971,16 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 **Description:** This application is an example of adding in an entity the fields, `created`, `createdBy`, `lastModified` and `lastModifiedBy` via Hibernate support. These fields will be automatically generated/populated.
 
-**Key points:**\
-     - write an abstract class (e.g., `BaseEntity`) annotated with `@MappedSuperclass`\
-     - in this abstract class, define a field named `created` and annotate it with the built-in `@CreationTimestamp` annotation\
-     - in this abstract class, define a field named `lastModified` and annotate it with the built-in `@UpdateTimestamp` annotation\
-     - in this abstract class, define a field named `createdBy` and annotate it with the `@CreatedBy` annotation\
-     - in this abstract class, define a field named `lastModifiedBy` and annotate it with the `@ModifiedBy` annotation\
-     - implement the `@CreatedBy` annotation via `AnnotationValueGeneration`\
-     - implement the `@ModifiedBy` annotation via `AnnotationValueGeneration`\
-     - every entity that want to take advantage of `created`, `createdBy`, `lastModified` and `lastModifiedBy` will extend the `BaseEntity`\
-     - store the date-time in UTC
+**Key points:**
+- write an `abstract` class (e.g., `BaseEntity`) annotated with `@MappedSuperclass`
+- in this `abstract` class, define a field named `created` and annotate it with the built-in `@CreationTimestamp` annotation
+- in this `abstract` class, define a field named `lastModified` and annotate it with the built-in `@UpdateTimestamp` annotation
+- in this `abstract` class, define a field named `createdBy` and annotate it with the `@CreatedBy` annotation
+- in this `abstract` class, define a field named `lastModifiedBy` and annotate it with the `@ModifiedBy` annotation
+- implement the `@CreatedBy` annotation via `AnnotationValueGeneration`
+- implement the `@ModifiedBy` annotation via `AnnotationValueGeneration`
+- every entity that want to take advantage of `created`, `createdBy`, `lastModified` and `lastModifiedBy` will extend the `BaseEntity`
+- store the date-time in UTC
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -1988,103 +1988,103 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
  
 **Description:** Auditing is useful for maintaining history records. This can later help us in tracking user activities. 
  
-**Key points:**\
-     - in `pom.xml` add the dependency `hibernate-envers` and JAXB API\
-     - each entity that should be audited should be annotated with `@Audited`\
-     - optionally, annotate entities with `@AuditTable` to rename the table used for auditing\
-     - rely on `ValidityAuditStrategy` for fast database reads, but slower writes (slower than the default `DefaultAuditStrategy`)\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto` for avoiding schema generated from JPA annotations\
-     - create `schema-mysql.sql` and provide the SQL statements needed by Hibernate Envers\
-     - if the schema is not autommatically found, then point it via `spring.jpa.properties.org.hibernate.envers.default_catalog` for MySQL or `spring.jpa.properties.org.hibernate.envers.default_schema` for the rest
+**Key points:**
+- for Maven, in `pom.xml` add the dependency `hibernate-envers` and JAXB API
+- each entity that should be audited should be annotated with `@Audited`
+- optionally, annotate entities with `@AuditTable` to rename the table used for auditing
+- rely on `ValidityAuditStrategy` for fast database reads, but slower writes (slower than the default `DefaultAuditStrategy`)
+- remove (disable) `spring.jpa.hibernate.ddl-auto` for avoiding schema generated from JPA annotations
+- create `schema-mysql.sql` and provide the SQL statements needed by Hibernate Envers
+- if the schema is not automatically found, then point it via `spring.jpa.properties.org.hibernate.envers.default_catalog` for MySQL or `spring.jpa.properties.org.hibernate.envers.default_schema` for the rest
 
 ----------------------------------------------------------------------------------------------------------------------
 
 133. **[How To Programmatically Setup Flyway And MySQL `DataSource`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLProg)**
  
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
 
 **Description:** This application is a kickoff for setting Flyway and MySQL `DataSource` programmatically.
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add the Flyway dependency\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - configure `DataSource` and Flyway programmatically
+**Key points:**
+- for Maven, in `pom.xml`, add the Flyway dependency
+- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- configure `DataSource` and Flyway programmatically
 
 ----------------------------------------------------------------------------------------------------------------------
 
 134. **[How To Migrate PostgreSQL Database Using Flyway - Use The Default Database `postgres` And Schema `public`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayPostgreSQLQuick)**
 
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of migrating a PostgreSQL database via Flyway for the default database `postgres` and schema `public`. 
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add the Flyway dependency\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - in `application.properties`, set the JDBC URL as follows: `jdbc:postgresql://localhost:5432/postgres`\
-     - each SQL file containing the schema update add it in `classpath:db/migration`\
-     - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
+**Key points:**
+- for Maven, in `pom.xml`, add the Flyway dependency
+- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- in `application.properties`, set the JDBC URL as follows: `jdbc:postgresql://localhost:5432/postgres`
+- each SQL file containing the schema update add it in `classpath:db/migration`
+- each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
 
 ----------------------------------------------------------------------------------------------------------------------
 
 135. **[How To Migrate Schema Using Flyway In PostgreSQL - Use The Default Database `postgres` And Schema Created Via `spring.flyway.schemas`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayPostgreSqlSchema)**
 
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of migrating a schema (`bookstore`) created by Flyway via `spring.flyway.schemas` in the default `postgres` database. In this case, the entities should be annotated with `@Table(schema = "bookstore")`.
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add the Flyway dependency\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - in `application.properties`, set the JDBC URL as follows: `jdbc:postgresql://localhost:5432/postgres`\
-     - in `application.properties`, add `spring.flyway.schemas=bookstore`, where `bookstore` is the schema that should be created by Flyway in the `postgres` database (feel free to add your own database name)\
-     - each entity that should be stored in this database should be annotated with, `@Table(schema = "bookstore")`\
-     - each SQL file containing the schema update add it in `classpath:db/migration`\
-     - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
+**Key points:**
+- for Maven, in `pom.xml`, add the Flyway dependency
+- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- in `application.properties`, set the JDBC URL as follows: `jdbc:postgresql://localhost:5432/postgres`
+- in `application.properties`, add `spring.flyway.schemas=bookstore`, where `bookstore` is the schema that should be created by Flyway in the `postgres` database (feel free to add your own database name)
+- each entity that should be stored in this database should be annotated with, `@Table(schema = "bookstore")`
+- each SQL file containing the schema update add it in `classpath:db/migration`
+- each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
 
 ----------------------------------------------------------------------------------------------------------------------
 
 136. **[How To Programmatically Setup Flyway And PostgreSQL `DataSource`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayPostgreSQLProg)**
  
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
 
 **Description:** This application is a kickoff for setting Flyway and PostgreSQL `DataSource` programmatically.
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add the Flyway dependency\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - configure `DataSource` and Flyway programmatically
+**Key points:**
+- for Maven, in `pom.xml`, add the Flyway dependency
+- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- configure `DataSource` and Flyway programmatically
 
 ----------------------------------------------------------------------------------------------------------------------
 
 137. **[How To Auto-Create And Migrate Two Databases In MySQL Using Flyway](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLTwoDatabases)**
 
-**Note:** or production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of auto-creating and migrating two databases in MySQL using Flyway. In addition, each data source uses its own HikariCP connection pool. In case of MySQL, where a database is the same thing with schema, we create two databases, `authorsdb` and `booksdb`.
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add the Flyway dependency\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - in `application.properties`, configure the JDBC URL for `booksdb` as `jdbc:mysql://localhost:3306/booksdb?createDatabaseIfNotExist=true` and for `authorsdb` as `jdbc:mysql://localhost:3306/authorsdb?createDatabaseIfNotExist=true`\
-     - in `application.properties`, set `spring.flyway.enabled=false` to disable default behavior\
-     - programmatically create two `DataSource`, one for `booksdb` and one for `authorsdb`\
-     - programmatically create two `FlywayDataSource`, one for `booksdb` and one for `authorsdb`\
-     - programmatically create two `EntityManagerFactory`, one for `booksdb` and one for `authorsdb`\
-     - for `booksdb`, place the migration SQLs files in `db\migration\booksdb`\
-     - for `authorsdb`, place the migration SQLs files in `db\migration\authorsdb`
+**Key points:**
+- for Maven, in `pom.xml`, add the Flyway dependency
+- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- in `application.properties`, configure the JDBC URL for `booksdb` as `jdbc:mysql://localhost:3306/booksdb?createDatabaseIfNotExist=true` and for `authorsdb` as `jdbc:mysql://localhost:3306/authorsdb?createDatabaseIfNotExist=true`
+- in `application.properties`, set `spring.flyway.enabled=false` to disable default behavior
+- programmatically create two `DataSource`, one for `booksdb` and one for `authorsdb`
+- programmatically create two `FlywayDataSource`, one for `booksdb` and one for `authorsdb`
+- programmatically create two `EntityManagerFactory`, one for `booksdb` and one for `authorsdb`
+- for `booksdb`, place the migration SQLs files in `db\migration\booksdb`
+- for `authorsdb`, place the migration SQLs files in `db\migration\authorsdb`    
 
 ----------------------------------------------------------------------------------------------------------------------
 
 138. **[Hibernate `hi/lo` Algorithm And External Systems Issue](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHiLoIssue)**
 
-**Description:** This is a Spring Boot sample that exemplifies how the `hi/lo` algorithm may cause issues when the database is used by external systems as well. Such systems can safely generate non-duplicated identifiers (e.g., for inserting new records) only if they know about the `hi/lo` presence and its internal work. So, better rely on `pooled` or `pooled-lo` which doesn't have such issues.
+**Description:** This is a Spring Boot sample that exemplifies how the `hi/lo` algorithm may cause issues when the database is used by external systems as well. Such systems can safely generate non-duplicated identifiers (e.g., for inserting new records) only if they know about the `hi/lo` presence and its internal work. So, better rely on `pooled` or `pooled-lo` algorithm which doesn't cause such issues.
 
-**Key points:**\
-     - use the `SEQUENCE` generator type (e.g., in PostgreSQL)\
-     - configure the `hi/lo` algorithm as in `Author.java` entity\
-     - insert a few records via `hi/lo`\
-     - insert a few records natively (this acts as an external system that relies on `NEXTVAL('hilo_sequence')` and is not aware of `hi/lo` presence and/or behavior)
+**Key points:**
+- use the `SEQUENCE` generator type (e.g., in PostgreSQL)
+- configure the `hi/lo` algorithm as in `Author.java` entity
+- insert a few records via `hi/lo`
+- insert a few records natively (this acts as an external system that relies on `NEXTVAL('hilo_sequence')` and is not aware of `hi/lo` presence and/or behavior)
      
 **Output sample:** Running this application should result in the following error:\
 `ERROR: duplicate key value violates unique constraint "author_pkey"`\
@@ -2093,16 +2093,16 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 ----------------------------------------------------------------------------------------------------------------------
 
 139. **[How To Generate Sequences Of Identifiers Via Hibernate `pooled` Algorithm](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPooled)**
-
+ 
  **Note:** Rely on `pooled-lo` or `pooled` especially if, beside your application, external systems needs to insert rows in your tables. Don't rely on `hi/lo` since, in such cases, it may cause errors resulted from generating duplicated identifiers.
  
-**Description:** This is a Spring Boot example of using the `pooled` algorithm. The `pooled` is an optimization of `hi/lo`. This algorithm fetched from the database the current sequence value as the top boundary identifier (the current sequence value is computed as the previous sequence value + `increment_size`). This way, the application will use in-memory identifiers generated between the previous top boundary exclusive (aka, lowest boundary) and the current top boundary inclusive.
+**Description:** This is a Spring Boot example of using the `pooled` algorithm. The `pooled` is an optimization of `hi/lo`. This algorithm fetched from the database the current sequence value as the top boundary identifier (the current sequence value is computed as the previous sequence value + `increment_size`). This way, the application will use in-memory identifiers generated between the previous top boundary exclusive (aka, lowest boundary) and the current top boundary inclusive. 
 
-**Key points:**\
-     - use the `SEQUENCE` generator type (e.g., in PostgreSQL)\
-     - configure the `pooled` algorithm as in `Author.java` entity\
-     - insert a few records via `pooled`\
-     - insert a few records natively (this acts as an external system that relies on `NEXTVAL('hilo_sequence')` and is not aware of `pooled` presence and/or behavior)
+**Key points:**
+- use the `SEQUENCE` generator type (e.g., in PostgreSQL)
+- configure the `pooled` algorithm as in `Author.java` entity
+- insert a few records via `pooled`
+- insert a few records natively (this acts as an external system that relies on `NEXTVAL('hilo_sequence')` and is not aware of `pooled` presence and/or behavior)
      
 **Conclusion:** In contrast to the classical `hi/lo` algorithm, the Hibernate `pooled` algorithm doesn't cause issues to external systems that wants to interact with our tables. In other words, external systems can concurrently insert rows in the tables relying on `pooled` algorithm. Nevertheless, old versions of Hibernate can raise exceptions caused by `INSERT` statements triggered by external systems that uses the lowest boundary as identifier. This is a good reason to update to Hibernate latest versions (e.g., Hibernate 5.x), which have fixed this issue.
 
@@ -2110,15 +2110,15 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 140. **[How To Generate Sequences Of Identifiers Via Hibernate `pooled-lo` Algorithm](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPooledLo)**
 
- **Note:** Rely on `pooled-lo` or `pooled` especially if, beside your application, external systems needs to insert rows in your tables. Don't rely on `hi/lo` since, in such cases, it may cause errors resulted from generating duplicated identifiers.
- 
+**Note:** Rely on `pooled-lo` or `pooled` especially if, beside your application, external systems needs to insert rows in your tables. Don't rely on `hi/lo` since, in such cases, it may cause errors resulted from generating duplicated identifiers.
+
 **Description:** This is a Spring Boot example of using the `pooled-lo` algorithm. The `pooled-lo` is an optimization of `hi/lo` similar with `pooled`. Only that, the strategy of this algorithm fetches from the database the current sequence value and use it as the in-memory lowest boundary identifier. The number of in-memory generated identifiers is equal to `increment_size`.
 
-**Key points:**\
-     - use the `SEQUENCE` generator type (e.g., in PostgreSQL)\
-     - configure the `pooled-lo` algorithm as in `Author.java` entity\
-     - insert a few records via `pooled-lo`\
-     - insert a few records natively (this acts as an external system that relies on `NEXTVAL('hilo_sequence')` and is not aware of `pooled-lo` presence and/or behavior)  
+**Key points:**
+- use the `SEQUENCE` generator type (e.g., in PostgreSQL)
+- configure the `pooled-lo` algorithm as in `Author.java` entity
+- insert a few records via `pooled-lo`
+- insert a few records natively (this acts as an external system that relies on `NEXTVAL('hilo_sequence')` and is not aware of `pooled-lo` presence and/or behavior)    
 
 ----------------------------------------------------------------------------------------------------------------------
 
