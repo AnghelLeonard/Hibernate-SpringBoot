@@ -2,7 +2,7 @@
 
 **Description:** Batch updates of entities with associations in MySQL.
 
-**Key points:**\
+**Key points:**
 - in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`
 - in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL, statements get rewritten into a single string buffer and sent in a single request)
 - in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)
