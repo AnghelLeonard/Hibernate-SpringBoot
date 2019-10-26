@@ -27,7 +27,7 @@ Fetch a page as a `List`:
 - call or write methods that returns `Page<entity>`
 
 **Examples of classical *offset* pagination:**
-- call the built-in `findAll(Pageable)` without sorting:
+- call the built-in `findAll(Pageable)` without sorting:\
 `repository.findAll(PageRequest.of(page, size));`
 - call the built-in `findAll(Pageable)` with sorting:
 `repository.findAll(PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name")));`
