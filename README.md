@@ -40,7 +40,7 @@
 
 **Description:** View the query details (query type, binding parameters, batch size, execution time, etc) via **[DataSource-Proxy](https://github.com/ttddyy/datasource-proxy)**
 
-**Key points:**\
+**Key points:**
 - for Maven, add in `pom.xml` the `datasource-proxy` dependency
 - create an bean post processor to intercept the `DataSource` bean
 - wrap the `DataSource` bean via `ProxyFactory` and an implementation of `MethodInterceptor`
@@ -116,16 +116,17 @@
 
 **Description:** Batch inserts via Hibernate session-level batching (Hibernate 5.2 or higher) in MySQL.
 
-**Key points:**\
-     - in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)\
-     - in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)\
-     - in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)\
-     - in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))\
-     - in case of using a parent-child relationship with cascade persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_inserts=true` to optimize the batching by ordering inserts\
-     - in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause batching to be disabled\
-     - the Hibernate `Session` is obtained by un-wrapping it via `EntityManager#unwrap(Session.class)`\
-     - the batching size is set via `Session#setJdbcBatchSize(Integer size)` and get via `Session#getJdbcBatchSize()`\
-     - in DAO, flush and clear the persistence context from time to time; this way you avoid to "overwhelm" the persistence context
+**Key points:**
+- in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)
+- in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)
+- in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)
+- in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))
+- in case of using a parent-child relationship with cascade persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_inserts=true` to optimize the batching by ordering inserts
+- in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause insert batching to be disabled
+- the Hibernate `Session` is obtained by un-wrapping it via `EntityManager#unwrap(Session.class)`
+- the batching size is set via `Session#setJdbcBatchSize(Integer size)` and get via `Session#getJdbcBatchSize()`
+- in DAO, flush and clear the Persistence Context from time to time; this way you avoid to "overwhelm" the Persistence Context
+- if is not needed, then ensure that Second Level Cache is disabled via `spring.jpa.properties.hibernate.cache.use_second_level_cache=false`
    
 **Output example:**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsViaSession/batch%20inserts%20via%20Session.png)
@@ -136,23 +137,24 @@
 
 **Description:** Direct fetching via Spring Data, `EntityManager` and Hibernate `Session` examples.
 
-**Key points:**\
-     - direct fetching via Spring Data uses `findById()`\
-     - direct fetching via JPA `EntityManager` uses `find()`\
-     - direct fetching via Hibernate `Session` uses `get()`
+**Key points:**
+- direct fetching via Spring Data uses `findById()`
+- direct fetching via JPA `EntityManager` uses `find()`
+- direct fetching via Hibernate `Session` uses `get()`
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-9. **[DTOs Via Spring Data Projections](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)**
+9. **[DTO Via Spring Data Projections](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)**
 
 **Note:** You may also like to read the recipe, ["How To Enrich DTOs With Virtual Properties Via Spring Projections"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaProjectionsAndVirtualProperties)
 
-**Description:** Fetch only the needed data from the database via Spring Data Projections (DTOs)
+**Description:** Fetch only the needed data from the database via Spring Data Projections (DTO).
 
-**Key points:**\
-     - write an interface (projection) containing getters only for the columns that should be fetched from the database\
-     - write the proper query returning a `List<projection>`\
-     - if is applicable, limit the number of returned rows (e.g., via `LIMIT`) - here, we can use query builder mechanism built into Spring Data repository infrastructure
+**Key points:**
+- write an interface (projection) containing getters only for the columns that should be fetched from the database
+- write the proper query returning a `List<projection>`
+- if it is applicable, limit the number of returned rows (e.g., via `LIMIT`) 
+- in this example, we can use query builder mechanism built into Spring Data repository infrastructure
      
 **Note:** Using projections is not limited to use query builder mechanism built into Spring Data repository infrastructure. We can fetch projections via JPQL or native queries as well. For example, in this [application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjectionsAndJpql) we use a JPQL.
      
