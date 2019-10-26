@@ -3,8 +3,8 @@
 **Description:** Batch inserts via `SimpleJpaRepository#saveAll(Iterable<S> entities)` method in MySQL
 
 **Key points:**\
-     - in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`\
-     - in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)\
+- in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`
+- in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)\
      - in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)\
      - in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)\
      - in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))\
