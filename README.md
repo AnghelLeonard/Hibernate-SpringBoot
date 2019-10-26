@@ -251,7 +251,7 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 16. **[The Best Way To Map The `@OneToMany` Bidirectional Association](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToManyBidirectional)**
 
-**Description:** This application is a proof of concept of how is correct to implement the bidirectional `@OneToMany` association. 
+**Description:** This application is a proof of concept of how is correct to implement the bidirectional `@OneToMany` association from the performance perspective. 
 
 **Key points:**
 - always cascade from parent to child
@@ -654,7 +654,7 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-46. **[How To Avoid LazyInitializationException Via JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinFetch)**
+46. **[How To Avoid `LazyInitializationException` Via `JOIN FETCH`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinFetch)**
 
 **See also:**
 - [LEFT JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLeftJoinFetch)
@@ -713,8 +713,7 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-50. 
-**[The Best Way To Implement A Bidirectional `@ManyToMany` Association](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManyBidirectional)**
+50. **[The Best Way To Implement A Bidirectional `@ManyToMany` Association](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManyBidirectional)**
 
 **Description:** This application is a proof of concept of how it is correct to implement the bidirectional `@ManyToMany` association from the performance perspective. 
 
@@ -730,24 +729,24 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-51. **[Prefer Set Instead of List in @ManyToMany Relationships](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManyBidirectionalListVsSet)**
+51. **[Prefer `Set` Instead of `List` in `@ManyToMany` Associations](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManyBidirectionalListVsSet)**
 
-**Description:** This is a Spring Boot example of removing rows in case of a bidirectional `@ManyToMany` using a `List` and a `Set`. The conclusion is that `Set` is much better! This applies to unidirectional as well!
+**Description:** This is a Spring Boot example of removing rows in case of a bidirectional `@ManyToMany` using `List`, respectively `Set`. The conclusion is that `Set` is much better! This applies to unidirectional as well!
 
-**Key points:**\
-     - using `Set` is much more efficent than `List`      
+**Key points:**
+- using `Set` is much more efficent than `List`    
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootManyToManyBidirectionalListVsSet/manytomany%20use%20always%20set%20not%20list.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-52. **[How To View Query Details Via log4jdbc](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLog4JdbcViewBindingParameters)**
+52. **[How To View Query Details Via `log4jdbc`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLog4JdbcViewBindingParameters)**
 
-**Description:** View the query details via [log4jdbc](https://stackoverflow.com/questions/45346905/how-to-log-sql-queries-their-parameters-and-results-with-log4jdbc-in-spring-boo/45346996#45346996)
+**Description:** View the query details via [log4jdbc](https://github.com/candrews/log4jdbc-spring-boot-starter).
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add `log4jdbc` dependency
+**Key points:**
+- for Maven, in `pom.xml`, add `log4jdbc` dependency
      
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLog4JdbcViewBindingParameters/query%20details%20via%20log4jdbc.png)
@@ -756,10 +755,10 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 53. **[How To View Binding Params Via TRACE](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLogTraceViewBindingParameters)**
 
-**Description:** View the prepared statement binding/extracted parameters via `TRACE`
+**Description:** View the prepared statement binding/extracted parameters via `TRACE`.
 
-**Key points:**\
-     - in application.properties add: `logging.level.org.hibernate.type.descriptor.sql=TRACE`
+**Key points:**
+- in `application.properties` add: `logging.level.org.hibernate.type.descriptor.sql=TRACE`
      
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLogTraceViewBindingParameters/display%20binding%20and%20extracted%20parameters%20via%20TRACE.png) 
@@ -768,11 +767,11 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 54. **[How To Store `java.time.YearMonth` As `Integer` Or `Date` Via Hibernate Types Library](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootYearMonth)**
 
-**Description:** [Hibernate Types](https://github.com/vladmihalcea/hibernate-types) is a set of extra types not supported by Hibernate by default. One of these types is `java.time.YearMonth`. This is a Spring Boot application that uses Hibernate Type to store this `YearMonth` in a MySQL database as integer or `Date`.
+**Description:** [Hibernate Types](https://github.com/vladmihalcea/hibernate-types) is a set of extra types not supported by default in Hibernate Core. One of these types is `java.time.YearMonth`. This is a Spring Boot application that uses Hibernate Type to store this `YearMonth` in a MySQL database as integer or date.
 
-**Key points:**\
-     - for Maven, add Hibernate Types as a dependency in pom.xml\
-     - in entity use `@TypeDef` to map `typeClass` to `defaultForType` 
+**Key points:**
+- for Maven, add Hibernate Types as a dependency in `pom.xml`
+- in entity use `@TypeDef` to map `typeClass` to `defaultForType`  
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootYearMonth/Hibernate%20Types%20library.png)     
@@ -781,30 +780,30 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 55. **[How To Execute SQL Functions In JPQL Query](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJpqlFunctionsParams)**
 
-**Note**: Using SQL functions in `WHERE` part (not in `SELECT` part) in JPA 2.1 can be done via `function()` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJpqlFunction).
+**Note**: Using SQL functions in the `WHERE` part (not in the `SELECT` part) of  query in JPA 2.1 can be done via `function()` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJpqlFunction).
 
 **Description:** Trying to use SQL functions (standard or defined) in JPQL queries may result in exceptions if Hibernate will not recognize them and cannot parse the JPQL query. For example, the MySQL, `concat_ws` function is not recognized by Hibernate. This application is a Spring Boot application based on Hibernate 5.3, that registers the `concat_ws` function via `MetadataBuilderContributor` and inform Hibernate about it via, `metadata_builder_contributor` property. This example uses `@Query` and `EntityManager` as well, so you can see two use cases.
 
-**Key points:**\
-     - use Hibernate 5.3 (or, to be precisely, 5.2.18) (e.g., use Spring Boot 2.1.0.RELEASE)\
-     - implement `MetadataBuilderContributor` and register the `concat_ws` MySQL function\
-     - in application.properties, set `spring.jpa.properties.hibernate.metadata_builder_contributor` to point out to `MetadataBuilderContributor` implementation
-     
+**Key points:**
+- use Hibernate 5.3 (or, to be precisely, 5.2.18) (e.g., use Spring Boot 2.1.0.RELEASE)
+- implement `MetadataBuilderContributor` and register the `concat_ws` MySQL function
+- in `application.properties`, set `spring.jpa.properties.hibernate.metadata_builder_contributor` to point out Hibernate to `MetadataBuilderContributor` implementation
+          
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootJpqlFunctionsParams/SQL%20functions%20in%20JPQL%20parameters.png)       
 
 -----------------------------------------------------------------------------------------------------------------------
 
-56. **[Log Slow Queries Via "datasource-proxy"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLogSlowQueries)**
+56. **[Log Slow Queries Via DataSource-Proxy](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLogSlowQueries)**
 
-**Description:** This application is a sample of logging only slow queries via **[datasource-proxy](https://github.com/ttddyy/datasource-proxy)**. A slow query is a query that has an exection time bigger than a specificed threshold in milliseconds.
+**Description:** This application is a sample of logging only slow queries via **[DataSource-Proxy](https://github.com/ttddyy/datasource-proxy)**. A slow query is a query that has an execution time bigger than a specificed threshold in milliseconds.
 
-**Key points:**\
-     - for Maven, add in `pom.xml` the `datasource-proxy` dependency\
-     - create an bean post processor to intercept the `DataSource` bean\
-     - wrap the `DataSource` bean via `ProxyFactory` and an implementation of `MethodInterceptor`\
-     - choose a threshold in milliseconds\
-     - define a listener and override `afterQuery()`
+**Key points:**
+- for Maven, add in `pom.xml` the DataSource-Proxy dependency
+- create an bean post processor to intercept the `DataSource` bean
+- wrap the `DataSource` bean via `ProxyFactory` and an implementation of `MethodInterceptor`
+- choose a threshold in milliseconds
+- define a listener and override `afterQuery()`
    
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLogSlowQueries/log%20slow%20queries%20via%20datasource-proxy.png)
@@ -815,11 +814,11 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 **Description:** This application fetches data as `Page<dto>` via Spring Boot offset pagination. Most of the time, the data that should be paginated is *read-only* data. Fetching the data into entities should be done only if we plan to modify that data, therefore, fetching *read only* data as `Page<entity>` is not preferable since it may end up in a significant performance penalty. The `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, there is one query needed for fetching the data and one for counting the total number of records).
 
-**Key points:**\
-     - create a Spring projection (DTO) to contains getters only for the data that should be fetched\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - fetch data via a JPQL or native query (that includes counting) into a `List<dto>`, and a `Pageable`\
-     - use the fetched `List<dto>` and `Pageable` to create a `Page<dto>`
+**Key points:**
+- create a Spring projection (DTO) to contains getters only for the columns that should be fetched
+- write a repository that extends `PagingAndSortingRepository`
+- fetch data via a JPQL or native query (that includes counting) into a `List<dto>`
+- use the fetched `List<dto>` and the proper `Pageable` to create a `Page<dto>`
      
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -827,10 +826,10 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 **Description:** This application fetches data as `List<dto>` via Spring Boot offset pagination. Most of the time, the data that should be paginated is *read-only* data. Fetching the data into entities should be done only if we plan to modify that data, therefore, fetching *read only* data as `List<entity>` is not preferable since it may end up in a significant performance penalty. The `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, there is one query needed for fetching the data and one for counting the total number of records).
  
-**Key points:**\
-     - create a Spring projection (DTO) to contains getters only for the data that should be fetched\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - fetch data via a JPQL or native query (that includes counting) into a `List<dto>`
+**Key points:**
+- create a Spring projection (DTO) to contains getters only for the columns that should be fetched
+- write a repository that extends `PagingAndSortingRepository`
+- fetch data via a JPQL or native query (that includes counting) into a `List<dto>`
      
 -----------------------------------------------------------------------------------------------------------------------    
      
@@ -840,10 +839,10 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
 
-**Description:** This is a kickoff application that set up HikariCP via `application.properties` only. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService`for simulating concurrent users. Check the HickariCP report revealing the connection pool status.
+**Description:** This is a kickoff application that set up HikariCP via `application.properties` only. The `jdbcUrl` is set up for a MySQL database. For testing purposes, the application uses an `ExecutorService`for simulating concurrent users. Check the HickariCP report revealing the connection pool status.
 
-**Key points:**\
-     - in `application.properties`, rely on `spring.datasource.hikari.*` to configure HikariCP     
+**Key points:**
+- in `application.properties`, rely on `spring.datasource.hikari.*` to configure HikariCP     
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHikariCPPropertiesKickoff/HikariCP%20trace%20log.png)
@@ -856,11 +855,11 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
 
-**Description:** This is a kickoff application that set up HikariCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. Check the HickariCP report revealing the connection pool status.
+**Description:** This is a kickoff application that set up HikariCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purposes, the application uses an `ExecutorService` for simulating concurrent users. Check the HickariCP report revealing the connection pool status.
 
-**Key points:**\
-     - in `application.properties`, configure HikariCP via a custom prefix, e.g., `app.datasource.*`\
-     - write a `@Bean` that returns the `DataSource`
+**Key points:**
+- in `application.properties`, configure HikariCP via a custom prefix, e.g., `app.datasource.*`
+- write a `@Bean` that returns the `DataSource`
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHikariCPPropertiesKickoff/HikariCP%20trace%20log.png)
@@ -877,12 +876,12 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
 
-**Description:** This is a kickoff application that set up BoneCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. 
+**Description:** This is a kickoff application that set up BoneCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purposes, the application uses an `ExecutorService` for simulating concurrent users. 
 
-**Key points:**\
-     - in `pom.xml` add the BoneCP dependency\
-     - in `application.properties`, configure BoneCP via a custom prefix, e.g., `app.datasource.*`\
-     - write a `@Bean` that returns the `DataSource`
+**Key points:**
+- in `pom.xml` add the BoneCP dependency
+- in `application.properties`, configure BoneCP via a custom prefix, e.g., `app.datasource.*`
+- write a `@Bean` that returns the `DataSource`
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceBuilderBoneCPKickoff/BoneCP%20trace%20log.png)
@@ -893,12 +892,12 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
  
-**Description:** This is a kickoff application that set up ViburDBCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. 
+**Description:** This is a kickoff application that set up ViburDBCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purposes, the application uses an `ExecutorService` for simulating concurrent users. 
 
-**Key points:**\
-     - in `pom.xml` add the ViburDBCP dependency\
-     - in `application.properties`, configure ViburDBCP via a custom prefix, e.g., `app.datasource.*`\
-     - write a `@Bean` that returns the `DataSource`
+**Key points:**
+- in `pom.xml` add the ViburDBCP dependency
+- in `application.properties`, configure ViburDBCP via a custom prefix, e.g., `app.datasource.*`
+- write a `@Bean` that returns the `DataSource`
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceBuilderViburDBCPKickoff/ViburDBCP%20log%20trace.png)
@@ -909,12 +908,12 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
  
-**Description:** This is a kickoff application that set up C3P0 via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. 
+**Description:** This is a kickoff application that set up C3P0 via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purposes, the application uses an `ExecutorService` for simulating concurrent users. 
 
-**Key points:**\
-     - in `pom.xml` add the C3P0 dependency\
-     - in `application.properties`, configure C3P0 via a custom prefix, e.g., `app.datasource.*`\
-     - write a `@Bean` that returns the `DataSource`
+**Key points:**
+- in `pom.xml` add the C3P0 dependency
+- in `application.properties`, configure C3P0 via a custom prefix, e.g., `app.datasource.*`
+- write a `@Bean` that returns the `DataSource`
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceBuilderC3P0Kickoff/C3P0%20trace%20log.png)
@@ -924,13 +923,13 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 65. **[How To Customize DBCP2 Settings Via Properties And `DataSourceBuilder`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceBuilderDBCP2Kickoff)**
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
- 
-**Description:** This is a kickoff application that set up DBCP2 via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. 
 
-**Key points:**\
-     - in `pom.xml` add the DBCP2 dependency\
-     - in `application.properties`, configure DBCP2 via a custom prefix, e.g., `app.datasource.*`\
-     - write a `@Bean` that returns the `DataSource`
+**Description:** This is a kickoff application that set up DBCP2 via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purposes, the application uses an `ExecutorService` for simulating concurrent users. 
+
+**Key points:**
+- in `pom.xml` add the DBCP2 dependency
+- in `application.properties`, configure DBCP2 via a custom prefix, e.g., `app.datasource.*`
+- write a `@Bean` that returns the `DataSource`
      
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -938,12 +937,12 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
  
-**Description:** This is a kickoff application that set up Tomcat via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. 
+**Description:** This is a kickoff application that set up Tomcat via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purposes, the application uses an `ExecutorService` for simulating concurrent users. 
 
-**Key points:**\
-     - in `pom.xml` add the Tomcat dependency\
-     - in `application.properties`, configure Tomcat via a custom prefix, e.g., `app.datasource.*`\
-     - write a `@Bean` that returns the `DataSource`
+**Key points:**
+- in `pom.xml` add the Tomcat dependency
+- in `application.properties`, configure Tomcat via a custom prefix, e.g., `app.datasource.*`
+- write a `@Bean` that returns the `DataSource`
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceBuilderTomcatKickoff/Tomcat%20trace%20log.png)
@@ -954,15 +953,15 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
 
-**Description:** This is a kickoff application that uses two data sources (two MySQL databases, one named `authorsdb` and one named `booksdb`) with two connection pools (each database uses its own HikariCP connection pool with different settings). Based on the above recipes is pretty easy to configure two connection pools from two different providers as well.
+**Description:** This is a kickoff application that uses two data sources (two MySQL databases, one named `authorsdb` and one named `booksdb`) with two connection pools (each database uses its own HikariCP connection pool with different settings). Based on the above items is pretty easy to configure two connection pools from two different providers as well.
 
-**Key points:**\
-     - in `application.properties`, configure two HikariCP connection pools via a two custom prefixes, e.g., `app.datasource.ds1` and `app.datasource.ds2`\
-     - write a `@Bean` that returns the first `DataSource` and mark it as `@Primary`\
-     - write another `@Bean` that returns the second `DataSource`\
-     - configure two `EntityManagerFactory` and point out the packages to scan for each of them\
-     - put the domains and repositories for each `EntityManager` in the right packages
-     
+**Key points:**
+- in `application.properties`, configure two HikariCP connection pools via a two custom prefixes, e.g., `app.datasource.ds1` and `app.datasource.ds2`
+- write a `@Bean` that returns the first `DataSource` and mark it as `@Primary`
+- write another `@Bean` that returns the second `DataSource`
+- configure two `EntityManagerFactory` and point out the packages to scan for each of them
+- put the domains and repositories for each `EntityManager` in the right packages
+
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootTwoDataSourceBuilderKickoff/Two%20DataSources.png)
 
@@ -970,12 +969,12 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 68. **[How To Provide a Fluent API Via Setters For Building Entities](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiOnSetters)**
 
-**Note**: If you want yo provide a Fluent API without altering setters then consider [this recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiAdditionalMethods).
+**Note**: If you want yo provide a Fluent API without altering setters then consider [this item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiAdditionalMethods).
 
 **Description:** This is a sample application that alter the entities setters methods in order to empower a Fluent API.
 
-**Key points:**\
-     - in entities, return `this` instead of `void` in setters
+**Key points:**
+- in entitites, return `this` instead of `void` in setters
 
 **Fluent API example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFluentApiOnSetters/fluent%20entity%20setters.png)
@@ -984,12 +983,12 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 69. **[How To Provide a Fluent API Via Additional Methods For Building Entities](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiAdditionalMethods)**
 
-**Note**: If you want yo provide a Fluent API by altering setters then consider [this recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiOnSetters).
+**Note**: If you want yo provide a Fluent API by altering setters then consider [this item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiOnSetters).
 
 **Description:** This is a sample application that add in entities additional methods (e.g., for `setName`, we add `name`) methods in order to empower a Fluent API.
 
-**Key points:**\
-     - in entities, add for each setter an additional method that return `this` instead of `void`
+**Key points:**
+- in entities, add for each setter an additional method that return `this` instead of `void`
 
 **Fluent API example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFluentApiAdditionalMethods/fluent%20api%20with%20additional%20methods.png)
@@ -1012,12 +1011,12 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 **Description:** This is a suite of samples applications that provides different versions of a `Slice<T> findAll(...)`  method. We have from a minimalist implementation that relies on a hardcoded query as: `"SELECT e FROM " + entityClass.getSimpleName() + " e";` (this recipe), to a custom implementation that supports sorting, specification, lock mode and query hints to an implementation that relies on extending `SimpleJpaRepository`.
 
-**Key points:**\
-     - write an `abstract` class that expose the `Slice<T> findAll(...)` methods (`SlicePagingRepositoryImplementation`)\
-     - implement the `findAll()` methods to return `Slice<T>` (or `Page<T>`, but without the total number of elements)\
-     - return a `SliceImpl` (`Slice<T>`) or a `PageImpl` (`Page<T>`) without the total number of elements\
-     - implement a new `readSlice()` method or override the `SimpleJpaRepository#readPage()` page to avoid `SELECT COUNT`\
-     - pass the entity class (e.g., `Author.class`) to this `abstract` class via a class repository (`AuthorRepository`)
+**Key points:**
+- write an `abstract` class that expose the `Slice<T> findAll(...)` methods (`SlicePagingRepositoryImplementation`)
+- implement the `findAll()` methods to return `Slice<T>` (or `Page<T>`, but without the total number of elements)
+- return a `SliceImpl` (`Slice<T>`) or a `PageImpl` (`Page<T>`) without the total number of elements
+- implement a new `readSlice()` method or override the `SimpleJpaRepository#readPage()` page to avoid `SELECT COUNT`
+- pass the entity class (e.g., `Author.class`) to this `abstract` class via a class repository (`AuthorRepository`)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
