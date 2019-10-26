@@ -5,7 +5,7 @@
 **Key points:**
 - an `@ElementCollection` doesn't have a primary key
 - an `@ElementCollection` is mapped in a separate table
-- pefer `@ElementCollection` with `@OrderColumn` when you have a lot of inserts and deletes near the collection tail
+- prefer `@ElementCollection` with `@OrderColumn` when you have a lot of inserts and deletes near the collection tail
 - the more elements are inserted/removed from the beginning of the collection the greater the performance penalty will be
      
 **Output example:**\
