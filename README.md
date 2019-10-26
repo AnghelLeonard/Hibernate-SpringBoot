@@ -1241,46 +1241,46 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-81. **[How To Retry Transactions After OptimisticLockException Shaped Via @Version](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionedOptimisticLocking)**
+81. **[How To Retry Transactions After `OptimisticLockException` Exception (`@Version`)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionedOptimisticLocking)**
 
-**Note:** Optimistic locking via `@Version` works for detached entities as well.
+**Note:** Optimistic locking mechanism via `@Version` works for detached entities as well.
 
 **Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic locking exception. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
 
-**Key points:**\
-     - in `pom.xml`, add the `db-util` dependency\
-     - configure the `OptimisticConcurrencyControlAspect` bean\
-     - mark the method (not annotated with `@Transactional`) that is prone to throw (or that calls a method that is prone to throw (this method can be annotated with `@Transactional`)) an optimistic locking exception with `@Retry(times = 10, on = OptimisticLockingFailureException.class)`
+**Key points:**
+- for Maven, in `pom.xml`, add the `db-util` dependency
+- configure the `OptimisticConcurrencyControlAspect` bean
+- mark the method (not annotated with `@Transactional`) that is prone to throw (or that calls a method that is prone to throw (this method can be annotated with `@Transactional`)) an optimistic locking exception with `@Retry(times = 10, on = OptimisticLockingFailureException.class)`
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootRetryVersionedOptimisticLocking/Retry%20Optimistic%20Lock.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-82. **[How To Retry Transaction After OptimisticLockException Shaped Via Hibernate Version-less Optimistic Locking](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionlessOptimisticLocking)**
+82. **[How To Retry Transaction After `OptimisticLockException` Exception (Hibernate Version-less Optimistic Locking Mechanism)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionlessOptimisticLocking)**
 
-**Note:** Optimistic locking via Hibernate version-less doesn't work for detached entities (don't close the persistent context).
+**Note:** Optimistic locking mechanism via Hibernate version-less doesn't work for detached entities (don't close the Persistent Context).
 
 **Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic locking exception (e.g., in Spring Boot, `OptimisticLockingFailureException`) via Hibernate version-less optimistic locking. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
 
-**Key points:**\
-     - in `pom.xml`, add the `db-util` library dependency\
-     - configure the `OptimisticConcurrencyControlAspect` bean\
-     - annotate the corresponding entity (e.g., `Inventory`) with `@DynamicUpdate` and `@OptimisticLocking(type = OptimisticLockType.DIRTY)`\
-     - mark the method (not annotated with `@Transactional`) that is prone to throw (or that calls a method that is prone to throw (this method can be annotated with `@Transactional`)) an optimistic locking exception with `@Retry(times = 10, on = OptimisticLockingFailureException.class)`
+**Key points:**
+- for Maven, in `pom.xml`, add the `db-util` library dependency
+- configure the `OptimisticConcurrencyControlAspect` bean
+- annotate the corresponding entity (e.g., `Inventory`) with `@DynamicUpdate` and `@OptimisticLocking(type = OptimisticLockType.DIRTY)`
+- mark the method (not annotated with `@Transactional`) that is prone to throw (or that calls a method that is prone to throw (this method can be annotated with `@Transactional`)) an optimistic locking exception with `@Retry(times = 10, on = OptimisticLockingFailureException.class)`
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-83. **[How To Enrich DTOs With Virtual Properties Via Spring Projections](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjectionsAndVirtualProperties)**
+83. **[How To Enrich DTO With Virtual Properties Via Spring Projections](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjectionsAndVirtualProperties)**
 
-**Note:** You may also like to read the recipe, ["How To Create DTOs Via Spring Data Projections"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
+**Note:** You may also like to read the recipe, ["How To Create DTO Via Spring Data Projections"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
 
-**Description:** Fetch only the needed data from the database via Spring Data Projections (DTOs) and enrich the result via virtual properties.
+**Description:** This is an application sample that fetches only the needed columns from the database via Spring Data Projections (DTO) and enrich the result via virtual properties.
 
-**Key points:**\
-     - we fetch from the database only the user `name` and `city`\
-     - in the projection interface, `UserDetail`, use the `@Value` and Spring SpEL to point to a backing property from the domain model (in this case, the domain model property `city` is exposed via the virtual property `livingin`)\
-     - in the projection interface, `UserDetail`, use the `@Value` and Spring SpEL to enrich the result with two virtual properties that don't have a match in the domain model (in this case, `sessionid` and `status`)
+**Key points:**
+- we fetch from the database only the author `name` and `age`
+- in the projection interface, `AuthorNameAge`, use the `@Value` and Spring SpEL to point to a backing property from the domain model (in this case, the domain model property `age` is exposed via the virtual property `years`)
+- in the projection interface, `AuthorNameAge`, use the `@Value` and Spring SpEL to enrich the result with two virtual properties that don't have a match in the domain model (in this case, `rank` and `books`)
 
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaProjectionsAndVirtualProperties/dto%20spring%20projection%20and%20virtual%20properties.png)
@@ -1289,11 +1289,11 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 
 84. **[How To Use Query Creation Mechanism For JPA To Limit Result Size](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLimitResultSizeViaQueryCreator)**
 
-**Description:** Spring Data comes with the query creation mechanism for JPA that is capable to interpret a query method name and convert it into a SQL query. This is possible as long as we respect the naming conventions of this mechanism. This is an application that exploit this mechanism to write queries that limit the result size. Basically, the name of the query method instructs Spring Data how to add the `LIMIT` (or similar clauses depending on the RDBMS) clause to the generated SQL queries.
+**Description:** Spring Data comes with the query creation mechanism for JPA that is capable to interpret a query method name and convert it into a SQL query in the proper dialect. This is possible as long as we respect the naming conventions of this mechanism. This is an application that exploit this mechanism to write queries that limit the result size. Basically, the name of the query method instructs Spring Data how to add the `LIMIT` (or similar clauses depending on the RDBMS) clause to the generated SQL queries.
 
-**Key points:**\
-     - define a Spring Data classic repository (e.g., `AuthorRepository`)\
-     - write query methods respecting the query creation mechanism for JPA naming conventions     
+**Key points:**
+- define a Spring Data regular repository (e.g., `AuthorRepository`)
+- write query methods respecting the query creation mechanism for JPA naming conventions      
 
 **Examples:**\
     - `List<Author> findFirst5ByAge(int age);`\
@@ -1312,16 +1312,16 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-85. **[How To Generate A Schema Via `schema-*.sql`In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSchemaSql)**
+85. **[How To Generate A Schema Via `schema-*.sql` In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSchemaSql)**
 
 **Note:** As a rule, in real applications avoid generating schema via `hibernate.ddl-auto`. Use `schema-*.sql` file or better `Flyway` or `Liquibase` migration tools.
 
 **Description:** This application is an example of using `schema-*.sql` to generate a schema(database) in MySQL.
 
-**Key points:**\
-     - in `application.properties`, set the JDBC URL (e.g., `spring.datasource.url=jdbc:mysql://localhost:3306/bookstoredb?createDatabaseIfNotExist=true`)\
-     - in `application.properties`, disable DDL auto (just don't use explicitly the `hibernate.ddl-auto` setting)\
-     - in `application.properties`, instruct Spring Boot to initialize the schema from `schema-mysql.sql` file 
+**Key points:**
+- in `application.properties`, set the JDBC URL (e.g., `spring.datasource.url=jdbc:mysql://localhost:3306/bookstoredb?createDatabaseIfNotExist=true`)
+- in `application.properties`, disable DDL auto (just don't add explicitly the `hibernate.ddl-auto` setting)
+- in `application.properties`, instruct Spring Boot to initialize the schema from `schema-mysql.sql` file 
 
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -1331,12 +1331,12 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 
 **Description:** This application is an example of using `schema-*.sql` to generate two databases in MySQL. The databases are matched at entity mapping via `@Table`.
 
-**Key points:**\
-     - in `application.properties`, set the JDBC URL without the database, e.g., `spring.datasource.url=jdbc:mysql://localhost:3306`\
-     - in `application.properties`, disable DDL auto (just don't specify `hibernate.ddl-auto`)\
-     - in `aaplication.properties`, instruct Spring Boot to initialize the schema from `schema-mysql.sql` file\
-     - in `Author` entity, specify that the corresponding table (`author`) is in the database `authorsdb` via `@Table(schema="authorsdb")`\
-     - in `Book` entity, specify that the corresponding table (`book`) is in the database `booksdb` via `@Table(schema="booksdb")`
+**Key points:**
+- in `application.properties`, set the JDBC URL without the database, e.g., `spring.datasource.url=jdbc:mysql://localhost:3306`
+- in `application.properties`, disable DDL auto (just don't specify `hibernate.ddl-auto`)
+- in `aaplication.properties`, instruct Spring Boot to initialize the schema from `schema-mysql.sql` file
+- in `Author` entity, specify that the corresponding table (`author`) is in the database `authorsdb` via `@Table(schema="authorsdb")`
+- in `Book` entity, specify that the corresponding table (`book`) is in the database `booksdb` via `@Table(schema="booksdb")`
 
 **Output example:**
 - Persisting a `Author` results in the following SQL: `insert into authorsdb.author (age, genre, name) values (?, ?, ?)`
@@ -1344,48 +1344,46 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-87. **[How To Stream Result Set Via Spring Data In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootStreamAndMySQL)**
-
-**Note:** For web-applications, pagination should be the way to go, not streaming. But, if you choose streaming then keep in mind the golden rule: keep th result set as small as posible. Also, keep in mind that the Execution Plan might not be as efficient as when using SQL-level pagination.
+87. **Note:** For web-applications, pagination should be the way to go, not streaming. But, if you choose streaming then keep in mind the golden rule: keep th result set as small as posible. Also, keep in mind that the Execution Plan might not be as efficient as when using SQL-level pagination.
 
 **Description:** This application is an example of streaming the result set via Spring Data and MySQL. This example can be adopted for databases that fetches the entire result set in a single roundtrip causing performance penalties.
 
-**Key points:**\
-     - rely on forward-only result set (default in Spring Data)\
-     - rely on read-only statement (add `@Transactional(readOnly=true)`)\
-     - set the fetch-size set (e.g. 30, or row-by-row; `Integer.MIN_VALUE` (recommended in MySQL))      
+**Key points:**
+- rely on *forward-only* result set (default in Spring Data)
+- rely on *read-only* statement (add `@Transactional(readOnly=true)`)
+- set the fetch-size set (e.g. 30, or row-by-row; `Integer.MIN_VALUE` (recommended in MySQL))  
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-88. **[How To Migrate MySQL Database Using Flyway - Database Created Via `createDatabaseIfNotExist`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLQuick)**
+88. **[How To Migrate MySQL Database Using Flyway - MySQL Database Created Via `createDatabaseIfNotExist`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLQuick)**
 
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of migrating a MySQL database via Flyway when the database exists (it is created before migration via MySQL specific parameter, `createDatabaseIfNotExist=true`). 
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add the Flyway dependency\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - in `application.properties`, set the JDBC URL as follows: `jdbc:mysql://localhost:3306/bookstoredb?createDatabaseIfNotExist=true`\
-     - each SQL file containing the schema update add it in `classpath:db/migration`\
-     - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
+**Key points:**
+- for Maven, in `pom.xml`, add the Flyway dependency
+- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- in `application.properties`, set the JDBC URL as follows: `jdbc:mysql://localhost:3306/bookstoredb?createDatabaseIfNotExist=true`
+- each SQL file containing the schema update add it in `classpath:db/migration`
+- each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
 
 -----------------------------------------------------------------------------------------------------------------------    
 
 89. **[How To Migrate MySQL Database Using Flyway - Database Created Via `spring.flyway.schemas`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLDatabase)**
 
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of migrating a MySQL database when the database is created by Flyway via `spring.flyway.schemas`. In this case, the entities should be annotated with `@Table(schema = "bookstoredb")` or `@Table(catalog = "bookstoredb")`. Here, the database name is `bookstoredb`.
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add the Flyway dependency\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - in `application.properties`, set the JDBC URL as follows: `jdbc:mysql://localhost:3306/`\
-     - in `application.properties`, add `spring.flyway.schemas=bookstoredb`, where `bookstoredb` is the database that should be created by Flyway (feel free to add your own database name)\
-     - each entity that should be stored in this database should be annotated with, `@Table(schema/catalog = "bookstoredb")`\
-     - each SQL file containing the schema update add it in `classpath:db/migration`\
-     - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
+**Key points:**
+- for Maven, in `pom.xml`, add the Flyway dependency
+- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- in `application.properties`, set the JDBC URL as follows: `jdbc:mysql://localhost:3306/`
+- in `application.properties`, add `spring.flyway.schemas=bookstoredb`, where `bookstoredb` is the database that should be created by Flyway (feel free to add your own database name)
+- each entity that should be stored in this database should be annotated with, `@Table(schema/catalog = "bookstoredb")`
+- each SQL file containing the schema update add it in `classpath:db/migration`
+- each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
 
 **Output of migration history example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFlywayMySQLDatabase/flyway_schema_history%20table.png)
@@ -1393,21 +1391,21 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 -----------------------------------------------------------------------------------------------------------------------    
 
 90. **[How To Auto-Create And Migrate Schemas For Two Data Sources (MySQL and PostgreSQL) Using Flyway](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayTwoVendors)**
-
-**Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+ 
+**Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of auto-creating and migrating schemas for MySQL and PostgreSQL. In addition, each data source uses its own HikariCP connection pool. In case of MySQL, where *schema*=*database*, we auto-create the schema (`authorsdb`) based on `createDatabaseIfNotExist=true`. In case of PostgreSQL, where a database can have multiple schemas, we use the default `postgres` database and auto-create in it the schema, `booksdb`. For this we rely on Flyway, which is capable to create a missing schema.
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add the Flyway dependency\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - in `application.properties`, configure the JDBC URL for MySQL as, `jdbc:mysql://localhost:3306/authorsdb?createDatabaseIfNotExist=true` and for PostgreSQL as, `jdbc:postgresql://localhost:5432/postgres?currentSchema=booksdb`\
-     - in `application.properties`, set `spring.flyway.enabled=false` to disable default behavior\
-     - programmatically create a `DataSource` for MySQL and one for PostgreSQL\
-     - programmatically create a `FlywayDataSource` for MySQL and one for PostgreSQL\
-     - programmatically create an `EntityManagerFactory` for MySQL and one for PostgreSQL\
-     - for MySQL, place the migration SQLs files in `db\migration\mysql`\
-     - for PostgreSQL, place the migration SQLs files in `db\migration\postgresql`   
+**Key points:**
+- for Maven, in `pom.xml`, add the Flyway dependency
+- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- in `application.properties`, configure the JDBC URL for MySQL as, `jdbc:mysql://localhost:3306/authorsdb?createDatabaseIfNotExist=true` and for PostgreSQL as, `jdbc:postgresql://localhost:5432/postgres?currentSchema=booksdb`
+- in `application.properties`, set `spring.flyway.enabled=false` to disable default behavior
+- programmatically create a `DataSource` for MySQL and one for PostgreSQL
+- programmatically create a `FlywayDataSource` for MySQL and one for PostgreSQL
+- programmatically create an `EntityManagerFactory` for MySQL and one for PostgreSQL
+- for MySQL, place the migration SQLs files in `db\migration\mysql`
+- for PostgreSQL, place the migration SQLs files in `db\migration\postgresql`    
 
 -----------------------------------------------------------------------------------------------------------------------    
 
