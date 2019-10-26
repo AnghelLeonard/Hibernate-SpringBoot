@@ -29,9 +29,9 @@ Fetch a page as a `List`:
 **Examples of classical *offset* pagination:**
 - call the built-in `findAll(Pageable)` without sorting:\
 `repository.findAll(PageRequest.of(page, size));`
-- call the built-in `findAll(Pageable)` with sorting:
+- call the built-in `findAll(Pageable)` with sorting:\
 `repository.findAll(PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name")));`
-- use Spring Data query creation to define new methods in your repository:
+- use Spring Data query creation to define new methods in your repository:\
 `Page<Author> findByName(String name, Pageable pageable);`
 `Page<Author> queryFirst10ByName(String name, Pageable pageable);`
 
