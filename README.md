@@ -371,7 +371,7 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-25. **[DTOs Via `SqlResultSetMapping` And `EntityManager`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaSqlResultSetMappingEm)** 
+25. **[How To Fetch DTO Via `SqlResultSetMapping` And `EntityManager`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaSqlResultSetMappingEm)** 
 
 **Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on `SqlResultSetMapping` and `EntityManager`.
  
@@ -381,56 +381,60 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-26. **[How To Extract DTOs Via SqlResultSetMapping & NamedNativeQuery](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSqlResultSetMappingAndNamedNativeQuery)**
-
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on `SqlResultSetMapping`, `NamedNativeQuery` and `EntityManager`.
-
-**Key points:**\
-     - use `SqlResultSetMapping`, `NamedNativeQuery` and `EntityManager`\
-     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
+26. **[How To Fetch DTO Via `SqlResultSetMapping` And `NamedNativeQuery`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSqlResultSetMappingAndNamedNativeQuery)**
+ 
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on `SqlResultSetMapping`, `NamedNativeQuery` and `EntityManager`.
+ 
+**Key points:**
+- use `SqlResultSetMapping`, `NamedNativeQuery` and `EntityManager`
+- for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-27. **[How To Extract DTOs Via javax.persistence.Tuple And Native SQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoTupleAndSql)**
+27. **[How To Fetch DTO Via `javax.persistence.Tuple` And Native SQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoTupleAndSql)**
 
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on `javax.persistence.Tuple` and native SQL.
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on `javax.persistence.Tuple` and native SQL.
 
-**Key points:**\
-     - use `java.persistence.Tuple` and `EntityManager.createNativeQuery()`\
-     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)     
-
------------------------------------------------------------------------------------------------------------------------    
-
-28. **[How To Extract DTOs Via javax.persistence.Tuple And JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoTupleAndJpql)**
-
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on `javax.persistence.Tuple` and JPQL.
+**Key points:**
+- use `java.persistence.Tuple` in a Spring repository and mark the query as `nativeQuery = true`
+- for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-29. **[How To Extract DTOs Via Constructor Expression And JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructorExpression)**
+28. **[How To Fetch DTO via `javax.persistence.Tuple` and JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoTupleAndJpql)**
 
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on Constructor Expression and JPQL.
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on `javax.persistence.Tuple` and JPQL.
 
-**Key points:**\
-     - use a proper constructor in the DTO class\
-     - and use a query as `select new com.jpa.CarDto(c.name, c.color) from Car c`\
-     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
-     
+**Key points:**
+- use `java.persistence.Tuple` in a Spring repository
+- for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+29. **[How To Fetch DTO Via Constructor Expression and JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructorExpression)**
+
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on Constructor Expression and JPQL.
+
+**Key points:**
+- write a proper constructor in the DTO class
+- use a query as `SELECT new com.bookstore.dto.AuthorDto(a.name, a.age) FROM Author a`
+- for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
+
 **See also:**\
-[Dto Via Constructor And Spring Data Query Builder Mechanism](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructor)
+[How To Fetch DTO Via Constructor And Spring Data Query Builder Mechanism](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructor)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-30. **[How To Extract DTOs Via ResultTransformer And Native SQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoResultTransformer)**
+30. **[How To Fetch DTO Via `ResultTransformer` And Native SQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoResultTransformer)**
 
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on Hibernate, `ResultTransformer` and native SQL.
+**Description:** Fetching more data than needed is prone to performance penalties. Using DTO allows us to extract only the needed data. In this application we rely on Hibernate, `ResultTransformer` and native SQL.
 
-**Key points:**\
-     - use `AliasToBeanConstructorResultTransformer` for DTOs without setters, with constructor\
-     - use `Transformers.aliasToBean()` for DTOs with setters\
-     - use `EntityManager.createNativeQuery()` and `unwrap(org.hibernate.query.NativeQuery.class)`\
-     - starting with Hibernate 5.2, `ResultTransformer` is deprecated, but until a replacement will be available (in Hibernate 6.0) it can be used ([read further](https://discourse.hibernate.org/t/hibernate-resulttransformer-is-deprecated-what-to-use-instead/232))\
-     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
+**Key points:**
+- use `AliasToBeanConstructorResultTransformer` for DTO without setters, but with constructor
+- use `Transformers.aliasToBean()` for DTO with setters
+- use `EntityManager.createNativeQuery()` and `unwrap(org.hibernate.query.NativeQuery.class)`
+- starting with Hibernate 5.2, `ResultTransformer` is deprecated, but until a replacement will be available (probably in Hibernate 6.0) it can be used ([read further](https://discourse.hibernate.org/t/hibernate-resulttransformer-is-deprecated-what-to-use-instead/232))
+- for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
 
 -----------------------------------------------------------------------------------------------------------------------    
 
