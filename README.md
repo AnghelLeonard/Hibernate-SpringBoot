@@ -1024,9 +1024,9 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
  
 **Description:** Typically, in offset pagination, there is one query needed for fetching the data and one for counting the total number of records. But, we can fetch this information in a single database rountrip via a `SELECT COUNT` subquery nested in the main `SELECT`. Even better, for databases vendors that support *Window Functions* there is a solution relying on `COUNT(*) OVER()` as in this application that uses this window function in a native query against MySQL 8. So, prefer this one instead of `SELECT COUNT` subquery.
 
-**Key points:**\
-     - create a DTO projection that contains getters for the data that should be fetched and an extra-column for mapping the return of the `COUNT(*) OVER()` window function\
-     - write a native query relying on this window function
+**Key points:**
+- create a DTO projection that contains getters for the columns that should be fetched and an extra-column for mapping the return of the `COUNT(*) OVER()` window function
+- write a native query relying on this window function
 
 **Example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootListDtoOffsetPaginationWF/offset%20pagination%20via%20window%20function.png)
@@ -1041,7 +1041,7 @@ Screenshot from that article (*offset* pagination):
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootKeysetPagination/offset%20pagination.png)
 
 **Need to know if there are more records?**\
-By its nature, *keyset* doesn't use a `SELECT COUNT` to fetch the number of total records. But, we a little tweak we can easily say if there are more records, therefore to show a button of type `Next Page`. Mainly, if you need such a thing then consider [this application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootKeysetPaginationNextPage). 
+By its nature, *keyset* doesn't use a `SELECT COUNT` to fetch the number of total records. But, with a little tweak, we can easily say if there are more records, therefore to show a button of type `Next Page`. Mainly, if you need such a thing then consider [this application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootKeysetPaginationNextPage) whose climax is listed below:
 
 `public AuthorView fetchNextPage(long id, int limit) {`\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`List<Author> authors = authorRepository.fetchAll(id, limit + 1);`
@@ -1069,9 +1069,9 @@ Or, like this (rely on `Author.toString()` method):
 
 A `Previous Page` button can be implemented easily based on the first record.
 
-**Key points:**\
-     - choose the column(s) to act as the latest visited record (e.g., `id`)\
-     - use the column(s) in the `WHERE` and `ORDER BY` clauses of your SQL
+**Key points:**
+- choose the column(s) to act as the latest visited record (e.g., `id`)
+- use the column(s) in the `WHERE` and `ORDER BY` clauses of your SQL
           
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -1099,18 +1099,18 @@ Fetch a page as a `List`:
 
 **But:** If *offset* pagination is causing you performance issues and you decide to go with *keyset* pagination then please check [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootKeysetPagination) (*keyset* pagination).
 
-**Key points of classical *offset* pagination:**\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - call or write methods that returns `Page<entity>`
+**Key points of classical *offset* pagination:**
+- write a repository that extends `PagingAndSortingRepository`
+- call or write methods that returns `Page<entity>`
 
-**Examples of classical *offset* pagination:**\
-     - call the built-in `findAll(Pageable)` without sorting:\
-     `repository.findAll(PageRequest.of(page, size));`\
-     - call the built-in `findAll(Pageable)` with sorting:\
-     `repository.findAll(PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name")));`\
-     - use Spring Data query creation to define new methods in your repository:\
-     `Page<Author> findByName(String name, Pageable pageable);`\
-     `Page<Author> queryFirst10ByName(String name, Pageable pageable);`
+**Examples of classical *offset* pagination:**
+- call the built-in `findAll(Pageable)` without sorting:\
+`repository.findAll(PageRequest.of(page, size));`
+- call the built-in `findAll(Pageable)` with sorting:\
+`repository.findAll(PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name")));`
+- use Spring Data query creation to define new methods in your repository:\
+`Page<Author> findByName(String name, Pageable pageable);`\
+`Page<Author> queryFirst10ByName(String name, Pageable pageable);`
      
 -----------------------------------------------------------------------------------------------------------------------    
 
