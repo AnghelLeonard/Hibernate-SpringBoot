@@ -180,7 +180,7 @@
 
 11. **[How To Populate a Child-Side Parent Association via Proxy](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPopulatingChildViaProxy)**
 
-**Description:** A proxy can be useful when a child entity can be persisted with a reference to its parent (`@ManyToOne` or `@OneToOne` association). In such cases, fetching the parent entity from the database (execute the `SELECT` statement) is a performance penalty and a pointless action, becase Hibernate can set the underlying foreign key value for an uninitialized proxy.
+**Description:** A Hibernate proxy can be useful when a child entity can be persisted with a reference to its parent (`@ManyToOne` or `@OneToOne` association). In such cases, fetching the parent entity from the database (execute the `SELECT` statement) is a performance penalty and a pointless action, because Hibernate can set the underlying foreign key value for an uninitialized proxy.
 
 **Key points:**
 - rely on `EntityManager#getReference()`
@@ -233,36 +233,36 @@
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootEnableDirtyTracking/Enable%20dirty%20tracking.png)
 
-The bytecode enhancement effect can be seen on `Author.class` [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootEnableDirtyTracking/Bytecode%20Enhancement%20Author.class/Author.java)
+The *bytecode enhancement* effect can be seen on `Author.class` [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootEnableDirtyTracking/Bytecode%20Enhancement%20Author.class/Author.java)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-15. **[How To Use Java 8 Optional In Entities And Queries](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOptional)**
-
+15. **[Use Java 8 `Optional` In Entities And Queries](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOptional)**
+ 
 **Description:** This application is an example of how is correct to use the Java 8 `Optional` in entities and queries. 
 
-**Key points:**\
-     - use the Spring Data built-in query-methods that return `Optional` (e.g., `findById()`)\
-     - write your own queries that return `Optional`\
-     - use `Optional` in entities getters\
-     - in order to run different scenarios check the file, `data-mysql.sql`
+**Key points:**
+- use the Spring Data built-in query-methods that return `Optional` (e.g., `findById()`)
+- write your own queries that return `Optional`
+- use `Optional` in entities getters
+- in order to run different scenarios check the file, `data-mysql.sql`
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-16. **[How To Use OneToMany Bidirectional Correctly](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToManyBidirectional)**
+16. **[The Best Way To Map The `@OneToMany` Bidirectional Association](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToManyBidirectional)**
 
 **Description:** This application is a proof of concept of how is correct to implement the bidirectional `@OneToMany` association. 
 
-**Key points:**\
-     - always cascade from parent to child\
-     - use `mappedBy` on the parent\
-     - use `orphanRemoval` on parent in order to remove children without references\
-     - use helper methods on parent to keep both sides of the association in sync\
-     - use lazy fetching on both side of the association\
-     - as entities identifiers, use assigned identifiers (business key, natural key (`@NaturalId`)) and/or database-generated identifiers and override (on child-side) properly the `equals()` and `hashCode()` methods as [here](https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/)\
-     - if `toString()` need to be overridden, then pay attention to involve only for the basic attributes fetched when the entity is loaded from the database
+**Key points:**
+- always cascade from parent to child
+- use `mappedBy` on the parent
+- use `orphanRemoval` on parent in order to remove children without references
+- use helper methods on parent to keep both sides of the association in sync
+- use lazy fetching on both side of the association
+- as entities identifiers, use assigned identifiers (business key, natural key (`@NaturalId`)) and/or database-generated identifiers and override (on child-side) properly the `equals()` and `hashCode()` methods as [here](https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/)
+- if `toString()` need to be overridden, then pay attention to involve only the basic attributes fetched when the entity is loaded from the database
      
-**Note:** Pay attention to remove operations, especially to removing child entities. The `CascadeType.REMOVE` and `orphanRemoval=true` may produce too many queries. Relying on *bulk* operations is most of the time the best way to go for deletions.  
+**Note:** Pay attention to remove operations, especially to removing child entities. The `CascadeType.REMOVE` and `orphanRemoval=true` may produce too many queries. In such scenarios, relying on *bulk* operations is most of the time the best way to go for deletions.
      
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -270,19 +270,19 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 **Description:** This application is an example of how to write a query via `JpaRepository`, `EntityManager` and `Session`.
 
-**Key points:**\
-     - for `JpaRepository` use `@Query` or Spring Data Query Creation\
-     - for `EntityManager` and `Session` use the `createQuery()` method 
+**Key points:**
+- for `JpaRepository` use `@Query` or Spring Data Query Creation
+- for `EntityManager` and `Session` use the `createQuery()` method 
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-18. **[How To Avoid MySQL & Hibernate 5 AUTO Generator Type](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAutoGeneratorType)**
+18. **[Why And How To Avoid The `AUTO` Generator Type In Hibernate 5 And MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAutoGeneratorType)**
 
-**Description:** In MySQL & Hibernate 5, the `GenerationType.AUTO` generator type will result in using the `TABLE` generator. This adds a significant performance penalty. Turning this behavior to `IDENTITY` generator can be obtained by using `GenerationType.IDENTITY` or the native generator.
-
-**Key points:**\
-     - use `GenerationType.IDENTITY` instead of `GenerationType.AUTO`\
-     - use the native generator - exemplified in this application
+**Description:** In MySQL & Hibernate 5, the `GenerationType.AUTO` generator type will result in using the `TABLE` generator. This adds a significant performance penalty. Turning this behavior to `IDENTITY` generator can be obtained by using `GenerationType.IDENTITY` or the *native* generator.
+ 
+**Key points:**
+- use `GenerationType.IDENTITY` instead of `GenerationType.AUTO`
+- use the *native* generator - exemplified in this application
    
 **Output example:**\
 <a href="#"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAutoGeneratorType/Hibernate%20Spring%20Boot%20Auto%20Generator%20Type.png" align="center" height="132" width="742" ></a>
@@ -291,11 +291,14 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 19. **[How To Avoid The Redundant save() Call](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRedundantSave)**
 
-**Description:** This application is an example when calling `save()` for a managed entity is redundant.
+**[Avoid Spring Redundant `save()` Call](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRedundantSave)**
+ 
+**Description:** This application is an example when calling `save()` for an entity is redundant (not necessary).
 
-**Key points:**\
-     - Hibernate triggers `UPDATE` statements for managed entities without the need to explicitly call the `save()` method\
-     - behind the scene, this redundancy implies a performance penalty as well
+**Key points:**
+- at flush time, Hibernate relies on *dirty checking* mechanism to determine the potential modifications in entities 
+- for each modification, Hibernate automatically triggers the corresponding `UPDATE` statement without the need to explicitly call the `save()` method
+- behind the scene, this redundancy (calling `save()` when is not necessarily) doesn't affect the number of triggered queries, but it implies a performance penalty in the underlying Hibernate processes
 
 -----------------------------------------------------------------------------------------------------------------------    
 
