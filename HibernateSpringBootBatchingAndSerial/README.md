@@ -4,7 +4,7 @@
 
 **Key points:**
 - use `GenerationType.SEQUENCE` instead of `GenerationType.IDENTITY`
-- rely on the `hi/lo` algorithm to fetch a *hi* value in a database roundtrip (the *hi* value is useful for generating identifiers in-memory; until you haven't exhausted all in-memory identifiers there is no need to fetch another *hi*) 
+- rely on the `hi/lo` algorithm to fetch a *hi* value in a database roundtrip (the *hi* value is useful for generating a certain/given number of identifiers in-memory; until you haven't exhausted all in-memory identifiers there is no need to fetch another *hi*) 
 - you can go even further and use the Hibernate `pooled` and `pooled-lo` identifier generators (these are optimizations of `hi/lo` that allows external services to use the database without causing duplication keys errors)
    
 **Output example:**\
