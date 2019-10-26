@@ -291,8 +291,6 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 19. **[How To Avoid The Redundant save() Call](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRedundantSave)**
 
-**[Avoid Spring Redundant `save()` Call](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRedundantSave)**
- 
 **Description:** This application is an example when calling `save()` for an entity is redundant (not necessary).
 
 **Key points:**
@@ -304,41 +302,42 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 20. **[Why To Avoid PostgreSQL (`BIG`)`SERIAL` In Batching Inserts Via Hibernate](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchingAndSerial)**
 
-**Description:** In PostgreSQL, using `GenerationType.IDENTITY` will disable insert batching. The `(BIG)SERIAL` is acting "almost" like MySQL, `AUTO_INCREMENT`. In this application, we use the `GenerationType.SEQUENCE` which enable insert batching, and we optimize it via the `hi/lo` optimization algorithm.
+**Description:** In PostgreSQL, using `GenerationType.IDENTITY` will disable insert batching. The `(BIG)SERIAL` is acting "almost" like MySQL, `AUTO_INCREMENT`. In this application, we use the `GenerationType.SEQUENCE` which permits insert batching, and we optimize it via the `hi/lo` optimization algorithm. 
 
-**Key points:**\
-     - use `GenerationType.SEQUENCE` instead of `GenerationType.IDENTITY`\
-     - rely on the `hi/lo` algorithm to fetch multiple identifiers in a single database roundtrip (you can go even further and use the Hibernate `pooled` and `pooled-lo` identifier generators (these are optimizations of `hi/lo`))
+**Key points:**
+- use `GenerationType.SEQUENCE` instead of `GenerationType.IDENTITY`
+- rely on the `hi/lo` algorithm to fetch a *hi* value in a database roundtrip (the *hi* value is useful for generating a certain/given number of identifiers in-memory; until you haven't exhausted all in-memory identifiers there is no need to fetch another *hi*) 
+- you can go even further and use the Hibernate `pooled` and `pooled-lo` identifier generators (these are optimizations of `hi/lo` that allows external services to use the database without causing duplication keys errors)
    
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchingAndSerial/PostgreSQL%20(BIG)SERIAL%20and%20Batching%20Inserts.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-21. **[JPA Inheritance - Single Table](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSingleTableInheritance)**
+21. **[JPA Inheritance - `SINGLE_TABLE`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSingleTableInheritance)**
 
-**Description:** This application is a sample of JPA Single Table inheritance strategy (`SINGLE_TABLE`)
+**Description:** This application is a sample of using JPA Single Table inheritance strategy (`SINGLE_TABLE`).
 
-**Key points:**\
-     - this is the default inheritance strategy (`@Inheritance(strategy=InheritanceType.SINGLE_TABLE)`)\
-     - all the classes in an inheritance hierarchy are represented via a single table in a the database\
-     - subclasses attributes non-nullability is ensured via `@NotNull` and MySQL triggers\
-     - the default discriminator column memory footprint was optimized by declaring it of type `TINYINT`
+**Key points:**
+- this is the default inheritance strategy (`@Inheritance(strategy=InheritanceType.SINGLE_TABLE)`)
+- all the classes in an inheritance hierarchy are represented via a single table in the database
+- subclasses attributes non-nullability is ensured via `@NotNull` and MySQL triggers
+- the default discriminator column memory footprint was optimized by declaring it of type `TINYINT`
    
 **Output example (below is a single table obtained from 3 entities):**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSingleTableInheritance/Single%20table%20inheritance.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-22. **[How To Count And Assert SQL Statements](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCountSQLStatements)**
+22. **[Count and Assert SQL Statements](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCountSQLStatements)**
 
-**Description:** This application is a sample of counting and asserting SQL statements triggered "behind the scene". Is very useful to count the SQL statements in order to ensure that your code is not generating more SQLs that you may think (e.g., N+1 can be easily detected by asserting the number of expected statements).
+**Description:** This application is a sample of counting and asserting SQL statements triggered "behind the scene". Is very useful to count the SQL statements in order to ensure that your code is not generating more SQL statements that you may think (e.g., N+1 can be easily detected by asserting the number of expected statements).
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add dependencies for `datasource-proxy` and Vlad Mihalcea's `db-util`\
-     - create the `ProxyDataSourceBuilder` with `countQuery()`\
-     - reset the counter via `SQLStatementCountValidator.reset()`\
-     - assert `INSERT`, `UPDATE`, `DELETE` and `SELECT` via `assertInsert/Update/Delete/Select/Count(long expectedNumberOfSql)`
+**Key points:**
+- for Maven, in `pom.xml`, add dependencies for DataSource-Proxy library and Vlad Mihalcea's db-util library
+- create the `ProxyDataSourceBuilder` with `countQuery()`
+- reset the counter via `SQLStatementCountValidator.reset()`
+- assert `INSERT`, `UPDATE`, `DELETE` and `SELECT` via `assertInsert/Update/Delete/Select/Count(long expectedNumberOfSql)`
    
 **Output example (when the number of expected SQLs is not equal with the reality an exception is thrown):**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootCountSQLStatements/count%20and%20assert%20SQL.png)
@@ -349,9 +348,9 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 **Description:** This application is a sample of setting the JPA callbacks (`Pre/PostPersist`, `Pre/PostUpdate`, `Pre/PostRemove` and `PostLoad`).
 
-**Key points:**\
-     - in entity, write callback methods and use the proper annotations\
-     - callback methods annotated on the bean class must return void and take no arguments
+**Key points:**
+- in entity, write callback methods and use the proper annotations
+- callback methods annotated on the bean class must return `void` and take no arguments
    
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootJpaCallbacks/JPA%20callbacks.png)
@@ -360,22 +359,25 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 24. **[How To Use `@MapsId` For Sharing Identifier In `@OneToOne` Relationship](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToOneMapsId)**
 
-**Description:** Instead of *classical* unidirectional/bidirectional `@OneToOne` better rely on an unidirectional `@OneToOne` and `@MapsId`. This application is a proof of concept. 
+**Description:** Instead of *regular* unidirectional/bidirectional `@OneToOne` better rely on an unidirectional `@OneToOne` and `@MapsId`. This application is a proof of concept. 
 
-**Key points:**\
-     - use `@MapsId` on child side\
-     - use `@JoinColumn` to customize the name of the Primary Key column\
-     - basically, for `@OneToOne` associations, `@MapsId` will share the Primary Key with the parent table (`id` property acts as both Primary Key and Foreign Key)      
+**Key points:**
+- use `@MapsId` on child side
+- use `@JoinColumn` to customize the name of the primary key column
+- mainly, for `@OneToOne` associations, `@MapsId` will share the primary key with the parent table (`id` property acts as both primary key and foreign key)    
+     
+**Note:**
+- `@MapsId` can be used for `@ManyToOne` as well   
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-25. **[How To Extract DTOs Via SqlResultSetMapping](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaSqlResultSetMappingEm)**
+25. **[DTOs Via `SqlResultSetMapping` And `EntityManager`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaSqlResultSetMappingEm)** 
 
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on `SqlResultSetMapping` and `EntityManager`.
-
-**Key points:**\
-     - use `SqlResultSetMapping` and `EntityManager`\
-     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on `SqlResultSetMapping` and `EntityManager`.
+ 
+**Key points:**
+- use `SqlResultSetMapping` and `EntityManager`
+- for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
      
 -----------------------------------------------------------------------------------------------------------------------    
 
