@@ -1,7 +1,7 @@
 
 **[The Best Way To Implement A Bidirectional `@ManyToMany` Association](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManyBidirectional)**
 
-**Description:** This application is a proof of concept of how it is correct to implement the bidirectional `@ManyToMany` association. 
+**Description:** This application is a proof of concept of how it is correct to implement the bidirectional `@ManyToMany` association from the performance perspective. 
 
 **Key points:**
 - choose an owning and a `mappedBy` side
