@@ -3,7 +3,7 @@
 **Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on [Blaze-Persistence](https://persistence.blazebit.com/) entity views.
  
 **Key points:**
-- add in `pom.xml` the dependencies specific to Blaze-Persistence
+- for Maven, add in `pom.xml` the dependencies specific to Blaze-Persistence
 - configure Blaze-Persistence via `CriteriaBuilderFactory` and `EntityViewManager`
 - write an *entity view* via an interface in Blaze-Persistence fashion
 - write a Spring-centric repository by extending `EntityViewRepository`
