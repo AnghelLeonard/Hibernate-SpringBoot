@@ -580,75 +580,75 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-41. **[How To Use Spring Projections(DTOs) And Exclusive Right Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaRightExcludingJoins)**
+41. **[How To Use Spring Projections(DTO) And Exclusive Right Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaRightExcludingJoins)**
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaRightExcludingJoins/DTO%20via%20exclusive%20right%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and exclusive right joins written via JPQL and native SQL (for MySQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTO) and exclusive right joins written via JPQL and native SQL (for MySQL).
 
-**Key points:**\
-     - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
-     - write exclusive right joins queries using JPQL/SQL
+**Key points:**
+- define two entities (e.g., `Author` and `Book` in a (lazy) bidirectional `@OneToMany` association)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (Spring projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)
+- write exclusive right joins queries using JPQL/SQL
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-42. **[How To Use Spring Projections(DTOs) And Exclusive Full Joins (PostgreSQL)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaOuterExcludingJoins)**
+42. **[How To Use Spring Projections(DTO) And Exclusive Full Joins (PostgreSQL)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaOuterExcludingJoins)**
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaOuterExcludingJoins/DTO%20via%20exclusive%20full%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and exclusive full joins written via JPQL and native SQL (for PostgreSQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTO) and exclusive full joins written via JPQL and native SQL (for PostgreSQL).
 
-**Key points:**\
-     - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
-     - write exclusive full joins queries using JPQL/SQL
+**Key points:**
+- define two entities (e.g., `Author` and `Book` in a (lazy) bidirectional `@OneToMany` association)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (Spring projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)
+- write exclusive full joins queries using JPQL/SQL
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-43. **[Why You Should Avoid Time-Consuming Tasks In Spring Boot Post-Commits](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPostCommit)**
+43. **[Why You Should Avoid Time-Consuming Tasks In Spring Boot Post-Commit Hooks](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPostCommit)**
 
-**Description:** This application is a proof of concept for using Spring post-commit hooks.
+**Description:** This application is a proof of concept for using Spring post-commit hooks and how they may affect the persistence layer performance.
 
-**Key points:**\
-     - avoid time-consuming task in post-commits since the database connection will remain open until this code finshes
+**Key points:**
+- avoid time-consuming tasks in Spring post-commit hooks since the database connection will remain open until this code finshes
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-44. **[How To Exploit Spring Projections(DTOs) And Join Unrelated Entities in Hibernate 5.1+](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoUnrelatedEntities)**
+44. **[How To Exploit Spring Projections(DTO) And Join Unrelated Entities In Hibernate 5.1+](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoUnrelatedEntities)**
 
-**Description:** This application is a proof of concept for using Spring Projections (DTOs) and join unrelated entities. Hibernate 5.1 introduced explicit joins on unrelated entities and the syntax and behaviour are similar to `SQL JOIN` statements.
+**Description:** This application is a proof of concept for using Spring Projections (DTO) and join unrelated entities. Hibernate 5.1 introduced explicit joins on unrelated entities and the syntax and behaviour are similar to SQL `JOIN` statements.
 
-**Key points:**\
-     - define serveral entities (e.g., `Author` and `Book` unrelated entities)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., `BookstoreDto`)\
-     - write joins queries using JPQL/SQL (e.g., queries all authors names and book titles of the given price) 
+**Key points:**
+- define serveral entities (e.g., `Author` and `Book` unrelated entities)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (Spring projections) that contains getters for the columns that should be fetched from the database (e.g., `BookstoreDto`)
+- write joins queries using JPQL/SQL (e.g., queries all authors names and book titles of the given price)  
      
 -----------------------------------------------------------------------------------------------------------------------    
 
 45. **[Why To Avoid Lombok `@EqualsAndHashCode` And `@Data` In Entities And How To Override `equals()` And `hashCode()`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLombokEqualsAndHashCode)**
-
+ 
 **Description:** Entities should implement `equals()` and `hashCode()` as [here](https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/). The main idea is that Hibernate requires that an entity is equal to itself across all its state transitions (*transient*, *attached*, *detached* and *removed*). Using Lombok `@EqualsAndHashCode` (or `@Data`) will not respect this requirment.
 
 **Key points:**\
-**AVOID THESE APPROACHES**\
-     - Using Lombok default behavior of `@EqualsAndHashCode`\
-     (entity: `LombokDefaultBook`, test: `LombokDefaultEqualsAndHashCodeTest`)\
-     - Using Lombok  `@EqualsAndHashCode` with primary key only\
-     (entity: `LombokIdBook`, test: `LombokEqualsAndHashCodeWithIdOnlyTest`)\
-     - Rely on default `equals()` and `hashCode()`\
-     (entity: `DefaultBook`, test: `DefaultEqualsAndHashCodeTest`)\
-     - Rely on default `equals()` and `hashCode()` containing only the database-generated identifier\
-     (entity: `IdBook`, test: `IdEqualsAndHashCodeTest`)
+**AVOID THESE APPROACHES**
+- Using Lombok default behavior of `@EqualsAndHashCode`
+(entity: `LombokDefaultBook`, test: `LombokDefaultEqualsAndHashCodeTest`)
+- Using Lombok  `@EqualsAndHashCode` with primary key only
+(entity: `LombokIdBook`, test: `LombokEqualsAndHashCodeWithIdOnlyTest`)
+- Rely on default `equals()` and `hashCode()`
+(entity: `DefaultBook`, test: `DefaultEqualsAndHashCodeTest`)
+- Rely on default `equals()` and `hashCode()` containing only the database-generated identifier
+(entity: `IdBook`, test: `IdEqualsAndHashCodeTest`)
 
-**PREFER THESE APPROACHES**\
-     - Rely on business key (entity: `BusinessKeyBook`, test: `BusinessKeyEqualsAndHashCodeTest`)\
-     - Rely on `@NaturalId` (entity: `NaturalIdBook`, test: `NaturalIdEqualsAndHashCodeTest`)\
-     - Rely on manually assigned identifiers (entity: `IdManBook`, test: `IdManEqualsAndHashCodeTest`)\
-     - Rely on database-generated identifiers (entity: `IdGenBook`, test: `IdGenEqualsAndHashCodeTest`)
+**PREFER THESE APPROACHES**
+- Rely on business key (entity: `BusinessKeyBook`, test: `BusinessKeyEqualsAndHashCodeTest`)
+- Rely on `@NaturalId` (entity: `NaturalIdBook`, test: `NaturalIdEqualsAndHashCodeTest`)
+- Rely on manually assigned identifiers (entity: `IdManBook`, test: `IdManEqualsAndHashCodeTest`)
+- Rely on database-generated identifiers (entity: `IdGenBook`, test: `IdGenEqualsAndHashCodeTest`)
      
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLombokEqualsAndHashCode/auto-generated%20primary%20key%20and%20equals%20-%20hashCode.png)   
 
@@ -656,12 +656,17 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 46. **[How To Avoid LazyInitializationException Via JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinFetch)**
 
-**Description:** Typically, when we get a `LazyInitializationException` we tend to modify the relationship fetching type from `LAZY` to `EAGER`. That is bad! This is a [code smell](https://vladmihalcea.com/eager-fetching-is-a-code-smell/). Best way to avoid this exception is to rely on `JOIN FETCH` (if you plan to modify the fetched entities) or `JOIN` + DTOs (if the fetched data is only read). `JOIN FETCH` allows associations or collections of values to be initialized along with their parent objects using a single `SELECT`. This application is a `JOIN FETCH` example with entities. But, with some constraints, `JOIN FETCH` can be used with DTOs as well. An example is available [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch).
+**See also:**
+- [LEFT JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLeftJoinFetch)
+- [JOIN FETCH And DTO](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch)
+- [JOIN VS. JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinVSJoinFetch)
 
-**Key points:**\
-     - define two related entities (e.g., `Author` and `Book` in a one-to-many lazy bidirectional relationship)\
-     - write a JPQL `JOIN FETCH` to fetch an author including his books\
-     - write a JPQL `JOIN FETCH` to fetch a book including its author
+**Description:** Typically, when we get a `LazyInitializationException` we tend to modify the association fetching type from `LAZY` to `EAGER`. That is very bad! This is a [code smell](https://vladmihalcea.com/eager-fetching-is-a-code-smell/). Best way to avoid this exception is to rely on `JOIN FETCH` (if you plan to modify the fetched entities) or `JOIN` + DTO (if the fetched data is only read). `JOIN FETCH` allows associations or collections of values to be initialized along with their parent objects using a single `SELECT`. This application is a `JOIN FETCH` example with entities. But, with some constraints, `JOIN FETCH` can be used with DTO as well. An example is available [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch).
+
+**Key points:**
+- define two related entities (e.g., `Author` and `Book` in a `@OneToMany` (lazy) bidirectional association)
+- write a JPQL `JOIN FETCH` to fetch an author including his books
+- write a JPQL `JOIN FETCH` to fetch a book including its author
 
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootJoinFetch/hibernate%20spring%20boot%20join%20fetch.png) 
@@ -672,20 +677,20 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 **Description:** This is a Spring Boot example based on the following [article](https://vladmihalcea.com/merge-entity-collections-jpa-hibernate/). Is a functional implementation of the Vlad's example. It is highly recommended to read that article.
 
-**Key points:**\
-     - Remove the existing database rows that are no longer found in the incoming collection\
-     - Update the existing database rows which can be found in the incoming collection\
-     - Add the rows found in the incoming collection, which cannot be found in the current database snapshot
+**Key points:**
+- remove the existing database rows that are no longer found in the incoming collection
+- update the existing database rows which can be found in the incoming collection
+- add the rows found in the incoming collection, which cannot be found in the current database snapshot
      
 -----------------------------------------------------------------------------------------------------------------------    
 
 48. **[How To Delay Connection Acquisition As Needed (Hibernate 5.2.10)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDelayConnection)**
 
-**Description:** This is a Spring Boot example that exploits Hibernate 5.2.10 capability of delaying the connection acquisition as needed. Normally, a database connection is aquried immediately after calling a method annotated with `@Transactional`. If this method contains some time-consuming tasks before the first SQL statement then the connection is holded for nothing. But, Hibernate 5.2.10 allows us to delay the connection acquisition as needed. This example rely on HikariCP as the default connection pool for Spring Boot.
+**Description:** This is a Spring Boot example that exploits Hibernate 5.2.10 capability of delaying the connection acquisition as needed. Normally, a database connection is aquried immediately after calling a method annotated with `@Transactional`. If this method contains some time-consuming tasks before the first SQL statement then the connection is hold open for nothing. But, Hibernate 5.2.10 allows us to delay the connection acquisition as needed. This example rely on HikariCP as the default connection pool for Spring Boot.
 
-**Key points:**\
-     - set `spring.datasource.hikari.auto-commit=false` in application.properties\
-     - set `spring.jpa.properties.hibernate.connection.provider_disables_autocommit=true` in application.properties
+**Key points:**
+- set `spring.datasource.hikari.auto-commit=false` in application.properties
+- set `spring.jpa.properties.hibernate.connection.provider_disables_autocommit=true` in `application.properties`
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDelayConnection/delay%20connection%20acquisition%201.png)
@@ -695,32 +700,33 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 49. **[How To Generate Sequences Of Identifiers Via Hibernate `hi/lo` Algorithm](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHiLo)**
 
- **Note:** If systems external to your application need to insert rows in your tables then don't rely on `hi/lo` since, in such cases, it may cause errors resulted from generating duplicated identifiers. Rely on `pooled` or `pooled-lo`.
+ **Note:** If systems external to your application need to insert rows in your tables then don't rely on `hi/lo` algorithm since, in such cases, it may cause errors resulted from generating duplicated identifiers. Rely on `pooled` or `pooled-lo` algorithms (optimizations of `hi/lo`).
  
-**Description:** This is a Spring Boot example of using the `hi/lo` algorithm for generating 1000 identifiers in 10 database roundtrips for batching 1000 inserts in batches of 30 inserts. The `hi/lo` is a Hibernate algorithm is an optimization algorithm for generating sequences of identifiers.
+**Description:** This is a Spring Boot example of using the `hi/lo` algorithm for generating 1000 identifiers in 10 database roundtrips for batching 1000 inserts in batches of 30. 
 
-**Key points:**\
-     - use the `SEQUENCE` generator type (e.g., in PostgreSQL)\
-     - configure the `hi/lo` algorithm as in `Author.java` entity
+**Key points:**
+- use the `SEQUENCE` generator type (e.g., in PostgreSQL)
+- configure the `hi/lo` algorithm as in `Author.java` entity
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHiLo/Hibernate%20hilo%20algorithm.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-50. **[How To Correctly Write a Bidirectional @ManyToMany Association](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManyBidirectional)**
+50. 
+**[The Best Way To Implement A Bidirectional `@ManyToMany` Association](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManyBidirectional)**
 
-**Description:** This application is a proof of concept of how is correct to implement the bidirectional `@ManyToMany` association. 
+**Description:** This application is a proof of concept of how it is correct to implement the bidirectional `@ManyToMany` association from the performance perspective. 
 
-**Key points:**\
-     - choose and set the owner of the relationship via `mappedBy`\
-     - materialize the relationships collections via `Set` not `List`\
-     - use helper methods on the owner of the relationship to keep both sides of the association in sync\
-     - on the owner of the relationship use `CascadeType.PERSIST` and `CascadeType.MERGE`, but avoid `CascadeType.REMOVE/ALL`\
-     - on the owner of the relationship set up join table\
-     - `@ManyToMany` is lazy by default; keep it this way!\
-     - as entities identifiers, use assigned identifiers (business key, natural key (`@NaturalId`)) and/or database-generated identifiers and override properly (on both sides) the `equals()` and `hashCode()` methods as [here](https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/)\
-     - if `toString()` need to be overridden, then pay attention to involve only for the basic attributes fetched when the entity is loaded from the database
+**Key points:**
+- choose an owning and a `mappedBy` side
+- materialize the relationships collections via `Set` not `List`
+- use helper methods on the owner of the relationship to keep both sides of the association in sync
+- on the owner of the relationship use `CascadeType.PERSIST` and `CascadeType.MERGE`, but avoid `CascadeType.REMOVE/ALL`
+- on the owner of the relationship set up join table
+- `@ManyToMany` is lazy by default; keep it this way!
+- as entities identifiers, use assigned identifiers (business key, natural key (`@NaturalId`)) and/or database-generated identifiers and override (on both sides) properly the `equals()` and `hashCode()` methods as [here](https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/)
+- if `toString()` need to be overridden, then pay attention to involve only for the basic attributes fetched when the entity is loaded from the database
      
 -----------------------------------------------------------------------------------------------------------------------    
 
