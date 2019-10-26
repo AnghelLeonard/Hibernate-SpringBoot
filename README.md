@@ -2128,9 +2128,9 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
  
 **Description:** This application fetches all `Author` entities via a `SELECT` query. Further, calling the `getBooks()` method of the first `Author` entity will trigger another `SELECT` query that initializes the association of the first three `Author` entities returned by the previous `SELECT` query. This is the effect of `@BatchSize`.
 
-**Key points:**\
-     - `Author` and `Book` are in a lazy relationship (e.g., `@OneToMany` bidirectional relationship)\
-     - `Author` association is annotated with `@BatchSize(size = 3)`
+**Key points:**
+- `Author` and `Book` are in a lazy relationship (e.g., `@OneToMany` bidirectional relationship)
+- `Author` association is annotated with `@BatchSize(size = 3)`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2148,10 +2148,10 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Description:** This is a sample application of using *entity graphs* in Spring Boot.
 
-**Key points:**\
-     - define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` relationship\
-     - in `Author` entity use the `@NamedEntityGraph` to define the *entity graph* (e.g., load in a single `SELECT` the authors and the associatated books)\
-     - in `AuthorRepository` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
+**Key points:**
+- define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` association
+- in `Author` entity use the `@NamedEntityGraph` to define the *entity graph* (e.g., load in a single `SELECT` the authors and the associatated books)
+- in `AuthorRepositry` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2169,15 +2169,15 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Description:** This is a sample application of using *entity sub-graphs* in Spring Boot. There is one example based on `@NamedSubgraph` and one based on the dot notation (.) in an ad-hoc *entity graph*.
 
-**Key points:**\
-     - define three entities, `Author`, `Book` and `Publisher` (`Author` and `Book` are involved in a lazy bidirectional `@OneToMany` relationship, `Book` and `Publisher` are also involved in a lazy bidirectional `@OneToMany` relationship; between `Author` and `Publisher` there is no relationship)
+**Key points:**
+- define three entities, `Author`, `Book` and `Publisher` (`Author` and `Book` are involved in a lazy bidirectional `@OneToMany` relationship, `Book` and `Publisher` are also involved in a lazy bidirectional `@OneToMany` relationship; between `Author` and `Publisher` there is no relationship)
      
-**Using `@NamedSubgraph`**\
-     - in `Author` entity define an *entity graph* via  `@NamedEntityGraph`; load the authors and the associatated books and use `@NamedSubgraph` to define a *sub-graph* for loading the publishers associated with these books\
-     - in `AuthorRepository` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
+**Using `@NamedSubgraph`**
+- in `Author` entity define an *entity graph* via  `@NamedEntityGraph`; load the authors and the associatated books and use `@NamedSubgraph` to define a *sub-graph* for loading the publishers associated with these books
+- in `AuthorRepository` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
      
-**Using the dot notation (.)**\
-     - in `PublisherRepository` define an ad-hoc *entity graph* that fetches all publishers with associated books, and further, the authors associated with these books (e.g., `@EntityGraph(attributePaths = {"books.author"})`.
+**Using the dot notation (.)**
+- in `PublisherRepository` define an ad-hoc *entity graph* that fetches all publishers with associated books, and further, the authors associated with these books (e.g., `@EntityGraph(attributePaths = {"books.author"})`.
      
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2195,10 +2195,10 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Description:** This is a sample application of defining ad-hoc *entity graphs* in Spring Boot.
 
-**Key points:**\
-     - define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` relationship\
-     - the *entity graph* should load in a single `SELECT` the authors and the associatated books\
-     - in `AuthorRepository` rely on Spring `@EntityGraph(attributePaths = {"books"})` annotation to indicate the ad-hoc *entity graph*
+**Key points:**
+- define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` relationship
+- the *entity graph* should load in a single `SELECT` the authors and the associatated books
+- in `AuthorRepository` rely on Spring `@EntityGraph(attributePaths = {"books"})` annotation to indicate the ad-hoc *entity graph*
 
 ----------------------------------------------------------------------------------------------------------------------
 
