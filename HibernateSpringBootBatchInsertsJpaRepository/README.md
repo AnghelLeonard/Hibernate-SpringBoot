@@ -2,16 +2,16 @@
 
 **Description:** Batch inserts via `SimpleJpaRepository#saveAll(Iterable<S> entities)` method in MySQL
 
-**Key points:**\
+**Key points:**
 - in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`
-- in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)\
-     - in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)\
-     - in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)\
-     - in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))\
-     - in case of using a parent-child relationship with cascade persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_inserts=true` to optimize the batching by ordering inserts\
-     - in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause insert batching to be disabled\
-     - in entity, add `@Version` property to avoid extra-`SELECT` statements fired before batching (also prevent lost updates in multi-request transactions). Extra-`SELECT` statements are the effect of using `merge()` instead of `persist()`; behind the scene, `saveAll()` uses `save()`, which in case of non-new entities (entities that have IDs) will call `merge()`, which instruct Hibernate to fire a `SELECT` statement to make sure that there is no record in the database having the same identifier\
-     - pay attention on the amount of inserts passed to `saveAll()` to not "overwhelm" the Persistence Context; normally the `EntityManager` should be flushed and cleared from time to time, but during the `saveAll()` execution you simply cannot do that, so if in `saveAll()` there is a list with a high amount of data, all that data will hit the Persistence Context (1st Level Cache) and will remain in memory until the flush time. Using relatively small amount of data should be ok.
+- in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)
+- in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)
+- in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)
+- in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))
+- in case of using a parent-child relationship with cascade persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_inserts=true` to optimize the batching by ordering inserts
+- in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause insert batching to be disabled
+- in entity, add `@Version` property to avoid extra-`SELECT` statements fired before batching (also prevent lost updates in multi-request transactions). Extra-`SELECT` statements are the effect of using `merge()` instead of `persist()`; behind the scene, `saveAll()` uses `save()`, which in case of non-new entities (entities that have IDs) will call `merge()`, which instruct Hibernate to fire a `SELECT` statement to make sure that there is no record in the database having the same identifier
+- pay attention on the amount of inserts passed to `saveAll()` to not "overwhelm" the Persistence Context; normally the `EntityManager` should be flushed and cleared from time to time, but during the `saveAll()` execution you simply cannot do that, so if in `saveAll()` there is a list with a high amount of data, all that data will hit the Persistence Context (1st Level Cache) and will remain in memory until the flush time; using relatively small amount of data should be ok
   
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsJpaRepository/batch%20inserts%20via%20saveAll.png)
