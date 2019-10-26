@@ -32,7 +32,7 @@ Fetch a page as a `List`:
 - call the built-in `findAll(Pageable)` with sorting:\
 `repository.findAll(PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name")));`
 - use Spring Data query creation to define new methods in your repository:\
-`Page<Author> findByName(String name, Pageable pageable);`
+`Page<Author> findByName(String name, Pageable pageable);`\
 `Page<Author> queryFirst10ByName(String name, Pageable pageable);`
 
 -------------------------------
