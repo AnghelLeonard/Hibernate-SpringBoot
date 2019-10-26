@@ -1,4 +1,4 @@
-**[DTOs Via `SqlResultSetMapping` And `EntityManager`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaSqlResultSetMappingEm)** 
+**[How To Fetch DTO Via `SqlResultSetMapping` And `EntityManager`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaSqlResultSetMappingEm)** 
 
 **Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on `SqlResultSetMapping` and `EntityManager`.
  
