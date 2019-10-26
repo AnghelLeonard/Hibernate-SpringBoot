@@ -16,9 +16,9 @@
 
 **Description:** This application is a sample of how to store date, time, and timestamps in UTC time zone. The second setting, `useLegacyDatetimeCode` is needed only for MySQL. Otherwise, set only `hibernate.jdbc.time_zone`.
 
-**Key points:**\
-     - `spring.jpa.properties.hibernate.jdbc.time_zone=UTC`\
-     - `spring.datasource.url=jdbc:mysql://localhost:3306/screenshotdb?useLegacyDatetimeCode=false`
+**Key points:**
+- `spring.jpa.properties.hibernate.jdbc.time_zone=UTC`
+- `spring.datasource.url=jdbc:mysql://localhost:3306/screenshotdb?useLegacyDatetimeCode=false`
      
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -36,9 +36,9 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-3. **[How To View Query Details Via "datasource-proxy"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceProxy)**
+3. **[How To View Query Details Via DataSource-Proxy Library](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceProxy)**
 
-**Description:** View the query details (query type, binding parameters, batch size, execution time, etc) via **[datasource-proxy](https://github.com/ttddyy/datasource-proxy)**
+**Description:** View the query details (query type, binding parameters, batch size, execution time, etc) via **[DataSource-Proxy](https://github.com/ttddyy/datasource-proxy)**
 
 **Key points:**\
      - for Maven, add in `pom.xml` the `datasource-proxy` dependency\
