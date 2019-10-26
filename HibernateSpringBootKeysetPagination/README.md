@@ -6,11 +6,11 @@ Screenshot from that article (*offset* pagination):
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootKeysetPagination/offset%20pagination.png)
 
 **Need to know if there are more records?**\
-By its nature, *keyset* doesn't use a `SELECT COUNT` to fetch the number of total records. But, we a little tweak we can easily say if there are more records, therefore to show a button of type `Next Page`. Mainly, if you need such a thing then consider [this application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootKeysetPaginationNextPage). 
+By its nature, *keyset* doesn't use a `SELECT COUNT` to fetch the number of total records. But, with a little tweak, we can easily say if there are more records, therefore to show a button of type `Next Page`. Mainly, if you need such a thing then consider [this application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootKeysetPaginationNextPage). 
 
-**Key points:**\
-     - choose the column(s) to act as the latest visited record (e.g., `id`)\
-     - use the column(s) in the `WHERE` and `ORDER BY` clauses of your SQL
+**Key points:**
+- choose the column(s) to act as the latest visited record (e.g., `id`)
+- use the column(s) in the `WHERE` and `ORDER BY` clauses of your SQL
 
 -------------------------------
 
