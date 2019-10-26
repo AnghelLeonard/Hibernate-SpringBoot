@@ -13,10 +13,10 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Description:** This is a sample application of using *entity graphs* in Spring Boot.
 
-**Key points:**\
-     - define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` relationship\
-     - in `Author` entity use the `@NamedEntityGraph` to define the *entity graph* (e.g., load in a single `SELECT` the authors and the associatated books)\
-     - in `AuthorRepositry` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
+**Key points:**
+- define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` association
+- in `Author` entity use the `@NamedEntityGraph` to define the *entity graph* (e.g., load in a single `SELECT` the authors and the associatated books)
+- in `AuthorRepositry` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
 
 -------------------------------
 
