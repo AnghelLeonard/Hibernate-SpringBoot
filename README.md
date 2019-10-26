@@ -1116,10 +1116,10 @@ Fetch a page as a `List`:
 
 74. **[How To Optimize Batch Inserts of Parent-Child Relationships In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertOrder)**
 
-**Description:** Let's suppose that we have a one-to-many relationship between `Author` and `Book` entities. When we save an author, we save his/her books as well thanks to cascading all/persist. We want to create a bunch of authors with books and save them in the database (e.g., a MySQL database) using the batch technique. By default, this will result in batching each author and the books per author. In order to batch authors and books, we need to **order inserts** as in this application.
+**Description:** Let's suppose that we have a one-to-many relationship between `Author` and `Book` entities. When we save an author, we save his books as well thanks to cascading all/persist. We want to create a bunch of authors with books and save them in the database (e.g., a MySQL database) using the batch technique. By default, this will result in batching each author and the books per author (one batch for the author and one batch for the books, another batch for the author and another batch for the books, and so on). In order to batch authors and books, we need to **order inserts** as in this application.
 
-**Key points:**\
-     - beside all setting specific to batching inserts in MySQL, we need to set up in application.properties the following property: `spring.jpa.properties.hibernate.order_inserts=true`
+**Key points:**
+Beside all setting specific to batching inserts in MySQL, we need to set up in `application.properties` the following property: `spring.jpa.properties.hibernate.order_inserts=true`
 
 **Example without ordered inserts:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertOrder/batch%20inserts%20including%20associations%20no%20order%20of%20inserts.png)
@@ -1137,13 +1137,13 @@ Fetch a page as a `List`:
 
 **Description:** Batch updates in MySQL.
 
-**Key points:**\
-     - in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`\
-     - in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL, statements get rewritten into a single `String` buffer and sent in a single request)\
-     - in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)\
-     - in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))\
-     - in case of using a parent-child relationship with cascade all/persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_updates=true` to optimize the batching by ordering updates\
-     - before Hibernate 5, we need to set in `application.properties` a setting for enabling batching for versioned entities during update and delete operations (entities that contains `@Version` for implicit optimistic locking); this setting is: `spring.jpa.properties.hibernate.jdbc.batch_versioned_data=true`; starting with Hibernate 5, this setting should be `true` by default
+**Key points:**
+- in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`
+- in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL, statements get rewritten into a single string buffer and sent in a single request)
+- in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)
+- in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))
+- in case of using a parent-child relationship with cascade all/persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_updates=true` to optimize the batching by ordering updates
+- before Hibernate 5, we need to set in `application.properties` a setting for enabling batching for versioned entities during update and delete operations (entities that contains `@Version` for implicit optimistic locking); this setting is: `spring.jpa.properties.hibernate.jdbc.batch_versioned_data=true`; starting with Hibernate 5, this setting should be `true` by default
    
 **Output example for single entity:**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchUpdateOrderSingleEntity/batch%20updates.png)     
@@ -1157,15 +1157,15 @@ Fetch a page as a `List`:
 
 **Description:** Batch deletes that don't involve associations in MySQL.
 
-**Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use delete batching and don't prevent *lost updates*. They rely on `Query.executeUpdate()` to trigger *bulk* operations. These operations are fast, but Hibernate doesn’t know which entities are removed, therefore, the Persistent Context is not updated accordingly (it is advisable to flush (before delete) and close/clear (after delete) the Persistent Context accordingly to avoid issues created by unflushed (if any) or outdated (if any) entities). The first one simply triggers a `delete from entity_name` statement and is very useful for deleting all records. The second one triggers a `delete from entity_name where id=? or id=? or id=? ...` statement, therefore, is prone to cause issues if the generated `DELETE` statement exceedes the maximum accepted size. This drawback can be controlled by deleting the data in chunks, relying on `IN` operator, and so on. *Bulk* operations are faster than batching which can be achieved via the `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or `delete()` method. Behind the scene, the two flavors of `deleteAll()` relies on `delete()`. The `delete()`/`deleteAll()` methods rely on `EntityManager.remove()` therefore the persistent context is synchronized accordingly.
+**Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use delete batching and don't take advantage of optimstic locking mechanism to prevent *lost updates*. They rely on `Query.executeUpdate()` to trigger *bulk* operations. These operations are fast, but Hibernate doesn’t know which entities are removed, therefore, the Persistent Context is not updated accordingly (it is advisable to flush (before delete) and close/clear (after delete) the Persistent Context accordingly to avoid issues created by unflushed (if any) or outdated (if any) entities). The first one (`deleteAllInBatch()`) simply triggers a `delete from entity_name` statement and is very useful for deleting all records. The second one (`deleteInBatch()`) triggers a `delete from entity_name where id=? or id=? or id=? ...` statement, therefore, is prone to cause issues if the generated `DELETE` statement exceedes the maximum accepted size. This drawback can be controlled by deleting the data in chunks, relying on `IN` operator, and so on. *Bulk* operations are faster than batching which can be achieved via the `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or `delete()` method. Behind the scene, the two flavors of `deleteAll()` relies on `delete()`. The `delete()`/`deleteAll()` methods rely on `EntityManager.remove()` therefore the Persistent Context is synchronized accordingly. This time, batching is employed and optimstic locking mechanism to prevent *lost updates* can be used.
 
-**Key points for *classical* delete batching:**\
-     - for delete batching rely on `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or `delete()` method\
-     - in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`\
-     - in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL, statements get rewritten into a single `String` buffer and sent in a single request)\
-     - in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)\
-     - in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))\
-     - before Hibernate 5, we need to set in `application.properties` a setting for enabling batching for versioned entities during update and delete operations (entities that contains `@Version` for implicit optimistic locking); this setting is: `spring.jpa.properties.hibernate.jdbc.batch_versioned_data=true`; starting with Hibernate 5, this setting should be `true` by default
+**Key points for *regular* delete batching:**
+- for deleting in batches rely on `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or `delete()` method
+- in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`
+- in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL, statements get rewritten into a single string buffer and sent in a single request)
+- in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)
+- in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))
+- before Hibernate 5, we need to set in `application.properties` a setting for enabling batching for versioned entities during update and delete operations (entities that contains `@Version` for implicit optimistic locking); this setting is: `spring.jpa.properties.hibernate.jdbc.batch_versioned_data=true`; starting with Hibernate 5, this setting should be `true` by default
     
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchDeleteSingleEntity/batch%20deletes.png)
@@ -1176,30 +1176,30 @@ Fetch a page as a `List`:
  
 **Description:** Batch deletes in MySQL via `orphanRemoval=true`.
 
-**Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use batching, don't prevent *lost updates* and don't take advantage of `orphanRemoval=true`. They trigger *bulk* operations and the Persistent Context is not synchronized accordingly (it is advisable to flush (before delete) and close/clear (after delete) the Persistent Context accordingly to avoid issues created by unflushed (if any) or outdated (if any) entities). The first one simply triggers a `delete from entity_name` statement, while the second one triggers a `delete from entity_name where id=? or id=? or id=? ...` statement. Using these methods for deleting parent-entities and the associated entites (child-entities) requires explicit calls for both sides. For batching rely on `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or even better, on `delete()` method. Behind the scene, `deleteAll()` methods uses `delete()`. The `delete()` and `deleteAll()` methods rely on `EntityManager.remove()`, therefore, the persistent context is synchronized.
+**Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use batching, don't take advantage of optimistic locking to prevent *lost updates* and don't take advantage of `orphanRemoval=true`. They trigger *bulk* operations and the Persistent Context is not synchronized accordingly (it is advisable to flush (before delete) and close/clear (after delete) the Persistent Context accordingly to avoid issues created by unflushed (if any) or outdated (if any) entities). The first one simply triggers a `delete from entity_name` statement, while the second one triggers a `delete from entity_name where id=? or id=? or id=? ...` statement. Using these methods for deleting parent-entities and the associated entites (child-entities) requires explicit calls for both sides. For batching rely on `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or even better, on `delete()` method. Behind the scene, `deleteAll()` methods uses `delete()`. The `delete()` and `deleteAll()` methods rely on `EntityManager.remove()`, therefore, the Persistent Context is synchronized. Moreover, cascading removals and `orphanRemoval` are taken into account.
 
-**Key points for using `deleteAll()/delete()`:**\
-     - in this example, we have a `Author` entity and each author can have several `Book` (*one-to-many*)\
-     - first, we use `orphanRemoval=true` and `CascadeType.ALL`\
-     - second, we dissociate all `Book` from the corresponding `Author`\
-     - third, we explicitly (manually) flush the persistent context; is time for `orphanRemoval=true` to enter into the scene; thanks to this setting, all disassociated books will be deleted; the generated `DELETE` statements are batched (if `orphanRemoval` is set to `false`, a bunch of updates will be executed instead of deletes)\
-     - forth, we delete all `Author` via the `deleteAll()` or `delete()` method (since we have dissaciated all `Book`, the `Author` deletion will take advantage of batching as well)
+**Key points for using `deleteAll()/delete()`:**
+- in this example, we have a `Author` entity and each author can have several `Book` (*one-to-many*)
+- first, we use `orphanRemoval=true` and `CascadeType.ALL`
+- second, we dissociate all `Book` from the corresponding `Author`
+- third, we explicitly (manually) flush the Persistent Context; is time for `orphanRemoval=true` to enter into the scene; thanks to this setting, all disassociated books will be deleted; the generated `DELETE` statements are batched (if `orphanRemoval` is set to `false`, a bunch of updates will be executed instead of deletes)
+- forth, we delete all `Author` via the `deleteAll()` or `delete()` method (since we have dissaciated all `Book`, the `Author` deletion will take advantage of batching as well)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-78. **[How To Batch Deletes In MySQL Via SQL "ON DELETE CASCADE"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchDeleteCascadeDelete)**
+78. **[How To Batch Deletes In MySQL Via SQL `ON DELETE CASCADE`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchDeleteCascadeDelete)**
 
 **Description:** Batch deletes in MySQL via `ON DELETE CASCADE`. Auto-generated database schema will contain the `ON DELETE CASCADE` directive.
 
-**Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use delete batching and don't prevent *lost updates*. They trigger *bulk* operations via `Query.executeUpdate()`, therefore, the persistent context is not synchronized accordingly (it is advisable to flush (before delete) and close/clear (after delete) the Persistent Context accordingly to avoid issues created by unflushed (if any) or outdated (if any) entities). The first one simply triggers a `delete from entity_name` statement, while the second one triggers a `delete from entity_name where id=? or id=? or id=? ...` statement. Both of them take advantage on `ON DELETE CASCADE` and are very efficient. For delete batching rely on `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or `delete()` method. Behind the scene, the two flavors of `deleteAll()` relies on `delete()`. Mixing batching with database automatic actions (`ON DELETE CASCADE`) will result in a partially synchronized persistent context.
+**Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use delete batching and don't take advantage of optimistic locking mechanism to prevent *lost updates*. They trigger *bulk* operations via `Query.executeUpdate()`, therefore, the Persistent Context is not synchronized accordingly (it is advisable to flush (before delete) and close/clear (after delete) the Persistent Context accordingly to avoid issues created by unflushed (if any) or outdated (if any) entities). The first one simply triggers a `delete from entity_name` statement, while the second one triggers a `delete from entity_name where id=? or id=? or id=? ...` statement. Both of them take advantage on `ON DELETE CASCADE` and are very efficient. For delete in batches rely on `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or `delete()` method. Behind the scene, the two flavors of `deleteAll()` relies on `delete()`. Mixing batching with database automatic actions (`ON DELETE CASCADE`) will result in a partially synchronized Persistent Context.
 
-**Key points:**\
-     - in this application, we have a `Author` entity and each author can have several `Book` (*one-to-many*)\
-     - first, we remove `orphanRemoval` or set it to `false`\
-     - second, we use only `CascadeType.PERSIST` and `CascadeType.MERGE`\
-     - third, we set `@OnDelete(action = OnDeleteAction.CASCADE)` next to `@OneToMany`\
-     - fourth, we set `spring.jpa.properties.hibernate.dialect` to `org.hibernate.dialect.MySQL5InnoDBDialect`\
-     - fifth, we run through each `deleteFoo()` method
+**Key points:**
+- in this application, we have a `Author` entity and each author can have several `Book` (*one-to-many*)
+- first, we remove `orphanRemoval` or set it to `false`
+- second, we use only `CascadeType.PERSIST` and `CascadeType.MERGE`
+- third, we set `@OnDelete(action = OnDeleteAction.CASCADE)` next to `@OneToMany`
+- fourth, we set `spring.jpa.properties.hibernate.dialect` to `org.hibernate.dialect.MySQL5InnoDBDialect` (or, `MySQL8Dialect`)
+- fifth, we run through each `deleteFoo()` method
         
 **Output example:**
 
@@ -1214,7 +1214,7 @@ Fetch a page as a `List`:
 **Description:** This is a SpringBoot application that maps a natural business key using Hibernate `@NaturalId`. This implementation allows us to use `@NaturalId` as it was provided by Spring.
 
 **Key points:**
-- in the entity (e.g., `Book`), mark the properties (business keys) that should act as natural IDs with `@NaturalId`; commonly, there is a single such property, but multiple are suppored as well as [here](https://docs.jboss.org/hibernate/orm/5.0/mappingGuide/en-US/html/ch07.html).
+- in the entity (e.g., `Book`), mark the properties (business keys) that should act as natural IDs with `@NaturalId`; commonly, there is a single such property, but multiple are suppored as well as [here](https://docs.jboss.org/hibernate/orm/5.0/mappingGuide/en-US/html/ch07.html)
 - for non-mutable ids, mark the columns as `@NaturalId(mutable = false)` and `@Column(nullable = false, updatable = false, unique = true, ...)`
 - for mutable ids, mark the columns as `@NaturalId(mutable = true)` and `@Column(nullable = false, updatable = true, unique = true, ...)`
 - override the `equals()` and `hashCode()` using the natural id(s)
@@ -1222,19 +1222,19 @@ Fetch a page as a `List`:
 - provide an implementation for this interface (`NaturalRepositoryImpl`) relying on Hibernate, `Session`, `bySimpleNaturalId()` and `byNaturalId()` methods
 - use `@EnableJpaRepositories(repositoryBaseClass = NaturalRepositoryImpl.class)` to register this implementation as the base class
 - for the entity, write a classic repository
-- inject this class in your services and call `findBySimpleNaturalId()` or `findByNaturalId()
+- inject this class in your services and call `findBySimpleNaturalId()` or `findByNaturalId()`
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-80. **[How To Set Up p6spy in Spring Boot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootP6spy)**
+80. **[How To Set Up P6Spy in Spring Boot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootP6spy)**
 
 **Description:** This is a Spring Boot application that uses [P6Spy](https://github.com/p6spy/p6spy). *P6Spy is a framework that enables database data to be seamlessly intercepted and logged with no code changes to the application.*
 
-**Key points:**\
-     - in `pom.xml`, add the P6Spy Maven dependency\
-     - in `application.properties`, set up JDBC URL as, `jdbc:p6spy:mysql://localhost:3306/db_users`\
-     - in `application.properties`, set up driver class name as, `com.p6spy.engine.spy.P6SpyDriver`\
-     - in the application root folder add the file `spy.properties` (this file contains P6Spy configurations); in this application, the logs will be outputed to console, but you can easy switch to a file; more details about P6Spy configurations can be found in documentation
+**Key points:**
+- in `pom.xml`, add the P6Spy Maven dependency
+- in `application.properties`, set up JDBC URL as, `jdbc:p6spy:mysql://localhost:3306/db_users`
+- in `application.properties`, set up driver class name as, `com.p6spy.engine.spy.P6SpyDriver`
+- in the application root folder add the file `spy.properties` (this file contains P6Spy configurations); in this application, the logs will be outputed to console, but you can easy switch to a file; more details about P6Spy configurations can be found in documentation
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootP6spy/p6spy.png)
