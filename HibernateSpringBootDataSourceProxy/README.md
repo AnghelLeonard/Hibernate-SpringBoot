@@ -1,7 +1,7 @@
 
-**[View Query Details Via "datasource-proxy"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceProxy)**
+**[View Query Details Via DataSource-Proxy Library](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceProxy)**
 
-**Description:** View the query details (query type, binding parameters, batch size, execution time, etc) via **[datasource-proxy](https://github.com/ttddyy/datasource-proxy)**
+**Description:** View the query details (query type, binding parameters, batch size, execution time, etc) via **[DataSource-Proxy](https://github.com/ttddyy/datasource-proxy)**
 
 **Key points:**\
      - for Maven, add in `pom.xml` the `datasource-proxy` dependency\
