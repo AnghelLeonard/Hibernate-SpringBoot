@@ -1586,7 +1586,7 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 
 -----------------------------------------------------------------------------------------------------------------------
 
-102. **[JOIN VS. JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinVSJoinFetch)**
+102. **[`JOIN` VS. `JOIN FETCH`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinVSJoinFetch)**
 
 **Description:** This is an application meant to reveal the differences between `JOIN` and `JOIN FETCH`. The important thing to keep in mind is that, in case of `LAZY` fetching, `JOIN` will not be capable to initialize the associations/collections along with their parent objects using a single SQL `SELECT`.  On the other hand, `JOIN FETCH` is capable to accomplish this kind of task. But, don't underestimate `JOIN`, because `JOIN` is the proper choice when we need to combine/join the columns of two (or more) tables in the same query, but we don't need to initialize the association on the returned entity (e.g., very useful for fetching DTO).
 
@@ -1703,40 +1703,40 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
 
 -----------------------------------------------------------------------------------------------------------------------
 
-112. **[How To Retry Transaction Via TransactionTemplate After OptimisticLockException Shaped Via Hibernate Version-less Optimistic Locking Mechanism](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionlessOptimisticLockingTT)**
+112. **[How To Retry Transaction Via `TransactionTemplate` After `OptimisticLockException` Shaped Via Hibernate Version-less Optimistic Locking Mechanism](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionlessOptimisticLockingTT)**
 
-**Note:** Version-less optimistic locking doesn't work for detached entities (do not close the persistence context).
+**Note:** Version-less optimistic locking doesn't work for detached entities (do not close the Persistence Context).
 
 **Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic locking exception. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
 
-**Key points:**\
-     - in `pom.xml`, add the `db-util` dependency\
-     - configure the `OptimisticConcurrencyControlAspect` bean\
-     - rely on `TransactionTemplate`
+**Key points:**
+- for Maven, in `pom.xml`, add the `db-util` dependency
+- configure the `OptimisticConcurrencyControlAspect` bean
+- rely on `TransactionTemplate`
 
 -----------------------------------------------------------------------------------------------------------------------
 
-113. **[HTTP Long Conversation Via Versioned Optimistic Locking And Detached Entities In Session](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHTTPLongConversationDetachedEntity)**
+113. **[HTTP Long Conversation Via Versioned Optimistic Locking And Detached Entities In The HTTP Session](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHTTPLongConversationDetachedEntity)**
 
 **Description:** This is a sample application that shows how to take advantage of versioned optimistic locking and detached entities in HTTP long conversations. The climax consists of storing the detached entities across multiple HTTP requests. Commonly, this can be accomplished via HTTP session. 
 
-**Key points:**\
-     - prepare the entity via `@Version`\
-     - rely on `@SessionAttributes` for storing the detached entities    
+**Key points:**
+- prepare the entity via `@Version`
+- rely on `@SessionAttributes` for storing the detached entities   
 
 **Sample output (check the message caused by optimistic locking exception):**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHTTPLongConversationDetachedEntity/http%20long%20conversations%20detached%20entity%20ole.png)
 
 -----------------------------------------------------------------------------------------------------------------------
 
-114. **[Filter Association Via Hibernate @Where](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFilterAssociation)**
+114. **[Filter Association Via Hibernate `@Where`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFilterAssociation)**
 
 **Note:** Rely on this approach only if you simply cannot use `JOIN FETCH WHERE` or `@NamedEntityGraph`.
 
 **Description:** This application is a sample of using Hibernate `@Where` for filtering associations. 
 
-**Key points:**\
-     - use `@Where(clause = "condition to be met")` in entity (check the `Author` entity)
+**Key points:**
+- use `@Where(clause = "condition to be met")` in entity (check the `Author` entity)
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -1744,15 +1744,15 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
 
 **Description:** Batch inserts (in MySQL) in Spring Boot style.
 
-**Key points:**\
-     - in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`\
-     - in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)\
-     - in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)\
-     - in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)\
-     - in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))\
-     - in case of using a parent-child relationship with cascade persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_inserts=true` to optimize the batching by ordering inserts\
-     - in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since the Hibernate `IDENTITY` will cause batching to be disabled\
-     - if is not needed then ensure that Second Level Cache is disabled via `spring.jpa.properties.hibernate.cache.use_second_level_cache=false`
+**Key points:**
+- in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`
+- in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)
+- in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)
+- in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)
+- in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))
+- in case of using a parent-child relationship with cascade persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_inserts=true` to optimize the batching by ordering inserts
+- in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since the Hibernate `IDENTITY` will cause insert batching to be disabled
+- if is not needed then ensure that Second Level Cache is disabled via `spring.jpa.properties.hibernate.cache.use_second_level_cache=false`
    
 **Output example:**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsSpringStyle/batch%20inserts%20in%20spring%20boot%20style.png)
@@ -1763,22 +1763,22 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
 
 **Description:** Typically, in offset pagination, there is one query needed for fetching the data and one for counting the total number of records. But, we can fetch this information in a single database rountrip via a `SELECT COUNT` subquery nested in the main `SELECT`. Even better, for databases vendors that support *Window Functions* there is a solution relying on `COUNT(*) OVER()` as in this application that uses this window function in a native query against MySQL 8. So, prefer this one instead of `SELECT COUNT` subquery.This application fetches data as `Page<entity>` via Spring Boot offset pagination, but, if the fetched data is *read-only*, then rely on `Page<dto>` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPageDtoOffsetPaginationWF). 
 
-**Key points:**\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - in the entity, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`\
-     - fetch data via a native query (that includes counting) into a `List<entity>`, and a `Pageable`\
-     - use the fetched `List<entity>` and `Pageable` to create a `Page<entity>`
+**Key points:**
+- write a repository that extends `PagingAndSortingRepository`
+- in the entity, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`
+- fetch data via a native query (that includes counting) into a `List<entity>`
+- use the fetched `List<entity>` and `Pageable` to create a `Page<entity>`
 
 -----------------------------------------------------------------------------------------------------------------------
 
 117. **[Offset Pagination - Trigger `SELECT COUNT` Subquery And Return `List<entity>` Via Extra Column](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootListEntityOffsetPaginationExtraColumn)**
-
+ 
 **Description:** This application fetches data as `List<entity>` via Spring Boot offset pagination. The `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, one query is needed for fetching the data and one for counting the total number of records).
 
-**Key points:**\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - in the `entity`, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`\
-     - fetch data via a native query (that includes `SELECT COUNT` subquery) into a `List<entity>` 
+**Key points:**
+- write a repository that extends `PagingAndSortingRepository`
+- in the `entity`, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`
+- fetch data via a native query (that includes `SELECT COUNT` subquery) into a `List<entity>`
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -1786,10 +1786,10 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
    
 **Description:** This application fetches data as `List<projection>` via Spring Boot offset pagination. The projection maps the entity and the total number of records. This information is fetched in a single database rountrip because the `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, there is one query needed for fetching the data and one for counting the total number of records). Use this approch only if the fetched data is not *read-only*. Otherwise, prefer `List<dto>` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootListDtoOffsetPagination).
 
-**Key points:**\
-     - write a Spring projection that maps the entity and the total number of records\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - fetch data via a JPQL query (that includes `SELECT COUNT` subquery) into a `List<projection>`
+**Key points:**
+- write a Spring projection that maps the entity and the total number of records
+- write a repository that extends `PagingAndSortingRepository`
+- fetch data via a JPQL query (that includes `SELECT COUNT` subquery) into a `List<projection>`
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -1797,10 +1797,10 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
  
 **Description:** Typically, in offset pagination, there is one query needed for fetching the data and one for counting the total number of records. But, we can fetch this information in a single database rountrip via a `SELECT COUNT` subquery nested in the main `SELECT`. Even better, for databases vendors that support *Window Functions* there is a solution relying on `COUNT(*) OVER()` as in this application that uses this window function in a native query against MySQL 8. So, prefer this one instead of `SELECT COUNT` subquery.This application fetches data as `List<entity>` via Spring Boot offset pagination, but, if the fetched data is *read-only*, then rely on `List<dto>` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootListDtoOffsetPaginationWF). 
 
-**Key points:**\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - in the `entity`, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`\
-     - fetch data via a native query (that includes `COUNT(*) OVER` subquery) into a `List<entity>` 
+**Key points:**
+- write a repository that extends `PagingAndSortingRepository`
+- in the `entity`, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`
+- fetch data via a native query (that includes `COUNT(*) OVER` subquery) into a `List<entity>`  
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -1808,23 +1808,23 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
 
 **Description:** This application fetches data as `Page<entity>` via Spring Boot offset pagination. Use this only if the fetched data will be modified. Otherwise, fetch `Page<dto>` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPageDtoOffsetPagination). The `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, there is one query needed for fetching the data and one for counting the total number of records).
 
-**Key points:**\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - in the entity, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`\
-     - fetch data via a native query (that includes counting) into a `List<entity>`, and a `Pageable`\
-     - use the fetched `List<entity>` and `Pageable` to create a `Page<entity>`
+**Key points:**
+- write a repository that extends `PagingAndSortingRepository`
+- in the entity, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`
+- fetch data via a native query (that includes counting) into a `List<entity>`
+- use the fetched `List<entity>` and `Pageable` to create a `Page<entity>`
 
 -----------------------------------------------------------------------------------------------------------------------
 
 121. **[Offset Pagination - Trigger `SELECT COUNT` Subquery And Return `Page<projection>` That Maps Entities And The Total Number Of Records Via Projection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPageEntityOffsetPaginationProjection)**
+ 
+**Description:** This application fetches data as `Page<projection>` via Spring Boot offset pagination. The projection maps the entity and the total number of records. This information is fetched in a single database rountrip because the `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. 
 
-**Description:** This application fetches data as `Page<projection>` via Spring Boot offset pagination. The projection maps the entity and the total number of records. This information is fetched in a single database rountrip because the `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, there is one query needed for fetching the data and one for counting the total number of records). Use this approch only if the fetched data is not *read-only*. Otherwise, prefer `Page<dto>` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPageDtoOffsetPagination).
-
-**Key points:**\
-     - define a Spring projection that maps the entity and the total number of records\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - fetch data via a JPQL query (that includes counting) into a `List<projection>`, and a `Pageable`\
-     - use the fetched `List<projection>` and `Pageable` to create a `Page<projection>`
+**Key points:**
+- define a Spring projection that maps the entity and the total number of records
+- write a repository that extends `PagingAndSortingRepository`
+- fetch data via a JPQL query into a `List<projection>`
+- use the fetched `List<projection>` and `Pageable` to create a `Page<projection>`
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -1832,11 +1832,11 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
 
 **Description:** Typically, in offset pagination, there is one query needed for fetching the data and one for counting the total number of records. But, we can fetch this information in a single database rountrip via a `SELECT COUNT` subquery nested in the main `SELECT`. Even better, for databases vendors that support *Window Functions* there is a solution relying on `COUNT(*) OVER()` as in this application that uses this window function in a native query against MySQL 8. So, prefer this one instead of `SELECT COUNT` subquery. This application return a `Page<dto>`.
 
-**Key points:**\
-     - create a Spring projection (DTO) to contains getters only for the data that should be fetched\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - fetch data via a native query (that includes counting) into a `List<dto>`, and a `Pageable`\
-     - use the fetched `List<dto>` and `Pageable` to create a `Page<dto>`
+**Key points:**
+- create a Spring projection (DTO) to contains getters only for the columns that should be fetched
+- write a repository that extends `PagingAndSortingRepository`
+- fetch data via a native query (that includes counting) into a `List<dto>`
+- use the fetched `List<dto>` and `Pageable` to create a `Page<dto>`
 
 **Example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootListDtoOffsetPaginationWF/offset%20pagination%20via%20window%20function.png)
@@ -1845,7 +1845,7 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
 
 123. **[How To Fetch `Slice<entity>`/`Slice<dto>` Via `fetchAll`/`fetchAllDto`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSliceAllViaFetchAll)**
 
-**Story**: Spring Boot provides an *offset* based built-in paging mechanism that returns a `Page` or `Slice`. Each of these APIs represents a page of data and some metadata. The main difference is that `Page` contains the total number of records, while `Slice` can only tell if there is another page available. For `Page`, Spring Boot provides a `findAll()` method capable to take as arguments a `Pageable` and/or a `Specification`.  In order to populate a `Page` containing the total number of records, this method triggers an `SELECT COUNT` extra-query next to the query used to fetch the current page . This can be a performance penalty since the `SELECT COUNT` query is triggered every time we request a page. In order to avoid this extra-query, Spring Boot provides a more relaxed API, the `Slice` API. Using `Slice` instead of `Page` removes the need of this extra `SELECT COUNT` query and returns the page (records) and some metadata without the total number of records. So, while `Slice` doesn't know the total number of records, it still can tell if there is another page available after the current one or this is the last page. The problem is that `Slice` work fine for queries containing the SQL, `WHERE` clause (including those that uses the query builder mechanism built into Spring Data), but it **doesn't work** for `findAll()`. This method will still return a `Page` instead of `Slice` therefore the `SELECT COUNT` query is triggered for `Slice<T> findAll(...);`.
+**Story**: Spring Boot provides an *offset* based built-in paging mechanism that returns a `Page` or `Slice`. Each of these APIs represents a page of data and some metadata. The main difference is that `Page` contains the total number of records, while `Slice` can only tell if there is another page available. For `Page`, Spring Boot provides a `findAll()` method capable to take as arguments a `Pageable` and/or a `Specification` or `Example`.  In order to create a `Page` that contains the total number of records, this method triggers an `SELECT COUNT` extra-query next to the query used to fetch the data of the current page . This can be a performance penalty since the `SELECT COUNT` query is triggered every time we request a page. In order to avoid this extra-query, Spring Boot provides a more relaxed API, the `Slice` API. Using `Slice` instead of `Page` removes the need of this extra `SELECT COUNT` query and returns the page (records) and some metadata without the total number of records. So, while `Slice` doesn't know the total number of records, it still can tell if there is another page available after the current one or this is the last page. The problem is that `Slice` work fine for queries containing the SQL, `WHERE` clause (including those that uses the query builder mechanism built into Spring Data), but it **doesn't work** for `findAll()`. This method will still return a `Page` instead of `Slice` therefore the `SELECT COUNT` query is triggered for `Slice<T> findAll(...);`.
 
 **Workaround:**
 The trick is to  simply define a method named `fetchAll()` that uses JPQL and `Pageable` to return `Slice<entity>`, and a method named `fetchAllDto()` that uses JPQL and `Pageable` as well to return `Slice<dto>`. So, avoid naming the method `findAll()`.
@@ -1865,13 +1865,13 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaFullJoinsMySQL/DTO%20via%20inclusive%20full%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and inclusive full joins written in native SQL (for MySQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTO) and inclusive full joins written in native SQL (for MySQL).
 
-**Key points:**\
-     - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
-     - write inclusive full joins queries using native SQL
+**Key points:**
+- define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)
+- write inclusive full joins queries using native SQL
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -1879,10 +1879,10 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 **Description:** This application is a sample of declaring an immutable entity. Moreover, the immutable entity will be stored in Second Level Cache via `EhCache` implementation.
 
-**Key points of declaring an immutable entity:**\
-     - annotate the entity with `@Immutable (org.hibernate.annotations.Immutable)`\
-     - avoid any kind of associations\
-     - set `hibernate.cache.use_reference_entries configuration` to `true`
+**Key points of declaring an immutable entity:**
+- annotate the entity with `@Immutable (org.hibernate.annotations.Immutable)`
+- avoid any kind of associations
+- set `hibernate.cache.use_reference_entries configuration` to `true`
      
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -1892,10 +1892,10 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
 
-**Description:** This is a kickoff application that set up HikariCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. Check the HickariCP report revealing the connection pool status.
+**Description:** This is a kickoff application that set up HikariCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purposes, the application uses an `ExecutorService` for simulating concurrent users. Check the HickariCP report revealing the connection pool status.
 
-**Key points:**\
-     - write a `@Bean` that returns the `DataSource` programmatically
+**Key points:**
+- write a `@Bean` that returns the `DataSource` programmatically
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHikariCPPropertiesKickoff/HikariCP%20trace%20log.png)
@@ -1904,7 +1904,7 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 127. **[How To Use Hibernate `@NaturalIdCache` For Skipping The Entity Identifier Retrieval](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNaturalIdCache)**
 
-**Description:** This is a SpringBoot - MySQL application that maps a natural business key using Hibernate `@NaturalId`. This implementation allows us to use `@NaturalId` as it was provided by Spring. Moreover, this application uses Second Level Cache (`EhCache`) and `@NaturalIdCache` for skipping the entity identifier retrieval.
+**Description:** This is a SpringBoot - MySQL application that maps a natural business key using Hibernate `@NaturalId`. This implementation allows us to use `@NaturalId` as it was provided by Spring. Moreover, this application uses Second Level Cache (`EhCache`) and `@NaturalIdCache` for skipping the entity identifier retrieval from the database.
 
 **Key points:**
 - enable Second Level Cache (`EhCache`)
@@ -1922,9 +1922,9 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
  
 **Description:** This application is an example of calculating a non-persistent property of an entity based on the persistent entity attributes. In this case, we will use JPA, `@PostLoad`.
 
-**Key points:**\
-     - annotate the non-persistent field and property with `@Transient`\
-     - define a method annotated with `@PostLoad` that calculates this non-persistent property based on the persistent entity attributes
+**Key points:**
+- annotate the non-persistent field and property with `@Transient`
+- define a method annotated with `@PostLoad` that calculates this non-persistent property based on the persistent entity attributes
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -1932,32 +1932,36 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
  
 **Description:** This application is an example of calculating an entity persistent property at `INSERT` and/or `UPDATE ` time via Hibernate, `@Generated`. 
 
-**Key points:**\
- **Calculate at `INSERT` time:**\
-      - annotate the corresponding persistent field with `@Generated(value = GenerationTime.INSERT)`\
-      - annotate the corresponding persistent field with `@Column(insertable = false)`\
- **Calculate at `INSERT` and `UPDATE` time:**\
-      - annotate the corresponding persistent field with `@Generated(value = GenerationTime.ALWAYS)`\
-      - annotate the corresponding persistent field with `@Column(insertable = false, updatable = false)`
+**Key points:**
 
-**Further, apply:**\
- **Method 1:**\
-     - if the database schema is generated via JPA annotations (not recommended) then use `columnDefinition` element of `@Column` to specify as an SQL query expression the formula for calculating the persistent property\
- **Method 2:**\
-     - if the database schema is not generated via JPA annotations (recommended way) then add the formula as part of schema in `CREATE TABLE`
+ **Calculate at `INSERT` time:**
+- annotate the corresponding persistent field with `@Generated(value = GenerationTime.INSERT)`
+- annotate the corresponding persistent field with `@Column(insertable = false)`
+
+ **Calculate at `INSERT` and `UPDATE` time:**
+- annotate the corresponding persistent field with `@Generated(value = GenerationTime.ALWAYS)`
+- annotate the corresponding persistent field with `@Column(insertable = false, updatable = false)`
+
+**Further, apply:**
+
+ **Method 1:**
+- if the database schema is generated via JPA annotations (not recommended) then use `columnDefinition` element of `@Column` to specify as an SQL query expression the formula for calculating the persistent property
+
+ **Method 2:**
+ - if the database schema is not generated via JPA annotations (recommended way) then add the formula as part of schema in `CREATE TABLE`
      
-**Note:** In production, you should not rely on `columnDefinition`. You should disable `hibernate.ddl-auto` (by omitting it) or set it to `validate`, and add the SQL query expression in `CREATE TABLE` (in this application, check the `discount` column in `CREATE TABLE`, file `schema-sql.sql`). Nevertheless, not even `schema-sql.sql` is ok in production. The best way is to rely on Flyway or Liquibase.
-
+**Note:** In production, you should not rely on `columnDefinition`. You should disable `hibernate.ddl-auto` (by omitting it), and add the SQL query expression in `CREATE TABLE` (in this application, check the `discount` column in `CREATE TABLE`, file `schema-sql.sql`). Nevertheless, not even `schema-sql.sql` is ok in production. The best way is to rely on Flyway or Liquibase.
+         
 ----------------------------------------------------------------------------------------------------------------------
 
 130. **[How To Calculate Non-Persistent Property via Hibernate `@Formula`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyFormula)**
  
 **Description:** This application is an example of calculating a non-persistent property of an entity based on the persistent entity attributes. In this case, we will use Hibernate, `@Formula`.
 
-**Key points:**\
-     - annotate the non-persistent property with `@Transient`\
-     - annotate the corresponding non-persistent field with `@Formula`\
-     - as the value of `@Formula` add the SQL query expression that calculates the non-persistent property based on the persistent entity attributes
+**Key points:**
+- annotate the non-persistent property with `@Transient`
+- annotate the non-persistent field with `@Formula`
+- as the value of `@Formula` add the SQL query expression that calculates this non-persistent property based on the persistent entity attributes
 
 ----------------------------------------------------------------------------------------------------------------------
 
