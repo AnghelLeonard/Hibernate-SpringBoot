@@ -438,57 +438,57 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-31. **[How To Extract DTOs Via ResultTransformer And JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoResultTransformerJpql)**
+31. **[How To Fetch DTO Via `ResultTransformer` and JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoResultTransformerJpql)**
+ 
+**Description:** Fetching more data than needed is prone to performance penalties. Using DTO allows us to extract only the needed data. In this application we rely on Hibernate, `ResultTransformer` and JPQL.
 
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on Hibernate, `ResultTransformer` and JPQL.
-
-**Key points:**\
-     - use `AliasToBeanConstructorResultTransformer` for DTOs without setters, with constructor\
-     - use `Transformers.aliasToBean()` for DTOs with setters\
-     - use `EntityManager.createQuery()` and `unwrap(org.hibernate.query.Query.class)`\
-     - starting with Hibernate 5.2, `ResultTransformer` is deprecated, but until a replacement will be available (in Hibernate 6.0) it can be used ([read further](https://discourse.hibernate.org/t/hibernate-resulttransformer-is-deprecated-what-to-use-instead/232))\
-     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
+**Key points:**
+- use `AliasToBeanConstructorResultTransformer` for DTO without setters, with constructor
+- use `Transformers.aliasToBean()` for DTO with setters
+- use `EntityManager.createQuery()` and `unwrap(org.hibernate.query.Query.class)`
+- starting with Hibernate 5.2, `ResultTransformer` is deprecated, but until a replacement will be available (in Hibernate 6.0) it can be used ([read further](https://discourse.hibernate.org/t/hibernate-resulttransformer-is-deprecated-what-to-use-instead/232))
+- for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-32. **[How To Extract DTOs Via Blaze-Persistence Entity Views](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoBlazeEntityView)**
+32. **[How To Fetch DTO Via Blaze-Persistence Entity Views](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoBlazeEntityView)** 
 
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on [Blaze-Persistence](https://persistence.blazebit.com/) entity views.
-
-**Key points:**\
-     - add in pom.xml dependencies specific to Blaze-Persistence\
-     - configure Blaze-Persistence, `CriteriaBuilderFactory` and `EntityViewManager`\
-     - write an entity view via an interface in Blaze-Persistence fashion\
-     - write a Spring-centric repository by extending `EntityViewRepository`\
-     - call method of this repository such as, `findAll()`, `findOne()`, etc\
-     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on [Blaze-Persistence](https://persistence.blazebit.com/) entity views.
+ 
+**Key points:**
+- for Maven, add in `pom.xml` the dependencies specific to Blaze-Persistence
+- configure Blaze-Persistence via `CriteriaBuilderFactory` and `EntityViewManager`
+- write an *entity view* via an interface in Blaze-Persistence fashion
+- write a Spring-centric repository by extending `EntityViewRepository`
+- call method of this repository such as, `findAll()`, `findOne()`, etc
+- for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-33. **[How @ElementCollection Without @OrderColumn Works](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionNoOrderColumn)**
+33. **[How Regular `@ElementCollection` (Without `@OrderColumn`) Works](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionNoOrderColumn)**
 
-**Description:** This application reveals the possible performance penalties of using `@ElementCollection`. In this case, without `@OrderColumn`. As you can see in the next recipe (34) adding `@OrderColumn` can mitigate some performance penalties.
+**Description:** This application reveals the possible performance penalties of using `@ElementCollection`. In this case, without `@OrderColumn`. As you can see in the next item (34) adding `@OrderColumn` can mitigate some performance penalties.
 
-**Key points:**\
-     - an `@ElementCollection` doesn't have a Primary Key\
-     - an `@ElementCollection` is mapped in a separate table\
-     - avoid `@ElementCollection` when you have a lot of inserts and deletes in/from it since the database has to delete all existing rows in order to add a new one or delete one\
-     - the more items we have in this table the greater the performance penalty
+**Key points:**
+- an `@ElementCollection` doesn't have a primary key
+- an `@ElementCollection` is mapped in a separate table
+- avoid `@ElementCollection` when you have a lot of inserts/deletes on this collection; inserts/deletes will cause Hibernate to delete all the existing table rows, process the collection in-memory, and re-insert the remaining table rows to mirror the collection from memory
+- the more entries we have in this collection the greater the performance penalty will be
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootElementCollectionNoOrderColumn/%40ElementCollection%20without%20%40OrderColumn.png)  
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-34. **[How @ElementCollection With @OrderColumn Works](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionWithOrderColumn)**
+34. **[How `@ElementCollection` With `@OrderColumn` Works](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionWithOrderColumn)**
 
-**Description:** This application reveals the performance penalties of using `@ElementCollection`. In this case, with `@OrderColumn`. But, as you can see in this application, by adding `@OrderColumn` can mitigate some performance penalties when operations take place near the collection tail (e.g., add/remove at/from the end of the collection). Mainly, all elements situated before the adding/removing entry are left untouched, so the performance penalty can be ignored if we affect rows close to the collection tail.
+**Description:** This application reveals the performance penalties of using `@ElementCollection`. In this case, with `@OrderColumn`. But, as you can see in this application (in comparison with item 33), by adding `@OrderColumn` can mitigate some performance penalties when operations takes place near the collection tail (e.g., add/remove at/from the end of the collection). Mainly, all elements situated before the adding/removing entry are left untouched, so the performance penalty can be ignored if we affect rows close to the collection tail.
 
-**Key points:**\
-     - an `@ElementCollection` doesn't have a Primary Key\
-     - an `@ElementCollection` is mapped in a separate table\
-     - pefer `@ElementCollection` with `@OrderColumn` when you have a lot of inserts and deletes from the collection tail\
-     - the more items are inserted/removed from the beginning of this table the greater the performance penalty
+**Key points:**
+- an `@ElementCollection` doesn't have a primary key
+- an `@ElementCollection` is mapped in a separate table
+- prefer `@ElementCollection` with `@OrderColumn` when you have a lot of inserts and deletes near the collection tail
+- the more elements are inserted/removed from the beginning of the collection the greater the performance penalty will be
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootElementCollectionWithOrderColumn/%40ElementCollection%20with%20%40OrderColumn.png)
@@ -498,85 +498,85 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 35. **[How To Avoid Lazy Initialization Issues Caused By Disabling Open Session In View Via Explicit (Default) Values](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSuppressLazyInitInOpenSessionInView)**
 
 **Note: Before reading this item try to see if [Hibernate5Module](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJacksonHibernate5Module) is not what you are looking for.**
+ 
+**Description:** The Open-Session in View anti-pattern is activated by default in SpringBoot. Now, imagine a lazy association (e.g., `@OneToMany`) between two entities, `Author` and `Book` (an author has associated more books). Next, a REST controller endpoint fetches an `Author` without the associated `Book`. But, the View (more precisely, Jackson), forces the lazy loading of the associated `Book` as well. Since OSIV will supply the already opened `Session`, the proxies initializations take place successfully. The solution to avoid this performance penalty starts by disabling the OSIV. Further, explicitly initialize the un-fetched lazy associations. This way, the View will not force lazy loading.
 
-**Description:** The Open-Session in View anti-pattern is activated by default in SpringBoot. Now, imagine a lazy relationship (e.g., `@OneToMany`) between two entities, `Author` and `Book` (an author has associated more books). Next, a REST controller endpoint fetches an `Author` without the associated `Book`. But, the View (more precisely, Jackson), forces the lazy loading of the associated `Book` as well. Since OSIV will supply the already opened `Session`, the `Proxy` initializations take place successfully. The solution to avoid this performance penalty starts by disabling the OSIV. Further, explicitly initialize the un-fetched lazy associations. This way, the View will not force lazy loading.
-
-**Key points:**\
-     - disable OSIV by adding in `application.properties` this setting: `spring.jpa.open-in-view=false`\
-     - fetch an `Author` entity and initialize its associated `Book` explicitly with (default) values (e.g., `null`)\
-     - set `@JsonInclude(Include.NON_EMPTY)` on this entity-level to avoid rendering `null` or what is considered empty in the resulted JSON
+**Key points:**
+- disable OSIV by adding in `application.properties` this setting: `spring.jpa.open-in-view=false`
+- fetch an `Author` entity and initialize its associated `Book` explicitly with (default) values (e.g., `null`)
+- set `@JsonInclude(Include.NON_EMPTY)` on this entity-level to avoid rendering `null` or what is considered empty in the resulted JSON
      
- **NOTE:** If OSIV is enabled, the developer can still initialize the un-fetched lazy associations manually as long as he does this outside of a transaction to avoid flushing. But, why is this working? Since the `Session` is open, why the manually initialization of the associations of a managed entity doesn't trigger the flush? The answer can be found in the documentation of `OpenSessionInViewFilter` which specifies that: *This filter will by default not flush the Hibernate `Session`, with the flush mode set to `FlushMode.NEVER`. It assumes to be used in combination with service layer transactions that care for the flushing: The active transaction manager will temporarily change the flush mode to `FlushMode.AUTO` during a read-write transaction, with the flush mode reset to `FlushMode.NEVER` at the end of each transaction. If you intend to use this filter without transactions, consider changing the default flush mode (through the "flushMode" property).*    
+ **NOTE:** If OSIV is enabled, the developer can still initialize the un-fetched lazy associations manually as long as he does this outside of a transaction to avoid flushing. But, why is this working? Since the `Session` is open, why the manually initialization of the associations of a managed entity doesn't trigger the flush? The answer can be found in the documentation of `OpenSessionInViewFilter` which specifies that: *This filter will by default not flush the Hibernate `Session`, with the flush mode set to `FlushMode.NEVER`. It assumes to be used in combination with service layer transactions that care for the flushing: The active transaction manager will temporarily change the flush mode to `FlushMode.AUTO` during a read-write transaction, with the flush mode reset to `FlushMode.NEVER` at the end of each transaction. If you intend to use this filter without transactions, consider changing the default flush mode (through the "flushMode" property).*         
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-36. **[How To Use Spring Projections(DTOs) And Inner Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaInnerJoins)**
+36. **[How To Use Spring Projections(DTO) And Inner Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaInnerJoins)**
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaInnerJoins/DTO%20via%20inner%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and inner joins written via JPQL and native SQL (for MySQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTO) and inner joins written via JPQL and native SQL (for MySQL).
 
-**Key points:**\
-     - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
-     - write inner joins queries using JPQL/SQL
+**Key points:**
+- define two entities (e.g., `Author` and `Book` in a (lazy) bidirectional `@OneToMany` association)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (Spring projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)
+- write inner joins queries using JPQL/SQL
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-37. **[How To Use Spring Projections(DTOs) And Left Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaLeftJoins)**
+37. **[How To Use Spring Projections(DTO) And Left Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaLeftJoins)**
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaLeftJoins/DTO%20via%20left%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and left joins written via JPQL and native SQL (for MySQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTO) and left joins written via JPQL and native SQL (for MySQL).
 
-**Key points:**\
-     - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
-     - write left joins queries using JPQL/SQL
+**Key points:**
+- define two entities (e.g., `Author` and `Book` in a (lazy) bidirectional `@OneToMany` association)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (Spring projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)
+- write left joins queries using JPQL/SQL
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-38. **[How To Use Spring Projections(DTOs) And Right Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaRightJoins)**
+38. **[How To Use Spring Projections(DTO) And Right Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaRightJoins)**
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaRightJoins/DTO%20via%20right%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and right joins written via JPQL and native SQL (for MySQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTO) and right joins written via JPQL and native SQL (for MySQL).
 
-**Key points:**\
-     - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
-     - write right joins queries using JPQL/SQL
+**Key points:**
+- define two entities (e.g., `Author` and `Book` in a (lazy) bidirectional `@OneToMany` association)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (Spring projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)
+- write right joins queries using JPQL/SQL
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-39. **[How To Use Spring Projections(DTOs) And Inclusive Full Joins (PostgreSQL)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaFullJoins)**
+39. **[How To Use Spring Projections(DTO) And Inclusive Full Joins (PostgreSQL)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaFullJoins)**
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaFullJoins/DTO%20via%20inclusive%20full%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and inclusive full joins written via JPQL and native SQL (for PostgreSQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTO) and inclusive full joins written via JPQL and native SQL (for PostgreSQL).
 
-**Key points:**\
-     - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
-     - write inclusive full joins queries using JPQL/SQL
+**Key points:**
+- define two entities (e.g., `Author` and `Book` in a (lazy) bidirectional `@OneToMany` association)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (Spring projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)
+- write inclusive full joins queries using JPQL/SQL
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-40. **[How To Use Spring Projections(DTOs) And Exclusive Left Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaLeftExcludingJoins)**
+40. **[How To Use Spring Projections(DTO) And Exclusive Left Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaLeftExcludingJoins)**
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaLeftExcludingJoins/DTO%20via%20exclusive%20left%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and exclusive left joins written via JPQL and native SQL (for MySQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTO) and exclusive left joins written via JPQL and native SQL (for MySQL).
 
-**Key points:**\
-     - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
-     - write exclusive left joins queries using JPQL/SQL
+**Key points:**
+- define two entities (e.g., `Author` and `Book` in a (lazy) bidirectional `@OneToMany` association)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)
+- write exclusive left joins queries using JPQL/SQL
      
 -----------------------------------------------------------------------------------------------------------------------    
 
