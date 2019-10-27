@@ -1,10 +1,10 @@
 **[How To Extract Tables Metadata](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTablesMetadata)**
  
-**Description:** This application is an example of using the Hibernare SPI, `org.hibernate.integrator.spi.Integrator` for extracting tables metadata.
+**Description:** This application is an example of using the Hibernate SPI, `org.hibernate.integrator.spi.Integrator` for extracting tables metadata.
 
-**Key points:**\
-     - Implement `org.hibernate.integrator.spi.Integrator` and override `integrate()` method to return `metadata.getDatabase()`\
-     - Register this `Integrator` via `LocalContainerEntityManagerFactoryBean`
+**Key points:**
+- implement `org.hibernate.integrator.spi.Integrator` and override `integrate()` method to return `metadata.getDatabase()`
+- register this `Integrator` via `LocalContainerEntityManagerFactoryBean`
      
 -------------------------------
 
