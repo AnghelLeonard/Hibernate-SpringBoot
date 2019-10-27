@@ -2543,8 +2543,8 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
   
  **Description:** This application is an example of getting the current database transaction id in MySQL. Only read-write database transactions gets an id in MySQL. Every database has a specific query for getting the transaction id. [Here](https://vladmihalcea.com/current-database-transaction-id/) it is a list of these queries.
 
-**Key points:**\
-     - rely on the following query, `SELECT tx.trx_id FROM information_schema.innodb_trx tx WHERE tx.trx_mysql_thread_id = connection_id()`
+**Key points:**
+- rely on the following query, `SELECT tx.trx_id FROM information_schema.innodb_trx tx WHERE tx.trx_mysql_thread_id = connection_id()`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2552,19 +2552,19 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This application is a sample of inspecting the Persistent Context content via `org.hibernate.engine.spi.PersistenceContext`.
 
-**Key points:**\
-     - get the current Persistent Context via Hibernate `SharedSessionContractImplementor`\
-     - rely on `PersistenceContext` [API](https://docs.jboss.org/hibernate/orm/5.4/javadocs/org/hibernate/engine/spi/PersistenceContext.html)
+**Key points:**
+- get the current Persistent Context via Hibernate `SharedSessionContractImplementor`
+- rely on `PersistenceContext` [API](https://docs.jboss.org/hibernate/orm/5.4/javadocs/org/hibernate/engine/spi/PersistenceContext.html)
 
 ----------------------------------------------------------------------------------------------------------------------
 
 173. **[How To Extract Tables Metadata](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTablesMetadata)**
- 
-**Description:** This application is an example of using the Hibernare SPI, `org.hibernate.integrator.spi.Integrator` for extracting tables metadata.
 
-**Key points:**\
-     - Implement `org.hibernate.integrator.spi.Integrator` and override `integrate()` method to return `metadata.getDatabase()`\
-     - Register this `Integrator` via `LocalContainerEntityManagerFactoryBean`
+**Description:** This application is an example of using the Hibernate SPI, `org.hibernate.integrator.spi.Integrator` for extracting tables metadata.
+
+**Key points:**
+- implement `org.hibernate.integrator.spi.Integrator` and override `integrate()` method to return `metadata.getDatabase()`
+- register this `Integrator` via `LocalContainerEntityManagerFactoryBean`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2572,8 +2572,8 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This application is an example of mapping the JPA `@ManyToOne` relationship to a SQL query via the Hibernate `@JoinFormula` annotation. We start with two entities, `Author` and `Book`, involved in a unidirectional `@ManyToOne` relationship. Each book has a price. While we fetch a book by id (let's call it book `A`), we want to fetch another book `B` of the same author whose price is the next smaller price in comparison with book `A` price.
 
-**Key points:**\
-     - fetching the book `B` is done via `@JoinFormula`
+**Key points:**
+- fetching the book `B` is done via `@JoinFormula`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2581,9 +2581,9 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This application is an example of fetching a read-only MySQL database view in a JPA immutable entity.
 
-**Key points:**\
-     - the database view is available in `data-mysql.sql` file\
-     - the entity used to map the database view is `GenreAndTitleView.java`
+**Key points:**
+- the database view is available in `data-mysql.sql` file
+- the entity used to map the database view is `GenreAndTitleView.java`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2591,9 +2591,9 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This application is an example of updating, inserting and deleting data in a MySQL database view. Every update/insert/delete will automatically update the contents of the underlying table(s).
 
-**Key points:**\
-     - the database views are available in `data-mysql.sql` file\
-     - respect [MySQL](https://dev.mysql.com/doc/refman/8.0/en/view-updatability.html) requirements for updatable and insertable database views
+**Key points:**
+- the database views are available in `data-mysql.sql` file
+- respect [MySQL](https://dev.mysql.com/doc/refman/8.0/en/view-updatability.html) requirements for updatable and insertable database views
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2601,9 +2601,9 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This application is an example of preventing inserts/updates of a MySQL view that are not visible through this view via `WITH CHECK OPTION`. In other words, whenever you insert or update a row of the base tables through a view, MySQL ensures that the this operation is conformed with the definition of the view.
 
-**Key points:**\
-     - add `WITH CHECK OPTION` to the view\
-     - this application will throw an exception of type `java.sql.SQLException: CHECK OPTION failed 'bookstoredb.author_anthology_view`
+**Key points:**
+- add `WITH CHECK OPTION` to the view
+- this application will throw an exception of type `java.sql.SQLException: CHECK OPTION failed 'bookstoredb.author_anthology_view`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2611,9 +2611,9 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
  
 **Description:** This application is an example of assigning a database sequential number to DTO rows via the window function, `ROW_NUMBER()`. This window function is available in almost all databases, and starting with version 8.x is available in MySQL as well.
 
-**Key points:**\
-     - write a Spring projection (DTO) that contains a getter for the column generated by `ROW_NUMBER`\
-     - write a native query relying on `ROW_NUMBER()` window function
+**Key points:**
+- write a Spring projection (DTO) that contains a getter for the column generated by `ROW_NUMBER`
+- write a native query relying on `ROW_NUMBER()` window function
      
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAssignSequentialNumber/assign%20sequential%20number%20to%20rows.png)
@@ -2624,8 +2624,8 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
  
 **Description:** This application is an example of finding top N rows of every group.
 
-**Key points:**\
-     - write a native query relying on `ROW_NUMBER()` window function
+**Key points:**
+- write a native query relying on `ROW_NUMBER()` window function
      
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootTopNRowsPerGroup/Finding%20top%20N%20rows%20of%20every%20group.png)
@@ -2636,9 +2636,9 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This application is an example of using `ROW_NUMBER()` (and `COUNT(*) OVER()` for counting all elements) window function to implement pagination.
 
-**Key points:**\
-     - use a native query relying on `ROW_NUMBER()`\
-     - we don't return a page as `Page` or `Slice`, we return it as `List`, therefore `Pageable` is not used
+**Key points:**
+- use a native query relying on `ROW_NUMBER()`
+- we don't return a page as `Page` or `Slice`, we return it as `List`, therefore `Pageable` is not used
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2649,10 +2649,10 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 1. `@Transactional` was added to a `private`, `protected` or `package-protected` method
 2. `@Transactional` was added to a method defined in the same class where it is invoked
 
-**Key points:**\
-     - write a helper service and move the `@Transactional` methods there\
-     - ensure that these methods are declared as `public`\
-     - call `@Transactional` methods from other services
+**Key points:**
+- write a helper service and move the `@Transactional` methods there
+- ensure that these methods are declared as `public`
+- call `@Transactional` methods from other services
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2660,9 +2660,9 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This is a Spring Boot example of using the `hi/lo` algorithm and a custom implementation of `SequenceStyleGenerator` for generating custom sequence IDs (e.g, `A-0000000001`, `A-0000000002`, ...).
 
-**Key points:**\
-     - extend `SequenceStyleGenerator` and override the `configure()` and `generate()` methods\
-     - set this generator in entities
+**Key points:**
+- extend `SequenceStyleGenerator` and override the `configure()` and `generate()` methods
+- set this generator in entities
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2670,8 +2670,8 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
  
 **Description:** This application is an example of mapping `Clob` and `Blob` as `byte[]` and `String`. 
 
-**Key points:**\
-     - this is vey easy to use but the application doesn't take advantage of JDBC driver LOB-specific optimizations
+**Key points:**
+- this is vey easy to use but the application doesn't take advantage of JDBC driver LOB-specific optimizations
      
 ----------------------------------------------------------------------------------------------------------------------
      
@@ -2679,8 +2679,8 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
  
 **Description:** This application is an example of mapping to JDBC's `LOB` locators `Clob` and `Blob`.
 
-**Key points:**\
-     - this takes advantage of JDBC driver LOB-specific optimizations
+**Key points:**
+- this takes advantage of JDBC driver LOB-specific optimizations
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2688,8 +2688,8 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This application is a sample of fetching a certain subclass from a `SINGLE_TABLE` inheritance hierarchy. This is useful when the dedicated repository of the subclass doesn't automatically add in the `WHERE` clause a `dtype` based condition for fetching only the needed subclass.
 
-**Key points:**\
-     - explicitly add in the `WHERE` clause a `TYPE` check
+**Key points:**
+- explicitly add in the `WHERE` clause a `TYPE` check 
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2704,10 +2704,10 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 187. **[How To Implement Advanced Search Via `Specification`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSearchViaSpecifications)**
  
-**Description:** This application is an example of implementing an advanced search via `Specification` API. Mainly, you can give the search filters to a generic `Specification` and fetch the result set. Pagination is supported as well. You can chain expressions via `AND` and `OR` to create compound filters. Nevertheless, there is room for extensions to add brackets support (e.g., `(x AND y) OR (x AND z)`), more operations, conditions parser and so on and forth.
+**Description:** This application is an example of implementing an advanced search via `Specification` API. Mainly, you can give the search filters to a generic `Specification` and fetch the result set. Pagination is supported as well. You can chain expressions via logical `AND` and `OR` to create compound filters. Nevertheless, there is room for extensions to add brackets support (e.g., `(x AND y) OR (x AND z)`), more operations, conditions parser and so on and forth.
 
-**Key points:**\
-     - write a generic `Specification`   
+**Key points:**
+- write a generic `Specification`       
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2715,23 +2715,23 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This application contains two examples of how to define `JOIN` in `Specification` to emulate JPQL join-fetch operations.
 
-**Key points:**\
-     - the first approach trigger two `SELECT` statements and the pagination is done in memory (very bad!)\
-     - the second approach trigger three `SELECT` statements but the pagination is done in the database\
-     - in both approaches the `JOIN` is defined in a `Specification` implementation
+**Key points:**
+- the first approach trigger two `SELECT` statements and the pagination is done in memory (very bad!)
+- the second approach trigger three `SELECT` statements but the pagination is done in the database
+- in both approaches the `JOIN` is defined in a `Specification` implementation
 
 ----------------------------------------------------------------------------------------------------------------------
 
-189. **[DTOs Via Spring Data Projections (Projection Interface In Repository Interface)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjectionsIntefaceInRepo)** 
+189. **[DTO Via Spring Data Projections (Projection Interface In Repository Interface)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjectionsIntefaceInRepo)** 
 
-**Note:** You may also like to read the recipe, ["How To Enrich DTOs With Virtual Properties Via Spring Projections"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaProjectionsAndVirtualProperties)
+**Note:** You may also like to read the recipe, ["How To Enrich DTO With Virtual Properties Via Spring Projections"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaProjectionsAndVirtualProperties)
 
-**Description:** Fetch only the needed data from the database via Spring Data Projections (DTOs). The projection interface is defined as a `static` interface (can be non-`static` as well) in the repository interface.
+**Description:** Fetch only the needed data from the database via Spring Data Projections (DTO). The projection interface is defined as a `static` interface (can be non-`static` as well) in the repository interface.
 
-**Key points:**\
-     - write an interface (projection) containing getters only for the columns that should be fetched from the database\
-     - write the proper query returning a `List<projection>`\
-     - if is applicable, limit the number of returned rows (e.g., via `LIMIT`) - here, we can use query builder mechanism built into Spring Data repository infrastructure
+**Key points:**
+- write an interface (projection) containing getters only for the columns that should be fetched from the database
+- write the proper query returning a `List<projection>`
+- if is applicable, limit the number of returned rows (e.g., via `LIMIT`) - here, we can use query builder mechanism built into Spring Data repository infrastructure
      
 **Note:** Using projections is not limited to use query builder mechanism built into Spring Data repository infrastructure. We can fetch projections via JPQL or native queries as well. For example, in this [application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjectionsAndJpql) we use a JPQL.
      
@@ -2740,23 +2740,23 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 ----------------------------------------------------------------------------------------------------------------------
 
-190. **[How To Ensure/Validate That Only One Association Is Non-null](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootChooseOnlyOneAssociation)**
+190. **[How To Ensure/Validate That Only One Association Is Non-Null](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootChooseOnlyOneAssociation)**
  
  **Description:** Consider an entity named `Review`. This entity defines three `@ManyToOne` relationships to `Book`, `Article` and `Magazine`. A review can be associated with either a book, a magazine or an article. To validate this constraint, we can rely on  [Bean Validation](https://beanvalidation.org/) as in this application.
 
-**Key points:**\
-     - rely on Bean Validation to validate that only one association is non-`null`\
-     - expose the constraint via a custom annotation (`@JustOneOfMany`) added at class-level to the `Review` entity\
-     - for preventing native query to break our constraint add the validation at database level as well (e.g., in MySQL add a `TRIGGER`) 
+**Key points:**
+- rely on Bean Validation to validate that only one association is non-`null`
+- expose the constraint via a custom annotation (`@JustOneOfMany`) added at class-level to the `Review` entity
+- for preventing native query to break our constraint add the validation at database level as well (e.g., in MySQL add a `TRIGGER`)
      
 ----------------------------------------------------------------------------------------------------------------------
      
-191. **[Quickest Mapping Of Enums](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnumStringInt)**
- 
+191. **[Quickest Mapping Of Java Enums](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnumStringInt)**
+  
 **Description:** This application uses `EnumType.ORDINAL` and `EnumType.STRING` for mapping Java `enum` type to database. As a rule of thumb, strive to keep the data types as small as possible (e.g., for `EnumType.ORDINAL` use `TINYINT/SMALLINT`, while for `EnumType.STRING` use `VARCHAR(max_needed_bytes)`). Relying on `EnumType.ORDINAL` should be more efficient but is less expressive than `EnumType.STRING`.
 
-**Key points:**\
-     - strive for smallest data types (e.g., for `EnumType.ORDINAL` set `@Column(columnDefinition = "TINYINT")`)
+**Key points:**
+- strive for smallest data types (e.g., for `EnumType.ORDINAL` set `@Column(columnDefinition = "TINYINT")`)
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2764,9 +2764,9 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
  
 **Description:** This application maps a Java `enum` via `AttributeConverter`. In other words, it maps the `enum` values `HORROR`, `ANTHOLOGY` and `HISTORY` to the integers `1`, `2` and `3` and viceversa. This allows us to set the column type as `TINYINT/SMALLINT` which is less space-consuming than `VARCHAR(9)` needed in this case.
 
-**Key points:**\
-     - define a custom `AttributeConverter`\
-     - annotate with `@Converter` the corresponding entity field
+**Key points:**
+- define a custom `AttributeConverter`
+- annotate with `@Converter` the corresponding entity field
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2774,10 +2774,10 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
  
 **Description:** This application maps a Java `enum` type to PostgreSQL `enum` type.
 
-**Key points:**\
-     - define a custom Hibernate `EnumType`\
-     - register this custom `EnumType` via `package-info.java`\
-     - annotate the corresponding entity field `@Type`
+**Key points:**
+- define a custom Hibernate `EnumType`
+- register this custom `EnumType` via `package-info.java`
+- annotate the corresponding entity field `@Type`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2785,10 +2785,10 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
  
 **Description:** This application maps a Java `enum` type to PostgreSQL `enum` type via [Hibernate Types](https://github.com/vladmihalcea/hibernate-types) library.
 
-**Key points:**\
-     - install Hibernate Types library via `pom.xml`\
-     - use `@TypeDef` to specify the needed type class\
-     - annotate the corresponding entity field with `@Type`
+**Key points:**
+- install Hibernate Types library via `pom.xml`
+- use `@TypeDef` to specify the needed type class
+- annotate the corresponding entity field with `@Type`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2796,9 +2796,9 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** [Hibernate Types](https://github.com/vladmihalcea/hibernate-types) is a library of extra types not supported by Hibernate Core by default. This is a Spring Boot application that uses this library to persist JSON data (JSON Java `Object`) in a MySQL `json` column and for querying JSON data from the MySQL `json` column to JSON Java `Object`. Updates are supported as well.
 
-**Key points:**\
-     - for Maven, add Hibernate Types as a dependency in `pom.xml`\
-     - in entity use `@TypeDef` to map `typeClass` to `JsonStringType`
+**Key points:**
+- for Maven, add Hibernate Types as a dependency in `pom.xml`
+- in entity use `@TypeDef` to map `typeClass` to `JsonStringType`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2806,42 +2806,41 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** [Hibernate Types](https://github.com/vladmihalcea/hibernate-types) is a library of extra types not supported by Hibernate Core by default. This is a Spring Boot application that uses this library to persist JSON data (JSON Java `Object`) in a PostgreSQL `json` column and for querying JSON data from the PostgreSQL `json` column to JSON Java `Object`. Updates are supported as well.
 
-**Key points:**\
-     - for Maven, add Hibernate Types as a dependency in `pom.xml`\
-     - in entity use `@TypeDef` to map `typeClass` to `JsonBinaryType`
+**Key points:**
+- for Maven, add Hibernate Types as a dependency in `pom.xml`
+- in entity use `@TypeDef` to map `typeClass` to `JsonBinaryType`
 
 ----------------------------------------------------------------------------------------------------------------------
 
-197. **[How to increment the version of the locked entity even if this entity was not modified `OPTIMISTIC_FORCE_INCREMENT`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOptimisticForceIncrement)**
+197. **[How To Increment The Version Of The Locked Entity Even If This Entity Was Not Modified `OPTIMISTIC_FORCE_INCREMENT`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOptimisticForceIncrement)**
 
 **Description:** This application is a sample of how `OPTIMISTIC_FORCE_INCREMENT` works in MySQL. This is useful when you want to increment the version of the locked entity even if this entity was not modified. Via `OPTIMISTIC_FORCE_INCREMENT` the version is updated (incremented) at the end of the currently running transaction.
 
-**Key points:**\
-     - use a root entity, `Chapter` (which uses `@Version`)\
-     - several editors load a chapter and perfom modifications mapped via the `Modification` entity\
-     - between `Modification` (child-side) and `Chapter` (parent-side) there is a lazy unidirectional `@ManyToOne` relationship\
-     - for each modification, Hibernate will trigger an `INSERT` statement against `modification` table, therefore the `chapter` table will not be modified by editors\
-     - but, `Chapter` entity version is needed to ensure that modifications are applied sequentially (the author and editor are notified if a modificaton was added since the chapter copy was loaded)\
-     - the `version` is forcibly increased at each modification (this is materialized in an `UPDATE` triggered against the `chapter` table at the end of the currently running transaction)\
-     - set `OPTIMISTIC_FORCE_INCREMENT` in the corresponding repository\
-     - rely on two concurrent transactions to shape the scenario that will lead to an exception of type `ObjectOptimisticLockingFailureException`    
+**Key points:**
+- use a root entity, `Chapter` (which uses `@Version`)
+- several editors load a chapter and perform modifications mapped via the `Modification` entity
+- between `Modification` (child-side) and `Chapter` (parent-side) there is a lazy unidirectional `@ManyToOne` association
+- for each modification, Hibernate will trigger an `INSERT` statement against the `modification` table, therefore the `chapter` table will not be modified by editors
+- but, `Chapter` entity version is needed to ensure that modifications are applied sequentially (the author and editor are notified if a modificaton was added since the chapter copy was loaded)
+- the `version` is forcibly increased at each modification (this is materialized in an `UPDATE` triggered against the `chapter` table at the end of the currently running transaction)
+- set `OPTIMISTIC_FORCE_INCREMENT` in the corresponding repository
+- rely on two concurrent transactions to shape the scenario that will lead to an exception of type `ObjectOptimisticLockingFailureException`      
 
 ----------------------------------------------------------------------------------------------------------------------
 
-198. **[How to increment the version of the locked entity even if this entity was not modified `PESSIMISTIC_FORCE_INCREMENT`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPesimisticForceIncrement)**
+198. **[How To Increment The Version Of The Locked Entity Even If This Entity Was Not Modified `PESSIMISTIC_FORCE_INCREMENT`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPesimisticForceIncrement)**
 
-**Descripti
-on:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in MySQL. This is useful when you want to increment the version of the locked entity even if this entity was not modified. Via `PESSIMISTIC_FORCE_INCREMENT` the version is updated (incremented) immediately (the entity version update is guaranteed to succeed immediately after acquiring the row-level lock). The incrementation takes place before the entity is returned to the data access layer.
+**Description:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in MySQL. This is useful when you want to increment the version of the locked entity even if this entity was not modified. Via `PESSIMISTIC_FORCE_INCREMENT` the version is updated (incremented) immediately (the entity version update is guaranteed to succeed immediately after acquiring the row-level lock). The incrementation takes place before the entity is returned to the data access layer.
 
-**Key points:**\
-     - use a root entity, `Chapter` (which uses `@Version`)\
-     - several editors load a chapter and perfom modifications mapped via the `Modification` entity\
-     - between `Modification` (child-side) and `Chapter` (parent-side) there is a lazy unidirectional `@ManyToOne` relationship\
-     - for each modification, Hibernate will trigger an `INSERT` statement against `modification` table, therefore the `chapter` table will not be modified by editors\
-     - but, `Chapter` entity `version` is needed to ensure that modifications are applied sequentially (each editor is notified if a modificaton was added since his chapter copy was loaded and he must re-load the chapter)\
-     - the `version` is forcibly increased at each modification (this is materialized in an `UPDATE` triggered against the `chapter` table immediately after aquiring the row-level lock)\
-     - set `PESSIMISTIC_FORCE_INCREMENT` in the corresponding repository\
-     - rely on two concurrent transactions to shape two scenarios: one that will lead to an exception of type `OptimisticLockException` and one that will lead to `QueryTimeoutException`          
+**Key points:**
+- use a root entity, `Chapter` (which uses `@Version`)
+- several editors load a chapter and perform modifications mapped via the `Modification` entity
+- between `Modification` (child-side) and `Chapter` (parent-side) there is a lazy unidirectional `@ManyToOne` association
+- for each modification, Hibernate will trigger an `INSERT` statement against the `modification` table, therefore the `chapter` table will not be modified by editors
+- but, `Chapter` entity `version` is needed to ensure that modifications are applied sequentially (each editor is notified if a modificaton was added since his chapter copy was loaded and he must re-load the chapter)
+- the `version` is forcibly increased at each modification (this is materialized in an `UPDATE` triggered against the `chapter` table immediately after aquiring the row-level lock)
+- set `PESSIMISTIC_FORCE_INCREMENT` in the corresponding repository
+- rely on two concurrent transactions to shape two scenarios: one that will lead to an exception of type `OptimisticLockException` and one that will lead to `QueryTimeoutException`                   
      
 **Note:** Pay attention to the MySQL dialect: `MySQL5Dialect` (MyISAM) doesn't support row-level locking, `MySQL5InnoDBDialect` (InnoDB) acquires row-level lock via `FOR UPDATE` (timeout can be set), `MySQL8Dialect` (InnoDB) acquires row-level lock via `FOR UPDATE NOWAIT`.
 
@@ -2851,9 +2850,9 @@ on:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in
  
 **Description:** This application is an example of using `PESSIMISTIC_READ` and `PESSIMISTIC_WRITE` in MySQL. In a nutshell, each database system defines its own syntax for acquiring shared and exclusive locks and not all databases support both types of locks. Depending on `Dialect`, the syntax can vary for the same database as well (Hibernate relies on `Dialect` for chosing the proper syntax). In MySQL, `MySQL5Dialect` doesn't support locking, while InnoDB engine (`MySQL5InnoDBDialect` and `MySQL8Dialect`) supports shared and exclusive locks as expected.
 
-**Key points:**\
-     - rely on `@Lock(LockModeType.PESSIMISTIC_READ)` and `@Lock(LockModeType.PESSIMISTIC_WRITE)` on query-level\
-     - for testing, use `TransactionTemplate` to trigger two concurrent transactions that read and write the same row
+**Key points:**
+- rely on `@Lock(LockModeType.PESSIMISTIC_READ)` and `@Lock(LockModeType.PESSIMISTIC_WRITE)` on query-level
+- for testing, use `TransactionTemplate` to trigger two concurrent transactions that read and write the same row
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2861,11 +2860,11 @@ on:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in
  
 **Description:** This application is an example of triggering `UPDATE`, `INSERT` and `DELETE` operations in the context of `PESSIMISTIC_WRITE` locking against MySQL. While `UPDATE` and `DELETE` are blocked until the exclusive lock is released, `INSERT` depends on the transaction isolation level. Typically, even with exclusive locks, inserts are possible (e.g., in PostgreSQL). In MySQL, for the default isolation level, `REPEATABLE READ`, inserts are prevented against a range of locked entries, but, if we switch to `READ_COMMITTED`, then MySQL acts as PostgreSQL as well.
 
-**Key points:**\
-     - start *Transaction A* and trigger a `SELECT` with `PESSIMISTIC_WRITE` to acquire an exclusive lock\
-     - start a concurrent *Transaction B* that triggers an `UPDATE`, `INSERT` or `DELETE` on the rows locked by *Transaction A*\
-     - in case of `UPDATE`, `DELETE` and `INSERT` + `REPEATABLE_READ`, *Transaction B* is blocked until it timeouts or *Transaction A* releases the exclusive lock\
-     - in case of `INSERT` + `READ_COMMITTED`, *Transaction B* can insert in the range of rows locked by *Transaction A* even if *Transaction A* is holding an exclusive lock on this range  
+**Key points:**
+- start *Transaction A* and trigger a `SELECT` with `PESSIMISTIC_WRITE` to acquire an exclusive lock
+- start a concurrent *Transaction B* that triggers an `UPDATE`, `INSERT` or `DELETE` on the rows locked by *Transaction A*
+- in case of `UPDATE`, `DELETE` and `INSERT` + `REPEATABLE_READ`, *Transaction B* is blocked until it timeouts or *Transaction A* releases the exclusive lock
+- in case of `INSERT` + `READ_COMMITTED`, *Transaction B* can insert in the range of rows locked by *Transaction A* even if *Transaction A* is holding an exclusive lock on this range     
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2875,11 +2874,11 @@ on:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in
 
 **Description:** This application contains several approaches for setting a timeout period for a transaction or query. The timeout is signaled by a specific timeout exception (e.g., `.QueryTimeoutException`). After timeout, the transaction is rolled back. You can see this in the database (visually or query) and on log via a message of type: `Initiating transaction rollback; Rolling back JPA transaction on EntityManager [SessionImpl(... <open>)]`.
 
-**Key points:**\
-     - set global transaction timeout via `spring.transaction.default-timeout` in seconds (see, `application.properties`)\
-     - set transaction timeout at method-level or class-level via `@Transactional(timeout = n)` in seconds\
-     - set query timeout via JPA `javax.persistence.query.timeout` hint in milliseconds\
-     - set query timeout via Hibrenate `org.hibernate.timeout` hint in seconds
+**Key points:**
+- set global transaction timeout via `spring.transaction.default-timeout` in seconds (see, `application.properties`)
+- set transaction timeout at method-level or class-level via `@Transactional(timeout = n)` in seconds
+- set query timeout via JPA `javax.persistence.query.timeout` hint in milliseconds
+- set query timeout via Hibrenate `org.hibernate.timeout` hint in seconds
      
 **Note:** If you are using `TransactionTemplate` then the timeout can be set via `TransactionTemplate.setTimeout(n)` in seconds.
 
@@ -2887,25 +2886,25 @@ on:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in
 
 202. **[How To Define A Composite Primary Key Via `@Embeddable`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCompositeKeyEmbeddable)**
 
-**Description:** This application is a proof of concept of how to define a composite key via `@Embeddable` and `@EmbeddedId`. This application uses two entities, `Author` and `Book` involved in a lazy bidirectional `@OneToMany` relationship. The identifier of `Author` is composed by `name` and `age` via `AuthorId` class. The identifier of `Book` is just a typical auto-generated numeric value.
+**Description:** This application is a proof of concept of how to define a composite key via `@Embeddable` and `@EmbeddedId`. This application uses two entities, `Author` and `Book` involved in a lazy bidirectional `@OneToMany` association. The identifier of `Author` is composed by `name` and `age` via `AuthorId` class. The identifier of `Book` is just a regular auto-generated numeric value.
 
-**Key points:**\
-     - The composite key class (e.g., `AuthorId`) is `public`\
-     - The composite key class must implement `Serializable`\
-     - The composite key must define `equals()` and `hashCode()`\
-     - The composite key must define a no-arguments constructor
+**Key points:**
+- the composite key class (e.g., `AuthorId`) is `public`
+- the composite key class must implement `Serializable`
+- the composite key must define `equals()` and `hashCode()`
+- the composite key must define a no-arguments constructor
 
 ----------------------------------------------------------------------------------------------------------------------
 
 203. **[How To Define A Composite Primary Key Via `@IdClass`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCompositeKeyIdClass)**
 
-**Description:** This application is a proof of concept of how to define a composite key via `@IdClass`. This application uses two entities, `Author` and `Book` involved in a lazy bidirectional `@OneToMany` relationship. The identifier of `Author` is composed by `name` and `age` via `AuthorId` class. The identifier of `Book` is just a typical auto-generated numeric value.
+**Description:** This application is a proof of concept of how to define a composite key via `@IdClass`. This application uses two entities, `Author` and `Book` involved in a lazy bidirectional `@OneToMany` association. The identifier of `Author` is composed by `name` and `age` via `AuthorId` class. The identifier of `Book` is just a typical auto-generated numeric value.
 
-**Key points:**\
-     - The composite key class (e.g., `AuthorId`) is `public`\
-     - The composite key class must implement `Serializable`\
-     - The composite key must define `equals()` and `hashCode()`\
-     - The composite key must define a no-arguments constructor
+**Key points:**
+- the composite key class (e.g., `AuthorId`) is `public`
+- the composite key class must implement `Serializable`
+- the composite key must define `equals()` and `hashCode()`
+- the composite key must define a no-arguments constructor
      
 **Note**: The `@IdClass` can be useful when we cannot modify the compsite key class. Otherwise, rely on [`@Embeddable`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCompositeKeyEmbeddable).
 
@@ -2915,11 +2914,11 @@ on:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in
 
 **Description:** This application is a proof of concept of how to define a relationship in an `@Embeddable` composite key. The composite key is `AuthorId` and it belongs to the `Author` class.
 
-**Key points:**\
-     - The composite key class (e.g., `AuthorId`) is `public`\
-     - The composite key class must implement `Serializable`\
-     - The composite key must define `equals()` and `hashCode()`\
-     - The composite key must define a no-arguments constructor
+**Key points:**
+- the composite key class (e.g., `AuthorId`) is `public`
+- the composite key class must implement `Serializable`
+- the composite key must define `equals()` and `hashCode()`
+- the composite key must define a no-arguments constructor
 
 ----------------------------------------------------------------------------------------------------------------------
 
