@@ -2218,12 +2218,12 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Description:** This is a sample application of using *entity graphs* with `@Basic` attributes in Spring Boot.
 
-**Key points:**\
-     - define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` relationship\
-     - in `Author` entity use the `@NamedEntityGraph` to define the *entity graph* (e.g., load the authors names (only the `name` basic attribute; ignore the rest) and the associatated books)\
-     - add *bytecode enhancement*\
-     - annotate the basic attributes that should be ignored by the *entity graph* with `@Basic(fetch = FetchType.LAZY)`\
-     - in `AuthorRepository` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
+**Key points:**
+- define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` association
+- in `Author` entity use the `@NamedEntityGraph` to define the *entity graph* (e.g., load the authors names (only the `name` basic attribute; ignore the rest) and the associatated books)
+- add *bytecode enhancement*
+- annotate the basic attributes that should be ignored by the *entity graph* with `@Basic(fetch = FetchType.LAZY)`
+- in `AuthorRepository` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2233,13 +2233,13 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Description:** This application is an example of implementing soft deletes in Spring Data style via a repository named, `SoftDeleteRepository`. 
 
-**Key points:**\
-     - define an abstract class, `BaseEntity`, annotated with `@MappedSuperclass`\
-     - in `BaseEntity` define a flag-field named `deleted` (default this field to `false` or in other words, not deleted)\
-     - every entity that wants to take advantage of soft deletes should extend the `BaseEntity` classs\
-     - write a `@NoRepositoryBean` named `SoftDeleteRepository` and extend `JpaRepository`\
-     - override and implement the needed methods that provide the logic for soft deletes (check out the source code)\     
-     - repositories of entities should extend `SoftDeleteRepository`
+**Key points:**
+- define an `abstract` class, `BaseEntity`, annotated with `@MappedSuperclass`
+- in `BaseEntity` define a flag-field named `deleted` (default this field to `false` or in other words, not deleted)
+- every entity that wants to take advantage of soft deletes should extend the `BaseEntity` classs
+- write a `@NoRepositoryBean` named `SoftDeleteRepository` and extend `JpaRepository`
+- override and implement the needed methods that provide the logic for soft deletes (check out the source code)
+- repositories of entities should extend `SoftDeleteRepository`
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSoftDeletes/soft%20deletes.png)
@@ -2250,12 +2250,12 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Description:** This application is an example of how to implement concurrent table based queue via `SKIP_LOCKED` in MySQL 8. `SKIP_LOCKED` can skip over locks achieved by other concurrent transactions, therefore is a great choice for implementing job queues. In this application, we run two concurrent transactions. The first transaction will lock the records with ids 1, 2 and 3. The second transaction will skip the records with ids 1, 2 and 3 and will lock the records with ids 4, 5 and 6.
 
-**Key points:**\
-     - define an entity that acts as a job queue (e.g., see the `Book` entity)\
-     - in `BookRepository` setup `@Lock(LockModeType.PESSIMISTIC_WRITE)`\
-     - in `BookRepository` use `@QueryHint` to setup `javax.persistence.lock.timeout` to `SKIP_LOCKED`\
-     - rely on `org.hibernate.dialect.MySQL8Dialect` dialect\
-     - run two concurrent transactions to see the effect of `SKIP_LOCKED`
+**Key points:**
+- define an entity that acts as a job queue (e.g., see the `Book` entity)
+- in `BookRepository` setup `@Lock(LockModeType.PESSIMISTIC_WRITE)`
+- in `BookRepository` use `@QueryHint` to setup `javax.persistence.lock.timeout` to `SKIP_LOCKED`
+- rely on `org.hibernate.dialect.MySQL8Dialect` dialect
+- run two concurrent transactions to see the effect of `SKIP_LOCKED`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2263,47 +2263,47 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Description:** This application is an example of how to implement concurrent table based queue via `SKIP_LOCKED` in PostgreSQL. `SKIP_LOCKED` can skip over locks achieved by other concurrent transactions, therefore is a great choice for implementing job queues. In this application, we run two concurrent transactions. The first transaction will lock the records with ids 1, 2 and 3. The second transaction will skip the records with ids 1, 2 and 3 and will lock the records with ids 4, 5 and 6.
 
-**Key points:**\
-     - define an entity that acts as a job queue (e.g., see the `Book` entity)\
-     - in `BookRepository` setup `@Lock(LockModeType.PESSIMISTIC_WRITE)`\
-     - in `BookRepository` use `@QueryHint` to setup `javax.persistence.lock.timeout` to `SKIP_LOCKED`\
-     - rely on `org.hibernate.dialect.PostgreSQL95Dialect` dialect\
-     - run two concurrent transactions to see the effect of `SKIP_LOCKED`
+**Key points:**
+- define an entity that acts as a job queue (e.g., see the `Book` entity)
+- in `BookRepository` setup `@Lock(LockModeType.PESSIMISTIC_WRITE)`
+- in `BookRepository` use `@QueryHint` to setup `javax.persistence.lock.timeout` to `SKIP_LOCKED`
+- rely on `org.hibernate.dialect.PostgreSQL95Dialect` dialect
+- run two concurrent transactions to see the effect of `SKIP_LOCKED`
 
 ----------------------------------------------------------------------------------------------------------------------
 
-149. **[JPA Inheritance - Join Table](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinTableInheritance)**
+149. **[JPA Inheritance - `JOINED`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinTableInheritance)**
 
 **Description:** This application is a sample of JPA Join Table inheritance strategy (`JOINED`)
 
-**Key points:**\
-     - this inheritance strategy can be employed via `@Inheritance(strategy=InheritanceType.JOINED)`\
-     - all the classes in an inheritance hierarchy (a.k.a., subclasses) are represented via individual tables\
-     - by default, subclass-tables contains a primary key column that acts as a foreign key  as well - this foreign key references the *base class* table primary key\
-     - customizing this foreign key can be done by annotating the subclasses with `@PrimaryKeyJoinColumn`  
+**Key points:**
+- this inheritance strategy can be employed via `@Inheritance(strategy=InheritanceType.JOINED)`
+- all the classes in an inheritance hierarchy (a.k.a., subclasses) are represented via individual tables
+- by default, subclass-tables contains a primary key column that acts as a foreign key  as well - this foreign key references the *base class* table primary key
+- customizing this foreign key can be done by annotating the subclasses with `@PrimaryKeyJoinColumn`  
 
 ----------------------------------------------------------------------------------------------------------------------
 
-150. **[JPA Inheritance - Table-per-class](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTablePerTableInheritance)**
+150. **[JPA Inheritance - `TABLE_PER_CLASS`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTablePerTableInheritance)**
 
 **Description:** This application is a sample of JPA Table-per-class inheritance strategy (`TABLE_PER_CLASS`)
 
-**Key points:**\
-     - this inheritance strategy doesn't allow the usage of the `IDENTITY` generator\
-     - this inheritance strategy can be employed via `@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)`\
-     - all the classes in an inheritance hierarchy (a.k.a., subclasses) are represented via individual tables\
-     - each subclass-table stores the columns inherited from the superclass-table (*base class*)
+**Key points:**
+- this inheritance strategy doesn't allow the usage of the `IDENTITY` generator
+- this inheritance strategy can be employed via `@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)`
+- all the classes in an inheritance hierarchy (a.k.a., subclasses) are represented via individual tables
+- each subclass-table stores the columns inherited from the superclass-table (*base class*)
 
 ----------------------------------------------------------------------------------------------------------------------
 
-151. **[JPA Inheritance - `@MappedSuperclas`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMappedSuperclass)**
+151. **[JPA Inheritance - `@MappedSuperclass`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMappedSuperclass)**
 
 **Description:** This application is a sample of using the JPA `@MappedSuperclass`.
 
-**Key points:**\
-     - the *base class* is not an entity, it can be `abstract`, and is annotated with `@MappedSuperclass`\
-     - subclasses of the *base class* are mapped in tables that contains columns for the inherited attributes and for their own attibutes\
-     - when the *base class* doens't need to be an entity, the `@MappedSuperclass` is the proper alternative to the JPA table-per-class inheritance strategy
+**Key points:**
+- the *base class* is not an entity, it can be `abstract`, and is annotated with `@MappedSuperclass`
+- subclasses of the *base class* are mapped in tables that contains columns for the inherited attributes and for their own attibutes
+- when the *base class* doens't need to be an entity, the `@MappedSuperclass` is the proper alternative to the JPA table-per-class inheritance strategy
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2317,12 +2317,12 @@ Of course, the correct decision is to disable OSIV by setting it to `false`, but
 
 Well, among the Hibernate5Module features we have support for dealing with this aspect of lazy loading and eliminate this exception. Even if OSIV will continue to be enabled (not recommended), Jackson will not use the `Session` opened via OSIV.
 
-**Key points:**\
-     - add the Hibernate5Module dependency in `pom.xml`\
-     - add a `@Bean` that returns an instance of `Hibernate5Module`\
-     - annotate the `Author` bean with `@JsonInclude(Include.NON_EMPTY)` to exclude `null` or what is considered empty from the returned JSON
+**Key points:**
+- for Maven, add the Hibernate5Module dependency in `pom.xml`
+- add a `@Bean` that returns an instance of `Hibernate5Module`
+- annotate the `Author` bean with `@JsonInclude(Include.NON_EMPTY)` to exclude `null` or what is considered empty from the returned JSON
      
-**Note:** The presence of Hibernate5Module instructs Jackson to initialize the lazy associations with default values (e.g., a lazy associated collection will be initialized with `null`). Hibernate5Module doesn't work for lazy loded attributes. For such case consider [this](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingJacksonSerialization) item.
+**Note:** The presence of Hibernate5Module instructs Jackson to initialize the lazy associations with default values (e.g., a lazy associated collection will be initialized with `null`). Hibernate5Module doesn't work for lazy loaded attributes. For such case consider [this](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingJacksonSerialization) item.
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2330,8 +2330,8 @@ Well, among the Hibernate5Module features we have support for dealing with this 
 
 **Description:** View the prepared statement binding parameters via `profileSQL=true` in MySQL.
 
-**Key points:**\
-     - in `application.properties` append `logger=Slf4JLogger&profileSQL=true` to the JDBC URL (e.g., `jdbc:mysql://localhost:3306/bookstoredb?createDatabaseIfNotExist=true&logger=Slf4JLogger&profileSQL=true`)
+**Key points:**
+- in `application.properties` append `logger=Slf4JLogger&profileSQL=true` to the JDBC URL (e.g., `jdbc:mysql://localhost:3306/bookstoredb?createDatabaseIfNotExist=true&logger=Slf4JLogger&profileSQL=true`)
      
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLogBindingParametersMySQL/display%20binding%20via%20profileSQL%3Dtrue.png)
@@ -2342,21 +2342,23 @@ Well, among the Hibernate5Module features we have support for dealing with this 
  
 **Description:** This application is an example of shuffling small results sets. **DO NOT USE** this technique for large results sets, since is extremely expensive.
 
-**Key points:**\
-     - write a JPQL `SELECT` query and append to it `ORDER BY RAND()`\
-     - each RDBMS support a function similar to `RAND()` (e.g., in PostgreSQL is `random()`)
+**Key points:**
+- write a JPQL `SELECT` query and append to it `ORDER BY RAND()`
+- each RDBMS support a function similar to `RAND()` (e.g., in PostgreSQL is `random()`)
 
 ----------------------------------------------------------------------------------------------------------------------
 
 155. **[The Best Way To Remove Parent And Child Entities](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCascadeChildRemoval)**
 
-**Description:** Commonly, deleting a parent and the associated children via `CascadeType.REMOVE`  and/or `orphanRemoval=true` involved several SQL statements (e.g., each child is deleted in a dedicated `DELETE` statement). This is far from being efficient, therefore other approaches should be employed. Consider `Author` and `Book` in a `OneToMany` relationship.
+**Description:** Commonly, deleting a parent and the associated children via `CascadeType.REMOVE`  and/or `orphanRemoval=true` involved several SQL statements (e.g., each child is deleted in a dedicated `DELETE` statement). This is far from being efficient, therefore other approaches should be employed. 
 
-**Best way to delete when:**\
-     - One `Author` is in Persistent Context, no `Book`\
-     - More `Author` are in the Persistent Context, no `Book`\
-     - One `Author` and the associated `Book` are in Persistent Context\
-     - No `Author` or `Book` is in Persistent Context
+Consider `Author` and `Book` in a `@OneToMany` association. This application exposes the best way to delete the parent(s) and the associated children in four scenarios listed below.
+
+**Best way to delete author(s) and the associated books when:**
+- One `Author` is in Persistent Context, no `Book`
+- More `Author` are in the Persistent Context, no `Book`
+- One `Author` and the associated `Book` are in Persistent Context
+- No `Author` or `Book` is in Persistent Context
      
 **Note:** The most efficient way to delete all entities can be done via the built-in `deleteAllInBatch()`. 
 
@@ -2364,12 +2366,16 @@ Well, among the Hibernate5Module features we have support for dealing with this 
 
 156. **[How To *Bulk* Updates](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBulkUpdates)**
 
-**Description:** *Bulk* operations (updates and deletes) are fastest than batching, can benefit from indexing, but they have two main drawbacks:
+**Description:** *Bulk* operations (updates and deletes) are faster than batching, can benefit from indexing, but they have two main drawbacks:
 
 - *bulk* updates/deletes may leave the Persistent Context in an outdated state (prevent this by flushing the Persistent Context before update/delete and close/clear it after the update/delete to avoid issues created by potentially unflushed or outdated entities)
-- *bulk* updates/deletes don't benefit of application-level optimistic locking mechanisms, therefore the *lost updates* not prevented (it is advisable to signal these updates by explicitly incrementing `version` (if any is present)).
+- *bulk* updates/deletes don't benefit of application-level optimistic locking mechanisms, therefore the *lost updates* are not prevented (it is advisable to signal these updates by explicitly incrementing `version` (if any is present)).
 
-This application provides examples of *bulk* updates for `Author` and `Book` entities (between `Author` and `Book` there is a bidirectional lazy `@OneToMany` relationship). Both, `Author` and `Book`, has a `version` field.
+This application provides examples of *bulk* updates for `Author` and `Book` entities (between `Author` and `Book` there is a bidirectional lazy `@OneToMany` association). Both, `Author` and `Book`, has a `version` field.
+
+**Key points:**
+- this application provide an example of *bulk* updates that don't involve managed entities (data is not loaded in the Persistent Context)
+- this application provide an example of *bulk* updates that involve managed entities (data is loaded in the Persistent Context before update it via *bulk* operations)
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2377,11 +2383,11 @@ This application provides examples of *bulk* updates for `Author` and `Book` ent
 
 **Description:** As a rule of thumb, unidirectional `@OneToMany` association is less efficient than the bidirectional `@OneToMany` or the unidirectional `@ManyToOne` associations. This application is a sample that exposes the DML statements generated for reads, writes and removal operations when the unidirectional `@OneToMany` mapping is used.
 
-**Key points:**\
-     - regular unidirectional `@OneToMany` is less efficient than bidirectional `@OneToMany` relationship\
-     - using `@OrderColumn` come with some optimizations for removal operations but is still less efficient than bidirectional `@OneToMany` relationship\
-     - using `@JoinColumn` eliminates the junction table but is still less efficient than bidirectional `@OneToMany` relationship\
-     - using `Set` instead of `List` or bidirectional `@OneToMany` with `@JoinColumn` relationship (e.g., `@ManyToOne @JoinColumn(name = "author_id", updatable = false, insertable = false)`) still performs worse than bidirectional `@OneToMany` relationship
+**Key points:**
+- regular unidirectional `@OneToMany` is less efficient than bidirectional `@OneToMany` association
+- using `@OrderColumn` come with some optimizations for removal operations but is still less efficient than bidirectional `@OneToMany` association
+- using `@JoinColumn` eliminates the junction table but is still less efficient than bidirectional `@OneToMany` association
+- using `Set` instead of `List` or bidirectional `@OneToMany` with `@JoinColumn` relationship (e.g., `@ManyToOne @JoinColumn(name = "author_id", updatable = false, insertable = false)`) still performs worse than bidirectional `@OneToMany` association
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2390,7 +2396,7 @@ This application provides examples of *bulk* updates for `Author` and `Book` ent
 **Description:** This application is an example of using subqueries in JPQL `WHERE` clause (you can easily use it in `HAVING` clause as well).
 
 **Key points:**\
-Keep in mind that subqueries and joins queries may not be semantically equivalent. Joins may returns duplicates that can be removed via `DISTINCT`. 
+Keep in mind that subqueries and joins queries may or may not be semantically equivalent (joins may returns duplicates that can be removed via `DISTINCT`). 
 
 Even if the Execution Plan is specific to the database, historically speaking joins are faster than subqueries among different databases, but this is not a rule (e.g., the amount of data may significantly influence the results). Of course, do not conclude that subqueries are just a replacement for joins that doesn't deserve attention. Tuning subqueries can increases their performance as well, but this is an SQL wide topic. So, benchmark! Benchmark! Benchmark!
 
@@ -2400,12 +2406,12 @@ Even if the Execution Plan is specific to the database, historically speaking jo
 
 159. **[How To Execute SQL Functions In `WHERE` Part Of JPQL Query And JPA 2.1](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJpqlFunctionsParams)**
 
-Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJpqlFunctionsParams).
+Note: Using SQL functions in `SELECT` part (not in `WHERE` part) of the query can be done as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJpqlFunctionsParams).
 
 **Description:** Starting with JPA 2.1, a JPQL query can call SQL functions in the `WHERE` part via `function()`. This application is an example of calling the MySQL, `concat_ws` function, but user defined (custom) functions can be used as well.
 
-**Key points:**\
-     - use JPA 2.1, `function()` 
+**Key points:**
+- use JPA 2.1, `function()`  
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2413,9 +2419,9 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as 
  
 **Description:** This application is an example of calling a MySQL stored procedure that returns a value (e.g., an `Integer`).
 
-**Key points:**\
-     - rely on `@NamedStoredProcedureQuery` to shape the stored procedure in the entity\
-     - rely on `@Procedure` in repository
+**Key points:**
+- rely on `@NamedStoredProcedureQuery` to shape the stored procedure in the entity
+- rely on `@Procedure` in repository
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2423,8 +2429,8 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as 
  
 **Description:** This application is an example of calling a MySQL stored procedure that returns a result set. The application fetches entities (e.g., `List<Author>`) and DTO (e.g., `List<AuthorDto>`).
 
-**Key points:**\
-     - rely on `EntiyManager` since Spring Data `@Procedure` will not work
+**Key points:**
+- rely on `EntiyManager` since Spring Data `@Procedure` will not work
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2432,8 +2438,8 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as 
  
 **Description:** This application is an example of calling a MySQL stored procedure that returns a result set (entity or DTO) via a native query.
  
-**Key points:**\
-     - rely on a native call as `@Query(value = "{CALL FETCH_AUTHOR_BY_GENRE (:p_genre)}", nativeQuery = true)`
+**Key points:**
+- rely on a native call as `@Query(value = "{CALL FETCH_AUTHOR_BY_GENRE (:p_genre)}", nativeQuery = true)`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2441,8 +2447,8 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as 
  
 **Description:** This application is an example of calling a MySQL stored procedure that returns a result set via `JdbcTemplate`.
  
-**Key points:**\
-     - rely on `JdbcTemplate` and `SimpleJdbcCall`
+**Key points:**
+- rely on `JdbcTemplate` and `SimpleJdbcCall`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2450,10 +2456,10 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as 
  
 **Description:** This application is an example of retrieving the database auto-generated primary keys.
 
-**Key points:**\
-     - JPA style, retrieve the auto-generated keys via `getId()`\
-     - JDBC style, retrieve the auto-generated keys via `JdbcTemplate`\
-     - JDBC style, retrieve the auto-generated keys via `SimpleJdbcInsert`
+**Key points:**
+- JPA style, retrieve the auto-generated keys via `getId()`
+- JDBC style, retrieve the auto-generated keys via `JdbcTemplate`
+- JDBC style, retrieve the auto-generated keys via `SimpleJdbcInsert`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2463,33 +2469,33 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as 
 
 A proxy can be unproxied via `Hibernate.unproxy()`. This method is available starting with Hibernate 5.2.10.
 
-**Key points:**\
-     - fetch a proxy via `JpaRepository#getOne()`\
-     - unproxy the fetched proxy via `Hibernate.unproxy()`    
+**Key points:**
+- fetch a proxy via `JpaRepository#getOne()`
+- unproxy the fetched proxy via `Hibernate.unproxy()`     
 
 ----------------------------------------------------------------------------------------------------------------------
 
 166. **[How To Convert `Boolean` To Yes/No Via `AttributeConverter`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMapBooleanToYesNo)**
  
-**Description:** This application is an example of converting a `Boolean` to Yes/No strings via `AttributeConverter`. This kind of conversions are needed when we deal with legacy databases that connot be changed. In this case, the legacy database stores the booleans as Yes/No.
+**Description:** This application is an example of converting a `Boolean` to *Yes*/*No* strings via `AttributeConverter`. This kind of conversions are needed when we deal with legacy databases that connot be changed. In this case, the legacy database stores the booleans as *Yes*/*No*.
 
-**Key points:**\
-     - implement a custom converter via `AttributeConverter`
+**Key points:**
+- implement a custom converter via `AttributeConverter`
 
 ----------------------------------------------------------------------------------------------------------------------
 
 167. **[How Efficient Is Just `@OManyToOne`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJustManyToOne)**
 
-**Note:** The `@ManyToOne` relationship maps exactly to the one-to-many table relationship. The underlying foreign key is under child-side control in unidirectional or bidirectional relationship.
+**Note:** The `@ManyToOne` association maps exactly to the one-to-many table relationship. The underlying foreign key is under child-side control in unidirectional or bidirectional relationship.
 
 **Description:** This application shows that using only `@ManyToOne` is quite efficient. On the other hand, using only `@OneToMany` is far away from being efficient. Always, prefer bidirectional `@OneToMany` or unidirectional `@ManyToOne`. Consider two entities, `Author` and `Book` in a unidirectional `@ManyToOne` relationship.
 
-**Key points:**\
-     - Adding a new book is efficient\
-     - Fetching all books of an author is efficient via a JPQL\
-     - Pagination of books is efficient\
-     - Remove a book is efficient\
-     - Even if the fetched collection is not managed, dirty checking mechanism works as expected
+**Key points:**
+- Adding a new book is efficient
+- Fetching all books of an author is efficient via a JPQL
+- Pagination of books is efficient
+- Remove a book is efficient
+- Even if the fetched collection is not managed, *dirty checking* mechanism works as expected
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2497,9 +2503,9 @@ A proxy can be unproxied via `Hibernate.unproxy()`. This method is available sta
 
 **Description:** Trying to combine `JOIN FETCH`/`LEFT JOIN FETCH` and `Pageable` results in an exception of type `org.hibernate.QueryException: query specified join fetching, but the owner of the fetched association was not present in the select list`. This application is a sample of how to avoid this exception.
 
-**Key points:**\
-     - use `countQuery`\
-     - use entity graph
+**Key points:**
+- use `countQuery`
+- use entity graph
      
 **Note:** Fixing the above exception will lead to an warning of type HHH000104, `firstResult / maxResults specified with collection fetch; applying in memory!`. If this warning is a performance issue, and most probably it is, then follow by reading [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHHH000104).
 
@@ -2507,7 +2513,7 @@ A proxy can be unproxied via `Hibernate.unproxy()`. This method is available sta
 
 169. **[How To Avoid HHH000104 And Use Pagination Of Parent-Child](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHHH000104)**
 
-**Description:** HHH000104 is a Hibernate warning that tell us that pagination of a result set is tacking place in memory. For example, consider the `Author` and `Book` entities in a bidirectional lazy `@OneToMany` relationship and the following query: 
+**Description:** HHH000104 is a Hibernate warning that tell us that pagination of a result set is tacking place in memory. For example, consider the `Author` and `Book` entities in a lazy bidirectional `@OneToMany` association and the following query: 
 
   `@Transactional`\
   `@Query(value = "SELECT a FROM Author a LEFT JOIN FETCH a.books WHERE a.genre = ?1",`\
@@ -2516,20 +2522,20 @@ A proxy can be unproxied via `Hibernate.unproxy()`. This method is available sta
 
 Calling `fetchWithBooksByGenre()` works fine only that the following warning is signaled: `HHH000104: firstResult / maxResults specified with collection fetch; applying in memory!` Obviously, having pagination in memory cannot be good from performance perspective. This application reveals several approaches for moving pagination at database-level.
 
-**Key points:**\
-     - use two JPQL queries (use `Page` or `Slice`) to fetch read-write result set\
-     - use DTOs to fetch read-only result set\
-     - use `DENSE_RANK()` to avoid truncate the result set (truncate the books of the an author)
+**Key points:**
+- use two JPQL queries (use `Page` or `Slice`) to fetch read-write result set
+- use DTO to fetch read-only result set
+- use `DENSE_RANK()` to avoid truncate the result set (truncate the books of the an author)
 
 ----------------------------------------------------------------------------------------------------------------------
 
 170. **[What `@Transactional(readOnly=true)` Actually Do](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTransactionalReadOnlyMeaning)**
  
- **Description:** This application is meant to reveal what is the difference between `@Transactional(readOnly = false)` and `@Transactional(readOnly = true)`. In a nuthsell, `readOnly = false` (default) fetches entites in *read-write* mode (managed). Before Spring 5.1, `readOnly = true` just set `FlushType.MANUAL`, therefore the automatic *dirty checking mechanism* will not take action since there is no flush. In other words, Hibernate keep in the Persistent Context the fetched entities and the hydrated (loaded) state. By comparing the entity state with the hydrated state, the *dirty checking mechanism* can decide to trigger `UPDATE`s in our behalf. But, the *dirty checking mechanism* take place at flush time, therefore, without a flush, the hydrated state is kept in Persistent Context for nothing, representing a performance penalty. Starting with Spring 5.1, the *read-only* mode is propagated to Hibernate, therefore the hydrated state is discarded immediately after loading the entities. Even if the *read-only* mode discards the hydrated state the entities are still loaded in the Persistent Context, therefore, for *read-only* data, relying on DTO (Spring projection) is better.
+ **Description:** This application is meant to reveal what is the difference between `@Transactional(readOnly = false)` and `@Transactional(readOnly = true)`. In a nuthsell, `readOnly = false` (default) fetches entites in *read-write* mode (managed). Before Spring 5.1, `readOnly = true` just set `FlushType.MANUAL/NEVER`, therefore the automatic *dirty checking mechanism* will not take action since there is no flush. In other words, Hibernate keep in the Persistent Context the fetched entities and the hydrated (loaded) state. By comparing the entity state with the hydrated state, the *dirty checking mechanism* can decide to trigger `UPDATE` statements in our behalf. But, the *dirty checking mechanism* take place at flush time, therefore, without a flush, the hydrated state is kept in Persistent Context for nothing, representing a performance penalty. Starting with Spring 5.1, the *read-only* mode is propagated to Hibernate, therefore the hydrated state is discarded immediately after loading the entities. Even if the *read-only* mode discards the hydrated state the entities are still loaded in the Persistent Context, therefore, for *read-only* data, relying on DTO (Spring projection) is better.
 
-**Key points:**\
-     - `readOnly = false` load data in *read-write* mode (managed)\
-     - `readOnly = true` discard the hydrated state (starting with Spring 5.1)
+**Key points:**
+- `readOnly = false` load data in *read-write* mode (managed)
+- `readOnly = true` discard the hydrated state (starting with Spring 5.1)
      
 ----------------------------------------------------------------------------------------------------------------------
      
