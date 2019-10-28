@@ -2,17 +2,23 @@
 
 # Best Performance Practices For Hibernate5 & Spring Boot 2
 
-<a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
+<table>
+     <tr><td><b>If you need a deep dive into the performance recipes exposed in this repository then I am sure that you will love my book "Spring Boot Persistence Best Practices"</b></td><td><b>If you need a hand of tips and illustrations of 100+ Java persistence performance issues then "Java Persistence Performance Illustrated Guide" is for you.</b></td></tr>
+     <tr><td>
+<a href="#"><p align="left"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Spring%20Boot%20Persistence%20Best%20Practices.jpg" height="500" width="450"/></p></a>
+</td><td>
+<a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
+</td></tr></table>
 
 **Hibernate & Spring Boot Samples**
 
 1. **[How To Store UTC Timezone In MySQL](https://github.com/AnghelLeonard/Hibernate/tree/master/HibernateSpringBootUTCTimezone)**
 
-**Description:** This application is a sample of how to store date, time, and timestamps in UTC time zone in MySQL.
+**Description:** This application is a sample of how to store date, time, and timestamps in UTC time zone. The second setting, `useLegacyDatetimeCode` is needed only for MySQL. Otherwise, set only `hibernate.jdbc.time_zone`.
 
-**Key points:**\
-     - `spring.jpa.properties.hibernate.jdbc.time_zone=UTC`\
-     - `spring.datasource.url=jdbc:mysql://localhost:3306/screenshotdb?useLegacyDatetimeCode=false`
+**Key points:**
+- `spring.jpa.properties.hibernate.jdbc.time_zone=UTC`
+- `spring.datasource.url=jdbc:mysql://localhost:3306/screenshotdb?useLegacyDatetimeCode=false`
      
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -20,25 +26,25 @@
 
 **Description:** View the prepared statement binding/extracted parameters via Log4J 2 logger setting.
 
-**Key points:**\
-     - for Maven, in `pom.xml`, exclude Spring Boot's Default Logging\
-     - for Maven, in `pom.xml`, Add Log4j 2 Dependency\
-     - in `log4j2.xml` add, `<Logger name="org.hibernate.type.descriptor.sql" level="trace"/>`
+**Key points:**
+- for Maven, in `pom.xml`, exclude Spring Boot's Default Logging
+- for Maven, in `pom.xml`, Add Log4j 2 Dependency
+- in `log4j2.xml` add, `<Logger name="org.hibernate.type.descriptor.sql" level="trace"/>`
    
 **Output example:**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLog4j2ViewBindingParameters/log4j2%20display%20binding%20and%20extracted%20parameters.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-3. **[How To View Query Details Via "datasource-proxy"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceProxy)**
+3. **[How To View Query Details Via DataSource-Proxy Library](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceProxy)**
 
-**Description:** View the query details (query type, binding parameters, batch size, execution time, etc) via **[datasource-proxy](https://github.com/ttddyy/datasource-proxy)**
+**Description:** View the query details (query type, binding parameters, batch size, execution time, etc) via **[DataSource-Proxy](https://github.com/ttddyy/datasource-proxy)**
 
-**Key points:**\
-     - for Maven, add in `pom.xml` the `datasource-proxy` dependency\
-     - create an bean post processor to intercept the `DataSource` bean\
-     - wrap the `DataSource` bean via `ProxyFactory` and an implementation of `MethodInterceptor`
-   
+**Key points:**
+- for Maven, add in `pom.xml` the `datasource-proxy` dependency
+- create an bean post processor to intercept the `DataSource` bean
+- wrap the `DataSource` bean via `ProxyFactory` and an implementation of `MethodInterceptor`
+
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceProxy/query%20details%20via%20datasource-proxy.png)
 
@@ -48,16 +54,17 @@
 
 **Description:** Batch inserts via `SimpleJpaRepository#saveAll(Iterable<S> entities)` method in MySQL
 
-**Key points:**\
-     - in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`\
-     - in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)\
-     - in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)\
-     - in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)\
-     - in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))\
-     - in case of using a parent-child relationship with cascade persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_inserts=true` to optimize the batching by ordering inserts\
-     - in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause batching to be disabled\
-     - in entity, add `@Version` property to avoid extra-`SELECT`s fired before batching (also prevent lost updates in multi-request transactions). Extra-`SELECT`s are the effect of using `merge()` instead of `persist()`; behind the scene, `saveAll()` uses `save()`, which in case of non-new entities (have IDs) will call `merge()`, which instruct Hibernate to fire a `SELECT` statement to make sure that there is no record in the database having the same identifier\
-     - pay attention on the amount of inserts passed to `saveAll()` to not "overwhelm" the persistence context; normally the `EntityManager` should be flushed and cleared from time to time, but during the `saveAll()` execution you simply cannot do that, so if in `saveAll()` there is a list with a high amount of data, all that data will hit the persistence context (1st level cache) and will be in-memory until flush time. Using relatively small amount of data should be ok
+**Key points:**
+- in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`
+- in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)
+- in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)
+- in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)
+- in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))
+- in case of using a parent-child relationship with cascade persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_inserts=true` to optimize the batching by ordering inserts
+- in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause insert batching to be disabled
+- in entity, add `@Version` property to avoid extra-`SELECT` statements fired before batching (also prevent lost updates in multi-request transactions). Extra-`SELECT` statements are the effect of using `merge()` instead of `persist()`; behind the scene, `saveAll()` uses `save()`, which in case of non-new entities (entities that have IDs) will call `merge()`, which instruct Hibernate to fire a `SELECT` statement to make sure that there is no record in the database having the same identifier
+- pay attention on the amount of inserts passed to `saveAll()` to not "overwhelm" the Persistence Context; normally the `EntityManager` should be flushed and cleared from time to time, but during the `saveAll()` execution you simply cannot do that, so if in `saveAll()` there is a list with a high amount of data, all that data will hit the Persistence Context (1st Level Cache) and will remain in memory until the flush time; using relatively small amount of data should be ok
+- if is not needed, then ensure that Second Level Cache is disabled via `spring.jpa.properties.hibernate.cache.use_second_level_cache=false`
   
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsJpaRepository/batch%20inserts%20via%20saveAll.png)
@@ -66,19 +73,19 @@
 
 5. **[Batch Inserts Via EntityManager in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsEntityManager)**
 
-**Description:** Batch inserts via `EntityManager` in MySQL. This way you can easily control the `flush()` and `clear()` of the persistence context (1st level cache). This is not possible via SpringBoot, `saveAll(Iterable<S> entities)`. Another advantage is that you can call `persist()` instead of `merge()` - this is used behind the scene by the SpringBoot `saveAll(Iterable<S> entities)` and `save(S entity)`.
+**Description:** Batch inserts via `EntityManager` in MySQL. This way you can easily control the `flush()` and `clear()` of the Persistence Context (1st Level Cache). This is not possible via SpringBoot, `saveAll(Iterable<S> entities)`. Another advantage is that you can call `persist()` instead of `merge()` - this is used behind the scene by the SpringBoot `saveAll(Iterable<S> entities)` and `save(S entity)`.
 
-**Key points:**\
-     - in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`\
-     - in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)\
-     - in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)\
-     - in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)\
-     - in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))\
-     - in case of using a parent-child relationship with cascade persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_inserts=true` to optimize the batching by ordering inserts\
-     - in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause batching to be disabled\
-     - in DAO, flush and clear the persistence context from time to time; this way you avoid to "overwhelm" the persistence context\
-     - if is not needed then ensure that Second Level Cache is disabled via `spring.jpa.properties.hibernate.cache.use_second_level_cache=false`
-   
+**Key points:**
+- in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`
+- in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)
+- in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)
+- in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)
+- in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))
+- in case of using a parent-child relationship with cascade persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_inserts=true` to optimize the batching by ordering inserts
+- in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause insert batching to be disabled
+- in your DAO layer, flush and clear the Persistence Context from time to time (e.g. for each batch); this way you avoid to "overwhelm" the Persistence Context
+- if is not needed, then ensure that Second Level Cache is disabled via `spring.jpa.properties.hibernate.cache.use_second_level_cache=false`
+
 **Output example:**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsEntityManager/batch%20inserts%20via%20EntityManager.png)
 
@@ -88,17 +95,18 @@
 
 **Description:** Batch inserts via `JpaContext/EntityManager` in MySQL.
 
-**Key points:**\
-     - in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`\
-     - in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)\
-     - in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)\
-     - in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)\
-     - in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))\
-     - in case of using a parent-child relationship with cascade persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_inserts=true` to optimize the batching by ordering inserts\
-     - in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause batching to be disabled\
-     - the `EntityManager` is obtain per entity type via, `JpaContext#getEntityManagerByManagedType(Class<?> entity)`\
-     - in DAO, flush and clear the persistence context from time to time; this way you avoid to "overwhelm" the persistence context
-   
+**Key points:**
+- in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`
+- in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)
+- in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)
+- in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)
+- in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))
+- in case of using a parent-child relationship with cascade persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_inserts=true` to optimize the batching by ordering inserts
+- in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause insert batching to be disabled
+- the `EntityManager` is obtain per entity type via, `JpaContext#getEntityManagerByManagedType(Class<?> entity)`
+- in DAO, flush and clear the Persistence Context from time to time; this way you avoid to "overwhelm" the Persistence Context
+- if is not needed, then ensure that Second Level Cache is disabled via `spring.jpa.properties.hibernate.cache.use_second_level_cache=false`
+
 **Output example:**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsEntityManagerViaJpaContext/batch%20inserts%20via%20JpaContext.png)
 
@@ -108,16 +116,17 @@
 
 **Description:** Batch inserts via Hibernate session-level batching (Hibernate 5.2 or higher) in MySQL.
 
-**Key points:**\
-     - in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)\
-     - in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)\
-     - in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)\
-     - in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))\
-     - in case of using a parent-child relationship with cascade persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_inserts=true` to optimize the batching by ordering inserts\
-     - in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause batching to be disabled\
-     - the Hibernate `Session` is obtained by un-wrapping it via `EntityManager#unwrap(Session.class)`\
-     - the batching size is set via `Session#setJdbcBatchSize(Integer size)` and get via `Session#getJdbcBatchSize()`\
-     - in DAO, flush and clear the persistence context from time to time; this way you avoid to "overwhelm" the persistence context
+**Key points:**
+- in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)
+- in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)
+- in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)
+- in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))
+- in case of using a parent-child relationship with cascade persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_inserts=true` to optimize the batching by ordering inserts
+- in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause insert batching to be disabled
+- the Hibernate `Session` is obtained by un-wrapping it via `EntityManager#unwrap(Session.class)`
+- the batching size is set via `Session#setJdbcBatchSize(Integer size)` and get via `Session#getJdbcBatchSize()`
+- in DAO, flush and clear the Persistence Context from time to time; this way you avoid to "overwhelm" the Persistence Context
+- if is not needed, then ensure that Second Level Cache is disabled via `spring.jpa.properties.hibernate.cache.use_second_level_cache=false`
    
 **Output example:**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsViaSession/batch%20inserts%20via%20Session.png)
@@ -128,23 +137,24 @@
 
 **Description:** Direct fetching via Spring Data, `EntityManager` and Hibernate `Session` examples.
 
-**Key points:**\
-     - direct fetching via Spring Data uses `findById()`\
-     - direct fetching via JPA `EntityManager` uses `find()`\
-     - direct fetching via Hibernate `Session` uses `get()`
+**Key points:**
+- direct fetching via Spring Data uses `findById()`
+- direct fetching via JPA `EntityManager` uses `find()`
+- direct fetching via Hibernate `Session` uses `get()`
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-9. **[DTOs Via Spring Data Projections](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)**
+9. **[DTO Via Spring Data Projections](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)**
 
 **Note:** You may also like to read the recipe, ["How To Enrich DTOs With Virtual Properties Via Spring Projections"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaProjectionsAndVirtualProperties)
 
-**Description:** Fetch only the needed data from the database via Spring Data Projections (DTOs)
+**Description:** Fetch only the needed data from the database via Spring Data Projections (DTO).
 
-**Key points:**\
-     - write an interface (projection) containing getters only for the columns that should be fetched from the database\
-     - write the proper query returning a `List<projection>`\
-     - if is applicable, limit the number of returned rows (e.g., via `LIMIT`) - here, we can use query builder mechanism built into Spring Data repository infrastructure
+**Key points:**
+- write an interface (projection) containing getters only for the columns that should be fetched from the database
+- write the proper query returning a `List<projection>`
+- if it is applicable, limit the number of returned rows (e.g., via `LIMIT`) 
+- in this example, we can use query builder mechanism built into Spring Data repository infrastructure
      
 **Note:** Using projections is not limited to use query builder mechanism built into Spring Data repository infrastructure. We can fetch projections via JPQL or native queries as well. For example, in this [application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjectionsAndJpql) we use a JPQL.
      
@@ -153,14 +163,14 @@
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-10. **[Attribute Lazy Loading](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAttributeLazyLoadingBasic)**
+10. **[How To Use Hibernate Attribute Lazy Loading](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAttributeLazyLoadingBasic)**
   
 **Description:** By default, the attributes of an entity are loaded eagerly (all at once). But, we can load them **lazy** as well. This is useful for column types that store large amounts of data: `CLOB`, `BLOB`, `VARBINARY`, etc or *details* that should be loaded on demand. In this application, we have an entity named `Author`. Its properties are: `id`, `name`, `genre`, `avatar` and `age`. And, we want to load the `avatar` lazy. So, the `avatar` should be loaded on demand.
 
-**Key points:**\
-     - in `pom.xml`, activate Hibernate *bytecode instrumentation* (e.g. use Maven *bytecode enhancement plugin*)\
-     - in entity, annotate the columns that should be loaded lazy with `@Basic(fetch = FetchType.LAZY)`\
-     - in `application.properties`, disable Open Session in View
+**Key points:**
+- in `pom.xml`, activate Hibernate *bytecode enhancement* (e.g. use Maven *bytecode enhancement plugin*)
+- in entity, annotate the attributes that should be loaded lazy with `@Basic(fetch = FetchType.LAZY)`
+- in `application.properties`, disable Open Session in View    
 
 **Check as well:**\
      - [Default Values For Lazy Loaded Attributes](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingDefaultValues)\
@@ -170,17 +180,17 @@
 
 11. **[How To Populate a Child-Side Parent Association via Proxy](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPopulatingChildViaProxy)**
 
-**Description:** A proxy can be useful when a child entity can be persisted with a reference to its parent (`@ManyToOne` or `@OneToOne` association). In such cases, fetching the parent entity from the database (execute the `SELECT` statement) is a performance penalty and a pointless action. Hibernate can set the underlying foreign key value for an uninitialized proxy.
+**Description:** A Hibernate proxy can be useful when a child entity can be persisted with a reference to its parent (`@ManyToOne` or `@OneToOne` association). In such cases, fetching the parent entity from the database (execute the `SELECT` statement) is a performance penalty and a pointless action, because Hibernate can set the underlying foreign key value for an uninitialized proxy.
 
-**Key points:**\
-     - rely on `EntityManager#getReference()`\
-     - in Spring, use `JpaRepository#getOne()` -> used in this example\
-     - in Hibernate, use `load()`\
-     - assume two entities, `Author` and `Book`, involved in a unidirectional `@ManyToOne` relationship (`Author` is the parent-side)\
-     - we fetch the author via a proxy (this will not trigger a `SELECT`), we create a new book, we set the proxy as the author for this book and we save the book (this will trigger an `INSERT` in the `book` table)
+**Key points:**
+- rely on `EntityManager#getReference()`
+- in Spring, use `JpaRepository#getOne()` -> used in this example
+- in Hibernate, use `load()`
+- assume two entities, `Author` and `Book`, involved in a unidirectional `@ManyToOne` association (`Author` is the parent-side)
+- we fetch the author via a proxy (this will not trigger a `SELECT`), we create a new book, we set the proxy as the author for this book and we save the book (this will trigger an `INSERT` in the `book` table)
      
-**Output example:**\
-     - the console output will reveal that only an `INSERT` is triggered, not the `SELECT`
+**Output example:**
+- the console output will reveal that only an `INSERT` is triggered, and no `SELECT`
      
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -188,12 +198,12 @@
 
 **Description:** The N+1 is an issue of lazy fetching (but, eager is not exempt). This application reproduce the N+1 behavior.
 
-**Key points:**\
-     - define two entities, `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship\
-     - fetch all `Book` lazy, so without `Author` (results in 1 query)\
-     - loop the fetched `Book` collection and for each entry fetch the corresponding `Author` (results N queries)\
-     - or, fetch all `Author` lazy, so without `Book` (results in 1 query)\
-     - loop the fetched `Author` collection and for each entry fetch the corresponding `Book` (results N queries)
+**Key points:**
+- define two entities, `Author` and `Book` in a lazy bidirectional `@OneToMany` association
+- fetch all `Book` lazy, so without `Author` (results in 1 query)
+- loop the fetched `Book` collection and for each entry fetch the corresponding `Author` (results N queries)
+- or, fetch all `Author` lazy, so without `Book` (results in 1 query)
+- loop the fetched `Author` collection and for each entry fetch the corresponding `Book` (results N queries)
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSimulateNPlus1/simulate%20N%2B1.png)
@@ -202,10 +212,10 @@
 
 13. **[Optimize `SELECT DISTINCT` Via Hibernate `HINT_PASS_DISTINCT_THROUGH` Hint](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHintPassDistinctThrough)**
 
-**Description:** Starting with Hibernate 5.2.2, we can optimize JPQL (HQL) query entites of type `SELECT DISTINCT` via `HINT_PASS_DISTINCT_THROUGH` hint. Keep in mind that this hint is useful only for JPQL (HQL) query entites. Is not useful for scalar queries (e.g., `List<Integer>`) or DTO. In such cases, the `DISTINCT` JPQL keyword is needed to be passed to the underlying SQL query. This will instruct the database to remove duplicates from the result set. Also check [HHH-13280](https://hibernate.atlassian.net/browse/HHH-13280).
+**Description:** Starting with Hibernate 5.2.2, we can optimize JPQL (HQL) query entites of type `SELECT DISTINCT` via `HINT_PASS_DISTINCT_THROUGH` hint. Keep in mind that this hint is useful only for JPQL (HQL) JOIN FETCH-ing queries. Is not useful for scalar queries (e.g., `List<Integer>`), DTO or [HHH-13280](https://hibernate.atlassian.net/browse/HHH-13280). In such cases, the `DISTINCT` JPQL keyword is needed to be passed to the underlying SQL query. This will instruct the database to remove duplicates from the result set. 
 
-**Key points:**\
-     - use `@QueryHints(value = @QueryHint(name = HINT_PASS_DISTINCT_THROUGH, value = "false"))`
+**Key points:**
+- use `@QueryHints(value = @QueryHint(name = HINT_PASS_DISTINCT_THROUGH, value = "false"))`
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHintPassDistinctThrough/HINT_PASS_DISTINCT_THROUGH.png)
@@ -214,44 +224,45 @@
 
 14. **[How To Enable Dirty Tracking In A Spring Boot Application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnableDirtyTracking)**
 
-**Description:** Prior to Hibernate version 5, the *dirty checking* mechanism relies on Java Reflection API. Starting with Hibernate version 5, the *dirty checking* mechanism relies on *bytecode enhancement*. This approach sustain a better performance, especially when you have a relatively large number of entitites.
+**Description:** Prior to Hibernate version 5, the *dirty checking* mechanism relies on Java Reflection API. Starting with Hibernate version 5, the *dirty checking* mechanism can rely on *bytecode enhancement*. This approach sustain a better performance, especially when you have a relatively large number of entitites. Enabling *bytecode enhancement* is about adding a plugin into the application.
 
-**Key points:**\
-     - add the corresponding `plugin` in `pom.xml` (use Maven bytecode enhancement plugin)
+**Key points:**
+- Hibernate come with plugins for Maven and Gradle
+- for Maven, add the plugin in the `pom.xml` file
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootEnableDirtyTracking/Enable%20dirty%20tracking.png)
 
-The bytecode enhancement effect can be seen on `Author.class` [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootEnableDirtyTracking/Bytecode%20Enhancement%20Author.class/Author.java)
+The *bytecode enhancement* effect can be seen on `Author.class` [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootEnableDirtyTracking/Bytecode%20Enhancement%20Author.class/Author.java)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-15. **[How To Use Java 8 Optional In Entities And Queries](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOptional)**
-
+15. **[Use Java 8 `Optional` In Entities And Queries](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOptional)**
+ 
 **Description:** This application is an example of how is correct to use the Java 8 `Optional` in entities and queries. 
 
-**Key points:**\
-     - use the Spring Data built-in query-methods that return `Optional` (e.g., `findById()`)\
-     - write your own queries that return `Optional`\
-     - use `Optional` in entities getters\
-     - in order to run different scenarios check the file, `data-mysql.sql`
+**Key points:**
+- use the Spring Data built-in query-methods that return `Optional` (e.g., `findById()`)
+- write your own queries that return `Optional`
+- use `Optional` in entities getters
+- in order to run different scenarios check the file, `data-mysql.sql`
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-16. **[How To Use OneToMany Bidirectional Correctly](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToManyBidirectional)**
+16. **[The Best Way To Map The `@OneToMany` Bidirectional Association](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToManyBidirectional)**
 
-**Description:** This application is a proof of concept of how is correct to implement the bidirectional `@OneToMany` association. 
+**Description:** This application is a proof of concept of how is correct to implement the bidirectional `@OneToMany` association from the performance perspective. 
 
-**Key points:**\
-     - always cascade from parent to child\
-     - use `mappedBy` on the parent\
-     - use `orphanRemoval` on parent in order to remove children without references\
-     - use helper methods on parent to keep both sides of the association in sync\
-     - use lazy fetching on both side of the association\
-     - as entities identifiers, use assigned identifiers (business key, natural key (`@NaturalId`)) and/or database-generated identifiers and override (on child-side) properly the `equals()` and `hashCode()` methods as [here](https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/)\
-     - if `toString()` need to be overridden, then pay attention to involve only for the basic attributes fetched when the entity is loaded from the database
+**Key points:**
+- always cascade from parent to child
+- use `mappedBy` on the parent
+- use `orphanRemoval` on parent in order to remove children without references
+- use helper methods on parent to keep both sides of the association in sync
+- use lazy fetching on both side of the association
+- as entities identifiers, use assigned identifiers (business key, natural key (`@NaturalId`)) and/or database-generated identifiers and override (on child-side) properly the `equals()` and `hashCode()` methods as [here](https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/)
+- if `toString()` need to be overridden, then pay attention to involve only the basic attributes fetched when the entity is loaded from the database
      
-**Note:** Pay attention to remove operations, especially to removing child entities. The `CascadeType.REMOVE` and `orphanRemoval=true` may produce too many queries. Relying on *bulk* operations is most of the time the best way to go for deletions.  
+**Note:** Pay attention to remove operations, especially to removing child entities. The `CascadeType.REMOVE` and `orphanRemoval=true` may produce too many queries. In such scenarios, relying on *bulk* operations is most of the time the best way to go for deletions.
      
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -259,19 +270,19 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 **Description:** This application is an example of how to write a query via `JpaRepository`, `EntityManager` and `Session`.
 
-**Key points:**\
-     - for `JpaRepository` use `@Query` or Spring Data Query Creation\
-     - for `EntityManager` and `Session` use the `createQuery()` method 
+**Key points:**
+- for `JpaRepository` use `@Query` or Spring Data Query Creation
+- for `EntityManager` and `Session` use the `createQuery()` method 
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-18. **[How To Avoid MySQL & Hibernate 5 AUTO Generator Type](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAutoGeneratorType)**
+18. **[Why And How To Avoid The `AUTO` Generator Type In Hibernate 5 And MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAutoGeneratorType)**
 
-**Description:** In MySQL & Hibernate 5, the `GenerationType.AUTO` generator type will result in using the `TABLE` generator. This adds a significant performance penalty. Turning this behavior to `IDENTITY` generator can be obtained by using `GenerationType.IDENTITY` or the native generator.
-
-**Key points:**\
-     - use `GenerationType.IDENTITY` instead of `GenerationType.AUTO`\
-     - use the native generator - exemplified in this application
+**Description:** In MySQL & Hibernate 5, the `GenerationType.AUTO` generator type will result in using the `TABLE` generator. This adds a significant performance penalty. Turning this behavior to `IDENTITY` generator can be obtained by using `GenerationType.IDENTITY` or the *native* generator.
+ 
+**Key points:**
+- use `GenerationType.IDENTITY` instead of `GenerationType.AUTO`
+- use the *native* generator - exemplified in this application
    
 **Output example:**\
 <a href="#"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAutoGeneratorType/Hibernate%20Spring%20Boot%20Auto%20Generator%20Type.png" align="center" height="132" width="742" ></a>
@@ -280,51 +291,53 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 19. **[How To Avoid The Redundant save() Call](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRedundantSave)**
 
-**Description:** This application is an example when calling `save()` for a managed entity is redundant.
+**Description:** This application is an example when calling `save()` for an entity is redundant (not necessary).
 
-**Key points:**\
-     - Hibernate triggers `UPDATE` statements for managed entities without the need to explicitly call the `save()` method\
-     - behind the scene, this redundancy implies a performance penalty as well
+**Key points:**
+- at flush time, Hibernate relies on *dirty checking* mechanism to determine the potential modifications in entities 
+- for each modification, Hibernate automatically triggers the corresponding `UPDATE` statement without the need to explicitly call the `save()` method
+- behind the scene, this redundancy (calling `save()` when is not necessarily) doesn't affect the number of triggered queries, but it implies a performance penalty in the underlying Hibernate processes
 
 -----------------------------------------------------------------------------------------------------------------------    
 
 20. **[Why To Avoid PostgreSQL (`BIG`)`SERIAL` In Batching Inserts Via Hibernate](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchingAndSerial)**
 
-**Description:** In PostgreSQL, using `GenerationType.IDENTITY` will disable insert batching. The `(BIG)SERIAL` is acting "almost" like MySQL, `AUTO_INCREMENT`. In this application, we use the `GenerationType.SEQUENCE` which enable insert batching, and we optimize it via the `hi/lo` optimization algorithm.
+**Description:** In PostgreSQL, using `GenerationType.IDENTITY` will disable insert batching. The `(BIG)SERIAL` is acting "almost" like MySQL, `AUTO_INCREMENT`. In this application, we use the `GenerationType.SEQUENCE` which permits insert batching, and we optimize it via the `hi/lo` optimization algorithm. 
 
-**Key points:**\
-     - use `GenerationType.SEQUENCE` instead of `GenerationType.IDENTITY`\
-     - rely on the `hi/lo` algorithm to fetch multiple identifiers in a single database roundtrip (you can go even further and use the Hibernate `pooled` and `pooled-lo` identifier generators (these are optimizations of `hi/lo`))
+**Key points:**
+- use `GenerationType.SEQUENCE` instead of `GenerationType.IDENTITY`
+- rely on the `hi/lo` algorithm to fetch a *hi* value in a database roundtrip (the *hi* value is useful for generating a certain/given number of identifiers in-memory; until you haven't exhausted all in-memory identifiers there is no need to fetch another *hi*) 
+- you can go even further and use the Hibernate `pooled` and `pooled-lo` identifier generators (these are optimizations of `hi/lo` that allows external services to use the database without causing duplication keys errors)
    
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchingAndSerial/PostgreSQL%20(BIG)SERIAL%20and%20Batching%20Inserts.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-21. **[JPA Inheritance - Single Table](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSingleTableInheritance)**
+21. **[JPA Inheritance - `SINGLE_TABLE`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSingleTableInheritance)**
 
-**Description:** This application is a sample of JPA Single Table inheritance strategy (`SINGLE_TABLE`)
+**Description:** This application is a sample of using JPA Single Table inheritance strategy (`SINGLE_TABLE`).
 
-**Key points:**\
-     - this is the default inheritance strategy (`@Inheritance(strategy=InheritanceType.SINGLE_TABLE)`)\
-     - all the classes in an inheritance hierarchy are represented via a single table in a the database\
-     - subclasses attributes non-nullability is ensured via `@NotNull` and MySQL triggers\
-     - the default discriminator column memory footprint was optimized by declaring it of type `TINYINT`
+**Key points:**
+- this is the default inheritance strategy (`@Inheritance(strategy=InheritanceType.SINGLE_TABLE)`)
+- all the classes in an inheritance hierarchy are represented via a single table in the database
+- subclasses attributes non-nullability is ensured via `@NotNull` and MySQL triggers
+- the default discriminator column memory footprint was optimized by declaring it of type `TINYINT`
    
 **Output example (below is a single table obtained from 3 entities):**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSingleTableInheritance/Single%20table%20inheritance.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-22. **[How To Count And Assert SQL Statements](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCountSQLStatements)**
+22. **[Count and Assert SQL Statements](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCountSQLStatements)**
 
-**Description:** This application is a sample of counting and asserting SQL statements triggered "behind the scene". Is very useful to count the SQL statements in order to ensure that your code is not generating more SQLs that you may think (e.g., N+1 can be easily detected by asserting the number of expected statements).
+**Description:** This application is a sample of counting and asserting SQL statements triggered "behind the scene". Is very useful to count the SQL statements in order to ensure that your code is not generating more SQL statements that you may think (e.g., N+1 can be easily detected by asserting the number of expected statements).
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add dependencies for `datasource-proxy` and Vlad Mihalcea's `db-util`\
-     - create the `ProxyDataSourceBuilder` with `countQuery()`\
-     - reset the counter via `SQLStatementCountValidator.reset()`\
-     - assert `INSERT`, `UPDATE`, `DELETE` and `SELECT` via `assertInsert/Update/Delete/Select/Count(long expectedNumberOfSql)`
+**Key points:**
+- for Maven, in `pom.xml`, add dependencies for DataSource-Proxy library and Vlad Mihalcea's db-util library
+- create the `ProxyDataSourceBuilder` with `countQuery()`
+- reset the counter via `SQLStatementCountValidator.reset()`
+- assert `INSERT`, `UPDATE`, `DELETE` and `SELECT` via `assertInsert/Update/Delete/Select/Count(long expectedNumberOfSql)`
    
 **Output example (when the number of expected SQLs is not equal with the reality an exception is thrown):**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootCountSQLStatements/count%20and%20assert%20SQL.png)
@@ -335,9 +348,9 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 **Description:** This application is a sample of setting the JPA callbacks (`Pre/PostPersist`, `Pre/PostUpdate`, `Pre/PostRemove` and `PostLoad`).
 
-**Key points:**\
-     - in entity, write callback methods and use the proper annotations\
-     - callback methods annotated on the bean class must return void and take no arguments
+**Key points:**
+- in entity, write callback methods and use the proper annotations
+- callback methods annotated on the bean class must return `void` and take no arguments
    
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootJpaCallbacks/JPA%20callbacks.png)
@@ -346,129 +359,136 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 24. **[How To Use `@MapsId` For Sharing Identifier In `@OneToOne` Relationship](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToOneMapsId)**
 
-**Description:** Instead of *classical* unidirectional/bidirectional `@OneToOne` better rely on an unidirectional `@OneToOne` and `@MapsId`. This application is a proof of concept. 
+**Description:** Instead of *regular* unidirectional/bidirectional `@OneToOne` better rely on an unidirectional `@OneToOne` and `@MapsId`. This application is a proof of concept. 
 
-**Key points:**\
-     - use `@MapsId` on child side\
-     - use `@JoinColumn` to customize the name of the Primary Key column\
-     - basically, for `@OneToOne` associations, `@MapsId` will share the Primary Key with the parent table (`id` property acts as both Primary Key and Foreign Key)      
+**Key points:**
+- use `@MapsId` on child side
+- use `@JoinColumn` to customize the name of the primary key column
+- mainly, for `@OneToOne` associations, `@MapsId` will share the primary key with the parent table (`id` property acts as both primary key and foreign key)    
+     
+**Note:**
+- `@MapsId` can be used for `@ManyToOne` as well   
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-25. **[How To Extract DTOs Via SqlResultSetMapping](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaSqlResultSetMappingEm)**
+25. **[How To Fetch DTO Via `SqlResultSetMapping` And `EntityManager`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaSqlResultSetMappingEm)** 
 
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on `SqlResultSetMapping` and `EntityManager`.
-
-**Key points:**\
-     - use `SqlResultSetMapping` and `EntityManager`\
-     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on `SqlResultSetMapping` and `EntityManager`.
+ 
+**Key points:**
+- use `SqlResultSetMapping` and `EntityManager`
+- for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-26. **[How To Extract DTOs Via SqlResultSetMapping & NamedNativeQuery](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSqlResultSetMappingAndNamedNativeQuery)**
-
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on `SqlResultSetMapping`, `NamedNativeQuery` and `EntityManager`.
-
-**Key points:**\
-     - use `SqlResultSetMapping`, `NamedNativeQuery` and `EntityManager`\
-     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
+26. **[How To Fetch DTO Via `SqlResultSetMapping` And `NamedNativeQuery`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSqlResultSetMappingAndNamedNativeQuery)**
+ 
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on `SqlResultSetMapping`, `NamedNativeQuery` and `EntityManager`.
+ 
+**Key points:**
+- use `SqlResultSetMapping`, `NamedNativeQuery` and `EntityManager`
+- for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-27. **[How To Extract DTOs Via javax.persistence.Tuple And Native SQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoTupleAndSql)**
+27. **[How To Fetch DTO Via `javax.persistence.Tuple` And Native SQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoTupleAndSql)**
 
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on `javax.persistence.Tuple` and native SQL.
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on `javax.persistence.Tuple` and native SQL.
 
-**Key points:**\
-     - use `java.persistence.Tuple` and `EntityManager.createNativeQuery()`\
-     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)     
-
------------------------------------------------------------------------------------------------------------------------    
-
-28. **[How To Extract DTOs Via javax.persistence.Tuple And JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoTupleAndJpql)**
-
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on `javax.persistence.Tuple` and JPQL.
+**Key points:**
+- use `java.persistence.Tuple` in a Spring repository and mark the query as `nativeQuery = true`
+- for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-29. **[How To Extract DTOs Via Constructor Expression And JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructorExpression)**
+28. **[How To Fetch DTO via `javax.persistence.Tuple` and JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoTupleAndJpql)**
 
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on Constructor Expression and JPQL.
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on `javax.persistence.Tuple` and JPQL.
 
-**Key points:**\
-     - use a proper constructor in the DTO class\
-     - and use a query as `select new com.jpa.CarDto(c.name, c.color) from Car c`\
-     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
-     
+**Key points:**
+- use `java.persistence.Tuple` in a Spring repository
+- for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+29. **[How To Fetch DTO Via Constructor Expression and JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructorExpression)**
+
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on Constructor Expression and JPQL.
+
+**Key points:**
+- write a proper constructor in the DTO class
+- use a query as `SELECT new com.bookstore.dto.AuthorDto(a.name, a.age) FROM Author a`
+- for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
+
 **See also:**\
-[Dto Via Constructor And Spring Data Query Builder Mechanism](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructor)
+[How To Fetch DTO Via Constructor And Spring Data Query Builder Mechanism](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructor)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-30. **[How To Extract DTOs Via ResultTransformer And Native SQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoResultTransformer)**
+30. **[How To Fetch DTO Via `ResultTransformer` And Native SQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoResultTransformer)**
 
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on Hibernate, `ResultTransformer` and native SQL.
+**Description:** Fetching more data than needed is prone to performance penalties. Using DTO allows us to extract only the needed data. In this application we rely on Hibernate, `ResultTransformer` and native SQL.
 
-**Key points:**\
-     - use `AliasToBeanConstructorResultTransformer` for DTOs without setters, with constructor\
-     - use `Transformers.aliasToBean()` for DTOs with setters\
-     - use `EntityManager.createNativeQuery()` and `unwrap(org.hibernate.query.NativeQuery.class)`\
-     - starting with Hibernate 5.2, `ResultTransformer` is deprecated, but until a replacement will be available (in Hibernate 6.0) it can be used ([read further](https://discourse.hibernate.org/t/hibernate-resulttransformer-is-deprecated-what-to-use-instead/232))\
-     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
+**Key points:**
+- use `AliasToBeanConstructorResultTransformer` for DTO without setters, but with constructor
+- use `Transformers.aliasToBean()` for DTO with setters
+- use `EntityManager.createNativeQuery()` and `unwrap(org.hibernate.query.NativeQuery.class)`
+- starting with Hibernate 5.2, `ResultTransformer` is deprecated, but until a replacement will be available (probably in Hibernate 6.0) it can be used ([read further](https://discourse.hibernate.org/t/hibernate-resulttransformer-is-deprecated-what-to-use-instead/232))
+- for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-31. **[How To Extract DTOs Via ResultTransformer And JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoResultTransformerJpql)**
+31. **[How To Fetch DTO Via `ResultTransformer` and JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoResultTransformerJpql)**
+ 
+**Description:** Fetching more data than needed is prone to performance penalties. Using DTO allows us to extract only the needed data. In this application we rely on Hibernate, `ResultTransformer` and JPQL.
 
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on Hibernate, `ResultTransformer` and JPQL.
-
-**Key points:**\
-     - use `AliasToBeanConstructorResultTransformer` for DTOs without setters, with constructor\
-     - use `Transformers.aliasToBean()` for DTOs with setters\
-     - use `EntityManager.createQuery()` and `unwrap(org.hibernate.query.Query.class)`\
-     - starting with Hibernate 5.2, `ResultTransformer` is deprecated, but until a replacement will be available (in Hibernate 6.0) it can be used ([read further](https://discourse.hibernate.org/t/hibernate-resulttransformer-is-deprecated-what-to-use-instead/232))\
-     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
+**Key points:**
+- use `AliasToBeanConstructorResultTransformer` for DTO without setters, with constructor
+- use `Transformers.aliasToBean()` for DTO with setters
+- use `EntityManager.createQuery()` and `unwrap(org.hibernate.query.Query.class)`
+- starting with Hibernate 5.2, `ResultTransformer` is deprecated, but until a replacement will be available (in Hibernate 6.0) it can be used ([read further](https://discourse.hibernate.org/t/hibernate-resulttransformer-is-deprecated-what-to-use-instead/232))
+- for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-32. **[How To Extract DTOs Via Blaze-Persistence Entity Views](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoBlazeEntityView)**
+32. **[How To Fetch DTO Via Blaze-Persistence Entity Views](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoBlazeEntityView)** 
 
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on [Blaze-Persistence](https://persistence.blazebit.com/) entity views.
-
-**Key points:**\
-     - add in pom.xml dependencies specific to Blaze-Persistence\
-     - configure Blaze-Persistence, `CriteriaBuilderFactory` and `EntityViewManager`\
-     - write an entity view via an interface in Blaze-Persistence fashion\
-     - write a Spring-centric repository by extending `EntityViewRepository`\
-     - call method of this repository such as, `findAll()`, `findOne()`, etc\
-     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on [Blaze-Persistence](https://persistence.blazebit.com/) entity views.
+ 
+**Key points:**
+- for Maven, add in `pom.xml` the dependencies specific to Blaze-Persistence
+- configure Blaze-Persistence via `CriteriaBuilderFactory` and `EntityViewManager`
+- write an *entity view* via an interface in Blaze-Persistence fashion
+- write a Spring-centric repository by extending `EntityViewRepository`
+- call method of this repository such as, `findAll()`, `findOne()`, etc
+- for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-33. **[How @ElementCollection Without @OrderColumn Works](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionNoOrderColumn)**
+33. **[How Regular `@ElementCollection` (Without `@OrderColumn`) Works](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionNoOrderColumn)**
 
-**Description:** This application reveals the possible performance penalties of using `@ElementCollection`. In this case, without `@OrderColumn`. As you can see in the next recipe (34) adding `@OrderColumn` can mitigate some performance penalties.
+**Description:** This application reveals the possible performance penalties of using `@ElementCollection`. In this case, without `@OrderColumn`. As you can see in the next item (34) adding `@OrderColumn` can mitigate some performance penalties.
 
-**Key points:**\
-     - an `@ElementCollection` doesn't have a Primary Key\
-     - an `@ElementCollection` is mapped in a separate table\
-     - avoid `@ElementCollection` when you have a lot of inserts and deletes in/from it since the database has to delete all existing rows in order to add a new one or delete one\
-     - the more items we have in this table the greater the performance penalty
+**Key points:**
+- an `@ElementCollection` doesn't have a primary key
+- an `@ElementCollection` is mapped in a separate table
+- avoid `@ElementCollection` when you have a lot of inserts/deletes on this collection; inserts/deletes will cause Hibernate to delete all the existing table rows, process the collection in-memory, and re-insert the remaining table rows to mirror the collection from memory
+- the more entries we have in this collection the greater the performance penalty will be
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootElementCollectionNoOrderColumn/%40ElementCollection%20without%20%40OrderColumn.png)  
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-34. **[How @ElementCollection With @OrderColumn Works](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionWithOrderColumn)**
+34. **[How `@ElementCollection` With `@OrderColumn` Works](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionWithOrderColumn)**
 
-**Description:** This application reveals the performance penalties of using `@ElementCollection`. In this case, with `@OrderColumn`. But, as you can see in this application, by adding `@OrderColumn` can mitigate some performance penalties when operations take place near the collection tail (e.g., add/remove at/from the end of the collection). Mainly, all elements situated before the adding/removing entry are left untouched, so the performance penalty can be ignored if we affect rows close to the collection tail.
+**Description:** This application reveals the performance penalties of using `@ElementCollection`. In this case, with `@OrderColumn`. But, as you can see in this application (in comparison with item 33), by adding `@OrderColumn` can mitigate some performance penalties when operations takes place near the collection tail (e.g., add/remove at/from the end of the collection). Mainly, all elements situated before the adding/removing entry are left untouched, so the performance penalty can be ignored if we affect rows close to the collection tail.
 
-**Key points:**\
-     - an `@ElementCollection` doesn't have a Primary Key\
-     - an `@ElementCollection` is mapped in a separate table\
-     - pefer `@ElementCollection` with `@OrderColumn` when you have a lot of inserts and deletes from the collection tail\
-     - the more items are inserted/removed from the beginning of this table the greater the performance penalty
+**Key points:**
+- an `@ElementCollection` doesn't have a primary key
+- an `@ElementCollection` is mapped in a separate table
+- prefer `@ElementCollection` with `@OrderColumn` when you have a lot of inserts and deletes near the collection tail
+- the more elements are inserted/removed from the beginning of the collection the greater the performance penalty will be
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootElementCollectionWithOrderColumn/%40ElementCollection%20with%20%40OrderColumn.png)
@@ -478,170 +498,175 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 35. **[How To Avoid Lazy Initialization Issues Caused By Disabling Open Session In View Via Explicit (Default) Values](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSuppressLazyInitInOpenSessionInView)**
 
 **Note: Before reading this item try to see if [Hibernate5Module](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJacksonHibernate5Module) is not what you are looking for.**
+ 
+**Description:** The Open-Session in View anti-pattern is activated by default in SpringBoot. Now, imagine a lazy association (e.g., `@OneToMany`) between two entities, `Author` and `Book` (an author has associated more books). Next, a REST controller endpoint fetches an `Author` without the associated `Book`. But, the View (more precisely, Jackson), forces the lazy loading of the associated `Book` as well. Since OSIV will supply the already opened `Session`, the proxies initializations take place successfully. The solution to avoid this performance penalty starts by disabling the OSIV. Further, explicitly initialize the un-fetched lazy associations. This way, the View will not force lazy loading.
 
-**Description:** The Open-Session in View anti-pattern is activated by default in SpringBoot. Now, imagine a lazy relationship (e.g., `@OneToMany`) between two entities, `Author` and `Book` (an author has associated more books). Next, a REST controller endpoint fetches an `Author` without the associated `Book`. But, the View (more precisely, Jackson), forces the lazy loading of the associated `Book` as well. Since OSIV will supply the already opened `Session`, the `Proxy` initializations take place successfully. The solution to avoid this performance penalty starts by disabling the OSIV. Further, explicitly initialize the un-fetched lazy associations. This way, the View will not force lazy loading.
-
-**Key points:**\
-     - disable OSIV by adding in `application.properties` this setting: `spring.jpa.open-in-view=false`\
-     - fetch an `Author` entity and initialize its associated `Book` explicitly with (default) values (e.g., `null`)\
-     - set `@JsonInclude(Include.NON_EMPTY)` on this entity-level to avoid rendering `null` or what is considered empty in the resulted JSON
+**Key points:**
+- disable OSIV by adding in `application.properties` this setting: `spring.jpa.open-in-view=false`
+- fetch an `Author` entity and initialize its associated `Book` explicitly with (default) values (e.g., `null`)
+- set `@JsonInclude(Include.NON_EMPTY)` on this entity-level to avoid rendering `null` or what is considered empty in the resulted JSON
      
- **NOTE:** If OSIV is enabled, the developer can still initialize the un-fetched lazy associations manually as long as he does this outside of a transaction to avoid flushing. But, why is this working? Since the `Session` is open, why the manually initialization of the associations of a managed entity doesn't trigger the flush? The answer can be found in the documentation of `OpenSessionInViewFilter` which specifies that: *This filter will by default not flush the Hibernate `Session`, with the flush mode set to `FlushMode.NEVER`. It assumes to be used in combination with service layer transactions that care for the flushing: The active transaction manager will temporarily change the flush mode to `FlushMode.AUTO` during a read-write transaction, with the flush mode reset to `FlushMode.NEVER` at the end of each transaction. If you intend to use this filter without transactions, consider changing the default flush mode (through the "flushMode" property).*    
+ **NOTE:** If OSIV is enabled, the developer can still initialize the un-fetched lazy associations manually as long as he does this outside of a transaction to avoid flushing. But, why is this working? Since the `Session` is open, why the manually initialization of the associations of a managed entity doesn't trigger the flush? The answer can be found in the documentation of `OpenSessionInViewFilter` which specifies that: *This filter will by default not flush the Hibernate `Session`, with the flush mode set to `FlushMode.NEVER`. It assumes to be used in combination with service layer transactions that care for the flushing: The active transaction manager will temporarily change the flush mode to `FlushMode.AUTO` during a read-write transaction, with the flush mode reset to `FlushMode.NEVER` at the end of each transaction. If you intend to use this filter without transactions, consider changing the default flush mode (through the "flushMode" property).*         
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-36. **[How To Use Spring Projections(DTOs) And Inner Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaInnerJoins)**
+36. **[How To Use Spring Projections(DTO) And Inner Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaInnerJoins)**
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaInnerJoins/DTO%20via%20inner%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and inner joins written via JPQL and native SQL (for MySQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTO) and inner joins written via JPQL and native SQL (for MySQL).
 
-**Key points:**\
-     - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
-     - write inner joins queries using JPQL/SQL
+**Key points:**
+- define two entities (e.g., `Author` and `Book` in a (lazy) bidirectional `@OneToMany` association)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (Spring projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)
+- write inner joins queries using JPQL/SQL
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-37. **[How To Use Spring Projections(DTOs) And Left Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaLeftJoins)**
+37. **[How To Use Spring Projections(DTO) And Left Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaLeftJoins)**
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaLeftJoins/DTO%20via%20left%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and left joins written via JPQL and native SQL (for MySQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTO) and left joins written via JPQL and native SQL (for MySQL).
 
-**Key points:**\
-     - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
-     - write left joins queries using JPQL/SQL
+**Key points:**
+- define two entities (e.g., `Author` and `Book` in a (lazy) bidirectional `@OneToMany` association)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (Spring projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)
+- write left joins queries using JPQL/SQL
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-38. **[How To Use Spring Projections(DTOs) And Right Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaRightJoins)**
+38. **[How To Use Spring Projections(DTO) And Right Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaRightJoins)**
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaRightJoins/DTO%20via%20right%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and right joins written via JPQL and native SQL (for MySQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTO) and right joins written via JPQL and native SQL (for MySQL).
 
-**Key points:**\
-     - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
-     - write right joins queries using JPQL/SQL
+**Key points:**
+- define two entities (e.g., `Author` and `Book` in a (lazy) bidirectional `@OneToMany` association)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (Spring projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)
+- write right joins queries using JPQL/SQL
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-39. **[How To Use Spring Projections(DTOs) And Inclusive Full Joins (PostgreSQL)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaFullJoins)**
+39. **[How To Use Spring Projections(DTO) And Inclusive Full Joins (PostgreSQL)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaFullJoins)**
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaFullJoins/DTO%20via%20inclusive%20full%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and inclusive full joins written via JPQL and native SQL (for PostgreSQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTO) and inclusive full joins written via JPQL and native SQL (for PostgreSQL).
 
-**Key points:**\
-     - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
-     - write inclusive full joins queries using JPQL/SQL
+**Key points:**
+- define two entities (e.g., `Author` and `Book` in a (lazy) bidirectional `@OneToMany` association)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (Spring projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)
+- write inclusive full joins queries using JPQL/SQL
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-40. **[How To Use Spring Projections(DTOs) And Exclusive Left Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaLeftExcludingJoins)**
+40. **[How To Use Spring Projections(DTO) And Exclusive Left Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaLeftExcludingJoins)**
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaLeftExcludingJoins/DTO%20via%20exclusive%20left%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and exclusive left joins written via JPQL and native SQL (for MySQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTO) and exclusive left joins written via JPQL and native SQL (for MySQL).
 
-**Key points:**\
-     - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
-     - write exclusive left joins queries using JPQL/SQL
+**Key points:**
+- define two entities (e.g., `Author` and `Book` in a (lazy) bidirectional `@OneToMany` association)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)
+- write exclusive left joins queries using JPQL/SQL
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-41. **[How To Use Spring Projections(DTOs) And Exclusive Right Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaRightExcludingJoins)**
+41. **[How To Use Spring Projections(DTO) And Exclusive Right Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaRightExcludingJoins)**
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaRightExcludingJoins/DTO%20via%20exclusive%20right%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and exclusive right joins written via JPQL and native SQL (for MySQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTO) and exclusive right joins written via JPQL and native SQL (for MySQL).
 
-**Key points:**\
-     - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
-     - write exclusive right joins queries using JPQL/SQL
+**Key points:**
+- define two entities (e.g., `Author` and `Book` in a (lazy) bidirectional `@OneToMany` association)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (Spring projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)
+- write exclusive right joins queries using JPQL/SQL
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-42. **[How To Use Spring Projections(DTOs) And Exclusive Full Joins (PostgreSQL)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaOuterExcludingJoins)**
+42. **[How To Use Spring Projections(DTO) And Exclusive Full Joins (PostgreSQL)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaOuterExcludingJoins)**
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaOuterExcludingJoins/DTO%20via%20exclusive%20full%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and exclusive full joins written via JPQL and native SQL (for PostgreSQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTO) and exclusive full joins written via JPQL and native SQL (for PostgreSQL).
 
-**Key points:**\
-     - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
-     - write exclusive full joins queries using JPQL/SQL
+**Key points:**
+- define two entities (e.g., `Author` and `Book` in a (lazy) bidirectional `@OneToMany` association)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (Spring projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)
+- write exclusive full joins queries using JPQL/SQL
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-43. **[Why You Should Avoid Time-Consuming Tasks In Spring Boot Post-Commits](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPostCommit)**
+43. **[Why You Should Avoid Time-Consuming Tasks In Spring Boot Post-Commit Hooks](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPostCommit)**
 
-**Description:** This application is a proof of concept for using Spring post-commit hooks.
+**Description:** This application is a proof of concept for using Spring post-commit hooks and how they may affect the persistence layer performance.
 
-**Key points:**\
-     - avoid time-consuming task in post-commits since the database connection will remain open until this code finshes
+**Key points:**
+- avoid time-consuming tasks in Spring post-commit hooks since the database connection will remain open until this code finshes
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-44. **[How To Exploit Spring Projections(DTOs) And Join Unrelated Entities in Hibernate 5.1+](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoUnrelatedEntities)**
+44. **[How To Exploit Spring Projections(DTO) And Join Unrelated Entities In Hibernate 5.1+](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoUnrelatedEntities)**
 
-**Description:** This application is a proof of concept for using Spring Projections (DTOs) and join unrelated entities. Hibernate 5.1 introduced explicit joins on unrelated entities and the syntax and behaviour are similar to `SQL JOIN` statements.
+**Description:** This application is a proof of concept for using Spring Projections (DTO) and join unrelated entities. Hibernate 5.1 introduced explicit joins on unrelated entities and the syntax and behaviour are similar to SQL `JOIN` statements.
 
-**Key points:**\
-     - define serveral entities (e.g., `Author` and `Book` unrelated entities)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., `BookstoreDto`)\
-     - write joins queries using JPQL/SQL (e.g., queries all authors names and book titles of the given price) 
+**Key points:**
+- define serveral entities (e.g., `Author` and `Book` unrelated entities)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (Spring projections) that contains getters for the columns that should be fetched from the database (e.g., `BookstoreDto`)
+- write joins queries using JPQL/SQL (e.g., queries all authors names and book titles of the given price)  
      
 -----------------------------------------------------------------------------------------------------------------------    
 
 45. **[Why To Avoid Lombok `@EqualsAndHashCode` And `@Data` In Entities And How To Override `equals()` And `hashCode()`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLombokEqualsAndHashCode)**
-
+ 
 **Description:** Entities should implement `equals()` and `hashCode()` as [here](https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/). The main idea is that Hibernate requires that an entity is equal to itself across all its state transitions (*transient*, *attached*, *detached* and *removed*). Using Lombok `@EqualsAndHashCode` (or `@Data`) will not respect this requirment.
 
 **Key points:**\
-**AVOID THESE APPROACHES**\
-     - Using Lombok default behavior of `@EqualsAndHashCode`\
-     (entity: `LombokDefaultBook`, test: `LombokDefaultEqualsAndHashCodeTest`)\
-     - Using Lombok  `@EqualsAndHashCode` with primary key only\
-     (entity: `LombokIdBook`, test: `LombokEqualsAndHashCodeWithIdOnlyTest`)\
-     - Rely on default `equals()` and `hashCode()`\
-     (entity: `DefaultBook`, test: `DefaultEqualsAndHashCodeTest`)\
-     - Rely on default `equals()` and `hashCode()` containing only the database-generated identifier\
-     (entity: `IdBook`, test: `IdEqualsAndHashCodeTest`)
+**AVOID THESE APPROACHES**
+- Using Lombok default behavior of `@EqualsAndHashCode`
+(entity: `LombokDefaultBook`, test: `LombokDefaultEqualsAndHashCodeTest`)
+- Using Lombok  `@EqualsAndHashCode` with primary key only
+(entity: `LombokIdBook`, test: `LombokEqualsAndHashCodeWithIdOnlyTest`)
+- Rely on default `equals()` and `hashCode()`
+(entity: `DefaultBook`, test: `DefaultEqualsAndHashCodeTest`)
+- Rely on default `equals()` and `hashCode()` containing only the database-generated identifier
+(entity: `IdBook`, test: `IdEqualsAndHashCodeTest`)
 
-**PREFER THESE APPROACHES**\
-     - Rely on business key (entity: `BusinessKeyBook`, test: `BusinessKeyEqualsAndHashCodeTest`)\
-     - Rely on `@NaturalId` (entity: `NaturalIdBook`, test: `NaturalIdEqualsAndHashCodeTest`)\
-     - Rely on manually assigned identifiers (entity: `IdManBook`, test: `IdManEqualsAndHashCodeTest`)\
-     - Rely on database-generated identifiers (entity: `IdGenBook`, test: `IdGenEqualsAndHashCodeTest`)
+**PREFER THESE APPROACHES**
+- Rely on business key (entity: `BusinessKeyBook`, test: `BusinessKeyEqualsAndHashCodeTest`)
+- Rely on `@NaturalId` (entity: `NaturalIdBook`, test: `NaturalIdEqualsAndHashCodeTest`)
+- Rely on manually assigned identifiers (entity: `IdManBook`, test: `IdManEqualsAndHashCodeTest`)
+- Rely on database-generated identifiers (entity: `IdGenBook`, test: `IdGenEqualsAndHashCodeTest`)
      
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLombokEqualsAndHashCode/auto-generated%20primary%20key%20and%20equals%20-%20hashCode.png)   
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-46. **[How To Avoid LazyInitializationException Via JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinFetch)**
+46. **[How To Avoid `LazyInitializationException` Via `JOIN FETCH`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinFetch)**
 
-**Description:** Typically, when we get a `LazyInitializationException` we tend to modify the relationship fetching type from `LAZY` to `EAGER`. That is bad! This is a [code smell](https://vladmihalcea.com/eager-fetching-is-a-code-smell/). Best way to avoid this exception is to rely on `JOIN FETCH` (if you plan to modify the fetched entities) or `JOIN` + DTOs (if the fetched data is only read). `JOIN FETCH` allows associations or collections of values to be initialized along with their parent objects using a single `SELECT`. This application is a `JOIN FETCH` example with entities. But, with some constraints, `JOIN FETCH` can be used with DTOs as well. An example is available [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch).
+**See also:**
+- [LEFT JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLeftJoinFetch)
+- [JOIN FETCH And DTO](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch)
+- [JOIN VS. JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinVSJoinFetch)
 
-**Key points:**\
-     - define two related entities (e.g., `Author` and `Book` in a one-to-many lazy bidirectional relationship)\
-     - write a JPQL `JOIN FETCH` to fetch an author including his books\
-     - write a JPQL `JOIN FETCH` to fetch a book including its author
+**Description:** Typically, when we get a `LazyInitializationException` we tend to modify the association fetching type from `LAZY` to `EAGER`. That is very bad! This is a [code smell](https://vladmihalcea.com/eager-fetching-is-a-code-smell/). Best way to avoid this exception is to rely on `JOIN FETCH` (if you plan to modify the fetched entities) or `JOIN` + DTO (if the fetched data is only read). `JOIN FETCH` allows associations or collections of values to be initialized along with their parent objects using a single `SELECT`. This application is a `JOIN FETCH` example with entities. But, with some constraints, `JOIN FETCH` can be used with DTO as well. An example is available [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch).
+
+**Key points:**
+- define two related entities (e.g., `Author` and `Book` in a `@OneToMany` (lazy) bidirectional association)
+- write a JPQL `JOIN FETCH` to fetch an author including his books
+- write a JPQL `JOIN FETCH` to fetch a book including its author
 
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootJoinFetch/hibernate%20spring%20boot%20join%20fetch.png) 
@@ -652,20 +677,20 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 **Description:** This is a Spring Boot example based on the following [article](https://vladmihalcea.com/merge-entity-collections-jpa-hibernate/). Is a functional implementation of the Vlad's example. It is highly recommended to read that article.
 
-**Key points:**\
-     - Remove the existing database rows that are no longer found in the incoming collection\
-     - Update the existing database rows which can be found in the incoming collection\
-     - Add the rows found in the incoming collection, which cannot be found in the current database snapshot
+**Key points:**
+- remove the existing database rows that are no longer found in the incoming collection
+- update the existing database rows which can be found in the incoming collection
+- add the rows found in the incoming collection, which cannot be found in the current database snapshot
      
 -----------------------------------------------------------------------------------------------------------------------    
 
 48. **[How To Delay Connection Acquisition As Needed (Hibernate 5.2.10)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDelayConnection)**
 
-**Description:** This is a Spring Boot example that exploits Hibernate 5.2.10 capability of delaying the connection acquisition as needed. Normally, a database connection is aquried immediately after calling a method annotated with `@Transactional`. If this method contains some time-consuming tasks before the first SQL statement then the connection is holded for nothing. But, Hibernate 5.2.10 allows us to delay the connection acquisition as needed. This example rely on HikariCP as the default connection pool for Spring Boot.
+**Description:** This is a Spring Boot example that exploits Hibernate 5.2.10 capability of delaying the connection acquisition as needed. Normally, a database connection is aquried immediately after calling a method annotated with `@Transactional`. If this method contains some time-consuming tasks before the first SQL statement then the connection is hold open for nothing. But, Hibernate 5.2.10 allows us to delay the connection acquisition as needed. This example rely on HikariCP as the default connection pool for Spring Boot.
 
-**Key points:**\
-     - set `spring.datasource.hikari.auto-commit=false` in application.properties\
-     - set `spring.jpa.properties.hibernate.connection.provider_disables_autocommit=true` in application.properties
+**Key points:**
+- set `spring.datasource.hikari.auto-commit=false` in application.properties
+- set `spring.jpa.properties.hibernate.connection.provider_disables_autocommit=true` in `application.properties`
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDelayConnection/delay%20connection%20acquisition%201.png)
@@ -675,53 +700,53 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 49. **[How To Generate Sequences Of Identifiers Via Hibernate `hi/lo` Algorithm](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHiLo)**
 
- **Note:** If systems external to your application need to insert rows in your tables then don't rely on `hi/lo` since, in such cases, it may cause errors resulted from generating duplicated identifiers. Rely on `pooled` or `pooled-lo`.
+ **Note:** If systems external to your application need to insert rows in your tables then don't rely on `hi/lo` algorithm since, in such cases, it may cause errors resulted from generating duplicated identifiers. Rely on `pooled` or `pooled-lo` algorithms (optimizations of `hi/lo`).
  
-**Description:** This is a Spring Boot example of using the `hi/lo` algorithm for generating 1000 identifiers in 10 database roundtrips for batching 1000 inserts in batches of 30 inserts. The `hi/lo` is a Hibernate algorithm is an optimization algorithm for generating sequences of identifiers.
+**Description:** This is a Spring Boot example of using the `hi/lo` algorithm for generating 1000 identifiers in 10 database roundtrips for batching 1000 inserts in batches of 30. 
 
-**Key points:**\
-     - use the `SEQUENCE` generator type (e.g., in PostgreSQL)\
-     - configure the `hi/lo` algorithm as in `Author.java` entity
+**Key points:**
+- use the `SEQUENCE` generator type (e.g., in PostgreSQL)
+- configure the `hi/lo` algorithm as in `Author.java` entity
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHiLo/Hibernate%20hilo%20algorithm.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-50. **[How To Correctly Write a Bidirectional @ManyToMany Association](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManyBidirectional)**
+50. **[The Best Way To Implement A Bidirectional `@ManyToMany` Association](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManyBidirectional)**
 
-**Description:** This application is a proof of concept of how is correct to implement the bidirectional `@ManyToMany` association. 
+**Description:** This application is a proof of concept of how it is correct to implement the bidirectional `@ManyToMany` association from the performance perspective. 
 
-**Key points:**\
-     - choose and set the owner of the relationship via `mappedBy`\
-     - materialize the relationships collections via `Set` not `List`\
-     - use helper methods on the owner of the relationship to keep both sides of the association in sync\
-     - on the owner of the relationship use `CascadeType.PERSIST` and `CascadeType.MERGE`, but avoid `CascadeType.REMOVE/ALL`\
-     - on the owner of the relationship set up join table\
-     - `@ManyToMany` is lazy by default; keep it this way!\
-     - as entities identifiers, use assigned identifiers (business key, natural key (`@NaturalId`)) and/or database-generated identifiers and override properly (on both sides) the `equals()` and `hashCode()` methods as [here](https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/)\
-     - if `toString()` need to be overridden, then pay attention to involve only for the basic attributes fetched when the entity is loaded from the database
+**Key points:**
+- choose an owning and a `mappedBy` side
+- materialize the relationships collections via `Set` not `List`
+- use helper methods on the owner of the relationship to keep both sides of the association in sync
+- on the owner of the relationship use `CascadeType.PERSIST` and `CascadeType.MERGE`, but avoid `CascadeType.REMOVE/ALL`
+- on the owner of the relationship set up join table
+- `@ManyToMany` is lazy by default; keep it this way!
+- as entities identifiers, use assigned identifiers (business key, natural key (`@NaturalId`)) and/or database-generated identifiers and override (on both sides) properly the `equals()` and `hashCode()` methods as [here](https://vladmihalcea.com/the-best-way-to-implement-equals-hashcode-and-tostring-with-jpa-and-hibernate/)
+- if `toString()` need to be overridden, then pay attention to involve only for the basic attributes fetched when the entity is loaded from the database
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-51. **[Prefer Set Instead of List in @ManyToMany Relationships](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManyBidirectionalListVsSet)**
+51. **[Prefer `Set` Instead of `List` in `@ManyToMany` Associations](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManyBidirectionalListVsSet)**
 
-**Description:** This is a Spring Boot example of removing rows in case of a bidirectional `@ManyToMany` using a `List` and a `Set`. The conclusion is that `Set` is much better! This applies to unidirectional as well!
+**Description:** This is a Spring Boot example of removing rows in case of a bidirectional `@ManyToMany` using `List`, respectively `Set`. The conclusion is that `Set` is much better! This applies to unidirectional as well!
 
-**Key points:**\
-     - using `Set` is much more efficent than `List`      
+**Key points:**
+- using `Set` is much more efficent than `List`    
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootManyToManyBidirectionalListVsSet/manytomany%20use%20always%20set%20not%20list.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-52. **[How To View Query Details Via log4jdbc](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLog4JdbcViewBindingParameters)**
+52. **[How To View Query Details Via `log4jdbc`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLog4JdbcViewBindingParameters)**
 
-**Description:** View the query details via [log4jdbc](https://stackoverflow.com/questions/45346905/how-to-log-sql-queries-their-parameters-and-results-with-log4jdbc-in-spring-boo/45346996#45346996)
+**Description:** View the query details via [log4jdbc](https://github.com/candrews/log4jdbc-spring-boot-starter).
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add `log4jdbc` dependency
+**Key points:**
+- for Maven, in `pom.xml`, add `log4jdbc` dependency
      
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLog4JdbcViewBindingParameters/query%20details%20via%20log4jdbc.png)
@@ -730,10 +755,10 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 53. **[How To View Binding Params Via TRACE](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLogTraceViewBindingParameters)**
 
-**Description:** View the prepared statement binding/extracted parameters via `TRACE`
+**Description:** View the prepared statement binding/extracted parameters via `TRACE`.
 
-**Key points:**\
-     - in application.properties add: `logging.level.org.hibernate.type.descriptor.sql=TRACE`
+**Key points:**
+- in `application.properties` add: `logging.level.org.hibernate.type.descriptor.sql=TRACE`
      
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLogTraceViewBindingParameters/display%20binding%20and%20extracted%20parameters%20via%20TRACE.png) 
@@ -742,11 +767,11 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 54. **[How To Store `java.time.YearMonth` As `Integer` Or `Date` Via Hibernate Types Library](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootYearMonth)**
 
-**Description:** [Hibernate Types](https://github.com/vladmihalcea/hibernate-types) is a set of extra types not supported by Hibernate by default. One of these types is `java.time.YearMonth`. This is a Spring Boot application that uses Hibernate Type to store this `YearMonth` in a MySQL database as integer or `Date`.
+**Description:** [Hibernate Types](https://github.com/vladmihalcea/hibernate-types) is a set of extra types not supported by default in Hibernate Core. One of these types is `java.time.YearMonth`. This is a Spring Boot application that uses Hibernate Type to store this `YearMonth` in a MySQL database as integer or date.
 
-**Key points:**\
-     - for Maven, add Hibernate Types as a dependency in pom.xml\
-     - in entity use `@TypeDef` to map `typeClass` to `defaultForType` 
+**Key points:**
+- for Maven, add Hibernate Types as a dependency in `pom.xml`
+- in entity use `@TypeDef` to map `typeClass` to `defaultForType`  
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootYearMonth/Hibernate%20Types%20library.png)     
@@ -755,30 +780,30 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 55. **[How To Execute SQL Functions In JPQL Query](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJpqlFunctionsParams)**
 
-**Note**: Using SQL functions in `WHERE` part (not in `SELECT` part) in JPA 2.1 can be done via `function()` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJpqlFunction).
+**Note**: Using SQL functions in the `WHERE` part (not in the `SELECT` part) of  query in JPA 2.1 can be done via `function()` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJpqlFunction).
 
 **Description:** Trying to use SQL functions (standard or defined) in JPQL queries may result in exceptions if Hibernate will not recognize them and cannot parse the JPQL query. For example, the MySQL, `concat_ws` function is not recognized by Hibernate. This application is a Spring Boot application based on Hibernate 5.3, that registers the `concat_ws` function via `MetadataBuilderContributor` and inform Hibernate about it via, `metadata_builder_contributor` property. This example uses `@Query` and `EntityManager` as well, so you can see two use cases.
 
-**Key points:**\
-     - use Hibernate 5.3 (or, to be precisely, 5.2.18) (e.g., use Spring Boot 2.1.0.RELEASE)\
-     - implement `MetadataBuilderContributor` and register the `concat_ws` MySQL function\
-     - in application.properties, set `spring.jpa.properties.hibernate.metadata_builder_contributor` to point out to `MetadataBuilderContributor` implementation
-     
+**Key points:**
+- use Hibernate 5.3 (or, to be precisely, 5.2.18) (e.g., use Spring Boot 2.1.0.RELEASE)
+- implement `MetadataBuilderContributor` and register the `concat_ws` MySQL function
+- in `application.properties`, set `spring.jpa.properties.hibernate.metadata_builder_contributor` to point out Hibernate to `MetadataBuilderContributor` implementation
+          
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootJpqlFunctionsParams/SQL%20functions%20in%20JPQL%20parameters.png)       
 
 -----------------------------------------------------------------------------------------------------------------------
 
-56. **[Log Slow Queries Via "datasource-proxy"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLogSlowQueries)**
+56. **[Log Slow Queries Via DataSource-Proxy](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLogSlowQueries)**
 
-**Description:** This application is a sample of logging only slow queries via **[datasource-proxy](https://github.com/ttddyy/datasource-proxy)**. A slow query is a query that has an exection time bigger than a specificed threshold in milliseconds.
+**Description:** This application is a sample of logging only slow queries via **[DataSource-Proxy](https://github.com/ttddyy/datasource-proxy)**. A slow query is a query that has an execution time bigger than a specificed threshold in milliseconds.
 
-**Key points:**\
-     - for Maven, add in `pom.xml` the `datasource-proxy` dependency\
-     - create an bean post processor to intercept the `DataSource` bean\
-     - wrap the `DataSource` bean via `ProxyFactory` and an implementation of `MethodInterceptor`\
-     - choose a threshold in milliseconds\
-     - define a listener and override `afterQuery()`
+**Key points:**
+- for Maven, add in `pom.xml` the DataSource-Proxy dependency
+- create an bean post processor to intercept the `DataSource` bean
+- wrap the `DataSource` bean via `ProxyFactory` and an implementation of `MethodInterceptor`
+- choose a threshold in milliseconds
+- define a listener and override `afterQuery()`
    
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLogSlowQueries/log%20slow%20queries%20via%20datasource-proxy.png)
@@ -789,11 +814,11 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 **Description:** This application fetches data as `Page<dto>` via Spring Boot offset pagination. Most of the time, the data that should be paginated is *read-only* data. Fetching the data into entities should be done only if we plan to modify that data, therefore, fetching *read only* data as `Page<entity>` is not preferable since it may end up in a significant performance penalty. The `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, there is one query needed for fetching the data and one for counting the total number of records).
 
-**Key points:**\
-     - create a Spring projection (DTO) to contains getters only for the data that should be fetched\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - fetch data via a JPQL or native query (that includes counting) into a `List<dto>`, and a `Pageable`\
-     - use the fetched `List<dto>` and `Pageable` to create a `Page<dto>`
+**Key points:**
+- create a Spring projection (DTO) to contains getters only for the columns that should be fetched
+- write a repository that extends `PagingAndSortingRepository`
+- fetch data via a JPQL or native query (that includes counting) into a `List<dto>`
+- use the fetched `List<dto>` and the proper `Pageable` to create a `Page<dto>`
      
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -801,10 +826,10 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 **Description:** This application fetches data as `List<dto>` via Spring Boot offset pagination. Most of the time, the data that should be paginated is *read-only* data. Fetching the data into entities should be done only if we plan to modify that data, therefore, fetching *read only* data as `List<entity>` is not preferable since it may end up in a significant performance penalty. The `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, there is one query needed for fetching the data and one for counting the total number of records).
  
-**Key points:**\
-     - create a Spring projection (DTO) to contains getters only for the data that should be fetched\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - fetch data via a JPQL or native query (that includes counting) into a `List<dto>`
+**Key points:**
+- create a Spring projection (DTO) to contains getters only for the columns that should be fetched
+- write a repository that extends `PagingAndSortingRepository`
+- fetch data via a JPQL or native query (that includes counting) into a `List<dto>`
      
 -----------------------------------------------------------------------------------------------------------------------    
      
@@ -814,10 +839,10 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
 
-**Description:** This is a kickoff application that set up HikariCP via `application.properties` only. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService`for simulating concurrent users. Check the HickariCP report revealing the connection pool status.
+**Description:** This is a kickoff application that set up HikariCP via `application.properties` only. The `jdbcUrl` is set up for a MySQL database. For testing purposes, the application uses an `ExecutorService`for simulating concurrent users. Check the HickariCP report revealing the connection pool status.
 
-**Key points:**\
-     - in `application.properties`, rely on `spring.datasource.hikari.*` to configure HikariCP     
+**Key points:**
+- in `application.properties`, rely on `spring.datasource.hikari.*` to configure HikariCP     
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHikariCPPropertiesKickoff/HikariCP%20trace%20log.png)
@@ -830,11 +855,11 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
 
-**Description:** This is a kickoff application that set up HikariCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. Check the HickariCP report revealing the connection pool status.
+**Description:** This is a kickoff application that set up HikariCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purposes, the application uses an `ExecutorService` for simulating concurrent users. Check the HickariCP report revealing the connection pool status.
 
-**Key points:**\
-     - in `application.properties`, configure HikariCP via a custom prefix, e.g., `app.datasource.*`\
-     - write a `@Bean` that returns the `DataSource`
+**Key points:**
+- in `application.properties`, configure HikariCP via a custom prefix, e.g., `app.datasource.*`
+- write a `@Bean` that returns the `DataSource`
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHikariCPPropertiesKickoff/HikariCP%20trace%20log.png)
@@ -851,12 +876,12 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
 
-**Description:** This is a kickoff application that set up BoneCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. 
+**Description:** This is a kickoff application that set up BoneCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purposes, the application uses an `ExecutorService` for simulating concurrent users. 
 
-**Key points:**\
-     - in `pom.xml` add the BoneCP dependency\
-     - in `application.properties`, configure BoneCP via a custom prefix, e.g., `app.datasource.*`\
-     - write a `@Bean` that returns the `DataSource`
+**Key points:**
+- in `pom.xml` add the BoneCP dependency
+- in `application.properties`, configure BoneCP via a custom prefix, e.g., `app.datasource.*`
+- write a `@Bean` that returns the `DataSource`
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceBuilderBoneCPKickoff/BoneCP%20trace%20log.png)
@@ -867,12 +892,12 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
  
-**Description:** This is a kickoff application that set up ViburDBCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. 
+**Description:** This is a kickoff application that set up ViburDBCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purposes, the application uses an `ExecutorService` for simulating concurrent users. 
 
-**Key points:**\
-     - in `pom.xml` add the ViburDBCP dependency\
-     - in `application.properties`, configure ViburDBCP via a custom prefix, e.g., `app.datasource.*`\
-     - write a `@Bean` that returns the `DataSource`
+**Key points:**
+- in `pom.xml` add the ViburDBCP dependency
+- in `application.properties`, configure ViburDBCP via a custom prefix, e.g., `app.datasource.*`
+- write a `@Bean` that returns the `DataSource`
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceBuilderViburDBCPKickoff/ViburDBCP%20log%20trace.png)
@@ -883,12 +908,12 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
  
-**Description:** This is a kickoff application that set up C3P0 via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. 
+**Description:** This is a kickoff application that set up C3P0 via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purposes, the application uses an `ExecutorService` for simulating concurrent users. 
 
-**Key points:**\
-     - in `pom.xml` add the C3P0 dependency\
-     - in `application.properties`, configure C3P0 via a custom prefix, e.g., `app.datasource.*`\
-     - write a `@Bean` that returns the `DataSource`
+**Key points:**
+- in `pom.xml` add the C3P0 dependency
+- in `application.properties`, configure C3P0 via a custom prefix, e.g., `app.datasource.*`
+- write a `@Bean` that returns the `DataSource`
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceBuilderC3P0Kickoff/C3P0%20trace%20log.png)
@@ -898,13 +923,13 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 65. **[How To Customize DBCP2 Settings Via Properties And `DataSourceBuilder`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceBuilderDBCP2Kickoff)**
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
- 
-**Description:** This is a kickoff application that set up DBCP2 via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. 
 
-**Key points:**\
-     - in `pom.xml` add the DBCP2 dependency\
-     - in `application.properties`, configure DBCP2 via a custom prefix, e.g., `app.datasource.*`\
-     - write a `@Bean` that returns the `DataSource`
+**Description:** This is a kickoff application that set up DBCP2 via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purposes, the application uses an `ExecutorService` for simulating concurrent users. 
+
+**Key points:**
+- in `pom.xml` add the DBCP2 dependency
+- in `application.properties`, configure DBCP2 via a custom prefix, e.g., `app.datasource.*`
+- write a `@Bean` that returns the `DataSource`
      
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -912,12 +937,12 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
  
-**Description:** This is a kickoff application that set up Tomcat via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. 
+**Description:** This is a kickoff application that set up Tomcat via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purposes, the application uses an `ExecutorService` for simulating concurrent users. 
 
-**Key points:**\
-     - in `pom.xml` add the Tomcat dependency\
-     - in `application.properties`, configure Tomcat via a custom prefix, e.g., `app.datasource.*`\
-     - write a `@Bean` that returns the `DataSource`
+**Key points:**
+- in `pom.xml` add the Tomcat dependency
+- in `application.properties`, configure Tomcat via a custom prefix, e.g., `app.datasource.*`
+- write a `@Bean` that returns the `DataSource`
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDataSourceBuilderTomcatKickoff/Tomcat%20trace%20log.png)
@@ -928,15 +953,15 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
 
-**Description:** This is a kickoff application that uses two data sources (two MySQL databases, one named `authorsdb` and one named `booksdb`) with two connection pools (each database uses its own HikariCP connection pool with different settings). Based on the above recipes is pretty easy to configure two connection pools from two different providers as well.
+**Description:** This is a kickoff application that uses two data sources (two MySQL databases, one named `authorsdb` and one named `booksdb`) with two connection pools (each database uses its own HikariCP connection pool with different settings). Based on the above items is pretty easy to configure two connection pools from two different providers as well.
 
-**Key points:**\
-     - in `application.properties`, configure two HikariCP connection pools via a two custom prefixes, e.g., `app.datasource.ds1` and `app.datasource.ds2`\
-     - write a `@Bean` that returns the first `DataSource` and mark it as `@Primary`\
-     - write another `@Bean` that returns the second `DataSource`\
-     - configure two `EntityManagerFactory` and point out the packages to scan for each of them\
-     - put the domains and repositories for each `EntityManager` in the right packages
-     
+**Key points:**
+- in `application.properties`, configure two HikariCP connection pools via a two custom prefixes, e.g., `app.datasource.ds1` and `app.datasource.ds2`
+- write a `@Bean` that returns the first `DataSource` and mark it as `@Primary`
+- write another `@Bean` that returns the second `DataSource`
+- configure two `EntityManagerFactory` and point out the packages to scan for each of them
+- put the domains and repositories for each `EntityManager` in the right packages
+
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootTwoDataSourceBuilderKickoff/Two%20DataSources.png)
 
@@ -944,12 +969,12 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 68. **[How To Provide a Fluent API Via Setters For Building Entities](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiOnSetters)**
 
-**Note**: If you want yo provide a Fluent API without altering setters then consider [this recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiAdditionalMethods).
+**Note**: If you want yo provide a Fluent API without altering setters then consider [this item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiAdditionalMethods).
 
 **Description:** This is a sample application that alter the entities setters methods in order to empower a Fluent API.
 
-**Key points:**\
-     - in entities, return `this` instead of `void` in setters
+**Key points:**
+- in entitites, return `this` instead of `void` in setters
 
 **Fluent API example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFluentApiOnSetters/fluent%20entity%20setters.png)
@@ -958,12 +983,12 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 69. **[How To Provide a Fluent API Via Additional Methods For Building Entities](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiAdditionalMethods)**
 
-**Note**: If you want yo provide a Fluent API by altering setters then consider [this recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiOnSetters).
+**Note**: If you want yo provide a Fluent API by altering setters then consider [this item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFluentApiOnSetters).
 
 **Description:** This is a sample application that add in entities additional methods (e.g., for `setName`, we add `name`) methods in order to empower a Fluent API.
 
-**Key points:**\
-     - in entities, add for each setter an additional method that return `this` instead of `void`
+**Key points:**
+- in entities, add for each setter an additional method that return `this` instead of `void`
 
 **Fluent API example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFluentApiAdditionalMethods/fluent%20api%20with%20additional%20methods.png)
@@ -986,12 +1011,12 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
 
 **Description:** This is a suite of samples applications that provides different versions of a `Slice<T> findAll(...)`  method. We have from a minimalist implementation that relies on a hardcoded query as: `"SELECT e FROM " + entityClass.getSimpleName() + " e";` (this recipe), to a custom implementation that supports sorting, specification, lock mode and query hints to an implementation that relies on extending `SimpleJpaRepository`.
 
-**Key points:**\
-     - write an `abstract` class that expose the `Slice<T> findAll(...)` methods (`SlicePagingRepositoryImplementation`)\
-     - implement the `findAll()` methods to return `Slice<T>` (or `Page<T>`, but without the total number of elements)\
-     - return a `SliceImpl` (`Slice<T>`) or a `PageImpl` (`Page<T>`) without the total number of elements\
-     - implement a new `readSlice()` method or override the `SimpleJpaRepository#readPage()` page to avoid `SELECT COUNT`\
-     - pass the entity class (e.g., `Author.class`) to this `abstract` class via a class repository (`AuthorRepository`)
+**Key points:**
+- write an `abstract` class that expose the `Slice<T> findAll(...)` methods (`SlicePagingRepositoryImplementation`)
+- implement the `findAll()` methods to return `Slice<T>` (or `Page<T>`, but without the total number of elements)
+- return a `SliceImpl` (`Slice<T>`) or a `PageImpl` (`Page<T>`) without the total number of elements
+- implement a new `readSlice()` method or override the `SimpleJpaRepository#readPage()` page to avoid `SELECT COUNT`
+- pass the entity class (e.g., `Author.class`) to this `abstract` class via a class repository (`AuthorRepository`)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -999,9 +1024,9 @@ The bytecode enhancement effect can be seen on `Author.class` [here](https://git
  
 **Description:** Typically, in offset pagination, there is one query needed for fetching the data and one for counting the total number of records. But, we can fetch this information in a single database rountrip via a `SELECT COUNT` subquery nested in the main `SELECT`. Even better, for databases vendors that support *Window Functions* there is a solution relying on `COUNT(*) OVER()` as in this application that uses this window function in a native query against MySQL 8. So, prefer this one instead of `SELECT COUNT` subquery.
 
-**Key points:**\
-     - create a DTO projection that contains getters for the data that should be fetched and an extra-column for mapping the return of the `COUNT(*) OVER()` window function\
-     - write a native query relying on this window function
+**Key points:**
+- create a DTO projection that contains getters for the columns that should be fetched and an extra-column for mapping the return of the `COUNT(*) OVER()` window function
+- write a native query relying on this window function
 
 **Example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootListDtoOffsetPaginationWF/offset%20pagination%20via%20window%20function.png)
@@ -1016,7 +1041,7 @@ Screenshot from that article (*offset* pagination):
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootKeysetPagination/offset%20pagination.png)
 
 **Need to know if there are more records?**\
-By its nature, *keyset* doesn't use a `SELECT COUNT` to fetch the number of total records. But, we a little tweak we can easily say if there are more records, therefore to show a button of type `Next Page`. Mainly, if you need such a thing then consider [this application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootKeysetPaginationNextPage). 
+By its nature, *keyset* doesn't use a `SELECT COUNT` to fetch the number of total records. But, with a little tweak, we can easily say if there are more records, therefore to show a button of type `Next Page`. Mainly, if you need such a thing then consider [this application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootKeysetPaginationNextPage) whose climax is listed below:
 
 `public AuthorView fetchNextPage(long id, int limit) {`\
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`List<Author> authors = authorRepository.fetchAll(id, limit + 1);`
@@ -1044,9 +1069,9 @@ Or, like this (rely on `Author.toString()` method):
 
 A `Previous Page` button can be implemented easily based on the first record.
 
-**Key points:**\
-     - choose the column(s) to act as the latest visited record (e.g., `id`)\
-     - use the column(s) in the `WHERE` and `ORDER BY` clauses of your SQL
+**Key points:**
+- choose the column(s) to act as the latest visited record (e.g., `id`)
+- use the column(s) in the `WHERE` and `ORDER BY` clauses of your SQL
           
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -1074,27 +1099,27 @@ Fetch a page as a `List`:
 
 **But:** If *offset* pagination is causing you performance issues and you decide to go with *keyset* pagination then please check [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootKeysetPagination) (*keyset* pagination).
 
-**Key points of classical *offset* pagination:**\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - call or write methods that returns `Page<entity>`
+**Key points of classical *offset* pagination:**
+- write a repository that extends `PagingAndSortingRepository`
+- call or write methods that returns `Page<entity>`
 
-**Examples of classical *offset* pagination:**\
-     - call the built-in `findAll(Pageable)` without sorting:\
-     `repository.findAll(PageRequest.of(page, size));`\
-     - call the built-in `findAll(Pageable)` with sorting:\
-     `repository.findAll(PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name")));`\
-     - use Spring Data query creation to define new methods in your repository:\
-     `Page<Author> findByName(String name, Pageable pageable);`\
-     `Page<Author> queryFirst10ByName(String name, Pageable pageable);`
+**Examples of classical *offset* pagination:**
+- call the built-in `findAll(Pageable)` without sorting:\
+`repository.findAll(PageRequest.of(page, size));`
+- call the built-in `findAll(Pageable)` with sorting:\
+`repository.findAll(PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name")));`
+- use Spring Data query creation to define new methods in your repository:\
+`Page<Author> findByName(String name, Pageable pageable);`\
+`Page<Author> queryFirst10ByName(String name, Pageable pageable);`
      
 -----------------------------------------------------------------------------------------------------------------------    
 
 74. **[How To Optimize Batch Inserts of Parent-Child Relationships In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertOrder)**
 
-**Description:** Let's suppose that we have a one-to-many relationship between `Author` and `Book` entities. When we save an author, we save his/her books as well thanks to cascading all/persist. We want to create a bunch of authors with books and save them in the database (e.g., a MySQL database) using the batch technique. By default, this will result in batching each author and the books per author. In order to batch authors and books, we need to **order inserts** as in this application.
+**Description:** Let's suppose that we have a one-to-many relationship between `Author` and `Book` entities. When we save an author, we save his books as well thanks to cascading all/persist. We want to create a bunch of authors with books and save them in the database (e.g., a MySQL database) using the batch technique. By default, this will result in batching each author and the books per author (one batch for the author and one batch for the books, another batch for the author and another batch for the books, and so on). In order to batch authors and books, we need to **order inserts** as in this application.
 
-**Key points:**\
-     - beside all setting specific to batching inserts in MySQL, we need to set up in application.properties the following property: `spring.jpa.properties.hibernate.order_inserts=true`
+**Key points:**
+Beside all setting specific to batching inserts in MySQL, we need to set up in `application.properties` the following property: `spring.jpa.properties.hibernate.order_inserts=true`
 
 **Example without ordered inserts:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertOrder/batch%20inserts%20including%20associations%20no%20order%20of%20inserts.png)
@@ -1112,13 +1137,13 @@ Fetch a page as a `List`:
 
 **Description:** Batch updates in MySQL.
 
-**Key points:**\
-     - in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`\
-     - in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL, statements get rewritten into a single `String` buffer and sent in a single request)\
-     - in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)\
-     - in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))\
-     - in case of using a parent-child relationship with cascade all/persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_updates=true` to optimize the batching by ordering updates\
-     - before Hibernate 5, we need to set in `application.properties` a setting for enabling batching for versioned entities during update and delete operations (entities that contains `@Version` for implicit optimistic locking); this setting is: `spring.jpa.properties.hibernate.jdbc.batch_versioned_data=true`; starting with Hibernate 5, this setting should be `true` by default
+**Key points:**
+- in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`
+- in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL, statements get rewritten into a single string buffer and sent in a single request)
+- in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)
+- in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))
+- in case of using a parent-child relationship with cascade all/persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_updates=true` to optimize the batching by ordering updates
+- before Hibernate 5, we need to set in `application.properties` a setting for enabling batching for versioned entities during update and delete operations (entities that contains `@Version` for implicit optimistic locking); this setting is: `spring.jpa.properties.hibernate.jdbc.batch_versioned_data=true`; starting with Hibernate 5, this setting should be `true` by default
    
 **Output example for single entity:**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchUpdateOrderSingleEntity/batch%20updates.png)     
@@ -1132,15 +1157,15 @@ Fetch a page as a `List`:
 
 **Description:** Batch deletes that don't involve associations in MySQL.
 
-**Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use delete batching and don't prevent *lost updates*. They rely on `Query.executeUpdate()` to trigger *bulk* operations. These operations are fast, but Hibernate doesn’t know which entities are removed, therefore, the Persistent Context is not updated accordingly (it is advisable to flush (before delete) and close/clear (after delete) the Persistent Context accordingly to avoid issues created by unflushed (if any) or outdated (if any) entities). The first one simply triggers a `delete from entity_name` statement and is very useful for deleting all records. The second one triggers a `delete from entity_name where id=? or id=? or id=? ...` statement, therefore, is prone to cause issues if the generated `DELETE` statement exceedes the maximum accepted size. This drawback can be controlled by deleting the data in chunks, relying on `IN` operator, and so on. *Bulk* operations are faster than batching which can be achieved via the `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or `delete()` method. Behind the scene, the two flavors of `deleteAll()` relies on `delete()`. The `delete()`/`deleteAll()` methods rely on `EntityManager.remove()` therefore the persistent context is synchronized accordingly.
+**Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use delete batching and don't take advantage of optimstic locking mechanism to prevent *lost updates*. They rely on `Query.executeUpdate()` to trigger *bulk* operations. These operations are fast, but Hibernate doesn’t know which entities are removed, therefore, the Persistent Context is not updated accordingly (it is advisable to flush (before delete) and close/clear (after delete) the Persistent Context accordingly to avoid issues created by unflushed (if any) or outdated (if any) entities). The first one (`deleteAllInBatch()`) simply triggers a `delete from entity_name` statement and is very useful for deleting all records. The second one (`deleteInBatch()`) triggers a `delete from entity_name where id=? or id=? or id=? ...` statement, therefore, is prone to cause issues if the generated `DELETE` statement exceedes the maximum accepted size. This drawback can be controlled by deleting the data in chunks, relying on `IN` operator, and so on. *Bulk* operations are faster than batching which can be achieved via the `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or `delete()` method. Behind the scene, the two flavors of `deleteAll()` relies on `delete()`. The `delete()`/`deleteAll()` methods rely on `EntityManager.remove()` therefore the Persistent Context is synchronized accordingly. This time, batching is employed and optimstic locking mechanism to prevent *lost updates* can be used.
 
-**Key points for *classical* delete batching:**\
-     - for delete batching rely on `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or `delete()` method\
-     - in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`\
-     - in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL, statements get rewritten into a single `String` buffer and sent in a single request)\
-     - in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)\
-     - in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))\
-     - before Hibernate 5, we need to set in `application.properties` a setting for enabling batching for versioned entities during update and delete operations (entities that contains `@Version` for implicit optimistic locking); this setting is: `spring.jpa.properties.hibernate.jdbc.batch_versioned_data=true`; starting with Hibernate 5, this setting should be `true` by default
+**Key points for *regular* delete batching:**
+- for deleting in batches rely on `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or `delete()` method
+- in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`
+- in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL, statements get rewritten into a single string buffer and sent in a single request)
+- in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)
+- in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))
+- before Hibernate 5, we need to set in `application.properties` a setting for enabling batching for versioned entities during update and delete operations (entities that contains `@Version` for implicit optimistic locking); this setting is: `spring.jpa.properties.hibernate.jdbc.batch_versioned_data=true`; starting with Hibernate 5, this setting should be `true` by default
     
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchDeleteSingleEntity/batch%20deletes.png)
@@ -1151,30 +1176,30 @@ Fetch a page as a `List`:
  
 **Description:** Batch deletes in MySQL via `orphanRemoval=true`.
 
-**Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use batching, don't prevent *lost updates* and don't take advantage of `orphanRemoval=true`. They trigger *bulk* operations and the Persistent Context is not synchronized accordingly (it is advisable to flush (before delete) and close/clear (after delete) the Persistent Context accordingly to avoid issues created by unflushed (if any) or outdated (if any) entities). The first one simply triggers a `delete from entity_name` statement, while the second one triggers a `delete from entity_name where id=? or id=? or id=? ...` statement. Using these methods for deleting parent-entities and the associated entites (child-entities) requires explicit calls for both sides. For batching rely on `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or even better, on `delete()` method. Behind the scene, `deleteAll()` methods uses `delete()`. The `delete()` and `deleteAll()` methods rely on `EntityManager.remove()`, therefore, the persistent context is synchronized.
+**Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use batching, don't take advantage of optimistic locking to prevent *lost updates* and don't take advantage of `orphanRemoval=true`. They trigger *bulk* operations and the Persistent Context is not synchronized accordingly (it is advisable to flush (before delete) and close/clear (after delete) the Persistent Context accordingly to avoid issues created by unflushed (if any) or outdated (if any) entities). The first one simply triggers a `delete from entity_name` statement, while the second one triggers a `delete from entity_name where id=? or id=? or id=? ...` statement. Using these methods for deleting parent-entities and the associated entites (child-entities) requires explicit calls for both sides. For batching rely on `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or even better, on `delete()` method. Behind the scene, `deleteAll()` methods uses `delete()`. The `delete()` and `deleteAll()` methods rely on `EntityManager.remove()`, therefore, the Persistent Context is synchronized. Moreover, cascading removals and `orphanRemoval` are taken into account.
 
-**Key points for using `deleteAll()/delete()`:**\
-     - in this example, we have a `Author` entity and each author can have several `Book` (*one-to-many*)\
-     - first, we use `orphanRemoval=true` and `CascadeType.ALL`\
-     - second, we dissociate all `Book` from the corresponding `Author`\
-     - third, we explicitly (manually) flush the persistent context; is time for `orphanRemoval=true` to enter into the scene; thanks to this setting, all disassociated books will be deleted; the generated `DELETE` statements are batched (if `orphanRemoval` is set to `false`, a bunch of updates will be executed instead of deletes)\
-     - forth, we delete all `Author` via the `deleteAll()` or `delete()` method (since we have dissaciated all `Book`, the `Author` deletion will take advantage of batching as well)
+**Key points for using `deleteAll()/delete()`:**
+- in this example, we have a `Author` entity and each author can have several `Book` (*one-to-many*)
+- first, we use `orphanRemoval=true` and `CascadeType.ALL`
+- second, we dissociate all `Book` from the corresponding `Author`
+- third, we explicitly (manually) flush the Persistent Context; is time for `orphanRemoval=true` to enter into the scene; thanks to this setting, all disassociated books will be deleted; the generated `DELETE` statements are batched (if `orphanRemoval` is set to `false`, a bunch of updates will be executed instead of deletes)
+- forth, we delete all `Author` via the `deleteAll()` or `delete()` method (since we have dissaciated all `Book`, the `Author` deletion will take advantage of batching as well)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-78. **[How To Batch Deletes In MySQL Via SQL "ON DELETE CASCADE"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchDeleteCascadeDelete)**
+78. **[How To Batch Deletes In MySQL Via SQL `ON DELETE CASCADE`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchDeleteCascadeDelete)**
 
 **Description:** Batch deletes in MySQL via `ON DELETE CASCADE`. Auto-generated database schema will contain the `ON DELETE CASCADE` directive.
 
-**Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use delete batching and don't prevent *lost updates*. They trigger *bulk* operations via `Query.executeUpdate()`, therefore, the persistent context is not synchronized accordingly (it is advisable to flush (before delete) and close/clear (after delete) the Persistent Context accordingly to avoid issues created by unflushed (if any) or outdated (if any) entities). The first one simply triggers a `delete from entity_name` statement, while the second one triggers a `delete from entity_name where id=? or id=? or id=? ...` statement. Both of them take advantage on `ON DELETE CASCADE` and are very efficient. For delete batching rely on `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or `delete()` method. Behind the scene, the two flavors of `deleteAll()` relies on `delete()`. Mixing batching with database automatic actions (`ON DELETE CASCADE`) will result in a partially synchronized persistent context.
+**Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use delete batching and don't take advantage of optimistic locking mechanism to prevent *lost updates*. They trigger *bulk* operations via `Query.executeUpdate()`, therefore, the Persistent Context is not synchronized accordingly (it is advisable to flush (before delete) and close/clear (after delete) the Persistent Context accordingly to avoid issues created by unflushed (if any) or outdated (if any) entities). The first one simply triggers a `delete from entity_name` statement, while the second one triggers a `delete from entity_name where id=? or id=? or id=? ...` statement. Both of them take advantage on `ON DELETE CASCADE` and are very efficient. For delete in batches rely on `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or `delete()` method. Behind the scene, the two flavors of `deleteAll()` relies on `delete()`. Mixing batching with database automatic actions (`ON DELETE CASCADE`) will result in a partially synchronized Persistent Context.
 
-**Key points:**\
-     - in this application, we have a `Author` entity and each author can have several `Book` (*one-to-many*)\
-     - first, we remove `orphanRemoval` or set it to `false`\
-     - second, we use only `CascadeType.PERSIST` and `CascadeType.MERGE`\
-     - third, we set `@OnDelete(action = OnDeleteAction.CASCADE)` next to `@OneToMany`\
-     - fourth, we set `spring.jpa.properties.hibernate.dialect` to `org.hibernate.dialect.MySQL5InnoDBDialect`\
-     - fifth, we run through each `deleteFoo()` method
+**Key points:**
+- in this application, we have a `Author` entity and each author can have several `Book` (*one-to-many*)
+- first, we remove `orphanRemoval` or set it to `false`
+- second, we use only `CascadeType.PERSIST` and `CascadeType.MERGE`
+- third, we set `@OnDelete(action = OnDeleteAction.CASCADE)` next to `@OneToMany`
+- fourth, we set `spring.jpa.properties.hibernate.dialect` to `org.hibernate.dialect.MySQL5InnoDBDialect` (or, `MySQL8Dialect`)
+- fifth, we run through each `deleteFoo()` method
         
 **Output example:**
 
@@ -1189,7 +1214,7 @@ Fetch a page as a `List`:
 **Description:** This is a SpringBoot application that maps a natural business key using Hibernate `@NaturalId`. This implementation allows us to use `@NaturalId` as it was provided by Spring.
 
 **Key points:**
-- in the entity (e.g., `Book`), mark the properties (business keys) that should act as natural IDs with `@NaturalId`; commonly, there is a single such property, but multiple are suppored as well as [here](https://docs.jboss.org/hibernate/orm/5.0/mappingGuide/en-US/html/ch07.html).
+- in the entity (e.g., `Book`), mark the properties (business keys) that should act as natural IDs with `@NaturalId`; commonly, there is a single such property, but multiple are suppored as well as [here](https://docs.jboss.org/hibernate/orm/5.0/mappingGuide/en-US/html/ch07.html)
 - for non-mutable ids, mark the columns as `@NaturalId(mutable = false)` and `@Column(nullable = false, updatable = false, unique = true, ...)`
 - for mutable ids, mark the columns as `@NaturalId(mutable = true)` and `@Column(nullable = false, updatable = true, unique = true, ...)`
 - override the `equals()` and `hashCode()` using the natural id(s)
@@ -1197,65 +1222,65 @@ Fetch a page as a `List`:
 - provide an implementation for this interface (`NaturalRepositoryImpl`) relying on Hibernate, `Session`, `bySimpleNaturalId()` and `byNaturalId()` methods
 - use `@EnableJpaRepositories(repositoryBaseClass = NaturalRepositoryImpl.class)` to register this implementation as the base class
 - for the entity, write a classic repository
-- inject this class in your services and call `findBySimpleNaturalId()` or `findByNaturalId()
+- inject this class in your services and call `findBySimpleNaturalId()` or `findByNaturalId()`
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-80. **[How To Set Up p6spy in Spring Boot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootP6spy)**
+80. **[How To Set Up P6Spy in Spring Boot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootP6spy)**
 
 **Description:** This is a Spring Boot application that uses [P6Spy](https://github.com/p6spy/p6spy). *P6Spy is a framework that enables database data to be seamlessly intercepted and logged with no code changes to the application.*
 
-**Key points:**\
-     - in `pom.xml`, add the P6Spy Maven dependency\
-     - in `application.properties`, set up JDBC URL as, `jdbc:p6spy:mysql://localhost:3306/db_users`\
-     - in `application.properties`, set up driver class name as, `com.p6spy.engine.spy.P6SpyDriver`\
-     - in the application root folder add the file `spy.properties` (this file contains P6Spy configurations); in this application, the logs will be outputed to console, but you can easy switch to a file; more details about P6Spy configurations can be found in documentation
+**Key points:**
+- in `pom.xml`, add the P6Spy Maven dependency
+- in `application.properties`, set up JDBC URL as, `jdbc:p6spy:mysql://localhost:3306/db_users`
+- in `application.properties`, set up driver class name as, `com.p6spy.engine.spy.P6SpyDriver`
+- in the application root folder add the file `spy.properties` (this file contains P6Spy configurations); in this application, the logs will be outputed to console, but you can easy switch to a file; more details about P6Spy configurations can be found in documentation
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootP6spy/p6spy.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-81. **[How To Retry Transactions After OptimisticLockException Shaped Via @Version](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionedOptimisticLocking)**
+81. **[How To Retry Transactions After `OptimisticLockException` Exception (`@Version`)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionedOptimisticLocking)**
 
-**Note:** Optimistic locking via `@Version` works for detached entities as well.
+**Note:** Optimistic locking mechanism via `@Version` works for detached entities as well.
 
 **Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic locking exception. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
 
-**Key points:**\
-     - in `pom.xml`, add the `db-util` dependency\
-     - configure the `OptimisticConcurrencyControlAspect` bean\
-     - mark the method (not annotated with `@Transactional`) that is prone to throw (or that calls a method that is prone to throw (this method can be annotated with `@Transactional`)) an optimistic locking exception with `@Retry(times = 10, on = OptimisticLockingFailureException.class)`
+**Key points:**
+- for Maven, in `pom.xml`, add the `db-util` dependency
+- configure the `OptimisticConcurrencyControlAspect` bean
+- mark the method (not annotated with `@Transactional`) that is prone to throw (or that calls a method that is prone to throw (this method can be annotated with `@Transactional`)) an optimistic locking exception with `@Retry(times = 10, on = OptimisticLockingFailureException.class)`
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootRetryVersionedOptimisticLocking/Retry%20Optimistic%20Lock.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-82. **[How To Retry Transaction After OptimisticLockException Shaped Via Hibernate Version-less Optimistic Locking](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionlessOptimisticLocking)**
+82. **[How To Retry Transaction After `OptimisticLockException` Exception (Hibernate Version-less Optimistic Locking Mechanism)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionlessOptimisticLocking)**
 
-**Note:** Optimistic locking via Hibernate version-less doesn't work for detached entities (don't close the persistent context).
+**Note:** Optimistic locking mechanism via Hibernate version-less doesn't work for detached entities (don't close the Persistent Context).
 
 **Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic locking exception (e.g., in Spring Boot, `OptimisticLockingFailureException`) via Hibernate version-less optimistic locking. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
 
-**Key points:**\
-     - in `pom.xml`, add the `db-util` library dependency\
-     - configure the `OptimisticConcurrencyControlAspect` bean\
-     - annotate the corresponding entity (e.g., `Inventory`) with `@DynamicUpdate` and `@OptimisticLocking(type = OptimisticLockType.DIRTY)`\
-     - mark the method (not annotated with `@Transactional`) that is prone to throw (or that calls a method that is prone to throw (this method can be annotated with `@Transactional`)) an optimistic locking exception with `@Retry(times = 10, on = OptimisticLockingFailureException.class)`
+**Key points:**
+- for Maven, in `pom.xml`, add the `db-util` library dependency
+- configure the `OptimisticConcurrencyControlAspect` bean
+- annotate the corresponding entity (e.g., `Inventory`) with `@DynamicUpdate` and `@OptimisticLocking(type = OptimisticLockType.DIRTY)`
+- mark the method (not annotated with `@Transactional`) that is prone to throw (or that calls a method that is prone to throw (this method can be annotated with `@Transactional`)) an optimistic locking exception with `@Retry(times = 10, on = OptimisticLockingFailureException.class)`
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-83. **[How To Enrich DTOs With Virtual Properties Via Spring Projections](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjectionsAndVirtualProperties)**
+83. **[How To Enrich DTO With Virtual Properties Via Spring Projections](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjectionsAndVirtualProperties)**
 
-**Note:** You may also like to read the recipe, ["How To Create DTOs Via Spring Data Projections"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
+**Note:** You may also like to read the recipe, ["How To Create DTO Via Spring Data Projections"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
 
-**Description:** Fetch only the needed data from the database via Spring Data Projections (DTOs) and enrich the result via virtual properties.
+**Description:** This is an application sample that fetches only the needed columns from the database via Spring Data Projections (DTO) and enrich the result via virtual properties.
 
-**Key points:**\
-     - we fetch from the database only the user `name` and `city`\
-     - in the projection interface, `UserDetail`, use the `@Value` and Spring SpEL to point to a backing property from the domain model (in this case, the domain model property `city` is exposed via the virtual property `livingin`)\
-     - in the projection interface, `UserDetail`, use the `@Value` and Spring SpEL to enrich the result with two virtual properties that don't have a match in the domain model (in this case, `sessionid` and `status`)
+**Key points:**
+- we fetch from the database only the author `name` and `age`
+- in the projection interface, `AuthorNameAge`, use the `@Value` and Spring SpEL to point to a backing property from the domain model (in this case, the domain model property `age` is exposed via the virtual property `years`)
+- in the projection interface, `AuthorNameAge`, use the `@Value` and Spring SpEL to enrich the result with two virtual properties that don't have a match in the domain model (in this case, `rank` and `books`)
 
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaProjectionsAndVirtualProperties/dto%20spring%20projection%20and%20virtual%20properties.png)
@@ -1264,11 +1289,11 @@ Fetch a page as a `List`:
 
 84. **[How To Use Query Creation Mechanism For JPA To Limit Result Size](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLimitResultSizeViaQueryCreator)**
 
-**Description:** Spring Data comes with the query creation mechanism for JPA that is capable to interpret a query method name and convert it into a SQL query. This is possible as long as we respect the naming conventions of this mechanism. This is an application that exploit this mechanism to write queries that limit the result size. Basically, the name of the query method instructs Spring Data how to add the `LIMIT` (or similar clauses depending on the RDBMS) clause to the generated SQL queries.
+**Description:** Spring Data comes with the query creation mechanism for JPA that is capable to interpret a query method name and convert it into a SQL query in the proper dialect. This is possible as long as we respect the naming conventions of this mechanism. This is an application that exploit this mechanism to write queries that limit the result size. Basically, the name of the query method instructs Spring Data how to add the `LIMIT` (or similar clauses depending on the RDBMS) clause to the generated SQL queries.
 
-**Key points:**\
-     - define a Spring Data classic repository (e.g., `AuthorRepository`)\
-     - write query methods respecting the query creation mechanism for JPA naming conventions     
+**Key points:**
+- define a Spring Data regular repository (e.g., `AuthorRepository`)
+- write query methods respecting the query creation mechanism for JPA naming conventions      
 
 **Examples:**\
     - `List<Author> findFirst5ByAge(int age);`\
@@ -1287,16 +1312,16 @@ Fetch a page as a `List`:
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-85. **[How To Generate A Schema Via `schema-*.sql`In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSchemaSql)**
+85. **[How To Generate A Schema Via `schema-*.sql` In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSchemaSql)**
 
 **Note:** As a rule, in real applications avoid generating schema via `hibernate.ddl-auto`. Use `schema-*.sql` file or better `Flyway` or `Liquibase` migration tools.
 
 **Description:** This application is an example of using `schema-*.sql` to generate a schema(database) in MySQL.
 
-**Key points:**\
-     - in `application.properties`, set the JDBC URL (e.g., `spring.datasource.url=jdbc:mysql://localhost:3306/bookstoredb?createDatabaseIfNotExist=true`)\
-     - in `application.properties`, disable DDL auto (just don't use explicitly the `hibernate.ddl-auto` setting)\
-     - in `application.properties`, instruct Spring Boot to initialize the schema from `schema-mysql.sql` file 
+**Key points:**
+- in `application.properties`, set the JDBC URL (e.g., `spring.datasource.url=jdbc:mysql://localhost:3306/bookstoredb?createDatabaseIfNotExist=true`)
+- in `application.properties`, disable DDL auto (just don't add explicitly the `hibernate.ddl-auto` setting)
+- in `application.properties`, instruct Spring Boot to initialize the schema from `schema-mysql.sql` file 
 
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -1306,12 +1331,12 @@ Fetch a page as a `List`:
 
 **Description:** This application is an example of using `schema-*.sql` to generate two databases in MySQL. The databases are matched at entity mapping via `@Table`.
 
-**Key points:**\
-     - in `application.properties`, set the JDBC URL without the database, e.g., `spring.datasource.url=jdbc:mysql://localhost:3306`\
-     - in `application.properties`, disable DDL auto (just don't specify `hibernate.ddl-auto`)\
-     - in `aaplication.properties`, instruct Spring Boot to initialize the schema from `schema-mysql.sql` file\
-     - in `Author` entity, specify that the corresponding table (`author`) is in the database `authorsdb` via `@Table(schema="authorsdb")`\
-     - in `Book` entity, specify that the corresponding table (`book`) is in the database `booksdb` via `@Table(schema="booksdb")`
+**Key points:**
+- in `application.properties`, set the JDBC URL without the database, e.g., `spring.datasource.url=jdbc:mysql://localhost:3306`
+- in `application.properties`, disable DDL auto (just don't specify `hibernate.ddl-auto`)
+- in `aaplication.properties`, instruct Spring Boot to initialize the schema from `schema-mysql.sql` file
+- in `Author` entity, specify that the corresponding table (`author`) is in the database `authorsdb` via `@Table(schema="authorsdb")`
+- in `Book` entity, specify that the corresponding table (`book`) is in the database `booksdb` via `@Table(schema="booksdb")`
 
 **Output example:**
 - Persisting a `Author` results in the following SQL: `insert into authorsdb.author (age, genre, name) values (?, ?, ?)`
@@ -1319,48 +1344,46 @@ Fetch a page as a `List`:
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-87. **[How To Stream Result Set Via Spring Data In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootStreamAndMySQL)**
-
-**Note:** For web-applications, pagination should be the way to go, not streaming. But, if you choose streaming then keep in mind the golden rule: keep th result set as small as posible. Also, keep in mind that the Execution Plan might not be as efficient as when using SQL-level pagination.
+87. **Note:** For web-applications, pagination should be the way to go, not streaming. But, if you choose streaming then keep in mind the golden rule: keep th result set as small as posible. Also, keep in mind that the Execution Plan might not be as efficient as when using SQL-level pagination.
 
 **Description:** This application is an example of streaming the result set via Spring Data and MySQL. This example can be adopted for databases that fetches the entire result set in a single roundtrip causing performance penalties.
 
-**Key points:**\
-     - rely on forward-only result set (default in Spring Data)\
-     - rely on read-only statement (add `@Transactional(readOnly=true)`)\
-     - set the fetch-size set (e.g. 30, or row-by-row; `Integer.MIN_VALUE` (recommended in MySQL))      
+**Key points:**
+- rely on *forward-only* result set (default in Spring Data)
+- rely on *read-only* statement (add `@Transactional(readOnly=true)`)
+- set the fetch-size set (e.g. 30, or row-by-row; `Integer.MIN_VALUE` (recommended in MySQL))  
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-88. **[How To Migrate MySQL Database Using Flyway - Database Created Via `createDatabaseIfNotExist`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLQuick)**
+88. **[How To Migrate MySQL Database Using Flyway - MySQL Database Created Via `createDatabaseIfNotExist`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLQuick)**
 
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of migrating a MySQL database via Flyway when the database exists (it is created before migration via MySQL specific parameter, `createDatabaseIfNotExist=true`). 
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add the Flyway dependency\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - in `application.properties`, set the JDBC URL as follows: `jdbc:mysql://localhost:3306/bookstoredb?createDatabaseIfNotExist=true`\
-     - each SQL file containing the schema update add it in `classpath:db/migration`\
-     - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
+**Key points:**
+- for Maven, in `pom.xml`, add the Flyway dependency
+- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- in `application.properties`, set the JDBC URL as follows: `jdbc:mysql://localhost:3306/bookstoredb?createDatabaseIfNotExist=true`
+- each SQL file containing the schema update add it in `classpath:db/migration`
+- each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
 
 -----------------------------------------------------------------------------------------------------------------------    
 
 89. **[How To Migrate MySQL Database Using Flyway - Database Created Via `spring.flyway.schemas`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLDatabase)**
 
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of migrating a MySQL database when the database is created by Flyway via `spring.flyway.schemas`. In this case, the entities should be annotated with `@Table(schema = "bookstoredb")` or `@Table(catalog = "bookstoredb")`. Here, the database name is `bookstoredb`.
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add the Flyway dependency\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - in `application.properties`, set the JDBC URL as follows: `jdbc:mysql://localhost:3306/`\
-     - in `application.properties`, add `spring.flyway.schemas=bookstoredb`, where `bookstoredb` is the database that should be created by Flyway (feel free to add your own database name)\
-     - each entity that should be stored in this database should be annotated with, `@Table(schema/catalog = "bookstoredb")`\
-     - each SQL file containing the schema update add it in `classpath:db/migration`\
-     - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
+**Key points:**
+- for Maven, in `pom.xml`, add the Flyway dependency
+- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- in `application.properties`, set the JDBC URL as follows: `jdbc:mysql://localhost:3306/`
+- in `application.properties`, add `spring.flyway.schemas=bookstoredb`, where `bookstoredb` is the database that should be created by Flyway (feel free to add your own database name)
+- each entity that should be stored in this database should be annotated with, `@Table(schema/catalog = "bookstoredb")`
+- each SQL file containing the schema update add it in `classpath:db/migration`
+- each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
 
 **Output of migration history example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootFlywayMySQLDatabase/flyway_schema_history%20table.png)
@@ -1368,94 +1391,94 @@ Fetch a page as a `List`:
 -----------------------------------------------------------------------------------------------------------------------    
 
 90. **[How To Auto-Create And Migrate Schemas For Two Data Sources (MySQL and PostgreSQL) Using Flyway](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayTwoVendors)**
-
-**Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+ 
+**Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of auto-creating and migrating schemas for MySQL and PostgreSQL. In addition, each data source uses its own HikariCP connection pool. In case of MySQL, where *schema*=*database*, we auto-create the schema (`authorsdb`) based on `createDatabaseIfNotExist=true`. In case of PostgreSQL, where a database can have multiple schemas, we use the default `postgres` database and auto-create in it the schema, `booksdb`. For this we rely on Flyway, which is capable to create a missing schema.
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add the Flyway dependency\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - in `application.properties`, configure the JDBC URL for MySQL as, `jdbc:mysql://localhost:3306/authorsdb?createDatabaseIfNotExist=true` and for PostgreSQL as, `jdbc:postgresql://localhost:5432/postgres?currentSchema=booksdb`\
-     - in `application.properties`, set `spring.flyway.enabled=false` to disable default behavior\
-     - programmatically create a `DataSource` for MySQL and one for PostgreSQL\
-     - programmatically create a `FlywayDataSource` for MySQL and one for PostgreSQL\
-     - programmatically create an `EntityManagerFactory` for MySQL and one for PostgreSQL\
-     - for MySQL, place the migration SQLs files in `db\migration\mysql`\
-     - for PostgreSQL, place the migration SQLs files in `db\migration\postgresql`   
+**Key points:**
+- for Maven, in `pom.xml`, add the Flyway dependency
+- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- in `application.properties`, configure the JDBC URL for MySQL as, `jdbc:mysql://localhost:3306/authorsdb?createDatabaseIfNotExist=true` and for PostgreSQL as, `jdbc:postgresql://localhost:5432/postgres?currentSchema=booksdb`
+- in `application.properties`, set `spring.flyway.enabled=false` to disable default behavior
+- programmatically create a `DataSource` for MySQL and one for PostgreSQL
+- programmatically create a `FlywayDataSource` for MySQL and one for PostgreSQL
+- programmatically create an `EntityManagerFactory` for MySQL and one for PostgreSQL
+- for MySQL, place the migration SQLs files in `db\migration\mysql`
+- for PostgreSQL, place the migration SQLs files in `db\migration\postgresql`    
 
 -----------------------------------------------------------------------------------------------------------------------    
 
 91. **[How To Auto-Create And Migrate Two Schemas In PostgreSQL Using Flyway](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayPostgreSqlTwoSchemas)**
 
-**Note:** or production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of auto-creating and migrating two schemas in PostgreSQL using Flyway. In addition, each data source uses its own HikariCP connection pool. In case of PostgreSQL, where a database can have multiple schemas, we use the default `postgres` database and auto-create two schemas, `authors` and `books`. For this we rely on Flyway, which is capable to create the missing schemas.
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add the Flyway dependency\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - in `application.properties`, configure the JDBC URL for `books` as `jdbc:postgresql://localhost:5432/postgres?currentSchema=books` and for `authors` as `jdbc:postgresql://localhost:5432/postgres?currentSchema=authors`\
-     - in `application.properties`, set `spring.flyway.enabled=false` to disable default behavior\
-     - programmatically create two `DataSource`, one for `books` and one for `authors`\
-     - programmatically create two `FlywayDataSource`, one for `books` and one for `authors`\
-     - programmatically create two `EntityManagerFactory`, one for `books` and one for `authors`\
-     - for `books`, place the migration SQLs files in `db\migration\books`\
-     - for `authors`, place the migration SQLs files in `db\migration\authors`   
+**Key points:**
+- for Maven, in `pom.xml`, add the Flyway dependency
+- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- in `application.properties`, configure the JDBC URL for `books` as `jdbc:postgresql://localhost:5432/postgres?currentSchema=books` and for `authors` as `jdbc:postgresql://localhost:5432/postgres?currentSchema=authors`
+- in `application.properties`, set `spring.flyway.enabled=false` to disable default behavior
+- programmatically create two `DataSource`, one for `books` and one for `authors`
+- programmatically create two `FlywayDataSource`, one for `books` and one for `authors`
+- programmatically create two `EntityManagerFactory`, one for `books` and one for `authors`
+- for `books`, place the migration SQLs files in `db\migration\books`
+- for `authors`, place the migration SQLs files in `db\migration\authors`   
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-92. **[How To JOIN FETCH an @ElementCollection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionJoinFetch)**
+92. **[How To `JOIN FETCH` an `@ElementCollection`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootElementCollectionJoinFetch)**
 
 **Description:** This application is an example applying `JOIN FETCH` to fetch an `@ElementCollection`.
-
-**Key points:**\
-     - by default, `@ElementCollection` is loaded lazy, keep it lazy\
-     - use `JOIN FETCH` in the repository
+ 
+**Key points:**
+- by default, `@ElementCollection` is loaded lazy, keep it lazy
+- use `JOIN FETCH` in the repository 
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-93. **[How To Map An Entity To a Query (@Subselect) in a Spring Boot Application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSubselect)**
+93. **[How To Map An Entity To a Query (`@Subselect`) in a Spring Boot Application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSubselect)**
 
 **Note:** Consider using `@Subselect` only if using DTO + extra queries or map a database view to an entity is not a solution.
 
-**Description:** This application is an example of mapping an entity to a query via Hibernate, `@Subselect`. Mainly, we have two entities in a bidirectional *one-to-many* association. An `Author` has wrote several `Book`. The idea is to write a *read-only* query to fetch from `Author` only some fields (e.g., DTO), but to have the posibility to call `getBooks()` and fetch the `Book` in a lazy manner as well. As you know, a classic DTO cannot be used, since such DTO is not managed and we cannot fetch managed associations. Via Hibernate, `@Subselect` we can map a *read-only*, *immutable* entity to a query. Being an entity, it can lazy load the managed associations. 
+**Description:** This application is an example of mapping an entity to a query via Hibernate, `@Subselect`. Mainly, we have two entities in a bidirectional *one-to-many* association. An `Author` has wrote several `Book`. The idea is to write a *read-only* query to fetch from `Author` only some fields (e.g., DTO), but to have the posibility to call `getBooks()` and fetch the `Book` in a lazy manner as well. As you know, a classic DTO cannot be used, since such DTO is not managed and we cannot navigate the associations. Via Hibernate `@Subselect` we can map a *read-only* and *immutable* entity to a query. This time, we can lazy navigate the associations. 
 
-**Key points:**\
-     - define a new entity that contains only the needed fields from the `Author` (including association to `Book`)\
-     - for these fields, define only getters\
-     - mark the entity as `@Immutable` since no write operations are allowed\
-     - flush pending state transitions for the used entities by `@Synchronize`\
-     - use `@Subselect` to write the needed query, map an entity to an SQL query
+**Key points:**
+- define a new entity that contains only the needed fields from the `Author` (including association to `Book`)
+- for these fields, define only getters
+- mark the entity as `@Immutable` since no write operations are allowed
+- flush pending state transitions for the used entities by `@Synchronize`
+- use `@Subselect` to write the needed query, map an entity to an SQL query
      
 -----------------------------------------------------------------------------------------------------------------------    
 
-94. **[How To Use Hibernate Soft Deletes in a Spring Boot Application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSoftDeletes)**
+94. **[How To Use Hibernate Soft Deletes In A Spring Boot Application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSoftDeletes)**
 
 **Description:** This application is an example of using Hibernate soft deletes in a Spring Boot application. 
 
-**Key points:**\
-     - define an abstract class `BaseEntity` with a field named `deleted`\
-     - the entities (e.g., `Author` and `Book` entities) that should take advantage of soft deletes should extend `BaseEntity`\
-     - these entities should be marked with Hibernate, `@Where` annotation like this: `@Where(clause = "deleted = false")`\
-     - these entities should be marked with Hibernate, `@SQLDelete` annotation to trigger `UPDATE` SQLs in place of `DELETE` SQLs, as follows: `@SQLDelete(sql = "UPDATE author SET deleted = true WHERE id = ?")`\
-     - for fetching all entities including those marked as deleted or for fetching only the entities marked as deleted we need to rely on SQL native queries
+**Key points:**
+- define an `abstract` class `BaseEntity` with a field named `deleted`
+- the entities (e.g., `Author` and `Book` entities) that should take advantage of soft deletes should extend `BaseEntity`
+- these entities should be marked with Hibernate, `@Where` annotation like this: `@Where(clause = "deleted = false")`
+- these entities should be marked with Hibernate, `@SQLDelete` annotation to trigger `UPDATE` SQLs in place of `DELETE` SQLs, as follows: `@SQLDelete(sql = "UPDATE author SET deleted = true WHERE id = ?")`
+- for fetching all entities including those marked as deleted or for fetching only the entities marked as deleted we need to rely on SQL native queries
 
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSoftDeletes/soft%20deletes.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-95. **[How To Programmatically Configure HikariCP Via DataSourceBuilder](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootProgDataSourceBuilderHikariCP)**
+95. **[How To Programmatically Customize HikariCP Settings Via `DataSourceBuilder`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceBuilderProgHikariCPKickoff)**
 
 **If you use the `spring-boot-starter-jdbc` or `spring-boot-starter-data-jpa` "starters", you automatically get a dependency to HikariCP**
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
 
-**Description:** This is a kickoff application that set up HikariCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. Check the HickariCP report revealing the connection pool status.
+**Description:** This is a kickoff application that set up HikariCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purposes, the application uses an `ExecutorService` for simulating concurrent users. Check the HickariCP report revealing the connection pool status.
 
-**Key points:**\
-     - write a `@Bean` that returns the `DataSource` configured programmatically via `DataSourceBuilder`
+**Key points:**
+- write a `@Bean` that returns the `DataSource` programmatically
 
 -----------------------------------------------------------------------------------------------------------------------    
 
@@ -1463,18 +1486,18 @@ Fetch a page as a `List`:
  
 **Description:** Auditing is useful for maintaining history records. This can later help us in tracking user activities. 
  
-**Key points:**\
-     - create an abstract base entity (e.g., `BaseEntity`) and annotate it with `@MappedSuperclass` and `@EntityListeners({AuditingEntityListener.class})`\
-     - in this base entity, add the following fields that will be automatically persisted:\
+**Key points:**
+- create an `abstract` base entity (e.g., `BaseEntity`) and annotate it with `@MappedSuperclass` and `@EntityListeners({AuditingEntityListener.class})`
+- in this base entity, add the following fields that will be automatically persisted:\
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `@CreatedDate protected LocalDateTime created;`\
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `@LastModifiedDate protected LocalDateTime lastModified;`\
      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `@CreatedBy protected U createdBy;`\
-     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `@LastModifiedBy protected U lastModifiedBy;`\
-     - enable auditing via `@EnableJpaAuditing(auditorAwareRef = "auditorAware")`\
-     - provide an implementation for `AuditorAware` (this is needed for persisting the user that performed the modification; use Spring Security to return the currently logged-in user)\
-     - expose this implementation via `@Bean`\
-     - entites that should be audited should extend the base entity\
-     - store the date-time in database in UTC
+     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- `@LastModifiedBy protected U lastModifiedBy;`
+- enable auditing via `@EnableJpaAuditing(auditorAwareRef = "auditorAware")`
+- provide an implementation for `AuditorAware` (this is needed for persisting the user that performed the modification; use Spring Security to return the currently logged-in user)
+- expose this implementation via `@Bean`
+- entites that should be audited should extend the base entity
+- store the date-time in database in UTC
      
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -1482,109 +1505,121 @@ Fetch a page as a `List`:
  
 **Description:** Auditing is useful for maintaining history records. This can later help us in tracking user activities. 
  
-**Key points:**\
-     - in `pom.xml` add the dependency `hibernate-envers` and JAXB API\
-     - each entity that should be audited should be annotated with `@Audited`\
-     - optionally, annotate entities with `@AuditTable` to rename the table used for auditing\
-     - rely on `ValidityAuditStrategy` for fast database reads, but slower writes (slower than the default `DefaultAuditStrategy`)
+**Key points:**
+- for Maven, in `pom.xml` add the dependency `hibernate-envers` and JAXB API
+- each entity that should be audited should be annotated with `@Audited`
+- optionally, annotate entities with `@AuditTable` to rename the table used for auditing
+- rely on `ValidityAuditStrategy` for fast database reads, but slower writes (slower than the default `DefaultAuditStrategy`)
 
 -----------------------------------------------------------------------------------------------------------------------
 
 98. **[Attributes Lazy Loading Via Subentities](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSubentities)**
  
-**Description:** By default, the attributes of an entity are loaded eager (all at once). This application is an alternative to *Attribute Lazy Loading* from [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingBasic). This application uses a base class to isolate the attributes that should be loaded eagerly and subentities (entities that extends the base class) for isolating the attributes that should be loaded on demand.
+**Description:** By default, the attributes of an entity are loaded eager (all at once). This application is an alternative to *How To Use Hibernate Attribute Lazy Loading* from [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingBasic). This application uses a base class to isolate the attributes that should be loaded eagerly and subentities (entities that extends the base class) for isolating the attributes that should be loaded on demand.
 
 <a href="#"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSubentities/attributes%20lazy%20loading%20via%20subentites.png" align="center" height="150" width="500" ></a>
 
-**Key points:**\
-     - create the base class (this is not an entity), `BaseAuthor`,  and annotate it with `@MappedSuperclass`\
-     - create `AuthorShallow` subentity of `BaseAuthor` and don't add any attribute in it (this will inherit the attributes from the superclass)\
-     - create `AuthorDeep` subentity of `BaseAuthor` and add to it the attributes that should be loaded on demand (e.g., `avatar`)\
-     - map both subentities to the same table via `@Table(name = "author")`\
-     - provide the typical repositories, `AuthorShallowRepository` and `AuthorDeepRepository`
+**Key points:**
+- create the base class (this is not an entity), `BaseAuthor`,  and annotate it with `@MappedSuperclass`
+- create `AuthorShallow` subentity of `BaseAuthor` and don't add any attribute in it (this will inherit the attributes from the superclass)
+- create `AuthorDeep` subentity of `BaseAuthor` and add to it the attributes that should be loaded on demand (e.g., `avatar`)
+- map both subentities to the same table via `@Table(name = "author")`
+- provide the typical repositories, `AuthorShallowRepository` and `AuthorDeepRepository`
      
-**Run the following requests (via BookstoreController):**\
-     - fetch all authors shallow (without avatars): `localhost:8080/authors/shallow`\
-     - fetch all authors deep (with avatars): `localhost:8080/authors/deep`
+**Run the following requests (via BookstoreController):**
+- fetch all authors shallow (without avatars): `localhost:8080/authors/shallow`
+- fetch all authors deep (with avatars): `localhost:8080/authors/deep`
+
+**Check as well:**
+- [Attribute Lazy Loading (basic)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAttributeLazyLoadingBasic)
+- [Default Values For Lazy Loaded Attributes](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingDefaultValues)
+- [Attribute Lazy Loading And Jackson Serialization](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingJacksonSerialization)
+     
 
 -----------------------------------------------------------------------------------------------------------------------
 
-99. **[DTOs Via Constructor And Spring Data Query Builder Mechanism](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructor)**
+99. **[DTO Via Constructor And Spring Data Query Builder Mechanism](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructor)**
 
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTOs allows us to extract only the needed data. In this application we rely on Constructor Expression and JPQL.
-
-**Key points:**\
-     - write a proper constructor in the DTO class\
-     - rely on Spring Data Query Builder Mechanism for expression the SQL\
-     - for using Spring Data Projections check this [recipe](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on constructor and Spring Data Query Builder Mechanism.
+ 
+**Key points:**
+- write a proper constructor in the DTO class
+- rely on Spring Data Query Builder Mechanism to write the SQL
+- for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
 
 **See also:**\
 [Dto Via Constructor Expression and JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructorExpression)
 
 -----------------------------------------------------------------------------------------------------------------------
 
-100. **[JOIN FETCH And DTOs](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch)**
+100. **[`JOIN FETCH` And DTO](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch)**
 
-**Description:** Combining `JOIN FETCH` and DTOs can be done under several constrains. Mainly, the JPQL containing the `JOIN FETCH` cannot be used to fetch only some columns from the involved entities (in such cases, `JOIN` is the proper choice). It must fetch all attributes of the involved entities. 
+**See also:**
+- [How To Avoid LazyInitializationException Via JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinFetch)
+- [LEFT JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLeftJoinFetch)
+- [JOIN VS. JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinVSJoinFetch)
+     
+**Description:** Combining `JOIN FETCH` and DTO can be done under several constrains. Mainly, the JPQL containing the `JOIN FETCH` cannot be used to fetch only some columns from the involved entities (in such cases, `JOIN` is the proper choice). It must fetch all attributes of the involved entities. 
 
-**Key points:**\
-     - define two related entities (e.g., `Author` and `Book` in a one-to-many lazy bidirectional relationship)\
-     - define the proper DTOs classes (e.g., `BookDto` and `AuthorDto`)\
-     - the `BookDto` and `AuthorDto` may map only the needed columns, but the triggered SQL will fetch all of them anyway\
-     - write a JPQL `JOIN FETCH` to fetch an author including his books
+**Key points:**
+- define two related entities (e.g., `Author` and `Book` in a one-to-many lazy bidirectional relationship)
+- define the proper DTOs classes (e.g., `BookDto` and `AuthorDto`)
+- the `BookDto` and `AuthorDto` may map only the needed columns, but the triggered SQL will fetch all of them anyway
+- write a JPQL `JOIN FETCH` to fetch an author including his books
 
-**Constrains:**\
-     - this is ok: `SELECT a FROM Author a JOIN FETCH a.books`\
-     - this is not ok: `SELECT a.age as age FROM Author a JOIN FETCH a.books` -> *org.hibernate.QueryException: query specified join fetching, but the owner of the fetched association was not present in the select list*\
-     - this is not ok: `SELECT a FROM Author a JOIN FETCH a.books.title` ->  *org.hibernate.QueryException: illegal attempt to dereference collection [author0_.id.books] with element property reference [title]*
+**Constrains:**
+- this is ok: `SELECT a FROM Author a JOIN FETCH a.books`
+- this is not ok: `SELECT a.age as age FROM Author a JOIN FETCH a.books` -> *org.hibernate.QueryException: query specified join fetching, but the owner of the fetched association was not present in the select list*
+- this is not ok: `SELECT a FROM Author a JOIN FETCH a.books.title` ->  *org.hibernate.QueryException: illegal attempt to dereference collection [author0_.id.books] with element property reference [title]*
+
 
 -----------------------------------------------------------------------------------------------------------------------
 
-101. **[LEFT JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLeftJoinFetch)**
+101. **[`LEFT JOIN FETCH`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLeftJoinFetch)**
 
 **Description:** Let's assume that we have two entities engaged in a one-to-many (or many-to-many) lazy bidirectional (or unidirectional) relationhip (e.g., `Author` has more `Book`). And, we want to trigger a single `SELECT` that fetches all `Author` and the corresponding `Book`. This is a job for `JOIN FETCH` which is converted behind the scene into a `INNER JOIN`. Being an `INNER JOIN`, the SQL will return only `Author` that have `Book`. If we want to return all `Author`, including those that doesn't have `Book`, then we can rely on `LEFT JOIN FETCH`. Similar, we can fetch all `Book`, including those with no registered `Author`.
 
-**Key points:**\
-     - define two related entities (e.g., `Author` and `Book` in a one-to-many lazy bidirectional relationship)\
-     - write a JPQL `LEFT JOIN FETCH` to fetch all authors and books (fetch authors even if they don't have registered books)\
-     - write a JPQL `LEFT JOIN FETCH` to fetch all books and authors (fetch books even if they don't have registered authors)
+**Key points:**
+- define two related entities (e.g., `Author` and `Book` in a one-to-many lazy bidirectional relationship)
+- write a JPQL `LEFT JOIN FETCH` to fetch all authors and books (fetch authors even if they don't have registered books)
+- write a JPQL `LEFT JOIN FETCH` to fetch all books and authors (fetch books even if they don't have registered authors)
 
 -----------------------------------------------------------------------------------------------------------------------
 
-102. **[JOIN VS. JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinVSJoinFetch)**
+102. **[`JOIN` VS. `JOIN FETCH`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinVSJoinFetch)**
 
-**Description:** This is an application meant to reveal the differences between `JOIN` and `JOIN FETCH`. The important thing to keep in mind is that, in case of `LAZY` fetching, `JOIN` will not be capable to initialize the associations/collections along with their parent objects using a single SQL `SELECT`.  On the other hand, `JOIN FETCH` is capable to accomplish this kind of task. But, don't underestimate `JOIN`, because `JOIN` is the proper choice when we need to combine/join the columns of two (or more) tables in the same query, but we don't need to initialize the association on the returned entity (e.g., very useful for fetching DTOs).
+**Description:** This is an application meant to reveal the differences between `JOIN` and `JOIN FETCH`. The important thing to keep in mind is that, in case of `LAZY` fetching, `JOIN` will not be capable to initialize the associations/collections along with their parent objects using a single SQL `SELECT`.  On the other hand, `JOIN FETCH` is capable to accomplish this kind of task. But, don't underestimate `JOIN`, because `JOIN` is the proper choice when we need to combine/join the columns of two (or more) tables in the same query, but we don't need to initialize the association on the returned entity (e.g., very useful for fetching DTO).
 
-**Key points:**\
-     - define two related entities (e.g., `Author` and `Book` in a one-to-many lazy bidirectional relationship)\
-     - write a JPQL `JOIN` and `JOIN FETCH` to fetch an author including his books\
-     - write a JPQL `JOIN` and `JOIN FETCH` to fetch a book including its author
+**Key points:**
+- define two related entities (e.g., `Author` and `Book` in a one-to-many lazy bidirectional relationship)
+- write a JPQL `JOIN` and `JOIN FETCH` to fetch an author including his books
+- write a JPQL `JOIN` and `JOIN FETCH` to fetch a book including its author
      
-**Notice that:**\
-     - via `JOIN`, fetching each `Author` of a `Book` (or each `Book` of an `Author`) may require additional `SELECT(s)` being prone to N+1 performance penalty\
-     - via `JOIN FETCH`, fetching each `Author` of a `Book` (or each `Book` of an `Author`) required a single `SELECT`
+**Notice that:**
+- via `JOIN`, fetching each `Author` of a `Book` (or each `Book` of an `Author`) may require additional `SELECT` statements being prone to N+1 performance penalty
+- via `JOIN FETCH`, fetching each `Author` of a `Book` (or each `Book` of an `Author`) required a single `SELECT`
 
 -----------------------------------------------------------------------------------------------------------------------
 
 103. **[Entity Inside Spring Projection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoEntityViaProjection)**
      
-**Description:** If, for any reason, you need an entity in your Spring projection (DTO), then this application shows you how to do it via an example. In this case, there are two entities, `Author` and `Book`, involved in a lazy bidirectional one-to-many association  (it can be other association as well, or even no materialized association). And, we want to fetch in a Spring projection the authors as entities, `Author`, and the `title` of the books.
+**Description:** If, for some reason, you need an entity in your Spring projection (DTO), then this application shows you how to do it via an example. In this case, there are two entities, `Author` and `Book`, involved in a lazy bidirectional one-to-many association  (it can be other association as well, or even no materialized association). And, we want to fetch in a Spring projection the authors as entities, `Author`, and the `title` of the books.
 
-**Key points:**\
-     - define two related entities (e.g., `Author` and `Book` in a one-to-many lazy bidirectional relationship)\
-     - define the proper Spring projection having `public Author getAuthor()` and `public String getTitle()`\
-     - write a JPQL to fetch data
+**Key points:**
+- define two related entities (e.g., `Author` and `Book` in a one-to-many lazy bidirectional relationship)
+- define the proper Spring projection having `public Author getAuthor()` and `public String getTitle()`
+- write a JPQL to fetch data
 
 -----------------------------------------------------------------------------------------------------------------------
 
 104. **[Entity Inside Spring Projection (no association)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoEntityViaProjectionNoAssociation)**
      
-**Description:** If, for any reason, you need an entity in your Spring projection (DTO), then this application shows you how to do it via an example. In this case, there are two entities, `Author` and `Book`, that have no materialized association between them, but, they share the `genre` attribute. We use this attribute to join authors with books via JPQL. And, we want to fetch in a Spring projection the authors as entities, `Author`, and the `title` of the books.
+**Description:** If, for some reason, you need an entity in your Spring projection (DTO), then this application shows you how to do it via an example. In this case, there are two entities, `Author` and `Book`, that have no materialized association between them, but, they share the `genre` attribute. We use this attribute to join authors with books via JPQL. And, we want to fetch in a Spring projection the authors as entities, `Author`, and the `title` of the books.
 
-**Key points:**\
-     - define two unrelated entities (e.g., `Author` and `Book`)\
-     - define the proper Spring projection having `public Author getAuthor()` and `public String getTitle()`\
-     - write a JPQL to fetch data
+**Key points:**
+- define two unrelated entities (e.g., `Author` and `Book`)
+- define the proper Spring projection having `public Author getAuthor()` and `public String getTitle()`
+- write a JPQL to fetch data
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -1594,26 +1629,26 @@ Fetch a page as a `List`:
 
 -----------------------------------------------------------------------------------------------------------------------
 
-106. **[How To DTO an @ElementCollection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoElementCollection)**
+106. **[How To DTO an `@ElementCollection`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoElementCollection)**
 
 **Description:** This application is an example of fetching a DTO that includes attributes from an `@ElementCollection`.
  
-**Key points:**\
-     - by default, `@ElementCollection` is loaded lazy, keep it lazy\
-     - use a Spring projection and `JOIN` in the repository 
+**Key points:**
+- by default, `@ElementCollection` is loaded lazy, keep it lazy
+- use a Spring projection and `JOIN` in the repository  
 
 -----------------------------------------------------------------------------------------------------------------------
 
-107. **[Ordering The Set Of Associated Entities In @ManyToMany Via @OrderBy](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManySetAndOrderBy)**
+107. **[Ordering The `Set` Of Associated Entities In `@ManyToMany` Association Via `@OrderBy`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManySetAndOrderBy)**
 
 **Description:** In case of `@ManyToMany` association, we always should rely on `Set` (not on `List`) for mapping the collection of associated entities (entities of the other parent-side). Why? Well, please see [Prefer Set Instead of List in @ManyToMany Relationships](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManyBidirectionalListVsSet). But, is well-known that `HashSet` doesn't have a predefined entry order of elements. If this is an issue then this application relies on `@OrderBy` which adds an `ORDER BY` clause in the SQL statement. The database will handle the ordering. Further, Hibernate will preserve the order via a `LinkedHashSet`.
 
 This application uses two entities, `Author` and `Book`, involved in a lazy bidirectional many-to-many relationship. First, we fetch a `Book` by title. Further, we call `getAuthors()` to fetch the authors of this book. The fetched authors are ordered descending by name. The ordering is done by the database as a result of adding `@OrderBy("name DESC")`, and is preserved by Hibernate.
 
-**Key points:**\
-     - ask the database to handle ordering and Hibernate to preserve this order via `@OrderBy`\
-     - this works with `HashSet`, but doesn't provide consistency across all transition states (e.g., over transient state)\
-     - for consistency across transient state as well, consider using explicitly `LinkedHashSet` instead of `HashSet`
+**Key points:**
+- ask the database to handle ordering and Hibernate to preserve this order via `@OrderBy`
+- this works with `HashSet`, but doesn't provide consistency across all transition states (e.g., *transient* state)
+- for consistency across the *transient* state as well, consider using explicitly `LinkedHashSet` instead of `HashSet`
 
 **Note:** Alternatively, we can use `@OrderColumn`. This gets materialized in an additional column in the junction table. This is needed for maintaining a permanent ordering of the related data.
 
@@ -1623,85 +1658,85 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
 
 **Description:** This is a sample application that shows how versioned (`@Version`) optimistic locking and detached entity works. Running the application will result in an optimistic locking specific exception (e.g., the Spring Boot specific, `OptimisticLockingFailureException`).
 
-**Key points:**\
-     - in a transaction, fetch an entity via `findById(1L)`; commit transaction and close the persistence context\
-     - in a second transaction, fetch another entity via `findById(1L)` and update it; commit the transaction and close the persistence context\
-     - outside transactional context, update the detached entity (fetched in the first transaction)\
-     - in a third transaction, call `save()` and pass to it the detached entity; trying to re-attach (`EntityManager.merge()`) the entity will end up in an optimistic locking exception since the version of the detached and just loaded entity don't match
+**Key points:**
+- in a transaction, fetch an entity via `findById(1L)`; commit transaction and close the Persistence Context
+- in a second transaction, fetch another entity via `findById(1L)` and update it; commit the transaction and close the Persistence Context
+- outside transactional context, update the detached entity (fetched in the first transaction)
+- in a third transaction, call `save()` and pass to it the detached entity; trying to merge (`EntityManager.merge()`) the entity will end up in an optimistic locking exception since the version of the detached and just loaded entity don't match
 
 -----------------------------------------------------------------------------------------------------------------------
 
-109. **[How To Simulate OptimisticLockException Shaped Via @Version](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSimulateVersionedOptimisticLocking)**
+109. **[How To Simulate `OptimisticLockException` Shaped Via `@Version`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSimulateVersionedOptimisticLocking)**
 
 **Note:** Optimistic locking via `@Version` works for detached entities as well.
 
-**Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic lock exception. So, running the application should end up with a Spring specific `ObjectOptimisticLockingFailureException` exception.
+**Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic locking exception. So, running the application should end up with a Spring specific `ObjectOptimisticLockingFailureException` exception.
 
-**Key points:**\
-     - set up versioned optimistic locking mechanism\
-     - rely on two concurrent threads that call the same a `@Transactional` method used for updating data
+**Key points:**
+- set up versioned optimistic locking mechanism
+- rely on two concurrent threads that call the same `@Transactional` method used for updating data
 
 -----------------------------------------------------------------------------------------------------------------------
 
-110. **[How To Retry Transaction Via TransactionTemplate After OptimisticLockException Shaped Via @Version](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionedOptimisticLockingTT)**
+110. **[How To Retry Transaction Via `TransactionTemplate` After `OptimisticLockException` Exception (`@Version`)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionedOptimisticLockingTT)**
 
 **Note:** Optimistic locking via `@Version` works for detached entities as well.
 
+**Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic locking exception. When such exception occurs, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
+
+**Key points:**
+- in `pom.xml`, add the `db-util` dependency
+- configure the `OptimisticConcurrencyControlAspect` bean
+- rely on `TransactionTemplate`
+
+-----------------------------------------------------------------------------------------------------------------------
+
+111. **[How To Simulate `OptimisticLockException` In Version-less Optimistic Locking](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSimulateVersionlessOptimisticLocking)**
+
+**Note:** Version-less optimistic locking doesn't work for detached entities (do not close the Persistence Context).
+
+**Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic locking exception. So, running the application should end up with a Spring specific `ObjectOptimisticLockingFailureException` exception.
+
+**Key points:**
+- set up the version-less optimistic locking mechanism
+- rely on two concurrent threads that call the same a `@Transactional` method used for updating data
+
+-----------------------------------------------------------------------------------------------------------------------
+
+112. **[How To Retry Transaction Via `TransactionTemplate` After `OptimisticLockException` Shaped Via Hibernate Version-less Optimistic Locking Mechanism](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionlessOptimisticLockingTT)**
+
+**Note:** Version-less optimistic locking doesn't work for detached entities (do not close the Persistence Context).
+
 **Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic locking exception. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
 
-**Key points:**\
-     - in `pom.xml`, add the `db-util` dependency\
-     - configure the `OptimisticConcurrencyControlAspect` bean\
-     - rely on `TransactionTemplate`
+**Key points:**
+- for Maven, in `pom.xml`, add the `db-util` dependency
+- configure the `OptimisticConcurrencyControlAspect` bean
+- rely on `TransactionTemplate`
 
 -----------------------------------------------------------------------------------------------------------------------
 
-111. **[How To Simulate Version-less OptimisticLockException](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSimulateVersionlessOptimisticLocking)**
-
-**Note:** Version-less optimistic locking doesn't work for detached entities (do not close the persistence context).
-
-**Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic lock exception. So, running the application should end up with a Spring specific `ObjectOptimisticLockingFailureException` exception.
-
-**Key points:**\
-     - set up version-less optimistic locking mechanism\
-     - rely on two concurrent threads that call the same a `@Transactional` method used for updating data
-
------------------------------------------------------------------------------------------------------------------------
-
-112. **[How To Retry Transaction Via TransactionTemplate After OptimisticLockException Shaped Via Hibernate Version-less Optimistic Locking Mechanism](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionlessOptimisticLockingTT)**
-
-**Note:** Version-less optimistic locking doesn't work for detached entities (do not close the persistence context).
-
-**Description:** This is a Spring Boot application that simulates a scenario that leads to an optimistic locking exception. When such exception occur, the application retry the corresponding transaction via [db-util](https://github.com/vladmihalcea/db-util) library developed by Vlad Mihalcea.
-
-**Key points:**\
-     - in `pom.xml`, add the `db-util` dependency\
-     - configure the `OptimisticConcurrencyControlAspect` bean\
-     - rely on `TransactionTemplate`
-
------------------------------------------------------------------------------------------------------------------------
-
-113. **[HTTP Long Conversation Via Versioned Optimistic Locking And Detached Entities In Session](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHTTPLongConversationDetachedEntity)**
+113. **[HTTP Long Conversation Via Versioned Optimistic Locking And Detached Entities In The HTTP Session](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHTTPLongConversationDetachedEntity)**
 
 **Description:** This is a sample application that shows how to take advantage of versioned optimistic locking and detached entities in HTTP long conversations. The climax consists of storing the detached entities across multiple HTTP requests. Commonly, this can be accomplished via HTTP session. 
 
-**Key points:**\
-     - prepare the entity via `@Version`\
-     - rely on `@SessionAttributes` for storing the detached entities    
+**Key points:**
+- prepare the entity via `@Version`
+- rely on `@SessionAttributes` for storing the detached entities   
 
 **Sample output (check the message caused by optimistic locking exception):**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHTTPLongConversationDetachedEntity/http%20long%20conversations%20detached%20entity%20ole.png)
 
 -----------------------------------------------------------------------------------------------------------------------
 
-114. **[Filter Association Via Hibernate @Where](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFilterAssociation)**
+114. **[Filter Association Via Hibernate `@Where`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFilterAssociation)**
 
 **Note:** Rely on this approach only if you simply cannot use `JOIN FETCH WHERE` or `@NamedEntityGraph`.
 
 **Description:** This application is a sample of using Hibernate `@Where` for filtering associations. 
 
-**Key points:**\
-     - use `@Where(clause = "condition to be met")` in entity (check the `Author` entity)
+**Key points:**
+- use `@Where(clause = "condition to be met")` in entity (check the `Author` entity)
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -1709,15 +1744,15 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
 
 **Description:** Batch inserts (in MySQL) in Spring Boot style.
 
-**Key points:**\
-     - in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`\
-     - in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)\
-     - in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)\
-     - in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)\
-     - in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))\
-     - in case of using a parent-child relationship with cascade persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_inserts=true` to optimize the batching by ordering inserts\
-     - in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since the Hibernate `IDENTITY` will cause batching to be disabled\
-     - if is not needed then ensure that Second Level Cache is disabled via `spring.jpa.properties.hibernate.cache.use_second_level_cache=false`
+**Key points:**
+- in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`
+- in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)
+- in `application.properties` set JDBC URL with `rewriteBatchedStatements=true` (optimization for MySQL)
+- in `application.properties` set JDBC URL with `cachePrepStmts=true` (enable caching and is useful if you decide to set `prepStmtCacheSize`, `prepStmtCacheSqlLimit`, etc as well; without this setting the cache is disabled)
+- in `application.properties` set JDBC URL with `useServerPrepStmts=true` (this way you switch to server-side prepared statements (may lead to signnificant performance boost))
+- in case of using a parent-child relationship with cascade persist (e.g. one-to-many, many-to-many) then consider to set up `spring.jpa.properties.hibernate.order_inserts=true` to optimize the batching by ordering inserts
+- in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since the Hibernate `IDENTITY` will cause insert batching to be disabled
+- if is not needed then ensure that Second Level Cache is disabled via `spring.jpa.properties.hibernate.cache.use_second_level_cache=false`
    
 **Output example:**
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsSpringStyle/batch%20inserts%20in%20spring%20boot%20style.png)
@@ -1728,22 +1763,22 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
 
 **Description:** Typically, in offset pagination, there is one query needed for fetching the data and one for counting the total number of records. But, we can fetch this information in a single database rountrip via a `SELECT COUNT` subquery nested in the main `SELECT`. Even better, for databases vendors that support *Window Functions* there is a solution relying on `COUNT(*) OVER()` as in this application that uses this window function in a native query against MySQL 8. So, prefer this one instead of `SELECT COUNT` subquery.This application fetches data as `Page<entity>` via Spring Boot offset pagination, but, if the fetched data is *read-only*, then rely on `Page<dto>` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPageDtoOffsetPaginationWF). 
 
-**Key points:**\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - in the entity, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`\
-     - fetch data via a native query (that includes counting) into a `List<entity>`, and a `Pageable`\
-     - use the fetched `List<entity>` and `Pageable` to create a `Page<entity>`
+**Key points:**
+- write a repository that extends `PagingAndSortingRepository`
+- in the entity, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`
+- fetch data via a native query (that includes counting) into a `List<entity>`
+- use the fetched `List<entity>` and `Pageable` to create a `Page<entity>`
 
 -----------------------------------------------------------------------------------------------------------------------
 
 117. **[Offset Pagination - Trigger `SELECT COUNT` Subquery And Return `List<entity>` Via Extra Column](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootListEntityOffsetPaginationExtraColumn)**
-
+ 
 **Description:** This application fetches data as `List<entity>` via Spring Boot offset pagination. The `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, one query is needed for fetching the data and one for counting the total number of records).
 
-**Key points:**\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - in the `entity`, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`\
-     - fetch data via a native query (that includes `SELECT COUNT` subquery) into a `List<entity>` 
+**Key points:**
+- write a repository that extends `PagingAndSortingRepository`
+- in the `entity`, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`
+- fetch data via a native query (that includes `SELECT COUNT` subquery) into a `List<entity>`
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -1751,10 +1786,10 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
    
 **Description:** This application fetches data as `List<projection>` via Spring Boot offset pagination. The projection maps the entity and the total number of records. This information is fetched in a single database rountrip because the `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, there is one query needed for fetching the data and one for counting the total number of records). Use this approch only if the fetched data is not *read-only*. Otherwise, prefer `List<dto>` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootListDtoOffsetPagination).
 
-**Key points:**\
-     - write a Spring projection that maps the entity and the total number of records\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - fetch data via a JPQL query (that includes `SELECT COUNT` subquery) into a `List<projection>`
+**Key points:**
+- write a Spring projection that maps the entity and the total number of records
+- write a repository that extends `PagingAndSortingRepository`
+- fetch data via a JPQL query (that includes `SELECT COUNT` subquery) into a `List<projection>`
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -1762,10 +1797,10 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
  
 **Description:** Typically, in offset pagination, there is one query needed for fetching the data and one for counting the total number of records. But, we can fetch this information in a single database rountrip via a `SELECT COUNT` subquery nested in the main `SELECT`. Even better, for databases vendors that support *Window Functions* there is a solution relying on `COUNT(*) OVER()` as in this application that uses this window function in a native query against MySQL 8. So, prefer this one instead of `SELECT COUNT` subquery.This application fetches data as `List<entity>` via Spring Boot offset pagination, but, if the fetched data is *read-only*, then rely on `List<dto>` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootListDtoOffsetPaginationWF). 
 
-**Key points:**\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - in the `entity`, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`\
-     - fetch data via a native query (that includes `COUNT(*) OVER` subquery) into a `List<entity>` 
+**Key points:**
+- write a repository that extends `PagingAndSortingRepository`
+- in the `entity`, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`
+- fetch data via a native query (that includes `COUNT(*) OVER` subquery) into a `List<entity>`  
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -1773,23 +1808,23 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
 
 **Description:** This application fetches data as `Page<entity>` via Spring Boot offset pagination. Use this only if the fetched data will be modified. Otherwise, fetch `Page<dto>` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPageDtoOffsetPagination). The `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, there is one query needed for fetching the data and one for counting the total number of records).
 
-**Key points:**\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - in the entity, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`\
-     - fetch data via a native query (that includes counting) into a `List<entity>`, and a `Pageable`\
-     - use the fetched `List<entity>` and `Pageable` to create a `Page<entity>`
+**Key points:**
+- write a repository that extends `PagingAndSortingRepository`
+- in the entity, add an extra column for representing the total number of records and annotate it as `@Column(insertable = false, updatable = false)`
+- fetch data via a native query (that includes counting) into a `List<entity>`
+- use the fetched `List<entity>` and `Pageable` to create a `Page<entity>`
 
 -----------------------------------------------------------------------------------------------------------------------
 
 121. **[Offset Pagination - Trigger `SELECT COUNT` Subquery And Return `Page<projection>` That Maps Entities And The Total Number Of Records Via Projection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPageEntityOffsetPaginationProjection)**
+ 
+**Description:** This application fetches data as `Page<projection>` via Spring Boot offset pagination. The projection maps the entity and the total number of records. This information is fetched in a single database rountrip because the `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. 
 
-**Description:** This application fetches data as `Page<projection>` via Spring Boot offset pagination. The projection maps the entity and the total number of records. This information is fetched in a single database rountrip because the `SELECT COUNT` triggered for counting the total number of records is a subquery of the main `SELECT`. Therefore, there will be a single database roundtrip instead of two (typically, there is one query needed for fetching the data and one for counting the total number of records). Use this approch only if the fetched data is not *read-only*. Otherwise, prefer `Page<dto>` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPageDtoOffsetPagination).
-
-**Key points:**\
-     - define a Spring projection that maps the entity and the total number of records\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - fetch data via a JPQL query (that includes counting) into a `List<projection>`, and a `Pageable`\
-     - use the fetched `List<projection>` and `Pageable` to create a `Page<projection>`
+**Key points:**
+- define a Spring projection that maps the entity and the total number of records
+- write a repository that extends `PagingAndSortingRepository`
+- fetch data via a JPQL query into a `List<projection>`
+- use the fetched `List<projection>` and `Pageable` to create a `Page<projection>`
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -1797,11 +1832,11 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
 
 **Description:** Typically, in offset pagination, there is one query needed for fetching the data and one for counting the total number of records. But, we can fetch this information in a single database rountrip via a `SELECT COUNT` subquery nested in the main `SELECT`. Even better, for databases vendors that support *Window Functions* there is a solution relying on `COUNT(*) OVER()` as in this application that uses this window function in a native query against MySQL 8. So, prefer this one instead of `SELECT COUNT` subquery. This application return a `Page<dto>`.
 
-**Key points:**\
-     - create a Spring projection (DTO) to contains getters only for the data that should be fetched\
-     - write a repository that extends `PagingAndSortingRepository`\
-     - fetch data via a native query (that includes counting) into a `List<dto>`, and a `Pageable`\
-     - use the fetched `List<dto>` and `Pageable` to create a `Page<dto>`
+**Key points:**
+- create a Spring projection (DTO) to contains getters only for the columns that should be fetched
+- write a repository that extends `PagingAndSortingRepository`
+- fetch data via a native query (that includes counting) into a `List<dto>`
+- use the fetched `List<dto>` and `Pageable` to create a `Page<dto>`
 
 **Example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootListDtoOffsetPaginationWF/offset%20pagination%20via%20window%20function.png)
@@ -1810,7 +1845,7 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
 
 123. **[How To Fetch `Slice<entity>`/`Slice<dto>` Via `fetchAll`/`fetchAllDto`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSliceAllViaFetchAll)**
 
-**Story**: Spring Boot provides an *offset* based built-in paging mechanism that returns a `Page` or `Slice`. Each of these APIs represents a page of data and some metadata. The main difference is that `Page` contains the total number of records, while `Slice` can only tell if there is another page available. For `Page`, Spring Boot provides a `findAll()` method capable to take as arguments a `Pageable` and/or a `Specification`.  In order to populate a `Page` containing the total number of records, this method triggers an `SELECT COUNT` extra-query next to the query used to fetch the current page . This can be a performance penalty since the `SELECT COUNT` query is triggered every time we request a page. In order to avoid this extra-query, Spring Boot provides a more relaxed API, the `Slice` API. Using `Slice` instead of `Page` removes the need of this extra `SELECT COUNT` query and returns the page (records) and some metadata without the total number of records. So, while `Slice` doesn't know the total number of records, it still can tell if there is another page available after the current one or this is the last page. The problem is that `Slice` work fine for queries containing the SQL, `WHERE` clause (including those that uses the query builder mechanism built into Spring Data), but it **doesn't work** for `findAll()`. This method will still return a `Page` instead of `Slice` therefore the `SELECT COUNT` query is triggered for `Slice<T> findAll(...);`.
+**Story**: Spring Boot provides an *offset* based built-in paging mechanism that returns a `Page` or `Slice`. Each of these APIs represents a page of data and some metadata. The main difference is that `Page` contains the total number of records, while `Slice` can only tell if there is another page available. For `Page`, Spring Boot provides a `findAll()` method capable to take as arguments a `Pageable` and/or a `Specification` or `Example`.  In order to create a `Page` that contains the total number of records, this method triggers an `SELECT COUNT` extra-query next to the query used to fetch the data of the current page . This can be a performance penalty since the `SELECT COUNT` query is triggered every time we request a page. In order to avoid this extra-query, Spring Boot provides a more relaxed API, the `Slice` API. Using `Slice` instead of `Page` removes the need of this extra `SELECT COUNT` query and returns the page (records) and some metadata without the total number of records. So, while `Slice` doesn't know the total number of records, it still can tell if there is another page available after the current one or this is the last page. The problem is that `Slice` work fine for queries containing the SQL, `WHERE` clause (including those that uses the query builder mechanism built into Spring Data), but it **doesn't work** for `findAll()`. This method will still return a `Page` instead of `Slice` therefore the `SELECT COUNT` query is triggered for `Slice<T> findAll(...);`.
 
 **Workaround:**
 The trick is to  simply define a method named `fetchAll()` that uses JPQL and `Pageable` to return `Slice<entity>`, and a method named `fetchAllDto()` that uses JPQL and `Pageable` as well to return `Slice<dto>`. So, avoid naming the method `findAll()`.
@@ -1830,13 +1865,13 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaFullJoinsMySQL/DTO%20via%20inclusive%20full%20joins.png)
 
-**Description:** This application is a proof of concept for using Spring Projections(DTOs) and inclusive full joins written in native SQL (for MySQL).
+**Description:** This application is a proof of concept for using Spring Projections(DTO) and inclusive full joins written in native SQL (for MySQL).
 
-**Key points:**\
-     - define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)\
-     - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)\
-     - write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)\
-     - write inclusive full joins queries using native SQL
+**Key points:**
+- define two entities (e.g., `Author` and `Book` in a lazy bidirectional `@OneToMany` relationship)
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (projections) that contains getters for the columns that should be fetched from the database (e.g., check `AuthorNameBookTitle.java`)
+- write inclusive full joins queries using native SQL
 
 -----------------------------------------------------------------------------------------------------------------------
 
@@ -1844,10 +1879,10 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 **Description:** This application is a sample of declaring an immutable entity. Moreover, the immutable entity will be stored in Second Level Cache via `EhCache` implementation.
 
-**Key points of declaring an immutable entity:**\
-     - annotate the entity with `@Immutable (org.hibernate.annotations.Immutable)`\
-     - avoid any kind of associations\
-     - set `hibernate.cache.use_reference_entries configuration` to `true`
+**Key points of declaring an immutable entity:**
+- annotate the entity with `@Immutable (org.hibernate.annotations.Immutable)`
+- avoid any kind of associations
+- set `hibernate.cache.use_reference_entries configuration` to `true`
      
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -1857,10 +1892,10 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 **Note:** The best way to tune the connection pool parameters consist in using [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) by Vlad Mihalcea. Via [Flexy Pool](https://github.com/vladmihalcea/flexy-pool) you can find the optim settings that sustain high-performance of your connection pool.
 
-**Description:** This is a kickoff application that set up HikariCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purpose the application uses an `ExecutorService` for simulating concurrent users. Check the HickariCP report revealing the connection pool status.
+**Description:** This is a kickoff application that set up HikariCP via `DataSourceBuilder`. The `jdbcUrl` is set up for a MySQL database. For testing purposes, the application uses an `ExecutorService` for simulating concurrent users. Check the HickariCP report revealing the connection pool status.
 
-**Key points:**\
-     - write a `@Bean` that returns the `DataSource` programmatically
+**Key points:**
+- write a `@Bean` that returns the `DataSource` programmatically
 
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootHikariCPPropertiesKickoff/HikariCP%20trace%20log.png)
@@ -1869,7 +1904,7 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 127. **[How To Use Hibernate `@NaturalIdCache` For Skipping The Entity Identifier Retrieval](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNaturalIdCache)**
 
-**Description:** This is a SpringBoot - MySQL application that maps a natural business key using Hibernate `@NaturalId`. This implementation allows us to use `@NaturalId` as it was provided by Spring. Moreover, this application uses Second Level Cache (`EhCache`) and `@NaturalIdCache` for skipping the entity identifier retrieval.
+**Description:** This is a SpringBoot - MySQL application that maps a natural business key using Hibernate `@NaturalId`. This implementation allows us to use `@NaturalId` as it was provided by Spring. Moreover, this application uses Second Level Cache (`EhCache`) and `@NaturalIdCache` for skipping the entity identifier retrieval from the database.
 
 **Key points:**
 - enable Second Level Cache (`EhCache`)
@@ -1887,9 +1922,9 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
  
 **Description:** This application is an example of calculating a non-persistent property of an entity based on the persistent entity attributes. In this case, we will use JPA, `@PostLoad`.
 
-**Key points:**\
-     - annotate the non-persistent field and property with `@Transient`\
-     - define a method annotated with `@PostLoad` that calculates this non-persistent property based on the persistent entity attributes
+**Key points:**
+- annotate the non-persistent field and property with `@Transient`
+- define a method annotated with `@PostLoad` that calculates this non-persistent property based on the persistent entity attributes
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -1897,32 +1932,36 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
  
 **Description:** This application is an example of calculating an entity persistent property at `INSERT` and/or `UPDATE ` time via Hibernate, `@Generated`. 
 
-**Key points:**\
- **Calculate at `INSERT` time:**\
-      - annotate the corresponding persistent field with `@Generated(value = GenerationTime.INSERT)`\
-      - annotate the corresponding persistent field with `@Column(insertable = false)`\
- **Calculate at `INSERT` and `UPDATE` time:**\
-      - annotate the corresponding persistent field with `@Generated(value = GenerationTime.ALWAYS)`\
-      - annotate the corresponding persistent field with `@Column(insertable = false, updatable = false)`
+**Key points:**
 
-**Further, apply:**\
- **Method 1:**\
-     - if the database schema is generated via JPA annotations (not recommended) then use `columnDefinition` element of `@Column` to specify as an SQL query expression the formula for calculating the persistent property\
- **Method 2:**\
-     - if the database schema is not generated via JPA annotations (recommended way) then add the formula as part of schema in `CREATE TABLE`
+ **Calculate at `INSERT` time:**
+- annotate the corresponding persistent field with `@Generated(value = GenerationTime.INSERT)`
+- annotate the corresponding persistent field with `@Column(insertable = false)`
+
+ **Calculate at `INSERT` and `UPDATE` time:**
+- annotate the corresponding persistent field with `@Generated(value = GenerationTime.ALWAYS)`
+- annotate the corresponding persistent field with `@Column(insertable = false, updatable = false)`
+
+**Further, apply:**
+
+ **Method 1:**
+- if the database schema is generated via JPA annotations (not recommended) then use `columnDefinition` element of `@Column` to specify as an SQL query expression the formula for calculating the persistent property
+
+ **Method 2:**
+ - if the database schema is not generated via JPA annotations (recommended way) then add the formula as part of schema in `CREATE TABLE`
      
-**Note:** In production, you should not rely on `columnDefinition`. You should disable `hibernate.ddl-auto` (by omitting it) or set it to `validate`, and add the SQL query expression in `CREATE TABLE` (in this application, check the `discount` column in `CREATE TABLE`, file `schema-sql.sql`). Nevertheless, not even `schema-sql.sql` is ok in production. The best way is to rely on Flyway or Liquibase.
-
+**Note:** In production, you should not rely on `columnDefinition`. You should disable `hibernate.ddl-auto` (by omitting it), and add the SQL query expression in `CREATE TABLE` (in this application, check the `discount` column in `CREATE TABLE`, file `schema-sql.sql`). Nevertheless, not even `schema-sql.sql` is ok in production. The best way is to rely on Flyway or Liquibase.
+         
 ----------------------------------------------------------------------------------------------------------------------
 
 130. **[How To Calculate Non-Persistent Property via Hibernate `@Formula`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyFormula)**
  
 **Description:** This application is an example of calculating a non-persistent property of an entity based on the persistent entity attributes. In this case, we will use Hibernate, `@Formula`.
 
-**Key points:**\
-     - annotate the non-persistent property with `@Transient`\
-     - annotate the corresponding non-persistent field with `@Formula`\
-     - as the value of `@Formula` add the SQL query expression that calculates the non-persistent property based on the persistent entity attributes
+**Key points:**
+- annotate the non-persistent property with `@Transient`
+- annotate the non-persistent field with `@Formula`
+- as the value of `@Formula` add the SQL query expression that calculates this non-persistent property based on the persistent entity attributes
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -1932,16 +1971,16 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 **Description:** This application is an example of adding in an entity the fields, `created`, `createdBy`, `lastModified` and `lastModifiedBy` via Hibernate support. These fields will be automatically generated/populated.
 
-**Key points:**\
-     - write an abstract class (e.g., `BaseEntity`) annotated with `@MappedSuperclass`\
-     - in this abstract class, define a field named `created` and annotate it with the built-in `@CreationTimestamp` annotation\
-     - in this abstract class, define a field named `lastModified` and annotate it with the built-in `@UpdateTimestamp` annotation\
-     - in this abstract class, define a field named `createdBy` and annotate it with the `@CreatedBy` annotation\
-     - in this abstract class, define a field named `lastModifiedBy` and annotate it with the `@ModifiedBy` annotation\
-     - implement the `@CreatedBy` annotation via `AnnotationValueGeneration`\
-     - implement the `@ModifiedBy` annotation via `AnnotationValueGeneration`\
-     - every entity that want to take advantage of `created`, `createdBy`, `lastModified` and `lastModifiedBy` will extend the `BaseEntity`\
-     - store the date-time in UTC
+**Key points:**
+- write an `abstract` class (e.g., `BaseEntity`) annotated with `@MappedSuperclass`
+- in this `abstract` class, define a field named `created` and annotate it with the built-in `@CreationTimestamp` annotation
+- in this `abstract` class, define a field named `lastModified` and annotate it with the built-in `@UpdateTimestamp` annotation
+- in this `abstract` class, define a field named `createdBy` and annotate it with the `@CreatedBy` annotation
+- in this `abstract` class, define a field named `lastModifiedBy` and annotate it with the `@ModifiedBy` annotation
+- implement the `@CreatedBy` annotation via `AnnotationValueGeneration`
+- implement the `@ModifiedBy` annotation via `AnnotationValueGeneration`
+- every entity that want to take advantage of `created`, `createdBy`, `lastModified` and `lastModifiedBy` will extend the `BaseEntity`
+- store the date-time in UTC
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -1949,103 +1988,103 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
  
 **Description:** Auditing is useful for maintaining history records. This can later help us in tracking user activities. 
  
-**Key points:**\
-     - in `pom.xml` add the dependency `hibernate-envers` and JAXB API\
-     - each entity that should be audited should be annotated with `@Audited`\
-     - optionally, annotate entities with `@AuditTable` to rename the table used for auditing\
-     - rely on `ValidityAuditStrategy` for fast database reads, but slower writes (slower than the default `DefaultAuditStrategy`)\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto` for avoiding schema generated from JPA annotations\
-     - create `schema-mysql.sql` and provide the SQL statements needed by Hibernate Envers\
-     - if the schema is not autommatically found, then point it via `spring.jpa.properties.org.hibernate.envers.default_catalog` for MySQL or `spring.jpa.properties.org.hibernate.envers.default_schema` for the rest
+**Key points:**
+- for Maven, in `pom.xml` add the dependency `hibernate-envers` and JAXB API
+- each entity that should be audited should be annotated with `@Audited`
+- optionally, annotate entities with `@AuditTable` to rename the table used for auditing
+- rely on `ValidityAuditStrategy` for fast database reads, but slower writes (slower than the default `DefaultAuditStrategy`)
+- remove (disable) `spring.jpa.hibernate.ddl-auto` for avoiding schema generated from JPA annotations
+- create `schema-mysql.sql` and provide the SQL statements needed by Hibernate Envers
+- if the schema is not automatically found, then point it via `spring.jpa.properties.org.hibernate.envers.default_catalog` for MySQL or `spring.jpa.properties.org.hibernate.envers.default_schema` for the rest
 
 ----------------------------------------------------------------------------------------------------------------------
 
 133. **[How To Programmatically Setup Flyway And MySQL `DataSource`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLProg)**
  
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
 
 **Description:** This application is a kickoff for setting Flyway and MySQL `DataSource` programmatically.
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add the Flyway dependency\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - configure `DataSource` and Flyway programmatically
+**Key points:**
+- for Maven, in `pom.xml`, add the Flyway dependency
+- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- configure `DataSource` and Flyway programmatically
 
 ----------------------------------------------------------------------------------------------------------------------
 
 134. **[How To Migrate PostgreSQL Database Using Flyway - Use The Default Database `postgres` And Schema `public`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayPostgreSQLQuick)**
 
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of migrating a PostgreSQL database via Flyway for the default database `postgres` and schema `public`. 
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add the Flyway dependency\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - in `application.properties`, set the JDBC URL as follows: `jdbc:postgresql://localhost:5432/postgres`\
-     - each SQL file containing the schema update add it in `classpath:db/migration`\
-     - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
+**Key points:**
+- for Maven, in `pom.xml`, add the Flyway dependency
+- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- in `application.properties`, set the JDBC URL as follows: `jdbc:postgresql://localhost:5432/postgres`
+- each SQL file containing the schema update add it in `classpath:db/migration`
+- each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
 
 ----------------------------------------------------------------------------------------------------------------------
 
 135. **[How To Migrate Schema Using Flyway In PostgreSQL - Use The Default Database `postgres` And Schema Created Via `spring.flyway.schemas`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayPostgreSqlSchema)**
 
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of migrating a schema (`bookstore`) created by Flyway via `spring.flyway.schemas` in the default `postgres` database. In this case, the entities should be annotated with `@Table(schema = "bookstore")`.
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add the Flyway dependency\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - in `application.properties`, set the JDBC URL as follows: `jdbc:postgresql://localhost:5432/postgres`\
-     - in `application.properties`, add `spring.flyway.schemas=bookstore`, where `bookstore` is the schema that should be created by Flyway in the `postgres` database (feel free to add your own database name)\
-     - each entity that should be stored in this database should be annotated with, `@Table(schema = "bookstore")`\
-     - each SQL file containing the schema update add it in `classpath:db/migration`\
-     - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
+**Key points:**
+- for Maven, in `pom.xml`, add the Flyway dependency
+- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- in `application.properties`, set the JDBC URL as follows: `jdbc:postgresql://localhost:5432/postgres`
+- in `application.properties`, add `spring.flyway.schemas=bookstore`, where `bookstore` is the schema that should be created by Flyway in the `postgres` database (feel free to add your own database name)
+- each entity that should be stored in this database should be annotated with, `@Table(schema = "bookstore")`
+- each SQL file containing the schema update add it in `classpath:db/migration`
+- each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
 
 ----------------------------------------------------------------------------------------------------------------------
 
 136. **[How To Programmatically Setup Flyway And PostgreSQL `DataSource`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayPostgreSQLProg)**
  
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
 
 **Description:** This application is a kickoff for setting Flyway and PostgreSQL `DataSource` programmatically.
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add the Flyway dependency\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - configure `DataSource` and Flyway programmatically
+**Key points:**
+- for Maven, in `pom.xml`, add the Flyway dependency
+- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- configure `DataSource` and Flyway programmatically
 
 ----------------------------------------------------------------------------------------------------------------------
 
 137. **[How To Auto-Create And Migrate Two Databases In MySQL Using Flyway](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLTwoDatabases)**
 
-**Note:** or production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate` and rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of auto-creating and migrating two databases in MySQL using Flyway. In addition, each data source uses its own HikariCP connection pool. In case of MySQL, where a database is the same thing with schema, we create two databases, `authorsdb` and `booksdb`.
 
-**Key points:**\
-     - for Maven, in `pom.xml`, add the Flyway dependency\
-     - remove (disable) `spring.jpa.hibernate.ddl-auto`\
-     - in `application.properties`, configure the JDBC URL for `booksdb` as `jdbc:mysql://localhost:3306/booksdb?createDatabaseIfNotExist=true` and for `authorsdb` as `jdbc:mysql://localhost:3306/authorsdb?createDatabaseIfNotExist=true`\
-     - in `application.properties`, set `spring.flyway.enabled=false` to disable default behavior\
-     - programmatically create two `DataSource`, one for `booksdb` and one for `authorsdb`\
-     - programmatically create two `FlywayDataSource`, one for `booksdb` and one for `authorsdb`\
-     - programmatically create two `EntityManagerFactory`, one for `booksdb` and one for `authorsdb`\
-     - for `booksdb`, place the migration SQLs files in `db\migration\booksdb`\
-     - for `authorsdb`, place the migration SQLs files in `db\migration\authorsdb`
+**Key points:**
+- for Maven, in `pom.xml`, add the Flyway dependency
+- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- in `application.properties`, configure the JDBC URL for `booksdb` as `jdbc:mysql://localhost:3306/booksdb?createDatabaseIfNotExist=true` and for `authorsdb` as `jdbc:mysql://localhost:3306/authorsdb?createDatabaseIfNotExist=true`
+- in `application.properties`, set `spring.flyway.enabled=false` to disable default behavior
+- programmatically create two `DataSource`, one for `booksdb` and one for `authorsdb`
+- programmatically create two `FlywayDataSource`, one for `booksdb` and one for `authorsdb`
+- programmatically create two `EntityManagerFactory`, one for `booksdb` and one for `authorsdb`
+- for `booksdb`, place the migration SQLs files in `db\migration\booksdb`
+- for `authorsdb`, place the migration SQLs files in `db\migration\authorsdb`    
 
 ----------------------------------------------------------------------------------------------------------------------
 
 138. **[Hibernate `hi/lo` Algorithm And External Systems Issue](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHiLoIssue)**
 
-**Description:** This is a Spring Boot sample that exemplifies how the `hi/lo` algorithm may cause issues when the database is used by external systems as well. Such systems can safely generate non-duplicated identifiers (e.g., for inserting new records) only if they know about the `hi/lo` presence and its internal work. So, better rely on `pooled` or `pooled-lo` which doesn't have such issues.
+**Description:** This is a Spring Boot sample that exemplifies how the `hi/lo` algorithm may cause issues when the database is used by external systems as well. Such systems can safely generate non-duplicated identifiers (e.g., for inserting new records) only if they know about the `hi/lo` presence and its internal work. So, better rely on `pooled` or `pooled-lo` algorithm which doesn't cause such issues.
 
-**Key points:**\
-     - use the `SEQUENCE` generator type (e.g., in PostgreSQL)\
-     - configure the `hi/lo` algorithm as in `Author.java` entity\
-     - insert a few records via `hi/lo`\
-     - insert a few records natively (this acts as an external system that relies on `NEXTVAL('hilo_sequence')` and is not aware of `hi/lo` presence and/or behavior)
+**Key points:**
+- use the `SEQUENCE` generator type (e.g., in PostgreSQL)
+- configure the `hi/lo` algorithm as in `Author.java` entity
+- insert a few records via `hi/lo`
+- insert a few records natively (this acts as an external system that relies on `NEXTVAL('hilo_sequence')` and is not aware of `hi/lo` presence and/or behavior)
      
 **Output sample:** Running this application should result in the following error:\
 `ERROR: duplicate key value violates unique constraint "author_pkey"`\
@@ -2054,16 +2093,16 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 ----------------------------------------------------------------------------------------------------------------------
 
 139. **[How To Generate Sequences Of Identifiers Via Hibernate `pooled` Algorithm](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPooled)**
-
+ 
  **Note:** Rely on `pooled-lo` or `pooled` especially if, beside your application, external systems needs to insert rows in your tables. Don't rely on `hi/lo` since, in such cases, it may cause errors resulted from generating duplicated identifiers.
  
-**Description:** This is a Spring Boot example of using the `pooled` algorithm. The `pooled` is an optimization of `hi/lo`. This algorithm fetched from the database the current sequence value as the top boundary identifier (the current sequence value is computed as the previous sequence value + `increment_size`). This way, the application will use in-memory identifiers generated between the previous top boundary exclusive (aka, lowest boundary) and the current top boundary inclusive.
+**Description:** This is a Spring Boot example of using the `pooled` algorithm. The `pooled` is an optimization of `hi/lo`. This algorithm fetched from the database the current sequence value as the top boundary identifier (the current sequence value is computed as the previous sequence value + `increment_size`). This way, the application will use in-memory identifiers generated between the previous top boundary exclusive (aka, lowest boundary) and the current top boundary inclusive. 
 
-**Key points:**\
-     - use the `SEQUENCE` generator type (e.g., in PostgreSQL)\
-     - configure the `pooled` algorithm as in `Author.java` entity\
-     - insert a few records via `pooled`\
-     - insert a few records natively (this acts as an external system that relies on `NEXTVAL('hilo_sequence')` and is not aware of `pooled` presence and/or behavior)
+**Key points:**
+- use the `SEQUENCE` generator type (e.g., in PostgreSQL)
+- configure the `pooled` algorithm as in `Author.java` entity
+- insert a few records via `pooled`
+- insert a few records natively (this acts as an external system that relies on `NEXTVAL('hilo_sequence')` and is not aware of `pooled` presence and/or behavior)
      
 **Conclusion:** In contrast to the classical `hi/lo` algorithm, the Hibernate `pooled` algorithm doesn't cause issues to external systems that wants to interact with our tables. In other words, external systems can concurrently insert rows in the tables relying on `pooled` algorithm. Nevertheless, old versions of Hibernate can raise exceptions caused by `INSERT` statements triggered by external systems that uses the lowest boundary as identifier. This is a good reason to update to Hibernate latest versions (e.g., Hibernate 5.x), which have fixed this issue.
 
@@ -2071,15 +2110,15 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 140. **[How To Generate Sequences Of Identifiers Via Hibernate `pooled-lo` Algorithm](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPooledLo)**
 
- **Note:** Rely on `pooled-lo` or `pooled` especially if, beside your application, external systems needs to insert rows in your tables. Don't rely on `hi/lo` since, in such cases, it may cause errors resulted from generating duplicated identifiers.
- 
+**Note:** Rely on `pooled-lo` or `pooled` especially if, beside your application, external systems needs to insert rows in your tables. Don't rely on `hi/lo` since, in such cases, it may cause errors resulted from generating duplicated identifiers.
+
 **Description:** This is a Spring Boot example of using the `pooled-lo` algorithm. The `pooled-lo` is an optimization of `hi/lo` similar with `pooled`. Only that, the strategy of this algorithm fetches from the database the current sequence value and use it as the in-memory lowest boundary identifier. The number of in-memory generated identifiers is equal to `increment_size`.
 
-**Key points:**\
-     - use the `SEQUENCE` generator type (e.g., in PostgreSQL)\
-     - configure the `pooled-lo` algorithm as in `Author.java` entity\
-     - insert a few records via `pooled-lo`\
-     - insert a few records natively (this acts as an external system that relies on `NEXTVAL('hilo_sequence')` and is not aware of `pooled-lo` presence and/or behavior)  
+**Key points:**
+- use the `SEQUENCE` generator type (e.g., in PostgreSQL)
+- configure the `pooled-lo` algorithm as in `Author.java` entity
+- insert a few records via `pooled-lo`
+- insert a few records natively (this acts as an external system that relies on `NEXTVAL('hilo_sequence')` and is not aware of `pooled-lo` presence and/or behavior)    
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2089,9 +2128,9 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
  
 **Description:** This application fetches all `Author` entities via a `SELECT` query. Further, calling the `getBooks()` method of the first `Author` entity will trigger another `SELECT` query that initializes the association of the first three `Author` entities returned by the previous `SELECT` query. This is the effect of `@BatchSize`.
 
-**Key points:**\
-     - `Author` and `Book` are in a lazy relationship (e.g., `@OneToMany` bidirectional relationship)\
-     - `Author` association is annotated with `@BatchSize(size = 3)`
+**Key points:**
+- `Author` and `Book` are in a lazy relationship (e.g., `@OneToMany` bidirectional relationship)
+- `Author` association is annotated with `@BatchSize(size = 3)`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2109,10 +2148,10 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Description:** This is a sample application of using *entity graphs* in Spring Boot.
 
-**Key points:**\
-     - define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` relationship\
-     - in `Author` entity use the `@NamedEntityGraph` to define the *entity graph* (e.g., load in a single `SELECT` the authors and the associatated books)\
-     - in `AuthorRepository` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
+**Key points:**
+- define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` association
+- in `Author` entity use the `@NamedEntityGraph` to define the *entity graph* (e.g., load in a single `SELECT` the authors and the associatated books)
+- in `AuthorRepositry` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2130,15 +2169,15 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Description:** This is a sample application of using *entity sub-graphs* in Spring Boot. There is one example based on `@NamedSubgraph` and one based on the dot notation (.) in an ad-hoc *entity graph*.
 
-**Key points:**\
-     - define three entities, `Author`, `Book` and `Publisher` (`Author` and `Book` are involved in a lazy bidirectional `@OneToMany` relationship, `Book` and `Publisher` are also involved in a lazy bidirectional `@OneToMany` relationship; between `Author` and `Publisher` there is no relationship)
+**Key points:**
+- define three entities, `Author`, `Book` and `Publisher` (`Author` and `Book` are involved in a lazy bidirectional `@OneToMany` relationship, `Book` and `Publisher` are also involved in a lazy bidirectional `@OneToMany` relationship; between `Author` and `Publisher` there is no relationship)
      
-**Using `@NamedSubgraph`**\
-     - in `Author` entity define an *entity graph* via  `@NamedEntityGraph`; load the authors and the associatated books and use `@NamedSubgraph` to define a *sub-graph* for loading the publishers associated with these books\
-     - in `AuthorRepository` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
+**Using `@NamedSubgraph`**
+- in `Author` entity define an *entity graph* via  `@NamedEntityGraph`; load the authors and the associatated books and use `@NamedSubgraph` to define a *sub-graph* for loading the publishers associated with these books
+- in `AuthorRepository` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
      
-**Using the dot notation (.)**\
-     - in `PublisherRepository` define an ad-hoc *entity graph* that fetches all publishers with associated books, and further, the authors associated with these books (e.g., `@EntityGraph(attributePaths = {"books.author"})`.
+**Using the dot notation (.)**
+- in `PublisherRepository` define an ad-hoc *entity graph* that fetches all publishers with associated books, and further, the authors associated with these books (e.g., `@EntityGraph(attributePaths = {"books.author"})`.
      
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2156,10 +2195,10 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Description:** This is a sample application of defining ad-hoc *entity graphs* in Spring Boot.
 
-**Key points:**\
-     - define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` relationship\
-     - the *entity graph* should load in a single `SELECT` the authors and the associatated books\
-     - in `AuthorRepository` rely on Spring `@EntityGraph(attributePaths = {"books"})` annotation to indicate the ad-hoc *entity graph*
+**Key points:**
+- define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` relationship
+- the *entity graph* should load in a single `SELECT` the authors and the associatated books
+- in `AuthorRepository` rely on Spring `@EntityGraph(attributePaths = {"books"})` annotation to indicate the ad-hoc *entity graph*
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2179,12 +2218,12 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Description:** This is a sample application of using *entity graphs* with `@Basic` attributes in Spring Boot.
 
-**Key points:**\
-     - define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` relationship\
-     - in `Author` entity use the `@NamedEntityGraph` to define the *entity graph* (e.g., load the authors names (only the `name` basic attribute; ignore the rest) and the associatated books)\
-     - add *bytecode enhancement*\
-     - annotate the basic attributes that should be ignored by the *entity graph* with `@Basic(fetch = FetchType.LAZY)`\
-     - in `AuthorRepository` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
+**Key points:**
+- define two entities, `Author` and `Book`, involved in a lazy bidirectional `@OneToMany` association
+- in `Author` entity use the `@NamedEntityGraph` to define the *entity graph* (e.g., load the authors names (only the `name` basic attribute; ignore the rest) and the associatated books)
+- add *bytecode enhancement*
+- annotate the basic attributes that should be ignored by the *entity graph* with `@Basic(fetch = FetchType.LAZY)`
+- in `AuthorRepository` rely on Spring `@EntityGraph` annotation to indicate the *entity graph* defined at the previous step
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2194,13 +2233,13 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Description:** This application is an example of implementing soft deletes in Spring Data style via a repository named, `SoftDeleteRepository`. 
 
-**Key points:**\
-     - define an abstract class, `BaseEntity`, annotated with `@MappedSuperclass`\
-     - in `BaseEntity` define a flag-field named `deleted` (default this field to `false` or in other words, not deleted)\
-     - every entity that wants to take advantage of soft deletes should extend the `BaseEntity` classs\
-     - write a `@NoRepositoryBean` named `SoftDeleteRepository` and extend `JpaRepository`\
-     - override and implement the needed methods that provide the logic for soft deletes (check out the source code)\     
-     - repositories of entities should extend `SoftDeleteRepository`
+**Key points:**
+- define an `abstract` class, `BaseEntity`, annotated with `@MappedSuperclass`
+- in `BaseEntity` define a flag-field named `deleted` (default this field to `false` or in other words, not deleted)
+- every entity that wants to take advantage of soft deletes should extend the `BaseEntity` classs
+- write a `@NoRepositoryBean` named `SoftDeleteRepository` and extend `JpaRepository`
+- override and implement the needed methods that provide the logic for soft deletes (check out the source code)
+- repositories of entities should extend `SoftDeleteRepository`
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSoftDeletes/soft%20deletes.png)
@@ -2211,12 +2250,12 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Description:** This application is an example of how to implement concurrent table based queue via `SKIP_LOCKED` in MySQL 8. `SKIP_LOCKED` can skip over locks achieved by other concurrent transactions, therefore is a great choice for implementing job queues. In this application, we run two concurrent transactions. The first transaction will lock the records with ids 1, 2 and 3. The second transaction will skip the records with ids 1, 2 and 3 and will lock the records with ids 4, 5 and 6.
 
-**Key points:**\
-     - define an entity that acts as a job queue (e.g., see the `Book` entity)\
-     - in `BookRepository` setup `@Lock(LockModeType.PESSIMISTIC_WRITE)`\
-     - in `BookRepository` use `@QueryHint` to setup `javax.persistence.lock.timeout` to `SKIP_LOCKED`\
-     - rely on `org.hibernate.dialect.MySQL8Dialect` dialect\
-     - run two concurrent transactions to see the effect of `SKIP_LOCKED`
+**Key points:**
+- define an entity that acts as a job queue (e.g., see the `Book` entity)
+- in `BookRepository` setup `@Lock(LockModeType.PESSIMISTIC_WRITE)`
+- in `BookRepository` use `@QueryHint` to setup `javax.persistence.lock.timeout` to `SKIP_LOCKED`
+- rely on `org.hibernate.dialect.MySQL8Dialect` dialect
+- run two concurrent transactions to see the effect of `SKIP_LOCKED`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2224,47 +2263,47 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 **Description:** This application is an example of how to implement concurrent table based queue via `SKIP_LOCKED` in PostgreSQL. `SKIP_LOCKED` can skip over locks achieved by other concurrent transactions, therefore is a great choice for implementing job queues. In this application, we run two concurrent transactions. The first transaction will lock the records with ids 1, 2 and 3. The second transaction will skip the records with ids 1, 2 and 3 and will lock the records with ids 4, 5 and 6.
 
-**Key points:**\
-     - define an entity that acts as a job queue (e.g., see the `Book` entity)\
-     - in `BookRepository` setup `@Lock(LockModeType.PESSIMISTIC_WRITE)`\
-     - in `BookRepository` use `@QueryHint` to setup `javax.persistence.lock.timeout` to `SKIP_LOCKED`\
-     - rely on `org.hibernate.dialect.PostgreSQL95Dialect` dialect\
-     - run two concurrent transactions to see the effect of `SKIP_LOCKED`
+**Key points:**
+- define an entity that acts as a job queue (e.g., see the `Book` entity)
+- in `BookRepository` setup `@Lock(LockModeType.PESSIMISTIC_WRITE)`
+- in `BookRepository` use `@QueryHint` to setup `javax.persistence.lock.timeout` to `SKIP_LOCKED`
+- rely on `org.hibernate.dialect.PostgreSQL95Dialect` dialect
+- run two concurrent transactions to see the effect of `SKIP_LOCKED`
 
 ----------------------------------------------------------------------------------------------------------------------
 
-149. **[JPA Inheritance - Join Table](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinTableInheritance)**
+149. **[JPA Inheritance - `JOINED`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinTableInheritance)**
 
 **Description:** This application is a sample of JPA Join Table inheritance strategy (`JOINED`)
 
-**Key points:**\
-     - this inheritance strategy can be employed via `@Inheritance(strategy=InheritanceType.JOINED)`\
-     - all the classes in an inheritance hierarchy (a.k.a., subclasses) are represented via individual tables\
-     - by default, subclass-tables contains a primary key column that acts as a foreign key  as well - this foreign key references the *base class* table primary key\
-     - customizing this foreign key can be done by annotating the subclasses with `@PrimaryKeyJoinColumn`  
+**Key points:**
+- this inheritance strategy can be employed via `@Inheritance(strategy=InheritanceType.JOINED)`
+- all the classes in an inheritance hierarchy (a.k.a., subclasses) are represented via individual tables
+- by default, subclass-tables contains a primary key column that acts as a foreign key  as well - this foreign key references the *base class* table primary key
+- customizing this foreign key can be done by annotating the subclasses with `@PrimaryKeyJoinColumn`  
 
 ----------------------------------------------------------------------------------------------------------------------
 
-150. **[JPA Inheritance - Table-per-class](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTablePerTableInheritance)**
+150. **[JPA Inheritance - `TABLE_PER_CLASS`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTablePerTableInheritance)**
 
 **Description:** This application is a sample of JPA Table-per-class inheritance strategy (`TABLE_PER_CLASS`)
 
-**Key points:**\
-     - this inheritance strategy doesn't allow the usage of the `IDENTITY` generator\
-     - this inheritance strategy can be employed via `@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)`\
-     - all the classes in an inheritance hierarchy (a.k.a., subclasses) are represented via individual tables\
-     - each subclass-table stores the columns inherited from the superclass-table (*base class*)
+**Key points:**
+- this inheritance strategy doesn't allow the usage of the `IDENTITY` generator
+- this inheritance strategy can be employed via `@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)`
+- all the classes in an inheritance hierarchy (a.k.a., subclasses) are represented via individual tables
+- each subclass-table stores the columns inherited from the superclass-table (*base class*)
 
 ----------------------------------------------------------------------------------------------------------------------
 
-151. **[JPA Inheritance - `@MappedSuperclas`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMappedSuperclass)**
+151. **[JPA Inheritance - `@MappedSuperclass`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMappedSuperclass)**
 
 **Description:** This application is a sample of using the JPA `@MappedSuperclass`.
 
-**Key points:**\
-     - the *base class* is not an entity, it can be `abstract`, and is annotated with `@MappedSuperclass`\
-     - subclasses of the *base class* are mapped in tables that contains columns for the inherited attributes and for their own attibutes\
-     - when the *base class* doens't need to be an entity, the `@MappedSuperclass` is the proper alternative to the JPA table-per-class inheritance strategy
+**Key points:**
+- the *base class* is not an entity, it can be `abstract`, and is annotated with `@MappedSuperclass`
+- subclasses of the *base class* are mapped in tables that contains columns for the inherited attributes and for their own attibutes
+- when the *base class* doens't need to be an entity, the `@MappedSuperclass` is the proper alternative to the JPA table-per-class inheritance strategy
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2278,12 +2317,12 @@ Of course, the correct decision is to disable OSIV by setting it to `false`, but
 
 Well, among the Hibernate5Module features we have support for dealing with this aspect of lazy loading and eliminate this exception. Even if OSIV will continue to be enabled (not recommended), Jackson will not use the `Session` opened via OSIV.
 
-**Key points:**\
-     - add the Hibernate5Module dependency in `pom.xml`\
-     - add a `@Bean` that returns an instance of `Hibernate5Module`\
-     - annotate the `Author` bean with `@JsonInclude(Include.NON_EMPTY)` to exclude `null` or what is considered empty from the returned JSON
+**Key points:**
+- for Maven, add the Hibernate5Module dependency in `pom.xml`
+- add a `@Bean` that returns an instance of `Hibernate5Module`
+- annotate the `Author` bean with `@JsonInclude(Include.NON_EMPTY)` to exclude `null` or what is considered empty from the returned JSON
      
-**Note:** The presence of Hibernate5Module instructs Jackson to initialize the lazy associations with default values (e.g., a lazy associated collection will be initialized with `null`). Hibernate5Module doesn't work for lazy loded attributes. For such case consider [this](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingJacksonSerialization) item.
+**Note:** The presence of Hibernate5Module instructs Jackson to initialize the lazy associations with default values (e.g., a lazy associated collection will be initialized with `null`). Hibernate5Module doesn't work for lazy loaded attributes. For such case consider [this](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingJacksonSerialization) item.
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2291,8 +2330,8 @@ Well, among the Hibernate5Module features we have support for dealing with this 
 
 **Description:** View the prepared statement binding parameters via `profileSQL=true` in MySQL.
 
-**Key points:**\
-     - in `application.properties` append `logger=Slf4JLogger&profileSQL=true` to the JDBC URL (e.g., `jdbc:mysql://localhost:3306/bookstoredb?createDatabaseIfNotExist=true&logger=Slf4JLogger&profileSQL=true`)
+**Key points:**
+- in `application.properties` append `logger=Slf4JLogger&profileSQL=true` to the JDBC URL (e.g., `jdbc:mysql://localhost:3306/bookstoredb?createDatabaseIfNotExist=true&logger=Slf4JLogger&profileSQL=true`)
      
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLogBindingParametersMySQL/display%20binding%20via%20profileSQL%3Dtrue.png)
@@ -2303,21 +2342,23 @@ Well, among the Hibernate5Module features we have support for dealing with this 
  
 **Description:** This application is an example of shuffling small results sets. **DO NOT USE** this technique for large results sets, since is extremely expensive.
 
-**Key points:**\
-     - write a JPQL `SELECT` query and append to it `ORDER BY RAND()`\
-     - each RDBMS support a function similar to `RAND()` (e.g., in PostgreSQL is `random()`)
+**Key points:**
+- write a JPQL `SELECT` query and append to it `ORDER BY RAND()`
+- each RDBMS support a function similar to `RAND()` (e.g., in PostgreSQL is `random()`)
 
 ----------------------------------------------------------------------------------------------------------------------
 
 155. **[The Best Way To Remove Parent And Child Entities](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCascadeChildRemoval)**
 
-**Description:** Commonly, deleting a parent and the associated children via `CascadeType.REMOVE`  and/or `orphanRemoval=true` involved several SQL statements (e.g., each child is deleted in a dedicated `DELETE` statement). This is far from being efficient, therefore other approaches should be employed. Consider `Author` and `Book` in a `OneToMany` relationship.
+**Description:** Commonly, deleting a parent and the associated children via `CascadeType.REMOVE`  and/or `orphanRemoval=true` involved several SQL statements (e.g., each child is deleted in a dedicated `DELETE` statement). This is far from being efficient, therefore other approaches should be employed. 
 
-**Best way to delete when:**\
-     - One `Author` is in Persistent Context, no `Book`\
-     - More `Author` are in the Persistent Context, no `Book`\
-     - One `Author` and the associated `Book` are in Persistent Context\
-     - No `Author` or `Book` is in Persistent Context
+Consider `Author` and `Book` in a `@OneToMany` association. This application exposes the best way to delete the parent(s) and the associated children in four scenarios listed below.
+
+**Best way to delete author(s) and the associated books when:**
+- One `Author` is in Persistent Context, no `Book`
+- More `Author` are in the Persistent Context, no `Book`
+- One `Author` and the associated `Book` are in Persistent Context
+- No `Author` or `Book` is in Persistent Context
      
 **Note:** The most efficient way to delete all entities can be done via the built-in `deleteAllInBatch()`. 
 
@@ -2325,12 +2366,16 @@ Well, among the Hibernate5Module features we have support for dealing with this 
 
 156. **[How To *Bulk* Updates](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBulkUpdates)**
 
-**Description:** *Bulk* operations (updates and deletes) are fastest than batching, can benefit from indexing, but they have two main drawbacks:
+**Description:** *Bulk* operations (updates and deletes) are faster than batching, can benefit from indexing, but they have two main drawbacks:
 
 - *bulk* updates/deletes may leave the Persistent Context in an outdated state (prevent this by flushing the Persistent Context before update/delete and close/clear it after the update/delete to avoid issues created by potentially unflushed or outdated entities)
-- *bulk* updates/deletes don't benefit of application-level optimistic locking mechanisms, therefore the *lost updates* not prevented (it is advisable to signal these updates by explicitly incrementing `version` (if any is present)).
+- *bulk* updates/deletes don't benefit of application-level optimistic locking mechanisms, therefore the *lost updates* are not prevented (it is advisable to signal these updates by explicitly incrementing `version` (if any is present)).
 
-This application provides examples of *bulk* updates for `Author` and `Book` entities (between `Author` and `Book` there is a bidirectional lazy `@OneToMany` relationship). Both, `Author` and `Book`, has a `version` field.
+This application provides examples of *bulk* updates for `Author` and `Book` entities (between `Author` and `Book` there is a bidirectional lazy `@OneToMany` association). Both, `Author` and `Book`, has a `version` field.
+
+**Key points:**
+- this application provide an example of *bulk* updates that don't involve managed entities (data is not loaded in the Persistent Context)
+- this application provide an example of *bulk* updates that involve managed entities (data is loaded in the Persistent Context before update it via *bulk* operations)
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2338,11 +2383,11 @@ This application provides examples of *bulk* updates for `Author` and `Book` ent
 
 **Description:** As a rule of thumb, unidirectional `@OneToMany` association is less efficient than the bidirectional `@OneToMany` or the unidirectional `@ManyToOne` associations. This application is a sample that exposes the DML statements generated for reads, writes and removal operations when the unidirectional `@OneToMany` mapping is used.
 
-**Key points:**\
-     - regular unidirectional `@OneToMany` is less efficient than bidirectional `@OneToMany` relationship\
-     - using `@OrderColumn` come with some optimizations for removal operations but is still less efficient than bidirectional `@OneToMany` relationship\
-     - using `@JoinColumn` eliminates the junction table but is still less efficient than bidirectional `@OneToMany` relationship\
-     - using `Set` instead of `List` or bidirectional `@OneToMany` with `@JoinColumn` relationship (e.g., `@ManyToOne @JoinColumn(name = "author_id", updatable = false, insertable = false)`) still performs worse than bidirectional `@OneToMany` relationship
+**Key points:**
+- regular unidirectional `@OneToMany` is less efficient than bidirectional `@OneToMany` association
+- using `@OrderColumn` come with some optimizations for removal operations but is still less efficient than bidirectional `@OneToMany` association
+- using `@JoinColumn` eliminates the junction table but is still less efficient than bidirectional `@OneToMany` association
+- using `Set` instead of `List` or bidirectional `@OneToMany` with `@JoinColumn` relationship (e.g., `@ManyToOne @JoinColumn(name = "author_id", updatable = false, insertable = false)`) still performs worse than bidirectional `@OneToMany` association
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2351,7 +2396,7 @@ This application provides examples of *bulk* updates for `Author` and `Book` ent
 **Description:** This application is an example of using subqueries in JPQL `WHERE` clause (you can easily use it in `HAVING` clause as well).
 
 **Key points:**\
-Keep in mind that subqueries and joins queries may not be semantically equivalent. Joins may returns duplicates that can be removed via `DISTINCT`. 
+Keep in mind that subqueries and joins queries may or may not be semantically equivalent (joins may returns duplicates that can be removed via `DISTINCT`). 
 
 Even if the Execution Plan is specific to the database, historically speaking joins are faster than subqueries among different databases, but this is not a rule (e.g., the amount of data may significantly influence the results). Of course, do not conclude that subqueries are just a replacement for joins that doesn't deserve attention. Tuning subqueries can increases their performance as well, but this is an SQL wide topic. So, benchmark! Benchmark! Benchmark!
 
@@ -2361,12 +2406,12 @@ Even if the Execution Plan is specific to the database, historically speaking jo
 
 159. **[How To Execute SQL Functions In `WHERE` Part Of JPQL Query And JPA 2.1](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJpqlFunctionsParams)**
 
-Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJpqlFunctionsParams).
+Note: Using SQL functions in `SELECT` part (not in `WHERE` part) of the query can be done as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJpqlFunctionsParams).
 
 **Description:** Starting with JPA 2.1, a JPQL query can call SQL functions in the `WHERE` part via `function()`. This application is an example of calling the MySQL, `concat_ws` function, but user defined (custom) functions can be used as well.
 
-**Key points:**\
-     - use JPA 2.1, `function()` 
+**Key points:**
+- use JPA 2.1, `function()`  
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2374,9 +2419,9 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as 
  
 **Description:** This application is an example of calling a MySQL stored procedure that returns a value (e.g., an `Integer`).
 
-**Key points:**\
-     - rely on `@NamedStoredProcedureQuery` to shape the stored procedure in the entity\
-     - rely on `@Procedure` in repository
+**Key points:**
+- rely on `@NamedStoredProcedureQuery` to shape the stored procedure in the entity
+- rely on `@Procedure` in repository
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2384,8 +2429,8 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as 
  
 **Description:** This application is an example of calling a MySQL stored procedure that returns a result set. The application fetches entities (e.g., `List<Author>`) and DTO (e.g., `List<AuthorDto>`).
 
-**Key points:**\
-     - rely on `EntiyManager` since Spring Data `@Procedure` will not work
+**Key points:**
+- rely on `EntiyManager` since Spring Data `@Procedure` will not work
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2393,8 +2438,8 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as 
  
 **Description:** This application is an example of calling a MySQL stored procedure that returns a result set (entity or DTO) via a native query.
  
-**Key points:**\
-     - rely on a native call as `@Query(value = "{CALL FETCH_AUTHOR_BY_GENRE (:p_genre)}", nativeQuery = true)`
+**Key points:**
+- rely on a native call as `@Query(value = "{CALL FETCH_AUTHOR_BY_GENRE (:p_genre)}", nativeQuery = true)`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2402,8 +2447,8 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as 
  
 **Description:** This application is an example of calling a MySQL stored procedure that returns a result set via `JdbcTemplate`.
  
-**Key points:**\
-     - rely on `JdbcTemplate` and `SimpleJdbcCall`
+**Key points:**
+- rely on `JdbcTemplate` and `SimpleJdbcCall`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2411,10 +2456,10 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as 
  
 **Description:** This application is an example of retrieving the database auto-generated primary keys.
 
-**Key points:**\
-     - JPA style, retrieve the auto-generated keys via `getId()`\
-     - JDBC style, retrieve the auto-generated keys via `JdbcTemplate`\
-     - JDBC style, retrieve the auto-generated keys via `SimpleJdbcInsert`
+**Key points:**
+- JPA style, retrieve the auto-generated keys via `getId()`
+- JDBC style, retrieve the auto-generated keys via `JdbcTemplate`
+- JDBC style, retrieve the auto-generated keys via `SimpleJdbcInsert`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2424,33 +2469,33 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) can be done as 
 
 A proxy can be unproxied via `Hibernate.unproxy()`. This method is available starting with Hibernate 5.2.10.
 
-**Key points:**\
-     - fetch a proxy via `JpaRepository#getOne()`\
-     - unproxy the fetched proxy via `Hibernate.unproxy()`    
+**Key points:**
+- fetch a proxy via `JpaRepository#getOne()`
+- unproxy the fetched proxy via `Hibernate.unproxy()`     
 
 ----------------------------------------------------------------------------------------------------------------------
 
 166. **[How To Convert `Boolean` To Yes/No Via `AttributeConverter`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMapBooleanToYesNo)**
  
-**Description:** This application is an example of converting a `Boolean` to Yes/No strings via `AttributeConverter`. This kind of conversions are needed when we deal with legacy databases that connot be changed. In this case, the legacy database stores the booleans as Yes/No.
+**Description:** This application is an example of converting a `Boolean` to *Yes*/*No* strings via `AttributeConverter`. This kind of conversions are needed when we deal with legacy databases that connot be changed. In this case, the legacy database stores the booleans as *Yes*/*No*.
 
-**Key points:**\
-     - implement a custom converter via `AttributeConverter`
+**Key points:**
+- implement a custom converter via `AttributeConverter`
 
 ----------------------------------------------------------------------------------------------------------------------
 
 167. **[How Efficient Is Just `@OManyToOne`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJustManyToOne)**
 
-**Note:** The `@ManyToOne` relationship maps exactly to the one-to-many table relationship. The underlying foreign key is under child-side control in unidirectional or bidirectional relationship.
+**Note:** The `@ManyToOne` association maps exactly to the one-to-many table relationship. The underlying foreign key is under child-side control in unidirectional or bidirectional relationship.
 
 **Description:** This application shows that using only `@ManyToOne` is quite efficient. On the other hand, using only `@OneToMany` is far away from being efficient. Always, prefer bidirectional `@OneToMany` or unidirectional `@ManyToOne`. Consider two entities, `Author` and `Book` in a unidirectional `@ManyToOne` relationship.
 
-**Key points:**\
-     - Adding a new book is efficient\
-     - Fetching all books of an author is efficient via a JPQL\
-     - Pagination of books is efficient\
-     - Remove a book is efficient\
-     - Even if the fetched collection is not managed, dirty checking mechanism works as expected
+**Key points:**
+- Adding a new book is efficient
+- Fetching all books of an author is efficient via a JPQL
+- Pagination of books is efficient
+- Remove a book is efficient
+- Even if the fetched collection is not managed, *dirty checking* mechanism works as expected
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2458,9 +2503,9 @@ A proxy can be unproxied via `Hibernate.unproxy()`. This method is available sta
 
 **Description:** Trying to combine `JOIN FETCH`/`LEFT JOIN FETCH` and `Pageable` results in an exception of type `org.hibernate.QueryException: query specified join fetching, but the owner of the fetched association was not present in the select list`. This application is a sample of how to avoid this exception.
 
-**Key points:**\
-     - use `countQuery`\
-     - use entity graph
+**Key points:**
+- use `countQuery`
+- use entity graph
      
 **Note:** Fixing the above exception will lead to an warning of type HHH000104, `firstResult / maxResults specified with collection fetch; applying in memory!`. If this warning is a performance issue, and most probably it is, then follow by reading [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHHH000104).
 
@@ -2468,7 +2513,7 @@ A proxy can be unproxied via `Hibernate.unproxy()`. This method is available sta
 
 169. **[How To Avoid HHH000104 And Use Pagination Of Parent-Child](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHHH000104)**
 
-**Description:** HHH000104 is a Hibernate warning that tell us that pagination of a result set is tacking place in memory. For example, consider the `Author` and `Book` entities in a bidirectional lazy `@OneToMany` relationship and the following query: 
+**Description:** HHH000104 is a Hibernate warning that tell us that pagination of a result set is tacking place in memory. For example, consider the `Author` and `Book` entities in a lazy bidirectional `@OneToMany` association and the following query: 
 
   `@Transactional`\
   `@Query(value = "SELECT a FROM Author a LEFT JOIN FETCH a.books WHERE a.genre = ?1",`\
@@ -2477,20 +2522,20 @@ A proxy can be unproxied via `Hibernate.unproxy()`. This method is available sta
 
 Calling `fetchWithBooksByGenre()` works fine only that the following warning is signaled: `HHH000104: firstResult / maxResults specified with collection fetch; applying in memory!` Obviously, having pagination in memory cannot be good from performance perspective. This application reveals several approaches for moving pagination at database-level.
 
-**Key points:**\
-     - use two JPQL queries (use `Page` or `Slice`) to fetch read-write result set\
-     - use DTOs to fetch read-only result set\
-     - use `DENSE_RANK()` to avoid truncate the result set (truncate the books of the an author)
+**Key points:**
+- use two JPQL queries (use `Page` or `Slice`) to fetch read-write result set
+- use DTO to fetch read-only result set
+- use `DENSE_RANK()` to avoid truncate the result set (truncate the books of the an author)
 
 ----------------------------------------------------------------------------------------------------------------------
 
 170. **[What `@Transactional(readOnly=true)` Actually Do](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTransactionalReadOnlyMeaning)**
  
- **Description:** This application is meant to reveal what is the difference between `@Transactional(readOnly = false)` and `@Transactional(readOnly = true)`. In a nuthsell, `readOnly = false` (default) fetches entites in *read-write* mode (managed). Before Spring 5.1, `readOnly = true` just set `FlushType.MANUAL`, therefore the automatic *dirty checking mechanism* will not take action since there is no flush. In other words, Hibernate keep in the Persistent Context the fetched entities and the hydrated (loaded) state. By comparing the entity state with the hydrated state, the *dirty checking mechanism* can decide to trigger `UPDATE`s in our behalf. But, the *dirty checking mechanism* take place at flush time, therefore, without a flush, the hydrated state is kept in Persistent Context for nothing, representing a performance penalty. Starting with Spring 5.1, the *read-only* mode is propagated to Hibernate, therefore the hydrated state is discarded immediately after loading the entities. Even if the *read-only* mode discards the hydrated state the entities are still loaded in the Persistent Context, therefore, for *read-only* data, relying on DTO (Spring projection) is better.
+ **Description:** This application is meant to reveal what is the difference between `@Transactional(readOnly = false)` and `@Transactional(readOnly = true)`. In a nuthsell, `readOnly = false` (default) fetches entites in *read-write* mode (managed). Before Spring 5.1, `readOnly = true` just set `FlushType.MANUAL/NEVER`, therefore the automatic *dirty checking mechanism* will not take action since there is no flush. In other words, Hibernate keep in the Persistent Context the fetched entities and the hydrated (loaded) state. By comparing the entity state with the hydrated state, the *dirty checking mechanism* can decide to trigger `UPDATE` statements in our behalf. But, the *dirty checking mechanism* take place at flush time, therefore, without a flush, the hydrated state is kept in Persistent Context for nothing, representing a performance penalty. Starting with Spring 5.1, the *read-only* mode is propagated to Hibernate, therefore the hydrated state is discarded immediately after loading the entities. Even if the *read-only* mode discards the hydrated state the entities are still loaded in the Persistent Context, therefore, for *read-only* data, relying on DTO (Spring projection) is better.
 
-**Key points:**\
-     - `readOnly = false` load data in *read-write* mode (managed)\
-     - `readOnly = true` discard the hydrated state (starting with Spring 5.1)
+**Key points:**
+- `readOnly = false` load data in *read-write* mode (managed)
+- `readOnly = true` discard the hydrated state (starting with Spring 5.1)
      
 ----------------------------------------------------------------------------------------------------------------------
      
@@ -2498,8 +2543,8 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
   
  **Description:** This application is an example of getting the current database transaction id in MySQL. Only read-write database transactions gets an id in MySQL. Every database has a specific query for getting the transaction id. [Here](https://vladmihalcea.com/current-database-transaction-id/) it is a list of these queries.
 
-**Key points:**\
-     - rely on the following query, `SELECT tx.trx_id FROM information_schema.innodb_trx tx WHERE tx.trx_mysql_thread_id = connection_id()`
+**Key points:**
+- rely on the following query, `SELECT tx.trx_id FROM information_schema.innodb_trx tx WHERE tx.trx_mysql_thread_id = connection_id()`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2507,19 +2552,19 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This application is a sample of inspecting the Persistent Context content via `org.hibernate.engine.spi.PersistenceContext`.
 
-**Key points:**\
-     - get the current Persistent Context via Hibernate `SharedSessionContractImplementor`\
-     - rely on `PersistenceContext` [API](https://docs.jboss.org/hibernate/orm/5.4/javadocs/org/hibernate/engine/spi/PersistenceContext.html)
+**Key points:**
+- get the current Persistent Context via Hibernate `SharedSessionContractImplementor`
+- rely on `PersistenceContext` [API](https://docs.jboss.org/hibernate/orm/5.4/javadocs/org/hibernate/engine/spi/PersistenceContext.html)
 
 ----------------------------------------------------------------------------------------------------------------------
 
 173. **[How To Extract Tables Metadata](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTablesMetadata)**
- 
-**Description:** This application is an example of using the Hibernare SPI, `org.hibernate.integrator.spi.Integrator` for extracting tables metadata.
 
-**Key points:**\
-     - Implement `org.hibernate.integrator.spi.Integrator` and override `integrate()` method to return `metadata.getDatabase()`\
-     - Register this `Integrator` via `LocalContainerEntityManagerFactoryBean`
+**Description:** This application is an example of using the Hibernate SPI, `org.hibernate.integrator.spi.Integrator` for extracting tables metadata.
+
+**Key points:**
+- implement `org.hibernate.integrator.spi.Integrator` and override `integrate()` method to return `metadata.getDatabase()`
+- register this `Integrator` via `LocalContainerEntityManagerFactoryBean`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2527,8 +2572,8 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This application is an example of mapping the JPA `@ManyToOne` relationship to a SQL query via the Hibernate `@JoinFormula` annotation. We start with two entities, `Author` and `Book`, involved in a unidirectional `@ManyToOne` relationship. Each book has a price. While we fetch a book by id (let's call it book `A`), we want to fetch another book `B` of the same author whose price is the next smaller price in comparison with book `A` price.
 
-**Key points:**\
-     - fetching the book `B` is done via `@JoinFormula`
+**Key points:**
+- fetching the book `B` is done via `@JoinFormula`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2536,9 +2581,9 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This application is an example of fetching a read-only MySQL database view in a JPA immutable entity.
 
-**Key points:**\
-     - the database view is available in `data-mysql.sql` file\
-     - the entity used to map the database view is `GenreAndTitleView.java`
+**Key points:**
+- the database view is available in `data-mysql.sql` file
+- the entity used to map the database view is `GenreAndTitleView.java`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2546,9 +2591,9 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This application is an example of updating, inserting and deleting data in a MySQL database view. Every update/insert/delete will automatically update the contents of the underlying table(s).
 
-**Key points:**\
-     - the database views are available in `data-mysql.sql` file\
-     - respect [MySQL](https://dev.mysql.com/doc/refman/8.0/en/view-updatability.html) requirements for updatable and insertable database views
+**Key points:**
+- the database views are available in `data-mysql.sql` file
+- respect [MySQL](https://dev.mysql.com/doc/refman/8.0/en/view-updatability.html) requirements for updatable and insertable database views
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2556,18 +2601,19 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This application is an example of preventing inserts/updates of a MySQL view that are not visible through this view via `WITH CHECK OPTION`. In other words, whenever you insert or update a row of the base tables through a view, MySQL ensures that the this operation is conformed with the definition of the view.
 
-**Key points:**\
-     - add `WITH CHECK OPTION` to the view\
-     - this application will throw an exception of type `java.sql.SQLException: CHECK OPTION failed 'bookstoredb.author_anthology_view`
+**Key points:**
+- add `WITH CHECK OPTION` to the view
+- this application will throw an exception of type `java.sql.SQLException: CHECK OPTION failed 'bookstoredb.author_anthology_view`
 
 ----------------------------------------------------------------------------------------------------------------------
 
 178. **[How To Efficiently Assign A Database Sequential Number To DTO Rows](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAssignSequentialNumber)**
  
-**Description:** This application is an example of assigning a database sequential number to DTO rows via the window function, `ROW_NUMBER()`. This is available in almost all databases, and starting with version 8.x is available in MySQL as well.
+**Description:** This application is an example of assigning a database sequential number to DTO rows via the window function, `ROW_NUMBER()`. This window function is available in almost all databases, and starting with version 8.x is available in MySQL as well.
 
-**Key points:**\
-     - write a native query relying on `ROW_NUMBER()` window function
+**Key points:**
+- write a Spring projection (DTO) that contains a getter for the column generated by `ROW_NUMBER`
+- write a native query relying on `ROW_NUMBER()` window function
      
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAssignSequentialNumber/assign%20sequential%20number%20to%20rows.png)
@@ -2578,8 +2624,8 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
  
 **Description:** This application is an example of finding top N rows of every group.
 
-**Key points:**\
-     - write a native query relying on `ROW_NUMBER()` window function
+**Key points:**
+- write a native query relying on `ROW_NUMBER()` window function
      
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootTopNRowsPerGroup/Finding%20top%20N%20rows%20of%20every%20group.png)
@@ -2590,9 +2636,9 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This application is an example of using `ROW_NUMBER()` (and `COUNT(*) OVER()` for counting all elements) window function to implement pagination.
 
-**Key points:**\
-     - use a native query relying on `ROW_NUMBER()`\
-     - we don't return a page as `Page` or `Slice`, we return it as `List`, therefore `Pageable` is not used
+**Key points:**
+- use a native query relying on `ROW_NUMBER()`
+- we don't return a page as `Page` or `Slice`, we return it as `List`, therefore `Pageable` is not used
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2603,10 +2649,10 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 1. `@Transactional` was added to a `private`, `protected` or `package-protected` method
 2. `@Transactional` was added to a method defined in the same class where it is invoked
 
-**Key points:**\
-     - write a helper service and move the `@Transactional` methods there\
-     - ensure that these methods are declared as `public`\
-     - call `@Transactional` methods from other services
+**Key points:**
+- write a helper service and move the `@Transactional` methods there
+- ensure that these methods are declared as `public`
+- call `@Transactional` methods from other services
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2614,9 +2660,9 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This is a Spring Boot example of using the `hi/lo` algorithm and a custom implementation of `SequenceStyleGenerator` for generating custom sequence IDs (e.g, `A-0000000001`, `A-0000000002`, ...).
 
-**Key points:**\
-     - extend `SequenceStyleGenerator` and override the `configure()` and `generate()` methods\
-     - set this generator in entities
+**Key points:**
+- extend `SequenceStyleGenerator` and override the `configure()` and `generate()` methods
+- set this generator in entities
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2624,8 +2670,8 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
  
 **Description:** This application is an example of mapping `Clob` and `Blob` as `byte[]` and `String`. 
 
-**Key points:**\
-     - this is vey easy to use but the application doesn't take advantage of JDBC driver LOB-specific optimizations
+**Key points:**
+- this is vey easy to use but the application doesn't take advantage of JDBC driver LOB-specific optimizations
      
 ----------------------------------------------------------------------------------------------------------------------
      
@@ -2633,8 +2679,8 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
  
 **Description:** This application is an example of mapping to JDBC's `LOB` locators `Clob` and `Blob`.
 
-**Key points:**\
-     - this takes advantage of JDBC driver LOB-specific optimizations
+**Key points:**
+- this takes advantage of JDBC driver LOB-specific optimizations
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2642,8 +2688,8 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This application is a sample of fetching a certain subclass from a `SINGLE_TABLE` inheritance hierarchy. This is useful when the dedicated repository of the subclass doesn't automatically add in the `WHERE` clause a `dtype` based condition for fetching only the needed subclass.
 
-**Key points:**\
-     - explicitly add in the `WHERE` clause a `TYPE` check
+**Key points:**
+- explicitly add in the `WHERE` clause a `TYPE` check 
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2658,10 +2704,10 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 187. **[How To Implement Advanced Search Via `Specification`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSearchViaSpecifications)**
  
-**Description:** This application is an example of implementing an advanced search via `Specification` API. Mainly, you can give the search filters to a generic `Specification` and fetch the result set. Pagination is supported as well. You can chain expressions via `AND` and `OR` to create compound filters. Nevertheless, there is room for extensions to add brackets support (e.g., `(x AND y) OR (x AND z)`), more operations, conditions parser and so on and forth.
+**Description:** This application is an example of implementing an advanced search via `Specification` API. Mainly, you can give the search filters to a generic `Specification` and fetch the result set. Pagination is supported as well. You can chain expressions via logical `AND` and `OR` to create compound filters. Nevertheless, there is room for extensions to add brackets support (e.g., `(x AND y) OR (x AND z)`), more operations, conditions parser and so on and forth.
 
-**Key points:**\
-     - write a generic `Specification`   
+**Key points:**
+- write a generic `Specification`       
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2669,23 +2715,23 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This application contains two examples of how to define `JOIN` in `Specification` to emulate JPQL join-fetch operations.
 
-**Key points:**\
-     - the first approach trigger two `SELECT` statements and the pagination is done in memory (very bad!)\
-     - the second approach trigger three `SELECT` statements but the pagination is done in the database\
-     - in both approaches the `JOIN` is defined in a `Specification` implementation
+**Key points:**
+- the first approach trigger two `SELECT` statements and the pagination is done in memory (very bad!)
+- the second approach trigger three `SELECT` statements but the pagination is done in the database
+- in both approaches the `JOIN` is defined in a `Specification` implementation
 
 ----------------------------------------------------------------------------------------------------------------------
 
-189. **[DTOs Via Spring Data Projections (Projection Interface In Repository Interface)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjectionsIntefaceInRepo)** 
+189. **[DTO Via Spring Data Projections (Projection Interface In Repository Interface)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjectionsIntefaceInRepo)** 
 
-**Note:** You may also like to read the recipe, ["How To Enrich DTOs With Virtual Properties Via Spring Projections"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaProjectionsAndVirtualProperties)
+**Note:** You may also like to read the recipe, ["How To Enrich DTO With Virtual Properties Via Spring Projections"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaProjectionsAndVirtualProperties)
 
-**Description:** Fetch only the needed data from the database via Spring Data Projections (DTOs). The projection interface is defined as a `static` interface (can be non-`static` as well) in the repository interface.
+**Description:** Fetch only the needed data from the database via Spring Data Projections (DTO). The projection interface is defined as a `static` interface (can be non-`static` as well) in the repository interface.
 
-**Key points:**\
-     - write an interface (projection) containing getters only for the columns that should be fetched from the database\
-     - write the proper query returning a `List<projection>`\
-     - if is applicable, limit the number of returned rows (e.g., via `LIMIT`) - here, we can use query builder mechanism built into Spring Data repository infrastructure
+**Key points:**
+- write an interface (projection) containing getters only for the columns that should be fetched from the database
+- write the proper query returning a `List<projection>`
+- if is applicable, limit the number of returned rows (e.g., via `LIMIT`) - here, we can use query builder mechanism built into Spring Data repository infrastructure
      
 **Note:** Using projections is not limited to use query builder mechanism built into Spring Data repository infrastructure. We can fetch projections via JPQL or native queries as well. For example, in this [application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjectionsAndJpql) we use a JPQL.
      
@@ -2694,23 +2740,23 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 ----------------------------------------------------------------------------------------------------------------------
 
-190. **[How To Ensure/Validate That Only One Association Is Non-null](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootChooseOnlyOneAssociation)**
+190. **[How To Ensure/Validate That Only One Association Is Non-Null](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootChooseOnlyOneAssociation)**
  
  **Description:** Consider an entity named `Review`. This entity defines three `@ManyToOne` relationships to `Book`, `Article` and `Magazine`. A review can be associated with either a book, a magazine or an article. To validate this constraint, we can rely on  [Bean Validation](https://beanvalidation.org/) as in this application.
 
-**Key points:**\
-     - rely on Bean Validation to validate that only one association is non-`null`\
-     - expose the constraint via a custom annotation (`@JustOneOfMany`) added at class-level to the `Review` entity\
-     - for preventing native query to break our constraint add the validation at database level as well (e.g., in MySQL add a `TRIGGER`) 
+**Key points:**
+- rely on Bean Validation to validate that only one association is non-`null`
+- expose the constraint via a custom annotation (`@JustOneOfMany`) added at class-level to the `Review` entity
+- for preventing native query to break our constraint add the validation at database level as well (e.g., in MySQL add a `TRIGGER`)
      
 ----------------------------------------------------------------------------------------------------------------------
      
-191. **[Quickest Mapping Of Enums](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnumStringInt)**
- 
+191. **[Quickest Mapping Of Java Enums](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnumStringInt)**
+  
 **Description:** This application uses `EnumType.ORDINAL` and `EnumType.STRING` for mapping Java `enum` type to database. As a rule of thumb, strive to keep the data types as small as possible (e.g., for `EnumType.ORDINAL` use `TINYINT/SMALLINT`, while for `EnumType.STRING` use `VARCHAR(max_needed_bytes)`). Relying on `EnumType.ORDINAL` should be more efficient but is less expressive than `EnumType.STRING`.
 
-**Key points:**\
-     - strive for smallest data types (e.g., for `EnumType.ORDINAL` set `@Column(columnDefinition = "TINYINT")`)
+**Key points:**
+- strive for smallest data types (e.g., for `EnumType.ORDINAL` set `@Column(columnDefinition = "TINYINT")`)
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2718,9 +2764,9 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
  
 **Description:** This application maps a Java `enum` via `AttributeConverter`. In other words, it maps the `enum` values `HORROR`, `ANTHOLOGY` and `HISTORY` to the integers `1`, `2` and `3` and viceversa. This allows us to set the column type as `TINYINT/SMALLINT` which is less space-consuming than `VARCHAR(9)` needed in this case.
 
-**Key points:**\
-     - define a custom `AttributeConverter`\
-     - annotate with `@Converter` the corresponding entity field
+**Key points:**
+- define a custom `AttributeConverter`
+- annotate with `@Converter` the corresponding entity field
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2728,10 +2774,10 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
  
 **Description:** This application maps a Java `enum` type to PostgreSQL `enum` type.
 
-**Key points:**\
-     - define a custom Hibernate `EnumType`\
-     - register this custom `EnumType` via `package-info.java`\
-     - annotate the corresponding entity field `@Type`
+**Key points:**
+- define a custom Hibernate `EnumType`
+- register this custom `EnumType` via `package-info.java`
+- annotate the corresponding entity field `@Type`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2739,10 +2785,10 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
  
 **Description:** This application maps a Java `enum` type to PostgreSQL `enum` type via [Hibernate Types](https://github.com/vladmihalcea/hibernate-types) library.
 
-**Key points:**\
-     - install Hibernate Types library via `pom.xml`\
-     - use `@TypeDef` to specify the needed type class\
-     - annotate the corresponding entity field with `@Type`
+**Key points:**
+- install Hibernate Types library via `pom.xml`
+- use `@TypeDef` to specify the needed type class
+- annotate the corresponding entity field with `@Type`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2750,9 +2796,9 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** [Hibernate Types](https://github.com/vladmihalcea/hibernate-types) is a library of extra types not supported by Hibernate Core by default. This is a Spring Boot application that uses this library to persist JSON data (JSON Java `Object`) in a MySQL `json` column and for querying JSON data from the MySQL `json` column to JSON Java `Object`. Updates are supported as well.
 
-**Key points:**\
-     - for Maven, add Hibernate Types as a dependency in `pom.xml`\
-     - in entity use `@TypeDef` to map `typeClass` to `JsonStringType`
+**Key points:**
+- for Maven, add Hibernate Types as a dependency in `pom.xml`
+- in entity use `@TypeDef` to map `typeClass` to `JsonStringType`
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2760,42 +2806,41 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** [Hibernate Types](https://github.com/vladmihalcea/hibernate-types) is a library of extra types not supported by Hibernate Core by default. This is a Spring Boot application that uses this library to persist JSON data (JSON Java `Object`) in a PostgreSQL `json` column and for querying JSON data from the PostgreSQL `json` column to JSON Java `Object`. Updates are supported as well.
 
-**Key points:**\
-     - for Maven, add Hibernate Types as a dependency in `pom.xml`\
-     - in entity use `@TypeDef` to map `typeClass` to `JsonBinaryType`
+**Key points:**
+- for Maven, add Hibernate Types as a dependency in `pom.xml`
+- in entity use `@TypeDef` to map `typeClass` to `JsonBinaryType`
 
 ----------------------------------------------------------------------------------------------------------------------
 
-197. **[How to increment the version of the locked entity even if this entity was not modified `OPTIMISTIC_FORCE_INCREMENT`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOptimisticForceIncrement)**
+197. **[How To Increment The Version Of The Locked Entity Even If This Entity Was Not Modified `OPTIMISTIC_FORCE_INCREMENT`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOptimisticForceIncrement)**
 
 **Description:** This application is a sample of how `OPTIMISTIC_FORCE_INCREMENT` works in MySQL. This is useful when you want to increment the version of the locked entity even if this entity was not modified. Via `OPTIMISTIC_FORCE_INCREMENT` the version is updated (incremented) at the end of the currently running transaction.
 
-**Key points:**\
-     - use a root entity, `Chapter` (which uses `@Version`)\
-     - several editors load a chapter and perfom modifications mapped via the `Modification` entity\
-     - between `Modification` (child-side) and `Chapter` (parent-side) there is a lazy unidirectional `@ManyToOne` relationship\
-     - for each modification, Hibernate will trigger an `INSERT` statement against `modification` table, therefore the `chapter` table will not be modified by editors\
-     - but, `Chapter` entity version is needed to ensure that modifications are applied sequentially (the author and editor are notified if a modificaton was added since the chapter copy was loaded)\
-     - the `version` is forcibly increased at each modification (this is materialized in an `UPDATE` triggered against the `chapter` table at the end of the currently running transaction)\
-     - set `OPTIMISTIC_FORCE_INCREMENT` in the corresponding repository\
-     - rely on two concurrent transactions to shape the scenario that will lead to an exception of type `ObjectOptimisticLockingFailureException`    
+**Key points:**
+- use a root entity, `Chapter` (which uses `@Version`)
+- several editors load a chapter and perform modifications mapped via the `Modification` entity
+- between `Modification` (child-side) and `Chapter` (parent-side) there is a lazy unidirectional `@ManyToOne` association
+- for each modification, Hibernate will trigger an `INSERT` statement against the `modification` table, therefore the `chapter` table will not be modified by editors
+- but, `Chapter` entity version is needed to ensure that modifications are applied sequentially (the author and editor are notified if a modificaton was added since the chapter copy was loaded)
+- the `version` is forcibly increased at each modification (this is materialized in an `UPDATE` triggered against the `chapter` table at the end of the currently running transaction)
+- set `OPTIMISTIC_FORCE_INCREMENT` in the corresponding repository
+- rely on two concurrent transactions to shape the scenario that will lead to an exception of type `ObjectOptimisticLockingFailureException`      
 
 ----------------------------------------------------------------------------------------------------------------------
 
-198. **[How to increment the version of the locked entity even if this entity was not modified `PESSIMISTIC_FORCE_INCREMENT`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPesimisticForceIncrement)**
+198. **[How To Increment The Version Of The Locked Entity Even If This Entity Was Not Modified `PESSIMISTIC_FORCE_INCREMENT`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPesimisticForceIncrement)**
 
-**Descripti
-on:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in MySQL. This is useful when you want to increment the version of the locked entity even if this entity was not modified. Via `PESSIMISTIC_FORCE_INCREMENT` the version is updated (incremented) immediately (the entity version update is guaranteed to succeed immediately after acquiring the row-level lock). The incrementation takes place before the entity is returned to the data access layer.
+**Description:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in MySQL. This is useful when you want to increment the version of the locked entity even if this entity was not modified. Via `PESSIMISTIC_FORCE_INCREMENT` the version is updated (incremented) immediately (the entity version update is guaranteed to succeed immediately after acquiring the row-level lock). The incrementation takes place before the entity is returned to the data access layer.
 
-**Key points:**\
-     - use a root entity, `Chapter` (which uses `@Version`)\
-     - several editors load a chapter and perfom modifications mapped via the `Modification` entity\
-     - between `Modification` (child-side) and `Chapter` (parent-side) there is a lazy unidirectional `@ManyToOne` relationship\
-     - for each modification, Hibernate will trigger an `INSERT` statement against `modification` table, therefore the `chapter` table will not be modified by editors\
-     - but, `Chapter` entity `version` is needed to ensure that modifications are applied sequentially (each editor is notified if a modificaton was added since his chapter copy was loaded and he must re-load the chapter)\
-     - the `version` is forcibly increased at each modification (this is materialized in an `UPDATE` triggered against the `chapter` table immediately after aquiring the row-level lock)\
-     - set `PESSIMISTIC_FORCE_INCREMENT` in the corresponding repository\
-     - rely on two concurrent transactions to shape two scenarios: one that will lead to an exception of type `OptimisticLockException` and one that will lead to `QueryTimeoutException`          
+**Key points:**
+- use a root entity, `Chapter` (which uses `@Version`)
+- several editors load a chapter and perform modifications mapped via the `Modification` entity
+- between `Modification` (child-side) and `Chapter` (parent-side) there is a lazy unidirectional `@ManyToOne` association
+- for each modification, Hibernate will trigger an `INSERT` statement against the `modification` table, therefore the `chapter` table will not be modified by editors
+- but, `Chapter` entity `version` is needed to ensure that modifications are applied sequentially (each editor is notified if a modificaton was added since his chapter copy was loaded and he must re-load the chapter)
+- the `version` is forcibly increased at each modification (this is materialized in an `UPDATE` triggered against the `chapter` table immediately after aquiring the row-level lock)
+- set `PESSIMISTIC_FORCE_INCREMENT` in the corresponding repository
+- rely on two concurrent transactions to shape two scenarios: one that will lead to an exception of type `OptimisticLockException` and one that will lead to `QueryTimeoutException`                   
      
 **Note:** Pay attention to the MySQL dialect: `MySQL5Dialect` (MyISAM) doesn't support row-level locking, `MySQL5InnoDBDialect` (InnoDB) acquires row-level lock via `FOR UPDATE` (timeout can be set), `MySQL8Dialect` (InnoDB) acquires row-level lock via `FOR UPDATE NOWAIT`.
 
@@ -2805,9 +2850,9 @@ on:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in
  
 **Description:** This application is an example of using `PESSIMISTIC_READ` and `PESSIMISTIC_WRITE` in MySQL. In a nutshell, each database system defines its own syntax for acquiring shared and exclusive locks and not all databases support both types of locks. Depending on `Dialect`, the syntax can vary for the same database as well (Hibernate relies on `Dialect` for chosing the proper syntax). In MySQL, `MySQL5Dialect` doesn't support locking, while InnoDB engine (`MySQL5InnoDBDialect` and `MySQL8Dialect`) supports shared and exclusive locks as expected.
 
-**Key points:**\
-     - rely on `@Lock(LockModeType.PESSIMISTIC_READ)` and `@Lock(LockModeType.PESSIMISTIC_WRITE)` on query-level\
-     - for testing, use `TransactionTemplate` to trigger two concurrent transactions that read and write the same row
+**Key points:**
+- rely on `@Lock(LockModeType.PESSIMISTIC_READ)` and `@Lock(LockModeType.PESSIMISTIC_WRITE)` on query-level
+- for testing, use `TransactionTemplate` to trigger two concurrent transactions that read and write the same row
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2815,11 +2860,11 @@ on:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in
  
 **Description:** This application is an example of triggering `UPDATE`, `INSERT` and `DELETE` operations in the context of `PESSIMISTIC_WRITE` locking against MySQL. While `UPDATE` and `DELETE` are blocked until the exclusive lock is released, `INSERT` depends on the transaction isolation level. Typically, even with exclusive locks, inserts are possible (e.g., in PostgreSQL). In MySQL, for the default isolation level, `REPEATABLE READ`, inserts are prevented against a range of locked entries, but, if we switch to `READ_COMMITTED`, then MySQL acts as PostgreSQL as well.
 
-**Key points:**\
-     - start *Transaction A* and trigger a `SELECT` with `PESSIMISTIC_WRITE` to acquire an exclusive lock\
-     - start a concurrent *Transaction B* that triggers an `UPDATE`, `INSERT` or `DELETE` on the rows locked by *Transaction A*\
-     - in case of `UPDATE`, `DELETE` and `INSERT` + `REPEATABLE_READ`, *Transaction B* is blocked until it timeouts or *Transaction A* releases the exclusive lock\
-     - in case of `INSERT` + `READ_COMMITTED`, *Transaction B* can insert in the range of rows locked by *Transaction A* even if *Transaction A* is holding an exclusive lock on this range  
+**Key points:**
+- start *Transaction A* and trigger a `SELECT` with `PESSIMISTIC_WRITE` to acquire an exclusive lock
+- start a concurrent *Transaction B* that triggers an `UPDATE`, `INSERT` or `DELETE` on the rows locked by *Transaction A*
+- in case of `UPDATE`, `DELETE` and `INSERT` + `REPEATABLE_READ`, *Transaction B* is blocked until it timeouts or *Transaction A* releases the exclusive lock
+- in case of `INSERT` + `READ_COMMITTED`, *Transaction B* can insert in the range of rows locked by *Transaction A* even if *Transaction A* is holding an exclusive lock on this range     
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -2829,11 +2874,11 @@ on:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in
 
 **Description:** This application contains several approaches for setting a timeout period for a transaction or query. The timeout is signaled by a specific timeout exception (e.g., `.QueryTimeoutException`). After timeout, the transaction is rolled back. You can see this in the database (visually or query) and on log via a message of type: `Initiating transaction rollback; Rolling back JPA transaction on EntityManager [SessionImpl(... <open>)]`.
 
-**Key points:**\
-     - set global transaction timeout via `spring.transaction.default-timeout` in seconds (see, `application.properties`)\
-     - set transaction timeout at method-level or class-level via `@Transactional(timeout = n)` in seconds\
-     - set query timeout via JPA `javax.persistence.query.timeout` hint in milliseconds\
-     - set query timeout via Hibrenate `org.hibernate.timeout` hint in seconds
+**Key points:**
+- set global transaction timeout via `spring.transaction.default-timeout` in seconds (see, `application.properties`)
+- set transaction timeout at method-level or class-level via `@Transactional(timeout = n)` in seconds
+- set query timeout via JPA `javax.persistence.query.timeout` hint in milliseconds
+- set query timeout via Hibrenate `org.hibernate.timeout` hint in seconds
      
 **Note:** If you are using `TransactionTemplate` then the timeout can be set via `TransactionTemplate.setTimeout(n)` in seconds.
 
@@ -2841,25 +2886,25 @@ on:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in
 
 202. **[How To Define A Composite Primary Key Via `@Embeddable`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCompositeKeyEmbeddable)**
 
-**Description:** This application is a proof of concept of how to define a composite key via `@Embeddable` and `@EmbeddedId`. This application uses two entities, `Author` and `Book` involved in a lazy bidirectional `@OneToMany` relationship. The identifier of `Author` is composed by `name` and `age` via `AuthorId` class. The identifier of `Book` is just a typical auto-generated numeric value.
+**Description:** This application is a proof of concept of how to define a composite key via `@Embeddable` and `@EmbeddedId`. This application uses two entities, `Author` and `Book` involved in a lazy bidirectional `@OneToMany` association. The identifier of `Author` is composed by `name` and `age` via `AuthorId` class. The identifier of `Book` is just a regular auto-generated numeric value.
 
-**Key points:**\
-     - The composite key class (e.g., `AuthorId`) is `public`\
-     - The composite key class must implement `Serializable`\
-     - The composite key must define `equals()` and `hashCode()`\
-     - The composite key must define a no-arguments constructor
+**Key points:**
+- the composite key class (e.g., `AuthorId`) is `public`
+- the composite key class must implement `Serializable`
+- the composite key must define `equals()` and `hashCode()`
+- the composite key must define a no-arguments constructor
 
 ----------------------------------------------------------------------------------------------------------------------
 
 203. **[How To Define A Composite Primary Key Via `@IdClass`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCompositeKeyIdClass)**
 
-**Description:** This application is a proof of concept of how to define a composite key via `@IdClass`. This application uses two entities, `Author` and `Book` involved in a lazy bidirectional `@OneToMany` relationship. The identifier of `Author` is composed by `name` and `age` via `AuthorId` class. The identifier of `Book` is just a typical auto-generated numeric value.
+**Description:** This application is a proof of concept of how to define a composite key via `@IdClass`. This application uses two entities, `Author` and `Book` involved in a lazy bidirectional `@OneToMany` association. The identifier of `Author` is composed by `name` and `age` via `AuthorId` class. The identifier of `Book` is just a typical auto-generated numeric value.
 
-**Key points:**\
-     - The composite key class (e.g., `AuthorId`) is `public`\
-     - The composite key class must implement `Serializable`\
-     - The composite key must define `equals()` and `hashCode()`\
-     - The composite key must define a no-arguments constructor
+**Key points:**
+- the composite key class (e.g., `AuthorId`) is `public`
+- the composite key class must implement `Serializable`
+- the composite key must define `equals()` and `hashCode()`
+- the composite key must define a no-arguments constructor
      
 **Note**: The `@IdClass` can be useful when we cannot modify the compsite key class. Otherwise, rely on [`@Embeddable`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCompositeKeyEmbeddable).
 
@@ -2869,11 +2914,11 @@ on:** This application is a sample of how `PESSIMISTIC_FORCE_INCREMENT` works in
 
 **Description:** This application is a proof of concept of how to define a relationship in an `@Embeddable` composite key. The composite key is `AuthorId` and it belongs to the `Author` class.
 
-**Key points:**\
-     - The composite key class (e.g., `AuthorId`) is `public`\
-     - The composite key class must implement `Serializable`\
-     - The composite key must define `equals()` and `hashCode()`\
-     - The composite key must define a no-arguments constructor
+**Key points:**
+- the composite key class (e.g., `AuthorId`) is `public`
+- the composite key class must implement `Serializable`
+- the composite key must define `equals()` and `hashCode()`
+- the composite key must define a no-arguments constructor
 
 ----------------------------------------------------------------------------------------------------------------------
 

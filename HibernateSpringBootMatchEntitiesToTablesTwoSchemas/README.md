@@ -4,12 +4,12 @@
 
 **Description:** This application is an example of using `schema-*.sql` to generate two databases in MySQL. The databases are matched at entity mapping via `@Table`.
 
-**Key points:**\
-     - in `application.properties`, set the JDBC URL without the database, e.g., `spring.datasource.url=jdbc:mysql://localhost:3306`\
-     - in `application.properties`, disable DDL auto (just don't specify `hibernate.ddl-auto`)\
-     - in `aaplication.properties`, instruct Spring Boot to initialize the schema from `schema-mysql.sql` file\
-     - in `Author` entity, specify that the corresponding table (`author`) is in the database `authorsdb` via `@Table(schema="authorsdb")`\
-     - in `Book` entity, specify that the corresponding table (`book`) is in the database `booksdb` via `@Table(schema="booksdb")`
+**Key points:**
+- in `application.properties`, set the JDBC URL without the database, e.g., `spring.datasource.url=jdbc:mysql://localhost:3306`
+- in `application.properties`, disable DDL auto (just don't specify `hibernate.ddl-auto`)
+- in `aaplication.properties`, instruct Spring Boot to initialize the schema from `schema-mysql.sql` file
+- in `Author` entity, specify that the corresponding table (`author`) is in the database `authorsdb` via `@Table(schema="authorsdb")`
+- in `Book` entity, specify that the corresponding table (`book`) is in the database `booksdb` via `@Table(schema="booksdb")`
 
 **Output example:**
 - Persisting a `Author` results in the following SQL: `insert into authorsdb.author (age, genre, name) values (?, ?, ?)`

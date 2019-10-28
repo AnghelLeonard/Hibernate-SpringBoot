@@ -4,9 +4,9 @@
  
 **Description:** This application fetches all `Author` entities via a `SELECT` query. Further, calling the `getBooks()` method of the first `Author` entity will trigger another `SELECT` query that initializes the association of the first three `Author` entities returned by the previous `SELECT` query. This is the effect of `@BatchSize`.
 
-**Key points:**\
-     - `Author` and `Book` are in a lazy relationship (e.g., `@OneToMany` bidirectional relationship)\
-     - `Author` association is annotated with `@BatchSize(size = 3)`
+**Key points:**
+- `Author` and `Book` are in a lazy relationship (e.g., `@OneToMany` bidirectional relationship)
+- `Author` association is annotated with `@BatchSize(size = 3)`
 
 -------------------------------
 

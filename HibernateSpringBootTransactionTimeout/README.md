@@ -4,11 +4,11 @@
 
 **Description:** This application contains several approaches for setting a timeout period for a transaction or query. The timeout is signaled by a specific timeout exception (e.g., `.QueryTimeoutException`). After timeout, the transaction is rolled back. You can see this in the database (visually or query) and on log via a message of type: `Initiating transaction rollback; Rolling back JPA transaction on EntityManager [SessionImpl(... <open>)]`.
 
-**Key points:**\
-     - set global transaction timeout via `spring.transaction.default-timeout` in seconds (see, `application.properties`)\
-     - set transaction timeout at method-level or class-level via `@Transactional(timeout = n)` in seconds\
-     - set query timeout via JPA `javax.persistence.query.timeout` hint in milliseconds\
-     - set query timeout via Hibrenate `org.hibernate.timeout` hint in seconds
+**Key points:**
+- set global transaction timeout via `spring.transaction.default-timeout` in seconds (see, `application.properties`)
+- set transaction timeout at method-level or class-level via `@Transactional(timeout = n)` in seconds
+- set query timeout via JPA `javax.persistence.query.timeout` hint in milliseconds
+- set query timeout via Hibrenate `org.hibernate.timeout` hint in seconds
      
 **Note:** If you are using `TransactionTemplate` then the timeout can be set via `TransactionTemplate.setTimeout(n)` in seconds.
 

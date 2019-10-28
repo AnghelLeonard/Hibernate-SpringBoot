@@ -2,11 +2,11 @@
  
 **Description:** Auditing is useful for maintaining history records. This can later help us in tracking user activities. 
  
-**Key points:**\
-     - in `pom.xml` add the dependency `hibernate-envers` and JAXB API\
-     - each entity that should be audited should be annotated with `@Audited`\
-     - optionally, annotate entities with `@AuditTable` to rename the table used for auditing\
-     - rely on `ValidityAuditStrategy` for fast database reads, but slower writes (slower than the default `DefaultAuditStrategy`)
+**Key points:**
+- for Maven, in `pom.xml` add the dependency `hibernate-envers` and JAXB API
+- each entity that should be audited should be annotated with `@Audited`
+- optionally, annotate entities with `@AuditTable` to rename the table used for auditing
+- rely on `ValidityAuditStrategy` for fast database reads, but slower writes (slower than the default `DefaultAuditStrategy`)
       
 -------------------------------
 
