@@ -658,7 +658,7 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 **See also:**
 - [LEFT JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLeftJoinFetch)
-- [JOIN FETCH And DTO](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch)
+- [Why To Avoid JOIN FETCH And DTO](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch)
 - [JOIN VS. JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinVSJoinFetch)
 
 **Description:** Typically, when we get a `LazyInitializationException` we tend to modify the association fetching type from `LAZY` to `EAGER`. That is very bad! This is a [code smell](https://vladmihalcea.com/eager-fetching-is-a-code-smell/). Best way to avoid this exception is to rely on `JOIN FETCH` (if you plan to modify the fetched entities) or `JOIN` + DTO (if the fetched data is only read). `JOIN FETCH` allows associations or collections of values to be initialized along with their parent objects using a single `SELECT`. This application is a `JOIN FETCH` example with entities. But, with some constraints, `JOIN FETCH` can be used with DTO as well. An example is available [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch).
