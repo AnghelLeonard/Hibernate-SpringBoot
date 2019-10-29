@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jpa</groupId>
-    <artifactId>HibernateSpringBootDtoSubselect</artifactId>
+    <artifactId>HibernateSpringBootSubselect</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>HibernateSpringBootDtoSubselect</name>
+    <name>HibernateSpringBootSubselect</name>
     <description>JPA project for Spring Boot</description>
 
     <parent>

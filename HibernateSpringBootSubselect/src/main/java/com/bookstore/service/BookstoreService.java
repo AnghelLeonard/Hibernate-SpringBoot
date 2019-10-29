@@ -1,26 +1,25 @@
 package com.bookstore.service;
 
-import com.bookstore.dto.AuthorDto;
+import com.bookstore.summary.AuthorSummary;
 import com.bookstore.entity.Book;
-import java.util.List;
 import java.util.Set;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.bookstore.repository.AuthorDtoRepository;
+import com.bookstore.repository.AuthorSummaryRepository;
 
 @Service
 public class BookstoreService {
 
-    private final AuthorDtoRepository authorDtoRepository;
+    private final AuthorSummaryRepository authorSummaryRepository;
 
-    public BookstoreService(AuthorDtoRepository authorDtoRepository) {
-        this.authorDtoRepository = authorDtoRepository;
+    public BookstoreService(AuthorSummaryRepository authorSummaryRepository) {
+        this.authorSummaryRepository = authorSummaryRepository;
     }
 
     @Transactional(readOnly = true)
     public void fetchAuthorWithBooksById(long id, String genre) {
 
-        AuthorDto author = authorDtoRepository.findById(id).orElseThrow();
+        AuthorSummary author = authorSummaryRepository.findById(id).orElseThrow();
 
         System.out.println("Author: " + author.getName());
 

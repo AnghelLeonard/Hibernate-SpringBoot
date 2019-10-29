@@ -1,4 +1,4 @@
-package com.bookstore.dto;
+package com.bookstore.summary;
 
 import com.bookstore.entity.Book;
 import java.io.Serializable;
@@ -16,7 +16,7 @@ import org.hibernate.annotations.Synchronize;
         "SELECT a.id AS id, a.name AS name, a.genre AS genre FROM Author a")
 @Synchronize({"author", "book"})
 @Immutable
-public class AuthorDto implements Serializable {
+public class AuthorSummary implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
