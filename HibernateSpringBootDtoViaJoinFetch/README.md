@@ -1,4 +1,4 @@
-**[`JOIN FETCH` And DTO](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch)**
+**[Why To Avoid `JOIN FETCH` And DTO](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch)**
 
 **See also:**
 - [How To Avoid LazyInitializationException Via JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinFetch)
@@ -6,6 +6,8 @@
 - [JOIN VS. JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinVSJoinFetch)
      
 **Description:** Combining `JOIN FETCH` and DTO can be done under several constrains. Mainly, the JPQL containing the `JOIN FETCH` cannot be used to fetch only some columns from the involved entities (in such cases, `JOIN` is the proper choice). It must fetch all attributes of the involved entities. 
+
+**But, even if the result set will be mapped to the DTO classes, it will be also loaded in the Persistent Context as entities. If we use `@Transactional(readOnly=false)` then the hydrated state will be kept in memory as well. If we use `@Transactional(readOnly=true)` then the hydrated state is discarded from memory, but the entities entries remains in `READ_ONLY` status in Persistent Context until the Persistent Context is cleared or closed.**.
 
 **Key points:**
 - define two related entities (e.g., `Author` and `Book` in a one-to-many lazy bidirectional relationship)
