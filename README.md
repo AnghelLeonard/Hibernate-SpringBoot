@@ -1438,7 +1438,7 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-93. **[How To Map An Entity To a Query (`@Subselect`) in a Spring Boot Application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSubselect)**
+93. **[How To Map An Entity To a Query (`@Subselect`) in a Spring Boot Application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSubselect)**
 
 **Note:** Consider using `@Subselect` only if using DTO, DTO and extra queries, or map a database view to an entity is not a solution.
 
