@@ -5,13 +5,14 @@ import java.util.List;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional(readOnly = true)
-public interface AuthorRepository extends JpaRepository<Author, Long> {
+public interface AuthorRepository extends JpaRepository<Author, Long>, JpaSpecificationExecutor<Author> {
    
     @EntityGraph(value = "author-books-graph", 
             type = EntityGraph.EntityGraphType.FETCH)
@@ -22,6 +23,7 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
             type = EntityGraph.EntityGraphType.FETCH)
     public List<Author> findByAgeLessThanOrderByNameDesc(int age);
     
+    @Override
     @EntityGraph(value = "author-books-graph",
             type = EntityGraph.EntityGraphType.FETCH)
     public List<Author> findAll(Specification spec);  
