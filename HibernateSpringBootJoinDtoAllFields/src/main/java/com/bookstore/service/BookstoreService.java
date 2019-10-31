@@ -1,0 +1,108 @@
+package com.bookstore.service;
+
+import com.bookstore.dto.AuthorDto;
+import com.bookstore.repository.AuthorRepository;
+import org.springframework.stereotype.Service;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import org.hibernate.engine.spi.EntityEntry;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
+import org.springframework.transaction.annotation.Transactional;
+
+@Service
+public class BookstoreService {
+
+    private final AuthorRepository authorRepository;
+
+    @PersistenceContext
+    private final EntityManager entityManager;
+
+    public BookstoreService(AuthorRepository authorRepository,
+            EntityManager entityManager) {
+
+        this.authorRepository = authorRepository;
+        this.entityManager = entityManager;
+    }
+
+    @Transactional(readOnly = true)
+    public void fetchAuthorAsArrayOfObject() {
+        List<Object[]> authors = authorRepository.fetchAsArray();
+        authors.forEach(a -> System.out.println(Arrays.toString(a)));
+
+        briefOverviewOfPersistentContextContent();
+    }
+
+    @Transactional(readOnly = true)
+    public void fetchAuthorAsDtoClass() {
+        List<AuthorDto> authors = authorRepository.fetchAsDto();
+        authors.forEach(System.out::println);
+
+        briefOverviewOfPersistentContextContent();
+    }
+
+    @Transactional(readOnly = true)
+    public void fetchAuthorAsDtoClassColumns() {
+        List<AuthorDto> authors = authorRepository.fetchAsDtoColumns();
+        authors.forEach(a -> System.out.println("Author{id=" + a.getId()
+                + ", name=" + a.getName() + ", genre=" + a.getGenre()
+                + ", age=" + a.getAge() + "}"));
+
+        briefOverviewOfPersistentContextContent();
+    }
+
+    @Transactional(readOnly = true)
+    public void fetchAuthorAsDtoClassNative() {
+        List<AuthorDto> authors = authorRepository.fetchAsDtoNative();
+        authors.forEach(a -> System.out.println("Author{id=" + a.getId()
+                + ", name=" + a.getName() + ", genre=" + a.getGenre()
+                + ", age=" + a.getAge() + "}"));
+
+        briefOverviewOfPersistentContextContent();
+    }
+
+    @Transactional(readOnly = true)
+    public void fetchAuthorByGenreAsDtoClassQueryBuilderMechanism() {
+        List<AuthorDto> authors = authorRepository.findByGenre("History");
+        authors.forEach(a -> System.out.println("Author{id=" + a.getId()
+                + ", name=" + a.getName() + ", genre=" + a.getGenre()
+                + ", age=" + a.getAge() + "}"));
+
+        briefOverviewOfPersistentContextContent();
+    }
+
+    private void briefOverviewOfPersistentContextContent() {
+        org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
+
+        int managedEntities = persistenceContext.getNumberOfManagedEntities();
+
+        System.out.println("\n-----------------------------------");
+        System.out.println("Total number of managed entities: " + managedEntities);
+
+        Map entities = persistenceContext.getEntitiesByKey();
+        entities.forEach((key, value) -> System.out.println(key + ":" + value));
+
+        entities.values().forEach(entry
+                -> {
+            EntityEntry ee = persistenceContext.getEntry(entry);
+            System.out.println(
+                    "Entity name: " + ee.getEntityName()
+                    + " | Status" + ee.getStatus()
+                    + " | State: " + Arrays.toString(ee.getLoadedState()));
+        });
+
+        System.out.println("\n-----------------------------------\n");
+    }
+
+    private org.hibernate.engine.spi.PersistenceContext getPersistenceContext() {
+
+        SharedSessionContractImplementor sharedSession = entityManager.unwrap(
+                SharedSessionContractImplementor.class
+        );
+
+        return sharedSession.getPersistenceContext();
+    }
+
+}
