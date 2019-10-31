@@ -23,7 +23,19 @@ public class MainApplication {
             System.out.println("\n\n Fetch authors as array of objects");
             System.out.println("-----------------------------------------------------------------------------");
             bookstoreService.fetchAuthorAsArrayOfObject();
-
+            
+            System.out.println("\n\n Fetch authors as array of objects by specifying columns");
+            System.out.println("-----------------------------------------------------------------------------");
+            bookstoreService.fetchAuthorAsArrayOfObjectColumns();
+            
+            System.out.println("\n\n Fetch authors as array of objects via native query");
+            System.out.println("-----------------------------------------------------------------------------");
+            bookstoreService.fetchAuthorAsArrayOfObjectNative();
+            
+            System.out.println("\n\n Fetch authors as array of objects via query builder mechanism");
+            System.out.println("-----------------------------------------------------------------------------");
+            bookstoreService.fetchAuthorAsArrayOfObjectQueryBuilderMechanism();
+            
             System.out.println("\n\n Fetch authors as Spring projection (DTO):");
             System.out.println("-----------------------------------------------------------------------------");
             bookstoreService.fetchAuthorAsDtoClass();

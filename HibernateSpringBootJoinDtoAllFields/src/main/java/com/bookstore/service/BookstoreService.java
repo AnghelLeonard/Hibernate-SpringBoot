@@ -36,6 +36,30 @@ public class BookstoreService {
     }
 
     @Transactional(readOnly = true)
+    public void fetchAuthorAsArrayOfObjectColumns() {
+        List<Object[]> authors = authorRepository.fetchAsArrayColumns();
+        authors.forEach(a -> System.out.println(Arrays.toString(a)));
+
+        briefOverviewOfPersistentContextContent();
+    }
+
+    @Transactional(readOnly = true)
+    public void fetchAuthorAsArrayOfObjectNative() {
+        List<Object[]> authors = authorRepository.fetchAsArrayNative();
+        authors.forEach(a -> System.out.println(Arrays.toString(a)));
+
+        briefOverviewOfPersistentContextContent();
+    }
+
+    @Transactional(readOnly = true)
+    public void fetchAuthorAsArrayOfObjectQueryBuilderMechanism() {
+        List<Object[]> authors = authorRepository.findByGenre("History");
+        authors.forEach(a -> System.out.println(Arrays.toString(a)));
+
+        briefOverviewOfPersistentContextContent();
+    }
+
+    @Transactional(readOnly = true)
     public void fetchAuthorAsDtoClass() {
         List<AuthorDto> authors = authorRepository.fetchAsDto();
         authors.forEach(System.out::println);
@@ -65,7 +89,7 @@ public class BookstoreService {
 
     @Transactional(readOnly = true)
     public void fetchAuthorByGenreAsDtoClassQueryBuilderMechanism() {
-        List<AuthorDto> authors = authorRepository.findByGenre("History");
+        List<AuthorDto> authors = authorRepository.findFirst2ByGenre("History");
         authors.forEach(a -> System.out.println("Author{id=" + a.getId()
                 + ", name=" + a.getName() + ", genre=" + a.getGenre()
                 + ", age=" + a.getAge() + "}"));
