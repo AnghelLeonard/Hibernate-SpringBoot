@@ -2954,3 +2954,12 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 **Key points:**
 - using virtual properties is the best approach
 - other approaches "pollute" the Persistent Context or return a result set that should be further processed
+
+----------------------------------------------------------------------------------------------------------------------
+
+208. **[Pay Attention To Spring Projections That Include Associated Collections](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootProjectionAndCollections)**
+
+**Description:** This application inspect the Persistent Context content during fetching Spring projections that includes collections of associations. In this case, we focus on a `@OneToMany` association. Mainly, we want to fetch only some attributes from the parent-side and some attributes from the child-side. 
+
+**Key points:**
+- nested projections fetches data in Persistent Context as well
