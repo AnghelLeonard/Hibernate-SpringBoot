@@ -1,6 +1,7 @@
 package com.bookstore.repository;
 
 import com.bookstore.dto.AuthorDto;
+import com.bookstore.dto.xx;
 import com.bookstore.entity.Author;
 import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
-
+    
     @Query("SELECT a FROM Author a")
     List<Object[]> fetchAsArray();
     
@@ -19,7 +20,7 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Query(value = "SELECT * FROM author a", nativeQuery = true)
     List<Object[]> fetchAsArrayNative();
         
-    List<Object[]> findByGenre(String genre);
+    List<Object[]> findBy();
 
     @Query("SELECT a FROM Author a")
     List<AuthorDto> fetchAsDto();
@@ -30,5 +31,5 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Query(value = "SELECT * FROM author a", nativeQuery = true)
     List<AuthorDto> fetchAsDtoNative();
     
-    List<AuthorDto> findFirst2ByGenre(String genre);
+    List<AuthorDto> findFirstBy();
 }
