@@ -74,13 +74,13 @@ public class BookstoreService {
         org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
 
         int managedEntities = persistenceContext.getNumberOfManagedEntities();
-        Map collections = persistenceContext.getCollectionEntries();
+        Map collectionEntries = persistenceContext.getCollectionEntries();
 
         System.out.println("\n-----------------------------------");
         System.out.println("Total number of managed entities: " + managedEntities);
-        if (collections != null) {
-            System.out.println("Total number of managed collections: "
-                    + (managedEntities - collections.values().size()));
+        if (collectionEntries != null) {
+            System.out.println("Total number of collection entries: "
+                    + (managedEntities - collectionEntries.values().size()));
         } else {
             System.out.println("No managed collections");
         }
