@@ -53,7 +53,7 @@ public class BookstoreService {
 
     @Transactional(readOnly = true)
     public void fetchAuthorAsArrayOfObjectQueryBuilderMechanism() {
-        List<Object[]> authors = authorRepository.findBy();
+        List<Object[]> authors = authorRepository.findFirstBy();
         authors.forEach(a -> System.out.println(Arrays.toString(a)));
 
         briefOverviewOfPersistentContextContent();
@@ -89,7 +89,7 @@ public class BookstoreService {
 
     @Transactional(readOnly = true)
     public void fetchAuthorByGenreAsDtoClassQueryBuilderMechanism() {
-        List<AuthorDto> authors = authorRepository.findFirstBy();
+        List<AuthorDto> authors = authorRepository.findBy();
         authors.forEach(a -> System.out.println("Author{id=" + a.getId()
                 + ", name=" + a.getName() + ", genre=" + a.getGenre()
                 + ", age=" + a.getAge() + "}"));

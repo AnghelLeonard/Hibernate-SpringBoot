@@ -19,7 +19,7 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Query(value = "SELECT * FROM author a", nativeQuery = true)
     List<Object[]> fetchAsArrayNative();
         
-    List<Object[]> findBy();
+    List<Object[]> findFirstBy();
 
     @Query("SELECT a FROM Author a")
     List<AuthorDto> fetchAsDto();
@@ -30,5 +30,5 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Query(value = "SELECT * FROM author a", nativeQuery = true)
     List<AuthorDto> fetchAsDtoNative();
     
-    List<AuthorDto> findFirstBy();
+    List<AuthorDto> findBy();
 }
