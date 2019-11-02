@@ -2944,3 +2944,13 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 - fetching the result set as a `List<Object[]>` or `List<AuthorDto>` via a native SQL of type `SELECT * FROM author` will **NOT** fetch the result set in Persistent Context
 - fetching the result set as a `List<Object[]>` via Spring Data query builder mechanism **WILL** fetch the result set in Persistent Context - avoid this approach
 - fetching the result set as a `List<AuthorDto>` via Spring Data query builder mechanism will **NOT** fetch the result set in Persistent Context
+
+----------------------------------------------------------------------------------------------------------------------
+
+207. **[How To Efficiently Fetch Spring Projection Including `@ManyToOne` Or `@OneToOne` Associations](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNestedVsVirtualProjection)**
+
+**Description:** This application fetches a Spring projection including the `@ManyToOne` association via different approaches. It can be easily adapted for `@OneToOne` association as well.
+
+**Key points:**
+- using virtual properties is the best approach
+- other approaches "pollute" the Persistent Context or return a result set that should be further processed
