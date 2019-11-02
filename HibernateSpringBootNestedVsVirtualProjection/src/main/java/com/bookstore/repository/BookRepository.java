@@ -17,16 +17,16 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     // avoid
     @Query("SELECT b.title AS title, a AS author "
-            + "FROM Book b INNER JOIN b.author a")
+            + "FROM Book b LEFT JOIN b.author a")
     List<BookDto> findByViaQuery();
 
     // avoid
     @Query("SELECT b.title AS title, a.name AS name, a.genre AS genre "
-            + "FROM Book b INNER JOIN b.author a")
+            + "FROM Book b LEFT JOIN b.author a")
     List<SimpleBookDto> findByViaQuerySimpleDto();
     
     // prefer
     @Query("SELECT b.title AS title, a.name AS name, a.genre AS genre "
-            + "FROM Book b INNER JOIN b.author a")
+            + "FROM Book b LEFT JOIN b.author a")
     List<VirtualBookDto> findByViaQueryVirtualDto();
 }
