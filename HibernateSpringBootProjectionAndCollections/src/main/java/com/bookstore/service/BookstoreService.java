@@ -81,9 +81,7 @@ public class BookstoreService {
         if (collectionEntries != null) {
             System.out.println("Total number of collection entries: "
                     + (managedEntities - collectionEntries.values().size()));
-        } else {
-            System.out.println("No managed collections");
-        }
+        } 
 
         Map entities = persistenceContext.getEntitiesByKey();
         entities.forEach((key, value) -> System.out.println(key + ":" + value));
