@@ -88,7 +88,7 @@ public class BookstoreService {
         System.out.println("\n-----------------------------------");
         System.out.println("Total number of managed entities: " + managedEntities);
         if (collections != null) {
-            System.out.println("Number of managed collections: "
+            System.out.println("Total number of managed collections: "
                     + (managedEntities - collections.values().size()));
         } else {
             System.out.println("No managed collections");
