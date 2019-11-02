@@ -1,11 +1,8 @@
-**[JPA Inheritance - `JOINED`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinTableInheritance)**
+**[Pay Attention To Spring Projection Including Associated Collections](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootProjectionAndCollections)**
 
-**Description:** This application is a sample of JPA Join Table inheritance strategy (`JOINED`)
+**Description:** This application inspect the Persistent Context content during fetching Spring projections that includes collections of associations. In this case, we focus on a `@OneToMany` association. Mainly, we want to fetch only some attributes from the parent-side and some attributes from the child-side. 
 
 **Key points:**
-- this inheritance strategy can be employed via `@Inheritance(strategy=InheritanceType.JOINED)`
-- all the classes in an inheritance hierarchy (a.k.a., subclasses) are represented via individual tables
-- by default, subclass-tables contains a primary key column that acts as a foreign key  as well - this foreign key references the *base class* table primary key
-- customizing this foreign key can be done by annotating the subclasses with `@PrimaryKeyJoinColumn`  
+- nested projections fetches data in Persistent Context as well
 
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
