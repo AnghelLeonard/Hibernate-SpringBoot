@@ -20,6 +20,10 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
+            System.out.println("\n\n Fetch all:");
+            System.out.println("---------------------------------");
+            bookstoreService.fetchAll();
+            
             System.out.println("\n\n Fetch age, name and genre:");
             System.out.println("---------------------------------");
             bookstoreService.fetchAgeNameGenre();

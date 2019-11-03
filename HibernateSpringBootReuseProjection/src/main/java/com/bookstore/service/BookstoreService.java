@@ -17,6 +17,13 @@ public class BookstoreService {
     }
 
     @Transactional(readOnly = true)
+    public List<AuthorDto> fetchAll() {
+        List<AuthorDto> authors = authorRepository.fetchAll();
+
+        return authors;
+    }
+    
+    @Transactional(readOnly = true)
     public List<AuthorDto> fetchAgeNameGenre() {
         List<AuthorDto> authors = authorRepository.fetchAgeNameGenre();
 

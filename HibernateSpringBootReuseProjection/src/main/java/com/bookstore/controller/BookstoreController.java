@@ -16,11 +16,16 @@ public class BookstoreController {
     }
 
     @GetMapping("/1")
+    public List<AuthorDto> fetchAll() {
+        return bookstoreService.fetchAll();
+    }
+    
+    @GetMapping("/2")
     public List<AuthorDto> fetchAgeNameGenre() {
         return bookstoreService.fetchAgeNameGenre();
     }
 
-    @GetMapping("/2")
+    @GetMapping("/3")
     public List<AuthorDto> fetchNameEmail() {
         return bookstoreService.fetchNameEmail();
     }
