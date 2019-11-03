@@ -10,7 +10,8 @@ import com.bookstore.dto.AuthorDto;
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
-    @Query("SELECT a.age AS age, a.name AS name, a.genre AS genre, a.email AS email, a.address AS address FROM Author a")
+    @Query("SELECT a.age AS age, a.name AS name, a.genre AS genre, "
+            + "a.email AS email, a.address AS address FROM Author a")
     List<AuthorDto> fetchAll();
     
     @Query("SELECT a.age AS age, a.name AS name, a.genre AS genre FROM Author a")
