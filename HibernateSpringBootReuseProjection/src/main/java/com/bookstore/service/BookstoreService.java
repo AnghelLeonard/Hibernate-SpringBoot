@@ -1,17 +1,16 @@
 package com.bookstore.service;
 
-import com.bookstore.dto.AuthorDto;
 import com.bookstore.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hibernate.engine.spi.EntityEntry;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.springframework.transaction.annotation.Transactional;
+import com.bookstore.dto.AuthorDto;
 
 @Service
 public class BookstoreService {
@@ -30,31 +29,19 @@ public class BookstoreService {
 
     @Transactional(readOnly = true)
     public List<AuthorDto> fetchAgeNameGenre() {
-        List<Map<String, Object>> results = authorRepository.fetchAgeNameGenre();
-
-        List<AuthorDto> authors = results.stream()
-                .map(result -> new AuthorDto(result))
-                .collect(Collectors.toList());
-        
-        authors.forEach(System.out::println);
+        List<AuthorDto> authors = authorRepository.fetchAgeNameGenre();
 
         briefOverviewOfPersistentContextContent();
-        
+
         return authors;
     }
-    
+
     @Transactional(readOnly = true)
     public List<AuthorDto> fetchNameEmail() {
-        List<Map<String, Object>> results = authorRepository.fetchNameEmail();
-
-        List<AuthorDto> authors = results.stream()
-                .map(result -> new AuthorDto(result))
-                .collect(Collectors.toList());
-        
-        authors.forEach(System.out::println);
-
+        List<AuthorDto> authors = authorRepository.fetchNameEmail();
+      
         briefOverviewOfPersistentContextContent();
-        
+
         return authors;
     }
 

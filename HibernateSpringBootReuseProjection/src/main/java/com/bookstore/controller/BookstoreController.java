@@ -1,10 +1,10 @@
 package com.bookstore.controller;
 
-import com.bookstore.dto.AuthorDto;
 import com.bookstore.service.BookstoreService;
 import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.bookstore.dto.AuthorDto;
 
 @RestController
 public class BookstoreController {
@@ -13,14 +13,14 @@ public class BookstoreController {
 
     public BookstoreController(BookstoreService bookstoreService) {
         this.bookstoreService = bookstoreService;
-    }        
-    
-    @GetMapping("/1")    
+    }
+
+    @GetMapping("/1")
     public List<AuthorDto> fetchAgeNameGenre() {
         return bookstoreService.fetchAgeNameGenre();
     }
-    
-    @GetMapping("/2")    
+
+    @GetMapping("/2")
     public List<AuthorDto> fetchNameEmail() {
         return bookstoreService.fetchNameEmail();
     }

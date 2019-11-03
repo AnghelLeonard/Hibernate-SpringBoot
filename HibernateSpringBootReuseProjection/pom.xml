@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jpa</groupId>
-    <artifactId>HibernateSpringBootMapProjection</artifactId>
+    <artifactId>HibernateSpringBootReuseProjection</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>HibernateSpringBootMapProjection</name>
+    <name>HibernateSpringBootReuseProjection</name>
     <description>JPA project for Spring Boot</description>
 
     <parent>
