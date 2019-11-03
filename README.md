@@ -2974,3 +2974,12 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 - define an interface-based Spring projection containing getters for the wider case 
 - rely on class-level `@JsonInclude(JsonInclude.Include.NON_DEFAULT)` annotation to avoid serialization of default fields (e.g., fields that are not available in the current projection and are `null` - these fields haven't been fetched in the current query)
 - this is useful to Jackson that will not serialize in the resulted JSON the missing fields (e.g., `null` fields)
+
+----------------------------------------------------------------------------------------------------------------------
+
+210. **[Dynamic Spring projection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDynamicProjection)**
+ 
+**Description:** This application is a sample of using dynamic Spring projections.
+
+**Key points:**
+- declare query-methods in a generic manner (e.g., `<T> List<T> findByGenre(String genre, Class<T> type);`)
