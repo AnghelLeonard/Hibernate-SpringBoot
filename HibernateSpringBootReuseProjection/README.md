@@ -1,6 +1,6 @@
 **[Reusing Spring projection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootReuseProjection)**
  
-**Description:** This application is a sample of reusing an interface-based Spring projection.
+**Description:** This application is a sample of reusing an interface-based Spring projection. This is useful to avoid defining multiple interface-based Spring projections in order to cover a range of queries that fetches different subsets of fields.
 
 **Key points:**
 - define an interface-based Spring projection containing getters for the wider case 
