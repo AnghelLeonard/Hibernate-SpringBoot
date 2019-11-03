@@ -23,14 +23,20 @@ public class MainApplication {
             System.out.println("\n\n Calling fetchAuthorByNameAsEntityJpql():");
             bookstoreService.fetchAuthorByNameAsEntityJpql();
             
-            System.out.println("\n\n Calling fetchAuthorByNameAsDtoJpql():");
-            bookstoreService.fetchAuthorByNameAsDtoJpql();
+            System.out.println("\n\n Calling fetchAuthorByNameAsDtoNameEmailJpql():");
+            bookstoreService.fetchAuthorByNameAsDtoNameEmailJpql();
+            
+            System.out.println("\n\n Calling fetchAuthorByNameAsDtoGenreJpql():");
+            bookstoreService.fetchAuthorByNameAsDtoGenreJpql();
             
             System.out.println("\n\n Calling fetchAuthorByNameAndAgeAsEntityJpql():");
             bookstoreService.fetchAuthorByNameAndAgeAsEntityJpql();
             
-            System.out.println("\n\n Calling fetchAuthorByNameAndAgeAsDtoJpql():");
-            bookstoreService.fetchAuthorByNameAndAgeAsDtoJpql();
+            System.out.println("\n\n Calling fetchAuthorByNameAndAgeAsDtoNameEmailJpql():");
+            bookstoreService.fetchAuthorByNameAndAgeAsDtoNameEmailJpql();
+            
+            System.out.println("\n\n Calling fetchAuthorByNameAndAgeAsDtoGenreJpql():");
+            bookstoreService.fetchAuthorByNameAndAgeAsDtoGenreJpql();
             
             System.out.println("\n\n Calling fetchAuthorsAsEntitiesJpql():");
             bookstoreService.fetchAuthorsAsEntitiesJpql();
