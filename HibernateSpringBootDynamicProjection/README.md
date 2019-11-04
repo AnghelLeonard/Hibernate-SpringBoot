@@ -1,5 +1,5 @@
 **[Dynamic Spring projection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDynamicProjection)**
- 
+  
 **Description:** This application is a sample of using dynamic Spring projections.
 
 **Key points:**
