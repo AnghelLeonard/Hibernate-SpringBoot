@@ -5,7 +5,7 @@
 **Key points:**
 - fetching the result set as a `List<Object[]>` or `List<AuthorDto>` via a JPQL of type `SELECT a FROM Author a` **WILL** fetch the result set as entities in Persistent Context as well - avoid this approach
 - fetching the result set as a `List<Object[]>` or `List<AuthorDto>` via a JPQL of type `SELECT a.id AS id, a.name AS name, ... FROM Author a` will **NOT** fetch the result set in Persistent Context
-- fetching the result set as a `List<Object[]>` or `List<AuthorDto>` via a native SQL of type `SELECT * FROM author` will **NOT** fetch the result set in Persistent Context
+- fetching the result set as a `List<Object[]>` or `List<AuthorDto>` via a native SQL of type `SELECT id, name, age, ... FROM author` will **NOT** fetch the result set in Persistent Context
 - fetching the result set as a `List<Object[]>` via Spring Data query builder mechanism **WILL** fetch the result set in Persistent Context - avoid this approach
 - fetching the result set as a `List<AuthorDto>` via Spring Data query builder mechanism will **NOT** fetch the result set in Persistent Context
 
