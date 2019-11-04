@@ -27,7 +27,7 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Query("SELECT a.id AS id, a.age AS age, a.name AS name, a.genre AS genre FROM Author a")
     List<AuthorDto> fetchAsDtoColumns();
 
-    @Query(value = "SELECT * FROM author a", nativeQuery = true)
+    @Query(value = "SELECT id, age, name, genre FROM author a", nativeQuery = true)
     List<AuthorDto> fetchAsDtoNative();
     
     List<AuthorDto> findBy();
