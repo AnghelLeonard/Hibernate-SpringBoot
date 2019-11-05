@@ -1,0 +1,71 @@
+package com.bookstore.dao;
+
+import java.io.Serializable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
+@Repository
+@Transactional
+public class Dao<T, ID extends Serializable> implements GenericDao<T, ID> {
+
+    private static final Logger logger = Logger.getLogger(Dao.class.getName());
+
+    @Value("${spring.jpa.properties.hibernate.jdbc.batch_size}")
+    private int batchSize;
+    
+    private final EntityManagerFactory entityManagerFactory;
+
+    public Dao(EntityManagerFactory entityManagerFactory) {
+        this.entityManagerFactory = entityManagerFactory;
+    }        
+        
+    @Override
+    public <S extends T> void saveInBatch(Iterable<S> entities) {
+
+        if (entities == null) {
+            throw new IllegalArgumentException("The given Iterable of entities not be null!");
+        }
+
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+
+        try {
+            entityTransaction.begin();
+
+            int i = 0;
+            for (S entity: entities) {
+                if (i % batchSize == 0 && i > 0) {
+                logger.log(Level.INFO, 
+                        "Flushing the EntityManager containing {0} entities ...", batchSize);
+                
+                    entityTransaction.commit();
+                    entityTransaction.begin();
+
+                    entityManager.clear();
+                }
+                
+                entityManager.persist(entity);
+                i++;
+            }
+
+            logger.log(Level.INFO, 
+                        "Flushing the remaining entities ...");
+            
+            entityTransaction.commit();
+        } catch (RuntimeException e) {
+            if (entityTransaction.isActive()) {
+                entityTransaction.rollback();
+            }
+            
+            throw e;
+        } finally {
+            entityManager.close();
+        }
+    }   
+}
