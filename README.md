@@ -2960,9 +2960,6 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 **Description:** This application inspect the Persistent Context content during fetching Spring projections that includes collections of associations. In this case, we focus on a `@OneToMany` association. Mainly, we want to fetch only some attributes from the parent-side and some attributes from the child-side. 
 
-**Key points:**
-- nested projections fetches data in Persistent Context as well
-
 ----------------------------------------------------------------------------------------------------------------------
 
 209. **[Reusing Spring projection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootReuseProjection)**
