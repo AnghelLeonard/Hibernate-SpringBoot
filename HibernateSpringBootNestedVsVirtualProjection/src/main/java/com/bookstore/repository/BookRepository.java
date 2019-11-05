@@ -12,20 +12,17 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    // avoid
     List<BookDto> findBy();
-
-    // avoid
+    
     @Query("SELECT b.title AS title, a AS author "
             + "FROM Book b LEFT JOIN b.author a")
     List<BookDto> findByViaQuery();
 
-    // avoid
+    // fastest
     @Query("SELECT b.title AS title, a.name AS name, a.genre AS genre "
             + "FROM Book b LEFT JOIN b.author a")
     List<SimpleBookDto> findByViaQuerySimpleDto();
-    
-    // prefer
+     
     @Query("SELECT b.title AS title, a.name AS name, a.genre AS genre "
             + "FROM Book b LEFT JOIN b.author a")
     List<VirtualBookDto> findByViaQueryVirtualDto();
