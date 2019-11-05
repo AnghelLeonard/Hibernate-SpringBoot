@@ -11,15 +11,12 @@ import org.springframework.data.jpa.repository.Query;
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
-    // avoid
     List<AuthorDto> findBy();
-
-    // avoid
+  
     @Query("SELECT a.name AS name, a.genre AS genre, b AS books "
             + "FROM Author a INNER JOIN a.books b")
     List<AuthorDto> findByViaQuery();
-
-    // require further processing of the result set
+   
     @Query("SELECT a.name AS name, a.genre AS genre, b.title AS title "
             + "FROM Author a INNER JOIN a.books b")
     List<SimpleAuthorDto> findByViaQuerySimpleDto();
