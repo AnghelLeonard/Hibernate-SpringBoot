@@ -75,6 +75,8 @@
 
 **Description:** Batch inserts via `EntityManager` in MySQL. This way you can easily control the `flush()` and `clear()` of the Persistence Context (1st Level Cache). This is not possible via SpringBoot, `saveAll(Iterable<S> entities)`. Another advantage is that you can call `persist()` instead of `merge()` - this is used behind the scene by the SpringBoot `saveAll(Iterable<S> entities)` and `save(S entity)`.
 
+If you want to execute a batch per transaction (to avoid long-running transaction and lose all batches in case of failure) then check this [example](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsEntityManagerBatchPerTransaction).
+
 **Key points:**
 - in `application.properties` set `spring.jpa.properties.hibernate.jdbc.batch_size`
 - in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)
