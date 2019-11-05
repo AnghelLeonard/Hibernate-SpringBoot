@@ -3,8 +3,6 @@ package com.bookstore.dao;
 import java.io.Serializable;
 
 public interface GenericDao<T, ID extends Serializable> {
-
-    <S extends T> S persist(S entity);
     
-    <S extends T> Iterable<S> saveInBatch(Iterable<S> entites);
+    <S extends T> void saveInBatch(Iterable<S> entites);
 }
