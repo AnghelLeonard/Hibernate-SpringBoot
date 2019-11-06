@@ -8,10 +8,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional
 public class Dao<T, ID extends Serializable> implements GenericDao<T, ID> {
 
     private static final Logger logger = Logger.getLogger(Dao.class.getName());
