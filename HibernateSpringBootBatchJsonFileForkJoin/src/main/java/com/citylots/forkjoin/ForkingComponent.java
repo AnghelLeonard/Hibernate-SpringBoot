@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @Scope("prototype")
 public class ForkingComponent extends RecursiveAction {
 
-    @Value("${spring.jpa.properties.hibernate.jdbc.batch_size}")
+    @Value("${jdbc.batch.size}")
     private int batchSize;
 
     @Autowired
