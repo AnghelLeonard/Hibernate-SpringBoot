@@ -1,6 +1,6 @@
 
 **[Batch Inserts In Spring Boot Style Via `CompletableFuture`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsCompletableFuture)**
-
+ 
 **Description:** This application is a sample of using `CompletableFuture` for batching inserts. This `CompletableFuture` uses an `Executor` that has the number of threads equal with the number of your computer cores. Usage is in Spring style.
      
 -------------------------------
