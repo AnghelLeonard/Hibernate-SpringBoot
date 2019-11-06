@@ -57,7 +57,8 @@ public class BatchExecutor<T> {
         run.get();
         timer.stop();
         
-        logger.info(() -> "Batch time: " + timer.getTotalTimeMillis());
+        logger.info(() -> "\nBatch time: " + timer.getTotalTimeMillis() 
+                + " ms (" + timer.getTotalTimeSeconds() + " s)");
     }
 
     public <S extends T> CompletableFuture<Void> executeBatch(List<S> list) {

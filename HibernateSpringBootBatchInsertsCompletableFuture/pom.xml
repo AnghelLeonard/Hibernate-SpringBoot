@@ -24,6 +24,7 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>12</maven.compiler.source>
         <maven.compiler.target>12</maven.compiler.target>
+        <datasource-proxy.version>1.4.9</datasource-proxy.version>            
     </properties>
 
     <dependencies>
@@ -48,6 +49,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.ttddyy</groupId>
+            <artifactId>datasource-proxy</artifactId>
+            <version>${datasource-proxy.version}</version>
         </dependency>
     </dependencies>
 
