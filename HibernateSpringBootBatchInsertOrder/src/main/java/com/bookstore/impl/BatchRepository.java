@@ -6,7 +6,6 @@ import org.springframework.data.repository.NoRepositoryBean;
 
 @NoRepositoryBean
 public interface BatchRepository<T, ID extends Serializable> extends JpaRepository<T, ID> {
-    
-    <S extends T> S persist(S entity);
-    <S extends T> Iterable<S> saveInBatch(Iterable<S> entites);
+        
+    <S extends T> void saveInBatch(Iterable<S> entites);
 }

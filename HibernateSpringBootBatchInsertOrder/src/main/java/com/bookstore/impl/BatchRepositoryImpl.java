@@ -3,8 +3,6 @@ package com.bookstore.impl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -31,24 +29,15 @@ public class BatchRepositoryImpl<T, ID extends Serializable>
 
     @Override
     @Transactional
-    public <S extends T> S persist(S entity) {
-        entityManager.persist(entity);
-
-        return entity;
-    }
-
-    @Override
-    @Transactional
-    public <S extends T> Iterable<S> saveInBatch(Iterable<S> entities) {
+    public <S extends T> void saveInBatch(Iterable<S> entities) {
 
         if (entities == null) {
             throw new IllegalArgumentException("The given Iterable of entities cannot be null!");
         }
 
         int i = 0;
-        List<S> result = new ArrayList<>();
         for (S entity : entities) {
-            result.add(persist(entity));
+            entityManager.persist(entity);
 
             i++;
 
@@ -70,8 +59,6 @@ public class BatchRepositoryImpl<T, ID extends Serializable>
             entityManager.flush();
             entityManager.clear();
         }
-
-        return result;
     }
 
     private static int batchSize() {
@@ -79,7 +66,7 @@ public class BatchRepositoryImpl<T, ID extends Serializable>
         int batchsize = Integer.valueOf(Dialect.DEFAULT_BATCH_SIZE); // default batch size
 
         Properties configuration = new Properties();
-        try ( InputStream inputStream = BatchRepositoryImpl.class.getClassLoader()
+        try (InputStream inputStream = BatchRepositoryImpl.class.getClassLoader()
                 .getResourceAsStream("application.properties")) {
             configuration.load(inputStream);
         } catch (IOException ex) {
