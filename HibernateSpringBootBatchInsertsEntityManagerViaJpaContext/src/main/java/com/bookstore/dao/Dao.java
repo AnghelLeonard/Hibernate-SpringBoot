@@ -1,8 +1,6 @@
 package com.bookstore.dao;
  
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -24,17 +22,10 @@ public class Dao<T, ID extends Serializable> implements GenericDao<T, ID> {
 
     public Dao(JpaContext jpaContext) {
         this.jpaContext = jpaContext;
-    }
+    }    
 
     @Override
-    public <S extends T> S persist(S entity) {
-        getEntityManager(entity).persist(entity);
-
-        return entity;
-    }
-
-    @Override
-    public <S extends T> Iterable<S> saveInBatch(Iterable<S> entities) {
+    public <S extends T> void saveInBatch(Iterable<S> entities) {
 
         if (entities == null) {
             throw new IllegalArgumentException("The given Iterable of entities not be null!");
@@ -42,10 +33,8 @@ public class Dao<T, ID extends Serializable> implements GenericDao<T, ID> {
 
         int i = 0;
 
-        List<S> result = new ArrayList<>();
-
         for (S entity : entities) {
-            result.add(persist(entity));
+            getEntityManager(entity).persist(entity);
 
             i++;
 
@@ -66,9 +55,7 @@ public class Dao<T, ID extends Serializable> implements GenericDao<T, ID> {
 
             getEntityManager(entities.iterator().next()).flush();
             getEntityManager(entities.iterator().next()).clear();
-        }
-
-        return result;
+        }        
     }
 
     protected EntityManager getEntityManager(T entity) {
