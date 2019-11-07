@@ -1316,7 +1316,7 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 
 85. **[How To Generate A Schema Via `schema-*.sql` In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSchemaSql)**
 
-**Note:** As a rule, in real applications avoid generating schema via `hibernate.ddl-auto`. Use `schema-*.sql` file or better `Flyway` or `Liquibase` migration tools.
+**Note:** As a rule, in real applications avoid generating schema via `hibernate.ddl-auto` or set it to `validate`. Use `schema-*.sql` file or better `Flyway` or `Liquibase` migration tools.
 
 **Description:** This application is an example of using `schema-*.sql` to generate a schema(database) in MySQL.
 
@@ -1329,7 +1329,7 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 
 86. **[How To Generate Two Databases Via `schema-*.sql` And Match Entities To Them Via `@Table` In MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMatchEntitiesToTablesTwoSchemas)**
 
-**Note:** As a rule, in real applications avoid generating schema via `hibernate.ddl-auto`. Use `schema-*.sql` file or better `Flyway` or `Liquibase`.
+**Note:** As a rule, in real applications avoid generating schema via `hibernate.ddl-auto` or set it to `validate`. Use `schema-*.sql` file or better `Flyway` or `Liquibase`.
 
 **Description:** This application is an example of using `schema-*.sql` to generate two databases in MySQL. The databases are matched at entity mapping via `@Table`.
 
@@ -1359,7 +1359,7 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 
 88. **[How To Migrate MySQL Database Using Flyway - MySQL Database Created Via `createDatabaseIfNotExist`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLQuick)**
 
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of migrating a MySQL database via Flyway when the database exists (it is created before migration via MySQL specific parameter, `createDatabaseIfNotExist=true`). 
 
@@ -1374,7 +1374,7 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 
 89. **[How To Migrate MySQL Database Using Flyway - Database Created Via `spring.flyway.schemas`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLDatabase)**
 
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of migrating a MySQL database when the database is created by Flyway via `spring.flyway.schemas`. In this case, the entities should be annotated with `@Table(schema = "bookstoredb")` or `@Table(catalog = "bookstoredb")`. Here, the database name is `bookstoredb`.
 
@@ -1394,13 +1394,13 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 
 90. **[How To Auto-Create And Migrate Schemas For Two Data Sources (MySQL and PostgreSQL) Using Flyway](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayTwoVendors)**
  
-**Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
+**Note:** For production don't rely on `hibernate.ddl-auto` to create your schema. Remove (disable) `hibernate.ddl-auto` or set it to `validate`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of auto-creating and migrating schemas for MySQL and PostgreSQL. In addition, each data source uses its own HikariCP connection pool. In case of MySQL, where *schema*=*database*, we auto-create the schema (`authorsdb`) based on `createDatabaseIfNotExist=true`. In case of PostgreSQL, where a database can have multiple schemas, we use the default `postgres` database and auto-create in it the schema, `booksdb`. For this we rely on Flyway, which is capable to create a missing schema.
 
 **Key points:**
 - for Maven, in `pom.xml`, add the Flyway dependency
-- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- remove (disable) `spring.jpa.hibernate.ddl-auto` or set it to `validate`
 - in `application.properties`, configure the JDBC URL for MySQL as, `jdbc:mysql://localhost:3306/authorsdb?createDatabaseIfNotExist=true` and for PostgreSQL as, `jdbc:postgresql://localhost:5432/postgres?currentSchema=booksdb`
 - in `application.properties`, set `spring.flyway.enabled=false` to disable default behavior
 - programmatically create a `DataSource` for MySQL and one for PostgreSQL
@@ -1413,13 +1413,13 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 
 91. **[How To Auto-Create And Migrate Two Schemas In PostgreSQL Using Flyway](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayPostgreSqlTwoSchemas)**
 
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of auto-creating and migrating two schemas in PostgreSQL using Flyway. In addition, each data source uses its own HikariCP connection pool. In case of PostgreSQL, where a database can have multiple schemas, we use the default `postgres` database and auto-create two schemas, `authors` and `books`. For this we rely on Flyway, which is capable to create the missing schemas.
 
 **Key points:**
 - for Maven, in `pom.xml`, add the Flyway dependency
-- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- remove (disable) `spring.jpa.hibernate.ddl-auto` or set it to `validate`
 - in `application.properties`, configure the JDBC URL for `books` as `jdbc:postgresql://localhost:5432/postgres?currentSchema=books` and for `authors` as `jdbc:postgresql://localhost:5432/postgres?currentSchema=authors`
 - in `application.properties`, set `spring.flyway.enabled=false` to disable default behavior
 - programmatically create two `DataSource`, one for `books` and one for `authors`
@@ -1953,7 +1953,7 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
  **Method 2:**
  - if the database schema is not generated via JPA annotations (recommended way) then add the formula as part of schema in `CREATE TABLE`
      
-**Note:** In production, you should not rely on `columnDefinition`. You should disable `hibernate.ddl-auto` (by omitting it), and add the SQL query expression in `CREATE TABLE` (in this application, check the `discount` column in `CREATE TABLE`, file `schema-sql.sql`). Nevertheless, not even `schema-sql.sql` is ok in production. The best way is to rely on Flyway or Liquibase.
+**Note:** In production, you should not rely on `columnDefinition`. You should disable `hibernate.ddl-auto` (by omitting it) or set it to `validate`, and add the SQL query expression in `CREATE TABLE` (in this application, check the `discount` column in `CREATE TABLE`, file `schema-sql.sql`). Nevertheless, not even `schema-sql.sql` is ok in production. The best way is to rely on Flyway or Liquibase.
          
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -1996,7 +1996,7 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 - each entity that should be audited should be annotated with `@Audited`
 - optionally, annotate entities with `@AuditTable` to rename the table used for auditing
 - rely on `ValidityAuditStrategy` for fast database reads, but slower writes (slower than the default `DefaultAuditStrategy`)
-- remove (disable) `spring.jpa.hibernate.ddl-auto` for avoiding schema generated from JPA annotations
+- remove (disable) `spring.jpa.hibernate.ddl-auto` or set it to `validate` for avoiding schema generated from JPA annotations
 - create `schema-mysql.sql` and provide the SQL statements needed by Hibernate Envers
 - if the schema is not automatically found, then point it via `spring.jpa.properties.org.hibernate.envers.default_catalog` for MySQL or `spring.jpa.properties.org.hibernate.envers.default_schema` for the rest
 
@@ -2004,26 +2004,26 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 133. **[How To Programmatically Setup Flyway And MySQL `DataSource`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLProg)**
  
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate`. Rely on Flyway or Liquibase.
 
 **Description:** This application is a kickoff for setting Flyway and MySQL `DataSource` programmatically.
 
 **Key points:**
 - for Maven, in `pom.xml`, add the Flyway dependency
-- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- remove (disable) `spring.jpa.hibernate.ddl-auto` or set it to `validate`
 - configure `DataSource` and Flyway programmatically
 
 ----------------------------------------------------------------------------------------------------------------------
 
 134. **[How To Migrate PostgreSQL Database Using Flyway - Use The Default Database `postgres` And Schema `public`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayPostgreSQLQuick)**
 
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of migrating a PostgreSQL database via Flyway for the default database `postgres` and schema `public`. 
 
 **Key points:**
 - for Maven, in `pom.xml`, add the Flyway dependency
-- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- remove (disable) `spring.jpa.hibernate.ddl-auto` or set it to `validate`
 - in `application.properties`, set the JDBC URL as follows: `jdbc:postgresql://localhost:5432/postgres`
 - each SQL file containing the schema update add it in `classpath:db/migration`
 - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
@@ -2032,13 +2032,13 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 135. **[How To Migrate Schema Using Flyway In PostgreSQL - Use The Default Database `postgres` And Schema Created Via `spring.flyway.schemas`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayPostgreSqlSchema)**
 
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of migrating a schema (`bookstore`) created by Flyway via `spring.flyway.schemas` in the default `postgres` database. In this case, the entities should be annotated with `@Table(schema = "bookstore")`.
 
 **Key points:**
 - for Maven, in `pom.xml`, add the Flyway dependency
-- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- remove (disable) `spring.jpa.hibernate.ddl-auto` or set it to `validate`
 - in `application.properties`, set the JDBC URL as follows: `jdbc:postgresql://localhost:5432/postgres`
 - in `application.properties`, add `spring.flyway.schemas=bookstore`, where `bookstore` is the schema that should be created by Flyway in the `postgres` database (feel free to add your own database name)
 - each entity that should be stored in this database should be annotated with, `@Table(schema = "bookstore")`
@@ -2049,26 +2049,26 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 
 136. **[How To Programmatically Setup Flyway And PostgreSQL `DataSource`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayPostgreSQLProg)**
  
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate`. Rely on Flyway or Liquibase.
 
 **Description:** This application is a kickoff for setting Flyway and PostgreSQL `DataSource` programmatically.
 
 **Key points:**
 - for Maven, in `pom.xml`, add the Flyway dependency
-- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- remove (disable) `spring.jpa.hibernate.ddl-auto` or set it to `validate`
 - configure `DataSource` and Flyway programmatically
 
 ----------------------------------------------------------------------------------------------------------------------
 
 137. **[How To Auto-Create And Migrate Two Databases In MySQL Using Flyway](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayMySQLTwoDatabases)**
 
-**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto`. Rely on Flyway or Liquibase.
+**Note:** For production, don't rely on `hibernate.ddl-auto` (or counterparts) to export schema DDL to the database. Simply remove (disable) `hibernate.ddl-auto` or set it to `validate`. Rely on Flyway or Liquibase.
 
 **Description:** This application is an example of auto-creating and migrating two databases in MySQL using Flyway. In addition, each data source uses its own HikariCP connection pool. In case of MySQL, where a database is the same thing with schema, we create two databases, `authorsdb` and `booksdb`.
 
 **Key points:**
 - for Maven, in `pom.xml`, add the Flyway dependency
-- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- remove (disable) `spring.jpa.hibernate.ddl-auto` or set it to `validate`
 - in `application.properties`, configure the JDBC URL for `booksdb` as `jdbc:mysql://localhost:3306/booksdb?createDatabaseIfNotExist=true` and for `authorsdb` as `jdbc:mysql://localhost:3306/authorsdb?createDatabaseIfNotExist=true`
 - in `application.properties`, set `spring.flyway.enabled=false` to disable default behavior
 - programmatically create two `DataSource`, one for `booksdb` and one for `authorsdb`
