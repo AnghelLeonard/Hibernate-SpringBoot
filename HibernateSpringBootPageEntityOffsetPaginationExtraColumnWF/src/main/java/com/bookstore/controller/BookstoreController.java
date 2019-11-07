@@ -18,7 +18,7 @@ public class BookstoreController {
 
     @GetMapping("/authors/{page}/{size}")
     public Page<Author> fetchAuthors(@PathVariable int page, @PathVariable int size) {
-
+        
         return bookstoreService.fetchNextPage(page, size);
     }
 
