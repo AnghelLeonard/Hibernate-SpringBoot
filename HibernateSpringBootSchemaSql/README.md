@@ -6,7 +6,7 @@
 
 **Key points:**
 - in `application.properties`, set the JDBC URL (e.g., `spring.datasource.url=jdbc:mysql://localhost:3306/bookstoredb?createDatabaseIfNotExist=true`)
-- in `application.properties`, disable DDL auto (just don't add explicitly the `hibernate.ddl-auto` setting)
+- in `application.properties`, disable DDL auto (just don't add explicitly the `hibernate.ddl-auto` setting) or set it to `validate`
 - in `application.properties`, instruct Spring Boot to initialize the schema from `schema-mysql.sql` file  
      
 -------------------------------
