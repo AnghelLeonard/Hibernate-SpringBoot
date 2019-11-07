@@ -6,7 +6,7 @@
 
 **Key points:**
 - for Maven, in `pom.xml`, add the Flyway dependency
-- remove (disable) `spring.jpa.hibernate.ddl-auto`
+- remove (disable) `spring.jpa.hibernate.ddl-auto` or set it to `validate`
 - in `application.properties`, set the JDBC URL as follows: `jdbc:mysql://localhost:3306/bookstoredb?createDatabaseIfNotExist=true`
 - each SQL file containing the schema update add it in `classpath:db/migration`
 - each SQL file name it as `V1.1__Description.sql`, `V1.2__Description.sql`, ...
