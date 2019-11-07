@@ -25,6 +25,7 @@ public class MainApplication {
 
             bookstoreService.persistAuthorsAndBooks();
             bookstoreService.updateAuthorsAndBooks();
+            // bookstoreService.updateBooksAndAuthors();
         };
     }
 }

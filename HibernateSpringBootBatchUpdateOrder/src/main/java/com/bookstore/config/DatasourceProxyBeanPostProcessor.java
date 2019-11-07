@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
 import java.util.logging.Logger;
 
 // this component is needed just for monitoring batching
-@Component
+// @Component
 public class DatasourceProxyBeanPostProcessor implements BeanPostProcessor {
 
     private static final Logger logger

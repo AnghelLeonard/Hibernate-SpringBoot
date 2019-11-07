@@ -48,7 +48,7 @@ public class BookstoreService {
     @Transactional
     public void updateAuthorsAndBooks() {
 
-        List<Author> authors = authorRepository.findAll();
+        List<Author> authors = authorRepository.fetchAll();
 
         for (Author author : authors) {
             author.setAge(author.getAge() + 1);
@@ -60,7 +60,7 @@ public class BookstoreService {
 
     @Transactional
     public void updateBooksAndAuthors() {
-        List<Book> books = bookRepository.findAll();
+        List<Book> books = bookRepository.fetchAll();
 
         for (Book book : books) {
             book.setIsbn(book.getIsbn() + "-2021");
