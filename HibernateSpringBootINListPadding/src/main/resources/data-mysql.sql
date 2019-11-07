@@ -1,0 +1,10 @@
+insert into author (age, name, genre, id) values (23, "Mark Janel", "Anthology", 1);
+insert into author (age, name, genre, id) values (43, "Olivia Goy", "Horror", 2);
+insert into author (age, name, genre, id) values (51, "Quartis Young", "Anthology", 3);
+insert into author (age, name, genre, id) values (34, "Joana Nimar", "History", 4);
+insert into author (age, name, genre, id) values (38, "Alicia Tom", "Anthology", 5);
+insert into author (age, name, genre, id) values (54, "Katy Loin", "Anthology", 6);
+insert into author (age, name, genre, id) values (33, "Marting Lyer", "Anthology", 7);
+insert into author (age, name, genre, id) values (54, "Sonya Ali", "History", 8);
+insert into author (age, name, genre, id) values (53, "Mark Junou", "Anthology", 9);
+insert into author (age, name, genre, id) values (48, "Sandra Toy", "Horror", 10);
