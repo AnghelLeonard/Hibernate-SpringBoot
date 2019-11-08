@@ -20,6 +20,10 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
+            System.out.println("\n\n Fetch authors read-only entities:");
+            System.out.println("-----------------------------------------------------------------------------");
+            bookstoreService.fetchAuthorAsReadOnlyEntities();
+            
             System.out.println("\n\n Fetch authors as array of objects");
             System.out.println("-----------------------------------------------------------------------------");
             bookstoreService.fetchAuthorAsArrayOfObject();

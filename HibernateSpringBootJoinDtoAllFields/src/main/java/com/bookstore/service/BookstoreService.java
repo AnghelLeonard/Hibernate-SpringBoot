@@ -1,6 +1,7 @@
 package com.bookstore.service;
 
 import com.bookstore.dto.AuthorDto;
+import com.bookstore.entity.Author;
 import com.bookstore.repository.AuthorRepository;
 import org.springframework.stereotype.Service;
 import java.util.Arrays;
@@ -27,6 +28,14 @@ public class BookstoreService {
         this.entityManager = entityManager;
     }
 
+    @Transactional(readOnly = true)
+    public void fetchAuthorAsReadOnlyEntities() {
+        List<Author> authors = authorRepository.findAll();
+        authors.forEach(a -> System.out.println(a));
+
+        briefOverviewOfPersistentContextContent();
+    }
+    
     @Transactional(readOnly = true)
     public void fetchAuthorAsArrayOfObject() {
         List<Object[]> authors = authorRepository.fetchAsArray();
