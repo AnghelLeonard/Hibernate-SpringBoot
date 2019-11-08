@@ -8,6 +8,6 @@
 - fetching the result set as a `List<Object[]>` or `List<AuthorDto>` via a native SQL of type `SELECT id, name, age, ... FROM author` will **NOT** fetch the result set in Persistent Context - but, this approach is pretty slow
 - fetching the result set as a `List<Object[]>` via Spring Data query builder mechanism **WILL** fetch the result set in Persistent Context - avoid this approach
 - fetching the result set as a `List<AuthorDto>` via Spring Data query builder mechanism will **NOT** fetch the result set in Persistent Context
-- fetching the result set as *read-only* entitites should be considered after JPQL with explicit list of columns to be fetched and query builder mechanism
+- fetching the result set as *read-only* entitites (e.g., via the built-in `findAll()` method) should be considered after JPQL with explicit list of columns to be fetched and query builder mechanism
 
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
