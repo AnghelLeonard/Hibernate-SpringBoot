@@ -5,9 +5,10 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional(readOnly = true)
+@Transactional(propagation = Propagation.NEVER)
 public class BatchRepositoryImpl<T, ID extends Serializable>
         extends SimpleJpaRepository<T, ID> implements BatchRepository<T, ID> {
 
