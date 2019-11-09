@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import com.bookstore.entity.Author;
 import com.bookstore.repository.AuthorRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class BookstoreService {
+
+    @Value("${spring.jpa.properties.hibernate.jdbc.batch_size}")
+    private int batchSize;
 
     private final AuthorRepository authorRepository;
 
@@ -27,8 +31,16 @@ public class BookstoreService {
             author.setAge(18 + i);
 
             authors.add(author);
+
+            if (i % batchSize == 0 && i > 0) {
+                authorRepository.saveAll(authors);
+                authors.clear();
+            }
         }
 
-        authorRepository.saveAll(authors);
+        if (authors.size() > 0) {
+            authorRepository.saveAll(authors);
+            authors.clear();
+        }
     }
 }
