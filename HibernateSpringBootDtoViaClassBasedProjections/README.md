@@ -1,11 +1,9 @@
-**[DTO Via Spring Data Projections](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)** 
+**[DTO Via Spring Data Class-Based Projections](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaClassBasedProjections)** 
 
-**Note:** You may also like to read the recipe, ["How To Enrich DTO With Virtual Properties Via Spring Projections"](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaProjectionsAndVirtualProperties)
-
-**Description:** Fetch only the needed data from the database via Spring Data Projections (DTO).
+**Description:** Fetch only the needed data from the database via Spring Data Projections (DTO). In this case, via class-based projections.
 
 **Key points:**
-- write an interface (projection) containing getters only for the columns that should be fetched from the database
+- write an class (projection) containing a constructor, getters, setters, `equals()` and `hashCode()` only for the columns that should be fetched from the database
 - write the proper query returning a `List<projection>`
 - if it is applicable, limit the number of returned rows (e.g., via `LIMIT`) 
 - in this example, we can use query builder mechanism built into Spring Data repository infrastructure
