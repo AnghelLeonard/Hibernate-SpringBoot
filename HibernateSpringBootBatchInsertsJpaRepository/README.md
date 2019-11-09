@@ -15,9 +15,6 @@
 - the `saveAll()` method return a `List<S>` containing the persisted entities; each persisted entity is added into this list; if you just don't need this `List` then it is created for nothing
 - if is not needed, then ensure that Second Level Cache is disabled via `spring.jpa.properties.hibernate.cache.use_second_level_cache=false`
   
-**Output example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootBatchInsertsJpaRepository/batch%20inserts%20via%20saveAll.png)
-
 ----------------------------
 
 **You may like to try as well:**
