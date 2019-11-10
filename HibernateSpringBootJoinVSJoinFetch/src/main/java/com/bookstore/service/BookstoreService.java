@@ -29,10 +29,19 @@ public class BookstoreService {
                 + ", books: " + e.getBooks())); // causes extra SELECTs and the result is not ok
     }
 
-    // INNER JOIN
+    // INNER JOIN BAD
     @Transactional(readOnly = true)
-    public void fetchBooksAuthorsInnerJoin() {
-        List<Book> books = bookRepository.fetchBooksAuthorsInnerJoin();
+    public void fetchBooksAuthorsInnerJoinBad() {
+        List<Book> books = bookRepository.fetchBooksAuthorsInnerJoinBad();
+
+        books.forEach((e) -> System.out.println("Book title: " + e.getTitle() + ", Isbn: " + e.getIsbn()
+                + ", author: " + e.getAuthor())); // causes extra SELECTs but the result is ok
+    }
+    
+    // INNER JOIN GOOD
+    @Transactional(readOnly = true)
+    public void fetchBooksAuthorsInnerJoinGood() {
+        List<Book> books = bookRepository.fetchBooksAuthorsInnerJoinGood();
 
         books.forEach((e) -> System.out.println("Book title: " + e.getTitle() + ", Isbn: " + e.getIsbn()
                 + ", author: " + e.getAuthor())); // causes extra SELECTs but the result is ok

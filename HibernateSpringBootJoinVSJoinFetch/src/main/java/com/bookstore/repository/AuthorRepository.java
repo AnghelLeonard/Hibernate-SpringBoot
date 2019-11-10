@@ -12,7 +12,7 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     // INNER JOIN
     @Transactional(readOnly = true)
-    @Query(value = "SELECT a FROM Author a INNER JOIN a.books b WHERE b.price > ?1")
+    @Query(value = "SELECT a, b FROM Author a INNER JOIN a.books b WHERE b.price > ?1")
     List<Author> fetchAuthorsBooksByPriceInnerJoin(int price);
 
     // JOIN FETCH
