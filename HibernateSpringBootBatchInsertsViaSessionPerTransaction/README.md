@@ -1,7 +1,7 @@
 
 **[Session-Level Batching (Hibernate 5.2 or Higher) in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsViaSession)**
 
-**Description:** Batch inserts via Hibernate session-level batching (Hibernate 5.2 or higher) in MySQL.
+**Description:** Batch inserts via Hibernate session-level batching (Hibernate 5.2 or higher) in MySQL. This example commits the database transaction after each batch excecution. This way we avoid long-running transactions and, in case of a failure, we rollback only the failed batch and don't lose the previous batches. For each batch, the Persistent Context is flushed and cleared, therefore we maintain a thin Persistent Context. This way the code is not prone to memory errors and performance penalties caused by slow flushes.
 
 **Key points:**
 - in `application.properties` set `spring.jpa.properties.hibernate.generate_statistics` (just to check that batching is working)
@@ -12,7 +12,7 @@
 - in entity, use the [assigned generator](https://vladmihalcea.com/how-to-combine-the-hibernate-assigned-generator-with-a-sequence-or-an-identity-column/) since MySQL `IDENTITY` will cause insert batching to be disabled
 - the Hibernate `Session` is obtained by un-wrapping it via `EntityManager#unwrap(Session.class)`
 - the batching size is set via `Session#setJdbcBatchSize(Integer size)` and get via `Session#getJdbcBatchSize()`
-- in DAO, flush and clear the Persistence Context from time to time; this way you avoid to "overwhelm" the Persistence Context
+- in your DAO layer, commit the database transaction after each batch execution
 - if is not needed, then ensure that Second Level Cache is disabled via `spring.jpa.properties.hibernate.cache.use_second_level_cache=false`
    
 **Output example:**
