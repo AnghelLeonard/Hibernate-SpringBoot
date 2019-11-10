@@ -12,5 +12,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Transactional(readOnly = true)
     @Query(value = "SELECT b FROM Book b LEFT JOIN FETCH b.author")
+    // or, via JOIN
+    // @Query(value = "SELECT b, a FROM Book b LEFT JOIN b.author a")
     List<Book> fetchBookWithAuthor();
 }
