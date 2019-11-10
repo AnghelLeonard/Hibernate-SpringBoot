@@ -1,6 +1,5 @@
 package com.bookstore.impl;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
