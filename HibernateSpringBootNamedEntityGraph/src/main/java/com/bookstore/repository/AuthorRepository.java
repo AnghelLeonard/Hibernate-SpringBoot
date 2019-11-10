@@ -30,6 +30,6 @@ public interface AuthorRepository extends JpaRepository<Author, Long>, JpaSpecif
     
     @EntityGraph(value = "author-books-graph",
             type = EntityGraph.EntityGraphType.FETCH)
-    @Query(value="SELECT a FROM Author a WHERE a.age > 20 AND a.age<40")
+    @Query(value="SELECT a FROM Author a WHERE a.age > 20 AND a.age < 40")
     public List<Author> fetchAllAgeBetween20And40();      
 }
