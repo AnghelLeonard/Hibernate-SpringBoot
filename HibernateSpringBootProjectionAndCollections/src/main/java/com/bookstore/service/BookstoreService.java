@@ -7,6 +7,7 @@ import java.util.Arrays;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hibernate.engine.spi.EntityEntry;
@@ -57,6 +58,21 @@ public class BookstoreService {
     }
 
     @Transactional(readOnly = true)
+    public Set<AuthorDto> fetchAuthorsWithBooksViaJoinFetch() {
+        Set<AuthorDto> authors = authorRepository.findByJoinFetch();
+
+        System.out.println("\nResult set:");
+        authors.forEach(a -> {
+            System.out.println("\n\n" + a.getName() + ", " + a.getGenre());
+            a.getBooks().forEach(b -> System.out.print(b.getTitle() + ", "));
+        });
+
+        briefOverviewOfPersistentContextContent();
+
+        return authors;
+    }
+
+    @Transactional(readOnly = true)
     public List<SimpleAuthorDto> fetchAuthorsWithBooksViaQuerySimpleDto() {
         List<SimpleAuthorDto> authors = authorRepository.findByViaQuerySimpleDto();
 
@@ -81,7 +97,7 @@ public class BookstoreService {
         if (collectionEntries != null) {
             System.out.println("Total number of collection entries: "
                     + (managedEntities - collectionEntries.values().size()));
-        } 
+        }
 
         Map entities = persistenceContext.getEntitiesByKey();
         entities.forEach((key, value) -> System.out.println(key + ":" + value));

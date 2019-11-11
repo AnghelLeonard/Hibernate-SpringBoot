@@ -6,17 +6,21 @@ import org.springframework.stereotype.Repository;
 import com.bookstore.dto.AuthorDto;
 import com.bookstore.dto.SimpleAuthorDto;
 import com.bookstore.entity.Author;
+import java.util.Set;
 import org.springframework.data.jpa.repository.Query;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     List<AuthorDto> findBy();
-  
+
     @Query("SELECT a.name AS name, a.genre AS genre, b AS books "
             + "FROM Author a INNER JOIN a.books b")
     List<AuthorDto> findByViaQuery();
-   
+
+    @Query("SELECT a FROM Author a JOIN FETCH a.books")
+    Set<AuthorDto> findByJoinFetch();
+
     @Query("SELECT a.name AS name, a.genre AS genre, b.title AS title "
             + "FROM Author a INNER JOIN a.books b")
     List<SimpleAuthorDto> findByViaQuerySimpleDto();

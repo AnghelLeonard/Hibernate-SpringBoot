@@ -20,7 +20,7 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-           
+
             System.out.println("\n\nFetch authors with books via query builder mechanism");
             System.out.println("-----------------------------------------------------------------");
             bookstoreService.fetchAuthorsWithBooksQueryBuilderMechanism();
@@ -28,6 +28,10 @@ public class MainApplication {
             System.out.println("\n\nFetch authors with books via JPQL query");
             System.out.println("-----------------------------------------------------------------");
             bookstoreService.fetchAuthorsWithBooksViaQuery();
+
+            System.out.println("\n\nFetch authors with books via JOIN FETCH");
+            System.out.println("-----------------------------------------------------------------");
+            bookstoreService.fetchAuthorsWithBooksViaJoinFetch();
 
             System.out.println("\n\nFetch authors with books via query and simple DTO");
             System.out.println("-----------------------------------------------------------------");

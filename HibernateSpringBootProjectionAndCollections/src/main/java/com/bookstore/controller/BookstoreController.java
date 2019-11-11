@@ -4,6 +4,7 @@ import com.bookstore.dto.AuthorDto;
 import com.bookstore.dto.SimpleAuthorDto;
 import com.bookstore.service.BookstoreService;
 import java.util.List;
+import java.util.Set;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,8 +26,13 @@ public class BookstoreController {
     public List<AuthorDto> fetchAuthorsWithBooksViaQuery() {
         return bookstoreService.fetchAuthorsWithBooksViaQuery();
     }
-
+    
     @GetMapping("/authorsAndbooks/3")
+    public Set<AuthorDto> fetchAuthorsWithBooksViaJoinFetch() {
+        return bookstoreService.fetchAuthorsWithBooksViaJoinFetch();
+    }
+
+    @GetMapping("/authorsAndbooks/4")
     public List<SimpleAuthorDto> fetchAuthorsWithBooksViaQuerySimpleDto() {
         return bookstoreService.fetchAuthorsWithBooksViaQuerySimpleDto();
     }
