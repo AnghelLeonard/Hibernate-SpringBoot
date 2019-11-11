@@ -1,12 +1,12 @@
 package com.bookstore;
 
-import com.bookstore.dto.AuthorDto;
 import com.bookstore.service.BookstoreService;
 import java.util.List;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import com.bookstore.interfacebased.dto.MirrorAuthorDto;
 
 @SpringBootApplication
 public class MainApplication {
@@ -24,10 +24,14 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
+            System.out.println("\n\nFetch authors as read-only entities:");
+            bookstoreService.fetchAuthorsAsReadOnlyEntities();
 
-            AuthorDto author = bookstoreService.fetchAuthorWithBooksByName();
-            System.out.println("\nAuthor name: " + author.getName()
-                    + " books:" + author.getBooks());
+            System.out.println("\n\nFetch authors via interface-based projection that mirrors the entity:");
+            bookstoreService.fetchAuthorsMirrorInterface();
+
+            System.out.println("\n\nFetch authors via interface-based projection (DTO):");
+            bookstoreService.fetchAuthorsDtoInterface();
         };
     }
 }
