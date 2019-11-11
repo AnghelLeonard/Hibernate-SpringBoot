@@ -658,7 +658,6 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 
 **See also:**
 - [LEFT JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLeftJoinFetch)
-- [Why To Avoid JOIN FETCH And DTO](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch)
 - [JOIN VS. JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinVSJoinFetch)
 
 **Description:** Typically, when we get a `LazyInitializationException` we tend to modify the association fetching type from `LAZY` to `EAGER`. That is very bad! This is a [code smell](https://vladmihalcea.com/eager-fetching-is-a-code-smell/). Best way to avoid this exception is to rely on `JOIN FETCH` (if you plan to modify the fetched entities) or `JOIN` + DTO (if the fetched data is only read). `JOIN FETCH` allows associations to be initialized along with their parent objects using a single `SELECT`. This is particularly useful for fetching associated collections. 
@@ -1554,30 +1553,10 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 
 -----------------------------------------------------------------------------------------------------------------------
 
-100. **[Why To Avoid Combining `JOIN FETCH` And Spring projections](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch)**
-
-**See also:**
-- [How To Avoid LazyInitializationException Via JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinFetch)
-- [LEFT JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLeftJoinFetch)
-- [JOIN VS. JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinVSJoinFetch)
-     
-**Description:** Combining `JOIN FETCH` and Spring projections (DTO) it is possible but you should't do it.
-Mainly, the JPQL containing the `JOIN FETCH` cannot be used to fetch only some columns from the involved parent-child entities (in such cases, `JOIN` is the proper choice). It must fetch all attributes of the involved entities. No matter if your projection has only one attribute from the parent and one from the child, or it mirrors the whole attributes of parent-child entitites, the Persistent Context will be populated with the same data. Moreover, using `DISTINCT` is not possible, therefore duplicates are allowed.
-
-**Even if the result set will be mapped to the projection, it will be also loaded in the Persistent Context as entities. If we use `@Transactional(readOnly=false)` then the *hydrated state* will be kept in memory as well and entities will be in the `MANAGED` status. If we use `@Transactional(readOnly=true)` then the *hydrated state* is discarded from memory, but the entities entries remains in `READ_ONLY` status in Persistent Context until the Persistent Context is cleared or closed. So, if your projection mirrors the involved entities then better rely on read-only entitites and don't create the projection. If your projection contains a subset of attributes then avoid `JOIN FETCH` and use other approaches.**.
-
-**Key points:**
-- this works: `SELECT a FROM Author a JOIN FETCH a.books`
-- this doesn't work: `SELECT a.age as age FROM Author a JOIN FETCH a.books` -> *org.hibernate.QueryException: query specified join fetching, but the owner of the fetched association was not present in the select list*
-- this doesn't work: `SELECT a FROM Author a JOIN FETCH a.books.title` ->  *org.hibernate.QueryException: illegal attempt to dereference collection [author0_.id.books] with element property reference [title]*
-
------------------------------------------------------------------------------------------------------------------------
-
 101. **[`LEFT JOIN FETCH`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLeftJoinFetch)**
 
 **See also:**
 - [How To Avoid LazyInitializationException Via JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinFetch)
-- [Why To Avoid JOIN FETCH And DTO](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch)
 - [JOIN VS. JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinVSJoinFetch)
 
 **Description:** Let's assume that we have two entities engaged in a one-to-many (or many-to-many) lazy bidirectional (or unidirectional) relationship (e.g., `Author` has more `Book`). And, we want to trigger a single `SELECT` that fetches all `Author` and the corresponding `Book`. This is a job for `JOIN FETCH` which is converted behind the scene into a `INNER JOIN`. Being an `INNER JOIN`, the SQL will return only `Author` that have `Book`. If we want to return all `Author`, including those that doesn't have `Book`, then we can rely on `LEFT JOIN FETCH`. Similar, we can fetch all `Book`, including those with no registered `Author`. This can be done via `JOIN FETCH` or `JOIN`.
@@ -1594,7 +1573,6 @@ Mainly, the JPQL containing the `JOIN FETCH` cannot be used to fetch only some c
 **See also:**
 - [How To Avoid LazyInitializationException Via JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinFetch)
 - [LEFT JOIN FETCH](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLeftJoinFetch)
-- [Why To Avoid JOIN FETCH And DTO](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaJoinFetch)
      
 **Description:** This is an application meant to reveal the differences between `JOIN` and `JOIN FETCH`. The important thing to keep in mind is that, in case of `LAZY` fetching, `JOIN` will not be capable to initialize the associated collections along with their parent objects using a single SQL `SELECT`.  On the other hand, `JOIN FETCH` is capable to accomplish this kind of task. But, don't underestimate `JOIN`, because `JOIN` is the proper choice when we need to combine/join the columns of two (or more) tables in the same query, but we don't need to initialize the associated collections on the returned entity (e.g., very useful for fetching DTO).
 
