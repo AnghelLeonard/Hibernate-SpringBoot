@@ -73,7 +73,7 @@ public class BookstoreService {
     }
     
     @Transactional
-    public Page<Author> fetchPageOfAuthorsWithBooksViaTupleByGenre(int page, int size) {
+    public Page<Author> fetchPageOfAuthorsWithBooksByGenreTuple(int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name"));
 

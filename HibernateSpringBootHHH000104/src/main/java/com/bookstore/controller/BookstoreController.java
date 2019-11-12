@@ -47,10 +47,10 @@ public class BookstoreController {
     }
     
     @GetMapping("/page/tuple/{page}/{size}")
-    public Page<Author> fetchPageOfAuthorsWithBooksViaTupleByGenre(
+    public Page<Author> fetchPageOfAuthorsWithBooksByGenreTuple(
             
             @PathVariable int page, @PathVariable int size) {
 
-        return bookstoreService.fetchPageOfAuthorsWithBooksViaTupleByGenre(page, size);
+        return bookstoreService.fetchPageOfAuthorsWithBooksByGenreTuple(page, size);
     }
 }
