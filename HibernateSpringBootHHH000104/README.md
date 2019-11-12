@@ -10,7 +10,7 @@
 Calling `fetchWithBooksByGenre()` works fine only that the following warning is signaled: `HHH000104: firstResult / maxResults specified with collection fetch; applying in memory!` Obviously, having pagination in memory cannot be good from performance perspective. This application implement a solution for moving pagination at database-level.
 
 **Key points:**
-- use three JPQL queries for fetching `Page` of read-write (or read-only) result set
-- use two JPQL queries for fetching `Slice` or `List` of read-write (or read-only) result set
+- use three JPQL queries for fetching `Page` of entities in read-write or read-only mode
+- use two JPQL queries for fetching `Slice` or `List` of entities in read-write or read-only mode
 
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
