@@ -1553,7 +1553,7 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 
 -----------------------------------------------------------------------------------------------------------------------
 
-**[How To Page The Result Set of a `JOIN`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinPagination)**
+100. **[How To Page The Result Set of a `JOIN`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinPagination)**
 
 **Description:** Using `JOIN` is very useful for fetching DTOs (data that is never modified, not in the current or subsequent requests). For example, consider two entities, `Author` and `Book` in a lazy-bidirectional `@OneToMany` association. And, we want to fetch a subset of columns from the parent table (`author`) and a subset of columns from the child table (`book`). This job is a perfect fit for `JOIN` which can pick up columns from different tables and build a *raw* result set. This way we fetch only the needed data. Moreover, we may want to serve the result set in pages (e.g., via `LIMIT`). This application contains several approaches for accomplishing this task with offset pagination.
 
