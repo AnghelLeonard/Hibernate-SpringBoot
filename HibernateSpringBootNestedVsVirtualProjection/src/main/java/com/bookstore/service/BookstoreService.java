@@ -79,6 +79,18 @@ public class BookstoreService {
         return books;
     }
 
+    @Transactional(readOnly = true)
+    public List<Object[]> fetchBooksWithAuthorsViaArrayOfObjects() {
+        List<Object[]> books = bookRepository.findByViaQueryArrayOfObjects();
+
+        System.out.println("\nResult set:");
+        books.forEach(b -> System.out.println(Arrays.toString(b)));
+
+        briefOverviewOfPersistentContextContent();
+        
+        return books;
+    }
+
     private void briefOverviewOfPersistentContextContent() {
         org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
 
@@ -90,7 +102,7 @@ public class BookstoreService {
         if (collectionEntries != null) {
             System.out.println("Total number of collection entries: "
                     + (managedEntities - collectionEntries.values().size()));
-        } 
+        }
 
         Map entities = persistenceContext.getEntitiesByKey();
         entities.forEach((key, value) -> System.out.println(key + ":" + value));

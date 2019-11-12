@@ -36,4 +36,9 @@ public class BookstoreController {
     public List<VirtualBookDto> fetchBooksWithAuthorsViaQueryVirtualDto() {
         return bookstoreService.fetchBooksWithAuthorsViaQueryVirtualDto();
     }
+    
+    @GetMapping("/booksAndauthors/5")
+    public List<Object[]> fetchBooksWithAuthorsViaArrayOfObjects() {
+        return bookstoreService.fetchBooksWithAuthorsViaArrayOfObjects();
+    }
 }

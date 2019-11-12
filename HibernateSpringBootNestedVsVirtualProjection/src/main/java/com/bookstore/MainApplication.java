@@ -31,10 +31,14 @@ public class MainApplication {
             System.out.println("\n\nFetch books with authors via query and simple DTO");
             System.out.println("-----------------------------------------------------------------");
             bookstoreService.fetchBooksWithAuthorsViaQuerySimpleDto();
+            
+            System.out.println("\n\nFetch books with authors via array of objects");
+            System.out.println("-----------------------------------------------------------------");
+            bookstoreService.fetchBooksWithAuthorsViaArrayOfObjects();
 
             System.out.println("\n\nFetch books with authors via query and virtual DTO");
             System.out.println("-----------------------------------------------------------------");
-            bookstoreService.fetchBooksWithAuthorsViaQueryVirtualDto();
+            bookstoreService.fetchBooksWithAuthorsViaQueryVirtualDto();                        
         };
     }
 }

@@ -26,4 +26,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("SELECT b.title AS title, a.name AS name, a.genre AS genre "
             + "FROM Book b LEFT JOIN b.author a")
     List<VirtualBookDto> findByViaQueryVirtualDto();
+    
+    @Query("SELECT b.title AS title, a.name AS name, a.genre AS genre "
+            + "FROM Book b LEFT JOIN b.author a")
+    List<Object[]> findByViaQueryArrayOfObjects();
 }
