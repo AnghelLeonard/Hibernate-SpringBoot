@@ -3,6 +3,7 @@ package com.bookstore.repository;
 import com.bookstore.entity.Author;
 import java.util.List;
 import javax.persistence.QueryHint;
+import javax.persistence.Tuple;
 import static org.hibernate.jpa.QueryHints.HINT_PASS_DISTINCT_THROUGH;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +29,11 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Transactional(readOnly = true)
     @Query(value = "SELECT a.id FROM Author a WHERE a.genre = ?1")
     Page<Long> fetchPageOfIdsByGenre(String genre, Pageable pageable);
+
+    @Transactional(readOnly = true)
+    @Query(value = "SELECT a.id AS id, COUNT(*) OVER() AS total FROM Author a WHERE a.genre = ?1",
+            nativeQuery = true)
+    List<Tuple> fetchTupleOfIdsByGenre(String genre, Pageable pageable);
 
     @Transactional(readOnly = true)
     @Query(value = "SELECT a.id FROM Author a WHERE a.genre = ?1")

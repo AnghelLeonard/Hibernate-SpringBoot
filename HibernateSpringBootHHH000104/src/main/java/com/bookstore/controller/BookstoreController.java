@@ -45,4 +45,12 @@ public class BookstoreController {
 
         return bookstoreService.fetchPageOfAuthorsWithBooksByGenreEntityGraph(page, size);
     }
+    
+    @GetMapping("/page/tuple/{page}/{size}")
+    public Page<Author> fetchPageOfAuthorsWithBooksViaTupleByGenre(
+            
+            @PathVariable int page, @PathVariable int size) {
+
+        return bookstoreService.fetchPageOfAuthorsWithBooksViaTupleByGenre(page, size);
+    }
 }

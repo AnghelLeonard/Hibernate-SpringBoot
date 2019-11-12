@@ -2,7 +2,10 @@ package com.bookstore.service;
 
 import com.bookstore.repository.AuthorRepository;
 import com.bookstore.entity.Author;
+import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Tuple;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -65,6 +68,24 @@ public class BookstoreService {
         Page<Long> pageOfIds = authorRepository.fetchPageOfIdsByGenre("Anthology", pageable);
         List<Author> listOfAuthors = authorRepository.fetchWithBooksEntityGraph(pageOfIds.getContent());
         Page<Author> pageOfAuthors = new PageImpl(listOfAuthors, pageable, pageOfIds.getTotalElements());
+
+        return pageOfAuthors;
+    }
+    
+    @Transactional
+    public Page<Author> fetchPageOfAuthorsWithBooksViaTupleByGenre(int page, int size) {
+
+        Pageable pageable = PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name"));
+
+        List<Tuple> tuples = authorRepository.fetchTupleOfIdsByGenre("Anthology", pageable);
+        
+        List<Long> listOfIds = new ArrayList<>(tuples.size());
+        for(Tuple tuple: tuples) {
+            listOfIds.add(((BigInteger) tuple.get("id")).longValue());
+        }
+        
+        List<Author> listOfAuthors = authorRepository.fetchWithBooksJoinFetch(listOfIds);
+        Page<Author> pageOfAuthors = new PageImpl(listOfAuthors, pageable, ((BigInteger) tuples.get(0).get("total")).longValue());
 
         return pageOfAuthors;
     }
