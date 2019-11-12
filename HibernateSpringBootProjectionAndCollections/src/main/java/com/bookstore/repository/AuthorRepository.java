@@ -24,4 +24,8 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Query("SELECT a.name AS name, a.genre AS genre, b.title AS title "
             + "FROM Author a INNER JOIN a.books b")
     List<SimpleAuthorDto> findByViaQuerySimpleDto();
+    
+    @Query("SELECT a.name AS name, a.genre AS genre, b.title AS title "
+            + "FROM Author a INNER JOIN a.books b")
+    List<Object[]> findByViaArrayOfObjects();
 }

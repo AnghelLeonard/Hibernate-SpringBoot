@@ -36,6 +36,10 @@ public class MainApplication {
             System.out.println("\n\nFetch authors with books via query and simple DTO");
             System.out.println("-----------------------------------------------------------------");
             bookstoreService.fetchAuthorsWithBooksViaQuerySimpleDto();
+            
+            System.out.println("\n\nFetch authors with books via array of objects:");
+            System.out.println("-----------------------------------------------------------------");
+            bookstoreService.fetchAuthorsWithBooksViaArrayOfObjects();                        
         };
     }
 }

@@ -85,6 +85,18 @@ public class BookstoreService {
 
         return authors;
     }
+    
+    @Transactional(readOnly = true)
+    public List<Object[]> fetchAuthorsWithBooksViaArrayOfObjects() {
+        List<Object[]> authors = authorRepository.findByViaArrayOfObjects();
+        
+        System.out.println("\nResult set:");
+        authors.forEach(a -> System.out.println(Arrays.toString(a)));
+        
+        briefOverviewOfPersistentContextContent();
+        
+        return authors;
+    }
 
     private void briefOverviewOfPersistentContextContent() {
         org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();

@@ -36,4 +36,9 @@ public class BookstoreController {
     public List<SimpleAuthorDto> fetchAuthorsWithBooksViaQuerySimpleDto() {
         return bookstoreService.fetchAuthorsWithBooksViaQuerySimpleDto();
     }
+    
+    @GetMapping("/authorsAndbooks/5")
+    public List<Object[]> fetchAuthorsWithBooksViaArrayOfObjects() {
+        return bookstoreService.fetchAuthorsWithBooksViaArrayOfObjects();
+    }       
 }
