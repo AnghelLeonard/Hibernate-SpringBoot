@@ -48,7 +48,7 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Query(value = "SELECT DISTINCT a FROM Author a LEFT JOIN FETCH a.books WHERE a.id IN ?1")
     List<Author> fetchWithBooksJoinFetch(List<Long> authorIds);
 
-    @Transactional
+    @Transactional(readOnly = true)
     @EntityGraph(attributePaths = {"books"}, type = EntityGraph.EntityGraphType.FETCH)
     @QueryHints(value = @QueryHint(name = HINT_PASS_DISTINCT_THROUGH, value = "false"))
     @Query(value = "SELECT DISTINCT a FROM Author a WHERE a.id IN ?1")
