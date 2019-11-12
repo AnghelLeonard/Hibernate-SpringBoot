@@ -1,16 +1,10 @@
-**[How To Avoid HHH000104 And Use Pagination Of Parent-Child](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHHH000104)**
+**[How To Page The Result Set of a `JOIN`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinPagination)**
 
-**Description:** HHH000104 is a Hibernate warning that tell us that pagination of a result set is tacking place in memory. For example, consider the `Author` and `Book` entities in a lazy-bidirectional `@OneToMany` association and the following query: 
-
-  `@Transactional`\
-  `@Query(value = "SELECT a FROM Author a LEFT JOIN FETCH a.books WHERE a.genre = ?1",`\
-  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`countQuery = "SELECT COUNT(a) FROM Author a WHERE a.genre = ?1")`\
-  `Page<Author> fetchWithBooksByGenre(String genre, Pageable pageable);`
-
-Calling `fetchWithBooksByGenre()` works fine only that the following warning is signaled: `HHH000104: firstResult / maxResults specified with collection fetch; applying in memory!` Obviously, having pagination in memory cannot be good from performance perspective. This application implement a solution for moving pagination at database-level.
+**Description:** Using `JOIN` is very useful for fetching DTOs (data that is never modified, not in the current or subsequent requests). For example, consider two entities, `Author` and `Book` in a lazy-bidirectional `@OneToMany` association. And, we want to fetch a subset of columns from the parent table (`author`) and a subset of columns from the child table (`book`). This job is a perfect fit for `JOIN` which can pick up columns from different tables and build a *raw* result set. This way we fetch only the needed data. Moreover, we may want to serve the result set in pages (e.g., via `LIMIT`). This application contains several approaches for accomplishing this task with offset pagination.
 
 **Key points:**
-- use three or two JPQL queries for fetching `Page` of entities in read-write or read-only mode
-- use two JPQL queries for fetching `Slice` or `List` of entities in read-write or read-only mode
+- pagination via `Page` (with `SELECT COUNT` and `COUNT(*) OVER()` window function)
+- pagination via `Slice` and `List`
+- pagination via `DENSE_RANK()` for avoiding the truncation of the result set (an author can be fetched with only a subset of his books)
 
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
