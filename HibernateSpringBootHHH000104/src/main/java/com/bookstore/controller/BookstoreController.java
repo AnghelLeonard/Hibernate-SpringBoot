@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
-import com.bookstore.dto.AuthorBookDto;
 import org.springframework.data.domain.Slice;
 
 @RestController
@@ -19,45 +18,24 @@ public class BookstoreController {
         this.bookstoreService = bookstoreService;
     }
 
-    @GetMapping("/jpql/page/entity/authorbook/{page}/{size}")
-    public Page<Author> fetchAuthorsWithBooksByGenre1(
+    @GetMapping("/page/{page}/{size}")
+    public Page<Author> fetchPageOfAuthorsWithBooksByGenre(
             @PathVariable int page, @PathVariable int size) {
 
-        return bookstoreService.fetchAuthorsWithBooksByGenre1(page, size);
+        return bookstoreService.fetchPageOfAuthorsWithBooksByGenre(page, size);
     }
 
-    @GetMapping("/jpql/slice/entity/authorbook/{page}/{size}")
-    public Slice<Author> fetchAuthorsWithBooksByGenre2(
+    @GetMapping("/slice/{page}/{size}")
+    public Slice<Author> fetchSliceOfAuthorsWithBooksByGenre(
             @PathVariable int page, @PathVariable int size) {
 
-        return bookstoreService.fetchAuthorsWithBooksByGenre2(page, size);
+        return bookstoreService.fetchSliceOfAuthorsWithBooksByGenre(page, size);
     }
 
-    @GetMapping("/jpql/page/dto/authorbook/{page}/{size}")
-    public Page<AuthorBookDto> fetchAuthorsDtoWithBooksDtoByGenre1(
+    @GetMapping("/list/{page}/{size}")
+    public List<Author> fetchListOfAuthorsWithBooksByGenre3(
             @PathVariable int page, @PathVariable int size) {
 
-        return bookstoreService.fetchAuthorsDtoWithBooksDtoByGenre1(page, size);
-    }
-
-    @GetMapping("/jpql/slice/dto/authorbook/{page}/{size}")
-    public Slice<AuthorBookDto> fetchAuthorsDtoWithBooksDtoByGenre2(
-            @PathVariable int page, @PathVariable int size) {
-
-        return bookstoreService.fetchAuthorsDtoWithBooksDtoByGenre2(page, size);
-    }
-
-    @GetMapping("/native/dto/authorbook/{page}/{size}")
-    public Page<AuthorBookDto> fetchNativeAuthorsDtoWithBooksDtoByGenre(
-            @PathVariable int page, @PathVariable int size) {
-
-        return bookstoreService.fetchNativeAuthorsDtoWithBooksDtoByGenre(page, size);
-    }
-
-    @GetMapping("/native/dto/authorbookdr/{start}/{end}")
-    public List<AuthorBookDto> fetchAuthorsNativeDtoWithBooksDtoViaDenseRank(
-            @PathVariable int start, @PathVariable int end) {
-
-        return bookstoreService.fetchAuthorsNativeDtoWithBooksDtoViaDenseRank(start, end);
+        return bookstoreService.fetchListOfAuthorsWithBooksByGenre(page, size);
     }
 }

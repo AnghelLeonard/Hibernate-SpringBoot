@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.bookstore.dto.AuthorBookDto;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.SliceImpl;
 
@@ -24,7 +23,7 @@ public class BookstoreService {
     }
 
     @Transactional
-    public Page<Author> fetchAuthorsWithBooksByGenre1(int page, int size) {
+    public Page<Author> fetchPageOfAuthorsWithBooksByGenre(int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name"));
 
@@ -36,7 +35,7 @@ public class BookstoreService {
     }
 
     @Transactional
-    public Slice<Author> fetchAuthorsWithBooksByGenre2(int page, int size) {
+    public Slice<Author> fetchSliceOfAuthorsWithBooksByGenre(int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name"));
 
@@ -47,43 +46,13 @@ public class BookstoreService {
         return sliceOfAuthors;
     }
 
-    @Transactional(readOnly = true)
-    public Page<AuthorBookDto> fetchAuthorsDtoWithBooksDtoByGenre1(int page, int size) {
-
-        Pageable pageable = PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name"));
-        Page<AuthorBookDto> pageOfAuthors = authorRepository.fetchPageOfDtoWithBooksDto("Anthology", pageable);
-
-        return pageOfAuthors;
-    }
-
-    @Transactional(readOnly = true)
-    public Slice<AuthorBookDto> fetchAuthorsDtoWithBooksDtoByGenre2(int page, int size) {
-
-        Pageable pageable = PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name"));
-        Slice<AuthorBookDto> sliceOfAuthors = authorRepository.fetchSliceOfDtoWithBooksDto("Anthology", pageable);
-
-        return sliceOfAuthors;
-    }
-
-    @Transactional(readOnly = true)
-    public Page<AuthorBookDto> fetchNativeAuthorsDtoWithBooksDtoByGenre(int page, int size) {
+    @Transactional
+    public List<Author> fetchListOfAuthorsWithBooksByGenre(int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name"));
 
-        List<AuthorBookDto> listOfAuthors
-                = authorRepository.fetchNativeDtoWithBooksDto("Anthology", pageable);
-        Page<AuthorBookDto> pageOfAuthors
-                = new PageImpl(listOfAuthors, pageable,
-                        listOfAuthors.isEmpty() ? 0 : listOfAuthors.get(0).getTotal());
-
-        return pageOfAuthors;
-    }
-
-    @Transactional(readOnly = true)
-    public List<AuthorBookDto> fetchAuthorsNativeDtoWithBooksDtoViaDenseRank(int start, int end) {
-
-        List<AuthorBookDto> listOfAuthors
-                = authorRepository.fetchNativeDtoWithBooksDtoViaDenseRank("Anthology", start, end);
+        List<Long> listOfIds = authorRepository.fetchListOfIdsByGenre("Anthology", pageable);
+        List<Author> listOfAuthors = authorRepository.fetchWithBooks(listOfIds);
 
         return listOfAuthors;
     }
