@@ -28,7 +28,7 @@ public class BookstoreService {
         Pageable pageable = PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name"));
 
         Page<Long> pageOfIds = authorRepository.fetchPageOfIdsByGenre("Anthology", pageable);
-        List<Author> listOfAuthors = authorRepository.fetchWithBooks(pageOfIds.getContent());
+        List<Author> listOfAuthors = authorRepository.fetchWithBooksJoinFetch(pageOfIds.getContent());
         Page<Author> pageOfAuthors = new PageImpl(listOfAuthors, pageable, pageOfIds.getTotalElements());
 
         return pageOfAuthors;
@@ -40,7 +40,7 @@ public class BookstoreService {
         Pageable pageable = PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name"));
 
         Slice<Long> pageOfIds = authorRepository.fetchSliceOfIdsByGenre("Anthology", pageable);
-        List<Author> listOfAuthors = authorRepository.fetchWithBooks(pageOfIds.getContent());
+        List<Author> listOfAuthors = authorRepository.fetchWithBooksJoinFetch(pageOfIds.getContent());
         Slice<Author> sliceOfAuthors = new SliceImpl(listOfAuthors, pageable, pageOfIds.hasNext());
 
         return sliceOfAuthors;
@@ -52,8 +52,20 @@ public class BookstoreService {
         Pageable pageable = PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name"));
 
         List<Long> listOfIds = authorRepository.fetchListOfIdsByGenre("Anthology", pageable);
-        List<Author> listOfAuthors = authorRepository.fetchWithBooks(listOfIds);
+        List<Author> listOfAuthors = authorRepository.fetchWithBooksJoinFetch(listOfIds);
 
         return listOfAuthors;
+    }
+
+    @Transactional
+    public Page<Author> fetchPageOfAuthorsWithBooksByGenreEntityGraph(int page, int size) {
+
+        Pageable pageable = PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name"));
+
+        Page<Long> pageOfIds = authorRepository.fetchPageOfIdsByGenre("Anthology", pageable);
+        List<Author> listOfAuthors = authorRepository.fetchWithBooksEntityGraph(pageOfIds.getContent());
+        Page<Author> pageOfAuthors = new PageImpl(listOfAuthors, pageable, pageOfIds.getTotalElements());
+
+        return pageOfAuthors;
     }
 }

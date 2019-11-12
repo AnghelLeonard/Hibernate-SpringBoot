@@ -12,6 +12,7 @@ import org.springframework.data.jpa.repository.QueryHints;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.data.domain.Slice;
+import org.springframework.data.jpa.repository.EntityGraph;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
@@ -24,15 +25,14 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
             countQuery = "SELECT COUNT(a) FROM Author a WHERE a.genre = ?1")
     Page<Author> fetchWithBooksByGenre(String genre, Pageable pageable);        
      */
-    
     @Transactional(readOnly = true)
     @Query(value = "SELECT a.id FROM Author a WHERE a.genre = ?1")
     Page<Long> fetchPageOfIdsByGenre(String genre, Pageable pageable);
-    
+
     @Transactional(readOnly = true)
     @Query(value = "SELECT a.id FROM Author a WHERE a.genre = ?1")
     Slice<Long> fetchSliceOfIdsByGenre(String genre, Pageable pageable);
-    
+
     @Transactional(readOnly = true)
     @Query(value = "SELECT a.id FROM Author a WHERE a.genre = ?1")
     List<Long> fetchListOfIdsByGenre(String genre, Pageable pageable);
@@ -40,5 +40,11 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Transactional(readOnly = true)
     @QueryHints(value = @QueryHint(name = HINT_PASS_DISTINCT_THROUGH, value = "false"))
     @Query(value = "SELECT DISTINCT a FROM Author a LEFT JOIN FETCH a.books WHERE a.id IN ?1")
-    List<Author> fetchWithBooks(List<Long> authorIds);  
+    List<Author> fetchWithBooksJoinFetch(List<Long> authorIds);
+
+    @Transactional
+    @EntityGraph(attributePaths = {"books"}, type = EntityGraph.EntityGraphType.FETCH)
+    @QueryHints(value = @QueryHint(name = HINT_PASS_DISTINCT_THROUGH, value = "false"))
+    @Query(value = "SELECT DISTINCT a FROM Author a WHERE a.id IN ?1")
+    List<Author> fetchWithBooksEntityGraph(List<Long> authorIds);
 }

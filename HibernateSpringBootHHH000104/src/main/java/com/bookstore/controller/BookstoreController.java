@@ -33,9 +33,16 @@ public class BookstoreController {
     }
 
     @GetMapping("/list/{page}/{size}")
-    public List<Author> fetchListOfAuthorsWithBooksByGenre3(
+    public List<Author> fetchListOfAuthorsWithBooksByGenre(
             @PathVariable int page, @PathVariable int size) {
 
         return bookstoreService.fetchListOfAuthorsWithBooksByGenre(page, size);
+    }
+    
+    @GetMapping("/page/eg/{page}/{size}")
+    public Page<Author> fetchPageOfAuthorsWithBooksByGenreEntityGraph(
+            @PathVariable int page, @PathVariable int size) {
+
+        return bookstoreService.fetchPageOfAuthorsWithBooksByGenreEntityGraph(page, size);
     }
 }
