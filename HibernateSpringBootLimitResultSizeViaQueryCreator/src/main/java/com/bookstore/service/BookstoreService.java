@@ -15,6 +15,10 @@ public class BookstoreService {
         this.authorRepository = authorRepository;
     }
 
+    public List<Author> fetchFirst5() {
+        return authorRepository.findFirst5By();
+    }
+    
     public List<Author> fetchFirst5ByAge(int age) {
         return authorRepository.findFirst5ByAge(age);
     }

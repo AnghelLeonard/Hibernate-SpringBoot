@@ -24,6 +24,10 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
+            System.out.println("\nFetch the first 5 authors: \n"
+                    + bookstoreService.fetchFirst5()
+                    + "\n\n");
+            
             System.out.println("\nFetch the first 5 authors by age equal to 56: \n"
                     + bookstoreService.fetchFirst5ByAge(56)
                     + "\n\n");
