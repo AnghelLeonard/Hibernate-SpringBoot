@@ -29,7 +29,7 @@ public class BookstoreService {
         System.out.println("Persistent Context before fetching read-write entity:");
         briefOverviewOfPersistentContextContent();
 
-        Author author = authorRepository.findById(1L).orElseThrow();
+        Author author = authorRepository.findByName("Joana Nimar");
 
         System.out.println("\n\nPersistent Context after fetching read-write entity:");
         briefOverviewOfPersistentContextContent();
@@ -42,7 +42,7 @@ public class BookstoreService {
         System.out.println("Persistent Context before fetching read-only entity:");
         briefOverviewOfPersistentContextContent();
 
-        Author author = authorRepository.findById(1L).orElseThrow();
+        Author author = authorRepository.findByName("Joana Nimar");
 
         System.out.println("\n\nPersistent Context after fetching read-only entity:");
         briefOverviewOfPersistentContextContent();
