@@ -26,12 +26,14 @@ public class MainApplication {
 
             System.out.println("Avoid:\n------\n");
             Author authorRW = bookstoreService.fetchAuthorReadWriteMode();
+            authorRW.setAge(authorRW.getAge() + 1);
             bookstoreService.updateAuthor(authorRW);
 
             System.out.println("\n\n=============================\n\n");
             
             System.out.println("Recommended:\n-----------\n");
             Author authorRO = bookstoreService.fetchAuthorReadOnlyMode();
+            authorRO.setAge(authorRO.getAge() + 1);
             bookstoreService.updateAuthor(authorRO);
         };
     }

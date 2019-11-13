@@ -52,8 +52,7 @@ public class BookstoreService {
     
     @Transactional
     public void updateAuthor(Author author) {
-        
-        author.setAge(author.getAge() + 1);
+                
         authorRepository.save(author);
         
         System.out.println("\n\nPersistent Context after update the entity:");
