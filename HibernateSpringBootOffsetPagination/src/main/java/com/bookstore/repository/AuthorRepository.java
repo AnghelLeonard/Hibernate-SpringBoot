@@ -12,6 +12,10 @@ public interface AuthorRepository extends PagingAndSortingRepository<Author, Lon
 
     @Query("SELECT a FROM Author a WHERE a.genre = ?1")
     public Page<Author> fetchByGenre(String genre, Pageable pageable);
+    
+    @Query(value = "SELECT a FROM Author a WHERE a.genre = ?1",
+            countQuery = "SELECT COUNT(*) FROM Author a WHERE a.genre = ?1")
+    public Page<Author> fetchByGenreExplicitCount(String genre, Pageable pageable);
 
     @Query(value = "SELECT * FROM author WHERE genre = ?1", 
             nativeQuery = true)

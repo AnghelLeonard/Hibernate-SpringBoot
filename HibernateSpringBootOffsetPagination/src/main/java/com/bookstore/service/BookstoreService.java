@@ -28,6 +28,12 @@ public class BookstoreService {
                 PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "age")));
     }
     
+    public Page<Author> fetchNextPageByGenreExplicitCount(int page, int size) {
+
+        return authorRepository.fetchByGenreExplicitCount("History",
+                PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "age")));
+    }
+    
     public Page<Author> fetchNextPageByGenreNative(int page, int size) {
 
         return authorRepository.fetchByGenreNative("History",

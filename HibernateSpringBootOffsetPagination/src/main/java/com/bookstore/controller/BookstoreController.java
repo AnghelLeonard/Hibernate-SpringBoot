@@ -29,6 +29,12 @@ public class BookstoreController {
         return bookstoreService.fetchNextPageByGenre(page, size);
     }
     
+    @GetMapping("/authorsByGenreExplicitCount/{page}/{size}")
+    public Page<Author> fetchAuthorsByGenreExplicitCount(@PathVariable int page, @PathVariable int size) {
+
+        return bookstoreService.fetchNextPageByGenreExplicitCount(page, size);
+    }
+    
     @GetMapping("/authorsByGenreNative/{page}/{size}")
     public Page<Author> fetchAuthorsByGenreNative(@PathVariable int page, @PathVariable int size) {
 
