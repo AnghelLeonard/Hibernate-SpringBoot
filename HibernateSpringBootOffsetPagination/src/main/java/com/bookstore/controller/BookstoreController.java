@@ -3,6 +3,7 @@ package com.bookstore.controller;
 import com.bookstore.entity.Author;
 import com.bookstore.service.BookstoreService;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,5 +22,10 @@ public class BookstoreController {
 
         return bookstoreService.fetchNextPage(page, size);
     }
+    
+    @GetMapping("/authors")
+    public Page<Author> fetchAuthors(Pageable pageable) {
 
+        return bookstoreService.fetchNextPagePageable(pageable);
+    }
 }
