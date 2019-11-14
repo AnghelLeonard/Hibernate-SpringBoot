@@ -3,9 +3,12 @@ package com.bookstore.service;
 import com.bookstore.entity.Author;
 import com.bookstore.entity.Book;
 import com.bookstore.repository.AuthorRepository;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.hibernate.engine.spi.EntityEntry;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,11 +18,11 @@ public class BookstoreService {
 
     @PersistenceContext
     private final EntityManager entityManager;
-    private final AuthorRepository authorRepository;    
+    private final AuthorRepository authorRepository;
 
     public BookstoreService(AuthorRepository authorRepository, EntityManager entityManager) {
 
-        this.authorRepository = authorRepository;        
+        this.authorRepository = authorRepository;
         this.entityManager = entityManager;
     }
 
@@ -56,15 +59,22 @@ public class BookstoreService {
         org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
 
         int managedEntities = persistenceContext.getNumberOfManagedEntities();
-        Map collections = persistenceContext.getCollectionEntries();
 
         System.out.println("\n-----------------------------------");
-        System.out.println("Total number of managed entities: " + managedEntities);
-        if (collections != null) {            
-            System.out.println("Managed collections: " + collections.values());
-        } else {
-            System.out.println("No managed collections");
+        System.out.println("\nTotal number of managed entities: " + managedEntities + "\n");
+
+        Map entities = persistenceContext.getEntitiesByKey();
+        entities.forEach((key, value) -> System.out.println(key + ": " + value));
+
+        Collection entitiesValues = entities.values();
+        for (Object entry : entitiesValues) {
+            EntityEntry ee = persistenceContext.getEntry(entry);
+            System.out.println(
+                    "\n\nEntity name: " + ee.getEntityName()
+                    + "\nStatus: " + ee.getStatus()
+                    + "\nState: " + Arrays.toString(ee.getLoadedState()));
         }
+
         System.out.println("\n-----------------------------------\n");
     }
 
