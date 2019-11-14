@@ -23,6 +23,24 @@ public class BookstoreController {
         return bookstoreService.fetchNextPage(page, size);
     }
     
+    @GetMapping("/authorsByGenre/{page}/{size}")
+    public Page<Author> fetchAuthorsByGenre(@PathVariable int page, @PathVariable int size) {
+
+        return bookstoreService.fetchNextPageByGenre(page, size);
+    }
+    
+    @GetMapping("/authorsByGenreNative/{page}/{size}")
+    public Page<Author> fetchAuthorsByGenreNative(@PathVariable int page, @PathVariable int size) {
+
+        return bookstoreService.fetchNextPageByGenreNative(page, size);
+    }
+    
+    @GetMapping("/authorsByGenreNativeExplicitCount/{page}/{size}")
+    public Page<Author> fetchAuthorsByGenreNativeExplicitCount(@PathVariable int page, @PathVariable int size) {
+
+        return bookstoreService.fetchNextPageByGenreNativeExplicitCount(page, size);
+    }
+    
     @GetMapping("/authors")
     // Request example: http://localhost:8080/authors?page=1&size=3&sort=name,desc
     public Page<Author> fetchAuthors(Pageable pageable) {
