@@ -24,6 +24,7 @@ public class BookstoreController {
     }
     
     @GetMapping("/authors")
+    // Request example: http://localhost:8080/authors?page=1&size=3&sort=name,asc
     public Page<Author> fetchAuthors(Pageable pageable) {
 
         return bookstoreService.fetchNextPagePageable(pageable);
