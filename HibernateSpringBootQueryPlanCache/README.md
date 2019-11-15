@@ -1,10 +1,12 @@
-**[Avoid Spring Redundant `save()` Call](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRedundantSave)**
+**[How To Use Hibernate Query Plan Cache](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootQueryPlanCache)**
  
-**Description:** This application is an example when calling `save()` for an entity is redundant (not necessary).
+**Description:** This application is an example of testing the Hibernate Query Plan Cache. For entity queries (JPQL and Criteria API_ the QPC has a size of 2048, while for native queries it has a size of 128. Pay attention to alter these values to accommodate all queries
+ executed by your application. If the number of exectued queries is higher than the QPC size (especially for entity queries) then you will start to experiment performance penalties caused by entity compilation time added for each query execution. 
+ 
+ In this application, you can adjust the QPC size in `application.properties`. Mainly, there are 2 JPQL queries and a QPC of size 2. Switching from size 2 to size 1 will cause the compilation of one JPQL query at each execution. Measuring the times for 5000 execution using a QPC of size 2, respectively 1 reveals the importance of QPC in terms of time.
 
 **Key points:**
-- at flush time, Hibernate relies on *dirty checking* mechanism to determine the potential modifications in entities 
-- for each modification, Hibernate automatically triggers the corresponding `UPDATE` statement without the need to explicitly call the `save()` method
-- behind the scene, this redundancy (calling `save()` when is not necessarily) doesn't affect the number of triggered queries, but it implies a performance penalty in the underlying Hibernate processes
+- for JPQL and Criteria API you can set the QPC via `hibernate.query.plan_cache_max_size`
+- for native queries you can set the QPC via `hibernate.query.plan_parameter_metadata_max_size`
      
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
