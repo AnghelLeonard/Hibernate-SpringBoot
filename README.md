@@ -3133,3 +3133,16 @@ Moreover, this example commits the database transaction after each batch excecut
 - in a subsequent Persistent Context, merge the detached entity and propagate changes to the database
 
 **Note:** If you never plan to modify the fetched result set then use DTO (e.g., Spring projection), not *read-only* entities.
+
+----------------------------------------------------------------------------------------------------------------------
+
+220. **[How To Publish Domain Events From Aggregate Root](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDomainEvents)**
+ 
+**Description:** Starting with Spring Data Ingalls release publishing domain events by aggregate roots becomes easier. Entities managed by repositories are aggregate roots. In a Domain-Driven Design application, these aggregate roots usually publish domain events. Spring Data provides an annotation `@DomainEvents` you can use on a method of your aggregate root to make that publication as easy as possible. A method annotated with `@DomainEvents` is automatically invoked by Spring Data whenever an entity is saved using the right repository. Moreover, Spring Data provides the  `@AfterDomainEventsPublication` annotation to indicate the method that should be automatically called for clearing events after publication. Spring Data Commons comes with a convenient template base class (`AbstractAggregateRoot`) to help to register domain events and is using the publication mechanism implied by `@DomainEvents` and `@AfterDomainEventsPublication`. The events are registered by calling the `AbstractAggregateRoot.registerEvent()` method. The registered domain events are published if we call one of the `save()` methods of the Spring Data repository and cleared after publication.
+
+This is a sample application that relies on `AbstractAggregateRoot` and its `registerEvent()` method. We have two entities, `Book` and `BookReview` involved in a lazy-bidirectional association. A new book review is saved in `CHECK` status and a `CheckReviewEvent` is published. This event is responsible to check the review grammar, content, etc and switch the review status from `CHECK` to `ACCEPT` or `REJECT` and send a corresponding e-mail to the reviewer. So, this event is registered before saving the book review in `CHECK` status and is published automatically after we call the `BookReviewRepository.save()` method. After publication, the event is cleared.
+
+**Key points:**
+- the entity that publish events should extend `AbstractAggregateRoot` and provide a method for registering events
+- here, we register a single event (`CheckReviewEvent`), but more can be registered 
+- event processing take place in `CheckReviewEventProcessor` in an asynchronous manner via `@Async`
