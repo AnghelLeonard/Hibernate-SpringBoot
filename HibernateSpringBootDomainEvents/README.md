@@ -5,7 +5,7 @@
 This is a sample application that relies on `AbstractAggregateRoot` and its `registerEvent()` method. We have two entities, `Book` and `BookReview` involved in a lazy-bidirectional association. A new book review is saved in `CHECK` status and a `CheckReviewEvent` is published. This event is responsible to check the review grammar, content, etc and switch the review status from `CHECK` to `ACCEPT` or `REJECT` and send a corresponding e-mail to the reviewer. So, this event is registered before saving the book review in `CHECK` status and is published automatically after we call the `BookReviewRepository.save()` method. After publication, the event is cleared.
 
 **Key points:**
-- the entity that publish events should extend `AbstractAggregateRoot` and provide a method for registering events
+- the entity (aggregate root) that publish events should extend `AbstractAggregateRoot` and provide a method for registering events
 - here, we register a single event (`CheckReviewEvent`), but more can be registered 
 - event processing take place in `CheckReviewEventProcessor` in an asynchronous manner via `@Async`
      
