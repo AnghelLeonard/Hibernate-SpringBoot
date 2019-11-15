@@ -10,17 +10,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 @Service
-public class CheckReviewEventProcessor {
+public class CheckReviewEventHandler {
     
-    private static final Logger logger = Logger.getLogger(CheckReviewEventProcessor.class.getName());
+    private static final Logger logger = Logger.getLogger(CheckReviewEventHandler.class.getName());
     
     public final BookReviewRepository bookReviewRepository;
     
-    public CheckReviewEventProcessor(BookReviewRepository bookReviewRepository) {
+    public CheckReviewEventHandler(BookReviewRepository bookReviewRepository) {
         this.bookReviewRepository = bookReviewRepository;
     }    
     
-    @Async   
+    @Async       
     @TransactionalEventListener
     public void handleCheckReviewEvent(CheckReviewEvent event) {        
         

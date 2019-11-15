@@ -10,6 +10,9 @@ import com.bookstore.repository.BookReviewRepository;
 @Service
 public class BookstoreService {
 
+    private final static String RESPONSE 
+            = "We check your review and get back to you with an e-mail ASAP :)";
+    
     private final BookRepository bookRepository;
     private final BookReviewRepository bookReviewRepository;
 
@@ -28,6 +31,6 @@ public class BookstoreService {
         
         bookReviewRepository.save(bookReview);        
         
-        return "We check your review and get back to you with an e-mail ASAP :)";
+        return RESPONSE;
     }
 }
