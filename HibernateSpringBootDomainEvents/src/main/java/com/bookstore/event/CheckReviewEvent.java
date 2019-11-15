@@ -10,5 +10,6 @@ public class CheckReviewEvent {
 
     public String getReviewerEmail() {
         return reviewerEmail;
-    }        
+    }
+        
 }

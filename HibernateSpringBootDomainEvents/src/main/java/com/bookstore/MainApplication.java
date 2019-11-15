@@ -1,6 +1,7 @@
 package com.bookstore;
 
 import com.bookstore.entity.BookReview;
+import static com.bookstore.entity.ReviewStatus.CHECK;
 import com.bookstore.service.BookstoreService;
 import java.util.logging.Logger;
 import org.springframework.boot.ApplicationRunner;
@@ -28,9 +29,10 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            BookReview bookReview = new BookReview();
+            BookReview bookReview = new BookReview();            
             bookReview.setContent("Very good book!");
             bookReview.setEmail("marinv@gmail.com");
+            bookReview.setStatus(CHECK);
 
             String response = bookstoreService.postReview(bookReview);
             logger.info(() -> "Response: " + response);

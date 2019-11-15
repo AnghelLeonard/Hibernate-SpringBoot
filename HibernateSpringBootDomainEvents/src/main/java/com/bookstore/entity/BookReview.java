@@ -3,6 +3,8 @@ package com.bookstore.entity;
 import com.bookstore.event.CheckReviewEvent;
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,6 +24,9 @@ public class BookReview extends AbstractAggregateRoot<BookReview> implements Ser
 
     private String content;
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    private ReviewStatus status;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id")
@@ -61,8 +66,16 @@ public class BookReview extends AbstractAggregateRoot<BookReview> implements Ser
 
     public void setEmail(String email) {
         this.email = email;
-    }        
+    }
 
+    public ReviewStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ReviewStatus status) {
+        this.status = status;
+    }   
+    
     @Override
     public boolean equals(Object obj) {
 
