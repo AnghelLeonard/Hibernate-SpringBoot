@@ -1,11 +1,10 @@
-**[How To Use Cache Entities And Query Results In Second Level Cache (EhCache)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHibernateSLCEhCacheKickoff)**
+**[Spring Boot Caching Kickoff](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSpringCacheEhCacheKickoff)**
 
-**Description:** This is a SpringBoot application that enables Hibernate Second Level Cache and EhCache provider. It contains an example of caching entities and an example of caching a query result.
+**Description:** This is a SpringBoot application representing a kickoff application for Spring Boot caching and `EhCache`.
 
 **Key points:**
-- enable Second Level Cache (`EhCache`)
-- rely on `@Cache`
-- rely on JPA hint `HINT_CACHEABLE`
+- setup `EhCache`
+- rely on Spring caching annotations
 
 -------------------------------
 
