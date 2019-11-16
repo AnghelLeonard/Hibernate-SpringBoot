@@ -1,16 +1,11 @@
-**[How To Use Hibernate `@NaturalIdCache` For Skipping The Entity Identifier Retrieval](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNaturalIdCache)**
+**[How To Use Cache Entities And Query Results In Second Level Cache (EhCache)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHibernateSLCEhCacheKickoff)**
 
-**Description:** This is a SpringBoot - MySQL application that maps a natural business key using Hibernate `@NaturalId`. This implementation allows us to use `@NaturalId` as it was provided by Spring. Moreover, this application uses Second Level Cache (`EhCache`) and `@NaturalIdCache` for skipping the entity identifier retrieval from the database.
+**Description:** This is a SpringBoot application that enables Hibernate Second Level Cache and EhCache provider. It contains an example of caching entities and an example of caching a query result.
 
 **Key points:**
 - enable Second Level Cache (`EhCache`)
-- annotate entity with `@NaturalIdCache` for caching natural ids
-- optionally, annotate entity with `@Cache(usage = CacheConcurrencyStrategy.READ_WRITE, region = "Book")` for caching entites as well
-
-**Output sample (for MySQL with `IDENTITY` generator, `@NaturalIdCache` and `@Cache`):**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootNaturalIdCache/Hibernate%20NaturalIdCache%20first%20query.png)
-
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootNaturalIdCache/Hibernate%20NaturalIdCache%20second%20query.png)
+- rely on `@Cache`
+- rely on JPQ hint `HINT_CACHEABLE`
 
 -------------------------------
 
