@@ -3180,3 +3180,12 @@ This is a sample application that relies on `AbstractAggregateRoot` and its `reg
 **Key points:**
 - setup `EhCache`
 - rely on Spring caching annotations
+
+----------------------------------------------------------------------------------------------------------------------
+
+224. **[How To Fetch Entity Via `SqlResultSetMapping` And `NamedNativeQuery`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSqlResultSetMappingAndNamedNativeQueryEntity)**
+ 
+**Description:** This is a sample application of using `SqlResultSetMapping`, `NamedNativeQuery` and `EntityResult` for fetching single entity and multiple entities as `List<Object[]>`.
+ 
+**Key points:**
+- use `SqlResultSetMapping`, `NamedNativeQuery` and `EntityResult`
