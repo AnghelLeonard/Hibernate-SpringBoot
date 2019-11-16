@@ -3162,7 +3162,7 @@ This is a sample application that relies on `AbstractAggregateRoot` and its `reg
 
 ----------------------------------------------------------------------------------------------------------------------
 
-222. **[How To Use Cache Entities And Query Results In Second Level Cache (EhCache)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHibernateSLCEhCacheKickoff)**
+222. **[How To Cache Entities And Query Results In Second Level Cache (EhCache)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHibernateSLCEhCacheKickoff)**
 
 **Description:** This is a SpringBoot application that enables Hibernate Second Level Cache and EhCache provider. It contains an example of caching entities and an example of caching a query result.
 
@@ -3170,3 +3170,13 @@ This is a sample application that relies on `AbstractAggregateRoot` and its `reg
 - enable Second Level Cache (`EhCache`)
 - rely on `@Cache`
 - rely on JPA hint `HINT_CACHEABLE`
+
+----------------------------------------------------------------------------------------------------------------------
+
+223. **[Spring Boot Caching Kickoff](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSpringCacheEhCacheKickoff)**
+
+**Description:** This is a SpringBoot application representing a kickoff application for Spring Boot caching and `EhCache`.
+
+**Key points:**
+- setup `EhCache`
+- rely on Spring caching annotations
