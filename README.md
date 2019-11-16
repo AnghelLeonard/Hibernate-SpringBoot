@@ -3159,3 +3159,14 @@ This is a sample application that relies on `AbstractAggregateRoot` and its `reg
 **Key points:**
 - for JPQL and Criteria API you can set the QPC via `hibernate.query.plan_cache_max_size`
 - for native queries you can set the QPC via `hibernate.query.plan_parameter_metadata_max_size`
+
+----------------------------------------------------------------------------------------------------------------------
+
+222. **[How To Use Cache Entities And Query Results In Second Level Cache (EhCache)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootHibernateSLCEhCacheKickoff)**
+
+**Description:** This is a SpringBoot application that enables Hibernate Second Level Cache and EhCache provider. It contains an example of caching entities and an example of caching a query result.
+
+**Key points:**
+- enable Second Level Cache (`EhCache`)
+- rely on `@Cache`
+- rely on JPA hint `HINT_CACHEABLE`
