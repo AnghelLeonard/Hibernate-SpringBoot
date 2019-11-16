@@ -11,6 +11,20 @@ import javax.persistence.Id;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.SqlResultSetMapping;
 
+// Scalar Mapping
+@SqlResultSetMapping(
+        name = "AuthorsNameMapping",
+        columns = {
+            @ColumnResult(name = "name")
+        }
+)
+@NamedNativeQuery(
+        name = "AuthorsNameQuery",
+        query = "select name from author",
+        resultSetMapping = "AuthorsNameMapping"
+)
+
+// Constructor Mapping
 @NamedNativeQuery(
         name = "AuthorDtoQuery",
         query = "select name, age from author",

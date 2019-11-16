@@ -18,4 +18,9 @@ public class BookstoreService {
 
         return authorRepository.fetchAuthors();
     }
+    
+    public List<String> fetchAuthorsNames() {
+
+        return authorRepository.fetchNames();
+    }
 }

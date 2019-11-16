@@ -33,6 +33,14 @@ public class MainApplication {
                 System.out.println("Author name: " + author.getName()
                         + " | Age: " + author.getAge());
             }
+            
+            System.out.println("============================================");
+            
+            List<String> names = bookstoreService.fetchAuthorsNames();
+
+            System.out.println("Number of items:" + names.size());
+
+            System.out.println(names);
         };
     }
 }
