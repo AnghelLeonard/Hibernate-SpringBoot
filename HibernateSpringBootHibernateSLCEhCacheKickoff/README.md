@@ -5,7 +5,7 @@
 **Key points:**
 - enable Second Level Cache (`EhCache`)
 - rely on `@Cache`
-- rely on JPQ hint `HINT_CACHEABLE`
+- rely on JPA hint `HINT_CACHEABLE`
 
 -------------------------------
 
