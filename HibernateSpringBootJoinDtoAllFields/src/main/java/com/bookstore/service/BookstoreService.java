@@ -115,14 +115,14 @@ public class BookstoreService {
         System.out.println("Total number of managed entities: " + managedEntities);
 
         Map entities = persistenceContext.getEntitiesByKey();
-        entities.forEach((key, value) -> System.out.println(key + ":" + value));
+        entities.forEach((key, value) -> System.out.println(key + ": " + value));
 
         entities.values().forEach(entry
                 -> {
             EntityEntry ee = persistenceContext.getEntry(entry);
             System.out.println(
                     "Entity name: " + ee.getEntityName()
-                    + " | Status" + ee.getStatus()
+                    + " | Status: " + ee.getStatus()
                     + " | State: " + Arrays.toString(ee.getLoadedState()));
         });
 
