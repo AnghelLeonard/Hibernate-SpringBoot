@@ -58,19 +58,27 @@ public class BookstoreService {
     private void briefOverviewOfPersistentContextContent() {
 
         System.out.println("\n-----------------------------------------------------");
-        
+
         org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
 
         int managedEntities = persistenceContext.getNumberOfManagedEntities();
         Map collections = persistenceContext.getCollectionEntries();
+        Map entities = persistenceContext.getEntitiesByKey();
 
         System.out.println("Total number of managed entities: "
                 + managedEntities);
+        System.out.println("Total number of collection entities: "
+                + collections.size());        
 
-        if (collections != null) {
-            System.out.println("Collection entries: " + collections.values());
-        } 
-        
+        if (!entities.isEmpty()) {
+            System.out.println("\nEntities by key:");
+            entities.forEach((key, value) -> System.out.println(key + ": " + value));
+        }
+
+        if (!collections.isEmpty()) {
+            System.out.println("\nCollection entries:\n" + collections.values());
+        }
+
         System.out.println("-----------------------------------------------------\n");
     }
 
