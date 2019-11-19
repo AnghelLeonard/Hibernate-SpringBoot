@@ -2351,9 +2351,9 @@ Well, among the Hibernate5Module features we have support for dealing with this 
 
 155. **[The Best Way To Remove Parent And Child Entities](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCascadeChildRemoval)**
 
-**Description:** Commonly, deleting a parent and the associated children via `CascadeType.REMOVE`  and/or `orphanRemoval=true` involved several SQL statements (e.g., each child is deleted in a dedicated `DELETE` statement). This is far from being efficient, therefore other approaches should be employed. 
+**Description:** Commonly, deleting a parent and the associated children via `CascadeType.REMOVE`  and/or `orphanRemoval=true` involved several SQL statements (e.g., each child is deleted in a dedicated `DELETE` statement). When the number of entities is significant, this is far from being efficient, therefore other approaches should be employed. 
 
-Consider `Author` and `Book` in a `@OneToMany` association. This application exposes the best way to delete the parent(s) and the associated children in four scenarios listed below.
+Consider `Author` and `Book` in a bidirectional-lazy `@OneToMany` association. This application exposes the best way to delete the parent(s) and the associated children in four scenarios listed below.
 
 **Best way to delete author(s) and the associated books when:**
 - One `Author` is in Persistent Context, no `Book`
