@@ -22,15 +22,27 @@ public class MainApplication {
         return args -> {
             System.out.println("\nCall AuthorRepository#findAll():");
             bookstoreService.displayAuthorsWithBooksAndPublishers();
-            
-            System.out.println("\nCall AuthorRepository#fetchAll001():");
-            bookstoreService.displayAuthorsWithBooksAndPublishersFetchAll001();
-            
+
+            System.out.println("\nCall AuthorRepository#findByAgeLessThanOrderByNameDesc(int age):");
+            bookstoreService.displayAuthorsByAgeWithBooksAndPublishers(25);
+
+            System.out.println("\nCall AuthorRepository#fetchAllAgeBetween20And40():");
+            bookstoreService.displayAuthorsByAgeBetween20And40WithBooksAndPublishers();
+
+            System.out.println("\nCall AuthorRepository#findAll(Specification):");
+            bookstoreService.displayAuthorsWithBooksAndPublishersWithSpec();
+
             System.out.println("\nCall PublisherRepository#findAll():");
             bookstoreService.displayPublishersWithBooksAndAuthors();
-            
-            System.out.println("\nCall PublisherRepository#fetchAll001():");
-            bookstoreService.displayPublishersWithBooksAndAuthorsFetchAll001();
+
+            System.out.println("\nCall PublisherRepository#findByIdLessThanOrderByCompanyDesc():");
+            bookstoreService.displayPublishersByIdWithBooksAndAuthors();
+
+            System.out.println("\nCall PublisherRepository#findAll(Specification):");
+            bookstoreService.displayPublishersWithBooksAndAuthorsWithSpec();
+
+            System.out.println("\nCall PublisherRepository#fetchAllIdBetween1And3:");
+            bookstoreService.displayPublishersByIdBetween1And3WithBooksAndAuthors();
         };
     }
 }

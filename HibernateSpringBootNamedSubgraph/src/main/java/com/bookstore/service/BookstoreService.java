@@ -5,6 +5,8 @@ import com.bookstore.entity.Author;
 import com.bookstore.entity.Book;
 import com.bookstore.entity.Publisher;
 import com.bookstore.repository.PublisherRepository;
+import static com.bookstore.specs.AuthorSpecs.isAgeGt45;
+import static com.bookstore.specs.PublisherSpecs.isIdGt2;
 import java.util.List;
 import org.springframework.stereotype.Service;
 
@@ -34,10 +36,10 @@ public class BookstoreService {
             }
         }
     }
-    
-    public void displayAuthorsWithBooksAndPublishersFetchAll001() {
 
-        List<Author> authors = authorRepository.fetchAll001();
+    public void displayAuthorsByAgeWithBooksAndPublishers(int age) {
+
+        List<Author> authors = authorRepository.findByAgeLessThanOrderByNameDesc(age);
 
         for (Author author : authors) {
             System.out.println("\nAuthor: " + author);
@@ -49,7 +51,37 @@ public class BookstoreService {
             }
         }
     }
-    
+
+    public void displayAuthorsByAgeBetween20And40WithBooksAndPublishers() {
+
+        List<Author> authors = authorRepository.fetchAllAgeBetween20And40();
+
+        for (Author author : authors) {
+            System.out.println("\nAuthor: " + author);
+
+            List<Book> books = author.getBooks();
+            System.out.println("No of books: " + books.size() + ", " + books);
+            for (Book book : books) {
+                System.out.println("Book: " + book.getTitle() + " published by: " + book.getPublisher());
+            }
+        }
+    }
+
+    public void displayAuthorsWithBooksAndPublishersWithSpec() {
+
+        List<Author> authors = authorRepository.findAll(isAgeGt45());
+
+        for (Author author : authors) {
+            System.out.println("\nAuthor: " + author);
+
+            List<Book> books = author.getBooks();
+            System.out.println("No of books: " + books.size() + ", " + books);
+            for (Book book : books) {
+                System.out.println("Book: " + book.getTitle() + " published by: " + book.getPublisher());
+            }
+        }
+    }
+
     public void displayPublishersWithBooksAndAuthors() {
 
         List<Publisher> publishers = publisherRepository.findAll();
@@ -64,10 +96,40 @@ public class BookstoreService {
             }
         }
     }
-    
-    public void displayPublishersWithBooksAndAuthorsFetchAll001() {
 
-        List<Publisher> publishers = publisherRepository.fetchAll001();
+    public void displayPublishersByIdWithBooksAndAuthors() {
+
+        List<Publisher> publishers = publisherRepository.findByIdLessThanOrderByCompanyDesc(2L);
+
+        for (Publisher publisher : publishers) {
+            System.out.println("\nPublisher: " + publisher);
+
+            List<Book> books = publisher.getBooks();
+            System.out.println("No of books: " + books.size() + ", " + books);
+            for (Book book : books) {
+                System.out.println("Book: " + book.getTitle() + " written by: " + book.getAuthor());
+            }
+        }
+    }
+
+    public void displayPublishersWithBooksAndAuthorsWithSpec() {
+
+        List<Publisher> publishers = publisherRepository.findAll(isIdGt2());
+
+        for (Publisher publisher : publishers) {
+            System.out.println("\nPublisher: " + publisher);
+
+            List<Book> books = publisher.getBooks();
+            System.out.println("No of books: " + books.size() + ", " + books);
+            for (Book book : books) {
+                System.out.println("Book: " + book.getTitle() + " written by: " + book.getAuthor());
+            }
+        }
+    }
+
+    public void displayPublishersByIdBetween1And3WithBooksAndAuthors() {
+
+        List<Publisher> publishers = publisherRepository.fetchAllIdBetween1And3();
 
         for (Publisher publisher : publishers) {
             System.out.println("\nPublisher: " + publisher);
