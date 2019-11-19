@@ -45,6 +45,7 @@ public class BookstoreService {
 
         bookRepository.deleteByAuthorIdentifier(author.getId());
         authorRepository.deleteByIdentifier(author.getId());
+     	// authorRepository.deleteInBatch(List.of(author));        
     }
 
     // One Author and the associated Book are in Persistent Context

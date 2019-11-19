@@ -14,7 +14,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Transactional(readOnly = true)
     Book findByTitle(String title);
-
+   
     @Transactional
     @Modifying(flushAutomatically = true, clearAutomatically = true)
     @Query("DELETE FROM Book b WHERE b.author.id=?1")
