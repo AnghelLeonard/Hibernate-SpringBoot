@@ -71,12 +71,12 @@ public class BookstoreService {
         bookRepository.deleteByAuthorIdentifier(4L);
         authorRepository.deleteByIdentifier(4L);
     }
-    
+
     // No Author or Book is in Persistent Context
     @Transactional
     public void deleteViaBulkHardCodedIdentifiers() {
         List<Long> authorsIds = Arrays.asList(1L, 4L);
-        
+
         bookRepository.deleteBulkByAuthorIdentifier(authorsIds);
         authorRepository.deleteBulkByIdentifier(authorsIds);
     }
