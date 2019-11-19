@@ -20,6 +20,10 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Transactional(readOnly=true)
     @Query("SELECT a FROM Author a JOIN FETCH a.books WHERE a.name=?1")        
     Author findByNameWithBooks(String name);
+    
+    @Transactional(readOnly=true)
+    @Query("SELECT a FROM Author a JOIN FETCH a.books WHERE a.genre=?1")        
+    List<Author> findByGenreWithBooks(String genre);
         
     @Transactional    
     @Modifying(flushAutomatically = true, clearAutomatically = true)

@@ -31,11 +31,14 @@ public class MainApplication {
             // System.out.println("\n\n deleteViaIdentifiers()");
             // bookstoreService.deleteViaIdentifiers();
             
-            System.out.println("\n\n deleteViaBulkIn()");
-            bookstoreService.deleteViaBulkIn();                                    
+            // System.out.println("\n\n deleteViaIdentifiersX()");
+            // bookstoreService.deleteViaIdentifiersX();                                    
                         
-            // System.out.println("\n\n deleteViaDeleteInBatch()");
-            // bookstoreService.deleteViaDeleteInBatch();
+             System.out.println("\n\n deleteViaBulkIn()");
+             bookstoreService.deleteViaBulkIn();
+             
+             // System.out.println("\n\n deleteViaBulkInX()");
+             // bookstoreService.deleteViaBulkInX();
             
              // System.out.println("\n\n deleteViaHardCodedIdentifiers()");
              // bookstoreService.deleteViaHardCodedIdentifiers();
