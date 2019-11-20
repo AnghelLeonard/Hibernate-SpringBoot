@@ -1,5 +1,6 @@
 package com.bookstore.service;
 
+import com.bookstore.dto.AuthorDto;
 import com.bookstore.repository.AuthorRepository;
 import com.bookstore.entity.Author;
 import java.io.File;
@@ -56,19 +57,27 @@ public class BookstoreService {
     @Transactional(readOnly = true)
     public byte[] fetchAuthorAvatarViaId(long id) {
 
-        Author author = authorRepository.getOne(id);
+        Author author = authorRepository.findById(id).orElseThrow();
         return author.getAvatar();
     }
 
     @Transactional(readOnly = true)
     public List<Author> fetchAuthorsDetailsByAgeGreaterThanEqual(int age) {
 
-        List<Author> authors = authorRepository.findByAgeGreaterThanEqual(age);
-        
+        List<Author> authors = authorRepository.findByAgeGreaterThanEqual(40);
+
         // don't do this since this is a N+1 case
         authors.forEach(a -> {
-            a.getAvatar();            
+            a.getAvatar();
         });
+
+        return authors;
+    }
+
+    @Transactional(readOnly = true)
+    public List<AuthorDto> fetchAuthorsWithAvatarsByAgeGreaterThanEqual(int age) {
+
+        List<AuthorDto> authors = authorRepository.findDtoByAgeGreaterThanEqual(40);
 
         return authors;
     }

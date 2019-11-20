@@ -1,5 +1,6 @@
 package com.bookstore;
 
+import com.bookstore.dto.AuthorDto;
 import com.bookstore.entity.Author;
 import com.bookstore.service.BookstoreService;
 import java.util.List;
@@ -39,6 +40,10 @@ public class MainApplication {
             System.out.println("\nN+1 (avoid this)  ...");
             List<Author> authorsDetails = bookstoreService.fetchAuthorsDetailsByAgeGreaterThanEqual(40);
             System.out.println(authorsDetails);
+
+            System.out.println("\nFetching DTO including avatars  ...");
+            List<AuthorDto> authorsWithAvatars = bookstoreService.fetchAuthorsWithAvatarsByAgeGreaterThanEqual(40);
+            authorsWithAvatars.forEach(a -> System.out.println(a.getName() + ", " + a.getAvatar()));
         };
     }
 }
