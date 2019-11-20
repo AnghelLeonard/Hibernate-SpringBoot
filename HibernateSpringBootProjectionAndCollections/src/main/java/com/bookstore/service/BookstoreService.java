@@ -108,7 +108,7 @@ public class BookstoreService {
         System.out.println("Total number of managed entities: " + managedEntities);
         if (collectionEntries != null) {
             System.out.println("Total number of collection entries: "
-                    + (managedEntities - collectionEntries.values().size()));
+                    + (collectionEntries.values().size()));
         }
 
         Map entities = persistenceContext.getEntitiesByKey();
@@ -119,7 +119,7 @@ public class BookstoreService {
             EntityEntry ee = persistenceContext.getEntry(entry);
             System.out.println(
                     "Entity name: " + ee.getEntityName()
-                    + " | Status" + ee.getStatus()
+                    + " | Status: " + ee.getStatus()
                     + " | State: " + Arrays.toString(ee.getLoadedState()));
         });
 
