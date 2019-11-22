@@ -17,6 +17,8 @@ public class Book implements Serializable {
 
     private String title;
     private String genre;
+    private String isbn;
+    private String author;
     private int price;
     
     public Long getId() {
@@ -50,4 +52,20 @@ public class Book implements Serializable {
     public void setPrice(int price) {
         this.price = price;
     }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }        
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }        
 }    

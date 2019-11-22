@@ -23,13 +23,15 @@ public class BookstoreService {
     
     public boolean existsBookOr(Book book) {
 
-        Example<Book> bookExample = Example.of(book, ExampleMatcher.matchingAny());
+        Example<Book> bookExample = Example.of(book, 
+                ExampleMatcher.matchingAll().withIgnorePaths("genre").withIgnorePaths("price"));
         return bookRepository.exists(bookExample);
     }
     
     public boolean existsBookIgnorePath(Book book) {
 
-        Example<Book> bookExample = Example.of(book, ExampleMatcher.matchingAny().withIgnorePaths("genre"));
+        Example<Book> bookExample = Example.of(book, 
+                ExampleMatcher.matchingAny().withIgnorePaths("genre").withIgnorePaths("price"));
         return bookRepository.exists(bookExample);
     }
 }
