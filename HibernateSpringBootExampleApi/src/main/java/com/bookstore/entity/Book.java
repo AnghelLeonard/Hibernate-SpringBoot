@@ -18,8 +18,7 @@ public class Book implements Serializable {
     private String title;
     private String genre;
     private int price;
-    private int soldCopies;
-
+    
     public Long getId() {
         return id;
     }
@@ -51,12 +50,4 @@ public class Book implements Serializable {
     public void setPrice(int price) {
         this.price = price;
     }
-
-    public int getSoldCopies() {
-        return soldCopies;
-    }
-
-    public void setSoldCopies(int soldCopies) {
-        this.soldCopies = soldCopies;
-    }   
-}
+}    

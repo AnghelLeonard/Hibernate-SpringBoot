@@ -31,7 +31,6 @@ public class MainApplication {
             book.setTitle("Carrie");
             book.setGenre("Horror");
             book.setPrice(23);
-            book.setSoldCopies(120);
             
             boolean foundAnd = bookstoreService.existsBookAnd(book);            
             System.out.println("\nFound (and): " + foundAnd);
