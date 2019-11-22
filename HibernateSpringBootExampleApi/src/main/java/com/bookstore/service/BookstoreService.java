@@ -15,20 +15,20 @@ public class BookstoreService {
         this.bookRepository = bookRepository;
     }
 
-    public boolean existsBookAnd(Book book) {
+    public boolean existsBook1(Book book) {
 
         Example<Book> bookExample = Example.of(book);
         return bookRepository.exists(bookExample);
     }
     
-    public boolean existsBookOr(Book book) {
+    public boolean existsBook2(Book book) {
 
         Example<Book> bookExample = Example.of(book, 
                 ExampleMatcher.matchingAll().withIgnorePaths("genre").withIgnorePaths("price"));
         return bookRepository.exists(bookExample);
     }
     
-    public boolean existsBookIgnorePath(Book book) {
+    public boolean existsBook3(Book book) {
 
         Example<Book> bookExample = Example.of(book, 
                 ExampleMatcher.matchingAny().withIgnorePaths("genre").withIgnorePaths("price"));

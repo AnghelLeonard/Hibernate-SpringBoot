@@ -34,14 +34,14 @@ public class MainApplication {
             book.setAuthor("Olivia Goy");
             book.setPrice(23);
             
-            boolean foundAnd = bookstoreService.existsBookAnd(book);            
-            System.out.println("\nFound (and): " + foundAnd);
+            boolean foundAnd = bookstoreService.existsBook1(book);            
+            System.out.println("Found (existsBook1): " + foundAnd + "\n");
             
-            boolean foundOr = bookstoreService.existsBookAnd(book);            
-            System.out.println("\nFound (or): " + foundOr);
+            boolean foundOr = bookstoreService.existsBook2(book);            
+            System.out.println("Found (existsBook2): " + foundOr + "\n");
             
-            boolean foundIgnorePath = bookstoreService.existsBookIgnorePath(book);            
-            System.out.println("\nFound (ignore path): " + foundIgnorePath);
+            boolean foundIgnorePath = bookstoreService.existsBook3(book);            
+            System.out.println("Found (existsBook3): " + foundIgnorePath + "\n");
         };
     }
 }
