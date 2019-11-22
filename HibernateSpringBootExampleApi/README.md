@@ -1,4 +1,4 @@
-**[How To Check If A Transient Entity Exists Via Spring Query By Example (QBE)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootExampleApi)**
+**[How To Check If A Transient Entity Exists In The Database Via Spring Query By Example (QBE)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootExampleApi)**
  
 **Description:** This application is an example of using Spring Data Query By Example (QBE) to check if a transient entity exists in the database. Consider the `Book` entity and a Spring controller that exposes an endpoint as: `public String saveNewBook(@Validated @ModelAttribute Book book, ...)`. Before saving a new book, we must ensure that this book doesn't already exists in the database. Beside writting an explicit JPQL, we can rely on Spring Data Query Builder mechanism or, even better, on Query By Example (QBE) API. This is quite useful if the entity has a significant number of attributes and:
 
