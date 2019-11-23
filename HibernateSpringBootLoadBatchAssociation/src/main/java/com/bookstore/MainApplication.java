@@ -20,7 +20,11 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            bookstoreService.displayAuthorsAndBooks();
+          //  System.out.println("\n\nLoad authors with books:");
+          //  bookstoreService.displayAuthorsAndBooks();
+            
+            System.out.println("\n\nLoad books with authors:");
+            bookstoreService.displayBooksAndAuthors();
         };
     }
 }
