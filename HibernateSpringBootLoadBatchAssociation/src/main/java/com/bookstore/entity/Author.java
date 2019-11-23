@@ -28,7 +28,7 @@ public class Author implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL,
             mappedBy = "author", orphanRemoval = true)
-    //@BatchSize(size = 3)
+    @BatchSize(size = 3)
     private List<Book> books = new ArrayList<>();
 
     public void addBook(Book book) {

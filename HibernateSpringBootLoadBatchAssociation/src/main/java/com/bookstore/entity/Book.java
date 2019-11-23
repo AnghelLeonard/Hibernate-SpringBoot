@@ -59,15 +59,15 @@ public class Book implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        
+
         if (this == obj) {
             return true;
         }
-        
+
         if (getClass() != obj.getClass()) {
             return false;
         }
-        
+
         return id != null && id.equals(((Book) obj).id);
     }
 
@@ -80,5 +80,5 @@ public class Book implements Serializable {
     public String toString() {
         return "Book{" + "id=" + id + ", title=" + title + ", isbn=" + isbn + '}';
     }
-    
+
 }
