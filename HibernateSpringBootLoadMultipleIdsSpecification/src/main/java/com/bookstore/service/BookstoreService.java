@@ -15,16 +15,22 @@ public class BookstoreService {
         this.bookRepository = bookRepository;
     }
 
+    public void fetchByMultipleIdsFindAllById() {
+
+        List<Book> books = bookRepository.findAllById(List.of(1L, 2L, 5L));
+        System.out.println(books);
+    }
+
     public void fetchByMultipleIdsJpql() {
-        
+
         List<Book> books = bookRepository.fetchByMultipleIds(List.of(1L, 2L, 5L));
         System.out.println(books);
     }
-    
+
     public void fetchByMultipleIdsSpec() {
-        
+
         List<Book> books = bookRepository.findAll(
-                new InIdsSpecification(List.of(1L, 2L, 5L)));        
+                new InIdsSpecification(List.of(1L, 2L, 5L)));
         System.out.println(books);
     }
 }

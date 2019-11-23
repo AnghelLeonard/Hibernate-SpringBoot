@@ -23,6 +23,9 @@ public class MainApplication {
     public ApplicationRunner init() {
         return args -> {
 
+            System.out.println("\nFetching multiple ids (findAllById()):");
+            bookstoreService.fetchByMultipleIdsFindAllById();
+            
             System.out.println("\nFetching multiple ids (JPQL):");
             bookstoreService.fetchByMultipleIdsJpql();
             
