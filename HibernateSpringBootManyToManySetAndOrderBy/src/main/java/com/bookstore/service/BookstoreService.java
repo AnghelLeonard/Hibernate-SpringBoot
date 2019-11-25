@@ -22,6 +22,6 @@ public class BookstoreService {
         Book book = bookRepository.findById(1L).orElseThrow();
         Set<Author> authorsSet = book.getAuthors();
 
-        System.out.println("Books ordered descending:\n" + authorsSet);
+        System.out.println("Authors ordered descending by name:\n" + authorsSet);
     }
 }
