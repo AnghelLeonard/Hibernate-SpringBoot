@@ -3257,3 +3257,11 @@ This kind of checks or constraints are easy to implement via database triggers. 
 
 **Note:** Do not conclude that Query By Example (QBE) defines only the `exists()` method. Check out all methods [here](https://docs.spring.io/spring-data/commons/docs/current/api/org/springframework/data/repository/query/QueryByExampleExecutor.html).
      
+----------------------------------------------------------------------------------------------------------------------
+
+230. **[Best Way To Use `@Transactional`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTransactionalInRepository)**
+ 
+**Description:** This application is meant to highlight that the best place to use `@Transactional` for user defined query-methods is in repository interface, and afterwards, depending on situation, on service-methods level.
+
+**Key points:**
+- this application is dissected in my book, **Spring Boot Persistence Best Practices**. 
