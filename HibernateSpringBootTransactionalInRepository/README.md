@@ -1,10 +1,8 @@
-**[Avoid Spring Redundant `save()` Call](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRedundantSave)**
+**[Best Way To Use `@Transactional`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTransactionalInRepository)**
  
-**Description:** This application is an example when calling `save()` for an entity is redundant (not necessary).
+**Description:** This application is meant to highlight that the best place to use `@Transactional` for user defined query-methods is in repository interface, and afterwards, depending on situation, on service-methods level.
 
 **Key points:**
-- at flush time, Hibernate relies on *dirty checking* mechanism to determine the potential modifications in entities 
-- for each modification, Hibernate automatically triggers the corresponding `UPDATE` statement without the need to explicitly call the `save()` method
-- behind the scene, this redundancy (calling `save()` when is not necessarily) doesn't affect the number of triggered queries, but it implies a performance penalty in the underlying Hibernate processes
+- this application is dissected in my book, **Spring Boot Persistence Best Practices**. 
      
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="center"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="410" width="350"/></p></a>
