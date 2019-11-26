@@ -1,6 +1,5 @@
 package com.bookstore.service;
 
-import com.bookstore.repository.BookRepository;
 import com.bookstore.repository.AuthorRepository;
 import com.bookstore.entity.Author;
 import com.bookstore.entity.Book;
@@ -9,45 +8,42 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookstoreService {
-   
-    private final AuthorRepository authorRepository;
-    private final BookRepository bookRepository;
 
-    public BookstoreService(AuthorRepository authorRepository,
-            BookRepository bookRepository) {
+    private final AuthorRepository authorRepository;
+
+    public BookstoreService(AuthorRepository authorRepository) {
 
         this.authorRepository = authorRepository;
-        this.bookRepository = bookRepository;
     }
-   
-    public void addAuthorWithBooks(){
-        
+
+    public void insertAuthorWithBooks() {
+
         Author author = new Author();
         author.setName("Alicia Tom");
         author.setAge(38);
         author.setGenre("Anthology");
-        
+
         Book book = new Book();
         book.setIsbn("001-AT");
         book.setTitle("The book of swords");
-                
+
         author.addBook(book); // use addBook() helper
-        
+
         authorRepository.save(author);
     }
-    
+
     @Transactional
-    public void removeBookOfAuthor() {
-        
-        Author author = authorRepository.findByName("Alicia Tom");
-        Book book  = bookRepository.findByTitle("The book of swords");
-        
+    public void deleteBookOfAuthor() {
+
+        Author author = authorRepository.fetchByName("Alicia Tom");
+        Book book = author.getBooks().get(0);
+
         author.removeBook(book); // use removeBook() helper        
     }
-        
+
     @Transactional
-    public void removeAllBooksOfAuthor() {
-        Author author = authorRepository.findByName("Joana Nimar");
+    public void deleteAllBooksOfAuthor() {
+        Author author = authorRepository.fetchByName("Joana Nimar");
         author.removeBooks(); // use removeBooks() helper    
     }
 

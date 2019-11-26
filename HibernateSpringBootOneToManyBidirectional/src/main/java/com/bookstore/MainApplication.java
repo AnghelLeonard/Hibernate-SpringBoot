@@ -22,14 +22,14 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            System.out.println("\nAdd author with books  ...");
-            bookstoreService.addAuthorWithBooks();
+            System.out.println("\nInsert author with books  ...");
+            bookstoreService.insertAuthorWithBooks();
 
-            System.out.println("\nRemove a book of an author...");
-            bookstoreService.removeBookOfAuthor();
+            System.out.println("\nDelete a book of an author...");
+            bookstoreService.deleteBookOfAuthor();
             
-            System.out.println("\nRemove all book of an author...");
-            bookstoreService.removeAllBooksOfAuthor();
+            System.out.println("\nDelete all book of an author...");
+            bookstoreService.deleteAllBooksOfAuthor();
         };
     }
 }
