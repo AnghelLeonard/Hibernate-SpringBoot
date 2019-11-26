@@ -22,13 +22,13 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            System.out.println("\nAdd one author with three books  ...");
-            bookstoreService.addAuthorWithBooks();
+            System.out.println("\nInsert one author with three books  ...");
+            bookstoreService.insertAuthorWithBooks();
 
             System.out.println("\n---------------------------------------------");
 
-            System.out.println("\nAdd new book to an author  ...");
-            bookstoreService.addNewBook();
+            System.out.println("\nInsert new book to an author  ...");
+            bookstoreService.insertNewBook();
 
             System.out.println("\n---------------------------------------------");
 

@@ -18,7 +18,7 @@ public class BookstoreService {
     }
 
     @Transactional
-    public void addAuthorWithBooks() {
+    public void insertAuthorWithBooks() {
 
         Author jn = new Author();
         jn.setName("Joana Nimar");
@@ -45,9 +45,9 @@ public class BookstoreService {
     }
 
     @Transactional
-    public void addNewBook() {
+    public void insertNewBook() {
 
-        Author author = authorRepository.findByName("Joana Nimar");
+        Author author = authorRepository.fetchByName("Joana Nimar");
 
         Book book = new Book();
         book.setIsbn("004-JN");
@@ -61,7 +61,7 @@ public class BookstoreService {
     @Transactional
     public void deleteLastBook() {
 
-        Author author = authorRepository.findByName("Joana Nimar");
+        Author author = authorRepository.fetchByName("Joana Nimar");
         List<Book> books = author.getBooks();
 
         author.removeBook(books.get(books.size() - 1));
@@ -70,7 +70,7 @@ public class BookstoreService {
     @Transactional
     public void deleteFirstBook() {
 
-        Author author = authorRepository.findByName("Joana Nimar");
+        Author author = authorRepository.fetchByName("Joana Nimar");
         List<Book> books = author.getBooks();
 
         author.removeBook(books.get(0));
