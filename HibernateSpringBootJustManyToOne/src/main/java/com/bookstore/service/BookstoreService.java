@@ -25,7 +25,7 @@ public class BookstoreService {
     }
 
     @Transactional
-    public void addNewBook() {
+    public void insertNewBook() {
         Author author = authorRepository.getOne(4L);
         // or, less efficient since a SELECT is triggered
         // Author author = authorRepository.findByName("Joana Nimar");        
@@ -66,7 +66,7 @@ public class BookstoreService {
     }
     
     @Transactional
-    public void fetchBooksOfAuthorByIdDeleteFirstBook() {
+    public void fetchBooksOfAuthorByIdAndDeleteFirstBook() {
         List<Book> books = bookRepository.fetchBooksOfAuthorById(4L);
                 
         bookRepository.delete(books.remove(0));                

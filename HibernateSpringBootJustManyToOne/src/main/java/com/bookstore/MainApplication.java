@@ -24,9 +24,9 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            System.out.println("\nAdd new book to an author ...");
+            System.out.println("\nInsert new book to an author ...");
             System.out.println("---------------------------------------------");
-            bookstoreService.addNewBook();
+            bookstoreService.insertNewBook();
             System.out.println("---------------------------------------------");
             
             System.out.println("\nList all books of an author ...");
@@ -46,7 +46,7 @@ public class MainApplication {
             
             System.out.println("\nFetch a list of books and delete the first book ...");
             System.out.println("---------------------------------------------");
-            bookstoreService.fetchBooksOfAuthorByIdDeleteFirstBook();
+            bookstoreService.fetchBooksOfAuthorByIdAndDeleteFirstBook();
             System.out.println("---------------------------------------------");
         };
     }
