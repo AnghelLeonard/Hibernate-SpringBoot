@@ -17,7 +17,7 @@ public class BookstoreService {
     }
 
     @Transactional
-    public void addAuthorsWithBooks() {
+    public void insertAuthorsWithBooks() {
 
         Author alicia = new Author();
         alicia.setName("Alicia Tom");
