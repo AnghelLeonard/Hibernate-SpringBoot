@@ -169,6 +169,7 @@ If you want to execute a batch per transaction (recommended) then check this [ex
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 10. **[How To Use Hibernate Attribute Lazy Loading](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAttributeLazyLoadingBasic)**
@@ -448,6 +449,7 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 30. **[How To Fetch DTO Via `ResultTransformer` And Native SQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoResultTransformer)**
@@ -597,6 +599,7 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 40. **[How To Use Spring Projections(DTO) And Exclusive Left Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaLeftExcludingJoins)**
@@ -753,6 +756,7 @@ This application is a `JOIN FETCH` example for avoiding `LazyInitializationExcep
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 50. **[The Best Way To Implement A Bidirectional `@ManyToMany` Association](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootManyToManyBidirectional)**
@@ -897,6 +901,7 @@ This application is a `JOIN FETCH` example for avoiding `LazyInitializationExcep
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 60. **[How To Customize HikariCP Settings Via Properties And `DataSourceBuilder`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceBuilderHikariCPKickoff)**
@@ -1051,6 +1056,7 @@ This application is a `JOIN FETCH` example for avoiding `LazyInitializationExcep
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 70. **[How To Implement `Slice<T> findAll()`](https://github.com/AnghelLeonard/Hibernate-SpringBoot)**
@@ -1290,6 +1296,7 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 80. **[How To Set Up P6Spy in Spring Boot](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootP6spy)**
@@ -1462,6 +1469,7 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 90. **[How To Auto-Create And Migrate Schemas For Two Data Sources (MySQL and PostgreSQL) Using Flyway](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFlywayTwoVendors)**
@@ -1632,6 +1640,7 @@ Beside all setting specific to batching inserts in MySQL, we need to set up in `
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 100. **[How To Page The Result Set of a `JOIN`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinPagination)**
@@ -1766,6 +1775,7 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 110. **[How To Retry Transaction Via `TransactionTemplate` After `OptimisticLockException` Exception (`@Version`)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRetryVersionedOptimisticLockingTT)**
@@ -1900,6 +1910,7 @@ This application uses two entities, `Author` and `Book`, involved in a lazy bidi
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 120. **[Offset Pagination - Trigger `SELECT COUNT` Subquery And Return `Page<entity>` Via Extra Column](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPageEntityOffsetPaginationExtraColumn)**
@@ -2058,6 +2069,7 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 130. **[How To Calculate Non-Persistent Property via Hibernate `@Formula`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCalculatePropertyFormula)**
@@ -2220,6 +2232,7 @@ The trick is to  simply define a method named `fetchAll()` that uses JPQL and `P
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 140. **[How To Generate Sequences Of Identifiers Via Hibernate `pooled-lo` Algorithm](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPooledLo)**
@@ -2409,6 +2422,7 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 150. **[JPA Inheritance - `TABLE_PER_CLASS`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTablePerTableInheritance)**
@@ -2548,6 +2562,7 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) of the query ca
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 160. **[Calling Stored Procedure That Returns A Value](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCallStoredProcedureReturnValue)**
@@ -2669,6 +2684,7 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 170. **[What `@Transactional(readOnly=true)` Actually Do](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTransactionalReadOnlyMeaning)**
@@ -2780,6 +2796,7 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 180. **[How To Implement Pagination Via `ROW_NUMBER()` Window Function](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPaginationRowNumber)**
@@ -2896,6 +2913,7 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 190. **[How To Ensure/Validate That Only One Association Is Non-Null](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootChooseOnlyOneAssociation)**
@@ -3020,6 +3038,7 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 200. **[How `PESSIMISTIC_WRITE` Works With `UPDATE`/`INSERT` And `DELETE` Operations](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootPessimisticLocksDelInsUpd)**
@@ -3145,6 +3164,7 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 210. **[Dynamic Spring projection](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDynamicProjection)**
@@ -3316,6 +3336,7 @@ Moreover, this example commits the database transaction after each batch excecut
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 220. **[How To Publish Domain Events From Aggregate Root](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDomainEvents)**
@@ -3442,6 +3463,7 @@ This kind of checks or constraints are easy to implement via database triggers. 
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
+
 -----------------------------------------------------------------------------------------------------------------------    
 
 230. **[Best Way To Use `@Transactional`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTransactionalInRepository)**
