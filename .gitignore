@@ -6,3 +6,6 @@ build.xml
 manifest.mf
 nbactions.xml
 nb-configuration.xml
+out/
+*.iml
+.idea
