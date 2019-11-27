@@ -14,7 +14,8 @@
 - expose this implementation via `@Bean`
 - entites that should be audited should extend the base entity
 - store the date-time in database in UTC
-          -----------------------------------------------------------------------------------------------------------------------    
+
+----------------------------------------------------------------------------------------------------------------------    
 <table>
      <tr><td><b>If you need a deep dive into the performance recipes exposed in this repository then I am sure that you will love my book "Spring Boot Persistence Best Practices"</b></td><td><b>If you need a hand of tips and illustrations of 100+ Java persistence performance issues then "Java Persistence Performance Illustrated Guide" is for you.</b></td></tr>
      <tr><td>
