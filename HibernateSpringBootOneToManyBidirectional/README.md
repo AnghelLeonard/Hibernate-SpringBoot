@@ -1,5 +1,7 @@
 **[The Best Way To Map The `@OneToMany` Bidirectional Association](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootOneToManyBidirectional)**
  
+**SlideShare presentation can be found [here](https://www.slideshare.net/AnghelLeonard/how-to-effectively-shape-the-one-tomany-association).**
+ 
 **Description:** This application is a proof of concept of how is correct to implement the bidirectional `@OneToMany` association from the performance perspective. 
 
 **Key points:**
