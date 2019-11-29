@@ -1,6 +1,6 @@
 [![HitCount](http://hits.dwyl.io/AnghelLeonard/Hibernate-SpringBoot.svg)](http://hits.dwyl.io/AnghelLeonard/Hibernate-SpringBoot)
 
-[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Get%20over%20170%20free%20design%20blocks%20based%20on%20Bootstrap%204&url=https://github.com/AnghelLeonard/Hibernate-SpringBoot&hashtags=springdata, hibernate)
+[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Collection%20of%20best%20practices%20for%20Java%20persistence%20performance%20in%20Spring%20Boot%20applications&url=https://github.com/AnghelLeonard/Hibernate-SpringBoot&hashtags=springdata,hibernate)
 
 # Best Performance Practices For Hibernate5 & Spring Boot 2
 
