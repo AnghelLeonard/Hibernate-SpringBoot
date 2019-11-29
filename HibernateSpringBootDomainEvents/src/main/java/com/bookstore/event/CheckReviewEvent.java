@@ -1,15 +1,17 @@
 package com.bookstore.event;
 
+import com.bookstore.entity.BookReview;
+
 public class CheckReviewEvent {    
     
-    private final String reviewerEmail;
+    private final BookReview bookReview;
 
-    public CheckReviewEvent(String reviewerEmail) {
-        this.reviewerEmail = reviewerEmail;
+    public CheckReviewEvent(BookReview bookReview) {
+        this.bookReview = bookReview;
     }
 
-    public String getReviewerEmail() {
-        return reviewerEmail;
+    public BookReview getBookReview() {
+        return bookReview;
     }
         
 }

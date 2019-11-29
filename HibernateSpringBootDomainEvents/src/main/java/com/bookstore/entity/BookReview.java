@@ -33,7 +33,7 @@ public class BookReview extends AbstractAggregateRoot<BookReview> implements Ser
     private Book book;
 
     public void registerReviewEvent() {
-        registerEvent(new CheckReviewEvent(email));
+        registerEvent(new CheckReviewEvent(this));
     }
 
     public Long getId() {

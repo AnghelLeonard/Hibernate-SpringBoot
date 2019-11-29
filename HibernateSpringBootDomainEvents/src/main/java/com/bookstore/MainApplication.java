@@ -14,8 +14,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @SpringBootApplication
 public class MainApplication {
 
-    private static final Logger logger = Logger.getLogger(MainApplication.class.getName());   
-    
+    private static final Logger logger = Logger.getLogger(MainApplication.class.getName());
+
     private final BookstoreService bookstoreService;
 
     public MainApplication(BookstoreService bookstoreService) {
@@ -29,7 +29,10 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            BookReview bookReview = new BookReview();            
+
+            bookstoreService.insertBook();
+
+            BookReview bookReview = new BookReview();
             bookReview.setContent("Very good book!");
             bookReview.setEmail("marinv@gmail.com");
             bookReview.setStatus(CHECK);
