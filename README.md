@@ -1,6 +1,4 @@
-[![HitCount](http://hits.dwyl.io/AnghelLeonard/Hibernate-SpringBoot.svg)](http://hits.dwyl.io/AnghelLeonard/Hibernate-SpringBoot)
-
-[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Collection%20of%20best%20practices%20for%20Java%20persistence%20performance%20in%20Spring%20Boot%20applications&url=https://github.com/AnghelLeonard/Hibernate-SpringBoot&hashtags=springdata,hibernate)
+<table><tr><td>[![HitCount](http://hits.dwyl.io/AnghelLeonard/Hibernate-SpringBoot.svg)](http://hits.dwyl.io/AnghelLeonard/Hibernate-SpringBoot)</td><td>[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Collection%20of%20best%20practices%20for%20Java%20persistence%20performance%20in%20Spring%20Boot%20applications&url=https://github.com/AnghelLeonard/Hibernate-SpringBoot&hashtags=springdata,hibernate,jpa,springboot)</tr></td></table>
 
 # Best Performance Practices For Hibernate5 & Spring Boot 2
 
