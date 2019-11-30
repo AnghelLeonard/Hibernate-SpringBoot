@@ -3475,3 +3475,12 @@ This kind of checks or constraints are easy to implement via database triggers. 
 
 **Key points:**
 - this application is dissected in my book, **Spring Boot Persistence Best Practices**. 
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+231. **[How To Use JPA `JOINED` Inheritance Strategy And Visitor Design Pattern](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinedAndVisitor)**
+ 
+**Description:** This application is an example of using JPA `JOINED` inheritance strategy and [Visitor](https://sourcemaking.com/design_patterns/visitor/java/1) pattern.
+
+**Key points:**
+- this application allows us to define multiple visitors and apply the one that we want
