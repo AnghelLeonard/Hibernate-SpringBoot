@@ -1,9 +1,9 @@
-**[How To Use JPA `JOINED` Inheritance Strategy And Visitor Design Pattern](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinedAndVisitor)**
+**[How To Use JPA `JOINED` Inheritance Strategy And Strategy Design Pattern](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinedAndStrategy)**
  
-**Description:** This application is an example of using JPA `JOINED` inheritance strategy and [Visitor](https://sourcemaking.com/design_patterns/visitor/java/1) pattern.
+**Description:** This application is an example of using JPA `JOINED` inheritance strategy and [Strategy](https://sourcemaking.com/design_patterns/strategy) pattern.
 
 **Key points:**
-- this application allows us to define multiple visitors and apply the one that we want
+- this application allows us to define multiple strategies and apply the one that we want
      
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
