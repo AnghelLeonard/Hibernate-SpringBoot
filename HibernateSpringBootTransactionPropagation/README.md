@@ -1,11 +1,9 @@
-**[Avoid Spring Redundant `save()` Call](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRedundantSave)**
+**[How Spring Transaction Propagation Work](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTransactionPropagation)**
  
-**Description:** This application is an example when calling `save()` for an entity is redundant (not necessary).
+**Description:** This folder holds several applications that shows how each Spring transaction propagation works.
 
 **Key points:**
-- at flush time, Hibernate relies on *dirty checking* mechanism to determine the potential modifications in entities 
-- for each modification, Hibernate automatically triggers the corresponding `UPDATE` statement without the need to explicitly call the `save()` method
-- behind the scene, this redundancy (calling `save()` when is not necessarily) doesn't affect the number of triggered queries, but it implies a performance penalty in the underlying Hibernate processes
+- it is strongly recommended to follow these examples in the context of my book, [Spring Boot Persistence Best Practices](https://www.apress.com/us/book/9781484256251).
      
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
