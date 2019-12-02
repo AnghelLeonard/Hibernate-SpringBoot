@@ -3493,3 +3493,13 @@ This kind of checks or constraints are easy to implement via database triggers. 
 
 **Key points:**
 - this application allows us to define multiple strategies and apply the one that we want
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+233. **[How Spring Transaction Propagation Work](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTransactionPropagation)**
+ 
+**Description:** This folder holds several applications that shows how each Spring transaction propagation works.
+
+**Key points:**
+- it is strongly recommended to follow these examples in the context of my book, [Spring Boot Persistence Best Practices](https://www.apress.com/us/book/9781484256251).
+     
