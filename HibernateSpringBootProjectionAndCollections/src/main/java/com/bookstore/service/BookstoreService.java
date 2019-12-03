@@ -31,7 +31,7 @@ public class BookstoreService {
         this.authorRepository = authorRepository;
         this.entityManager = entityManager;
         this.authorTransformer = authorTransformer;
-    }
+    }        
 
     @Transactional(readOnly = true)
     public List<AuthorDto> fetchAuthorsWithBooksQueryBuilderMechanism() {
@@ -107,7 +107,7 @@ public class BookstoreService {
     @Transactional(readOnly = true)
     public List<com.bookstore.transform.dto.AuthorDto> fetchAuthorsWithBooksViaArrayOfObjectsAndTransformToDto() {
         
-        List<Object[]> authors = authorRepository.findByViaArrayOfObjects();
+        List<Object[]> authors = authorRepository.findByViaArrayOfObjectsWithIds();
         List<com.bookstore.transform.dto.AuthorDto> authorsDto = authorTransformer.transform(authors);
 
         System.out.println("\nResult set:");
