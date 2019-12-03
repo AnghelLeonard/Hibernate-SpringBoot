@@ -1,13 +1,12 @@
 package com.bookstore.entity;
 
-import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Book extends BaseEntity<String> implements Serializable {
+public class Book extends BaseEntity<String>  {
 
     private static final long serialVersionUID = 1L;
 

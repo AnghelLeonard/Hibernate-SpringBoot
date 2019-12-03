@@ -1,6 +1,5 @@
 package com.bookstore.entity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,7 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Author extends BaseEntity<String> implements Serializable {
+public class Author extends BaseEntity<String> {
 
     private static final long serialVersionUID = 1L;
 

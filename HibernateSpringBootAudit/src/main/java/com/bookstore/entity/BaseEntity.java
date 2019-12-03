@@ -1,5 +1,6 @@
 package com.bookstore.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.EntityListeners;
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @MappedSuperclass
 @EntityListeners({AuditingEntityListener.class})
-public abstract class BaseEntity<U> {        
+public abstract class BaseEntity<U> implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -20,25 +20,25 @@ public class BookstoreService {
     @Transactional
     public void registerAuthor() {
 
-        Author a1 = new Author();
+        var a1 = new Author();
         a1.setName("Quartis Young");
         a1.setGenre("Anthology");
         a1.setAge(34);
 
-        Author a2 = new Author();
+        var a2 = new Author();
         a2.setName("Mark Janel");
         a2.setGenre("Anthology");
         a2.setAge(23);
 
-        Book b1 = new Book();
+        var b1 = new Book();
         b1.setIsbn("001");
         b1.setTitle("The Beatles Anthology");
 
-        Book b2 = new Book();
+        var b2 = new Book();
         b2.setIsbn("002");
         b2.setTitle("A People's Anthology");
 
-        Book b3 = new Book();
+        var b3 = new Book();
         b3.setIsbn("003");
         b3.setTitle("Anthology Myths");
 
@@ -52,14 +52,13 @@ public class BookstoreService {
 
     @Transactional
     public void updateAuthor() {
-        Author author = authorRepository.findByName("Mark Janel");
-
+        var author = authorRepository.findByName("Mark Janel");
         author.setAge(45);
     }
 
     @Transactional
     public void updateBooks() {
-        Author author = authorRepository.findByName("Quartis Young");
+        var author = authorRepository.findByName("Quartis Young");
         List<Book> books = author.getBooks();
 
         for (Book book : books) {
