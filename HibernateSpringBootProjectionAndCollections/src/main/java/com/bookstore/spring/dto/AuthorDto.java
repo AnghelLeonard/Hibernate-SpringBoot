@@ -1,4 +1,4 @@
-package com.bookstore.dto;
+package com.bookstore.spring.dto;
 
 import java.util.List;
 

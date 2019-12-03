@@ -1,7 +1,7 @@
 package com.bookstore.controller;
 
-import com.bookstore.dto.AuthorDto;
-import com.bookstore.dto.SimpleAuthorDto;
+import com.bookstore.spring.dto.AuthorDto;
+import com.bookstore.spring.dto.SimpleAuthorDto;
 import com.bookstore.service.BookstoreService;
 import java.util.List;
 import java.util.Set;

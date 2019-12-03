@@ -1,8 +1,9 @@
 package com.bookstore.service;
 
-import com.bookstore.dto.AuthorDto;
-import com.bookstore.dto.SimpleAuthorDto;
+import com.bookstore.spring.dto.AuthorDto;
+import com.bookstore.spring.dto.SimpleAuthorDto;
 import com.bookstore.repository.AuthorRepository;
+import com.bookstore.transform.dto.AuthorTransformer;
 import java.util.Arrays;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -18,13 +19,18 @@ import org.springframework.transaction.annotation.Transactional;
 public class BookstoreService {
 
     private final AuthorRepository authorRepository;
+    private final AuthorTransformer authorTransformer;
 
     @PersistenceContext
     private final EntityManager entityManager;
 
-    public BookstoreService(AuthorRepository authorRepository, EntityManager entityManager) {
+    public BookstoreService(AuthorRepository authorRepository,
+            AuthorTransformer authorTransformer,
+            EntityManager entityManager) {
+
         this.authorRepository = authorRepository;
         this.entityManager = entityManager;
+        this.authorTransformer = authorTransformer;
     }
 
     @Transactional(readOnly = true)
@@ -85,17 +91,31 @@ public class BookstoreService {
 
         return authors;
     }
-    
+
     @Transactional(readOnly = true)
     public List<Object[]> fetchAuthorsWithBooksViaArrayOfObjects() {
         List<Object[]> authors = authorRepository.findByViaArrayOfObjects();
-        
+
         System.out.println("\nResult set:");
         authors.forEach(a -> System.out.println(Arrays.toString(a)));
-        
+
         briefOverviewOfPersistentContextContent();
-        
+
         return authors;
+    }
+
+    @Transactional(readOnly = true)
+    public List<com.bookstore.transform.dto.AuthorDto> fetchAuthorsWithBooksViaArrayOfObjectsAndTransformToDto() {
+        
+        List<Object[]> authors = authorRepository.findByViaArrayOfObjects();
+        List<com.bookstore.transform.dto.AuthorDto> authorsDto = authorTransformer.transform(authors);
+
+        System.out.println("\nResult set:");
+        authors.forEach(a -> System.out.println(Arrays.toString(a)));
+
+        briefOverviewOfPersistentContextContent();
+
+        return authorsDto;
     }
 
     private void briefOverviewOfPersistentContextContent() {

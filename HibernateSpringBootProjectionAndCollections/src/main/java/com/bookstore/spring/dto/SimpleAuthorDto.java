@@ -1,4 +1,4 @@
-package com.bookstore.dto;
+package com.bookstore.spring.dto;
 
 public interface SimpleAuthorDto {
 
