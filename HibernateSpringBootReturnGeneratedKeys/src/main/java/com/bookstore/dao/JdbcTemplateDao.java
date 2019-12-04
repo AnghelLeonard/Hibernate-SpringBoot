@@ -6,9 +6,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public class JdbcTemplateDao {
+public class JdbcTemplateDao implements AuthorDao {
 
     private static final String SQL_INSERT
             = "INSERT INTO author (age, name, genre) VALUES (?, ?, ?);";
@@ -19,6 +20,8 @@ public class JdbcTemplateDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    @Override
+    @Transactional    
     public long insertAuthor(int age, String name, String genre) {
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
