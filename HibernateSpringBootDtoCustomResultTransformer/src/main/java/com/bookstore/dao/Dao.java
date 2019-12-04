@@ -10,11 +10,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public class Dao {
+public class Dao implements AuthorDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Override
     @Transactional(readOnly = true)
     public List<AuthorDto> fetchAuthorWithBook() {
         Query query = entityManager
