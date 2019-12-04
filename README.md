@@ -3511,3 +3511,12 @@ This kind of checks or constraints are easy to implement via database triggers. 
 
 **Key points:**
 - store UUID in a `BINARY(16)` column
+
+-----------------------------------------------------------------------------------------------------------------------
+
+235. **[How To Manually Assign UUID Identifiers](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAssignedUUID)**
+ 
+**Description:** This application is an example of manually assigning UUID identifiers.
+
+**Key points:**
+- store UUID in a `BINARY(16)` column
