@@ -3502,4 +3502,12 @@ This kind of checks or constraints are easy to implement via database triggers. 
 
 **Key points:**
 - it is strongly recommended to follow these examples in the context of my book, [Spring Boot Persistence Best Practices](https://www.apress.com/us/book/9781484256251).
-     
+
+-----------------------------------------------------------------------------------------------------------------------
+
+234. **[How To Use JPA `GenerationType.AUTO` And UUID Identifiers](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAutoUUID)**
+ 
+**Description:** This application is an example of using the JPA `GenerationType.AUTO` for assigning automatically UUID identifiers.
+
+**Key points:**
+- store UUID in a `BINARY(16)` column
