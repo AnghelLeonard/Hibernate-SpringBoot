@@ -1,6 +1,6 @@
-**[How To Use JPA `GenerationType.AUTO` And UUID Identifiers](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAutoUUID)**
+**[How To Manually Assign UUID Identifiers](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAssignedUUID)**
  
-**Description:** This application is an example of using the JPA `GenerationType.AUTO` for assigning automatically UUID identifiers.
+**Description:** This application is an example of manually assigning UUID identifiers.
 
 **Key points:**
 - store UUID in a `BINARY(16)` column
