@@ -1,5 +1,5 @@
 **[How To Use JPA `GenerationType.AUTO` And UUID Identifiers](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAutoUUID)**
- 
+  
 **Description:** This application is an example of using the JPA `GenerationType.AUTO` for assigning automatically UUID identifiers.
 
 **Key points:**
