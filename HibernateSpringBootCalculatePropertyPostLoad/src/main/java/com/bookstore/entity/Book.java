@@ -22,7 +22,7 @@ public class Book implements Serializable {
     private double price;
 
     @Transient
-    private double discount;
+    private double discounted;
 
     public Long getId() {
         return id;
@@ -56,19 +56,18 @@ public class Book implements Serializable {
         this.price = price;
     }
 
-    @Transient
-    public double getDiscount() {
-        return discount;
+    public double getDiscounted() {
+        return discounted;
     }
 
     @PostLoad
     private void postLoad() {
-        this.discount = this.price - this.price * 0.25; 
+        this.discounted = this.price - this.price * 0.25; 
     }
 
     @Override
     public String toString() {
         return "Book{" + "id=" + id + ", title=" + title + ", isbn=" 
-                + isbn + ", price=" + price + ", discount=" + discount + '}';
+                + isbn + ", price=" + price + ", discounted=" + discounted + '}';
     }        
 }
