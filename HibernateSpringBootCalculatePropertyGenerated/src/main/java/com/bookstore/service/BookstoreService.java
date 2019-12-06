@@ -27,7 +27,7 @@ public class BookstoreService {
 
         bookRepository.save(book);
 
-        System.out.println("Discount after insert: " + book.getDiscount());
+        System.out.println("Discounted price after insert: " + book.getDiscounted());
     }
 
     @Transactional
@@ -37,6 +37,6 @@ public class BookstoreService {
         
         bookRepository.flush();
 
-        System.out.println("Discount after update: " + book.getDiscount());
+        System.out.println("Discounted price after update: " + book.getDiscounted());
     }
 }
