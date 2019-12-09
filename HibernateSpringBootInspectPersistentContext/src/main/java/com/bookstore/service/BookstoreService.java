@@ -3,12 +3,9 @@ package com.bookstore.service;
 import com.bookstore.entity.Author;
 import com.bookstore.entity.Book;
 import com.bookstore.repository.AuthorRepository;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.hibernate.engine.spi.EntityEntry;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -90,5 +87,4 @@ public class BookstoreService {
 
         return sharedSession.getPersistenceContext();
     }
-
 }
