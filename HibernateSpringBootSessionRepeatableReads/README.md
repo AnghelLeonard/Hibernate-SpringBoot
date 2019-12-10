@@ -1,12 +1,10 @@
 
-**[Direct Fetching Via Spring Data `findById()`, JPA `EntityManager` And Hibernate `Session`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDirectFetching)**
+**[How Hibernate Session-Level Repeatable Reads Works](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSessionRepeatableReads)**
 
-**Description:** Direct fetching via Spring Data, `EntityManager` and Hibernate `Session` examples.
+**Description:** This application is a sample that reveals how Hibernate session-level repeatable reads works. Persistence Context guarantees session-level repeatable reads. Check out how it works.
 
 **Key points:**
-- direct fetching via Spring Data uses `findById()`
-- direct fetching via JPA `EntityManager` uses `find()`
-- direct fetching via Hibernate `Session` uses `get()`
+- rely on two transactions implemented via `TransactionTemplate`
 
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
