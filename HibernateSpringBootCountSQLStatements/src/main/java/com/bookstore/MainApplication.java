@@ -31,20 +31,20 @@ public class MainApplication {
             SQLStatementCountValidator.reset();
             bookstoreService.authorOperationsWithoutTransactional();
             // at this point there is no transaction running
-            // a total of 5 statements, not very good
-            assertInsertCount(1);
-            assertUpdateCount(1);
-            assertDeleteCount(1);
+            // there are 3 statements         
             assertSelectCount(2);
+            assertUpdateCount(1);
+            assertInsertCount(0);
+            assertDeleteCount(0);
 
             SQLStatementCountValidator.reset();
             bookstoreService.authorOperationsWithTransactional();
             // allow the transaction to commit
-            // a total of 2 statements instead of 5 as in the case of no explicit transaction
-            assertInsertCount(1);
-            assertUpdateCount(0);
-            assertDeleteCount(1);
-            assertSelectCount(0);
+            // there are 2 statements instead of 3
+            assertSelectCount(1);
+            assertUpdateCount(1);
+            assertInsertCount(0);            
+            assertDeleteCount(0);           
         };
     }
 }

@@ -15,30 +15,17 @@ public class BookstoreService {
     }
 
     public void authorOperationsWithoutTransactional() {
-        Author author = new Author();
 
-        author.setName("Mark Janel");
-        author.setGenre("Anthology");
-        author.setAge(23);
-
-        authorRepository.save(author);   // 1 insert
+        Author author = authorRepository.findById(1L).orElseThrow();
         author.setGenre("History");
-        authorRepository.save(author);   // 1 select, 1 update
-        authorRepository.delete(author); // 1 select, 1 delete        
+
+        authorRepository.save(author);
     }
 
     @Transactional
     public void authorOperationsWithTransactional() {
-        Author author = new Author();
-
-        author.setName("Mark Janel");
+        Author author = authorRepository.findById(1L).orElseThrow();
         author.setGenre("Anthology");
-        author.setAge(23);
-
-        authorRepository.save(author);   // 1 insert
-        author.setGenre("History");
-        authorRepository.save(author);   // update not triggered since a delete follows
-        authorRepository.delete(author); // 1 delete        
     }
 
 }
