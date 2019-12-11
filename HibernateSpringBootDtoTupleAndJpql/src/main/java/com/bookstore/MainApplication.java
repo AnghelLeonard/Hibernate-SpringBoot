@@ -33,6 +33,10 @@ public class MainApplication {
                 System.out.println("Author name: " + author.get("name")
                         + " | Age: " + author.get("age"));
             }
+
+            System.out.println("\n------------------");
+            System.out.println(authors.get(0).get("name") instanceof String);
+            System.out.println(authors.get(0).get("age") instanceof Integer);
         };
     }
 }
