@@ -29,7 +29,7 @@ public class MainApplication {
         return args -> {
 
             SQLStatementCountValidator.reset();
-            bookstoreService.authorOperationsWithoutTransactional();
+            bookstoreService.updateAuthorWithoutTransactional();
             // at this point there is no transaction running
             // there are 3 statements         
             assertSelectCount(2);
@@ -38,7 +38,7 @@ public class MainApplication {
             assertDeleteCount(0);
 
             SQLStatementCountValidator.reset();
-            bookstoreService.authorOperationsWithTransactional();
+            bookstoreService.updateAuthorWithTransactional();
             // allow the transaction to commit
             // there are 2 statements instead of 3
             assertSelectCount(1);

@@ -14,7 +14,7 @@ public class BookstoreService {
         this.authorRepository = authorRepository;
     }
 
-    public void authorOperationsWithoutTransactional() {
+    public void updateAuthorWithoutTransactional() {
 
         Author author = authorRepository.findById(1L).orElseThrow();
         author.setGenre("History");
@@ -23,7 +23,7 @@ public class BookstoreService {
     }
 
     @Transactional
-    public void authorOperationsWithTransactional() {
+    public void updateAuthorWithTransactional() {
         Author author = authorRepository.findById(1L).orElseThrow();
         author.setGenre("Anthology");
     }
