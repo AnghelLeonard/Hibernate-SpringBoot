@@ -112,7 +112,7 @@ public class BookstoreService {
             EntityEntry ee = persistenceContext.getEntry(entry);
             System.out.println(
                     "Entity name: " + ee.getEntityName()
-                    + " | Status" + ee.getStatus()
+                    + " | Status: " + ee.getStatus()
                     + " | State: " + Arrays.toString(ee.getLoadedState()));
         });
 

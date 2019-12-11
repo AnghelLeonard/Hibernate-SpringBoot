@@ -16,6 +16,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     
     @Query("SELECT b.title AS title, a AS author "
             + "FROM Book b LEFT JOIN b.author a")
+    // or as a INNER JOIN
+    // @Query("SELECT b.title AS title, b.author AS author FROM Book b")
     List<BookDto> findByViaQuery();
 
     // fastest
