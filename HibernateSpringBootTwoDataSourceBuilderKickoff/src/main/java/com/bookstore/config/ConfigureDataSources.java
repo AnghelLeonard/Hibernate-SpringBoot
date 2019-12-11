@@ -27,7 +27,7 @@ public class ConfigureDataSources {
                 .build();
     }
 
-    // second database, books
+    // second database, booksdb
     @Bean(name = "configBooksDb")
     @ConfigurationProperties("app.datasource.ds2")
     public DataSourceProperties secondDataSourceProperties() {
