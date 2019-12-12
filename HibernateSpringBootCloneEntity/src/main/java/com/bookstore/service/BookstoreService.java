@@ -19,9 +19,9 @@ public class BookstoreService {
     public void cloneAuthor() {
         Author author = authorRepository.fetchByName("Mark Janel");
 
-        Author authorClone = new Author(author, true);
+        Author authorClone = new Author(author, false);
         authorClone.setAge(54);
-        authorClone.setName("Mark Tliop");
+        authorClone.setName("Farell Tliop");                
 
         authorRepository.save(authorClone);
     }
