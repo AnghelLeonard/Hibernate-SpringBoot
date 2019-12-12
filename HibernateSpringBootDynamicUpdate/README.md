@@ -1,10 +1,10 @@
-**[How To Update/Insert/Delete Data From/In A MySQL Database View](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDatabaseViewUpdateInsertDelete)**
+**[How To Include In The `UPDATE` Statement Only The Modified Columns Via Hibernate `@DynamicUpdate`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDynamicUpdate)**
 
-**Description:** This application is an example of updating, inserting and deleting data in a MySQL database view. Every update/insert/delete will automatically update the contents of the underlying table(s).
+**Description:** This application is an example of using the Hibernate-specific, `@DynamicUpdate`. By default, even if we modify only a subset of columns, the triggered `UPDATE` statements will include all columns. By simply annotating the corresponding entity at class-level with `@DynamicUpdate` the generated `UPDATE` statement will include only the modified columns. 
 
 **Key points:**
-- the database views are available in `data-mysql.sql` file
-- respect [MySQL](https://dev.mysql.com/doc/refman/8.0/en/view-updatability.html) requirements for updatable and insertable database views
+- pro: avoid updating unmodified indexes (useful for heavy indexing)
+- con: cannot reuse the same `UPDATE` for different subsets of columns via JDBC statements caching (each `UPDATE` string will be cached and reused accordingly)
      
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
