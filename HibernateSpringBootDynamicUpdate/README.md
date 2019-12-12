@@ -4,7 +4,7 @@
 
 **Key points:**
 - pro: avoid updating unmodified indexes (useful for heavy indexing)
-- con: cannot reuse the same `UPDATE` for different subsets of columns via JDBC statements caching (each `UPDATE` string will be cached and reused accordingly)
+- con: cannot reuse the same `UPDATE` for different subsets of columns via JDBC statements caching (each triggered `UPDATE` string will be cached and reused accordingly)
      
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
