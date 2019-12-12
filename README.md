@@ -3533,8 +3533,7 @@ This kind of checks or constraints are easy to implement via database triggers. 
 
 -----------------------------------------------------------------------------------------------------------------------
 
-237. 
-**[How Hibernate Session-Level Repeatable Reads Works](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSessionRepeatableReads)**
+237. **[How Hibernate Session-Level Repeatable Reads Works](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSessionRepeatableReads)**
 
 **Description:** This Spring Boot application is a sample that reveals how Hibernate session-level repeatable reads works. Persistence Context guarantees session-level repeatable reads. Check out how it works.
 
@@ -3542,3 +3541,12 @@ This kind of checks or constraints are easy to implement via database triggers. 
 - rely on two transactions implemented via `TransactionTemplate`
 
 **Note:** For a detailed explanation of this application consider my book, [Spring Boot Persistence Best Practices](https://www.apress.com/us/book/9781484256251)
+
+-----------------------------------------------------------------------------------------------------------------------
+
+238. **[Why To Avoid Hibernate-specific `hibernate.enable_lazy_load_no_trans`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnableLazyLoadNoTrans)**
+ 
+**Description:** This application is an example of using Hibernate-specific `hibernate.enable_lazy_load_no_trans`. Check out the application log to see how transactions and database connections are used. 
+
+**Key points:**
+- always avoid Hibernate-specific `hibernate.enable_lazy_load_no_trans`
