@@ -1,9 +1,9 @@
 package com.bookstore.service;
 
 import org.springframework.stereotype.Service;
-import javax.transaction.Transactional;
 import com.bookstore.view.AuthorAnthologyView;
 import com.bookstore.repository.AuthorAnthologyViewRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookstoreService {
