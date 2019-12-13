@@ -35,7 +35,7 @@ public class BookstoreService {
 
         briefOverviewOfPersistentContextContent();
     }
-    
+
     @Transactional(readOnly = true)
     public void fetchAuthorAsArrayOfObject() {
         List<Object[]> authors = authorRepository.fetchAsArray();
@@ -117,14 +117,13 @@ public class BookstoreService {
         Map entities = persistenceContext.getEntitiesByKey();
         entities.forEach((key, value) -> System.out.println(key + ": " + value));
 
-        entities.values().forEach(entry
-                -> {
+        for (Object entry : entities.values()) {
             EntityEntry ee = persistenceContext.getEntry(entry);
             System.out.println(
                     "Entity name: " + ee.getEntityName()
                     + " | Status: " + ee.getStatus()
                     + " | State: " + Arrays.toString(ee.getLoadedState()));
-        });
+        };
 
         System.out.println("\n-----------------------------------\n");
     }
