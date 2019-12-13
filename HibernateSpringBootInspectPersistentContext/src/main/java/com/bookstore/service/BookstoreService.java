@@ -3,9 +3,11 @@ package com.bookstore.service;
 import com.bookstore.entity.Author;
 import com.bookstore.entity.Book;
 import com.bookstore.repository.AuthorRepository;
+import java.util.Arrays;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.hibernate.engine.spi.EntityEntry;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -59,23 +61,32 @@ public class BookstoreService {
         org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
 
         int managedEntities = persistenceContext.getNumberOfManagedEntities();
-        Map collections = persistenceContext.getCollectionEntries();
-        Map entities = persistenceContext.getEntitiesByKey();
+        Map collectionEntries = persistenceContext.getCollectionEntries();
+        Map entitiesByKey = persistenceContext.getEntitiesByKey();
 
         System.out.println("Total number of managed entities: "
                 + managedEntities);
-        System.out.println("Total number of collection entities: "
-                + collections.size());        
+        System.out.println("Total number of collection entries: "
+                + collectionEntries.size());
 
-        if (!entities.isEmpty()) {
+        if (!entitiesByKey.isEmpty()) {
             System.out.println("\nEntities by key:");
-            entities.forEach((key, value) -> System.out.println(key + ": " + value));
+            entitiesByKey.forEach((key, value) -> System.out.println(key + ": " + value));
+
+            System.out.println("\nStatus and hydrated state:");
+            for (Object entry : entitiesByKey.values()) {
+                EntityEntry ee = persistenceContext.getEntry(entry);
+                System.out.println(
+                        "Entity name: " + ee.getEntityName()
+                        + " | Status: " + ee.getStatus()
+                        + " | State: " + Arrays.toString(ee.getLoadedState()));
+            }
         }
 
-        if (!collections.isEmpty()) {
-            System.out.println("\nCollection entries:\n" + collections.values());
+        if (!collectionEntries.isEmpty()) {
+            System.out.println("\nCollection entries:");
+            System.out.println(collectionEntries.values());
         }
-
         System.out.println("-----------------------------------------------------\n");
     }
 
