@@ -31,7 +31,7 @@ public class BookstoreService {
         this.authorRepository = authorRepository;
         this.entityManager = entityManager;
         this.authorTransformer = authorTransformer;
-    }        
+    }
 
     @Transactional(readOnly = true)
     public List<AuthorDto> fetchAuthorsWithBooksQueryBuilderMechanism() {
@@ -106,7 +106,7 @@ public class BookstoreService {
 
     @Transactional(readOnly = true)
     public List<com.bookstore.transform.dto.AuthorDto> fetchAuthorsWithBooksViaArrayOfObjectsAndTransformToDto() {
-        
+
         List<Object[]> authors = authorRepository.findByViaArrayOfObjectsWithIds();
         List<com.bookstore.transform.dto.AuthorDto> authorsDto = authorTransformer.transform(authors);
 
@@ -134,14 +134,13 @@ public class BookstoreService {
         Map entities = persistenceContext.getEntitiesByKey();
         entities.forEach((key, value) -> System.out.println(key + ":" + value));
 
-        entities.values().forEach(entry
-                -> {
+        for (Object entry : entities.values()) {
             EntityEntry ee = persistenceContext.getEntry(entry);
             System.out.println(
                     "Entity name: " + ee.getEntityName()
                     + " | Status: " + ee.getStatus()
                     + " | State: " + Arrays.toString(ee.getLoadedState()));
-        });
+        };
 
         System.out.println("\n-----------------------------------\n");
     }
