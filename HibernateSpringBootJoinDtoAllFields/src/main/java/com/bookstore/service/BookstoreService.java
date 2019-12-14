@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hibernate.engine.spi.EntityEntry;
+import org.hibernate.engine.spi.EntityKey;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -114,10 +115,11 @@ public class BookstoreService {
         System.out.println("\n-----------------------------------");
         System.out.println("Total number of managed entities: " + managedEntities);
 
-        Map entities = persistenceContext.getEntitiesByKey();
-        entities.forEach((key, value) -> System.out.println(key + ": " + value));
+        // getEntitiesByKey() will be removed and probably replaced with #iterateEntities() 
+        Map<EntityKey, Object> entitiesByKey = persistenceContext.getEntitiesByKey();
+        entitiesByKey.forEach((key, value) -> System.out.println(key + ": " + value));
 
-        for (Object entry : entities.values()) {
+        for (Object entry : entitiesByKey.values()) {
             EntityEntry ee = persistenceContext.getEntry(entry);
             System.out.println(
                     "Entity name: " + ee.getEntityName()
