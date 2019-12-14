@@ -63,6 +63,8 @@ public class BookstoreService {
 
         int managedEntities = persistenceContext.getNumberOfManagedEntities();
         int collectionEntriesSize = persistenceContext.getCollectionEntriesSize();
+        
+        // getEntitiesByKey() will be removed and probably replaced with #iterateEntities() 
         Map<EntityKey, Object> entitiesByKey = persistenceContext.getEntitiesByKey();
 
         System.out.println("Total number of managed entities: "
