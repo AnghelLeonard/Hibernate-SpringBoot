@@ -13,6 +13,7 @@ public class DatabaseTableMetadataExtractor
 
     private Database database;   
 
+    // this method will be deprecated starting with Hibernate 6.0
     @Override
     public void integrate(
             Metadata metadata,
