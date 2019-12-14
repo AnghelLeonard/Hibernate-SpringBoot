@@ -16,7 +16,7 @@ public class BookService {
 
         book.setIsbn("001-JN");
         book.setTitle("A History of Ancient Prague");
-        book.setAuthors("Joaana Nimar");
+        book.setAuthors("Joana Nimar");
 
         return bookRepository.save(book);
     }

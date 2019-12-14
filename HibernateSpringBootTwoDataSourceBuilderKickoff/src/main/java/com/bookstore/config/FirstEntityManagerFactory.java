@@ -53,7 +53,7 @@ public class FirstEntityManagerFactory {
     protected Map<String, String> hibernateProperties() {
         return new HashMap<String, String>() {
             {
-                put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");                
+                put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");                
                 put("hibernate.hbm2ddl.auto", "create");                
             }
         };
