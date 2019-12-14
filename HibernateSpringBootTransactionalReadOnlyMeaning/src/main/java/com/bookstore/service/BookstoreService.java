@@ -34,6 +34,8 @@ public class BookstoreService {
      
         displayInformation("After Update Entity", author);
 
+        // force flush
+        // by default, flush will take place before transaction commit
         authorRepository.flush();
 
         displayInformation("After Flush", author);
@@ -49,6 +51,9 @@ public class BookstoreService {
      
         displayInformation("After Update Entity", author);
 
+        // force flush
+        // be default, because we set readOnly=true, flush mode is MANUAL, 
+        // therefore no flush will take place
         authorRepository.flush();
 
         displayInformation("After Flush", author);
