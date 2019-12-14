@@ -15,11 +15,11 @@ public class BookstoreService {
                 .getDatabase()
                 .getNamespaces()) {
 
-            namespace.getTables().forEach(this::displayTablesMetdata);
+            namespace.getTables().forEach(this::displayTablesMetadata);
         }
     }
 
-    private void displayTablesMetdata(Table table) {
+    private void displayTablesMetadata(Table table) {
 
         System.out.println("\nTable: " + table);
         Iterator it = table.getColumnIterator();
