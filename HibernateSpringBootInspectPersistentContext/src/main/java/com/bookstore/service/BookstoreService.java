@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hibernate.engine.spi.EntityEntry;
+import org.hibernate.engine.spi.EntityKey;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,13 +62,13 @@ public class BookstoreService {
         org.hibernate.engine.spi.PersistenceContext persistenceContext = getPersistenceContext();
 
         int managedEntities = persistenceContext.getNumberOfManagedEntities();
-        Map collectionEntries = persistenceContext.getCollectionEntries();
-        Map entitiesByKey = persistenceContext.getEntitiesByKey();
+        int collectionEntriesSize = persistenceContext.getCollectionEntriesSize();
+        Map<EntityKey, Object> entitiesByKey = persistenceContext.getEntitiesByKey();
 
         System.out.println("Total number of managed entities: "
                 + managedEntities);
         System.out.println("Total number of collection entries: "
-                + collectionEntries.size());
+                + collectionEntriesSize);
 
         if (!entitiesByKey.isEmpty()) {
             System.out.println("\nEntities by key:");
@@ -83,9 +84,10 @@ public class BookstoreService {
             }
         }
 
-        if (!collectionEntries.isEmpty()) {
-            System.out.println("\nCollection entries:");
-            System.out.println(collectionEntries.values());
+        if (collectionEntriesSize > 0) {
+            System.out.println("\nCollection entries:");           
+            persistenceContext.forEachCollectionEntry(
+                    (k, v) -> System.out.println("Key:" + k + ", Value:" + v), false);
         }
         System.out.println("-----------------------------------------------------\n");
     }
