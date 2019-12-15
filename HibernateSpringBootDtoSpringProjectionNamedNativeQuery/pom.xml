@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jpa</groupId>
-    <artifactId>HibernateSpringBootDtoSpringProjectionNamedQuery</artifactId>
+    <artifactId>HibernateSpringBootDtoSpringProjectionNamedNativeQuery</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>HibernateSpringBootDtoSpringProjectionNamedQuery</name>
+    <name>HibernateSpringBootDtoSpringProjectionNamedNativeQuery</name>
     <description>JPA project for Spring Boot</description>
 
     <parent>
