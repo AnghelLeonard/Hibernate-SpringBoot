@@ -3577,3 +3577,12 @@ This kind of checks or constraints are easy to implement via database triggers. 
 **Key points:**
 - pro: avoid updating unmodified indexes (useful for heavy indexing)
 - con: cannot reuse the same `UPDATE` for different subsets of columns via JDBC statements caching (each triggered `UPDATE` string will be cached and reused accordingly)
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+241. **[How To Log Spring Data JPA Repository Query-Method Execution Time](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRepoIntercept)**
+ 
+**Description:** This application is an example of logging execution time for a repository query-method.
+
+**Key points:**
+- write an AOP component (see `RepositoryProfiler`)
