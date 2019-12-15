@@ -401,11 +401,13 @@ The *bytecode enhancement* effect can be seen on `Author.class` [here](https://g
 -----------------------------------------------------------------------------------------------------------------------    
 
 26. **[How To Fetch DTO Via `SqlResultSetMapping` And `NamedNativeQuery`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSqlResultSetMappingAndNamedNativeQuery)**
- 
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on `SqlResultSetMapping`, `NamedNativeQuery` and `EntityManager`.
+
+**Note:** If you want to rely on the `{EntityName}.{RepositoryMethodName}` naming convention for simply creating in the repository interface methods with the same name as of native named query then skip this application and [check this one](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSqlResultSetMappingAndNamedNativeQuery2).
+
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on `SqlResultSetMapping`, `NamedNativeQuery`.
  
 **Key points:**
-- use `SqlResultSetMapping`, `NamedNativeQuery` and `EntityManager`
+- use `SqlResultSetMapping`, `NamedNativeQuery`
 - for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections)
      
 -----------------------------------------------------------------------------------------------------------------------    
