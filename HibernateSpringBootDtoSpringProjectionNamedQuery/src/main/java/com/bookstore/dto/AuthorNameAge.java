@@ -1,6 +1,6 @@
 package com.bookstore.dto;
 
-public interface AuthorDto {
+public interface AuthorNameAge {
     
     public String getName();
     public int getAge();   

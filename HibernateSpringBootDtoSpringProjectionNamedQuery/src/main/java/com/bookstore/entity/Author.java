@@ -7,13 +7,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
-// Scalar Mapping
 @NamedQuery(
         name = "Author.fetchName",
         query = "SELECT a.name FROM Author a"
 )
 
-// Spring projection
 @NamedQuery(
         name = "Author.fetchNameAndAge",
         query = "SELECT a.age AS age, a.name AS name FROM Author a"
