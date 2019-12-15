@@ -1,10 +1,10 @@
-**[How To Use JPA Named Native Queries `@NamedNativeQuery` And Spring Projection (DTO)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSpringProjectionNamedNativeQuery)**
+**[How To Use JPA Named Queries Via a Properties File](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNamedQueriesInPropertiesFile)**
   
-**Description:** This application is an example of combining JPA named native queries `@NamedNativeQuery` and Spring projections (DTO). For queries names we use the `{EntityName}.{RepositoryMethodName}` naming convention. This convention allows us to create in the repository interface methods with the same name as of named native query.
+**Description:** JPA named (native) queries are commonly written via `@NamedQuery` and `@NamedNativeQuery` annoatations in entity classes. Spring Data allows us to write our named (native) queries in a typical `*.properties` file inside the `META-INF` folder of your classpath. This way, we avoid modifying our entities. This application shows you how to do it.
  
 **Key points:**
-- define the named native queries
-- define the proper Spring projection
+- define the named (native) queries in a file, `META-INF/jpa-named-queries.properties`
+- follow the Spring `{EntityName}.{RepositoryMethodName}` naming convention for a quick and slim implementation
 
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
