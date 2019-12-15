@@ -3392,6 +3392,8 @@ This is a sample application that relies on `AbstractAggregateRoot` and its `reg
 
 224. **[How To Fetch Entity Via `SqlResultSetMapping` And `NamedNativeQuery`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSqlResultSetMappingAndNamedNativeQueryEntity)**
  
+**Note:** If you want to rely on the `{EntityName}.{RepositoryMethodName}` naming convention for simply creating in the repository interface methods with the same name as of native named query then skip this application and [check this one](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSqlResultSetMappingAndNamedNativeQueryEntity2).
+ 
 **Description:** This is a sample application of using `SqlResultSetMapping`, `NamedNativeQuery` and `EntityResult` for fetching single entity and multiple entities as `List<Object[]>`.
  
 **Key points:**
