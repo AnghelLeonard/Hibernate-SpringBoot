@@ -6,13 +6,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-public class Dao {
+@Transactional(readOnly=true)
+public class AuthorDaoImpl implements AuthorDao {
 
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Override
     public List<AuthorDto> fetchNameAndAge() {
 
         Query query = entityManager.createNativeQuery(
@@ -20,9 +23,5 @@ public class Dao {
         List<AuthorDto> authors = query.getResultList();
 
         return authors;
-    }
-
-    protected EntityManager getEntityManager() {
-        return entityManager;
-    }
+    }    
 }

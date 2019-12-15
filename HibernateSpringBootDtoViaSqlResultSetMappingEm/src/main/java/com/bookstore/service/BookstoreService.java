@@ -1,6 +1,6 @@
 package com.bookstore.service;
 
-import com.bookstore.dao.Dao;
+import com.bookstore.dao.AuthorDaoImpl;
 import java.util.List;
 import org.springframework.stereotype.Service;
 import com.bookstore.dto.AuthorDto;
@@ -8,13 +8,13 @@ import com.bookstore.dto.AuthorDto;
 @Service
 public class BookstoreService {
 
-    private final Dao dao;
+    private final AuthorDaoImpl dao;
 
-    public BookstoreService(Dao dao) {
+    public BookstoreService(AuthorDaoImpl dao) {
         this.dao = dao;
     }
 
-    public List<AuthorDto> fetchNameAndAge() {
+    public List<AuthorDto> fetchAuthorsNamesAndAges() {
 
         return dao.fetchNameAndAge();
     }
