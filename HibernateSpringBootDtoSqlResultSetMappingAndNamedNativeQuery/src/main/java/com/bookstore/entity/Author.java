@@ -20,14 +20,14 @@ import javax.persistence.SqlResultSetMapping;
 )
 @NamedNativeQuery(
         name = "AuthorsNameQuery",
-        query = "select name from author",
+        query = "SELECT name FROM author",
         resultSetMapping = "AuthorsNameMapping"
 )
 
 // Constructor Mapping
 @NamedNativeQuery(
         name = "AuthorDtoQuery",
-        query = "select name, age from author",
+        query = "SELECT name, age FROM author",
         resultSetMapping = "AuthorDtoMapping"
 )
 @SqlResultSetMapping(
