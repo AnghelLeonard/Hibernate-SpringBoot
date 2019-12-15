@@ -13,8 +13,8 @@ import org.springframework.data.jpa.repository.Query;
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     @Query(name = "AuthorsNameQuery", nativeQuery = true)
-    List<String> fetchNames();
+    List<String> fetchName();
 
     @Query(name = "AuthorDtoQuery", nativeQuery = true)
-    List<AuthorDto> fetchAuthors();
+    List<AuthorDto> fetchNameAndAge();
 }

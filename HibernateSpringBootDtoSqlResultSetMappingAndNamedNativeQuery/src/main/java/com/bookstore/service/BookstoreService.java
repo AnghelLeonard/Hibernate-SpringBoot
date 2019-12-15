@@ -14,13 +14,13 @@ public class BookstoreService {
         this.authorRepository = authorRepository;
     }
 
-    public List<AuthorDto> fetchAuthors() {
+    public List<AuthorDto> fetchAuthorsNamesAndAges() {
 
-        return authorRepository.fetchAuthors();
+        return authorRepository.fetchNameAndAge();
     }
     
     public List<String> fetchAuthorsNames() {
 
-        return authorRepository.fetchNames();
+        return authorRepository.fetchName();
     }
 }
