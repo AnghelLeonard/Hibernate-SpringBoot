@@ -17,7 +17,6 @@ public class TransactionProfiler extends TransactionSynchronizationAdapter {
     @Before("@annotation(org.springframework.transaction.annotation.Transactional)")
     public void registerTransactionSyncrhonization() {
         TransactionSynchronizationManager.registerSynchronization(this);
-
     }
 
     @Override
