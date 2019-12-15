@@ -1,9 +1,9 @@
-**[How To Log Spring Data JPA Repository Query-Method Execution Time](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRepoIntercept)**
+**[How To Take Control Before/After Transaction Commits/Completes Via Callbacks](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTransactionCallback)**
  
-**Description:** This application is an example of logging execution time for a repository query-method.
+**Description:** This application is an example of using the `TransactionSynchronizationAdapter` for overriding `beforeCommit()`, `beforeCompletion()`, `afterCommit()` and `afterCompletion()` callbacks.
 
 **Key points:**
-- write an AOP component (see `RepositoryProfiler`)
+- write an AOP component (see `TransactionProfiler`)
      
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
