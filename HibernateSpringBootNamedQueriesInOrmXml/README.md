@@ -1,6 +1,8 @@
 **[How To Use JPA Named Queries Via The `orm.xml` File](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNamedQueriesInOrmXml)**
   
-**Description:** JPA named (native) queries are commonly written via `@NamedQuery` and `@NamedNativeQuery` annotations in entity classes. Spring Data allows us to write our named (native) queries in a typical `orm.xml` file inside the `META-INF` folder of your classpath. This way, we avoid modifying our entities. This application shows you how to do it. Pay attention that dynamic sorting doesn't work in this approach.
+**Description:** JPA named (native) queries are commonly written via `@NamedQuery` and `@NamedNativeQuery` annotations in entity classes. Spring Data allows us to write our named (native) queries in a typical `orm.xml` file inside the `META-INF` folder of your classpath. This way, we avoid modifying our entities. This application shows you how to do it.
+
+**Warning:** Cannot use native queries with dynamic sorting (`Sort`). Using `Sort` in `Pageable` is ignored. At least this is how it behave in Spring Boot 2.2.2. Better rely on using a [properties](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNamedQueriesInPropertiesFile) file for listing the named (native) queries. In this case, `Sort` in `Pageable` is not ignored and you don't need to modify/pollute entitites.
  
 **Key points:**
 - define the named (native) queries in a file, `META-INF/orm.xml`
