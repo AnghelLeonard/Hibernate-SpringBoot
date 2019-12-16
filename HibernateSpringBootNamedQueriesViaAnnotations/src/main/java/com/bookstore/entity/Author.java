@@ -11,19 +11,63 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @NamedQueries({
-    @NamedQuery(name = "Author.fetchGtAgeDescName",
-            query = "SELECT a FROM Author a WHERE a.age > ?1 ORDER BY a.name DESC"),
+    @NamedQuery(name = "Author.fetchAll",
+            query = "SELECT a FROM Author a"),
+
     @NamedQuery(name = "Author.fetchByNameAndAge",
-            query = "SELECT a FROM Author a WHERE a.name=?1 AND a.age=?2")
+            query = "SELECT a FROM Author a WHERE a.name=?1 AND a.age=?2"),
+
+    @NamedQuery(name = "Author.fetchViaSort",
+            query = "SELECT a FROM Author a"), // causes exception
+
+    @NamedQuery(name = "Author.fetchViaSortWhere",
+            query = "SELECT a FROM Author a WHERE a.age > ?1"), // causes exception
+
+    @NamedQuery(name = "Author.fetchPageSort",
+            query = "SELECT a FROM Author a"), // sort is ignored
+
+    @NamedQuery(name = "Author.fetchPageSortWhere",
+            query = "SELECT a FROM Author a WHERE a.age > ?1"), // sort and SELECT COUNT are ignored
+
+    @NamedQuery(name = "Author.fetchSliceSort",
+            query = "SELECT a FROM Author a"), // sort is ignored
+
+    @NamedQuery(name = "Author.fetchSliceSortWhere",
+            query = "SELECT a FROM Author a WHERE a.age > ?1") // sort is ignored
 })
 
 @NamedNativeQueries({
-    @NamedNativeQuery(name = "Author.fetchGtAgeDescNameNative",
-            query = "SELECT * FROM author WHERE age > ?1 ORDER By name DESC",
+    @NamedNativeQuery(name = "Author.fetchAllNative",
+            query = "SELECT * FROM author",
             resultClass = Author.class),
+
     @NamedNativeQuery(name = "Author.fetchByNameAndAgeNative",
             query = "SELECT * FROM author WHERE name=?1 AND age=?2",
-            resultClass = Author.class)
+            resultClass = Author.class),
+
+    @NamedNativeQuery(name = "Author.fetchViaSortNative",
+            query = "SELECT * FROM author",
+            resultClass = Author.class), // causes exception
+
+    @NamedNativeQuery(name = "Author.fetchViaSortWhereNative",
+            query = "SELECT * FROM author WHERE age > ?1",
+            resultClass = Author.class), // causes exception
+
+    @NamedNativeQuery(name = "Author.fetchPageSortNative",
+            query = "SELECT * FROM author",
+            resultClass = Author.class), // causes exception
+
+    @NamedNativeQuery(name = "Author.fetchPageSortWhereNative",
+            query = "SELECT * FROM author WHERE age > ?1",
+            resultClass = Author.class), // sort and SELECT COUNT are ignored
+
+    @NamedNativeQuery(name = "Author.fetchSliceSortNative",
+            query = "SELECT * FROM author",
+            resultClass = Author.class), // sort is ignored
+
+    @NamedNativeQuery(name = "Author.fetchSliceSortWhereNative",
+            query = "SELECT * FROM author WHERE age > ?1",
+            resultClass = Author.class) // sort is ignored
 })
 @Entity
 public class Author implements Serializable {
