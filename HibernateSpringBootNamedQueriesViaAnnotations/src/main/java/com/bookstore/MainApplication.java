@@ -90,12 +90,10 @@ public class MainApplication {
             List<Author> sortedWhereAuthorsNative = bookstoreService.fetchAuthorsViaSortWhereNative();
             sortedWhereAuthorsNative.forEach(System.out::println);
             */
-                       
-            /* causes exception
+                                 
             System.out.println("\nFind page of authors ordered descending by name via Pageable (native):");
             Page<Author> pageAuthorsNative = bookstoreService.fetchAuthorsPageSortNative();
-            pageAuthorsNative.forEach(System.out::println);
-            */
+            pageAuthorsNative.forEach(System.out::println);            
 
             System.out.println("\nFind page of authors older than 30 ordered descending by name via Pageable (native):");
             Page<Author> pageWhereAuthorsNative = bookstoreService.fetchAuthorsPageSortWhereNative();

@@ -27,7 +27,7 @@ import javax.persistence.NamedQuery;
             query = "SELECT a FROM Author a"), // sort is ignored
 
     @NamedQuery(name = "Author.fetchPageSortWhere",
-            query = "SELECT a FROM Author a WHERE a.age > ?1"), // sort and SELECT COUNT are ignored
+            query = "SELECT a FROM Author a WHERE a.age > ?1"), // sort is ignored
 
     @NamedQuery(name = "Author.fetchSliceSort",
             query = "SELECT a FROM Author a"), // sort is ignored
@@ -54,12 +54,12 @@ import javax.persistence.NamedQuery;
             resultClass = Author.class), // causes exception
 
     @NamedNativeQuery(name = "Author.fetchPageSortNative",
-            query = "SELECT * FROM author",
-            resultClass = Author.class), // causes exception
+            query = "SELECT * FROM Author a",
+            resultClass = Author.class), // sort is ignored
 
     @NamedNativeQuery(name = "Author.fetchPageSortWhereNative",
-            query = "SELECT * FROM author WHERE age > ?1",
-            resultClass = Author.class), // sort and SELECT COUNT are ignored
+            query = "SELECT * FROM Author a WHERE a.age > ?1",
+            resultClass = Author.class), // sort is ignored
 
     @NamedNativeQuery(name = "Author.fetchSliceSortNative",
             query = "SELECT * FROM author",

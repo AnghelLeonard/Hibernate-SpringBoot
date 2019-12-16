@@ -77,13 +77,11 @@ public class BookstoreService {
         return authorRepository.fetchViaSortWhereNative(30, Sort.by(Direction.DESC, "name"));
     }
     */
-       
-    /* exception
+          
     public Page<Author> fetchAuthorsPageSortNative() {
         return authorRepository.fetchPageSortNative(PageRequest.of(1, 3,
                 Sort.by(Sort.Direction.DESC, "name")));
-    }
-    */
+    }    
     
     public Page<Author> fetchAuthorsPageSortWhereNative() {
         return authorRepository.fetchPageSortWhereNative(30, PageRequest.of(1, 3,

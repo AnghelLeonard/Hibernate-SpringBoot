@@ -4,3 +4,4 @@ insert into author (age, name, genre, id) values (51, "Quartis Young", "Antholog
 insert into author (age, name, genre, id) values (34, "Joana Nimar", "History", 4);
 insert into author (age, name, genre, id) values (38, "Alicia Tom", "Anthology", 5);
 insert into author (age, name, genre, id) values (56, "Katy Loin", "Anthology", 6);
+insert into author (age, name, genre, id) values (53, "Doil Kia", "Anthology", 7);

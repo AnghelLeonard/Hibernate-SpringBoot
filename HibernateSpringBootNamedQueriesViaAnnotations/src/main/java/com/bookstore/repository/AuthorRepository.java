@@ -25,8 +25,7 @@ public interface AuthorRepository extends PagingAndSortingRepository<Author, Lon
     // List<Author> fetchViaSortWhere(int age, Sort sort);
     
     Page<Author> fetchPageSort(Pageable pageable);
-
-    @Query(countQuery = "SELECT COUNT(a) FROM Author a WHERE a.age > ?1") // ignored
+    
     Page<Author> fetchPageSortWhere(int age, Pageable pageable);
 
     Slice<Author> fetchSliceSort(Pageable pageable);
@@ -46,12 +45,11 @@ public interface AuthorRepository extends PagingAndSortingRepository<Author, Lon
     // causes exception
     // @Query(nativeQuery = true)
     // List<Author> fetchViaSortWhereNative(int age, Sort sort);
-
-    // causes exception
-    // @Query(nativeQuery = true)
-    // Page<Author> fetchPageSortNative(Pageable pageable);
+   
+    @Query(nativeQuery = true)
+    Page<Author> fetchPageSortNative(Pageable pageable);
     
-    @Query(countQuery = "SELECT COUNT(*) author WHERE age > ?1", nativeQuery = true) // ignored
+    @Query(nativeQuery = true)
     Page<Author> fetchPageSortWhereNative(int age, Pageable pageable);
 
     @Query(nativeQuery = true)
