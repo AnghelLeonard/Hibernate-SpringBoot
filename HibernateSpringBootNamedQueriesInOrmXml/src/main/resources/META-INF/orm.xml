@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-mappings version="2.0" xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
+        http://java.sun.com/xml/ns/persistence/orm_2_0.xsd ">
+    
+    <!--find all authors order by name descending-->
+    <named-query name="Author.fetchAllDesc">
+        <query>SELECT a FROM Author a ORDER BY a.name DESC</query>
+    </named-query>
+       
+    <!--pagination of authors order by name descending (via Pageable)-->
+    <named-query name="Author.fetchPageDesc">
+        <query>SELECT a FROM Author a</query>
+    </named-query>
+    
+    <!--find author by name and age-->
+    <named-query name="Author.fetchByNameAndAge">
+        <query>SELECT a FROM Author a WHERE a.name=?1 AND a.age=?2</query>
+    </named-query>
+    
+    <!--find all names and ages (native query)-->
+    <named-native-query name="Author.fetchNameAndAge"
+                        result-class="com.bookstore.entity.Author"
+                        result-set-mapping="AuthorDtoMapping">
+        <query>SELECT name AS name, age AS age FROM author</query>
+    </named-native-query>
+    <sql-result-set-mapping name="AuthorDtoMapping">
+        <constructor-result target-class="com.bookstore.dto.AuthorDto">
+            <column name="name"/>
+            <column name="age" type="java.lang.Integer"/>        
+        </constructor-result>
+    </sql-result-set-mapping>
+</entity-mappings>
