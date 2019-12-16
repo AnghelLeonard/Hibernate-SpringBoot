@@ -3664,8 +3664,11 @@ This kind of checks or constraints are easy to implement via database triggers. 
 
 249. **[How To Use JPA Named Queries Via Annotations](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNamedQueriesViaAnnotations)**
   
-**Description:** JPA named (native) queries are commonly written via `@NamedQuery` and `@NamedNativeQuery` annotations in entity classes.  This application shows you how to do it. But, keep in mind that dynamic sorting (`Sort`) and pagination via `Pageable` doesn't work in this approach. The best approach that supports dynamic sorting, pagination and slicing relies on using a [properties](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNamedQueriesInPropertiesFile) file for listing the named (native) queries.
+**Description:** JPA named (native) queries are commonly written via `@NamedQuery` and `@NamedNativeQuery` annotations in entity classes.  This application shows you how to do it. But, keep in mind that dynamic sorting (`Sort`) and pagination via `Pageable` doesn't work at full capacity in this approach. More precisely, `Sort` will be ignored and `Pageable` will ask you to provide the `SELECT COUNT` via `countQuery`. At least this is how it behave in Spring Boot 2.2.2.
+
+The best approach that supports dynamic sorting, pagination and slicing relies on using a [properties](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNamedQueriesInPropertiesFile) file for listing the named (native) queries.
  
 **Key points:**
 - use `@NamedQuery` and `@NamedNativeQuery` annotations in entity classes
 - follow the Spring `{EntityName}.{RepositoryMethodName}` naming convention for a quick and slim implementation
+- avoid `Sort` and `Pageable`
