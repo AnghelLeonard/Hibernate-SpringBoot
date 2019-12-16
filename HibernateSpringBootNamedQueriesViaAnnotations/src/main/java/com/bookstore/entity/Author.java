@@ -11,19 +11,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 
 @NamedQueries({
-    @NamedQuery(name = "Author.fetchAllDesc",
-            query = "SELECT a FROM Author a ORDER BY a.name DESC"),
-    @NamedQuery(name = "Author.fetchAllSorted",
-            query = "SELECT a FROM Author a"),
-    @NamedQuery(name = "Author.fetchPageDesc",
-            query = "SELECT a FROM Author a"),
+    @NamedQuery(name = "Author.fetchGtAgeDescName",
+            query = "SELECT a FROM Author a WHERE a.age > ?1 ORDER BY a.name DESC"),
     @NamedQuery(name = "Author.fetchByNameAndAge",
             query = "SELECT a FROM Author a WHERE a.name=?1 AND a.age=?2")
 })
 
 @NamedNativeQueries({
-    @NamedNativeQuery(name = "Author.fetchAllDescNative",
-            query = "SELECT * FROM author ORDER BY name DESC",
+    @NamedNativeQuery(name = "Author.fetchGtAgeDescNameNative",
+            query = "SELECT * FROM author WHERE age > ?1 ORDER By name DESC",
             resultClass = Author.class),
     @NamedNativeQuery(name = "Author.fetchByNameAndAgeNative",
             query = "SELECT * FROM author WHERE name=?1 AND age=?2",
