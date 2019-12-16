@@ -1,8 +1,8 @@
 **[How To Use JPA Named Queries Via Annotations](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNamedQueriesViaAnnotations)**
   
-**Description:** JPA named (native) queries are commonly written via `@NamedQuery` and `@NamedNativeQuery` annotations in entity classes.  This application shows you how to do it. But, keep in mind that dynamic sorting (`Sort`) and pagination via `Pageable` doesn't work at full capacity in this approach. More precisely, `Sort` will be ignored and `Pageable` will not trigger `SELECT COUNT` if `WHERE` is used. Using `countQuery` is ignored as well. At least this is how it behave in Spring Boot 2.2.2.
+**Description:** JPA named (native) queries are commonly written via `@NamedQuery` and `@NamedNativeQuery` annotations in entity classes.  This application shows you how to do it. At least this is how it behave in Spring Boot 2.2.2.
 
-The best approach that supports dynamic sorting, pagination and slicing relies on using a [properties](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNamedQueriesInPropertiesFile) file for listing the named (native) queries.
+**Warning:** Cannot use native queries with dynamic sorting (`Sort`). Using `Sort` in `Pageable` is ignored. At least this is how it behave in Spring Boot 2.2.2. Better rely on using a [properties](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNamedQueriesInPropertiesFile) file for listing the named (native) queries. In this case, `Sort` in `Pageable` is not ignored and you don't need to modify/pollute entitites.
  
 **Key points:**
 - use `@NamedQuery` and `@NamedNativeQuery` annotations in entity classes
