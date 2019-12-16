@@ -6,23 +6,26 @@ import com.bookstore.entity.Author;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 @Transactional(readOnly = true)
-public interface AuthorRepository extends JpaRepository<Author, Long> {
+public interface AuthorRepository extends PagingAndSortingRepository<Author, Long> {
 
     List<Author> fetchAllDesc();
 
-    List<Author> fetchAllSorted(Sort sort);
+    List<Author> fetchAllSorted(int age, Sort sort);
 
-    Page<Author> fetchPageDesc(Pageable pageable);
+    Page<Author> fetchPageDesc(int age, Pageable pageable);
 
     Author fetchByNameAndAge(String name, int age);
 
+    @Query(countQuery = "SELECT COUNT(*) FROM author", nativeQuery = true)
+    List<Author> fetchAllSortedNative(int age, Pageable pageable);
+    
     @Query(nativeQuery = true)
     List<AuthorNameAge> fetchNameAndAge();
 }

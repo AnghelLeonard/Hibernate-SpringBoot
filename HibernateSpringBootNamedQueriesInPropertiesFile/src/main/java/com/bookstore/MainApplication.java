@@ -42,6 +42,16 @@ public class MainApplication {
             System.out.println("\nFind author by name and age:");
             Author authorNameAge = bookstoreService.fetchAuthorByNameAndAge();
             System.out.println(authorNameAge);
+            
+            
+            
+            
+            
+            
+            
+            System.out.println("\nFind all authors order by name ascending (via Sort) (native):");
+            List<Author> authorsSortedNative = bookstoreService.fetchAllAuthorsSortedNative();
+            authorsSortedNative.forEach(System.out::println);
 
             System.out.println("\nFind all names and ages:");
             List<AuthorNameAge> namesAndAges = bookstoreService.fetchAuthorsNamesAndAges();

@@ -25,18 +25,29 @@ public class BookstoreService {
     
     public List<Author> fetchAllAuthorsSorted() {
 
-        return authorRepository.fetchAllSorted(new Sort(Sort.Direction.ASC, "name"));
+        return authorRepository.fetchAllSorted(30, Sort.by(Sort.Direction.ASC, "name"));
     }
     
     public Page<Author> fetchAuthorsPageDesc() {
 
-        return authorRepository.fetchPageDesc(
-                PageRequest.of(0, 2, new Sort(Sort.Direction.DESC, "name")));
+        return authorRepository.fetchPageDesc(30, 
+                PageRequest.of(0, 2, Sort.by(Sort.Direction.DESC, "name")));
     }
     
     public Author fetchAuthorByNameAndAge() {
+        
         return authorRepository.fetchByNameAndAge("Joana Nimar", 34);
-    }       
+    }   
+
+    
+    
+    
+    
+    public List<Author> fetchAllAuthorsSortedNative() {
+
+        return authorRepository.fetchAllSortedNative(30, 
+                PageRequest.of(0, 2, Sort.by(Sort.Direction.DESC, "name")));
+    }
     
     public List<AuthorNameAge> fetchAuthorsNamesAndAges() {
 
