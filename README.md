@@ -3646,7 +3646,7 @@ This kind of checks or constraints are easy to implement via database triggers. 
   
 **Description:** JPA named (native) queries are commonly written via `@NamedQuery` and `@NamedNativeQuery` annotations in entity classes. Spring Data allows us to write our named (native) queries in a typical `*.properties` file inside the `META-INF` folder of your classpath. This way, we avoid modifying our entities. This application shows you how to do it.
 
-**Warning:** Cannot use native queries with dynamic sorting (`Sort`). Nevertheless, using `Sort` in `Pageable` works fine.
+**Warning:** Cannot use native queries with dynamic sorting (`Sort`). Nevertheless, using `Sort` in `Pageable` works fine. At least this is how it behave in Spring Boot 2.2.2.
  
 **Key points:**
 - define the named (native) queries in a file, `META-INF/jpa-named-queries.properties`
@@ -3666,9 +3666,9 @@ This kind of checks or constraints are easy to implement via database triggers. 
 
 249. **[How To Use JPA Named Queries Via Annotations](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNamedQueriesViaAnnotations)**
   
-**Description:** JPA named (native) queries are commonly written via `@NamedQuery` and `@NamedNativeQuery` annotations in entity classes.  This application shows you how to do it. But, keep in mind that dynamic sorting (`Sort`) and pagination via `Pageable` doesn't work at full capacity in this approach. More precisely, `Sort` will be ignored and `Pageable` will not trigger `SELECT COUNT` if `WHERE` is used. Using `countQuery` is ignored as well. At least this is how it behave in Spring Boot 2.2.2.
+**Description:** JPA named (native) queries are commonly written via `@NamedQuery` and `@NamedNativeQuery` annotations in entity classes.  This application shows you how to do it. 
 
-The best approach that supports dynamic sorting, pagination and slicing relies on using a [properties](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNamedQueriesInPropertiesFile) file for listing the named (native) queries.
+**Warning:** Cannot use native queries with dynamic sorting (`Sort`). Using `Sort` in `Pageable` is ignored. At least this is how it behave in Spring Boot 2.2.2. Better rely on using a [properties](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNamedQueriesInPropertiesFile) file for listing the named (native) queries. In this case, `Sort` in `Pageable` is not ignored and you don't need to modify/pollute entitites.
  
 **Key points:**
 - use `@NamedQuery` and `@NamedNativeQuery` annotations in entity classes
