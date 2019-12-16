@@ -1,9 +1,9 @@
-**[How To Use JPA Named Queries Via a Properties File](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNamedQueriesInPropertiesFile)**
+**[How To Use JPA Named Queries Via Annotations](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNamedQueriesViaAnnotations)**
   
-**Description:** JPA named (native) queries are commonly written via `@NamedQuery` and `@NamedNativeQuery` annotations in entity classes. Spring Data allows us to write our named (native) queries in a typical `*.properties` file inside the `META-INF` folder of your classpath. This way, we avoid modifying our entities. This application shows you how to do it.
+**Description:** JPA named (native) queries are commonly written via `@NamedQuery` and `@NamedNativeQuery` annotations in entity classes.  This application shows you how to do it. But, keep in mind that dynamic sorting (`Sort`) and pagination via `Pageable` doesn't work in this approach. The best approach that supports dynamic sorting, pagination and slicing relies on using a [properties](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootNamedQueriesInPropertiesFile) file for listing the named (native) queries.
  
 **Key points:**
-- define the named (native) queries in a file, `META-INF/jpa-named-queries.properties`
+- use `@NamedQuery` and `@NamedNativeQuery` annotations in entity classes
 - follow the Spring `{EntityName}.{RepositoryMethodName}` naming convention for a quick and slim implementation
 
 -----------------------------------------------------------------------------------------------------------------------    
