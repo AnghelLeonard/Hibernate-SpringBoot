@@ -1,6 +1,5 @@
 package com.bookstore;
 
-import com.bookstore.dto.AuthorNameAge;
 import java.util.List;
 import com.bookstore.service.BookstoreService;
 import org.springframework.boot.ApplicationRunner;
@@ -9,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import com.bookstore.entity.Author;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Slice;
 
 @SpringBootApplication
 public class MainApplication {
@@ -27,38 +27,81 @@ public class MainApplication {
     public ApplicationRunner init() {
         return args -> {
 
-            System.out.println("Find all authors order by name descending:");
-            List<Author> authorsDesc = bookstoreService.fetchAllAuthorsDesc();
-            authorsDesc.forEach(System.out::println);
+            System.out.println("\n--------------------------------------");
+            System.out.println("Calling named queries");
+            System.out.println("--------------------------------------\n");
 
-            System.out.println("\nFind all authors order by name ascending (via Sort):");
-            List<Author> authorsSorted = bookstoreService.fetchAllAuthorsSorted();
-            authorsSorted.forEach(System.out::println);
-
-            System.out.println("\nFind a page of authors order by name descending:");
-            Page<Author> pageOfAuthors = bookstoreService.fetchAuthorsPageDesc();
-            pageOfAuthors.getContent().forEach(System.out::println);
+            System.out.println("Find all authors:");
+            List<Author> allAuthors = bookstoreService.fetchAllAuthors();
+            allAuthors.forEach(System.out::println);
 
             System.out.println("\nFind author by name and age:");
             Author authorNameAge = bookstoreService.fetchAuthorByNameAndAge();
             System.out.println(authorNameAge);
-            
-            
-            
-            
-            
-            
-            
-            System.out.println("\nFind all authors order by name ascending (via Sort) (native):");
-            List<Author> authorsSortedNative = bookstoreService.fetchAllAuthorsSortedNative();
-            authorsSortedNative.forEach(System.out::println);
 
-            System.out.println("\nFind all names and ages:");
-            List<AuthorNameAge> namesAndAges = bookstoreService.fetchAuthorsNamesAndAges();
-            for (AuthorNameAge author : namesAndAges) {
-                System.out.println("Author name: " + author.getName()
-                        + " | Age: " + author.getAge());
-            }
+            System.out.println("\nFind authors ordered descending by name via Sort:");
+            List<Author> sortedAuthors = bookstoreService.fetchAuthorsViaSort();
+            sortedAuthors.forEach(System.out::println);
+
+            System.out.println("\nFind authors older than 30 ordered descending by name via Sort:");
+            List<Author> sortedWhereAuthors = bookstoreService.fetchAuthorsViaSortWhere();
+            sortedWhereAuthors.forEach(System.out::println);
+
+            System.out.println("\nFind page of authors ordered descending by name via Pageable:");
+            Page<Author> pageAuthors = bookstoreService.fetchAuthorsPageSort();
+            pageAuthors.forEach(System.out::println);
+
+            System.out.println("\nFind page of authors older than 30 ordered descending by name via Pageable:");
+            Page<Author> pageWhereAuthors = bookstoreService.fetchAuthorsPageSortWhere();
+            pageWhereAuthors.forEach(System.out::println);
+
+            System.out.println("\nFind slice of authors ordered descending by name via Pageable:");
+            Slice<Author> sliceAuthors = bookstoreService.fetchAuthorsSliceSort();
+            sliceAuthors.forEach(System.out::println);
+
+            System.out.println("\nFind slice of authors older than 30 ordered descending by name via Pageable:");
+            Slice<Author> sliceWhereAuthors = bookstoreService.fetchAuthorsSliceSortWhere();
+            sliceWhereAuthors.forEach(System.out::println);
+
+            System.out.println("\n--------------------------------------");
+            System.out.println("Calling named native queries");
+            System.out.println("--------------------------------------");
+
+            System.out.println("Find all authors (native):");
+            List<Author> allAuthorsNative = bookstoreService.fetchAllAuthorsNative();
+            allAuthorsNative.forEach(System.out::println);
+
+            System.out.println("\nFind author by name and age (native):");
+            Author authorNameAgeNative = bookstoreService.fetchAuthorByNameAndAgeNative();
+            System.out.println(authorNameAgeNative);
+
+            /* causes exception: InvalidJpaQueryMethodException: Cannot use native queries with dynamic sorting
+            System.out.println("\nFind authors ordered descending by name via Sort (native):");
+            List<Author> sortedAuthorsNative = bookstoreService.fetchAuthorsViaSortNative();
+            sortedAuthorsNative.forEach(System.out::println);
+             */
+            
+            /* causes exception: InvalidJpaQueryMethodException: Cannot use native queries with dynamic sorting
+            System.out.println("\nFind authors older than 30 ordered descending by name via Sort (native):");
+            List<Author> sortedWhereAuthorsNative = bookstoreService.fetchAuthorsViaSortWhereNative();
+            sortedWhereAuthorsNative.forEach(System.out::println);
+             */
+            
+            System.out.println("\nFind page of authors ordered descending by name via Pageable (native):");
+            Page<Author> pageAuthorsNative = bookstoreService.fetchAuthorsPageSortNative();
+            pageAuthorsNative.forEach(System.out::println);
+
+            System.out.println("\nFind page of authors older than 30 ordered descending by name via Pageable (native):");
+            Page<Author> pageWhereAuthorsNative = bookstoreService.fetchAuthorsPageSortWhereNative();
+            pageWhereAuthorsNative.forEach(System.out::println);
+
+            System.out.println("\nFind slice of authors ordered descending by name via Pageable (native):");
+            Slice<Author> sliceAuthorsNative = bookstoreService.fetchAuthorsSliceSortNative();
+            sliceAuthorsNative.forEach(System.out::println);
+
+            System.out.println("\nFind slice of authors older than 30 ordered descending by name via Pageable (native):");
+            Slice<Author> sliceWhereAuthorsNative = bookstoreService.fetchAuthorsSliceSortWhereNative();
+            sliceWhereAuthorsNative.forEach(System.out::println);
         };
     }
 }
