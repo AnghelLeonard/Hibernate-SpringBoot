@@ -3622,7 +3622,7 @@ This kind of checks or constraints are easy to implement via database triggers. 
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-245. **[How To Use JPA Named Queries `@NamedQuery` And Spring Projection (DTO)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSpringProjectionNamedQuery)**
+245. **[How To Use JPA Named Queries `@NamedQuery` And Spring Projection (DTO)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSpringProjectionAnnotatedNamedQuery)**
  
 **Description:** This application is an example of combining JPA named queries `@NamedQuery` and Spring projections (DTO). For queries names we use the `{EntityName}.{RepositoryMethodName}` naming convention. This convention allows us to create in the repository interface methods with the same name as of named query.
  
@@ -3632,7 +3632,7 @@ This kind of checks or constraints are easy to implement via database triggers. 
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-246. **[How To Use JPA Named Native Queries `@NamedNativeQuery` And Spring Projection (DTO)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSpringProjectionNamedNativeQuery)**
+246. **[How To Use JPA Named Native Queries `@NamedNativeQuery` And Spring Projection (DTO)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoSpringProjectionAnnotatedNamedNativeQuery)**
  
 **Description:** This application is an example of combining JPA named native queries `@NamedNativeQuery` and Spring projections (DTO). For queries names we use the `{EntityName}.{RepositoryMethodName}` naming convention. This convention allows us to create in the repository interface methods with the same name as of named native query.
  
