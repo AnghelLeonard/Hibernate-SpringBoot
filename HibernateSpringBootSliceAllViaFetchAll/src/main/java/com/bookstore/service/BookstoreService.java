@@ -20,12 +20,12 @@ public class BookstoreService {
     public Slice<Author> fetchNextSlice(int page, int size) {
 
         return authorRepository.fetchAll(PageRequest.of(page, size,
-                new Sort(Sort.Direction.ASC, "age")));
+                Sort.by(Sort.Direction.ASC, "age")));
     }
 
     public Slice<AuthorDto> fetchNextSliceDto(int page, int size) {
 
         return authorRepository.fetchAllDto(PageRequest.of(page, size,
-                new Sort(Sort.Direction.ASC, "age")));
+                Sort.by(Sort.Direction.ASC, "age")));
     }
 }
