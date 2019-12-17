@@ -28,13 +28,13 @@ public class BookstoreService {
             @Override
             protected void doInTransactionWithoutResult(TransactionStatus status) {
                 List<Book> books = bookRepository
-                        .findTop3ByStatus(BookStatus.PENDING, new Sort(Sort.Direction.ASC, "id"));
+                        .findTop3ByStatus(BookStatus.PENDING, Sort.by(Sort.Direction.ASC, "id"));
 
                 template.execute(new TransactionCallbackWithoutResult() {
                     @Override
                     protected void doInTransactionWithoutResult(TransactionStatus status) {
                         List<Book> books = bookRepository
-                                .findTop3ByStatus(BookStatus.PENDING, new Sort(Sort.Direction.ASC, "id"));
+                                .findTop3ByStatus(BookStatus.PENDING, Sort.by(Sort.Direction.ASC, "id"));
                         System.out.println("Second transaction: " + books);
                     }
                 });
