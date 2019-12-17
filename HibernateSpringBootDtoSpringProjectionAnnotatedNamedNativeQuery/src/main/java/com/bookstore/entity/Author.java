@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQuery;
-
+ 
 @NamedNativeQuery(
         name = "Author.fetchName",
         query = "SELECT name FROM author"
