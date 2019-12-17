@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-mappings version="2.0" xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
+        http://java.sun.com/xml/ns/persistence/orm_2_0.xsd ">
+        
+    <!-- Find the names of authors -->
+    <named-native-query name="Author.fetchName">
+        <query>SELECT name FROM author</query>
+    </named-native-query>
+    
+    <!-- Find the names and ages of authors -->
+    <named-native-query name="Author.fetchNameAndAge"
+                        result-class="com.bookstore.entity.Author"
+                        result-set-mapping="AuthorDtoMapping">
+        <query>SELECT age, name FROM author</query>
+    </named-native-query>
+    
+    <sql-result-set-mapping name="AuthorDtoMapping">
+        <constructor-result target-class="com.bookstore.dto.AuthorDto">
+            <column name="name"/>
+            <column name="age" type="java.lang.Integer"/>        
+        </constructor-result>
+    </sql-result-set-mapping>
+</entity-mappings>
