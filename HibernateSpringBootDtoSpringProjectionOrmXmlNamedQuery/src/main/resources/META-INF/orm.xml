@@ -6,12 +6,12 @@
         http://java.sun.com/xml/ns/persistence/orm_2_0.xsd ">
         
     <!-- Find the names of authors -->
-    <named-native-query name="Author.fetchName">
+    <named-query name="Author.fetchName">
         <query>SELECT a.name FROM Author a</query>
-    </named-native-query>
+    </named-query>
     
     <!-- Find the names and ages of authors -->
-    <named-native-query name="Author.fetchNameAndAge">
+    <named-query name="Author.fetchNameAndAge">
         <query>SELECT a.age AS age, a.name AS name FROM Author a</query>
-    </named-native-query>
+    </named-query>
 </entity-mappings>
