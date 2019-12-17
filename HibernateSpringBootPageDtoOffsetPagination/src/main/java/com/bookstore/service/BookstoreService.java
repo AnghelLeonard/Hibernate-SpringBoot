@@ -20,7 +20,7 @@ public class BookstoreService {
     }
 
     public Page<AuthorDto> fetchNextPageNative(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "age"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "age"));
 
         List<AuthorDto> authors = authorRepository.fetchAllNative(pageable);
         Page<AuthorDto> pageOfAuthors = new PageImpl(authors, pageable,
@@ -30,7 +30,7 @@ public class BookstoreService {
     }
 
     public Page<AuthorDto> fetchNextPageJpql(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "age"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "age"));
 
         List<AuthorDto> authors = authorRepository.fetchAllJpql(pageable);
         Page<AuthorDto> pageOfAuthors = new PageImpl(authors, pageable,
