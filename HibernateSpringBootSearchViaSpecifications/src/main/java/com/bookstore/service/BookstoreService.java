@@ -50,7 +50,7 @@ public class BookstoreService {
                 .build();
 
         Pageable pageable = PageRequest.of(page, size,
-                new Sort(Sort.Direction.ASC, "title"));
+                Sort.by(Sort.Direction.ASC, "title"));
 
         Page<Book> books = bookRepository.findAll(specBook, pageable);
 
