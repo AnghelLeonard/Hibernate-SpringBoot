@@ -25,7 +25,7 @@ public class BookstoreService {
     public Page<Author> fetchViaJoinFetchSpecification(int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size,
-                new Sort(Sort.Direction.ASC, "name"));
+                Sort.by(Sort.Direction.ASC, "name"));
 
         Page<Author> pageOfAuthors = authorRepository
                 .findAll(new JoinFetchSpecification("Anthology"), pageable);
@@ -37,7 +37,7 @@ public class BookstoreService {
     public Page<Author> fetchViaJoinFetchInIdsSpecification(int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size,
-                new Sort(Sort.Direction.ASC, "name"));
+                Sort.by(Sort.Direction.ASC, "name"));
 
         Page<Long> pageOfIds = authorRepository.fetchPageOfIdsByGenre("Anthology", pageable);
         List<Author> listOfAuthors = authorRepository.findAll(
