@@ -24,7 +24,7 @@ public class BookstoreService {
     @Transactional(readOnly = true)
     public Page<AuthorBookDto> fetchPageOfAuthorsWithBooksDtoByGenre(int page, int size) {
 
-        Pageable pageable = PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "name"));
         Page<AuthorBookDto> pageOfAuthors = authorRepository.fetchPageOfDto("Anthology", pageable);
 
         return pageOfAuthors;
@@ -33,7 +33,7 @@ public class BookstoreService {
     @Transactional(readOnly = true)
     public Slice<AuthorBookDto> fetchSliceOfAuthorsWithBooksDtoByGenre(int page, int size) {
 
-        Pageable pageable = PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "name"));
         Slice<AuthorBookDto> sliceOfAuthors = authorRepository.fetchSliceOfDto("Anthology", pageable);
 
         return sliceOfAuthors;
@@ -42,7 +42,7 @@ public class BookstoreService {
     @Transactional(readOnly = true)
     public List<AuthorBookDto> fetchListOfAuthorsWithBooksDtoByGenre(int page, int size) {
 
-        Pageable pageable = PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "name"));
         List<AuthorBookDto> listOfAuthors = authorRepository.fetchListOfDto("Anthology", pageable);
 
         return listOfAuthors;
@@ -51,7 +51,7 @@ public class BookstoreService {
     @Transactional(readOnly = true)
     public Page<AuthorBookDto> fetchPageOfAuthorsWithBooksDtoByGenreNative(int page, int size) {
 
-        Pageable pageable = PageRequest.of(page, size, new Sort(Sort.Direction.ASC, "name"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "name"));
 
         List<AuthorBookDto> listOfAuthors
                 = authorRepository.fetchListOfDtoNative("Anthology", pageable);
