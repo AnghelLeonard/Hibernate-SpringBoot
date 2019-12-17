@@ -46,7 +46,7 @@ public class BookstoreService {
 
     public void fetchPageBooksOfAuthorById() {
         Page<Book> books = bookRepository.fetchPageBooksOfAuthorById(4L,
-                PageRequest.of(0, 2, new Sort(Sort.Direction.ASC, "title")));
+                PageRequest.of(0, 2, Sort.by(Sort.Direction.ASC, "title")));
 
         books.get().forEach(System.out::println);
     }
