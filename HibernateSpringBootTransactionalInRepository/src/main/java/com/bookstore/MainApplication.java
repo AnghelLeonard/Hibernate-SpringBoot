@@ -22,8 +22,7 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-
-            bookstoreService.newAuthor();
+            bookstoreService.newAuthors();
             System.out.println("=========================================");
             System.out.println("=========================================");
             System.out.println("=========================================");
