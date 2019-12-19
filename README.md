@@ -3734,3 +3734,17 @@ This kind of checks or constraints are easy to implement via database triggers. 
  
 **Key points:**
 - use `<named-native-query/>` and `<sql-result-set-mapping/>` to map the native query to `AuthorDto` class
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+255. **[How To Use Spring Projections(DTO) And Cross Joins](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaCrossJoins)**
+
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaCrossJoins/DTO%20via%20cross%20joins.png)
+
+**Description:** This application is a proof of concept for using Spring Projections(DTO) and cross joins written via JPQL and native SQL (for MySQL).
+
+**Key points:**
+- define two entities (e.g., `Book` and `Format` 
+- populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
+- write interfaces (Spring projections) that contains getters for the columns that should be fetched from the database (e.g., check `BookTitleAndFormatType.java`)
+- write cross joins queries using JPQL/SQL
