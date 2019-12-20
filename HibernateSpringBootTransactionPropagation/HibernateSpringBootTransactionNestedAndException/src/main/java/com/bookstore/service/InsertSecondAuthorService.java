@@ -27,7 +27,7 @@ public class InsertSecondAuthorService {
         Author author = new Author();
         author.setName("Alicia Tom");
 
-        authorRepository.saveAndFlush(author); // I even flush the insert!
+        authorRepository.save(author);
         
         if(new Random().nextBoolean()) {
             throw new RuntimeException("DummyException");
