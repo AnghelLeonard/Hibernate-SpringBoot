@@ -21,6 +21,6 @@ public class InsertFirstAuthorService {
         Author author = new Author();
         author.setName("Joana Nimar");
 
-        authorRepository.saveAndFlush(author); // I even flush the insert!        
+        authorRepository.saveAndFlush(author); 
     }
 }
