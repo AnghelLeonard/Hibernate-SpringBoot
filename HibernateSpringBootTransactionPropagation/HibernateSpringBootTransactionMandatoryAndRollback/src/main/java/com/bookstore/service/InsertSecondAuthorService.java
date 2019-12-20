@@ -22,7 +22,7 @@ public class InsertSecondAuthorService {
         Author author = new Author();
         author.setName("Alicia Tom");
 
-        authorRepository.saveAndFlush(author); // I even flush the insert!
+        authorRepository.saveAndFlush(author); 
 
         if (new Random().nextBoolean()) {
             throw new RuntimeException("DummyException: this should cause rollback of both inserts!");
