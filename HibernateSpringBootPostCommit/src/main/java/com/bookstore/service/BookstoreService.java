@@ -33,7 +33,7 @@ public class BookstoreService {
                 // return to pool connection until this code is done
                 // So, avoid time-consuming tasks here                 
                 try {
-                    // This sleep() is just a prove that the connection is not released
+                    // This sleep() is just proof that the connection is not released
                     // Check HikariCP log ()
                     Thread.sleep(60 * 1000);
                 } catch (InterruptedException ex) {
