@@ -26,7 +26,7 @@ public class BookstoreService {
 
     public AuthorDto fetchAuthorById() {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withProcedureName("FETCH_AUTHOR_BY_ID");
+                .withProcedureName("FETCH_NICKNAME_AND_AGE_BY_ID");
 
         Map<String, Object> author = simpleJdbcCall.execute(Map.of("p_id", 1));
 

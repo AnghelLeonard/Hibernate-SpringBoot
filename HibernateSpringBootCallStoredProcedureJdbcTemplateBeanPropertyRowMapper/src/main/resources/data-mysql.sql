@@ -6,9 +6,9 @@ INSERT INTO author (age, name, genre, nickname, id) VALUES (38, "Alicia Tom", "A
 INSERT INTO author (age, name, genre, nickname, id) VALUES (56, "Katy Loin", "Anthology", "KL", 6) ^;
 
 DROP PROCEDURE IF EXISTS FETCH_AUTHOR_BY_GENRE ^; 
-DROP PROCEDURE IF EXISTS FETCH_AUTHOR_BY_ID ^; 
+DROP PROCEDURE IF EXISTS FETCH_NICKNAME_AND_AGE_BY_ID ^; 
 
-CREATE DEFINER=root@localhost PROCEDURE FETCH_AUTHOR_BY_ID(
+CREATE DEFINER=root@localhost PROCEDURE FETCH_NICKNAME_AND_AGE_BY_ID(
   IN p_id INT(10), OUT o_nickname CHAR(20), OUT o_age INT(3))
 BEGIN  
   SELECT nickname, age INTO o_nickname, o_age FROM author WHERE id = p_id;    
