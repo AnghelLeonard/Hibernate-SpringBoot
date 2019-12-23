@@ -1,6 +1,7 @@
 package com.bookstore.service;
 
 import com.bookstore.dto.AuthorDto;
+import com.bookstore.dto.AuthorNicknameAndAge;
 import com.bookstore.entity.Author;
 import com.bookstore.repository.AuthorRepository;
 import java.util.List;
@@ -9,18 +10,26 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BookstoreService {
-
+    
     private final AuthorRepository authorRepository;
-
+    
     public BookstoreService(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
-
+    
     public void fetchAnthologyAuthors() {
         List<Author> authors = authorRepository.fetchByGenre("Anthology");
         System.out.println("Result: " + authors);
     }
-
+    
+    public void fetchAnthologyAuthorsNameAndAgeDto() {
+        List<AuthorNicknameAndAge> authorsDto
+                = authorRepository.fetchNicknameAndAgeByGenreDto("Anthology");
+        
+        System.out.println("Result: ");
+        authorsDto.forEach(a -> System.out.println(a.getNickname() + ", " + a.getAge()));        
+    }
+    
     public void fetchAnthologyAuthorsNameAndAge() {
         List<Object[]> authorsArray = authorRepository.fetchNicknameAndAgeByGenre("Anthology");
         List<AuthorDto> authors = authorsArray.stream()
@@ -30,5 +39,5 @@ public class BookstoreService {
         )).collect(Collectors.toList());
         
         System.out.println("Result: " + authors);
-    }
+    }    
 }

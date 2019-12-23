@@ -22,7 +22,13 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
+            System.out.println("Call fetchAnthologyAuthors:");
             bookstoreService.fetchAnthologyAuthors();
+            
+            System.out.println("\n\nCall fetchAnthologyAuthorsNameAndAgeDto:");
+            bookstoreService.fetchAnthologyAuthorsNameAndAgeDto();
+            
+            System.out.println("\n\nCall fetchAnthologyAuthorsNameAndAge:");
             bookstoreService.fetchAnthologyAuthorsNameAndAge();
         };
     }
