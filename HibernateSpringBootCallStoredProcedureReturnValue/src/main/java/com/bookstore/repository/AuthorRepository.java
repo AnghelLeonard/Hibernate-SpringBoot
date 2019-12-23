@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface AuthorRepository extends JpaRepository<Author, Long> {
-
+    
     @Transactional
     @Procedure(name = "CountByGenreProcedure")
-    Integer countByGenre(@Param("p_genre") String genre);
+    Integer countByGenre(@Param("p_genre") String genre);          
 }
