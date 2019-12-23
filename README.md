@@ -2596,7 +2596,9 @@ Note: Using SQL functions in `SELECT` part (not in `WHERE` part) of the query ca
 ----------------------------------------------------------------------------------------------------------------------
 
 163. **[Calling Stored Procedure That Returns A Result Set Via `JdbcTemplate`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCallStoredProcedureJdbcTemplate)**
- 
+
+**Note:** Most probably you'll like to process the result set via `BeanPropertyRowMapper` as [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCallStoredProcedureJdbcTemplateBeanPropertyRowMapper). This is less verbose than the approach used here. Nevertheless, this approach is useful to understand how the result set looks like.
+
 **Description:** This application is an example of calling a MySQL stored procedure that returns a result set via `JdbcTemplate`.
  
 **Key points:**
@@ -3748,3 +3750,12 @@ This kind of checks or constraints are easy to implement via database triggers. 
 - populate the database with some test data (e.g., check the file `resources/data-mysql.sql`)
 - write interfaces (Spring projections) that contains getters for the columns that should be fetched from the database (e.g., check `BookTitleAndFormatType.java`)
 - write cross joins queries using JPQL/SQL
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+256. **[Calling Stored Procedure That Returns A Result Set Via `JdbcTemplate` And `BeanPropertyRowMapper`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCallStoredProcedureJdbcTemplateBeanPropertyRowMapper)**
+ 
+**Description:** This application is an example of calling a MySQL stored procedure that returns a result set via `JdbcTemplate` and `BeanPropertyRowMapper`.
+ 
+**Key points:**
+- rely on `JdbcTemplate`, `SimpleJdbcCall` and `BeanPropertyRowMapper`
