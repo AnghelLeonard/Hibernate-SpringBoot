@@ -1,6 +1,8 @@
 package com.bookstore;
 
+import com.bookstore.entity.Author;
 import com.bookstore.service.BookstoreService;
+import java.util.List;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +24,13 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            bookstoreService.fetchAnthologyAuthors();
+            List<Author> authors = bookstoreService.fetchAnthologyAuthors();
+            System.out.println(authors);
+            
+            System.out.println("\n--------------------------");
+            
+            AuthorDto authorDto = bookstoreService.fetchAuthorById();
+            System.out.println(authorDto);
         };
     }
 }
