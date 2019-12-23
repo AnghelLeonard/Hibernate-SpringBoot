@@ -1,6 +1,6 @@
 package com.bookstore.service;
 
-import com.bookstore.AuthorDto;
+import com.bookstore.dto.AuthorDto;
 import com.bookstore.entity.Author;
 import java.util.List;
 import java.util.Map;

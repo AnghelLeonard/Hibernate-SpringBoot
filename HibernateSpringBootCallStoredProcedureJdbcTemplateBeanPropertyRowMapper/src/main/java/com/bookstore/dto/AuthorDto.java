@@ -1,4 +1,4 @@
-package com.bookstore;
+package com.bookstore.dto;
 
 import java.io.Serializable;
 
