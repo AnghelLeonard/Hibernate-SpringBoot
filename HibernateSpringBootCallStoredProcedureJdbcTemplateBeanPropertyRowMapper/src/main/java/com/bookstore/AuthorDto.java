@@ -10,12 +10,7 @@ public class AuthorDto implements Serializable {
     private int age;
 
     public AuthorDto() {
-    }
-
-    public AuthorDto(String nickname, int age) {
-        this.nickname = nickname;
-        this.age = age;
-    }
+    }    
 
     public String getNickname() {
         return nickname;

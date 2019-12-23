@@ -24,17 +24,15 @@ public class BookstoreService {
         jdbcTemplate.setResultsMapCaseInsensitive(true);
     }
 
-    public AuthorDto fetchAuthorById() {
+    public List<AuthorDto> fetchNicknameAndAgeByGenre() {
         SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withProcedureName("FETCH_NICKNAME_AND_AGE_BY_ID");
+                .withProcedureName("FETCH_NICKNAME_AND_AGE_BY_GENRE")
+                .returningResultSet("AuthorResultSet",
+                        BeanPropertyRowMapper.newInstance(AuthorDto.class));
 
-        Map<String, Object> author = simpleJdbcCall.execute(Map.of("p_id", 1));
-
-        AuthorDto authorDto = new AuthorDto();
-        authorDto.setNickname((String) author.get("o_nickname"));
-        authorDto.setAge((int) author.get("o_age"));
-
-        return authorDto;
+        Map<String, Object> authors = simpleJdbcCall.execute(Map.of("p_genre", "Anthology"));
+        
+        return (List<AuthorDto>) authors.get("AuthorResultSet");
     }
 
     public List<Author> fetchAnthologyAuthors() {
