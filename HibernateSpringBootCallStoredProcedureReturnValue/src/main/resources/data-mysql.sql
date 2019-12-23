@@ -9,5 +9,5 @@ DROP PROCEDURE IF EXISTS COUNT_AUTHOR_BY_GENRE ^;
 
 CREATE DEFINER=root@localhost PROCEDURE COUNT_AUTHOR_BY_GENRE(IN p_genre CHAR(20), OUT p_count INT)
 BEGIN  
-  SELECT COUNT(*) INTO p_count FROM AUTHOR WHERE GENRE = p_genre;    
+  SELECT COUNT(*) INTO p_count FROM author WHERE genre = p_genre;    
 END ^;
