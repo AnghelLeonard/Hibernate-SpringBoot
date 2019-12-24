@@ -33,6 +33,10 @@ public class MainApplication {
 
             List<AuthorDto> authorsDto = bookstoreService.fetchNicknameAndAgeByGenre();
             System.out.println(authorsDto);
+            
+            System.out.println("\n--------------------------");
+            
+            bookstoreService.fetchNicknameGenreAndAgeByGenre();
 
             System.out.println("\n--------------------------");
 

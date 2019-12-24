@@ -1,6 +1,8 @@
 package com.bookstore.service;
 
 import com.bookstore.dto.AuthorDto;
+import com.bookstore.dto.NicknameAndAgeDto;
+import com.bookstore.dto.GenreAndAgeDto;
 import com.bookstore.entity.Author;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +35,23 @@ public class BookstoreService {
         Map<String, Object> authors = simpleJdbcCall.execute(Map.of("p_genre", "Anthology"));
 
         return (List<AuthorDto>) authors.get("AuthorResultSet");
+    }
+    
+    public void fetchNicknameGenreAndAgeByGenre() {
+        SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+                .withProcedureName("FETCH_NICKNAME_GENRE_AND_AGE_BY_GENRE")
+                .returningResultSet("#result-set-1",
+                        BeanPropertyRowMapper.newInstance(NicknameAndAgeDto.class))
+                .returningResultSet("#result-set-2",
+                        BeanPropertyRowMapper.newInstance(GenreAndAgeDto.class));
+        
+        Map<String, Object> authors = simpleJdbcCall.execute(Map.of("p_genre", "Anthology"));
+
+        List<NicknameAndAgeDto> nicknameAndAge = (List<NicknameAndAgeDto>) authors.get("#result-set-1");
+        List<GenreAndAgeDto> genreAndAge = (List<GenreAndAgeDto>) authors.get("#result-set-2");
+        
+        System.out.println("Nickname and age:" + nicknameAndAge);
+        System.out.println("Genre and age:" + genreAndAge);
     }
 
     public List<Author> fetchAnthologyAuthors() {
