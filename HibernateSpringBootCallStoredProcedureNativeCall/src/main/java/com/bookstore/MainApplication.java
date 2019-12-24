@@ -28,7 +28,7 @@ public class MainApplication {
             System.out.println("\n\nCall fetchAnthologyAuthorsNameAndAgeDto:");
             bookstoreService.fetchAnthologyAuthorsNameAndAgeDto();
             
-            System.out.println("\n\nCall fetchAnthologyAuthorsNameAndAge:");
+            System.out.println("\n\nCall fetchAnthologyAuthorsNameAndAgeProj:");
             bookstoreService.fetchAnthologyAuthorsNameAndAgeProj();
         };
     }

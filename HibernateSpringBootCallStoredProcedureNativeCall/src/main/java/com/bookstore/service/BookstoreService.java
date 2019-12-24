@@ -10,34 +10,34 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class BookstoreService {
-    
+
     private final AuthorRepository authorRepository;
-    
+
     public BookstoreService(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
-    
+
     public void fetchAnthologyAuthors() {
         List<Author> authors = authorRepository.fetchByGenre("Anthology");
         System.out.println("Result: " + authors);
     }
-    
+
     public void fetchAnthologyAuthorsNameAndAgeDto() {
-        List<AuthorNicknameAndAge> authorsDto
-                = authorRepository.fetchNicknameAndAgeByGenreDto("Anthology");
-        
-        System.out.println("Result: ");
-        authorsDto.forEach(a -> System.out.println(a.getNickname() + ", " + a.getAge()));        
-    }
-    
-    public void fetchAnthologyAuthorsNameAndAgeProj() {
-        List<Object[]> authorsArray = authorRepository.fetchNicknameAndAgeByGenreProj("Anthology");
+        List<Object[]> authorsArray = authorRepository.fetchNicknameAndAgeByGenreDto("Anthology");
         List<AuthorDto> authors = authorsArray.stream()
                 .map(result -> new AuthorDto(
                 (String) result[0],
                 (Integer) result[1]
         )).collect(Collectors.toList());
-        
+
         System.out.println("Result: " + authors);
-    }    
+    }
+
+    public void fetchAnthologyAuthorsNameAndAgeProj() {
+        List<AuthorNicknameAndAge> authorsDto
+                = authorRepository.fetchNicknameAndAgeByGenreProj("Anthology");
+
+        System.out.println("Result: ");
+        authorsDto.forEach(a -> System.out.println(a.getNickname() + ", " + a.getAge()));
+    }
 }

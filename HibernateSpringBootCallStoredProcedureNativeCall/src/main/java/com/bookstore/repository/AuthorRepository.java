@@ -17,8 +17,8 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     List<Author> fetchByGenre(@Param("p_genre") String genre);
 
     @Query(value = "{CALL FETCH_NICKNAME_AND_AGE_BY_GENRE (:p_genre)}", nativeQuery = true)
-    List<Object[]> fetchNicknameAndAgeByGenreProj(@Param("p_genre") String genre);
+    List<Object[]> fetchNicknameAndAgeByGenreDto(@Param("p_genre") String genre);
 
     @Query(value = "{CALL FETCH_NICKNAME_AND_AGE_BY_GENRE (:p_genre)}", nativeQuery = true)
-    List<AuthorNicknameAndAge> fetchNicknameAndAgeByGenreDto(@Param("p_genre") String genre);
+    List<AuthorNicknameAndAge> fetchNicknameAndAgeByGenreProj(@Param("p_genre") String genre);
 }
