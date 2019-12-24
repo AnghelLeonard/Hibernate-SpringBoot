@@ -12,37 +12,37 @@ import javax.persistence.PreUpdate;
 public class BookListener {
 
     @PrePersist
-    void onPrePersist(Book myEntity) {
-        System.out.println("MyEntityListener.onPrePersist(): " + myEntity);
+    void onPrePersist(Book book) {
+        System.out.println("BookListener.onPrePersist(): " + book);
     }
 
     @PostPersist
-    void onPostPersist(Book myEntity) {
-        System.out.println("MyEntityListener.onPostPersist(): " + myEntity);
+    void onPostPersist(Book book) {
+        System.out.println("BookListener.onPostPersist(): " + book);
     }
 
     @PostLoad
-    void onPostLoad(Book myEntity) {
-        System.out.println("MyEntityListener.onPostLoad(): " + myEntity);
+    void onPostLoad(Book book) {
+        System.out.println("BookListener.onPostLoad(): " + book);
     }
 
     @PreUpdate
-    void onPreUpdate(Book myEntity) {
-        System.out.println("MyEntityListener.onPreUpdate(): " + myEntity);
+    void onPreUpdate(Book book) {
+        System.out.println("BookListener.onPreUpdate(): " + book);
     }
 
     @PostUpdate
-    void onPostUpdate(Book myEntity) {
-        System.out.println("MyEntityListener.onPostUpdate(): " + myEntity);
+    void onPostUpdate(Book book) {
+        System.out.println("BookListener.onPostUpdate(): " + book);
     }
 
     @PreRemove
-    void onPreRemove(Book myEntity) {
-        System.out.println("MyEntityListener.onPreRemove(): " + myEntity);
+    void onPreRemove(Book book) {
+        System.out.println("BookListener.onPreRemove(): " + book);
     }
 
     @PostRemove
-    void onPostRemove(Book myEntity) {
-        System.out.println("MyEntityListener.onPostRemove(): " + myEntity);
+    void onPostRemove(Book book) {
+        System.out.println("BookListener.onPostRemove(): " + book);
     }
 }
