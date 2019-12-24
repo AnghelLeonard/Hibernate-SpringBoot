@@ -20,6 +20,7 @@ public class DaoImpl implements Dao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Override
     @Transactional
     public List<Author> fetchByGenre1(String genre) {
 
@@ -37,6 +38,7 @@ public class DaoImpl implements Dao {
         return storedProcedureResults;
     }
 
+    @Override
     @Transactional
     public List<Author> fetchByGenre2(String genre) {
 
@@ -56,6 +58,7 @@ public class DaoImpl implements Dao {
         return storedProcedureResults;
     }
 
+    @Override
     @Transactional
     public List<AuthorDto> fetchByGenre3(String genre) {
 
@@ -76,6 +79,7 @@ public class DaoImpl implements Dao {
         return storedProcedureResults;
     }
 
+    @Override
     @Transactional
     public List<AuthorDto> fetchByGenre4(String genre) {
 
