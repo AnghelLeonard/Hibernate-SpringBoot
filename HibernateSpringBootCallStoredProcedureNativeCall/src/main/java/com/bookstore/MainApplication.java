@@ -29,7 +29,7 @@ public class MainApplication {
             bookstoreService.fetchAnthologyAuthorsNameAndAgeDto();
             
             System.out.println("\n\nCall fetchAnthologyAuthorsNameAndAge:");
-            bookstoreService.fetchAnthologyAuthorsNameAndAge();
+            bookstoreService.fetchAnthologyAuthorsNameAndAgeProj();
         };
     }
 }

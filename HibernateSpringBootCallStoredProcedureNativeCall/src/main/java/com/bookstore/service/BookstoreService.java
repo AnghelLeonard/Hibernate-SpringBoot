@@ -30,8 +30,8 @@ public class BookstoreService {
         authorsDto.forEach(a -> System.out.println(a.getNickname() + ", " + a.getAge()));        
     }
     
-    public void fetchAnthologyAuthorsNameAndAge() {
-        List<Object[]> authorsArray = authorRepository.fetchNicknameAndAgeByGenre("Anthology");
+    public void fetchAnthologyAuthorsNameAndAgeProj() {
+        List<Object[]> authorsArray = authorRepository.fetchNicknameAndAgeByGenreProj("Anthology");
         List<AuthorDto> authors = authorsArray.stream()
                 .map(result -> new AuthorDto(
                 (String) result[0],
