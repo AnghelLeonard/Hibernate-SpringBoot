@@ -3771,3 +3771,17 @@ This kind of checks or constraints are easy to implement via database triggers. 
 - `BookListener` defines JPA callbacks (e.g., `@PrePersist`)
 - subclasses of the *base class* are mapped in tables that contains columns for the inherited attributes and for their own attibutes
 - when any entity that is a subclass of `Book` is persisted, loaded, updated, etc the corresponding JPA callbacks are called
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+258. **[Improper Usage Of `@Fetch(FetchMode.JOIN)` May Causes N+1 Issues](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootFetchJoinAndQueries)**
+
+**Note:** Let's assume three entities, `Author`, `Book` and `Publisher`. Between `Author` and `Book` there is a bidirectional-lazy `@OneToMany` association. Between `Author` and `Publisher` there is a unidirectional-lazy `@ManyToOne`. Between `Book` and `Publisher` there is no association.
+
+Now, we want to fetch an book by id (`BookRepository#findById()`), including its author, and the author's publisher. In such cases, using Hibernate fetch mode, `@Fetch(FetchMode.JOIN)` works as expected. Using `JOIN FETCH` or entity graph is also working as expected.
+
+Next, we want to fetch all books (`BookRepository#findAll()`), including its author, and the author's publisher. In such cases, using Hibernate fetch mode, `@Fetch(FetchMode.JOIN)` will cause N+1 issues. It will not trigger the expected `JOIN`. In this case, using `JOIN FETCH` or entity graph should be used.
+
+**Key points:**
+- using Hibernate fetch mode, `@Fetch(FetchMode.JOIN)` doesn't work for query-methods
+- Hibernate fetch mode, `@Fetch(FetchMode.JOIN)` works in cases that fetches the entity by id (primary key) like using `EntityManager#find()`, Spring Data, `findById()`, `findOne()`.
