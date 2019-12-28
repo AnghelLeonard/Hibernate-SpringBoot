@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BookRepositoryJoin extends JpaRepository<Book, Long>,
+public interface BookRepositoryFetchModeJoin extends JpaRepository<Book, Long>,
         JpaSpecificationExecutor<Book> {        
 }

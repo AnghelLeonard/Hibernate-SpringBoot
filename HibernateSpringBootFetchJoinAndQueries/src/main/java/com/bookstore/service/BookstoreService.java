@@ -5,28 +5,28 @@ import com.bookstore.repository.BookRepositoryEntityGraph;
 import static com.bookstore.specs.BookSpecs.isPriceGt35;
 import java.util.List;
 import org.springframework.stereotype.Service;
-import com.bookstore.repository.BookRepositoryJoin;
 import com.bookstore.repository.BookRepositoryJoinFetch;
+import com.bookstore.repository.BookRepositoryFetchModeJoin;
 
 @Service
 public class BookstoreService {
 
-    private final BookRepositoryJoin bookRepositoryJoin;
+    private final BookRepositoryFetchModeJoin bookRepositoryFetchModeJoin;
     private final BookRepositoryEntityGraph bookRepositoryEntityGraph;
     private final BookRepositoryJoinFetch bookRepositoryJoinFetch;
 
-    public BookstoreService(BookRepositoryJoin bookRepositoryJoin,
+    public BookstoreService(BookRepositoryFetchModeJoin bookRepositoryFetchModeJoin,
             BookRepositoryEntityGraph bookRepositoryEntityGraph,
             BookRepositoryJoinFetch bookRepositoryJoinFetch) {
 
-        this.bookRepositoryJoin = bookRepositoryJoin;
+        this.bookRepositoryFetchModeJoin = bookRepositoryFetchModeJoin;
         this.bookRepositoryEntityGraph = bookRepositoryEntityGraph;
         this.bookRepositoryJoinFetch = bookRepositoryJoinFetch;
     }
 
     public void displayBookById() {
 
-        Book book = bookRepositoryJoin.findById(1L).orElseThrow(); // LEFT JOIN
+        Book book = bookRepositoryFetchModeJoin.findById(1L).orElseThrow(); // LEFT JOIN
         displayBook(book);
     }
     
@@ -44,13 +44,13 @@ public class BookstoreService {
 
     public void displayBooksCausingNPlus1() {
 
-        List<Book> books = bookRepositoryJoin.findAll(); // N+1         
+        List<Book> books = bookRepositoryFetchModeJoin.findAll(); // N+1         
         displayBooks(books);
     }
 
     public void displayBooksByAgeGt45CausingNPlus1() {
 
-        List<Book> books = bookRepositoryJoin.findAll(isPriceGt35()); // N+1         
+        List<Book> books = bookRepositoryFetchModeJoin.findAll(isPriceGt35()); // N+1         
         displayBooks(books);
     }   
     
