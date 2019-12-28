@@ -35,6 +35,14 @@ public class MainApplication {
             System.out.println("-----------------displayBookById-------------------- \n");
 
             bookstoreService.displayBookById();
+            
+            System.out.println("-----------------displayBookByIdViaJoinFetch-------------------- \n");
+
+            bookstoreService.displayBookByIdViaJoinFetch();
+            
+            System.out.println("-----------------displayBookByIdViaEntityGraph-------------------- \n");
+
+            bookstoreService.displayBookByIdViaEntityGraph();
 
             System.out.println("------------------displayBooksViaEntityGraph------------------- \n");
 

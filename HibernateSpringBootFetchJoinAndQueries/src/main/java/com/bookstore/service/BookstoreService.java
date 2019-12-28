@@ -29,6 +29,12 @@ public class BookstoreService {
         Book book = bookRepositoryJoin.findById(1L).orElseThrow(); // LEFT JOIN
         displayBook(book);
     }
+    
+    public void displayBookByIdViaJoinFetch() {
+
+        Book book = bookRepositoryJoinFetch.findById(1L).orElseThrow(); // LEFT JOIN
+        displayBook(book);
+    }
 
     public void displayBooksCausingNPlus1() {
 
@@ -42,6 +48,12 @@ public class BookstoreService {
         displayBooks(books);
     }
 
+    public void displayBookByIdViaEntityGraph() {
+
+        Book book = bookRepositoryEntityGraph.findById(1L).orElseThrow(); // LEFT JOIN
+        displayBook(book);
+    }
+    
     public void displayBooksViaEntityGraph() {
 
         List<Book> books = bookRepositoryEntityGraph.findAll(); // LEFT JOIN
