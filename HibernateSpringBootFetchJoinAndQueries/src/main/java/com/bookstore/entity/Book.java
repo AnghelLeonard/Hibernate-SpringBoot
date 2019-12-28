@@ -26,7 +26,7 @@ public class Book implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "author_id")
-    @Fetch(FetchMode.JOIN) // this is not needed for entity graph usage
+    @Fetch(FetchMode.JOIN) // this is not needed for entity graph usage and JOIN FETCH usage
     private Author author;
 
     public Long getId() {
