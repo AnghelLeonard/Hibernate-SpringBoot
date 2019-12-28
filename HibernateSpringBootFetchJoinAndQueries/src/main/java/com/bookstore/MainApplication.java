@@ -23,20 +23,30 @@ public class MainApplication {
     public ApplicationRunner init() {
         return args -> {
             System.out.println("\n ------------------ N+1 ----------------- \n");
-            
+            System.out.println("-----------------displayBooksCausingNPlus1-------------------- \n");
+
             bookstoreService.displayBooksCausingNPlus1();
-            
-            System.out.println("-------------------------------------- \n");
-            
-            bookstoreService.displayBooksOfAuthorsAgeGt45CausingNPlus1();
-            
+
+            System.out.println("-----------------displayBooksByAgeGt45CausingNPlus1-------------------- \n");
+
+            bookstoreService.displayBooksByAgeGt45CausingNPlus1();
+
             System.out.println("\n ----------------- LEFT JOIN ----------------- \n");
-            
+            System.out.println("-----------------displayBookById-------------------- \n");
+
+            bookstoreService.displayBookById();
+
+            System.out.println("------------------displayBooksViaEntityGraph------------------- \n");
+
             bookstoreService.displayBooksViaEntityGraph();
-            
-            System.out.println("-------------------------------------- \n");
-            
-            bookstoreService.displayBooksOfAuthorsAgeGt45ViaEntityGraph();
+
+            System.out.println("-------------------displayBooksByAgeGt45ViaEntityGraph------------------ \n");
+
+            bookstoreService.displayBooksByAgeGt45ViaEntityGraph();
+
+            System.out.println("------------------displayBooksViaJoinfetch------------------- \n");
+
+            bookstoreService.displayBooksViaJoinFetch();
         };
     }
 }

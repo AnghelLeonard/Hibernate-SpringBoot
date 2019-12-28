@@ -2,51 +2,74 @@ package com.bookstore.service;
 
 import com.bookstore.entity.Book;
 import com.bookstore.repository.BookRepositoryEntityGraph;
-import com.bookstore.repository.BookRepositoryNPlus1;
 import static com.bookstore.specs.BookSpecs.isPriceGt35;
 import java.util.List;
 import org.springframework.stereotype.Service;
+import com.bookstore.repository.BookRepositoryJoin;
+import com.bookstore.repository.BookRepositoryJoinFetch;
 
 @Service
 public class BookstoreService {
 
-    private final BookRepositoryNPlus1 bookRepositoryNplus1;
+    private final BookRepositoryJoin bookRepositoryJoin;
     private final BookRepositoryEntityGraph bookRepositoryEntityGraph;
+    private final BookRepositoryJoinFetch bookRepositoryJoinFetch;
 
-    public BookstoreService(BookRepositoryNPlus1 bookRepositoryNplus1,
-            BookRepositoryEntityGraph bookRepositoryEntityGraph) {
+    public BookstoreService(BookRepositoryJoin bookRepositoryJoin,
+            BookRepositoryEntityGraph bookRepositoryEntityGraph,
+            BookRepositoryJoinFetch bookRepositoryJoinFetch) {
 
-        this.bookRepositoryNplus1 = bookRepositoryNplus1;
+        this.bookRepositoryJoin = bookRepositoryJoin;
         this.bookRepositoryEntityGraph = bookRepositoryEntityGraph;
+        this.bookRepositoryJoinFetch = bookRepositoryJoinFetch;
     }
-    
-    public void displayBooksCausingNPlus1()  {
-        
-        List<Book> books = bookRepositoryNplus1.findAll(); // N+1         
-        display(books);
-    }   
-    
-    public void displayBooksOfAuthorsAgeGt45CausingNPlus1()  {
-        
-        List<Book> books = bookRepositoryNplus1.findAll(isPriceGt35()); // N+1         
-        display(books);
+
+    public void displayBookById() {
+
+        Book book = bookRepositoryJoin.findById(1L).orElseThrow(); // LEFT JOIN
+        displayBook(book);
     }
-    
+
+    public void displayBooksCausingNPlus1() {
+
+        List<Book> books = bookRepositoryJoin.findAll(); // N+1         
+        displayBooks(books);
+    }
+
+    public void displayBooksByAgeGt45CausingNPlus1() {
+
+        List<Book> books = bookRepositoryJoin.findAll(isPriceGt35()); // N+1         
+        displayBooks(books);
+    }
+
     public void displayBooksViaEntityGraph() {
-        
+
         List<Book> books = bookRepositoryEntityGraph.findAll(); // LEFT JOIN
-        display(books);
+        displayBooks(books);
     }
-    
-    public void displayBooksOfAuthorsAgeGt45ViaEntityGraph()  {
-        
+
+    public void displayBooksByAgeGt45ViaEntityGraph() {
+
         List<Book> books = bookRepositoryEntityGraph.findAll(isPriceGt35()); // LEFT JOIN
-        display(books);
+        displayBooks(books);
     }
     
-    private void display(List<Book> books) {
-        
-        for(Book book: books) {
+    public void displayBooksViaJoinFetch() {
+
+        List<Book> books = bookRepositoryJoinFetch.findAll(); // LEFT JOIN
+        displayBooks(books);
+    }       
+
+    private void displayBook(Book book) {
+
+        System.out.println(book);
+        System.out.println(book.getAuthor());
+        System.out.println(book.getAuthor().getPublisher() + "\n");
+    }
+
+    private void displayBooks(List<Book> books) {
+
+        for (Book book : books) {
             System.out.println(book);
             System.out.println(book.getAuthor());
             System.out.println(book.getAuthor().getPublisher() + "\n");
