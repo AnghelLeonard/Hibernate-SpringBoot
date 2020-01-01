@@ -31,6 +31,7 @@ public class BookstoreService {
         briefOverviewOfPersistentContextContent();
 
         Author author = authorRepository.findByName("Joana Nimar");
+
         briefOverviewOfPersistentContextContent();
 
         author.getBooks().get(0).setIsbn("not available");
@@ -63,7 +64,7 @@ public class BookstoreService {
 
         int managedEntities = persistenceContext.getNumberOfManagedEntities();
         int collectionEntriesSize = persistenceContext.getCollectionEntriesSize();
-        
+
         // getEntitiesByKey() will be removed and probably replaced with #iterateEntities() 
         Map<EntityKey, Object> entitiesByKey = persistenceContext.getEntitiesByKey();
 
@@ -87,9 +88,10 @@ public class BookstoreService {
         }
 
         if (collectionEntriesSize > 0) {
-            System.out.println("\nCollection entries:");           
+            System.out.println("\nCollection entries:");
             persistenceContext.forEachCollectionEntry(
-                    (k, v) -> System.out.println("Key:" + k + ", Value:" + v), false);
+                    (k, v) -> System.out.println("Key:" + k
+                            + ", Value:" + (v.getRole() == null ? "" : v)), false);
         }
         System.out.println("-----------------------------------------------------\n");
     }
