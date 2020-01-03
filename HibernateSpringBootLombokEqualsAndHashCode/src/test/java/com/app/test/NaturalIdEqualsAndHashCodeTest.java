@@ -3,6 +3,7 @@ package com.app.test;
 import com.app.NaturalIdBook;
 import java.util.HashSet;
 import java.util.Set;
+import org.hibernate.Session;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
@@ -80,7 +81,10 @@ public class NaturalIdEqualsAndHashCodeTest {
     // Transition state at assert point: MANAGED
     public void D_givenBookWhenFindThenSuccess() throws Exception {
 
-        NaturalIdBook foundBook = entityManager.find(NaturalIdBook.class, book.getId());
+        // NaturalIdBook foundBook = entityManager.find(NaturalIdBook.class, book.getId());
+        NaturalIdBook foundBook = entityManager
+                .getEntityManager().unwrap(Session.class)
+                .bySimpleNaturalId(NaturalIdBook.class).load("001-100-000-111");
         entityManager.flush();
 
         assertTrue(books.contains(foundBook));
@@ -91,7 +95,10 @@ public class NaturalIdEqualsAndHashCodeTest {
     // Transition state at assert point: DETACHED    
     public void E_givenBookWhenFindAndDetachThenSuccess() throws Exception {
 
-        NaturalIdBook foundBook = entityManager.find(NaturalIdBook.class, book.getId());
+        // NaturalIdBook foundBook = entityManager.find(NaturalIdBook.class, book.getId());
+        NaturalIdBook foundBook = entityManager
+                .getEntityManager().unwrap(Session.class)
+                .bySimpleNaturalId(NaturalIdBook.class).load("001-100-000-111");
         entityManager.detach(foundBook);
 
         assertTrue(books.contains(foundBook));
@@ -102,7 +109,10 @@ public class NaturalIdEqualsAndHashCodeTest {
     // Transition state at assert points: REMOVED    
     public void F_givenBookWhenFindAndRemoveThenSuccess() throws Exception {
 
-        NaturalIdBook foundBook = entityManager.find(NaturalIdBook.class, book.getId());
+        // NaturalIdBook foundBook = entityManager.find(NaturalIdBook.class, book.getId());
+        NaturalIdBook foundBook = entityManager
+                .getEntityManager().unwrap(Session.class)
+                .bySimpleNaturalId(NaturalIdBook.class).load("001-100-000-111");
         entityManager.remove(foundBook);
         entityManager.flush();
 
