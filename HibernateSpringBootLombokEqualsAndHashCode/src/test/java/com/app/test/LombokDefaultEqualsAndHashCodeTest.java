@@ -64,7 +64,7 @@ public class LombokDefaultEqualsAndHashCodeTest {
     }
 
     @Test(expected = java.lang.AssertionError.class)
-    // Find the Book after a merge() - UPDATE statement   
+    // Find the Book after a merge() - SELECT and UPDATE statement   
     // Transition state at assert point: MANAGED
     public void C_givenBookWhenMergeThenSuccess() throws Exception {
 

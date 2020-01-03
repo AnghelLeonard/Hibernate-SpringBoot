@@ -64,8 +64,8 @@ public class IdEqualsAndHashCodeTest {
     }
 
     @Test(expected = java.lang.AssertionError.class)
-    // Find the Book after a merge() - UPDATE statement   
-    // Transition state at assert point: MANAGE    
+    // Find the Book after a merge() - SELECT and UPDATE statement   
+    // Transition state at assert point: MANAGED    
     public void C_givenBookWhenMergeThenSuccess() throws Exception {
 
         book.setTitle("New Modern History");
