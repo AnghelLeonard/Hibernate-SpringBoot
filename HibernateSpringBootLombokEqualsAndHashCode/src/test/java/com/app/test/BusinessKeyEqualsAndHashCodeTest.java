@@ -42,17 +42,17 @@ public class BusinessKeyEqualsAndHashCodeTest {
     }
 
     @Test
-    // Find the Book that has never been persisted
-    // Transition state at assert point: NEW
+    // Find in Set the book that has never been persisted
+    // State transition at assertion point: NEW
     public void A_givenBookInSetWhenContainsThenTrue() throws Exception {
 
         assertTrue(books.contains(book));
     }
 
     @Test
-    // Find the Book after persist
-    // Transition state at first assert point: NEW
-    // Transition state at second and third assert point: MANAGED
+    // Find in Set the book after it was persisted
+    // State transition at first assertion point: NEW
+    // State transition at second and third assertion point: MANAGED
     public void B_givenBookWhenPersistThenSuccess() throws Exception {
 
         assertNull(book.getId());
@@ -64,8 +64,8 @@ public class BusinessKeyEqualsAndHashCodeTest {
     }
 
     @Test
-    // Find the Book after a merge() - SELECT and UPDATE statement    
-    // Transition state at assert point: MANAGED
+    // Find in Set the book after merge() was called - SELECT and UPDATE statement    
+    // State transition at assertion point: MANAGED
     public void C_givenBookWhenMergeThenSuccess() throws Exception {
         
         book.setTitle("New Modern History");        
@@ -76,8 +76,8 @@ public class BusinessKeyEqualsAndHashCodeTest {
     }
 
     @Test
-    // Find the Book after a find() - SELECT statement
-    // Transition state at assert point: MANAGED
+    // Find in Set the book after find() was called - SELECT statement
+    // State transition at assertion point: MANAGED
     public void D_givenBookWhenFindThenSuccess() throws Exception {
      
         BusinessKeyBook foundBook = entityManager.find(BusinessKeyBook.class, book.getId());
@@ -87,8 +87,8 @@ public class BusinessKeyEqualsAndHashCodeTest {
     }
 
     @Test
-    // Find the Book after an explicit detach
-    // Transition state at assert point: DETACHED    
+    // Find in Set the book after detach() was called
+    // State transition at assertion point: DETACHED    
     public void E_givenBookWhenFindAndDetachThenSuccess() throws Exception {
 
         BusinessKeyBook foundBook = entityManager.find(BusinessKeyBook.class, book.getId());
@@ -98,8 +98,8 @@ public class BusinessKeyEqualsAndHashCodeTest {
     }
 
     @Test
-    // Find the Book after a remove() - DELETE statement
-    // Transition state at assert points: REMOVED    
+    // Find in Set the book after remove() was called - DELETE statement
+    // State transition at assertion points: REMOVED    
     public void F_givenBookWhenFindAndRemoveThenSuccess() throws Exception {
 
         BusinessKeyBook foundBook = entityManager.find(BusinessKeyBook.class, book.getId());
