@@ -2774,8 +2774,6 @@ Calling `fetchWithBooksByGenre()` works fine only that the following warning is 
 
 178. **[How To Efficiently Assign A Database Temporary Sequential Value To Rows](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAssignSequentialNumber)**
  
-<b><a href="https://persistencelayer.wixsite.com/springboot-hibernate/post/how-to-efficiently-assign-a-database-sequential-number-to-dto-rows">If you prefer to read it as a blog-post containing the relevant snippets of code then check this post</a></b>
-
 **Description:** This application is an example of assigning a database temporary sequential number to rows (in this case, to a Spring projection(DTO)) via the window function, `ROW_NUMBER()`. This window function is available in almost all databases, and starting with version 8.x is available in MySQL as well.
 
 **Key points:**
