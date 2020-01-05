@@ -2,6 +2,8 @@
 
 **Description:** Batch deletes in MySQL via `ON DELETE CASCADE`. Auto-generated database schema will contain the `ON DELETE CASCADE` directive.
 
+<b><a href="https://persistencelayer.wixsite.com/springboot-hibernate/post/how-to-batch-deletes-in-mysql-via-sql-on-delete-cascade">If you prefer to read it as a blog-post containing the relevant snippets of code then check this post</a></b>
+
 **Note:** Spring `deleteAllInBatch()` and `deleteInBatch()` don't use delete batching and don't take advantage of optimistic locking mechanism to prevent *lost updates*. They trigger *bulk* operations via `Query.executeUpdate()`, therefore, the Persistent Context is not synchronized accordingly (it is advisable to flush (before delete) and close/clear (after delete) the Persistent Context accordingly to avoid issues created by unflushed (if any) or outdated (if any) entities). The first one simply triggers a `delete from entity_name` statement, while the second one triggers a `delete from entity_name where id=? or id=? or id=? ...` statement. Both of them take advantage on `ON DELETE CASCADE` and are very efficient. For delete in batches rely on `deleteAll()`, `deleteAll(Iterable<? extends T> entities)` or `delete()` method. Behind the scene, the two flavors of `deleteAll()` relies on `delete()`. Mixing batching with database automatic actions (`ON DELETE CASCADE`) will result in a partially synchronized Persistent Context.
 
 **Key points:**
