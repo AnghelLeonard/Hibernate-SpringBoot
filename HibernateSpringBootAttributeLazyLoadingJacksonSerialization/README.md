@@ -1,6 +1,8 @@
 **[Attribute Lazy Loading And Jackson Serialization](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAttributeLazyLoadingJacksonSerialization)**
  
-**Description:** By default, the attributes of an entity are loaded eagerly (all at once). But, we can load them **lazy** as well. This is useful for column types that store large amounts of data: `CLOB`, `BLOB`, `VARBINARY`, etc or *details* that should be loaded on demand. In this application, we have an entity named `Author`. Its properties are: `id`, `name`, `genre`, `avatar` and `age`. And, we want to load the `avatar` lazy. But, returning entities (as JSON) that contains un-fetched lazy attributes from a REST controller (`@RestController`) will cause lazy initialization exceptions because Jackson tries to force the fetching of these attributes outside a Hibernate session. 
+<b><a href="https://persistencelayer.wixsite.com/springboot-hibernate/post/attribute-lazy-loading-and-jackson-serialization">If you prefer to read it as a blog-post containing the relevant snippets of code then check this post</a></b>
+ 
+**Description:** By default, the attributes of an entity are loaded eagerly (all at once). But, we can load them **lazily** as well. This is useful for column types that store large amounts of data: `CLOB`, `BLOB`, `VARBINARY`, etc or *details* that should be loaded on demand. In this application, we have an entity named `Author`. Its properties are: `id`, `name`, `genre`, `avatar` and `age`. And, we want to load the `avatar` lazy. But, returning entities (as JSON) that contains un-fetched lazy attributes from a REST controller (`@RestController`) will cause lazy initialization exceptions because Jackson tries to force the fetching of these attributes outside a Hibernate session. 
 
 **Key points:**
 - for Maven, in `pom.xml`, activate Hibernate *bytecode enhancement* (e.g. use Maven *bytecode enhancement plugin*)

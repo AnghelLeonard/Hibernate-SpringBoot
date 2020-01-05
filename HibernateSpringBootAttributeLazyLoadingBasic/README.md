@@ -1,6 +1,6 @@
 **[How To Use Hibernate Attribute Lazy Loading](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootAttributeLazyLoadingBasic)**
 
-[![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=How%20To%20Use%20Hibernate%20Attribute%20Lazy%20Loading&url=https://github.com/AnghelLeonard/Hibernate-SpringBoot/edit/master/HibernateSpringBootAttributeLazyLoadingBasic&hashtags=springdata,hibernate,jpa,springboot)
+<b><a href="https://persistencelayer.wixsite.com/springboot-hibernate/post/how-to-use-hibernate-attribute-lazy-loading">If you prefer to read it as a blog-post containing the relevant snippets of code then check this post</a></b>
   
 **Description:** By default, the attributes of an entity are loaded eagerly (all at once). But, we can load them **lazy** as well. This is useful for column types that store large amounts of data: `CLOB`, `BLOB`, `VARBINARY`, etc or *details* that should be loaded on demand. In this application, we have an entity named `Author`. Its properties are: `id`, `name`, `genre`, `avatar` and `age`. And, we want to load the `avatar` lazy. So, the `avatar` should be loaded on demand.
 

@@ -1,5 +1,7 @@
 **[How To Setup Spring Data JPA Auditing](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAudit)**
- 
+
+<b><a href="https://persistencelayer.wixsite.com/springboot-hibernate/post/how-to-setup-spring-data-jpa-auditing">If you prefer to read it as a blog-post containing the relevant snippets of code then check this post</a></b>
+
 **Description:** Auditing is useful for maintaining history records. This can later help us in tracking user activities. 
  
 **Key points:**
