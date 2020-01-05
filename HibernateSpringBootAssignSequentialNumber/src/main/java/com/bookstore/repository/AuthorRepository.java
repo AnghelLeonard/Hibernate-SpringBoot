@@ -9,11 +9,26 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
+@Transactional(readOnly = true)
 public interface AuthorRepository extends JpaRepository<Author, Long> {
-
-    @Transactional(readOnly = true)
-    @Query(value = "SELECT ROW_NUMBER() OVER() rowNum, name, genre "
-            + "FROM author ORDER BY name",
+    
+    @Query(value = "SELECT ROW_NUMBER() OVER(ORDER BY age) "
+            + "rowNum, name, age FROM author",
             nativeQuery = true)
-    List<AuthorDto> fetchWithSeqNumber();
+    List<AuthorDto> fetchWithSeqNumber1();       
+    
+    @Query(value = "SELECT ROW_NUMBER() OVER() "
+            + "rowNum, name, age FROM author ORDER BY age",
+            nativeQuery = true)
+    List<AuthorDto> fetchWithSeqNumber2(); 
+    
+    @Query(value = "SELECT ROW_NUMBER() OVER(ORDER BY age) "
+            + "rowNum, name, age FROM author ORDER BY name",
+            nativeQuery = true)
+    List<AuthorDto> fetchWithSeqNumber3();   
+    
+    @Query(value = "SELECT ROW_NUMBER() OVER(ORDER BY age, name DESC) "
+            + "rowNum, name, age FROM author",
+            nativeQuery = true)
+    List<AuthorDto> fetchWithSeqNumber4();           
 }

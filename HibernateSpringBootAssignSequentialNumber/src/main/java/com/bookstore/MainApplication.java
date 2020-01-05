@@ -22,7 +22,17 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            bookstoreService.fetchAuthorsWithSeqNumber();
+            System.out.println("\n\nUsing ORDER BY only in OVER:");
+            bookstoreService.fetchAuthorsWithSeqNumber1();
+            
+            System.out.println("\n\nUsing ORDER BY only in query:");
+            bookstoreService.fetchAuthorsWithSeqNumber2();
+            
+            System.out.println("\n\nUsing ORDER BY in OVER and in query:");
+            bookstoreService.fetchAuthorsWithSeqNumber3();
+            
+            System.out.println("\n\nUsing multiple columns in OVER:");
+            bookstoreService.fetchAuthorsWithSeqNumber4();
         };
     }
 }
