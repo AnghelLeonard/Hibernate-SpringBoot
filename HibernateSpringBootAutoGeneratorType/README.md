@@ -1,5 +1,7 @@
 **[Why And How To Avoid The `AUTO` Generator Type In Hibernate 5 And MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootAutoGeneratorType)**
 
+<b><a href="https://persistencelayer.wixsite.com/springboot-hibernate/post/why-and-how-to-avoid-the-auto-generator-type-in-hibernate-5-6-and-mysql">If you prefer to read it as a blog-post containing the relevant snippets of code then check this post</a></b>
+
 **Description:** In MySQL & Hibernate 5, the `GenerationType.AUTO` generator type will result in using the `TABLE` generator. This adds a significant performance penalty. Turning this behavior to `IDENTITY` generator can be obtained by using `GenerationType.IDENTITY` or the *native* generator.
  
 **Key points:**
