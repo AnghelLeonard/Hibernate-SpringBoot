@@ -1,4 +1,4 @@
-**[How To Efficiently Assign A Database Temporary Rank Values To Rows](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRankFunction)**
+**[How To Efficiently Assign A Database Temporary Ranking Of Values To Rows via `RANK()`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRankFunction)**
  
 **Description:** This application is an example of assigning a database temporary ranking of values to rows via the window function, `RANK()`. This window function is available in almost all databases, and starting with version 8.x is available in MySQL as well.
 
