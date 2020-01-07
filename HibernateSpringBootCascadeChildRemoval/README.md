@@ -4,13 +4,13 @@
 
 Consider `Author` and `Book` in a bidirectional-lazy `@OneToMany` association. This application exposes the best way to delete the parent(s) and the associated children in four scenarios listed below. These approaches relies on *bulk* deletions, therefore they are not useful if you want the deletions to take advantage of automatic optimistic locking mechanisms (e.g., via `@Version`): 
 
-**Best way to delete author(s) and the associated books when:**
+**Best way to delete author(s) and the associated books via *bulk* deletions when:**
 - One `Author` is in Persistent Context, no `Book`
 - More `Author` are in the Persistent Context, no `Book`
 - One `Author` and the associated `Book` are in Persistent Context
 - No `Author` or `Book` is in Persistent Context
      
-**Note:** The most efficient way to delete all entities can be done via the built-in `deleteAllInBatch()`. 
+**Note:** The most efficient way to delete all entities via a *bulk* deletion can be done via the built-in `deleteAllInBatch()`. 
      
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
