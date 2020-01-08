@@ -1,5 +1,7 @@
 **[Batch Inserts via `saveAll(Iterable<S> entities)` in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsJpaRepository)**
 
+<b><a href="https://persistencelayer.wixsite.com/springboot-hibernate/post/the-best-way-to-batch-inserts-via-saveall-iterable-s-entities">If you prefer to read it as a blog-post containing the relevant snippets of code then check this post</a></b>
+
 **Description:** Batch inserts via `SimpleJpaRepository#saveAll(Iterable<S> entities)` method in MySQL
 
 **Key points:**
