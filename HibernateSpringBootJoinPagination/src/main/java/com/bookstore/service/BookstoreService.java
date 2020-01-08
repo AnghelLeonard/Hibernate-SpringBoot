@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookstoreService {
@@ -20,8 +19,7 @@ public class BookstoreService {
     public BookstoreService(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
-
-    @Transactional(readOnly = true)
+    
     public Page<AuthorBookDto> fetchPageOfAuthorsWithBooksDtoByGenre(int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "name"));
@@ -30,7 +28,6 @@ public class BookstoreService {
         return pageOfAuthors;
     }
 
-    @Transactional(readOnly = true)
     public Slice<AuthorBookDto> fetchSliceOfAuthorsWithBooksDtoByGenre(int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "name"));
@@ -39,7 +36,6 @@ public class BookstoreService {
         return sliceOfAuthors;
     }
     
-    @Transactional(readOnly = true)
     public List<AuthorBookDto> fetchListOfAuthorsWithBooksDtoByGenre(int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "name"));
@@ -47,8 +43,7 @@ public class BookstoreService {
 
         return listOfAuthors;
     }
-
-    @Transactional(readOnly = true)
+    
     public Page<AuthorBookDto> fetchPageOfAuthorsWithBooksDtoByGenreNative(int page, int size) {
 
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "name"));
@@ -62,7 +57,6 @@ public class BookstoreService {
         return pageOfAuthors;
     }
 
-    @Transactional(readOnly = true)
     public List<AuthorBookDto> fetchListOfAuthorsWithBooksDtoNativeDenseRank(int start, int end) {
 
         List<AuthorBookDto> listOfAuthors
