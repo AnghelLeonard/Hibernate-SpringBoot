@@ -1,4 +1,6 @@
 **[How To JDBC Batch a Big JSON File To MySQL Via ForkJoinPool And HikariCP](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchJsonFileForkJoin)**
+
+<b><a href="https://persistencelayer.wixsite.com/springboot-hibernate/post/how-to-jdbc-batch-a-big-json-file-via-forkjoinpool">If you prefer to read it as a blog-post containing the relevant snippets of code then check this post</a></b>
  
 **Description:** This is a Spring Boot application that reads a relatively big JSON file (200000+ lines) and inserts its content in MySQL via batching using `ForkJoinPool`, `JdbcTemplate` and HikariCP.
 

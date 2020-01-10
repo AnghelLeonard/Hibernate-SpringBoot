@@ -1,6 +1,8 @@
 
 **[Session-Level Batching (Hibernate 5.2 or Higher) in MySQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsViaSession)**
 
+<b><a href="https://persistencelayer.wixsite.com/springboot-hibernate/post/session-level-batching-hibernate-5-2-or-higher-in-mysql">If you prefer to read it as a blog-post containing the relevant snippets of code then check this post</a></b>
+
 **Description:** Batch inserts via Hibernate session-level batching (Hibernate 5.2 or higher) in MySQL. This example commits the database transaction after each batch excecution. This way we avoid long-running transactions and, in case of a failure, we rollback only the failed batch and don't lose the previous batches. For each batch, the Persistent Context is flushed and cleared, therefore we maintain a thin Persistent Context. This way the code is not prone to memory errors and performance penalties caused by slow flushes.
 
 **Key points:**
