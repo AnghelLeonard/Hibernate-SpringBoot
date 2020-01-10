@@ -1,5 +1,7 @@
 **[How To *Bulk* Updates](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBulkUpdates)**
 
+<b><a href="https://persistencelayer.wixsite.com/springboot-hibernate/post/how-to-bulk-updates">If you prefer to read it as a blog-post containing the relevant snippets of code then check this post</a></b>
+
 **Description:** *Bulk* operations (updates and deletes) are faster than batching, can benefit from indexing, but they have three main shortcomings:
 
 - *bulk* updates/deletes may leave the Persistence Context in an outdated state (it's up to you to prevent this issue by flushing the Persistence Context before update/delete and close/clear it after the update/delete to avoid issues created by potentially unflushed or outdated entities)
