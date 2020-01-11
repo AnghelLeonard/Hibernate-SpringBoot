@@ -4,7 +4,7 @@
 
 **Key points:**
 - a derived count query starts with `count...` (e.g., `long countByGenre(String genre)`) - Spring Data will generate a `SELECT COUNT(...) FROM ...` query 
-- a derived delete query can return the number of deleted records or the a list of the deleted records
+- a derived delete query can return the number of deleted records or the list of the deleted records
 - a derived delete query that returns the number of deleted records starts with `delete...` (e.g., `long deleteByGenre(String genre)`) - Spring Data will trigger first a `SELECT` to fetch entities in the Persistence Context, and, afterwards, it triggers a `DELETE` for each entity that must be deleted 
 - a derived delete query that returns the list of deleted records starts with `remove...` (e.g., `List<Author> removeByGenre(String genre)`) - Spring Data will trigger first a `SELECT` to fetch entities in the Persistence Context, and, afterwards, it triggers a `DELETE` for each entity that must be deleted 
 -----------------------------------------------------------------------------------------------------------------------    
