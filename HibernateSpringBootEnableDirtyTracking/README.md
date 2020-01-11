@@ -1,6 +1,6 @@
 **[How To Enable Dirty Tracking In A Spring Boot Application](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootEnableDirtyTracking)**
 
-**Description:** Prior to Hibernate version 5, the *dirty checking* mechanism relies on Java Reflection API. Starting with Hibernate version 5, the *dirty checking* mechanism can rely on *bytecode enhancement*. This approach sustain a better performance, especially when you have a relatively large number of entitites. Enabling *bytecode enhancement* is about adding a plugin into the application.
+**Description:** Prior to Hibernate version 5, the *Dirty Checking* mechanism relies on Java Reflection API. Starting with Hibernate version 5, the *Dirty Checking* mechanism can rely on the *Dirty Tracking* mechanism (which is the capability of an entity to track its own property changes) which requires Hibernate *Bytecode Enhancement* to be enabled (disabled by default). The *Dirty Tracking* mechanism sustain a better performance, especially when you have a relatively large number of entitites. Enabling *Bytecode Enhancement* is about adding a plugin into the application (via Maven or Gradle).
 
 **Key points:**
 - Hibernate come with plugins for Maven and Gradle
