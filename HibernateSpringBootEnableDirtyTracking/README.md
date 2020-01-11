@@ -6,7 +6,7 @@
 
 For *Dirty Tracking*, during *Bytecode Enhancement* process, the entity classes bytecode is instrumented by Hibernate by adding a *tracker*, `$$_hibernate_tracker`. At flush time, Hibernate will use this *tracker* to discover the entities changes (each entity *tracker* will report the changes). This is better than checking every property of every managed entity.
 
-Commonly (by default), the instrumentation takes place at build-time, but it can be configured to take place at runtime or deploy-time as well.
+Commonly (by default), the instrumentation takes place at build-time, but it can be configured to take place at runtime or deploy-time as well. It is preferable to take place at build-time for avoiding an overhead in the runtime.
 
 Adding *Bytecode Enhancement* and enabling *Dirty Tracking* can be done via a plugin added via Maven or Gradle (Ant can be used as well). We use Maven, therefore we add it in `pom.xml`.
 
