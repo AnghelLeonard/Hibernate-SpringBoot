@@ -9,7 +9,7 @@ During *Bytecode Enhancement* the entity classes bytecode is instrumented by Hib
 Adding *Bytecode Enhancement* and enabling *Dirty Tracking* can be done via a plugin added via Maven, Gradle or Ant. We use Maven, therefore we add it in `pom.xml`.
 
 **Key points:**
-- Hibernate come with *Bytecode Enhancement* plugins for Maven, Gradle and Ant
+- Hibernate come with *Bytecode Enhancement* plugins for Maven, Gradle (Ant can be used as well)
 - for Maven, add the *Bytecode Enhancement* plugin in the `pom.xml` file
      
 **Output example:**\
