@@ -1,26 +1,12 @@
-**[How To Use Query Creation Mechanism For JPA To Limit Result Size](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLimitResultSizeViaQueryCreator)**
+**[How To Write Derived Count And Delete Queries](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDerivedCountAndDelete)**
 
-**Description:** Spring Data comes with the query creation mechanism for JPA that is capable to interpret a query method name and convert it into a SQL query in the proper dialect. This is possible as long as we respect the naming conventions of this mechanism. This is an application that exploit this mechanism to write queries that limit the result size. Basically, the name of the query method instructs Spring Data how to add the `LIMIT` (or similar clauses depending on the RDBMS) clause to the generated SQL queries.
+**Description:** Spring Data comes with the Query Builder mechanism for JPA that is capable to interpret a query method name (known as a derived query) and convert it into a SQL query in the proper dialect. This is possible as long as we respect the naming conventions of this mechanism. Beside the well-known query of type `find...`, Spring Data supports derived count queries and derived delete queries.
 
 **Key points:**
-- define a Spring Data regular repository (e.g., `AuthorRepository`)
-- write query methods respecting the query creation mechanism for JPA naming conventions     
-
-**Examples:**\
-    - `List<Author> findFirst5ByAge(int age);`\
-    - `List<Author> findFirst5ByAgeGreaterThanEqual(int age);`\
-    - `List<Author> findFirst5ByAgeLessThan(int age);`\
-    - `List<Author> findFirst5ByAgeOrderByNameDesc(int age);`\
-    - `List<Author> findFirst5ByGenreOrderByAgeAsc(String genre);`\
-    - `List<Author> findFirst5ByAgeGreaterThanEqualOrderByNameAsc(int age);`\
-    - `List<Author> findFirst5ByGenreAndAgeLessThanOrderByNameDesc(String genre, int age);`\
-    - `List<AuthorDto> findFirst5ByOrderByAgeAsc();`\
-    - `Page<Author> queryFirst10ByName(String name, Pageable p);`\
-    - `Slice<Author> findFirst10ByName(String name, Pageable p);`
-    
-**The list of supported keywords is listed below:**
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLimitResultSizeViaQueryCreator/supported%20keywords%20inside%20method%20names.png)
-
+- a derived count query starts with `count...` (e.g., `long countByGenre(String genre)`) - Spring Data will generate a `SELECT COUNT(...) FROM ...` query 
+- a derived delete query can return the number of deleted records or the a list of the deleted records
+- a derived delete query that returns the number of deleted records starts with `delete...` (e.g., `long deleteByGenre(String genre)`) - Spring Data will trigger first a `SELECT` to fetch entities in the Persistence Context, and, afterwards, it triggers a `DELETE` for each entity that must be deleted 
+- a derived delete query that returns the list of deleted records starts with `remove...` (e.g., `List<Author> removeByGenre(String genre)`) - Spring Data will trigger first a `SELECT` to fetch entities in the Persistence Context, and, afterwards, it triggers a `DELETE` for each entity that must be deleted 
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
      <tr><td><b>If you need a deep dive into the performance recipes exposed in this repository then I am sure that you will love my book "Spring Boot Persistence Best Practices"</b></td><td><b>If you need a hand of tips and illustrations of 100+ Java persistence performance issues then "Java Persistence Performance Illustrated Guide" is for you.</b></td></tr>
