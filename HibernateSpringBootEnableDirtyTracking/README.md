@@ -6,7 +6,7 @@
 
 During *Bytecode Enhancement* the entity classes bytecode is instrumented by Hibernate by adding a tracker, `$$_hibernate_tracker`. Commonly (by default), the instrumentation takes place at build-time, but it can be configured to take place at runtime or deploy-time as well.
 
-Adding *Bytecode Enhancement* and enabling *Dirty Tracking* can be done via a plugin added via Maven, Gradle or Ant. We use Maven, therefore we add it in `pom.xml`.
+Adding *Bytecode Enhancement* and enabling *Dirty Tracking* can be done via a plugin added via Maven or Gradle (Ant can be used as well). We use Maven, therefore we add it in `pom.xml`.
 
 **Key points:**
 - Hibernate come with *Bytecode Enhancement* plugins for Maven, Gradle (Ant can be used as well)
