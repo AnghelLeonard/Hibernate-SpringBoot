@@ -4,7 +4,7 @@
 
 **Description:** Prior to Hibernate version 5, the *Dirty Checking* mechanism relies on Java Reflection API for checking every property of every managed entity. Starting with Hibernate version 5, the *Dirty Checking* mechanism can rely on the *Dirty Tracking* mechanism (which is the capability of an entity to track its own property changes) which requires Hibernate *Bytecode Enhancement* to be present in the application. The *Dirty Tracking* mechanism sustain a better performance, especially when you have a relatively large number of entitites. 
 
-During *Bytecode Enhancement* the entity classes bytecode is instrumented by Hibernate by adding a tracker, `$$_hibernate_tracker`. Commonly, the instrumentation takes place at build-time, but it can be configured to take place at runtime or deploy-time as well.
+During *Bytecode Enhancement* the entity classes bytecode is instrumented by Hibernate by adding a tracker, `$$_hibernate_tracker`. Commonly (by default), the instrumentation takes place at build-time, but it can be configured to take place at runtime or deploy-time as well.
 
 Adding *Bytecode Enhancement* and enabling *Dirty Tracking* can be done via a plugin added via Maven, Gradle or Ant. We use Maven, therefore we add it in `pom.xml`.
 
