@@ -5,8 +5,8 @@
 **Key points:**
 - a derived count query starts with `count...` (e.g., `long countByGenre(String genre)`) - Spring Data will generate a `SELECT COUNT(...) FROM ...` query 
 - a derived delete query can return the number of deleted records or the list of the deleted records
-- a derived delete query that returns the number of deleted records starts with `delete...` (e.g., `long deleteByGenre(String genre)`) - Spring Data will trigger first a `SELECT` to fetch entities in the Persistence Context, and, afterwards, it triggers a `DELETE` for each entity that must be deleted 
-- a derived delete query that returns the list of deleted records starts with `remove...` (e.g., `List<Author> removeByGenre(String genre)`) - Spring Data will trigger first a `SELECT` to fetch entities in the Persistence Context, and, afterwards, it triggers a `DELETE` for each entity that must be deleted 
+- a derived delete query that returns the number of deleted records starts with `delete...` or `remove...` and returns `long` (e.g., `long deleteByGenre(String genre)`) - Spring Data will trigger first a `SELECT` to fetch entities in the Persistence Context, and, afterwards, it triggers a `DELETE` for each entity that must be deleted 
+- a derived delete query that returns the list of deleted records starts with `delete...` or `remove...` and returns `List<entity>` (e.g., `List<Author> removeByGenre(String genre)`) - Spring Data will trigger first a `SELECT` to fetch entities in the Persistence Context, and, afterwards, it triggers a `DELETE` for each entity that must be deleted 
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
      <tr><td><b>If you need a deep dive into the performance recipes exposed in this repository then I am sure that you will love my book "Spring Boot Persistence Best Practices"</b></td><td><b>If you need a hand of tips and illustrations of 100+ Java persistence performance issues then "Java Persistence Performance Illustrated Guide" is for you.</b></td></tr>
