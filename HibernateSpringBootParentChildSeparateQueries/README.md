@@ -1,6 +1,12 @@
 **[The Best Way To Fetch Parent And Children In Different Queries](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootParentChildSeparateQueries)** 
  
-**Description:** Let's assume that `Author` and `Book` are involved in a bidirectional-lazy `@OneToMany` association. At first request (query), we fetch an `Author`. The `Author` is detached. At second request (query), we want to load the `Book` of this `Author`. We don't want to load the `Author` again (e.g., we don't care about lost updates), we just want to load the associated `Book` in a single `SELECT`. A common approach is to load the `Author` again (e.g., via `findById()`) and call the `getBooks()`. But, this will trigger two `SELECT` statements. Moreover, the collection is not initialized if we simply return it. In order to trigger the collection initialization the developer call `books.size()` or he rely on `Hibernate.initialize(books);`. But, we can avoid such an approach by relying on an explicit JPQL or Query Builder property expressions. This way, there will be a single `SELECT` and no need to call `size()` or `Hibernate.initialize();`
+**Description:** Let's assume that `Author` and `Book` are involved in a bidirectional-lazy `@OneToMany` association. At first request (query), we fetch an `Author`. The `Author` is detached. At second request (query), we want to load the `Book` associated to this `Author`. 
+
+Imagine an user that loads a certain `Author` (without the associated `Book`). The user may be interested  or not in the `Book`, therefore, we don't load them with the `Author`. If the user is interested in the `Book` then he will click a button of type, *View books*. Now, we have to return the `List<Book>` associated to this `Author`.
+
+But, we don't want to load the `Author` again (for example, we don't care about *lost updates* of `Author`), we just want to load the associated `Book` in a single `SELECT`. A common (not recommended) approach is to load the `Author` again (e.g., via `findById(author.getId())`) and call the `author.getBooks()`. But, this end up in two `SELECT` statements. One `SELECT` for loading the `Author`, and another `SELECT` after we *force* the collection initialization. We *force* collection initialization because it will not be initialize if we simply return it. In order to trigger the collection initialization the developer call `books.size()` or he rely on `Hibernate.initialize(books);`. 
+
+But, we can avoid such solution by relying on an explicit JPQL or Query Builder property expressions. This way, there will be a single `SELECT` and no need to call `size()` or `Hibernate.initialize();`
 
 **Key points:**
 - use an explicit JPQL
