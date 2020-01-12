@@ -1,5 +1,13 @@
 **[The Best Way To Fetch Parent And Children In Different Queries](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootParentChildSeparateQueries)** 
- 
+
+**Note:** Fetching *read-only* data should be done via DTO, not managed entities. But, there is no tragedy to fetch read-only entities in a context as follows:
+
+- we need all attributes of the entity (so, a DTO just mirrors an entity)
+- we manipulate a small number of entities (e.g., an author with several books)
+- we use `@Transactional(readOnly = true)`
+
+Under these circumstances, let's tackle a common case that I saw quite a lot.
+
 **Description:** Let's assume that `Author` and `Book` are involved in a bidirectional-lazy `@OneToMany` association. At first request (query), we fetch an `Author`. The `Author` is detached. At second request (query), we want to load the `Book` associated to this `Author`. 
 
 Imagine an user that loads a certain `Author` (without the associated `Book`). The user may be interested  or not in the `Book`, therefore, we don't load them with the `Author`. If the user is interested in the `Book` then he will click a button of type, *View books*. Now, we have to return the `List<Book>` associated to this `Author`.
