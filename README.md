@@ -3870,3 +3870,29 @@ Next, we want to fetch all books (`BookRepository#findAll()`), including their a
 - In this case, the method creates the property traversal `books.reviews`. The algorithm starts by interpreting the entire part (`BooksReviews`) as the property and checks the domain class for a property with that name (uncapitalized). If the algorithm succeeds, it uses that property. If not, the algorithm splits up the source at the camel case parts from the right side into a head and a tail and tries to find the corresponding property — in our example, `Books` and `Reviews`. If the algorithm finds a property with that head, it takes the tail and continues building the tree down from there, splitting the tail up in the way just described. If the first split does not match, the algorithm moves the split point to the left and continues.
 - Although this algorithm should work for most cases, it is possible for the algorithm to select the wrong property. Suppose the `Author` class has an `booksReview` property as well. The algorithm would match in the first split round already, choose the wrong property, and fail (as the type of `booksReview` probably has no code property). To resolve this ambiguity you can use _ inside your method name to manually define traversal points. So our method name would be as follows: `Author findByBooks_Reviews(Review review);`
 - More examples (including DTOs) are available in the application
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+264. **[The Best Way To Fetch Parent And Children In Different Queries](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootParentChildSeparateQueries)** 
+
+**Note:** Fetching *read-only* data should be done via DTO, not managed entities. But, there is no tragedy to fetch read-only entities in a context as follows:
+
+- we need all attributes of the entity (so, a DTO just mirrors an entity)
+- we manipulate a small number of entities (e.g., an author with several books)
+- we use `@Transactional(readOnly = true)`
+
+Under these circumstances, let's tackle a common case that I saw quite a lot.
+
+**Description:** Let's assume that `Author` and `Book` are involved in a bidirectional-lazy `@OneToMany` association. At first request (query), we fetch an `Author`. The `Author` is detached. At second request (query), we want to load the `Book` associated to this `Author`. 
+
+Imagine an user that loads a certain `Author` (without the associated `Book`). The user may be interested  or not in the `Book`, therefore, we don't load them with the `Author`. If the user is interested in the `Book` then he will click a button of type, *View books*. Now, we have to return the `List<Book>` associated to this `Author`.
+
+But, we don't want to load the `Author` again (for example, we don't care about *lost updates* of `Author`), we just want to load the associated `Book` in a single `SELECT`. A common (not recommended) approach is to load the `Author` again (e.g., via `findById(author.getId())`) and call the `author.getBooks()`. But, this end up in two `SELECT` statements. One `SELECT` for loading the `Author`, and another `SELECT` after we *force* the collection initialization. We *force* collection initialization because it will not be initialize if we simply return it. In order to trigger the collection initialization the developer call `books.size()` or he rely on `Hibernate.initialize(books);`. 
+
+But, we can avoid such solution by relying on an explicit JPQL or Query Builder property expressions. This way, there will be a single `SELECT` and no need to call `size()` or `Hibernate.initialize();`
+
+**Key points:**
+- use an explicit JPQL
+- use Query Builder propery expressions
+
+This item is detailed in my book, [Spring Boot Persistence Best Practices](https://www.amazon.com/gp/product/1484256255).
