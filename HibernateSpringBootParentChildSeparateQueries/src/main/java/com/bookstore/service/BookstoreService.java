@@ -21,11 +21,13 @@ public class BookstoreService {
         this.bookRepository = bookRepository;
     }
 
+    // first query/request
     public Author fetchAuthor(long id) {
 
         return authorRepository.findById(id).orElseThrow();
     }
 
+    // second query/request
     @Transactional(readOnly = true)
     public List<Book> fetchBooksOfAuthorBad(Author a) {
 
@@ -38,6 +40,7 @@ public class BookstoreService {
         return books;
     }
 
+    // second query/request
     @Transactional(readOnly = true)
     public List<Book> fetchBooksOfAuthorGood(Author a) {
 
@@ -49,11 +52,13 @@ public class BookstoreService {
         return books;
     }
 
+    // first query/request
     public Book fetchBook(long id) {
 
         return bookRepository.findById(id).orElseThrow();
     }
 
+    // second query/request
     @Transactional(readOnly = true)
     public Author fetchAuthorOfBookBad(Book b) {
 
@@ -65,6 +70,7 @@ public class BookstoreService {
         return author;
     }
 
+    // second query/request
     @Transactional(readOnly = true)
     public Author fetchAuthorOfBookGood(Book b) {
 
