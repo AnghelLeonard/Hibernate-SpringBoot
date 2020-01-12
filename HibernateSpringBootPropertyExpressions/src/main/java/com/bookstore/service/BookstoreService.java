@@ -27,7 +27,7 @@ public class BookstoreService {
         this.reviewRepository = reviewRepository;
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public void fetchAuthorByBook() {
 
         Book book = bookRepository.findById(4L).orElseThrow();
@@ -36,7 +36,7 @@ public class BookstoreService {
         System.out.println("Fetched author: " + author);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public void fetchBooksByAuthor() {
 
         Author author = authorRepository.findById(4L).orElseThrow();
@@ -45,7 +45,7 @@ public class BookstoreService {
         System.out.println("Fetched books: " + books);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional
     public void fetchAuthorByBooksReviews() {
 
         Review review = reviewRepository.findById(1L).orElseThrow();
