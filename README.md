@@ -3881,7 +3881,9 @@ Next, we want to fetch all books (`BookRepository#findAll()`), including their a
 - we manipulate a small number of entities (e.g., an author with several books)
 - we use `@Transactional(readOnly = true)`
 
-Under these circumstances, let's tackle a common case that I saw quite a lot.
+Under these circumstances, let's tackle a common case that I saw quite a lot. There is even an SO answer about it (don't do this):
+
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootParentChildSeparateQueries/Fetch%20Parent%20And%20Children%20In%20Different%20Queries.png)
 
 **Description:** Let's assume that `Author` and `Book` are involved in a bidirectional-lazy `@OneToMany` association. At first request (query), we fetch an `Author`. The `Author` is detached. At second request (query), we want to load the `Book` associated to this `Author`. 
 
