@@ -40,8 +40,7 @@ public class BookstoreService {
         return books;
     }
 
-    // second query/request
-    @Transactional(readOnly = true)
+    // second query/request    
     public List<Book> fetchBooksOfAuthorGood(Author a) {
 
         // Explicit JPQL
@@ -70,8 +69,7 @@ public class BookstoreService {
         return author;
     }
 
-    // second query/request
-    @Transactional(readOnly = true)
+    // second query/request    
     public Author fetchAuthorOfBookGood(Book b) {
 
         // Explicit JPQL
