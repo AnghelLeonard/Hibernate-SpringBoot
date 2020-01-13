@@ -23,9 +23,16 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
-            Author author = bookstoreService.fetchAuthorById(1L);
-            
+            Author author = bookstoreService.fetchAuthorById(1L);            
             author.setAge(author.getAge() + 1);
+            System.out.println("\n\nUpdate inefficiently via EntityManager#merge():");
+            bookstoreService.updateAuthorViaMerge(author);
+            
+            System.out.println("\n\n-----------------------------------------\n\n");
+            
+            author = bookstoreService.fetchAuthorById(1L);           
+            author.setAge(author.getAge() + 1);
+            System.out.println("\n\nUpdate efficiently via Session#update():");
             bookstoreService.updateAuthorViaUpdate(author);
         };
     }
