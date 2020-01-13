@@ -44,11 +44,9 @@ public class BookstoreService {
     public List<Book> fetchBooksOfAuthorGood(Author a) {
 
         // Explicit JPQL
-        // List<Book> books = bookRepository.fetchByAuthor(a);
+        // return bookRepository.fetchByAuthor(a);
         // Query Builder
-        List<Book> books = bookRepository.findByAuthor(a);
-
-        return books;
+        return bookRepository.findByAuthor(a);       
     }
 
     // first query/request
@@ -73,11 +71,9 @@ public class BookstoreService {
     public Author fetchAuthorOfBookGood(Book b) {
 
         // Explicit JPQL
-        // Author author = authorRepository.fetchByBooks(b);
+        // return authorRepository.fetchByBooks(b);
         // Query Builder
-        Author author = authorRepository.findByBooks(b);
-
-        return author;
+        return authorRepository.findByBooks(b);        
     }
 
 }
