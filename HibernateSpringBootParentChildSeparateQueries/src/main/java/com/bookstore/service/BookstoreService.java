@@ -45,6 +45,7 @@ public class BookstoreService {
 
         // Explicit JPQL
         // return bookRepository.fetchByAuthor(a);
+        
         // Query Builder
         return bookRepository.findByAuthor(a);       
     }
@@ -72,6 +73,7 @@ public class BookstoreService {
 
         // Explicit JPQL
         // return authorRepository.fetchByBooks(b);
+        
         // Query Builder
         return authorRepository.findByBooks(b);        
     }
