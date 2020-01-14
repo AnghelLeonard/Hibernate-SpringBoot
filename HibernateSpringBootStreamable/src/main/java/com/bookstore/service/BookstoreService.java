@@ -15,7 +15,7 @@ public class BookstoreService {
     public BookstoreService(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
-    
+
     public void fetchAuthorsAsStreamable() {
 
         Streamable<Author> authors = authorRepository.findByGenre("Anthology");
@@ -26,6 +26,18 @@ public class BookstoreService {
 
         Streamable<AuthorName> authors = authorRepository.findBy();
         authors.forEach(a -> System.out.println(a.getName()));
+    }
+
+    public void fetchAuthorsByGenreAndAgeGreaterThan() {
+
+        Streamable<Author> authors = authorRepository.findByGenreAndAgeGreaterThan("Anthology", 40);
+        authors.forEach(System.out::println);
+    }
+    
+    public void fetchAuthorsByGenreOrAgeGreaterThan() {
+
+        Streamable<Author> authors = authorRepository.findByGenreOrAgeGreaterThan("Anthology", 40);
+        authors.forEach(System.out::println);
     }
 
     // Caution: Don't do this! Fetch all columns just to drop a part of them
@@ -46,9 +58,10 @@ public class BookstoreService {
         authors.forEach(System.out::println);
     }
 
-    // Caution: Don't do this! It triggers two SELECT statements!
+    // Caution: It triggers two SELECT statements and the
+    // final result is the concatenation of the these two results sets!
     @Transactional(readOnly = true)
-    public void fetchAuthorsByGenreAndAge() {
+    public void fetchAuthorsByGenreConcatAge() {
 
         Streamable<Author> authors = authorRepository.findByGenre("Anthology")
                 .and(authorRepository.findByAgeGreaterThan(40));
