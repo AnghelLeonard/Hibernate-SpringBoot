@@ -1,11 +1,11 @@
-**[Avoid Spring Redundant `save()` Call](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRedundantSave)**
+**[How To Use Streamable As Query Method Return Type](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootStreamable)**
  
-**Description:** This application is an example when calling `save()` for an entity is redundant (not necessary).
+**Description:** This application is an example of fetching `Streamable<entity>` and `Streamable<dto>`. But, more important, is an example of how to **not** use `Streamable`. It is very tempting to fetch a `Streamable` just to apply to the result set some filter or a map operations, or even to join two or more `Streamable` via `and()` method. Is nothing wrong in using these methods as long as you respect the key points from below.
 
 **Key points:**
-- at flush time, Hibernate relies on *dirty checking* mechanism to determine the potential modifications in entities 
-- for each modification, Hibernate automatically triggers the corresponding `UPDATE` statement without the need to explicitly call the `save()` method
-- behind the scene, this redundancy (calling `save()` when is not necessarily) doesn't affect the number of triggered queries, but it implies a performance penalty in the underlying Hibernate processes
+- don't fetch all columns just to drop a part of them (e.g., via `map()`)
+- don't fetch all rows just to throw away a part of it (e.g., via `filter()`)
+- don't join `Streamable` via `and()` if you can write a single SQL statement (each `Streamable` produces a separate SQL statement)
      
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
