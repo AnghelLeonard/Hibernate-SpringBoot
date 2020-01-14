@@ -15,15 +15,13 @@ public class BookstoreService {
     public BookstoreService(AuthorRepository authorRepository) {
         this.authorRepository = authorRepository;
     }
-
-    @Transactional
+    
     public void fetchAuthorsAsStreamable() {
 
         Streamable<Author> authors = authorRepository.findByGenre("Anthology");
         authors.forEach(System.out::println);
     }
 
-    @Transactional
     public void fetchAuthorsDtoAsStreamable() {
 
         Streamable<AuthorName> authors = authorRepository.findBy();
