@@ -28,7 +28,7 @@ public class BookstoreService {
         authors.forEach(a -> System.out.println(a.getName()));
     }
 
-    // Caution: Don't do this! Fetching all columns just to drop a part of them
+    // Caution: Don't do this! Fetch all columns just to drop a part of them
     public void fetchAuthorsNames() {
 
         Streamable<String> authors = authorRepository.findByGenre("Anthology")
@@ -37,7 +37,7 @@ public class BookstoreService {
         authors.forEach(System.out::println);
     }
 
-    // Caution: Don't do this! Fetching all rows just to throw away a part of it
+    // Caution: Don't do this! Fetch more rows than needed just to throw away a part of it
     public void fetchAuthorsOlderThan40() {
 
         Streamable<Author> authors = authorRepository.findByGenre("Anthology")

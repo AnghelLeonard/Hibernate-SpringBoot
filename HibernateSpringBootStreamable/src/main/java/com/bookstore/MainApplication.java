@@ -29,10 +29,10 @@ public class MainApplication {
             System.out.println("\n\nFetch Author DTO as Streamable:");
             bookstoreService.fetchAuthorsDtoAsStreamable();
 
-            System.out.println("\n\nDON'T DO THIS! Fetching all columns just to drop a part of them:");
+            System.out.println("\n\nDON'T DO THIS! Fetch all columns just to drop a part of them:");
             bookstoreService.fetchAuthorsNames();
 
-            System.out.println("\n\nDON'T DO THIS! Fetching all rows just to throw away a part of it:");
+            System.out.println("\n\nDON'T DO THIS! Fetch more rows than needed just to throw away a part of it:");
             bookstoreService.fetchAuthorsOlderThan40();
 
             System.out.println("\n\nDON'T DO THIS! Trigger more SQL statements than necessary:");
