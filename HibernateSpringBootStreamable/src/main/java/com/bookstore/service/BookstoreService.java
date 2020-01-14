@@ -3,10 +3,6 @@ package com.bookstore.service;
 import com.bookstore.dto.AuthorDto;
 import com.bookstore.entity.Author;
 import com.bookstore.repository.AuthorRepository;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import static java.util.stream.Collectors.partitioningBy;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,36 +17,17 @@ public class BookstoreService {
     }
 
     @Transactional
-    public void fetchSomeAuthorsAsDTOAndUpdate() {
+    public void fetchSomeAuthorsUpdateAndDto() {
 
-        Streamable<AuthorDto> authorsDto = authorRepository.findByGenre("Anthology")
-                .map(a -> {
-                    a.setAge(a.getAge() + 1);
-                    return a;
-                })
+        Streamable<Author> authors = authorRepository.findByGenre("Anthology");
+
+        authors.forEach(a -> a.setAge(a.getAge() + 1));
+
+        Streamable<AuthorDto> authorsDto = authors
                 .filter(a -> a.getAge() > 40)
                 .map(a -> new AuthorDto(a.getName(), a.getAge()));
-        
+
         authorsDto.forEach(System.out::println);
-    }
-
-    public void fetchAuthorsByGenrePartitioningByAge() {
-
-        Map<Boolean, List<Author>> authorsMap = authorRepository.findByGenre("Anthology")
-                .get()
-                .collect(partitioningBy(a -> a.getAge() > 40));
-
-        System.out.println(authorsMap);
-    }
-
-    public void fetchAuthorsNamesAsString() {
-
-        String authorsNames = authorRepository.findBy()
-                .map(a -> a.getName().toUpperCase())
-                .get()
-                .collect(Collectors.joining("; "));
-
-        System.out.println(authorsNames);
     }
 
     // Caution: Don't do this! Fetching all columns just to drop a part of them

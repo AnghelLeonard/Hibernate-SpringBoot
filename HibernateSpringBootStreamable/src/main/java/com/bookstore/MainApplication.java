@@ -24,14 +24,8 @@ public class MainApplication {
         return args -> {
 
             System.out.println("\n\nUpdate all the fetched authors, filter them and map to DTO:");
-            bookstoreService.fetchSomeAuthorsAsDTOAndUpdate();
-
-            System.out.println("\n\nFetch authors and partition them by age:");
-            bookstoreService.fetchAuthorsByGenrePartitioningByAge();
-
-            System.out.println("\n\nFetch authors names, uppercase and join them in a String:");
-            bookstoreService.fetchAuthorsNamesAsString();
-
+            bookstoreService.fetchSomeAuthorsUpdateAndDto();
+           
             System.out.println("\n\nDON'T DO THIS! Fetching all columns just to drop a part of them:");
             bookstoreService.fetchAuthorsNames();
 
