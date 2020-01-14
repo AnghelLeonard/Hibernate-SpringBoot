@@ -3918,12 +3918,12 @@ How about triggering only the `UPDATE` instead of this? The solution relies on c
 
 266. **[How To NOT Use Spring Data `Streamable`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootStreamable)**
  
-**Description:** This application is an example of fetching `Streamable<entity>` and `Streamable<dto>`. But, more important, is an example of how to **not** use `Streamable`. It is very tempting to fetch a `Streamable` just to apply to the result set some filter or a map operations, or even to combine two or more `Streamable` via the `and()` method. Is nothing wrong in using these methods as long as you respect the key points from below.
+**Description:** This application is a sample of fetching `Streamable<entity>` and `Streamable<dto>`. But, more important, this application contains three examples of how to **not** use `Streamable`. It is very tempting and comfortable to fetch a `Streamable` result set and chop it via `filter()` and `map()` until we obtain only the needed data instead of writing a query (e.g., JPQL) that fetches exactly the needed result set from the database. Mainly, we just throw away some of the fetched data to keep only the needed data. Fetching more data than needed can cause significant performance penalties. Moreover, pay attention to combining two or more `Streamable` via the `and()` method. The returned result may be different from what you are expecting to see. Each `Streamable` produces a separate SQL statement and the final result set is a concatenation of the intermediate results sets (prone to duplicate values).
 
 **Key points:**
 - don't fetch more columns than needed just to drop a part of them (e.g., via `map()`)
 - don't fetch more rows than needed just to throw away a part of it (e.g., via `filter()`)
-- don't combine `Streamable` via `and()` if you can write a single SQL statement (each `Streamable` produces a separate SQL statement)
+- pay attention on combining `Streamable` via `and()`; each `Streamable` produces a separate SQL statement and the final result set is a concatenation of the intermediate results sets (prone to duplicate values)
 
 -----------------------------------------------------------------------------------------------------------------------    
 
