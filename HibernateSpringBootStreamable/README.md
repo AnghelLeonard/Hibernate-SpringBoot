@@ -3,8 +3,8 @@
 **Description:** This application is an example of fetching `Streamable<entity>` and `Streamable<dto>`. But, more important, is an example of how to **not** use `Streamable`. It is very tempting to fetch a `Streamable` just to apply to the result set some filter or a map operations, or even to join two or more `Streamable` via `and()` method. Is nothing wrong in using these methods as long as you respect the key points from below.
 
 **Key points:**
-- don't fetch all columns just to drop a part of them (e.g., via `map()`)
-- don't fetch all rows just to throw away a part of it (e.g., via `filter()`)
+- don't fetch more columns than needed just to drop a part of them (e.g., via `map()`)
+- don't fetch more rows than needed just to throw away a part of it (e.g., via `filter()`)
 - don't join `Streamable` via `and()` if you can write a single SQL statement (each `Streamable` produces a separate SQL statement)
      
 -----------------------------------------------------------------------------------------------------------------------    
