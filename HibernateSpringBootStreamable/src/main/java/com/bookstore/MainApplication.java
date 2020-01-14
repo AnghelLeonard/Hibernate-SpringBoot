@@ -23,9 +23,12 @@ public class MainApplication {
     public ApplicationRunner init() {
         return args -> {
 
-            System.out.println("\n\nUpdate all the fetched authors, filter them and map to DTO:");
-            bookstoreService.fetchSomeAuthorsUpdateAndDto();
-           
+            System.out.println("\n\nFetch Author as Streamable:");
+            bookstoreService.fetchAuthorsAsStreamable();
+
+            System.out.println("\n\nFetch Author DTO as Streamable:");
+            bookstoreService.fetchAuthorsDtoAsStreamable();
+
             System.out.println("\n\nDON'T DO THIS! Fetching all columns just to drop a part of them:");
             bookstoreService.fetchAuthorsNames();
 

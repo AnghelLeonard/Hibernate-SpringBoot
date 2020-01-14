@@ -1,6 +1,6 @@
 package com.bookstore.service;
 
-import com.bookstore.dto.AuthorDto;
+import com.bookstore.dto.AuthorName;
 import com.bookstore.entity.Author;
 import com.bookstore.repository.AuthorRepository;
 import org.springframework.data.util.Streamable;
@@ -17,23 +17,23 @@ public class BookstoreService {
     }
 
     @Transactional
-    public void fetchSomeAuthorsUpdateAndDto() {
+    public void fetchAuthorsAsStreamable() {
 
         Streamable<Author> authors = authorRepository.findByGenre("Anthology");
+        authors.forEach(System.out::println);
+    }
 
-        authors.forEach(a -> a.setAge(a.getAge() + 1));
+    @Transactional
+    public void fetchAuthorsDtoAsStreamable() {
 
-        Streamable<AuthorDto> authorsDto = authors
-                .filter(a -> a.getAge() > 40)
-                .map(a -> new AuthorDto(a.getName(), a.getAge()));
-
-        authorsDto.forEach(System.out::println);
+        Streamable<AuthorName> authors = authorRepository.findBy();
+        authors.forEach(a -> System.out.println(a.getName()));
     }
 
     // Caution: Don't do this! Fetching all columns just to drop a part of them
     public void fetchAuthorsNames() {
 
-        Streamable<String> authors = authorRepository.queryBy()
+        Streamable<String> authors = authorRepository.findByGenre("Anthology")
                 .map(Author::getName);
 
         authors.forEach(System.out::println);
@@ -42,7 +42,7 @@ public class BookstoreService {
     // Caution: Don't do this! Fetching all rows just to throw away a part of it
     public void fetchAuthorsOlderThan40() {
 
-        Streamable<Author> authors = authorRepository.queryBy()
+        Streamable<Author> authors = authorRepository.findByGenre("Anthology")
                 .filter(a -> a.getAge() > 40);
 
         authors.forEach(System.out::println);
