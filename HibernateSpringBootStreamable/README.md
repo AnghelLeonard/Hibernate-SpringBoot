@@ -5,7 +5,7 @@
 **Key points:**
 - don't fetch more columns than needed just to drop a part of them (e.g., via `map()`)
 - don't fetch more rows than needed just to throw away a part of it (e.g., via `filter()`)
-- don't join `Streamable` via `and()` if you can write a single SQL statement (each `Streamable` produces a separate SQL statement)
+- don't combine `Streamable` via `and()` if you can write a single SQL statement (each `Streamable` produces a separate SQL statement)
      
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
