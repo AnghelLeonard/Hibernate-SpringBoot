@@ -1,4 +1,4 @@
-**[How To Use Streamable As Query Method Return Type](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootStreamable)**
+**[How To NOT Use Spring Data `Streamable`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootStreamable)**
  
 **Description:** This application is an example of fetching `Streamable<entity>` and `Streamable<dto>`. But, more important, is an example of how to **not** use `Streamable`. It is very tempting to fetch a `Streamable` just to apply to the result set some filter or a map operations, or even to join two or more `Streamable` via `and()` method. Is nothing wrong in using these methods as long as you respect the key points from below.
 
