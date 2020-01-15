@@ -41,20 +41,34 @@ public class BookstoreService {
     }
 
     // Caution: Don't do this! Fetch all columns just to drop a part of them
-    public void fetchAuthorsNames() {
+    public void fetchAuthorsNames1() {
 
         Streamable<String> authors = authorRepository.findByGenre("Anthology")
                 .map(Author::getName);
 
         authors.forEach(System.out::println);
     }
+    
+    // Do this
+    public void fetchAuthorsNames2() {
+
+        Streamable<AuthorName> authors = authorRepository.queryByGenre("Anthology");
+        authors.forEach(a -> System.out.println(a.getName()));
+    }
 
     // Caution: Don't do this! Fetch more rows than needed just to throw away a part of it
-    public void fetchAuthorsOlderThan40() {
+    public void fetchAuthorsOlderThanAge1() {
 
         Streamable<Author> authors = authorRepository.findByGenre("Anthology")
                 .filter(a -> a.getAge() > 40);
 
+        authors.forEach(System.out::println);
+    }
+    
+    // Do this! Fetch more rows than needed just to throw away a part of it
+    public void fetchAuthorsOlderThanAge2() {
+
+        Streamable<Author> authors = authorRepository.findByGenreAndAgeGreaterThan("Anthology", 40);
         authors.forEach(System.out::println);
     }
 

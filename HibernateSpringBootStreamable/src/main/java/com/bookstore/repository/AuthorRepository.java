@@ -12,6 +12,8 @@ import com.bookstore.dto.AuthorName;
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
     Streamable<Author> findByGenre(String genre);
+    
+    Streamable<AuthorName> queryByGenre(String genre);
 
     Streamable<Author> findByAgeGreaterThan(int age);
 
