@@ -26,7 +26,7 @@ public class BookstoreService {
         int sumPricesBefore = books.sumPrices();
         System.out.println("Total prices before update: " + sumPricesBefore);
         
-        Map<Boolean, List<Book>> booksMap = books.groupByPrice(25);
+        Map<Boolean, List<Book>> booksMap = books.partitionByPrice(25);
 
         booksMap.get(Boolean.TRUE).forEach(
                 a -> a.setPrice(a.getPrice() + 3));

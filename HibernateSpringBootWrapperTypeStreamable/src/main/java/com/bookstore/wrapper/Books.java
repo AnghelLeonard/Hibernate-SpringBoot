@@ -16,7 +16,7 @@ public class Books implements Streamable<Book> {
         this.streamable = streamable;
     }
 
-    public Map<Boolean, List<Book>> groupByPrice(int price) {
+    public Map<Boolean, List<Book>> partitionByPrice(int price) {
 
         return streamable.stream()
                 .collect(Collectors.partitioningBy((Book a) -> a.getPrice() >= price));
