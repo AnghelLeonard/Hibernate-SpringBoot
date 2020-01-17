@@ -1,4 +1,4 @@
-**[How To Use Spring Projections(DTO) And Exclusive Full Joins (PostgreSQL)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaOuterExcludingJoins)**
+**[How To Use Spring Projections(DTO) And Exclusive Full Joins (PostgreSQL)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaFullOuterExcludingJoins)**
 
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootDtoViaOuterExcludingJoins/DTO%20via%20exclusive%20full%20joins.png)
 
