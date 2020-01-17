@@ -16,7 +16,7 @@ Adding *Bytecode Enhancement* and enabling *Dirty Tracking* can be done via a pl
      
 **Output example:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootEnableDirtyTracking/Enable%20dirty%20tracking.png)
-
+ 
 The *Bytecode Enhancement* effect can be seen on `Author.class` [here](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootEnableDirtyTracking/Bytecode%20Enhancement%20Author.class/Author.java). Notice how the bytecode was instrumented with `$$_hibernate_tracker`.
 
 -----------------------------------------------------------------------------------------------------------------------    
