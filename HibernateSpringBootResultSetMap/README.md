@@ -1,11 +1,9 @@
-**[Avoid Spring Redundant `save()` Call](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRedundantSave)**
+**[How To Return A Map Result From A Spring Data Query Method](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootResultSetMap)**
  
-**Description:** This application is an example when calling `save()` for an entity is redundant (not necessary).
+**Description:** Sometimes, we need to write in repositories certain query-methods that return a `Map` instead of a `List` or a `Set`. For example, when we need a `Map<Id, Entity>` or we use `GROUP BY` and we need a `Map<Group, Count>`. This application shows you how to do it via `default` methods directly in repository.
 
 **Key points:**
-- at flush time, Hibernate relies on *dirty checking* mechanism to determine the potential modifications in entities 
-- for each modification, Hibernate automatically triggers the corresponding `UPDATE` statement without the need to explicitly call the `save()` method
-- behind the scene, this redundancy (calling `save()` when is not necessarily) doesn't affect the number of triggered queries, but it implies a performance penalty in the underlying Hibernate processes
+- rely on `default` methods and `Collectors.toMap()`
      
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
