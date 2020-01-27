@@ -3965,3 +3965,15 @@ Moreover, we can instruct the persistence provider to load data from a file into
 
 **Key points:**
 - rely on `default` methods and `Collectors.toMap()`
+
+----------------------------------------------------------------------------------------------------------------------- 
+
+270. **[How To Handle Entities Inheritance With Spring Data Repositories](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinTableRepositoryInheritance)**
+
+**Description:** Consider one of the JPA inheritance strategies (e.g., `JOINED`). Handling entities inheritance With Spring Data repositories can be done as follows:
+
+- [Single Table](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootSingleTableRepositoryInheritance)
+- [Joined](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinTableRepositoryInheritance)
+- [Table per class](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTablePerClassRepositoryInheritance)
+- [Mapped Superclass](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMappedSuperclassRepository)
+
