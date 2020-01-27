@@ -1,11 +1,15 @@
-**[JPA Inheritance - `@MappedSuperclass`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMappedSuperclass)**
+**[How To Handle Entities Inheritance With Spring Data Repositories](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootMappedSuperclassRepository)**
 
-**Description:** This application is a sample of using the JPA `@MappedSuperclass`.
+**Description:** The `@MappedSuperclass` is an entity-level annotation useful for shaping an inheritance model similar with table-per-class strategy but with a base class that is not an entity - is not materialized in a database table. Consider the following entity hierarchy (`Book` is annotated with `@MappedSuperclass`):
+
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSingleTableRepositoryInheritance/Single%20table%20inheritance.png)
+    
+For these two entities, `Paperback` and `Ebook`, we have the corresponding repositories, `PaperbackRepository` and `EbookRepository`. But, if we write a query-method as `findByTitle()` we should duplicate it in both of these repositories in order to call `PaperbackRepository#findByTitle()` and `EBookRepository#findByTitle()`. But, we know that `Paperback` and `Ebook` are actually subclasses of `Book`, therefore they inherit the `Book` class. It will be useful to do the same thing for our repositories. It will be better to write the `findByTitle()` query-method only once and use it in our repositories instead of duplicating it in each repository. This application shows you how to do it.
 
 **Key points:**
-- the *base class* is not an entity, it can be `abstract`, and is annotated with `@MappedSuperclass`
-- subclasses of the *base class* are mapped in tables that contains columns for the inherited attributes and for their own attibutes
-- when the *base class* doens't need to be an entity, the `@MappedSuperclass` is the proper alternative to the JPA table-per-class inheritance strategy
+- define the `findByTitle()` in a `@NoRepositoryBean` class (let's name this class, `BookBaseRepository`)
+- next, `PaperbackRepository` and `EbookRepository` extends `BookBaseRepository`
+- for queries express via `@Query` use `#{#entityName}` and Spring will replace it with the proper entity name
 
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
