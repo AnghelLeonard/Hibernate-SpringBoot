@@ -1,12 +1,15 @@
-**[JPA Inheritance - `JOINED`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinTableInheritance)**
+**[How To Handle Entities Inheritance With Spring Data Repositories](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinTableRepositoryInheritance)**
 
-**Description:** This application is a sample of JPA Join Table inheritance strategy (`JOINED`)
+**Description:** Consider the JPA Single Table inheritance strategy (`JOINED`). It can be any other JPA inheritance (e.g., `SINGLE_TABLE`), but let's use this one here. And, the following entity hierarchy:
+
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootSingleTableRepositoryInheritance/Single%20table%20inheritance.png)
+    
+For these three entities, `Book`, `Paperback` and `Ebook`, we have the corresponding repositories, `BookRepository`, `PaperbackRepository` and `EbookRepository`. But, if we write a query-method as `findByTitle()` we should duplicate it in each of these repositories in order to call `BookRepository#findByTitle()`, `PaperbackRepository#findByTitle()` and `EBookRepository#findByTitle()`. But, we know that `Paperback` and `Ebook` are actually subclasses of `Book`, therefore they inherit the `Book` class. It will be useful to do the same thing for our repositories. It will be better to write the `findByTitle()` query-method only once and use it in all these repositories instead of duplicating it in each repository. This application shows you how to do it.
 
 **Key points:**
-- this inheritance strategy can be employed via `@Inheritance(strategy=InheritanceType.JOINED)`
-- all the classes in an inheritance hierarchy (a.k.a., subclasses) are represented via individual tables
-- by default, subclass-tables contains a primary key column that acts as a foreign key  as well - this foreign key references the *base class* table primary key
-- customizing this foreign key can be done by annotating the subclasses with `@PrimaryKeyJoinColumn`  
+- define the `findByTitle()` in a `@NoRepositoryBean` class (let's name this class, `BookBaseRepository`)
+- next, `BookRepository`, `PaperbackRepository` and `EbookRepository` extends `BookBaseRepository`
+- for queries express via `@Query` use `#{#entityName}` and Spring will replace it with the proper entity name
 
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
