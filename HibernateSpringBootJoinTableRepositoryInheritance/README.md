@@ -1,4 +1,4 @@
-**[How To Shape JPA Inheritance In Repositories To Avoid Query-Methods Duplication](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinTableRepositoryInheritance)**
+**[How To Handle Entities Inheritance With Spring Data Repositories](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootJoinTableRepositoryInheritance)**
 
 **Description:** Consider the JPA Single Table inheritance strategy (`JOINED`). It can be any other JPA inheritance (e.g., `SINGLE_TABLE`), but let's use this one here. And, the following entity hierarchy:
 
