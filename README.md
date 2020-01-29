@@ -2439,7 +2439,7 @@ The attributes present in `attributeNodes` are treated as `FetchType.EAGER`. The
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-150. **[JPA Inheritance - `TABLE_PER_CLASS`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTablePerTableInheritance)**
+150. **[JPA Inheritance - `TABLE_PER_CLASS`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTablePerClassInheritance)**
 
 **Description:** This application is a sample of JPA Table-per-class inheritance strategy (`TABLE_PER_CLASS`)
 
