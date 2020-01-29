@@ -1,4 +1,4 @@
-**[JPA Inheritance - `TABLE_PER_CLASS`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTablePerTableInheritance)**
+**[JPA Inheritance - `TABLE_PER_CLASS`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootTablePerClassInheritance)**
 
 **Description:** This application is a sample of JPA Table-per-class inheritance strategy (`TABLE_PER_CLASS`)
 
