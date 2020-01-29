@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jpa</groupId>
-    <artifactId>HibernateSpringBootTablePerTableInheritance</artifactId>
+    <artifactId>HibernateSpringBootTablePerClassInheritance</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>HibernateSpringBootTablePerTableInheritance</name>
+    <name>HibernateSpringBootTablePerClassInheritance</name>
     <description>JPA project for Spring Boot</description>
 
     <parent>
