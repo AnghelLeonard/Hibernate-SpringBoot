@@ -105,6 +105,14 @@ public final class Lists {
 
     public static <T> List<List<T>> toChunkV6(List<T> list, int chunkSize) {
 
+        if (list == null || list.size() < 2) {
+            throw new IllegalArgumentException("The list must have at least 1 element");
+        }
+
+        if (chunkSize < 1) {
+            throw new IllegalArgumentException("Chunk size should be minimum 1");
+        }
+
         List<List<T>> result = Chunk.ofSize(list, chunkSize);
 
         return result;
