@@ -7,7 +7,7 @@
 **Key points:**
 - the fastest execution is provided by `Chunk.java` class which relies on the built-in `List.subList()` method
      
-**Time-performance trend graphic for chunking 500, 1_000_000, 10_000_000 and 20_000_000 items:**\
+**Time-performance trend graphic for chunking 500, 1_000_000, 10_000_000 and 20_000_000 items in lists of 5 items:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/ChunkList/head-to-head.png)
      
 -----------------------------------------------------------------------------------------------------------------------    
