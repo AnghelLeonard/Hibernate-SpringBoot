@@ -1,16 +1,12 @@
-**[Log Slow Queries Via DataSource-Proxy](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLogSlowQueries)**
+**[Log Slow Queries Via Hibernate 5.4.5](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLogSlowQueries545)**
 
-**Description:** This application is a sample of logging only slow queries via **[DataSource-Proxy](https://github.com/ttddyy/datasource-proxy)**. A slow query is a query that has an execution time bigger than a specificed threshold in milliseconds.
+**Description:** This application is a sample of logging only slow queries via Hibernate 5.4.5, `hibernate.session.events.log.LOG_QUERIES_SLOWER_THAN_MS` property. A slow query is a query that has an execution time bigger than a specificed threshold in milliseconds.
 
 **Key points:**
-- for Maven, add in `pom.xml` the DataSource-Proxy dependency
-- create an bean post processor to intercept the `DataSource` bean
-- wrap the `DataSource` bean via `ProxyFactory` and an implementation of `MethodInterceptor`
-- choose a threshold in milliseconds
-- define a listener and override `afterQuery()`
+- in `application.properties` add `hibernate.session.events.log.LOG_QUERIES_SLOWER_THAN_MS`
    
 **Output example:**\
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLogSlowQueries/log%20slow%20queries%20via%20datasource-proxy.png)
+![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLogSlowQueries545/log%20slow%20queries%20Hibernate%205.4.5.png)
 
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
