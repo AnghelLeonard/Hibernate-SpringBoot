@@ -1,14 +1,16 @@
-**[How To Fetch DTO Via Constructor Expression and JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructorExpression)**
+**[How To Fetch DTO Via JDK14 Records, Constructor Expression and JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoRecordConstructorExpression)**
 
 **Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on Constructor Expression and JPQL.
 
-**Key points:**
-- write a proper constructor in the DTO class
-- use a query as `SELECT new com.bookstore.dto.AuthorDto(a.name, a.age) FROM Author a`
-- for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
+From Openjdk JEP359:
 
-**See also:**\
-[How To Fetch DTO Via Constructor And Spring Data Query Builder Mechanism](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructor)
+*Records provide a compact syntax for declaring classes which are transparent holders for shallowly immutable data.*
+
+**Key points:**
+
+Define the AuthorDto as:
+
+`public record AuthorDto(String name, int age) implements Serializable {}`
 
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
