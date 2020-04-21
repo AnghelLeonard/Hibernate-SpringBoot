@@ -1,14 +1,15 @@
-**[DTO Via Constructor And Spring Data Query Builder Mechanism](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructor)**
+**[DTO Via JDK14 Records And Spring Data Query Builder Mechanism](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoRecordConstructor)**
 
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on constructor and Spring Data Query Builder Mechanism.
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on JDK14 Recors feature and Spring Data Query Builder Mechanism.
+
+From Openjdk JEP359:
+
+*Records provide a compact syntax for declaring classes which are transparent holders for shallowly immutable data.*
  
 **Key points:**
-- write a proper constructor in the DTO class
-- rely on Spring Data Query Builder Mechanism to write the SQL
-- for using Spring Data Projections check this [item](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoViaProjections) 
+Define the `AuthorDto` as:
 
-**See also:**\
-[Dto Via Constructor Expression and JPQL](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoConstructorExpression)
+`public record AuthorDto(String name, int age implements Serializable {}`
 
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
