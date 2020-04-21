@@ -8,7 +8,7 @@ From Openjdk JEP359:
 
 **Key points:**
 
-Define the AuthorDto as:
+Define the `AuthorDto` as:
 
 `public record AuthorDto(String name, int age) implements Serializable {}`
 
