@@ -6,13 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 @Service
-public class BookstoreService {
-
-    private final Dao dao;
-
-    public BookstoreService(Dao dao) {
-        this.dao = dao;
-    }
+public record BookstoreService(Dao dao) {   
 
     public List<AuthorDto> fetchAuthorWithBook() {
 
