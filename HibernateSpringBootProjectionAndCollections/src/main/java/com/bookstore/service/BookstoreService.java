@@ -1,5 +1,6 @@
 package com.bookstore.service;
 
+import com.bookstore.jdbcTemplate.dto.AuthorExtractor;
 import com.bookstore.spring.dto.AuthorDto;
 import com.bookstore.spring.dto.SimpleAuthorDto;
 import com.bookstore.repository.AuthorRepository;
@@ -21,17 +22,20 @@ public class BookstoreService {
 
     private final AuthorRepository authorRepository;
     private final AuthorTransformer authorTransformer;
+    private final AuthorExtractor authorExtractor;
 
     @PersistenceContext
     private final EntityManager entityManager;
 
     public BookstoreService(AuthorRepository authorRepository,
             AuthorTransformer authorTransformer,
+            AuthorExtractor authorExtractor,
             EntityManager entityManager) {
 
         this.authorRepository = authorRepository;
         this.entityManager = entityManager;
         this.authorTransformer = authorTransformer;
+        this.authorExtractor = authorExtractor;
     }
 
     @Transactional(readOnly = true)
@@ -117,6 +121,22 @@ public class BookstoreService {
         briefOverviewOfPersistentContextContent();
 
         return authorsDto;
+    }
+
+    @Transactional(readOnly = true)
+    public List<com.bookstore.jdbcTemplate.dto.AuthorDto> fetchAuthorsWithBooksViaJdbcTemplateToDto() {
+
+        List<com.bookstore.jdbcTemplate.dto.AuthorDto> authors = authorExtractor.extract();
+        
+        System.out.println("\nResult set:");
+        authors.forEach(a -> {
+            System.out.println("\n\n" + a.getName() + ", " + a.getGenre());
+            a.getBooks().forEach(b -> System.out.print(b.getTitle() + ", "));
+        });
+
+        briefOverviewOfPersistentContextContent();
+
+        return authors;
     }
 
     private void briefOverviewOfPersistentContextContent() {

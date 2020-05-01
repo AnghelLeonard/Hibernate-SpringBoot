@@ -44,6 +44,10 @@ public class MainApplication {
             System.out.println("\n\nFetch authors with books via array of objects and transform to DTO:");
             System.out.println("-----------------------------------------------------------------");
             bookstoreService.fetchAuthorsWithBooksViaArrayOfObjectsAndTransformToDto();                          
+            
+            System.out.println("\n\nFetch authors with books via JdbcTemplate as DTO:");
+            System.out.println("-----------------------------------------------------------------");
+            bookstoreService.fetchAuthorsWithBooksViaJdbcTemplateToDto();                          
         };
     }
 }
