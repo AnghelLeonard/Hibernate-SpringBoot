@@ -10,7 +10,7 @@ From Openjdk JEP359:
 
 Define the `AuthorDto` as:
 
-`public record AuthorDto(String name, int age) implements Serializable {}`
+`public record AuthorDto(String name, int age) {}`
 
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
