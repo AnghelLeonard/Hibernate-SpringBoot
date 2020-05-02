@@ -1,6 +1,6 @@
-**[DTO Via JDK14 Records And Spring Data Query Builder Mechanism](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoRecordConstructor)** 
+**[DTO Via JDK14 Records, `JdbcTemplate` And `ResultSetExtractor`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDtoRecordJbcTemplate)** 
 
-**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on JDK14 Records feature and Spring Data Query Builder Mechanism.
+**Description:** Fetching more data than needed is prone to performance penalities. Using DTO allows us to extract only the needed data. In this application we rely on JDK14 Records feature, `JdbcTemplate` and `ResultSetExtractor`.
 
 From Openjdk JEP359:
 
@@ -9,7 +9,8 @@ From Openjdk JEP359:
 **Key points:**
 Define the `AuthorDto` as:
 
-`public record AuthorDto(String name, int age) implements Serializable {}`
+- define the Java Records as `AuthorDto` and `BookDto`
+- use `JdbcTemplate` and `ResultSetExtractor`
 
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
