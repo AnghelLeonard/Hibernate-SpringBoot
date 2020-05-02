@@ -7,7 +7,6 @@ From Openjdk JEP359:
 *Records provide a compact syntax for declaring classes which are transparent holders for shallowly immutable data.*
  
 **Key points:**
-Define the `AuthorDto` as:
 
 - define the Java Records as `AuthorDto` and `BookDto`
 - use `JdbcTemplate` and `ResultSetExtractor`
