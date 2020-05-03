@@ -817,7 +817,7 @@ This application is a `JOIN FETCH` example for avoiding `LazyInitializationExcep
 
 **Key points:**
 - in `application.properties` add: `logging.level.org.hibernate.type.descriptor.sql=TRACE`
-- or, in a Logback specific configuration file add the proper logger
+- or, even better (for filtering SQLs capabilities), in a Logback specific configuration file add the proper logger
      
 **Output sample:**\
 ![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLogTraceViewBindingParameters/display%20binding%20and%20extracted%20parameters%20via%20TRACE.png) 
