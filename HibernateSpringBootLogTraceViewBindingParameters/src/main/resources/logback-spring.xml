@@ -2,7 +2,7 @@
 <configuration>
    
     <appender name="Console"
-        class="ch.qos.logback.core.ConsoleAppender">
+              class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>
                 %black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable
@@ -16,6 +16,9 @@
     </root>
  
     <!-- LOG triggered SQL statements -->
+    <logger name="org.hibernate.SQL" level="debug"/>
+ 
+    <!-- LOG Binding and Extracted Parameters -->
     <logger name="org.hibernate.type.descriptor.sql" level="trace" additivity="false">        
         <appender-ref ref="Console" />
     </logger>
