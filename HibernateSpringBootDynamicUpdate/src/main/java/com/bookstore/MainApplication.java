@@ -1,5 +1,6 @@
 package com.bookstore;
 
+import com.bookstore.entity.Author;
 import com.bookstore.service.BookstoreService;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,7 +23,15 @@ public class MainApplication {
     @Bean
     public ApplicationRunner init() {
         return args -> {
+
+            System.out.println("Update attached entity:");
             bookstoreService.updateAuthor();
+
+            System.out.println();
+
+            System.out.println("Update detached entity:");
+            Author author = bookstoreService.fetchAuthor();
+            bookstoreService.updateDetachedAuthor(author);
         };
     }
 }
