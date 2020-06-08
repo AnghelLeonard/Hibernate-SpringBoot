@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.jpa</groupId>
-    <artifactId>HibernateSpringBootDynamicProjection</artifactId>
+    <artifactId>HibernateSpringBootDynamicProjectionClass</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
-    <name>HibernateSpringBootDynamicProjection</name>
+    <name>HibernateSpringBootDynamicProjectionClass</name>
     <description>JPA project for Spring Boot</description>
 
     <parent>
