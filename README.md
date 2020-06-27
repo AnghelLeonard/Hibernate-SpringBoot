@@ -4068,3 +4068,7 @@ From Openjdk JEP359:
 </td></tr></table>
 
 -----------------------------------------------------------------------------------------------------------------------    
+
+277. **[Batch Inserts In Spring Boot Style Via `CompletableFuture` And Return `List<S>`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsCompletableFutureReturnList)**
+ 
+**Description:** This application is a sample of using `CompletableFuture` for batching inserts. This `CompletableFuture` uses an `Executor` that has the number of threads equal with the number of your computer cores. Usage is in Spring style. It returns `List<S>` representing the list of persisted entities.
