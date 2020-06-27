@@ -1,9 +1,7 @@
 
-**[Batch Inserts In Spring Boot Style Via `CompletableFuture`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsCompletableFuture)**
-
-<b><a href="https://persistencelayer.wixsite.com/springboot-hibernate/post/how-to-batch-inserts-in-spring-boot-style-via-completablefuture">If you prefer to read it as a blog-post containing the relevant snippets of code then check this post</a></b>
+**[Batch Inserts In Spring Boot Style Via `CompletableFuture` And Return `List<S>`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsCompletableFutureReturnGivenList)**
  
-**Description:** This application is a sample of using `CompletableFuture` for batching inserts. This `CompletableFuture` uses an `Executor` that has the number of threads equal with the number of your computer cores. Usage is in Spring style.
+**Description:** This application is a sample of using `CompletableFuture` for batching inserts. This `CompletableFuture` uses an `Executor` that has the number of threads equal with the number of your computer cores. Usage is in Spring style. It returns `List<S>` representing the given list.
      
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
