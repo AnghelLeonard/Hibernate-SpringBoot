@@ -4069,7 +4069,7 @@ From Openjdk JEP359:
 
 -----------------------------------------------------------------------------------------------------------------------    
 
-277. **[Batch Inserts In Spring Boot Style Via `CompletableFuture` And Return `List<S>`]**
+277. **Batch Inserts In Spring Boot Style Via `CompletableFuture` And Return `List<S>`**
  
 **Description:** This application is a sample of using `CompletableFuture` for batching inserts. This `CompletableFuture` uses an `Executor` that has the number of threads equal with the number of your computer cores. Usage is in Spring style. It returns `List<S>`:
 
