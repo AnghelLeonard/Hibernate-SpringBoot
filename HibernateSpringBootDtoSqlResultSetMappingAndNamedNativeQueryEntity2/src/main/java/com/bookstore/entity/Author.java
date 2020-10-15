@@ -41,7 +41,7 @@ import javax.persistence.SqlResultSetMapping;
 @NamedNativeQuery(
         name = "Author.fetchWithBook",
         query = "SELECT a.*, b.* FROM author a INNER JOIN book b ON a.id = b.author_id",
-        resultSetMapping = "AuthorMapping"
+        resultSetMapping = "AuthorWithBookMapping"
 )
 @SqlResultSetMapping(
         name = "AuthorWithBookMapping",
