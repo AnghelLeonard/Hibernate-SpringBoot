@@ -14,6 +14,7 @@ public interface AuthorRepository extends JpaRepository<Author, Long> {
     @Query(name = "AuthorQuery", nativeQuery = true)
     List<Author> fetchAll();
 
-    @Query(name = "AuthorWithBookQuery", nativeQuery = true)
-    List<Object[]> fetchWithBook();
+    /* this currently is not supported */
+    // @Query(name = "AuthorWithBookQuery", nativeQuery = true)
+    // List<Object[]> fetchWithBook();
 }

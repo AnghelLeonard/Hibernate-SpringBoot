@@ -31,8 +31,8 @@ public class MainApplication {
             
             System.out.println("==========================================");
 
-            List<Object[]> authorsArray = bookstoreService.fetchAuthorWithBook();
-            authorsArray.forEach(a -> System.out.println(Arrays.toString(a)));
+            //List<Object[]> authorsArray = bookstoreService.fetchAuthorWithBook();
+            //authorsArray.forEach(a -> System.out.println(Arrays.toString(a)));
         };
     }
 }
