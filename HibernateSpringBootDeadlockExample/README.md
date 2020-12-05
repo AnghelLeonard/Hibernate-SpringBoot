@@ -20,5 +20,5 @@
 </td><td>
 <a href="https://leanpub.com/java-persistence-performance-illustrated-guide"><p align="right"><img src="https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/Java%20Persistence%20Performance%20Illustrated%20Guide.jpg" height="500" width="450"/></p></a>
 </td></tr></table>
-
+ 
 -----------------------------------------------------------------------------------------------------------------------    
