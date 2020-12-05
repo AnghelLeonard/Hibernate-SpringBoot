@@ -4080,7 +4080,7 @@ From Openjdk JEP359:
 
 278. **[How to simulate a deadlock](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDeadlockExample)**
  
-**Description:** This application is an example of causing a database deadlock in MySQL. This application produces an exception of type: `com.mysql.cj.jdbc.exceptions.MySQLTransactionRollbackException: Deadlock found when trying to get lock; try restarting transaction`. However, the database will retry until one of the transaction (A) succeeds.
+**Description:** This application is an example of causing a database deadlock in MySQL. This application produces an exception of type: `com.mysql.cj.jdbc.exceptions.MySQLTransactionRollbackException: Deadlock found when trying to get lock; try restarting transaction`. However, the database will retry until transaction (A) succeeds.
 
 **Key points:**
 - start *Transaction (A)* and trigger a `SELECT` with `PESSIMISTIC_WRITE` to acquire an exclusive lock to table `author`
