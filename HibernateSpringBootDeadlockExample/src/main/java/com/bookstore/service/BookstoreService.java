@@ -40,8 +40,8 @@ public class BookstoreService {
 
                     log.info("Starting first transaction (A) ...");
 
-                    Author author = authorRepository.findById(1L).orElseThrow();
-                    author.setGenre("Comedy"); // this ends successfully                    
+                    authorRepository.findById(1L).orElseThrow(); // get the lock
+                    authorRepository.updateGenre("Comedy", 1L);
 
                     try {
                         log.info("Holding in place first transaction (A) for 10s ...");
@@ -51,8 +51,8 @@ public class BookstoreService {
                         Thread.currentThread().interrupt();
                     }
                     
-                    Book book = bookRepository.findById(1L).orElseThrow();
-                    book.setTitle("A happy day"); // this cannot be done, transaction (B) holds the lock                    
+                    bookRepository.findById(1L).orElseThrow(); // this cannot be done, transaction (B) holds the lock                    
+                    bookRepository.updateTitle("A happy day", 1L); 
                 }
             });
 
@@ -71,8 +71,8 @@ public class BookstoreService {
 
                     log.info("Starting second transaction (B) ...");
 
-                    Book book = bookRepository.findById(1L).orElseThrow();
-                    book.setTitle("A long night"); // this ends successfully                                       
+                    bookRepository.findById(1L).orElseThrow(); // get the lock
+                    bookRepository.updateTitle("A long night", 1L);        
                     
                     try {
                         log.info("Holding in place second transaction (B) for 10s ...");
@@ -82,8 +82,8 @@ public class BookstoreService {
                         Thread.currentThread().interrupt();
                     }
                     
-                    Author author = authorRepository.findById(1L).orElseThrow();
-                    author.setGenre("Horror"); // // this cannot be done, transaction (A) holds the lock                                    
+                    authorRepository.findById(1L).orElseThrow(); // this cannot be done, transaction (A) holds the lock
+                    authorRepository.updateGenre("Horror", 1L); 
                 }
             });
 
