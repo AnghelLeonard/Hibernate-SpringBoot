@@ -4075,3 +4075,19 @@ From Openjdk JEP359:
 
 - [Batch Inserts In Spring Boot Style Via `CompletableFuture` And Return `List<S>` (1)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsCompletableFutureReturnList)
 - [Batch Inserts In Spring Boot Style Via `CompletableFuture` And Return `List<S>` (2)](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootBatchInsertsCompletableFutureReturnGivenList)
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+278. **[How to simulate a deadlock](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDeadlockExample)**
+ 
+**Description:** This application is an example of causing a database deadlock in MySQL. This application produces an exception of type: `com.mysql.cj.jdbc.exceptions.MySQLTransactionRollbackException: Deadlock found when trying to get lock; try restarting transaction`. However, the database will retry until one of the transaction (A) succeeds.
+
+**Key points:**
+- start *Transaction (A)* and trigger a `SELECT` with `PESSIMISTIC_WRITE` to acquire an exclusive lock to table `author`
+- *Transaction (A)* update `author` genre with success and sleeps for 10s
+- after 5s, start a concurrent *Transaction B* that trigger a `SELECT` with `PESSIMISTIC_WRITE` to acquire an exclusive lock to table `book`
+- *Transaction (B)* update `book` title with success and sleeps for 10s
+- *Transaction (A)* wakes up and attempt to update the book but it cannot acquire the lock holded by *Transaction (B)*
+- *Transaction (B)* wakes up and attempt to update the author but it cannot acquire the lock holded by *Transaction (A)*
+- DEADLOCK
+- database retry and succeeds after *Transaction (B)* releases the lock
