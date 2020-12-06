@@ -45,18 +45,18 @@ public class BookstoreService {
 
                     try {
                         log.info("Holding in place first transaction (A) for 10s ...");
-                        Thread.sleep(10000);
-                        log.info("First transaction (A) attempts to update a book (id:1) ...");
+                        Thread.sleep(10000);                        
                     } catch (InterruptedException ex) {
                         Thread.currentThread().interrupt();
                     }
                     
+                    log.info("First transaction (A) attempts to update a book (id:1) ...");
                     bookRepository.findById(1L).orElseThrow(); // this cannot be done, transaction (B) holds the lock                    
                     bookRepository.updateTitle("A happy day", 1L); 
                 }
             });
 
-            log.info("First transaction committed!"); 
+            log.info("First transaction (A) committed!"); 
         });
 
         Thread tB = new Thread(() -> {
@@ -76,18 +76,18 @@ public class BookstoreService {
                     
                     try {
                         log.info("Holding in place second transaction (B) for 10s ...");
-                        Thread.sleep(10000);
-                        log.info("Second transaction (B) attempts to update an author (id:1) ...");
+                        Thread.sleep(10000);                        
                     } catch (InterruptedException ex) {
                         Thread.currentThread().interrupt();
                     }
                     
+                    log.info("Second transaction (B) attempts to update an author (id:1) ...");
                     authorRepository.findById(1L).orElseThrow(); // this cannot be done, transaction (A) holds the lock
                     authorRepository.updateGenre("Horror", 1L); 
                 }
             });
 
-            log.info("Second transaction committed!");
+            log.info("Second transaction (B) committed!");
         });
         
         tA.start();
