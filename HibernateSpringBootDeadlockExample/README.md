@@ -4,7 +4,7 @@
 
 **Key points:**
 - start *Transaction (A)* and trigger a `SELECT` with `PESSIMISTIC_WRITE` to acquire an exclusive lock to table `author`
-- *Transaction (A)* update `author` genre with success and sleeps for 10s
+- *Transaction (A)* update `author` genre with success and sleeps for 10s 
 - after 5s, start a concurrent *Transaction B* that trigger a `SELECT` with `PESSIMISTIC_WRITE` to acquire an exclusive lock to table `book`
 - *Transaction (B)* update `book` title with success and sleeps for 10s
 - *Transaction (A)* wakes up and attempt to update the book but it cannot acquire the lock holded by *Transaction (B)*
