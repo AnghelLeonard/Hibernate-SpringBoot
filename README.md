@@ -1,4 +1,3 @@
-[![HitCount](http://hits.dwyl.io/AnghelLeonard/Hibernate-SpringBoot.svg)](http://hits.dwyl.io/AnghelLeonard/Hibernate-SpringBoot)
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Collection%20of%20best%20practices%20for%20Java%20persistence%20performance%20in%20Spring%20Boot%20applications&url=https://github.com/AnghelLeonard/Hibernate-SpringBoot&hashtags=springdata,hibernate,jpa,springboot)
 
 # Best Performance Practices Hibernate 5/6 & Spring Boot 2
@@ -4091,3 +4090,12 @@ From Openjdk JEP359:
 - *Transaction (B)* wakes up and attempt to update the author but it cannot acquire the lock holded by *Transaction (A)*
 - DEADLOCK
 - database retry and succeeds after *Transaction (B)* releases the lock
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+279. **[How To Define A Composite Primary Key Having An Explicit Part and a Generated Part Via Sequence](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCompositeKeySeqIdClass)**
+
+**Description:** This application is a proof of concept of how to define a composite key having an explicit part (`name`) and a generated part (`authorId` via `SEQUENCE` generator).
+
+**Key points:**
+- use `@IdClass`
