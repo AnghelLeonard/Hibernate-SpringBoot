@@ -1,15 +1,9 @@
-**[How To Define A Composite Primary Key Via `@IdClass`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCompositeKeyIdClass)**
+**[How To Define A Composite Primary Key Having An Explicit Part and a Generated Part Via Sequence](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCompositeKeySeqIdClass)**
 
-**Description:** This application is a proof of concept of how to define a composite key via `@IdClass`. This application uses two entities, `Author` and `Book` involved in a lazy bidirectional `@OneToMany` association. The identifier of `Author` is composed by `name` and `age` via `AuthorId` class. The identifier of `Book` is just a typical auto-generated numeric value.
+**Description:** This application is a proof of concept of how to define a composite key having an explicit part (`name`) and a generated part (`authorId` via `SEQUENCE` generator).
 
 **Key points:**
-- the composite key class (e.g., `AuthorId`) is `public`
-- the composite key class must implement `Serializable`
-- the composite key must define `equals()` and `hashCode()`
-- the composite key must define a no-arguments constructor
-     
-**Note**: The `@IdClass` can be useful when we cannot modify the compsite key class. Otherwise, rely on [`@Embeddable`](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootCompositeKeyEmbeddable).
-     
+- use `@IdClass`         
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
      <tr><td><b>If you need a deep dive into the performance recipes exposed in this repository then I am sure that you will love my book "Spring Boot Persistence Best Practices"</b></td><td><b>If you need a hand of tips and illustrations of 100+ Java persistence performance issues then "Java Persistence Performance Illustrated Guide" is for you.</b></td></tr>
