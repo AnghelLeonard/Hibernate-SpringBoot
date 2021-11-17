@@ -4099,3 +4099,13 @@ From Openjdk JEP359:
 
 **Key points:**
 - use `@IdClass`
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+280. **[How To Intercept The Generated SQL For Logging Or Altering](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootInterceptSql)**
+ 
+**Description:** Sometimes we need to intercept the generated SQL that originates from Spring Data, `EntityManager`, Criteria API, `JdbcTemplate` and so on. This can be done as in this sample application. After interception, you can log, modify or even return a brand new SQL that will be executed in the end.
+
+**Key points:**
+- define an implementation of Hibernate `StatementInspector` SPI
+- configure this SPI in `application.properties` via `spring.jpa.properties.hibernate.session_factory.statement_inspector`
