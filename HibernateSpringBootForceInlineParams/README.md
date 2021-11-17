@@ -1,10 +1,11 @@
-**[How To Intercept The Generated SQL For Logging Or Altering](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootInterceptSql)**
+**[Force inline params in Criteria API](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootForceInlineParams)**
+
+**NOTE** Use this with high precaution since you open the gate for SQL injections.
  
-**Description:** Sometimes we need to intercept the generated SQL that originates from Spring Data, `EntityManager`, Criteria API, `JdbcTemplate` and so on. This can be done as in this sample application. After interception, you can log, modify or even return a brand new SQL that will be executed in the end.
+**Description:** Sometimes we need to force inline params in Criteria API. By default, numeric parameters are inlined, but string parameters are not.
 
 **Key points:**
-- define an implementation of Hibernate `StatementInspector` SPI
-- configure this SPI in `application.properties` via `spring.jpa.properties.hibernate.session_factory.statement_inspector`
+- configure in `application.properties` the setting `spring.jpa.properties.hibernate.criteria.literal_handling_mode` as `inline`
 
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
