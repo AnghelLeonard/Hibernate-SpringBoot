@@ -4109,3 +4109,14 @@ From Openjdk JEP359:
 **Key points:**
 - define an implementation of Hibernate `StatementInspector` SPI
 - configure this SPI in `application.properties` via `spring.jpa.properties.hibernate.session_factory.statement_inspector`
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+281.**[Force inline params in Criteria API](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootForceInlineParams)**
+
+**NOTE** Use this with high precaution since you open the gate for SQL injections.
+ 
+**Description:** Sometimes we need to force inline params in Criteria API. By default, numeric parameters are inlined, but string parameters are not.
+
+**Key points:**
+- configure in `application.properties` the setting `spring.jpa.properties.hibernate.criteria.literal_handling_mode` as `inline`
