@@ -1,14 +1,10 @@
-**[View Binding/Extracted Params Via Log4J 2](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootLog4j2ViewBindingParameters)**
+**[Using Arthur Gavlyukovskiy's data source decorator](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceDecorator)**
 
-**Description:** View the prepared statement binding/extracted parameters via Log4J 2 logger setting.
+**Description:** [Arthur Gavlyukovskiy](https://github.com/gavlyukovskiy/spring-boot-data-source-decorator) provide a suite of Spring Boot starters for quickly integrate [P6Spy](https://github.com/p6spy/p6spy), [Datasource Proxy](https://github.com/ttddyy/datasource-proxy), and [FlexyPool](https://github.com/vladmihalcea/flexy-pool). In this example, we add Datasource Proxy, but please consider [this](https://github.com/gavlyukovskiy/spring-boot-data-source-decorator) for more details.
 
 **Key points:**
-- for Maven, in `pom.xml`, exclude Spring Boot's Default Logging
-- for Maven, in `pom.xml`, Add Log4j 2 Dependency
-- in `log4j2.xml` add, `<Logger name="org.hibernate.type.descriptor.sql" level="trace"/>`
-   
-**Output example:**
-![](https://github.com/AnghelLeonard/Hibernate-SpringBoot/blob/master/HibernateSpringBootLog4j2ViewBindingParameters/log4j2%20display%20binding%20and%20extracted%20parameters.png)
+- for Maven, in `pom.xml`, add the `datasource-proxy-spring-boot-starter` starter
+- in `application.properties` enable `DEBUG` level for logging
 
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
