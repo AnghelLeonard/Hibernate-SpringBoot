@@ -4120,3 +4120,13 @@ From Openjdk JEP359:
 
 **Key points:**
 - configure in `application.properties` the setting `spring.jpa.properties.hibernate.criteria.literal_handling_mode` as `inline`
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+282. **[Using Arthur Gavlyukovskiy's data source decorator](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootDataSourceDecorator)**
+
+**Description:** [Arthur Gavlyukovskiy](https://github.com/gavlyukovskiy/spring-boot-data-source-decorator) provide a suite of Spring Boot starters for quickly integrate [P6Spy](https://github.com/p6spy/p6spy), [Datasource Proxy](https://github.com/ttddyy/datasource-proxy), and [FlexyPool](https://github.com/vladmihalcea/flexy-pool). In this example, we add Datasource Proxy, but please consider [this](https://github.com/gavlyukovskiy/spring-boot-data-source-decorator) for more details.
+
+**Key points:**
+- for Maven, in `pom.xml`, add the `datasource-proxy-spring-boot-starter` starter
+- in `application.properties` enable `DEBUG` level for logging
