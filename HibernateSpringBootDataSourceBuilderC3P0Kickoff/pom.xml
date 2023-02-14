@@ -23,7 +23,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>    
         
-        <c3p0.version>0.9.5.2</c3p0.version>   
+        <c3p0.version>0.9.5.4</c3p0.version>   
     </properties>
 
     <dependencies>
