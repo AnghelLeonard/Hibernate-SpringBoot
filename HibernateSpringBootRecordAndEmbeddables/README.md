@@ -1,11 +1,12 @@
-**[Avoid Spring Redundant `save()` Call](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRedundantSave)**
+**[Using Java records as Hibernate embeddable](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRecordAndEmbeddables)**
  
-**Description:** This application is an example when calling `save()` for an entity is redundant (not necessary).
+**Description:** This application is an example of using Java records as embeddable. This is available starting with Hibernate 6.0, but it was refined to be more accessible and easy to use in Hibernate 6.2
 
 **Key points:**
-- at flush time, Hibernate relies on *dirty checking* mechanism to determine the potential modifications in entities 
-- for each modification, Hibernate automatically triggers the corresponding `UPDATE` statement without the need to explicitly call the `save()` method
-- behind the scene, this redundancy (calling `save()` when is not necessarily) doesn't affect the number of triggered queries, but it implies a performance penalty in the underlying Hibernate processes
+- add Hibernate 6.2 (this is not default in Spring Boot 3.0.2 used here)
+- define a record (`Contact`)
+- add this record in an entity (`Author`) via `@Embedded`
+- fetch data into a DTO represented by another record (`AuthorDto`)
      
 -----------------------------------------------------------------------------------------------------------------------    
 <table>
