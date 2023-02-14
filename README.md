@@ -4130,3 +4130,15 @@ From Openjdk JEP359:
 **Key points:**
 - for Maven, in `pom.xml`, add the `datasource-proxy-spring-boot-starter` starter
 - in `application.properties` enable `DEBUG` level for logging
+
+-----------------------------------------------------------------------------------------------------------------------    
+
+282. **[Using Java records as Hibernate embeddable](https://github.com/AnghelLeonard/Hibernate-SpringBoot/tree/master/HibernateSpringBootRecordAndEmbeddables)**
+ 
+**Description:** This application is an example of using Java records as embeddable. This is available starting with Hibernate 6.0, but it was refined to be more accessible and easy to use in Hibernate 6.2
+
+**Key points:**
+- add Hibernate 6.2 (this is not default in Spring Boot 3.0.2 used here)
+- define a record (`Contact`)
+- add this record in an entity (`Author`) via `@Embedded`
+- fetch data into a DTO represented by another record (`AuthorDto`)
