@@ -1,3 +1,5 @@
+# *If you just want to level up to Spring Boot 4 with Hibernate 7 then follow this [repo](https://github.com/AnghelLeonard/Hibernate-SpringBoot-4)*
+
 [![Tweet](https://img.shields.io/twitter/url/http/shields.io.svg?style=social)](https://twitter.com/intent/tweet?text=Collection%20of%20best%20practices%20for%20Java%20persistence%20performance%20in%20Spring%20Boot%20applications&url=https://github.com/AnghelLeonard/Hibernate-SpringBoot&hashtags=springdata,hibernate,jpa,springboot)
 
 # Best Performance Practices Hibernate 5/6 & Spring Boot 2
